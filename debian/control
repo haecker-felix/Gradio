@@ -4,12 +4,12 @@ Priority: extra
 Maintainer: Felix Häcker <haecker.felix1207@gmail.com>
 Build-Depends: 	cmake (>= 2.8),
 		debhelper (>= 8.0.0),
-		valac-0.16 | valac (>= 0.16)
-		glib-2.0
-		gtk+-3.0 (>= 3.10=
-		gstreamer-0.10
-		json-glib-1.0
-		gio-2.0
+		valac-0.16 | valac (>= 0.16),
+		glib-2.0,
+		gtk+-3.0 (>= 3.10),
+		gstreamer-0.10,
+		json-glib-1.0,
+		gio-2.0,
 		gee-0.8
 Standards-Version: 3.9.3
 
