@@ -50,14 +50,14 @@ set (CPACK_SOURCE_IGNORE_FILES "/build/;/.git/;/.gitignore/~$;${CPACK_SOURCE_IGN
 include (CPack)
 add_custom_target (dist COMMAND "$CMAKE_MAKE_PROGRAM} package_source")
 
-set(COMPILE_OPTIONS_VALA ${COMPILE_OPTIONS_VALA} --pkg gstreamer-0.10 json-glib-1.0 gio-2.0 gee-0.8)
+set(COMPILE_OPTIONS_VALA ${COMPILE_OPTIONS_VALA} --pkg gstreamer-1.0 json-glib-1.0 gio-2.0 gee-0.8)
 
 ### PKGCONFIG ###
 find_package ( PkgConfig REQUIRED )
 pkg_check_modules ( DEPS
 	REQUIRED glib-2.0
 	REQUIRED gtk+-3.0>=3.10
-	REQUIRED gstreamer-0.10
+	REQUIRED gstreamer-1.0
 	REQUIRED json-glib-1.0
 	REQUIRED gio-2.0
 	REQUIRED gee-0.8
@@ -105,7 +105,7 @@ VALA_C ${EXEC_NAME}
 PACKAGES
 	gtk+-3.0
 	glib-2.0
-	gstreamer-0.10
+	gstreamer-1.0
 	json-glib-1.0
 	gio-2.0
 	gee-0.8
