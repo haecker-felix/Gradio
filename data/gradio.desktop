@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Gradio
+GenericName=Internet Radio
+Comment=GTK3 Internet Radio Player
+Categories=GTK;Utility;
+Exec=gradio
+Icon=gradio
+Terminal=false
+Type=Application
+X-GNOME-Gettext-Domain=gradio
+X-GNOME-Keywords=Internet;Radio;Player;
