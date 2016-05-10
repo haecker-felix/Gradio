@@ -40,7 +40,7 @@ public class AudioPlayer {
 		stream.uri = address;
 
 		Gst.Bus bus = stream.get_bus ();
-		bus.add_watch (bus_callback, 1);
+		bus.add_watch (1, bus_callback);
 
 		play();
 	}
