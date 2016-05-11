@@ -25,11 +25,11 @@ namespace Gradio{
 		private bool _isWorking = false;
 		public signal void status_changed();
 
+		//bullshit?
 		public bool isWorking {
 			get { return _isWorking; status_changed();}
 			set { _isWorking = value; status_changed();}
 		}
-
 
 		public RadioStationsProvider (ref GradioApp a) {
 			app = a;
@@ -49,86 +49,65 @@ namespace Gradio{
 			return null;
 		}
 
-		private async ArrayList<RadioStation> process_data(string data_url){
-			SourceFunc callback = process_data.callback;
+		public async ArrayList<RadioStation> search_radio_stations(string search, Search type) throws ThreadError{
+			SourceFunc callback = search_radio_stations.callback;
+
 			ArrayList<RadioStation> output = new ArrayList<RadioStation>();
 
-			// stop old thread
-			while(isWorking)
-				cancellable.cancel ();
 
+			string search_type = "byname/";
+			// soon
+			/*
+			switch(type){
+				case type.BY_NAME: search_type = "";
+			}
+			*/
+
+			// alten thread beenden
+			while(isWorking){
+				cancellable.cancel ();
+			}
 			cancellable.reset ();
 
-			// start new thread
-
-			ThreadFunc<void*> run = () => {
-				print("new thread\n");
+			new GLib.Thread<void*> (null, () => {
 				isWorking = true;
 				try{
 					cancellable.set_error_if_cancelled ();
+
+					print("Info: SearchProvider: Search thread started.\n");
 
 		   			ArrayList<RadioStation> results = new ArrayList<RadioStation>();
 					Json.Parser parser = new Json.Parser ();
 
 					cancellable.set_error_if_cancelled ();
 
-					parser.load_from_data (Util.get_string_from_uri(data_url));
+					parser.load_from_data (Util.get_string_from_uri("http://www.radio-browser.info/webservice/json/stations/"+search_type+Util.optimize_string(search)));
 					var root = parser.get_root ();
 					var radio_stations = root.get_array ();
 
 					cancellable.set_error_if_cancelled ();
 
 					foreach(var radio_station in radio_stations.get_elements()){
-						print("ehm...\n");
 						cancellable.set_error_if_cancelled ();
 						var radio_station_data = radio_station.get_object ();
 						RadioStation station = new RadioStation.parse_from_id(int.parse(radio_station_data.get_string_member("id")));
+						cancellable.set_error_if_cancelled ();
 						results.add(station);
 					}
 
 					output = results;
+					print("Info: SearchProvider: Fetched results!\n");
 				}catch(GLib.Error e){
-					print("Info: RadioStationsProvider: " + e.message + "\n");
+					print("Info: SearchProvider: " + e.message + "\n");
 				}
 
 				isWorking = false;
-				print("thread stopped...\n");
 				Idle.add((owned) callback);
 				return null;
-			};
-
-			Thread.create<void*>(run, false);
+			});
 
 			yield;
-
-			print("method stopped...\n");
-
            		return output;
-		}
-
-		public async ArrayList<RadioStation> search_radio_stations(string search, Search type) throws ThreadError{
-			ArrayList<RadioStation> output = new ArrayList<RadioStation>();
-
-			// search type
-			string search_type = "byname/";
-			/*
-			switch(type){
-				case type.BY_NAME: search_type = "byname/"; break;
-				case type.BY_COUNTRY: search_type = "bycountry/"; break;
-				case type.BY_LANGUAGE: search_type = "bylanguage/"; break;
-				case type.BY_TAG: search_type = "bytag/"; break;
-			}
-			*/
-
-
-			process_data.begin("http://www.radio-browser.info/webservice/json/stations/" + search_type+Util.optimize_string(search), (obj, res) => {
-		        		print("waiting for output...");
-		        		output = process_data.end(res);
-		        		print("got output...\n");
-        		});
-
-			print("returning output search_radio_stations\n");
-			return output;
         	}
 	}
 }
