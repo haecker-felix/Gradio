@@ -24,6 +24,12 @@ namespace Gradio {
 			window = new MainWindow(ref app, ref player_toolbar);
 			player = new AudioPlayer();
 
+			player.connection_error.connect((o,t) => {
+				Util.show_info_dialog("Es ist ein Fehler bei der Wiedergabe aufgetreten: \n" + t, window);
+				return;	
+			});
+			
+
 			this.add_window(window);
 			window.show_all();
 		}

@@ -4,6 +4,9 @@ public class AudioPlayer {
 
 	dynamic Element stream;
 
+	public signal void connection_error(string text);
+	public signal void state_changed();
+
 	private bool bus_callback (Gst.Bus bus, Gst.Message message) {
 		switch (message.type) {
 			case MessageType.ERROR:
@@ -11,6 +14,7 @@ public class AudioPlayer {
 				string debug;
 				message.parse_error (out err, out debug);
 				stdout.printf ("Error: %s\n", err.message);
+				connection_error(err.message);
 				break;
 			case MessageType.EOS:
 				stdout.printf ("Info: End of stream.\n");
@@ -21,6 +25,7 @@ public class AudioPlayer {
 				Gst.State pending;
 				message.parse_state_changed (out oldstate, out newstate, out pending);
 				stdout.printf ("Info: State changed: %s->%s:%s\n", oldstate.to_string (), newstate.to_string (), pending.to_string ());
+				state_changed();
 				break;
 			default:
 				break;

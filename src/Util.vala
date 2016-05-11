@@ -27,6 +27,14 @@ public class Util{
 		w.destroy();
 	}
 
+	public static void show_info_dialog(string text, Gtk.Window parent){
+		Gtk.MessageDialog msg = new Gtk.MessageDialog (parent, Gtk.DialogFlags.MODAL, Gtk.MessageType.WARNING, Gtk.ButtonsType.OK, text);
+			msg.response.connect ((response_id) => {
+			msg.destroy();
+		});
+		msg.show ();
+	}
+
 	public static string optimize_string(string str){
 		string s = str;
 
