@@ -33,7 +33,6 @@ public class AudioPlayer {
 	}
 
 	private void connect_to_stream_address(string address){
-		print("Crash?\n");
 		stop();
 
 		stream = ElementFactory.make ("playbin", "play");

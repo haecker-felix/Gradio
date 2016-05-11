@@ -85,13 +85,10 @@ namespace Gradio{
 
 		private void build_result_list(ArrayList<RadioStation> stations){
 			Util.remove_all_widgets(ref ResultsBox);
-			print("NR 1 HÄÄÄÄÄÄÄÄÄÄÄ?\n");
 
 			if(stations != null){
-				print("NR 2 HÄÄÄÄÄÄÄÄÄÄÄ?\n");
 				if(SearchEntry.get_text() != "" && !(stations.is_empty)){
 					foreach (RadioStation station in stations) {
-						print("added...");
 						ListItem box = new ListItem(app, station);
 
 						ResultsBox.add(box);

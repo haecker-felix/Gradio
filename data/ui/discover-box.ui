@@ -111,7 +111,8 @@
     </child>
     <child>
       <object class="GtkBox">
-        <property name="visible">True</property>
+	<property name="visible">False</property>
+	<property name="no_show_all">True</property>
         <property name="can_focus">False</property>
         <property name="margin_left">5</property>
         <property name="margin_right">5</property>
@@ -177,17 +178,6 @@
         <property name="expand">False</property>
         <property name="fill">True</property>
         <property name="position">3</property>
-      </packing>
-    </child>
-    <child>
-      <object class="GtkSeparator">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-      </object>
-      <packing>
-        <property name="expand">False</property>
-        <property name="fill">True</property>
-        <property name="position">4</property>
       </packing>
     </child>
     <child>
