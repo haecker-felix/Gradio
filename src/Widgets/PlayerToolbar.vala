@@ -19,6 +19,8 @@ namespace Gradio{
 
 		public PlayerToolbar(ref GradioApp a){
 			app = a;
+
+			app.player.state_changed.connect (() => refresh_play_stop_button());
 		}
 
 		public void set_radio_stationA (RadioStation s){
@@ -38,11 +40,9 @@ namespace Gradio{
 
 		private void refresh_play_stop_button(){
 			if(app.player.is_playing()){
-				print("\n\nis playing..\n\n");
 				StopImage.set_visible(true);
 				PlayImage.set_visible(false);
 			}else{
-				print("\n\nis not playing..\n\n");
 				PlayImage.set_visible(true);
 				StopImage.set_visible(false);
 			}

@@ -12,12 +12,19 @@ public class AudioPlayer {
 			case MessageType.ERROR:
 				GLib.Error err;
 				string debug;
+
 				message.parse_error (out err, out debug);
 				stdout.printf ("Error: %s\n", err.message);
+
+				stream.set_state (State.NULL);
 				connection_error(err.message);
+				state_changed();
 				break;
 			case MessageType.EOS:
 				stdout.printf ("Info: End of stream.\n");
+				stream.set_state (State.NULL);
+
+				state_changed();
 				break;
 			case MessageType.STATE_CHANGED:
 				Gst.State oldstate;
@@ -25,7 +32,8 @@ public class AudioPlayer {
 				Gst.State pending;
 				message.parse_state_changed (out oldstate, out newstate, out pending);
 				stdout.printf ("Info: State changed: %s->%s:%s\n", oldstate.to_string (), newstate.to_string (), pending.to_string ());
-				state_changed();
+				
+				state_changed();				
 				break;
 			default:
 				break;
