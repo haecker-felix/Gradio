@@ -23,7 +23,7 @@ namespace Gradio{
 			app.player.state_changed.connect (() => refresh_play_stop_button());
 		}
 
-		public void set_radio_stationA (RadioStation s){
+		public void set_radio_station (RadioStation s){
 			station = s;
 			app.player.set_radio_station(station);
 

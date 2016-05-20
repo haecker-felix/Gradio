@@ -24,7 +24,7 @@ namespace Gradio{
 
 			ContentStack.add_titled(library_box, "library_box", "Bibliothek");
 	       		ContentStack.add_titled(discover_box, "discover_box", "Suchen");
-			
+
 	       		Bottom.pack_end(player_toolbar);
 		}
 

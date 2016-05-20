@@ -99,6 +99,7 @@ VALA_C ${EXEC_NAME}
 	src/RadioStation.vala
 	src/Util.vala
 	src/DataProvider.vala
+	src/Library.vala
 #CUSTOM_VAPIS
 #	vapi/libqrencode.vapi
 PACKAGES

@@ -23,12 +23,12 @@ namespace Gradio{
 
 		[GtkCallback]
 		private void PlayButton_clicked (Button button) {
-			app.set_radio_station(station);
+			app.set_current_radio_station(station);
 		}
 
 		[GtkCallback]
 		private void AddButton_clicked (Button button) {
-			//library.add_radio_station_by_id(station.id);
+			app.library.add_radio_station_by_id(int.parse(station.ID));
 		}
 	}
 }

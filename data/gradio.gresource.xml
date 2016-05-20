@@ -6,5 +6,6 @@
     <file>ui/player-toolbar.ui</file>
     <file>ui/list-item.ui</file>
     <file>gradio.desktop</file>
+    <file>app-menu.ui</file>
   </gresource>
 </gresources>
