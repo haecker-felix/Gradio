@@ -35,7 +35,6 @@ namespace Gradio {
 		}
 
 		public static void main (string [] args){
-
 			// Init gstreamer
 			unowned string[] argv = null;
 			Gst.init (ref argv);

@@ -16,7 +16,8 @@ namespace Gradio{
 		private SearchEntry SearchEntry;
 		[GtkChild]
 		private Stack SearchStack;
-
+		[GtkChild]
+		private Button SearchButton;
 
 		public DiscoverBox(ref GradioApp a){
 			app = a;
@@ -24,16 +25,20 @@ namespace Gradio{
 
 			provider.status_changed.connect(() => {
 				if(provider.isWorking){
+					SearchButton.set_sensitive(false);
 					SearchStack.set_visible_child_name("loading");
 				}else{
+					SearchButton.set_sensitive(true);
 					SearchStack.set_visible_child_name("no_results");
-				}
+				}				
+
 			});
+
 		}
 
 		[GtkCallback]
-		private void SearchEntry_search_changed(){
-			provider.search_radio_stations.begin(SearchEntry.get_text(), Search.BY_NAME, (obj, res) => {
+		private void SearchButton_clicked(){
+			provider.search_radio_stations.begin(SearchEntry.get_text(), Search.BY_NAME, 20, (obj, res) => {
 		    		try {
 		        		var search_results = provider.search_radio_stations.end(res);
 		        		build_result_list(search_results);
@@ -46,41 +51,16 @@ namespace Gradio{
 
 		[GtkCallback]
 		private void RecentlyButton_clicked(){
-			provider.search_radio_stations.begin(SearchEntry.get_text(), Search.BY_NAME, (obj, res) => {
-		    		try {
-		        		var search_results = provider.search_radio_stations.end(res);
-		        		build_result_list(search_results);
-		    		} catch (ThreadError e) {
-		        		string msg = e.message;
-		        		stderr.printf("Error: Thread:" + msg+ "\n");
-		    		}
-        		});
 		}
 
 		[GtkCallback]
 		private void ClicksButton_clicked(){
-			provider.search_radio_stations.begin(SearchEntry.get_text(), Search.BY_NAME, (obj, res) => {
-		    		try {
-		        		var search_results = provider.search_radio_stations.end(res);
-		        		build_result_list(search_results);
-		    		} catch (ThreadError e) {
-		        		string msg = e.message;
-		        		stderr.printf("Error: Thread:" + msg+ "\n");
-		    		}
-        		});
+
 		}
 
 		[GtkCallback]
 		private void VotesButton_clicked(){
-			provider.search_radio_stations.begin(SearchEntry.get_text(), Search.BY_NAME, (obj, res) => {
-		    		try {
-		        		var search_results = provider.search_radio_stations.end(res);
-		        		build_result_list(search_results);
-		    		} catch (ThreadError e) {
-		        		string msg = e.message;
-		        		stderr.printf("Error: Thread:" + msg+ "\n");
-		    		}
-        		});
+
 		}
 
 		private void build_result_list(ArrayList<RadioStation> stations){
@@ -90,10 +70,11 @@ namespace Gradio{
 				if(SearchEntry.get_text() != "" && !(stations.is_empty)){
 					foreach (RadioStation station in stations) {
 						ListItem box = new ListItem(app, station);
-
 						ResultsBox.add(box);
-						SearchStack.set_visible_child_name("results");
+						
 					}
+					SearchStack.set_visible_child_name("results");
+					SearchButton.set_sensitive(true);
 				}
 			}
 

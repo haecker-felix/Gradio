@@ -20,21 +20,18 @@ namespace Gradio{
 
 	public class RadioStationsProvider{
 		GradioApp app;
-		GLib.Cancellable cancellable;
 
 		private bool _isWorking = false;
 		public signal void status_changed();
 
-		//bullshit?
 		public bool isWorking {
-			get { return _isWorking; status_changed();}
+			get { return _isWorking;}
 			set { _isWorking = value; status_changed();}
 		}
 
+
 		public RadioStationsProvider (ref GradioApp a) {
 			app = a;
-			cancellable = new GLib.Cancellable ();
-
 		}
 
 		public async ArrayList<RadioStation> get_most_clicked_list(){
@@ -49,64 +46,55 @@ namespace Gradio{
 			return null;
 		}
 
-		public async ArrayList<RadioStation> search_radio_stations(string search, Search type) throws ThreadError{
+		public async ArrayList<RadioStation> search_radio_stations(string search, Search type, int max_results) throws ThreadError{
 			SourceFunc callback = search_radio_stations.callback;
-
 			ArrayList<RadioStation> output = new ArrayList<RadioStation>();
 
-
 			string search_type = "byname/";
-			// soon
-			/*
-			switch(type){
-				case type.BY_NAME: search_type = "";
-			}
-			*/
 
-			// alten thread beenden
-			while(isWorking){
-				cancellable.cancel ();
-			}
-			cancellable.reset ();
-
-			new GLib.Thread<void*> (null, () => {
-				isWorking = true;
+			isWorking = true;
+			ThreadFunc<void*> run = () => {
 				try{
-					cancellable.set_error_if_cancelled ();
-
-					print("Info: SearchProvider: Search thread started.\n");
-
+					
+					message("Search thread started.");
 		   			ArrayList<RadioStation> results = new ArrayList<RadioStation>();
-					Json.Parser parser = new Json.Parser ();
 
-					cancellable.set_error_if_cancelled ();
+					
+					Json.Parser parser = new Json.Parser ();
 
 					parser.load_from_data (Util.get_string_from_uri("http://www.radio-browser.info/webservice/json/stations/"+search_type+Util.optimize_string(search)));
 					var root = parser.get_root ();
 					var radio_stations = root.get_array ();
 
-					cancellable.set_error_if_cancelled ();
+					int max_items = (int)radio_stations.get_length();
+					if(max_items < max_results)
+						max_results = max_items;					
 
-					foreach(var radio_station in radio_stations.get_elements()){
-						cancellable.set_error_if_cancelled ();
+
+					for(int a = 0; a < max_results; a++){
+						message(a.to_string());
+						var radio_station = radio_stations.get_element(a);
 						var radio_station_data = radio_station.get_object ();
 						RadioStation station = new RadioStation.parse_from_id(int.parse(radio_station_data.get_string_member("id")));
-						cancellable.set_error_if_cancelled ();
 						results.add(station);
 					}
+					
 
 					output = results;
-					print("Info: SearchProvider: Fetched results!\n");
+					message("Fetched results!");
 				}catch(GLib.Error e){
-					print("Info: SearchProvider: " + e.message + "\n");
+					warning(e.message);
 				}
-
-				isWorking = false;
+				
 				Idle.add((owned) callback);
+				Thread.exit (1.to_pointer ());
 				return null;
-			});
+			};
+
+			Thread<void*> search_thread = new Thread<void*> ("search_thread", run);
 
 			yield;
+			isWorking = false;
            		return output;
         	}
 	}
