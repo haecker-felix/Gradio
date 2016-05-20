@@ -3,7 +3,6 @@
     <file>ui/main-window.ui</file>
     <file>ui/discover-box.ui</file>
     <file>ui/library-box.ui</file>
-    <file>ui/manual-box.ui</file>
     <file>ui/player-toolbar.ui</file>
     <file>ui/list-item.ui</file>
     <file>gradio.desktop</file>

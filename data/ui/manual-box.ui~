@@ -13,33 +13,15 @@
         <property name="halign">center</property>
         <property name="valign">center</property>
         <child>
-          <object class="GtkEntry" id="AddressEntry">
+          <object class="GtkLabel">
             <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="max_width_chars">0</property>
-            <property name="placeholder_text" translatable="yes">Radio ID eingeben</property>
-          </object>
-          <packing>
-            <property name="expand">True</property>
-            <property name="fill">True</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkButton" id="ConnectButton">
-            <property name="label" translatable="yes">Verbinden</property>
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">True</property>
-            <signal name="clicked" handler="ConnectButton_clicked" swapped="no"/>
-            <style>
-              <class name="suggested-action"/>
-            </style>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">Keine Radiosender in der Bibliothek.</property>
           </object>
           <packing>
             <property name="expand">False</property>
             <property name="fill">True</property>
-            <property name="position">1</property>
+            <property name="position">0</property>
           </packing>
         </child>
         <style>
