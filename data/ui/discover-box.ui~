@@ -22,44 +22,19 @@
     <property name="can_focus">False</property>
     <property name="orientation">vertical</property>
     <child>
-      <object class="GtkSearchEntry" id="SearchEntry">
+      <object class="GtkBox">
         <property name="visible">True</property>
-        <property name="can_focus">True</property>
-        <property name="margin_left">5</property>
-        <property name="margin_right">5</property>
-        <property name="margin_top">5</property>
-        <property name="margin_bottom">5</property>
-        <property name="primary_icon_name">edit-find-symbolic</property>
-        <property name="primary_icon_activatable">False</property>
-        <property name="primary_icon_sensitive">False</property>
-        <signal name="search-changed" handler="SearchEntry_search_changed" swapped="no"/>
-      </object>
-      <packing>
-        <property name="expand">False</property>
-        <property name="fill">True</property>
-        <property name="position">0</property>
-      </packing>
-    </child>
-    <child>
-      <object class="GtkBox" id="NavigationBox">
         <property name="can_focus">False</property>
-        <property name="no_show_all">True</property>
-        <property name="margin_left">5</property>
-        <property name="margin_right">5</property>
-        <property name="margin_top">5</property>
-        <property name="margin_bottom">5</property>
         <child>
-          <object class="GtkButton" id="BackButton">
+          <object class="GtkSearchEntry" id="SearchEntry">
             <property name="visible">True</property>
             <property name="can_focus">True</property>
-            <property name="receives_default">True</property>
-            <child>
-              <object class="GtkImage">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="icon_name">go-previous-symbolic</property>
-              </object>
-            </child>
+            <property name="margin_left">5</property>
+            <property name="margin_top">5</property>
+            <property name="margin_bottom">5</property>
+            <property name="primary_icon_name">edit-find-symbolic</property>
+            <property name="primary_icon_activatable">False</property>
+            <property name="primary_icon_sensitive">False</property>
           </object>
           <packing>
             <property name="expand">True</property>
@@ -68,22 +43,24 @@
           </packing>
         </child>
         <child>
-          <object class="GtkButton" id="ForwardButton">
+          <object class="GtkButton" id="SearchButton">
+            <property name="label">gtk-find</property>
+            <property name="width_request">80</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
+            <property name="has_focus">True</property>
+            <property name="is_focus">True</property>
+            <property name="can_default">True</property>
             <property name="receives_default">True</property>
-            <child>
-              <object class="GtkImage">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="icon_name">go-next-symbolic</property>
-              </object>
-            </child>
+            <property name="margin_right">5</property>
+            <property name="margin_top">5</property>
+            <property name="margin_bottom">5</property>
+            <property name="use_stock">True</property>
+            <signal name="clicked" handler="SearchButton_clicked" swapped="no"/>
           </object>
           <packing>
-            <property name="expand">True</property>
+            <property name="expand">False</property>
             <property name="fill">True</property>
-            <property name="pack_type">end</property>
             <property name="position">1</property>
           </packing>
         </child>
@@ -94,8 +71,7 @@
       <packing>
         <property name="expand">False</property>
         <property name="fill">True</property>
-        <property name="pack_type">end</property>
-        <property name="position">1</property>
+        <property name="position">0</property>
       </packing>
     </child>
     <child>
@@ -111,9 +87,8 @@
     </child>
     <child>
       <object class="GtkBox">
-	<property name="visible">False</property>
-	<property name="no_show_all">True</property>
         <property name="can_focus">False</property>
+        <property name="no_show_all">True</property>
         <property name="margin_left">5</property>
         <property name="margin_right">5</property>
         <property name="margin_top">5</property>

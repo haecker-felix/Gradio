@@ -93,13 +93,12 @@ VALA_C ${EXEC_NAME}
 	src/Widgets/MainWindow.vala
 	src/Widgets/DiscoverBox.vala
 	src/Widgets/LibraryBox.vala
-	src/Widgets/ManualBox.vala
 	src/Widgets/PlayerToolbar.vala
 	src/Widgets/ListItem.vala
 	src/AudioPlayer.vala
 	src/RadioStation.vala
 	src/Util.vala
-	src/RadioStationsProvider.vala
+	src/DataProvider.vala
 #CUSTOM_VAPIS
 #	vapi/libqrencode.vapi
 PACKAGES

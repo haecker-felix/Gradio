@@ -31,7 +31,6 @@ namespace Gradio{
 			ChannelNameLabel.set_text(station.Title);
 		}
 
-
 		[GtkCallback]
         	private void PlayStopButton_clicked (Button button) {
 			app.player.toggle_play_stop();

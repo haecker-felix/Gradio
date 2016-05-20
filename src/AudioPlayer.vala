@@ -7,6 +7,10 @@ public class AudioPlayer {
 	public signal void connection_error(string text);
 	public signal void state_changed();
 
+	public AudioPlayer(){
+		stream = ElementFactory.make ("playbin", "play");
+	}
+
 	private bool bus_callback (Gst.Bus bus, Gst.Message message) {
 		switch (message.type) {
 			case MessageType.ERROR:
@@ -14,14 +18,14 @@ public class AudioPlayer {
 				string debug;
 
 				message.parse_error (out err, out debug);
-				stdout.printf ("Error: %s\n", err.message);
+				print (err.message);
 
 				stream.set_state (State.NULL);
 				connection_error(err.message);
 				state_changed();
 				break;
 			case MessageType.EOS:
-				stdout.printf ("Info: End of stream.\n");
+				print ("End of stream.");
 				stream.set_state (State.NULL);
 
 				state_changed();
@@ -31,7 +35,7 @@ public class AudioPlayer {
 				Gst.State newstate;
 				Gst.State pending;
 				message.parse_state_changed (out oldstate, out newstate, out pending);
-				stdout.printf ("Info: State changed: %s->%s:%s\n", oldstate.to_string (), newstate.to_string (), pending.to_string ());
+				print ("State changed: %s->%s:%s\n", oldstate.to_string (), newstate.to_string (), pending.to_string ());
 				
 				state_changed();				
 				break;
@@ -48,7 +52,7 @@ public class AudioPlayer {
 	private void connect_to_stream_address(string address){
 		stop();
 
-		stream = ElementFactory.make ("playbin", "play");
+		
 		stream.uri = address;
 
 		Gst.Bus bus = stream.get_bus ();

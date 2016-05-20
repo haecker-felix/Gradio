@@ -43,7 +43,7 @@ namespace Gradio {
 			Gtk.init(ref args);
 
 			// dark theme
-			Gtk.Settings.get_default().set("gtk-application-prefer-dark-theme", true);
+			//Gtk.Settings.get_default().set("gtk-application-prefer-dark-theme", true);
 
 			// run the app
 		    	var app = new GradioApp ();

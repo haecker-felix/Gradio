@@ -8,7 +8,7 @@ namespace Gradio{
 	public class DiscoverBox : Gtk.Box{
 
 		GradioApp app;
-		public RadioStationsProvider provider;
+		public DataProvider provider;
 
 		[GtkChild]
 		private ListBox ResultsBox;
@@ -21,7 +21,7 @@ namespace Gradio{
 
 		public DiscoverBox(ref GradioApp a){
 			app = a;
-			provider = new Gradio.RadioStationsProvider(ref app);
+			provider = new Gradio.DataProvider(ref app);
 
 			provider.status_changed.connect(() => {
 				if(provider.isWorking){
@@ -38,9 +38,11 @@ namespace Gradio{
 
 		[GtkCallback]
 		private void SearchButton_clicked(){
-			provider.search_radio_stations.begin(SearchEntry.get_text(), Search.BY_NAME, 20, (obj, res) => {
+			string address = DataProvider.radio_stations + DataProvider.by_name + SearchEntry.get_text();
+
+			provider.get_radio_stations.begin(address, 20, (obj, res) => {
 		    		try {
-		        		var search_results = provider.search_radio_stations.end(res);
+		        		var search_results = provider.get_radio_stations.end(res);
 		        		build_result_list(search_results);
 		    		} catch (ThreadError e) {
 		        		string msg = e.message;
