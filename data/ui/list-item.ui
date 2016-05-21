@@ -36,22 +36,46 @@
           </packing>
         </child>
         <child>
-          <object class="GtkButton" id="AddButton">
+          <object class="GtkButton" id="AddRemoveButton">
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
-            <property name="no_show_all">True</property>
             <property name="margin_left">3</property>
             <property name="margin_right">3</property>
             <property name="margin_top">3</property>
             <property name="margin_bottom">3</property>
             <property name="relief">none</property>
-            <signal name="clicked" handler="AddButton_clicked" swapped="no"/>
+            <signal name="clicked" handler="AddRemoveButton_clicked" swapped="no"/>
             <child>
-              <object class="GtkImage">
+              <object class="GtkBox">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="icon_name">list-add-symbolic</property>
+                <property name="orientation">vertical</property>
+                <property name="homogeneous">True</property>
+                <child>
+                  <object class="GtkImage" id="AddImage">
+                    <property name="can_focus">False</property>
+                    <property name="no_show_all">True</property>
+                    <property name="icon_name">list-add-symbolic</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkImage" id="RemoveImage">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="icon_name">list-remove-symbolic</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
               </object>
             </child>
           </object>

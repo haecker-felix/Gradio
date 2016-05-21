@@ -24,10 +24,10 @@ namespace Gradio {
 			create_app_menu();
 
 			player = new AudioPlayer();
-			player_toolbar = new PlayerToolbar(ref app);
-			window = new MainWindow(ref app, ref player_toolbar);	
-
 			library = new Library(ref app);
+
+			player_toolbar = new PlayerToolbar(ref app);
+			window = new MainWindow(ref app, ref player_toolbar, ref library);	
 
 			this.add_window(window);
 			window.show_all();

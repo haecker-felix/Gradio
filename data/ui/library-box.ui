@@ -7,11 +7,36 @@
     <property name="can_focus">False</property>
     <property name="baseline_position">top</property>
     <child>
-      <object class="GtkBox">
+      <object class="GtkStack" id="LibraryStack">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="halign">center</property>
-        <property name="valign">center</property>
+        <property name="has_tooltip">True</property>
+        <property name="transition_duration">190</property>
+        <property name="transition_type">crossfade</property>
+        <child>
+          <object class="GtkScrolledWindow">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="shadow_type">in</property>
+            <child>
+              <object class="GtkViewport">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <child>
+                  <object class="GtkListBox" id="StationsBox">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="selection_mode">none</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="name">results</property>
+            <property name="title" translatable="yes">page0</property>
+          </packing>
+        </child>
         <child>
           <object class="GtkLabel">
             <property name="visible">True</property>
@@ -19,14 +44,23 @@
             <property name="label" translatable="yes">Keine Radiosender in der Bibliothek.</property>
           </object>
           <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">0</property>
+            <property name="name">no_results</property>
+            <property name="title" translatable="yes">page1</property>
+            <property name="position">1</property>
           </packing>
         </child>
-        <style>
-          <class name="linked"/>
-        </style>
+        <child>
+          <object class="GtkSpinner">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="active">True</property>
+          </object>
+          <packing>
+            <property name="name">loading</property>
+            <property name="title" translatable="yes">page2</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
       </object>
       <packing>
         <property name="expand">True</property>

@@ -8,7 +8,8 @@ namespace Gradio{
 	public class DiscoverBox : Gtk.Box{
 
 		GradioApp app;
-		public DataProvider provider;
+		Library lib;
+		DataProvider provider;
 
 		[GtkChild]
 		private ListBox ResultsBox;
@@ -19,8 +20,9 @@ namespace Gradio{
 		[GtkChild]
 		private Button SearchButton;
 
-		public DiscoverBox(ref GradioApp a){
+		public DiscoverBox(ref GradioApp a, ref Library l){
 			app = a;
+			lib = l;
 			provider = new Gradio.DataProvider(ref app);
 
 			provider.status_changed.connect(() => {
@@ -71,7 +73,7 @@ namespace Gradio{
 			if(stations != null){
 				if(SearchEntry.get_text() != "" && !(stations.is_empty)){
 					foreach (RadioStation station in stations) {
-						ListItem box = new ListItem(app, station);
+						ListItem box = new ListItem(ref app, ref lib, station);
 						ResultsBox.add(box);
 						
 					}
