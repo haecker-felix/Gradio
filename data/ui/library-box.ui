@@ -33,7 +33,7 @@
             </child>
           </object>
           <packing>
-            <property name="name">results</property>
+            <property name="name">library</property>
             <property name="title" translatable="yes">page0</property>
           </packing>
         </child>
@@ -44,21 +44,9 @@
             <property name="label" translatable="yes">Keine Radiosender in der Bibliothek.</property>
           </object>
           <packing>
-            <property name="name">no_results</property>
+            <property name="name">empty_library</property>
             <property name="title" translatable="yes">page1</property>
             <property name="position">1</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkSpinner">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="active">True</property>
-          </object>
-          <packing>
-            <property name="name">loading</property>
-            <property name="title" translatable="yes">page2</property>
-            <property name="position">2</property>
           </packing>
         </child>
       </object>

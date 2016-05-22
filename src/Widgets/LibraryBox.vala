@@ -21,18 +21,26 @@ namespace Gradio{
 
 			lib.added_radio_station.connect(() => reload_radio_stations());
 			lib.removed_radio_station.connect(() => reload_radio_stations());
+
+			reload_radio_stations();
 		}
 
 		private void reload_radio_stations(){
 			Util.remove_all_widgets(ref StationsBox);
 			
-			foreach (var entry in lib.lib.entries){
-				var station = entry.value;
+			if(lib.lib.size != 0){
+				foreach (var entry in lib.lib.entries){
+					var station = entry.value;
 
-				ListItem item = new ListItem(ref app, ref lib, station);
+					ListItem item = new ListItem(ref app, ref lib, station);
 
-				StationsBox.add(item);
+					StationsBox.add(item);
+				}
+				LibraryStack.set_visible_child_name("library");
+			}else{
+				LibraryStack.set_visible_child_name("empty_library");
 			}
+
 		}		
 	}
 }

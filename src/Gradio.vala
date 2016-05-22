@@ -24,7 +24,9 @@ namespace Gradio {
 			create_app_menu();
 
 			player = new AudioPlayer();
+
 			library = new Library(ref app);
+			library.read_data();
 
 			player_toolbar = new PlayerToolbar(ref app);
 			window = new MainWindow(ref app, ref player_toolbar, ref library);	
