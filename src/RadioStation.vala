@@ -1,12 +1,12 @@
 public class RadioStation{
 
-	public string Title;
-	public string Homepage;
-	public string Source;
-	public string Language;
-	public string ID;
-	public string Icon;
-	public string Country;
+	public string Title = "Corrupted data";
+	public string Homepage = "?";
+	public string Source = "";
+	public string Language = "?";
+	public string ID = "0";
+	public string Icon = "";
+	public string Country = "";
 
 	public RadioStation.parse_from_address(string address){
 		json_parse(address);

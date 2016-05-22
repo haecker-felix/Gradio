@@ -100,7 +100,6 @@ namespace Gradio{
 					while ((line = dis.read_line (null)) != null) {
 						RadioStation station = new RadioStation.parse_from_id(int.parse(line));
 						lib[int.parse(line)] = station;
-						stdout.printf ("%s\n", line);
 					}
 				}else{
 					message("No gradio data folder found. Library is empty.");
