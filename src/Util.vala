@@ -44,4 +44,8 @@ public class Util{
 
 		return s;
 	}
+
+	public static void open_website(string address){
+		Gtk.show_uri(null, address, 0);
+	}
 }

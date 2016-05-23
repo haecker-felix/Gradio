@@ -58,7 +58,7 @@ namespace Gradio {
 				"comments", "GNOME Internet Radio",
 				"license-type", Gtk.License.GPL_3_0,
 				"logo-icon-name", "gradio",
-				"version", "0.1",
+				"version", "0.2 unstable",
 				"website", "https://github.com/haecker-felix/gradio",
 				"wrap-license", true);
 		}
