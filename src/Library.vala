@@ -66,12 +66,15 @@ namespace Gradio{
 				var dir = File.new_for_path (dir_path);	
 
 				if(!file.query_exists ()){
-					message("Creating gradio data folder...");
-					dir.make_directory_with_parents ();
+					if(!dir.query_exists ()){
+						message("Creating gradio data folder...");
+						dir.make_directory_with_parents ();
+					}
+					file.create (FileCreateFlags.NONE);
+				}else{
+					file.delete();
+					file.create (FileCreateFlags.NONE);
 				}
-
-				file.delete();
-				file.create (FileCreateFlags.NONE);
 
 				FileIOStream iostream = file.open_readwrite ();
 				iostream.seek (0, SeekType.END);
@@ -102,7 +105,7 @@ namespace Gradio{
 						lib[int.parse(line)] = station;
 					}
 				}else{
-					message("No gradio data folder found. Library is empty.");
+					message("No gradio library found. ");
 				}
 			}catch(Error e){
 				error(e.message);
