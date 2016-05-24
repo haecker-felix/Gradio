@@ -8,7 +8,9 @@ namespace Gradio {
 		public MainWindow window;
 		public AudioPlayer player;
 		public PlayerToolbar player_toolbar;
+
 		public Library library;
+		public GLib.Settings settings;
 
 		public GradioApp () {
 			Object(application_id: "de.haecker-felix.gradio", flags: ApplicationFlags.FLAGS_NONE);
@@ -24,6 +26,7 @@ namespace Gradio {
 			create_app_menu();
 
 			player = new AudioPlayer();
+			settings = new GLib.Settings ("de.haecker-felix.gradio");
 
 			library = new Library(ref app);
 			library.read_data();
@@ -38,8 +41,13 @@ namespace Gradio {
 			create_app_menu();
 		}	
 
+		public void report_an_error(){
+			Util.open_website("https://github.com/haecker-felix/gradio/issues/new");
+		}
+
 		private void show_preferences_dialog(){
-		
+			SettingsWindow swindow = new SettingsWindow(this);
+			swindow.show();
 		}
 
 		private void show_about_dialog(){
@@ -71,7 +79,14 @@ namespace Gradio {
 			action = new GLib.SimpleAction ("about", null);
 			action.activate.connect (() => { this.show_about_dialog (); });
 			this.add_action (action);
-			this.add_accelerator ("F1", "app.ABOUT", null);
+
+			action = new GLib.SimpleAction ("quit", null);
+			action.activate.connect (() => { this.quit (); });
+			this.add_action (action);
+
+			action = new GLib.SimpleAction ("report_an_error", null);
+			action.activate.connect (() => { this.report_an_error (); });
+			this.add_action (action);
 
 			var builder = new Gtk.Builder.from_resource ("/de/haecker-felix/gradio/app-menu.ui");
 			var app_menu = builder.get_object ("app-menu") as GLib.MenuModel;

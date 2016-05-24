@@ -3,8 +3,24 @@
   <menu id="app-menu">
     <section>
       <item>
+        <attribute name="label" translatable="yes">Einstellungen</attribute>
+        <attribute name="action">app.preferences</attribute>
+      </item>
+    </section>
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">Fehler melden</attribute>
+        <attribute name="action">app.report_an_error</attribute>
+      </item>
+      <item>
         <attribute name="label" translatable="yes">Info</attribute>
         <attribute name="action">app.about</attribute>
+      </item>
+    </section>
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">Beenden</attribute>
+        <attribute name="action">app.quit</attribute>
       </item>
     </section>
   </menu>

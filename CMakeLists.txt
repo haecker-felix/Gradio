@@ -95,6 +95,7 @@ VALA_C ${EXEC_NAME}
 	src/Widgets/LibraryBox.vala
 	src/Widgets/PlayerToolbar.vala
 	src/Widgets/ListItem.vala
+	src/Widgets/SettingsWindow.vala
 	src/AudioPlayer.vala
 	src/RadioStation.vala
 	src/Util.vala
