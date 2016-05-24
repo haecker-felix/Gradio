@@ -13,8 +13,8 @@ namespace Gradio{
 		public string Votes = "";
 		public string Codec = "";
 		public string Bitrate = "";
+		public string DataAddress = "";
 		public bool Available = false;
-		string DataAddress = "";
 
 		public signal void data_changed();
 
@@ -62,7 +62,11 @@ namespace Gradio{
 						else
 							Available = false;
 					}
+					if(Source.contains(".m3u") || Source.contains(".pls"))
+						Available = false;
 				}
+
+				
 
 			}catch(GLib.Error e){
 				print("Error: " + e.message + "\n");

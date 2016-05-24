@@ -74,8 +74,9 @@ namespace Gradio{
 				if(SearchEntry.get_text() != "" && !(stations.is_empty)){
 					foreach (RadioStation station in stations) {
 						ListItem box = new ListItem(ref app, ref lib, station);
-						ResultsBox.add(box);
-						
+						if(station.Available){
+							ResultsBox.add(box);
+						}
 					}
 					SearchStack.set_visible_child_name("results");
 					SearchButton.set_sensitive(true);
