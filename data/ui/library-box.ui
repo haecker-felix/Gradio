@@ -41,7 +41,7 @@
           <object class="GtkLabel">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="label" translatable="yes">Keine Radiosender in der Bibliothek.</property>
+            <property name="label" translatable="yes">Your library is empty!</property>
           </object>
           <packing>
             <property name="name">empty_library</property>

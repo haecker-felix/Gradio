@@ -95,7 +95,7 @@
         <property name="homogeneous">True</property>
         <child>
           <object class="GtkButton" id="ClicksButton">
-            <property name="label" translatable="yes">Meiste Aufrufe</property>
+            <property name="label" translatable="yes">Most clicks</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
@@ -112,7 +112,7 @@
         </child>
         <child>
           <object class="GtkButton" id="VotesButton">
-            <property name="label" translatable="yes">Meiste Votes</property>
+            <property name="label" translatable="yes">Most Votes</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
@@ -129,7 +129,7 @@
         </child>
         <child>
           <object class="GtkButton" id="RecentlyButton">
-            <property name="label" translatable="yes">Zuletzt gespielt</property>
+            <property name="label" translatable="yes">Last played</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
@@ -188,7 +188,7 @@
           <object class="GtkLabel">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="label" translatable="yes">Keine Radiosender gefunden</property>
+            <property name="label" translatable="yes">No radio stations found.</property>
           </object>
           <packing>
             <property name="name">no_results</property>

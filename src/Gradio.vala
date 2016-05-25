@@ -62,11 +62,10 @@ namespace Gradio {
 				"authors", authors,
 				"translator-credits", _("translator-credits"),
 				"program-name", "Gradio",
-				"title", "Über Gradio",
-				"comments", "GNOME Internet Radio",
+				"title", _("About Gradio"),
 				"license-type", Gtk.License.GPL_3_0,
 				"logo-icon-name", "gradio",
-				"version", "0.2 unstable",
+				"version", "1.01",
 				"website", "https://github.com/haecker-felix/gradio",
 				"wrap-license", true);
 		}
@@ -96,7 +95,7 @@ namespace Gradio {
 
 		private void connect_signals(){
 			player.connection_error.connect((o,t) => {
-				Util.show_info_dialog("Es ist ein Fehler bei der Wiedergabe aufgetreten: \n" + t, window);
+				Util.show_info_dialog(t, window);
 				return;	
 			});
 

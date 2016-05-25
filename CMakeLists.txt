@@ -67,6 +67,11 @@ link_libraries ( ${DEPS_LIBRARIES} )
 link_directories ( ${DEPS_LIBRARY_DIRS} )
 add_definitions ( ${DEPS_CFLAGS} )
 
+### TRANSLATION ###
+set (GETTEXT_PACKAGE "${CMAKE_PROJECT_NAME}")
+add_definitions (-DGETTEXT_PACKAGE=\"${GETTEXT_PACKAGE}\")
+add_subdirectory (po)
+
 
 ### GRESOURCES ###
 include ( GResource )

@@ -5,7 +5,7 @@
   <template class="GradioSettingsDialog" parent="GtkDialog">
     <property name="can_focus">False</property>
     <property name="type">popup</property>
-    <property name="title" translatable="yes">Einstellungen</property>
+    <property name="title" translatable="yes">Settings</property>
     <property name="resizable">False</property>
     <property name="modal">True</property>
     <property name="window_position">center-on-parent</property>
@@ -67,7 +67,7 @@
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="halign">start</property>
-                            <property name="label" translatable="yes">Nur abspielbare Radiosender anzeigen:</property>
+                            <property name="label" translatable="yes">Only show playable radio stations:</property>
                           </object>
                           <packing>
                             <property name="left_attach">0</property>
@@ -94,7 +94,7 @@
                   <object class="GtkLabel" id="SearchSettingsLabel">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">Sucheinstellungen</property>
+                    <property name="label" translatable="yes">Search settings</property>
                     <attributes>
                       <attribute name="weight" value="bold"/>
                     </attributes>
@@ -128,7 +128,7 @@
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="halign">start</property>
-                            <property name="label" translatable="yes">Benachrichtigungen anzeigen:</property>
+                            <property name="label" translatable="yes">Show notifications:</property>
                           </object>
                           <packing>
                             <property name="left_attach">0</property>
@@ -164,7 +164,7 @@
                             <property name="can_focus">False</property>
                             <property name="no_show_all">True</property>
                             <property name="halign">start</property>
-                            <property name="label" translatable="yes">Dunkles Design verwenden:</property>
+                            <property name="label" translatable="yes">Use dark design:</property>
                           </object>
                           <packing>
                             <property name="left_attach">0</property>
@@ -179,7 +179,7 @@
                   <object class="GtkLabel" id="GeneralSettingsLabel">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">Allgemeine Einstellungen</property>
+                    <property name="label" translatable="yes">General settings</property>
                     <attributes>
                       <attribute name="weight" value="bold"/>
                     </attributes>
