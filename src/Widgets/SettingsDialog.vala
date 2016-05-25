@@ -1,8 +1,8 @@
 using Gtk;
 namespace Gradio{
 
-	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/settings-window.ui")]
-	public class SettingsWindow : Gtk.Window {
+	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/settings-dialog.ui")]
+	public class SettingsDialog : Gtk.Dialog {
 
 		[GtkChild]
 		private Switch OnlyShowWorkingStationsSwitch;
@@ -11,7 +11,8 @@ namespace Gradio{
 		[GtkChild]
 		private Switch ShowNotificationsSwitch;
 
-		public SettingsWindow (GradioApp app) {
+		public SettingsDialog (GradioApp app) {
+			this.set_transient_for(app.window);
 			load_settings(app.settings);
 
 			OnlyShowWorkingStationsSwitch.notify["active"].connect (() => {

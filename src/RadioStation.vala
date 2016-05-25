@@ -29,8 +29,6 @@ namespace Gradio{
 		}
 
 		private void json_parse (string address){
-			print(address+"\n");
-
 			Json.Parser parser = new Json.Parser ();
 
 			try{
@@ -65,8 +63,6 @@ namespace Gradio{
 					if(Source.contains(".m3u") || Source.contains(".pls"))
 						Available = false;
 				}
-
-				
 
 			}catch(GLib.Error e){
 				print("Error: " + e.message + "\n");

@@ -46,7 +46,7 @@ namespace Gradio {
 		}
 
 		private void show_preferences_dialog(){
-			SettingsWindow swindow = new SettingsWindow(this);
+			SettingsDialog swindow = new SettingsDialog(this);
 			swindow.show();
 		}
 
@@ -98,6 +98,15 @@ namespace Gradio {
 			player.connection_error.connect((o,t) => {
 				Util.show_info_dialog("Es ist ein Fehler bei der Wiedergabe aufgetreten: \n" + t, window);
 				return;	
+			});
+
+			player.new_radio_station.connect(() => {
+				if(settings.get_boolean ("show-notifications")){
+					Notification notify = new Notification("Gradio");
+					notify.set_priority (NotificationPriority.LOW);
+					notify.set_body(player.current_station.Title);
+					this.send_notification("1212", notify);	
+				}
 			});
 		}
 

@@ -1,7 +1,7 @@
 <gresources>
   <gresource prefix="/de/haecker-felix/gradio">
     <file>ui/main-window.ui</file>
-    <file>ui/settings-window.ui</file>
+    <file>ui/settings-dialog.ui</file>
     <file>ui/discover-box.ui</file>
     <file>ui/library-box.ui</file>
     <file>ui/player-toolbar.ui</file>

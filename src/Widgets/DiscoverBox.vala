@@ -76,6 +76,8 @@ namespace Gradio{
 						ListItem box = new ListItem(ref app, ref lib, station);
 						if(station.Available){
 							ResultsBox.add(box);
+						}else if(!app.settings.get_boolean("only-show-working-stations")){
+							ResultsBox.add(box);
 						}
 					}
 					SearchStack.set_visible_child_name("results");

@@ -5,8 +5,11 @@ namespace Gradio{
 
 		dynamic Element stream;
 
+		public signal void new_radio_station();
 		public signal void connection_error(string text);
 		public signal void state_changed();
+
+		public RadioStation current_station;
 
 		public AudioPlayer(){
 			stream = ElementFactory.make ("playbin", "play");
@@ -36,8 +39,8 @@ namespace Gradio{
 					Gst.State newstate;
 					Gst.State pending;
 					message.parse_state_changed (out oldstate, out newstate, out pending);
-					print ("State changed: %s->%s:%s\n", oldstate.to_string (), newstate.to_string (), pending.to_string ());
-				
+					GLib.message ("State changed: %s -> %s", oldstate.to_string (), newstate.to_string ());					
+
 					state_changed();				
 					break;
 				default:
@@ -47,13 +50,15 @@ namespace Gradio{
 		}
 
 		public void set_radio_station(RadioStation station){
+			current_station = station;
 			connect_to_stream_address(station.Source);
+			new_radio_station();
+
 		}
 
 		private void connect_to_stream_address(string address){
 			stop();
 
-		
 			stream.uri = address;
 
 			Gst.Bus bus = stream.get_bus ();
