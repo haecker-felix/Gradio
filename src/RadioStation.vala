@@ -60,6 +60,8 @@ namespace Gradio{
 						else
 							Available = false;
 					}
+
+					// TODO: Support for playlists
 					if(Source.contains(".m3u") || Source.contains(".pls"))
 						Available = false;
 				}

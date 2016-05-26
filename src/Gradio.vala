@@ -120,10 +120,20 @@ namespace Gradio {
 
 			// dark theme
 			//Gtk.Settings.get_default().set("gtk-application-prefer-dark-theme", true);
+			
+			var app = new GradioApp ();
+			if(Util.check_database_connection()){
+				app.run (args);
+			}else{
+				warning("Cannot connect to the database. Is your internet connection working?");
+			}
+						
 
-			// run the app
-		    	var app = new GradioApp ();
-		    	app.run (args);
+
+
+			
+		
+
 		}
     }
 }

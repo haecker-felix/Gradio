@@ -40,7 +40,7 @@ namespace Gradio{
 
 		[GtkCallback]
 		private void SearchButton_clicked(){
-			string address = DataProvider.radio_stations + DataProvider.by_name + SearchEntry.get_text();
+			string address = DataProvider.radio_stations + DataProvider.by_name + Util.optimize_string(SearchEntry.get_text());
 
 			provider.get_radio_stations.begin(address, 20, (obj, res) => {
 		    		try {
