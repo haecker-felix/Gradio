@@ -56,7 +56,7 @@ set(COMPILE_OPTIONS_VALA ${COMPILE_OPTIONS_VALA} --pkg gstreamer-1.0 json-glib-1
 find_package ( PkgConfig REQUIRED )
 pkg_check_modules ( DEPS
 	REQUIRED glib-2.0
-	REQUIRED gtk+-3.0>=3.10
+	REQUIRED gtk+-3.0>=3.14
 	REQUIRED gstreamer-1.0
 	REQUIRED json-glib-1.0
 	REQUIRED gio-2.0
