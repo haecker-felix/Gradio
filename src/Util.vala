@@ -46,6 +46,11 @@ public class Util{
 	}
 
 	public static void open_website(string address){
-		Gtk.show_uri(null, address, 0);
+		try{
+			Gtk.show_uri(null, address, 0);
+		}catch(Error e){
+			error("Cannot open website. " + e.message);
+		}
+		
 	}
 }

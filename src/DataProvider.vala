@@ -34,19 +34,6 @@ namespace Gradio{
 			app = a;
 		}
 
-
-		public async ArrayList<RadioStation> get_most_clicked_list(){
-			return null;
-		}
-
-		public async ArrayList<RadioStation> get_most_voted_list(){
-			return null;
-		}
-
-		public async ArrayList<RadioStation> get_last_played_list(){
-			return null;
-		}
-
 		public async ArrayList<RadioStation> get_radio_stations(string address, int max_results) throws ThreadError{
 			SourceFunc callback = get_radio_stations.callback;
 			ArrayList<RadioStation> output = new ArrayList<RadioStation>();
@@ -82,7 +69,7 @@ namespace Gradio{
 				return null;
 			};
 
-			Thread<void*> search_thread = new Thread<void*> ("search_thread", run);
+			new Thread<void*> ("search_thread", run);
 
 			yield;
 			isWorking = false;

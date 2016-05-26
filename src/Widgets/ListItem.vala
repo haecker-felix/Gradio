@@ -16,8 +16,8 @@ namespace Gradio{
 		private Label VotesLabel;
 		[GtkChild]
 		private Label LocationLabel;
-		[GtkChild]
-		private Label TagsLabel;
+		//[GtkChild]
+		//private Label TagsLabel;
 
 		GradioApp app;
 		RadioStation station;

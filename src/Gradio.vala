@@ -66,6 +66,7 @@ namespace Gradio {
 				"license-type", Gtk.License.GPL_3_0,
 				"logo-icon-name", "gradio",
 				"version", "1.01",
+				"comments", "Database: www.radio-browser.info",
 				"website", "https://github.com/haecker-felix/gradio",
 				"wrap-license", true);
 		}
