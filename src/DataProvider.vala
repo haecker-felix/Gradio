@@ -55,7 +55,7 @@ namespace Gradio{
 					for(int a = 0; a < max_results; a++){
 						var radio_station = radio_stations.get_element(a);
 						var radio_station_data = radio_station.get_object ();
-						RadioStation station = new RadioStation.parse_from_id(int.parse(radio_station_data.get_string_member("id")));
+						RadioStation station = new RadioStation.parse_from_name(radio_station_data.get_string_member("name"));
 						results.add(station);
 					}
 					

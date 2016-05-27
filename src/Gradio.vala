@@ -65,7 +65,7 @@ namespace Gradio {
 				"title", _("About Gradio"),
 				"license-type", Gtk.License.GPL_3_0,
 				"logo-icon-name", "gradio",
-				"version", "1.01",
+				"version", "1.03",
 				"comments", "Database: www.radio-browser.info",
 				"website", "https://github.com/haecker-felix/gradio",
 				"wrap-license", true);
@@ -127,12 +127,6 @@ namespace Gradio {
 			}else{
 				warning("Cannot connect to the database. Is your internet connection working?");
 			}
-						
-
-
-
-			
-		
 
 		}
     }

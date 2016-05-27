@@ -28,6 +28,11 @@ namespace Gradio{
 			json_parse(DataAddress);
 		}
 
+		public RadioStation.parse_from_name(string name){
+			DataAddress = "http://www.radio-browser.info/webservice/json/stations/byname/" + name;
+			json_parse(DataAddress);
+		}
+
 		private void json_parse (string address){
 			Json.Parser parser = new Json.Parser ();
 
