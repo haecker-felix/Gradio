@@ -1,12 +1,27 @@
 public class Util{
 	public static string get_string_from_uri (string url){	
 		var session = new Soup.Session ();
-		session.user_agent = "gradio_1.02";
+		session.user_agent = "gradio/1.03";
 		var message = new Soup.Message ("GET", url);
 
 		session.send_message (message);
 
 		return (string)message.response_body.data;
+	}
+
+	public static Gdk.Pixbuf get_image_from_url (string url, int height, int width){
+		var session = new Soup.Session ();
+		session.user_agent = "gradio/1.03";
+		var message = new Soup.Message ("GET", url);
+		session.send_message (message);
+
+		var loader = new Gdk.PixbufLoader();
+
+		loader.write(message.response_body.data);
+		loader.close();
+
+		var pixbuf = loader.get_pixbuf();
+		return pixbuf.scale_simple(width, height, Gdk.InterpType.BILINEAR);
 	}
 
 	public static void remove_all_widgets (ref Gtk.ListBox container) {

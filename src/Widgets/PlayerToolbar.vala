@@ -13,6 +13,8 @@ namespace Gradio{
 		private Label ChannelNameLabel;
 		[GtkChild]
 		private Label ChannelHomepageLabel;
+		[GtkChild]
+		private Image StationLogo;
 
 		RadioStation station;
 		GradioApp app;
@@ -29,6 +31,10 @@ namespace Gradio{
 
 			ChannelHomepageLabel.set_text(station.Homepage);
 			ChannelNameLabel.set_text(station.Title);
+
+			print(station.Icon);
+			StationLogo.set_from_pixbuf(Util.get_image_from_url(station.Icon, 40, 40));
+
 		}
 
 		[GtkCallback]
