@@ -1,21 +1,12 @@
 public class Util{
-	public static string get_string_from_uri (string uri){	
-		string data = "";
+	public static string get_string_from_uri (string url){	
+		var session = new Soup.Session ();
+		session.user_agent = "gradio_1.02";
+		var message = new Soup.Message ("GET", url);
 
-		try {
-			File file = File.new_for_uri (uri);
-			FileInputStream @is = file.read ();
-			DataInputStream dis = new DataInputStream (@is);
-			string line;
+		session.send_message (message);
 
-			while ((line = dis.read_line ()) != null) {
-				data = data + line;
-			}
-		} catch (Error e) {
-			GLib.error (e.message);
-		}
-
-		return data;
+		return (string)message.response_body.data;
 	}
 
 	public static void remove_all_widgets (ref Gtk.ListBox container) {

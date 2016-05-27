@@ -50,7 +50,7 @@ set (CPACK_SOURCE_IGNORE_FILES "/build/;/.git/;/.gitignore/~$;${CPACK_SOURCE_IGN
 include (CPack)
 add_custom_target (dist COMMAND "$CMAKE_MAKE_PROGRAM} package_source")
 
-set(COMPILE_OPTIONS_VALA ${COMPILE_OPTIONS_VALA} --pkg gstreamer-1.0 json-glib-1.0 gio-2.0 gee-0.8)
+set(COMPILE_OPTIONS_VALA ${COMPILE_OPTIONS_VALA} --pkg gstreamer-1.0 json-glib-1.0 gio-2.0 gee-0.8 libsoup-2.4)
 
 ### PKGCONFIG ###
 find_package ( PkgConfig REQUIRED )
@@ -61,6 +61,7 @@ pkg_check_modules ( DEPS
 	REQUIRED json-glib-1.0
 	REQUIRED gio-2.0
 	REQUIRED gee-0.8
+	REQUIRED libsoup-2.4
 )
 include_directories ( ${DEPS_INCLUDE_DIRS} )
 link_libraries ( ${DEPS_LIBRARIES} )
@@ -115,6 +116,7 @@ PACKAGES
 	json-glib-1.0
 	gio-2.0
 	gee-0.8
+	libsoup-2.4
 OPTIONS
 	--thread
 	--target-glib=2.38
