@@ -7,9 +7,8 @@ namespace Gradio{
 	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/discover-box.ui")]
 	public class DiscoverBox : Gtk.Box{
 
-		GradioApp app;
-		Library lib;
 		DataProvider provider;
+		private GLib.Settings settings;
 
 		[GtkChild]
 		private ListBox ResultsBox;
@@ -20,10 +19,9 @@ namespace Gradio{
 		[GtkChild]
 		private Button SearchButton;
 
-		public DiscoverBox(ref GradioApp a, ref Library l){
-			app = a;
-			lib = l;
-			provider = new Gradio.DataProvider(ref app);
+		public DiscoverBox(){
+			settings = new GLib.Settings ("de.haecker-felix.gradio");
+			provider = new Gradio.DataProvider();
 
 			provider.status_changed.connect(() => {
 				if(provider.isWorking){
@@ -73,10 +71,10 @@ namespace Gradio{
 			if(stations != null){
 				if(SearchEntry.get_text() != "" && !(stations.is_empty)){
 					foreach (RadioStation station in stations) {
-						ListItem box = new ListItem(ref app, ref lib, station);
+						ListItem box = new ListItem(station);
 						if(station.Available){
 							ResultsBox.add(box);
-						}else if(!app.settings.get_boolean("only-show-working-stations")){
+						}else if(!settings.get_boolean("only-show-working-stations")){
 							ResultsBox.add(box);
 						}
 					}

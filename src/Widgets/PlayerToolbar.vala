@@ -17,17 +17,13 @@ namespace Gradio{
 		private Image StationLogo;
 
 		RadioStation station;
-		GradioApp app;
 
-		public PlayerToolbar(ref GradioApp a){
-			app = a;
-
-			app.player.state_changed.connect (() => refresh_play_stop_button());
+		public PlayerToolbar(){
+			App.player.state_changed.connect (() => refresh_play_stop_button());
 		}
 
 		public void set_radio_station (RadioStation s){
 			station = s;
-			app.player.set_radio_station(station);
 
 			ChannelHomepageLabel.set_text(station.Homepage);
 			ChannelNameLabel.set_text(station.Title);
@@ -39,12 +35,12 @@ namespace Gradio{
 
 		[GtkCallback]
         	private void PlayStopButton_clicked (Button button) {
-			app.player.toggle_play_stop();
+			App.player.toggle_play_stop();
 			refresh_play_stop_button();
 		}
 
 		private void refresh_play_stop_button(){
-			if(app.player.is_playing()){
+			if(App.player.is_playing()){
 				StopImage.set_visible(true);
 				PlayImage.set_visible(false);
 			}else{

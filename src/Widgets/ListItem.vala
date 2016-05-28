@@ -19,19 +19,15 @@ namespace Gradio{
 		//[GtkChild]
 		//private Label TagsLabel;
 
-		GradioApp app;
 		RadioStation station;
-		Library lib;
 
-		public ListItem(ref GradioApp a, ref Library l, RadioStation s){
-			app = a;
+		public ListItem(RadioStation s){
 			station = s;
-			lib = l;
 
 			load_information();
 
-			lib.added_radio_station.connect(() => refresh_add_remove_button());
-			lib.removed_radio_station.connect(() => refresh_add_remove_button());
+			App.library.added_radio_station.connect(() => refresh_add_remove_button());
+			App.library.removed_radio_station.connect(() => refresh_add_remove_button());
 			station.data_changed.connect(() => load_information());
 
 			refresh_add_remove_button();
@@ -59,20 +55,20 @@ namespace Gradio{
 
 		[GtkCallback]
 		private void PlayButton_clicked (Button button) {
-			app.set_current_radio_station(station);
+			App.player.set_radio_station(station);
 		}
 
 		[GtkCallback]
 		private void AddRemoveButton_clicked (Button button) {
-			if(lib.contains_station(int.parse(station.ID))){
-				lib.remove_radio_station_by_id(int.parse(station.ID));
+			if(App.library.contains_station(int.parse(station.ID))){
+				App.library.remove_radio_station_by_id(int.parse(station.ID));
 			}else{
-				lib.add_radio_station_by_id(int.parse(station.ID));
+				App.library.add_radio_station_by_id(int.parse(station.ID));
 			}
 		}
 
 		private void refresh_add_remove_button(){
-			if(lib.contains_station(int.parse(station.ID))){
+			if(App.library.contains_station(int.parse(station.ID))){
 				AddImage.set_visible(false);
 				RemoveImage.set_visible(true);
 			}else{

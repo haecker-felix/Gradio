@@ -3,36 +3,32 @@ using GLib;
 
 namespace Gradio {
 
-	public class GradioApp : Gtk.Application {
+	public class App : Gtk.Application {
 
 		public MainWindow window;
-		public AudioPlayer player;
-		public PlayerToolbar player_toolbar;
+		public static AudioPlayer player;
 
-		public Library library;
+		public static Library library;
 		public GLib.Settings settings;
 
-		public GradioApp () {
+		public string version = "1.04";
+
+		public App () {
 			Object(application_id: "de.haecker-felix.gradio", flags: ApplicationFlags.FLAGS_NONE);
 		}
 
-		public void set_current_radio_station (RadioStation station){
-			player_toolbar.set_radio_station(station);
-		}
-
 		protected override void activate () {
-			Gradio.GradioApp app = this;
+			Gradio.App app = this;
 
 			create_app_menu();
 
 			player = new AudioPlayer();
 			settings = new GLib.Settings ("de.haecker-felix.gradio");
 
-			library = new Library(ref app);
+			library = new Library();
 			library.read_data();
-
-			player_toolbar = new PlayerToolbar(ref app);
-			window = new MainWindow(ref app, ref player_toolbar, ref library);	
+			
+			window = new MainWindow(app);	
 
 			this.add_window(window);
 			window.show_all();
@@ -46,7 +42,8 @@ namespace Gradio {
 		}
 
 		private void show_preferences_dialog(){
-			SettingsDialog swindow = new SettingsDialog(this);
+			SettingsDialog swindow = new SettingsDialog();
+			swindow.set_transient_for(window);
 			swindow.show();
 		}
 
@@ -65,7 +62,7 @@ namespace Gradio {
 				"title", _("About Gradio"),
 				"license-type", Gtk.License.GPL_3_0,
 				"logo-icon-name", "gradio",
-				"version", "1.03",
+				"version", version,
 				"comments", "Database: www.radio-browser.info",
 				"website", "https://github.com/haecker-felix/gradio",
 				"wrap-license", true);
@@ -100,7 +97,7 @@ namespace Gradio {
 				return;	
 			});
 
-			player.new_radio_station.connect(() => {
+			player.radio_station_changed.connect((t,a) => {
 				if(settings.get_boolean ("show-notifications")){
 					Notification notify = new Notification("Gradio");
 					notify.set_priority (NotificationPriority.LOW);
@@ -118,10 +115,7 @@ namespace Gradio {
 			// Init gtk
 			Gtk.init(ref args);
 
-			// dark theme
-			//Gtk.Settings.get_default().set("gtk-application-prefer-dark-theme", true);
-			
-			var app = new GradioApp ();
+			var app = new App ();
 			if(Util.check_database_connection()){
 				app.run (args);
 			}else{

@@ -17,12 +17,12 @@ namespace Gradio{
 		DiscoverBox discover_box;
 		LibraryBox library_box;
 
-		public MainWindow (ref GradioApp app, ref PlayerToolbar pt, ref Library lib) {
+		public MainWindow (App app) {
 	       		GLib.Object(application: app);
 
-	       		player_toolbar = pt;
-	       		discover_box = new DiscoverBox(ref app, ref lib);
-			library_box = new LibraryBox(ref app, ref lib);
+	       		player_toolbar = new PlayerToolbar();
+	       		discover_box = new DiscoverBox();
+			library_box = new LibraryBox();
 
 			ContentStack.add_titled(library_box, "library_box", _("Library"));
 	       		ContentStack.add_titled(discover_box, "discover_box", _("Search"));
@@ -38,6 +38,14 @@ namespace Gradio{
 			
 
 	       		Bottom.pack_end(player_toolbar);
+
+			connect_signals();
+		}
+
+		private void connect_signals(){
+			App.player.radio_station_changed.connect((t,a) => {
+				player_toolbar.set_radio_station(a);
+			});
 		}
 
 	}

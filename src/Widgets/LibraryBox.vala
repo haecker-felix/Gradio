@@ -12,15 +12,9 @@ namespace Gradio{
 		[GtkChild]
 		private ListBox StationsBox;
 
-		GradioApp app;
-		Library lib;
-
-		public LibraryBox(ref GradioApp a, ref Library l){
-			app = a;
-			lib = l;
-
-			lib.added_radio_station.connect(() => reload_radio_stations());
-			lib.removed_radio_station.connect(() => reload_radio_stations());
+		public LibraryBox(){
+			App.library.added_radio_station.connect(() => reload_radio_stations());
+			App.library.removed_radio_station.connect(() => reload_radio_stations());
 
 			reload_radio_stations();
 		}
@@ -28,11 +22,11 @@ namespace Gradio{
 		private void reload_radio_stations(){
 			Util.remove_all_widgets(ref StationsBox);
 			
-			if(lib.lib.size != 0){
-				foreach (var entry in lib.lib.entries){
+			if(App.library.lib.size != 0){
+				foreach (var entry in App.library.lib.entries){
 					var station = entry.value;
 
-					ListItem item = new ListItem(ref app, ref lib, station);
+					ListItem item = new ListItem(station);
 
 					StationsBox.add(item);
 				}

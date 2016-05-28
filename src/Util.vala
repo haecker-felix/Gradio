@@ -2,7 +2,7 @@ public class Util{
 	public static string get_string_from_uri (string url){	
 		message(url);
 		var session = new Soup.Session ();
-		session.user_agent = "gradio/1.03";
+		session.user_agent = "gradio/1.04";
 		var message = new Soup.Message ("GET", url);
 
 		session.send_message (message);
@@ -12,14 +12,19 @@ public class Util{
 
 	public static Gdk.Pixbuf get_image_from_url (string url, int height, int width){
 		var session = new Soup.Session ();
-		session.user_agent = "gradio/1.03";
+		session.user_agent = "gradio/1.04";
 		var message = new Soup.Message ("GET", url);
 		session.send_message (message);
 
 		var loader = new Gdk.PixbufLoader();
 
-		loader.write(message.response_body.data);
-		loader.close();
+		try{
+			loader.write(message.response_body.data);
+			loader.close();
+		}catch (Error e){
+			error("Pixbufloader: " + e.message);
+		}
+
 
 		var pixbuf = loader.get_pixbuf();
 		return pixbuf.scale_simple(width, height, Gdk.InterpType.BILINEAR);
@@ -54,7 +59,7 @@ public class Util{
 	public static bool check_database_connection(){
 		try {
 			File file = File.new_for_uri ("http://www.radio-browser.info/webservice/json/stats");
-			FileInputStream @is = file.read ();
+			file.read ();
 			return true;
 		} catch (Error e) {
 			warning (e.message);

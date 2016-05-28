@@ -11,33 +11,35 @@ namespace Gradio{
 		[GtkChild]
 		private Switch ShowNotificationsSwitch;
 
-		public SettingsDialog (GradioApp app) {
-			this.set_transient_for(app.window);
-			load_settings(app.settings);
+		private GLib.Settings settings;
+
+		public SettingsDialog () {
+			settings = new GLib.Settings ("de.haecker-felix.gradio");
+			load_settings(settings);
 
 			OnlyShowWorkingStationsSwitch.notify["active"].connect (() => {
 				if (OnlyShowWorkingStationsSwitch.active) {
-					app.settings.set_boolean ("only-show-working-stations", true);
+					settings.set_boolean ("only-show-working-stations", true);
 				} else {
-					app.settings.set_boolean ("only-show-working-stations", false);
+					settings.set_boolean ("only-show-working-stations", false);
 				}
 				
 			});
 
 			UseDarkDesignSwitch.notify["active"].connect (() => {
 				if (UseDarkDesignSwitch.active) {
-					app.settings.set_boolean ("use-dark-design", true);
+					settings.set_boolean ("use-dark-design", true);
 				} else {
-					app.settings.set_boolean ("use-dark-design", false);
+					settings.set_boolean ("use-dark-design", false);
 				}
 				
 			});
 
 			ShowNotificationsSwitch.notify["active"].connect (() => {
 				if (ShowNotificationsSwitch.active) {
-					app.settings.set_boolean ("show-notifications", true);
+					settings.set_boolean ("show-notifications", true);
 				} else {
-					app.settings.set_boolean ("show-notifications", false);
+					settings.set_boolean ("show-notifications", false);
 				}
 				
 			});

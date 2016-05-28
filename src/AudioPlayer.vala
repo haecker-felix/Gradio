@@ -5,7 +5,7 @@ namespace Gradio{
 
 		dynamic Element stream;
 
-		public signal void new_radio_station();
+		public signal void radio_station_changed(RadioStation station);
 		public signal void connection_error(string text);
 		public signal void state_changed();
 
@@ -52,8 +52,7 @@ namespace Gradio{
 		public void set_radio_station(RadioStation station){
 			current_station = station;
 			connect_to_stream_address(station.Source);
-			new_radio_station();
-
+			radio_station_changed(station);
 		}
 
 		private void connect_to_stream_address(string address){
