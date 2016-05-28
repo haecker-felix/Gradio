@@ -33,6 +33,8 @@ namespace Gradio{
 				}				
 
 			});
+				
+			SearchEntry.activate.connect(() => SearchButton_clicked());
 
 		}
 
