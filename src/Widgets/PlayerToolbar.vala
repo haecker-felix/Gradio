@@ -31,6 +31,7 @@ namespace Gradio{
 			print(station.Icon);
 			StationLogo.set_from_pixbuf(Util.get_image_from_url(station.Icon, 40, 40));
 
+			this.set_visible(true);
 		}
 
 		[GtkCallback]
