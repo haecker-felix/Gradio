@@ -18,6 +18,22 @@ namespace Gradio{
 
 		public signal void data_changed();
 
+		public RadioStation(string title, string homepage, string source, string language, string id, string icon, string country, string tags, string state, string votes, string codec, string bitrate, bool available){
+			Title = title;
+			Homepage = homepage;
+			Source = source;
+			Language = language;
+			ID = id;
+			Icon = icon;
+			Country = country;
+			Tags = tags;
+			State = state;
+			Votes = votes;
+			Codec = codec;
+			Bitrate = bitrate;
+			Available = available;
+		}
+
 		public RadioStation.parse_from_address(string address){
 			DataAddress = address;
 			json_parse(DataAddress);

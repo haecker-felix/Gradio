@@ -55,7 +55,30 @@ namespace Gradio{
 					for(int a = 0; a < max_results; a++){
 						var radio_station = radio_stations.get_element(a);
 						var radio_station_data = radio_station.get_object ();
-						RadioStation station = new RadioStation.parse_from_name(radio_station_data.get_string_member("name"));
+						
+						string title = radio_station_data.get_string_member("name");
+						string homepage = radio_station_data.get_string_member("homepage");
+						string source = radio_station_data.get_string_member("url");
+						string language = radio_station_data.get_string_member("language");
+						string id = radio_station_data.get_string_member("id");
+						string icon = radio_station_data.get_string_member("favicon");
+						string country = radio_station_data.get_string_member("country");
+						string tags = radio_station_data.get_string_member("tags");
+						string state = radio_station_data.get_string_member("state");
+						string votes = radio_station_data.get_string_member("votes");
+						string codec = radio_station_data.get_string_member("codec");
+						string bitrate = radio_station_data.get_string_member("bitrate");
+						bool available;
+						
+						if(radio_station_data.get_string_member("lastcheckok") == "1")
+							available = true;
+						else
+							available = false;
+
+						if(source.contains(".m3u") || source.contains(".pls"))
+							available = false;
+
+						RadioStation station = new RadioStation(title, homepage, source, language, id, icon, country, tags, state, votes, codec, bitrate, available);
 						results.add(station);
 					}
 					

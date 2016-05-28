@@ -1,5 +1,6 @@
 public class Util{
 	public static string get_string_from_uri (string url){	
+		message(url);
 		var session = new Soup.Session ();
 		session.user_agent = "gradio/1.03";
 		var message = new Soup.Message ("GET", url);
