@@ -25,7 +25,7 @@ enable_testing ()
 # Project info
 set (EXEC_NAME "gradio")
 set (APP_NAME "Gradio")
-set (VERSION "1.03")
+set (VERSION "1.05")
 set (VERSION_INFO "Alpha")
 set (COPYRIGHT "Copyright 2016 Felix Häcker")
 set (DESCRIPTION "Generate QR Codes")
@@ -101,7 +101,10 @@ VALA_C ${EXEC_NAME}
 	src/Widgets/LibraryBox.vala
 	src/Widgets/PlayerToolbar.vala
 	src/Widgets/ListItem.vala
+	src/Widgets/ActionPopover.vala
 	src/Widgets/SettingsDialog.vala
+	src/Widgets/StationsGridView.vala
+	src/Widgets/StationsListView.vala
 	src/AudioPlayer.vala
 	src/RadioStation.vala
 	src/Util.vala

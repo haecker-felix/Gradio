@@ -8,33 +8,22 @@ namespace Gradio{
 	public class LibraryBox : Gtk.Box{
 
 		[GtkChild]
-		private Stack LibraryStack;
-		[GtkChild]
-		private ListBox StationsBox;
+		private Box ContentBox;
+
+		private StationsListView list_view_library;
 
 		public LibraryBox(){
-			App.library.added_radio_station.connect(() => reload_radio_stations());
-			App.library.removed_radio_station.connect(() => reload_radio_stations());
+			list_view_library = new StationsListView();
+			list_view_library.set_stations(ref App.library.lib);
 
-			reload_radio_stations();
-		}
+			ContentBox.add(list_view_library);
 
-		private void reload_radio_stations(){
-			Util.remove_all_widgets(ref StationsBox);
-			
-			if(App.library.lib.size != 0){
-				foreach (var entry in App.library.lib.entries){
-					var station = entry.value;
+			App.library.added_radio_station.connect(() => list_view_library.reload_view());
+			App.library.removed_radio_station.connect(() => list_view_library.reload_view());
 
-					ListItem item = new ListItem(station);
 
-					StationsBox.add(item);
-				}
-				LibraryStack.set_visible_child_name("library");
-			}else{
-				LibraryStack.set_visible_child_name("empty_library");
-			}
-
-		}		
+			ContentBox.show_all();
+			//reload_radio_stations();
+		}	
 	}
 }

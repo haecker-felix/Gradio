@@ -112,6 +112,8 @@ namespace Gradio{
 				error(e.message);
 			}
 
+			message("Successfully imported library");
+
 		}
 
 	}

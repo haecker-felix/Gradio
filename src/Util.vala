@@ -35,7 +35,7 @@ public class Util{
 		return pixbuf.scale_simple(width, height, Gdk.InterpType.BILINEAR);
 	}
 
-	public static void remove_all_widgets (ref Gtk.ListBox container) {
+	public static void remove_all_widgets (Gtk.ListBox container) {
 		container.foreach(remove_all_cb);
 	}
 

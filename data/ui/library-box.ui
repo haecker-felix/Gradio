@@ -7,47 +7,21 @@
     <property name="can_focus">False</property>
     <property name="baseline_position">top</property>
     <child>
-      <object class="GtkStack" id="LibraryStack">
+      <object class="GtkScrolledWindow">
         <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="has_tooltip">True</property>
-        <property name="transition_duration">190</property>
-        <property name="transition_type">crossfade</property>
+        <property name="can_focus">True</property>
+        <property name="shadow_type">in</property>
         <child>
-          <object class="GtkScrolledWindow">
+          <object class="GtkViewport">
             <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="shadow_type">in</property>
+            <property name="can_focus">False</property>
             <child>
-              <object class="GtkViewport">
+              <object class="GtkBox" id="ContentBox">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <child>
-                  <object class="GtkListBox" id="StationsBox">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="selection_mode">none</property>
-                  </object>
-                </child>
               </object>
             </child>
           </object>
-          <packing>
-            <property name="name">library</property>
-            <property name="title" translatable="yes">page0</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkLabel">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="label" translatable="yes">Your library is empty!</property>
-          </object>
-          <packing>
-            <property name="name">empty_library</property>
-            <property name="title" translatable="yes">page1</property>
-            <property name="position">1</property>
-          </packing>
         </child>
       </object>
       <packing>

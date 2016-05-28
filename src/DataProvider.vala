@@ -92,14 +92,14 @@ namespace Gradio{
 			return station;	
 		}
 
-		public async ArrayList<RadioStation> get_radio_stations(string address, int max_results) throws ThreadError{
+		public async HashMap<int,RadioStation> get_radio_stations(string address, int max_results) throws ThreadError{
 			SourceFunc callback = get_radio_stations.callback;
-			ArrayList<RadioStation> output = new ArrayList<RadioStation>();
+			HashMap<int,RadioStation> output = new HashMap<int,RadioStation>();
 
 			isWorking = true;
 			ThreadFunc<void*> run = () => {
 				try{
-		   			ArrayList<RadioStation> results = new ArrayList<RadioStation>();
+		   			HashMap<int,RadioStation> results = new HashMap<int,RadioStation>();
 					
 					Json.Parser parser = new Json.Parser ();
 					parser.load_from_data (Util.get_string_from_uri(address));
@@ -114,7 +114,9 @@ namespace Gradio{
 						var radio_station = radio_stations.get_element(a);
 						var radio_station_data = radio_station.get_object ();
 						
-						results.add(parse_station_data_from_json(radio_station_data));
+						var station = parse_station_data_from_json(radio_station_data);
+
+						results[int.parse(station.ID)] = station;
 					}
 					
 					output = results;

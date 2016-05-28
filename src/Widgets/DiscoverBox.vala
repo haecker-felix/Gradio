@@ -10,18 +10,29 @@ namespace Gradio{
 		DataProvider provider;
 		private GLib.Settings settings;
 
-		[GtkChild]
-		private ListBox ResultsBox;
-		[GtkChild]
-		private SearchEntry SearchEntry;
+		private StationsListView list_view_search;
+
 		[GtkChild]
 		private Stack SearchStack;
+		[GtkChild]
+		private Box SearchBox;
+		[GtkChild]
+		private SearchEntry SearchEntry;
 		[GtkChild]
 		private Button SearchButton;
 
 		public DiscoverBox(){
 			settings = new GLib.Settings ("de.haecker-felix.gradio");
 			provider = new Gradio.DataProvider();
+			list_view_search = new StationsListView();
+
+			SearchBox.add(list_view_search);
+
+			connect_signals();
+		}
+	
+		private void connect_signals(){
+			SearchEntry.activate.connect(() => SearchButton_clicked());
 
 			provider.status_changed.connect(() => {
 				if(provider.isWorking){
@@ -29,14 +40,11 @@ namespace Gradio{
 					SearchStack.set_visible_child_name("loading");
 				}else{
 					SearchButton.set_sensitive(true);
-					SearchStack.set_visible_child_name("no_results");
+					SearchStack.set_visible_child_name("results");
 				}				
-
 			});
-				
-			SearchEntry.activate.connect(() => SearchButton_clicked());
-
 		}
+
 
 		[GtkCallback]
 		private void SearchButton_clicked(){
@@ -45,47 +53,12 @@ namespace Gradio{
 			provider.get_radio_stations.begin(address, 20, (obj, res) => {
 		    		try {
 		        		var search_results = provider.get_radio_stations.end(res);
-		        		build_result_list(search_results);
+		        		list_view_search.set_stations(ref search_results);
 		    		} catch (ThreadError e) {
 		        		string msg = e.message;
 		        		stderr.printf("Error: Thread:" + msg+ "\n");
 		    		}
         		});
-		}
-
-		[GtkCallback]
-		private void RecentlyButton_clicked(){
-		}
-
-		[GtkCallback]
-		private void ClicksButton_clicked(){
-
-		}
-
-		[GtkCallback]
-		private void VotesButton_clicked(){
-
-		}
-
-		private void build_result_list(ArrayList<RadioStation> stations){
-			Util.remove_all_widgets(ref ResultsBox);
-
-			if(stations != null){
-				if(SearchEntry.get_text() != "" && !(stations.is_empty)){
-					foreach (RadioStation station in stations) {
-						ListItem box = new ListItem(station);
-						if(station.Available){
-							ResultsBox.add(box);
-						}else if(!settings.get_boolean("only-show-working-stations")){
-							ResultsBox.add(box);
-						}
-					}
-					SearchStack.set_visible_child_name("results");
-					SearchButton.set_sensitive(true);
-				}
-			}
-
-
 		}
 	}
 }
