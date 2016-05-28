@@ -41,6 +41,14 @@ namespace Gradio {
 			Util.open_website("https://github.com/haecker-felix/gradio/issues/new");
 		}
 
+		public void add_radio_station(){
+
+		}
+
+		public void edit_radio_station(){
+
+		}
+
 		private void show_preferences_dialog(){
 			SettingsDialog swindow = new SettingsDialog();
 			swindow.set_transient_for(window);
@@ -101,7 +109,7 @@ namespace Gradio {
 				if(settings.get_boolean ("show-notifications")){
 					Notification notify = new Notification("Gradio");
 					notify.set_priority (NotificationPriority.LOW);
-					notify.set_body(player.current_station.Title);
+					notify.set_body(_("Now playing: ") + player.current_station.Title);
 					this.send_notification("1212", notify);	
 				}
 			});
