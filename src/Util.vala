@@ -19,8 +19,13 @@ public class Util{
 		var loader = new Gdk.PixbufLoader();
 
 		try{
-			loader.write(message.response_body.data);
-			loader.close();
+			if(message.response_body.data != null){
+				loader.write(message.response_body.data);
+				loader.close();
+			}else{
+				return null;
+			}
+			
 		}catch (Error e){
 			error("Pixbufloader: " + e.message);
 		}
