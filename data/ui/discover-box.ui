@@ -56,6 +56,8 @@
             <property name="margin_bottom">5</property>
             <property name="use_stock">True</property>
             <signal name="clicked" handler="SearchButton_clicked" swapped="no"/>
+            <accelerator key="Return" signal="clicked"/>
+            <accelerator key="F12" signal="clicked"/>
           </object>
           <packing>
             <property name="expand">False</property>
