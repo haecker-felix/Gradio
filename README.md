@@ -66,6 +66,7 @@ sudo xargs rm < install_manifest.txt
 
 ## Translations
 Translations are handeled by [gettext](http://www.gnu.org/software/gettext/manual/gettext.html).
+
 1. Fork this repository
 2. Create a new branch for the language you wish to up-date/create (ex. fr, de, es, jp, etc..)
 3. Duplicate the `gradio/po/gradio.pot` and rename it `<language code>.po` ([language codes can be found in the manual](http://www.gnu.org/software/gettext/manual/gettext.html#Usual-Language-Codes))
