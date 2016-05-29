@@ -1,8 +1,7 @@
 public class Util{
 	public static string get_string_from_uri (string url){	
-		message(url);
 		var session = new Soup.Session ();
-		session.user_agent = "gradio/1.04";
+		session.user_agent = "gradio/2.01";
 		var message = new Soup.Message ("GET", url);
 
 		session.send_message (message);
@@ -11,28 +10,34 @@ public class Util{
 	}
 
 	public static Gdk.Pixbuf get_image_from_url (string url, int height, int width){
-		var session = new Soup.Session ();
-		session.user_agent = "gradio/1.04";
-		var message = new Soup.Message ("GET", url);
-		session.send_message (message);
 
-		var loader = new Gdk.PixbufLoader();
+		if(url != ""){
+			var session = new Soup.Session ();
+			session.user_agent = "gradio/2.01";
+			var message = new Soup.Message ("GET", url);
+			session.send_message (message);
 
-		try{
-			if(message.response_body.data != null){
-				loader.write(message.response_body.data);
-				loader.close();
-			}else{
-				return null;
-			}
+			var loader = new Gdk.PixbufLoader();
+
+			try{
+				if(message.response_body.data != null){
+					loader.write(message.response_body.data);
+					loader.close();
+				}else{
+					return null;
+				}
 			
-		}catch (Error e){
-			error("Pixbufloader: " + e.message);
+			}catch (Error e){
+				error("Pixbufloader: " + e.message);
+			}
+
+
+			var pixbuf = loader.get_pixbuf();
+			return pixbuf.scale_simple(width, height, Gdk.InterpType.BILINEAR);
+		}else{
+			return null;
 		}
-
-
-		var pixbuf = loader.get_pixbuf();
-		return pixbuf.scale_simple(width, height, Gdk.InterpType.BILINEAR);
+		
 	}
 
 	public static void remove_all_widgets (Gtk.ListBox container) {
