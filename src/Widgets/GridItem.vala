@@ -21,7 +21,19 @@ namespace Gradio{
 
 		private void load_information(){
 			ChannelNameLabel.set_text(station.Title);
-			ChannelLogoImage.set_from_pixbuf(Util.get_image_from_url(station.Icon, 60, 60));	
+
+			Gdk.Pixbuf icon = null;
+			Util.get_image_from_url(station.Icon, 60, 60, (obj, res) => {
+		    		try {
+		        		icon = Util.get_image_from_url.end(res);
+		    		} catch (ThreadError e) {
+		        		stderr.printf("Error: Thread:" + e.message + "\n");
+		    		}
+
+				if(icon != null){
+					ChannelLogoImage.set_from_pixbuf(icon);	
+				}
+        		});
 		}
 	}
 }

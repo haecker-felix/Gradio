@@ -174,7 +174,8 @@
         <property name="margin_right">5</property>
         <property name="margin_top">5</property>
         <property name="margin_bottom">5</property>
-        <property name="stock">gtk-missing-image</property>
+        <property name="icon_name">application-rss+xml-symbolic</property>
+        <property name="icon_size">5</property>
       </object>
       <packing>
         <property name="expand">False</property>

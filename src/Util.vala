@@ -1,46 +1,58 @@
 public class Util{
-	public static string get_string_from_uri (string url){	
-		if(url != ""){
-			message("url:" + url);
-			var session = new Soup.Session ();
-			session.user_agent = "gradio/2.01";
-			var message = new Soup.Message ("GET", url);
+	public static string get_string_from_uri (string url){
+		if(check_connection(url)){
+			if(url != ""){
+				var session = new Soup.Session ();
+				session.user_agent = "gradio/2.01";
+				var message = new Soup.Message ("GET", url);
 
-			session.send_message (message);
+				session.send_message (message);
 
-			return (string)message.response_body.data;
-		}else{
-			return null;
+				return (string)message.response_body.data;
+			}
 		}
+		return null;
 	}
 
-	public static Gdk.Pixbuf get_image_from_url (string url, int height, int width){
-		if(url != ""){
-			var session = new Soup.Session ();
-			session.user_agent = "gradio/2.01";
-			var message = new Soup.Message ("GET", url);
-			session.send_message (message);
+	public static async Gdk.Pixbuf get_image_from_url (string url, int height, int width){
+		SourceFunc callback = get_image_from_url.callback;
+		Gdk.Pixbuf output = null;
 
-			var loader = new Gdk.PixbufLoader();
-
+		ThreadFunc<void*> run = () => {
 			try{
-				if(message.response_body.data != null){
-					loader.write(message.response_body.data);
-					loader.close();
-				}else{
-					return null;
-				}
+				if(check_connection(url)){			
+					if(url != ""){	
+						var session = new Soup.Session ();
+						session.user_agent = "gradio/2.01";
+						var message = new Soup.Message ("GET", url);
+						session.send_message (message);
+						var loader = new Gdk.PixbufLoader();
 
-			var pixbuf = loader.get_pixbuf();
-			return pixbuf.scale_simple(width, height, Gdk.InterpType.BILINEAR);
+						try{
+							if(message.response_body.data != null){
+								loader.write(message.response_body.data);
+							}
+						loader.close();
+						var pixbuf = loader.get_pixbuf();
+						output = pixbuf.scale_simple(width, height, Gdk.InterpType.BILINEAR);
 			
-			}catch (Error e){
-				warning("Pixbufloader: " + e.message);
-				return null;
+						}catch (Error e){
+							warning("Pixbufloader: " + e.message);
+						}
+					}
+				}
+			}catch(GLib.Error e){
+				warning(e.message);
 			}
-		}else{
+				
+			Idle.add((owned) callback);
+			Thread.exit (1.to_pointer ());
 			return null;
-		}
+		};
+
+		new Thread<void*> ("image_thread", run);
+		yield;
+		return output;
 	}
 
 	public static void remove_all_items_from_list_box (Gtk.ListBox container) {
@@ -80,6 +92,16 @@ public class Util{
 			return true;
 		} catch (Error e) {
 			warning (e.message);
+			return false;
+		}
+	}
+
+	public static bool check_connection(string url){
+		try {
+			File file = File.new_for_uri (url);
+			file.read ();
+			return true;
+		} catch (Error e) {
 			return false;
 		}
 	}

@@ -3,8 +3,6 @@
 <interface>
   <requires lib="gtk+" version="3.14"/>
   <template class="GradioGridItem" parent="GtkFlowBoxChild">
-    <property name="width_request">150</property>
-    <property name="height_request">150</property>
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="margin_left">5</property>
@@ -20,7 +18,7 @@
           <object class="GtkImage" id="ChannelLogoImage">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="icon_name">application-x-appliance-symbolic</property>
+            <property name="icon_name">application-rss+xml-symbolic</property>
             <property name="icon_size">6</property>
           </object>
           <packing>
@@ -33,6 +31,9 @@
           <object class="GtkLabel" id="ChannelNameLabel">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="margin_left">5</property>
+            <property name="margin_right">5</property>
+            <property name="margin_bottom">5</property>
             <property name="label" translatable="yes">label</property>
           </object>
           <packing>

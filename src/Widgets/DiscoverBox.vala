@@ -29,7 +29,7 @@ namespace Gradio{
 			list_view_search = new StationsListView();
 			grid_view_search = new StationsGridView();
 
-			SearchBox.add(list_view_search);
+			SearchBox.add(grid_view_search);
 
 			connect_signals();
 		}

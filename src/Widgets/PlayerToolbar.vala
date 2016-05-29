@@ -28,8 +28,22 @@ namespace Gradio{
 			ChannelHomepageLabel.set_text(station.Homepage);
 			ChannelNameLabel.set_text(station.Title);
 
-			print(station.Icon);
-			StationLogo.set_from_pixbuf(Util.get_image_from_url(station.Icon, 40, 40));
+			Gdk.Pixbuf icon = null;
+			Util.get_image_from_url(station.Icon, 40, 40, (obj, res) => {
+		    		try {
+		        		icon = Util.get_image_from_url.end(res);
+		    		} catch (ThreadError e) {
+		        		stderr.printf("Error: Thread:" + e.message + "\n");
+		    		}
+
+				if(icon != null){
+					StationLogo.set_from_pixbuf(icon);
+				}else{
+					StationLogo.set_from_icon_name("application-rss+xml-symbolic", IconSize.DND);		
+				}
+				
+        		});
+			
 			this.set_visible(true);
 		}
 
