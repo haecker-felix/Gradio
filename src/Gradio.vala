@@ -11,7 +11,7 @@ namespace Gradio {
 		public static Library library;
 		public GLib.Settings settings;
 
-		public string version = "1.04";
+		public string version = "2.01";
 
 		public App () {
 			Object(application_id: "de.haecker-felix.gradio", flags: ApplicationFlags.FLAGS_NONE);
