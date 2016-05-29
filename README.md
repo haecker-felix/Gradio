@@ -1,5 +1,5 @@
-# gradio
-GTK 3 application for finding and listening to internet radio.
+# Gradio
+A GTK3 application for finding and listening to internet radio stations.
 
 <p align="center">
   <img alt="Library View" src="http://i.imgur.com/yMK0v1b.png" />
@@ -8,12 +8,13 @@ GTK 3 application for finding and listening to internet radio.
 
 ## Features
 * Search radio stations (worldwide)
-* Add them to your library
+* Create your own library
 * Vote for radio stations
 * Visit their homepage
 * Notifications
+* Grid/List view
 
-## Dependecies
+## Dependencies
 For gradio:
 * glib-2.0
 * gtk+-3.0 _>=3.14_
@@ -48,8 +49,7 @@ sudo make install
 ```
 
 ### Ubuntu
-For Ubuntu based ditros you can add the [daily ppa](https://code.launchpad.net/~haecker-felix/+archive/ubuntu/gradio-daily).
-For 16.04 based ditros:
+For Ubuntu based distros (16.04) you can add the [daily ppa](https://code.launchpad.net/~haecker-felix/+archive/ubuntu/gradio-daily).
 ```
 deb http://ppa.launchpad.net/haecker-felix/gradio-daily/ubuntu xenial main
 deb-src http://ppa.launchpad.net/haecker-felix/gradio-daily/ubuntu xenial main
@@ -64,13 +64,6 @@ cd ~/Downloads/gradio/build
 sudo xargs rm < install_manifest.txt
 ```
 
-## Translations
-Translations are handeled by [gettext](http://www.gnu.org/software/gettext/manual/gettext.html).
-
-1. Fork this repository
-2. Create a new branch for the language you wish to up-date/create (ex. fr, de, es, jp, etc..)
-3. Duplicate the `gradio/po/gradio.pot` and rename it `<language code>.po` ([language codes can be found in the manual](http://www.gnu.org/software/gettext/manual/gettext.html#Usual-Language-Codes))
-4. Translate strings and submit a pull request upstream
-
 ## To-do
 * MPRIS support
+* Playlists (*.m3u) support
