@@ -60,9 +60,11 @@ namespace Gradio{
 			if(ListImage.get_visible()){
 				GridImage.set_visible(true);
 				ListImage.set_visible(false);
+				library_box.show_list_view();
 			}else{
 				GridImage.set_visible(false);
 				ListImage.set_visible(true);
+				library_box.show_grid_view();
 			}
 		}
 

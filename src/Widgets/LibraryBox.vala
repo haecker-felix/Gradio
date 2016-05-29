@@ -10,20 +10,36 @@ namespace Gradio{
 		[GtkChild]
 		private Box ContentBox;
 
-		private StationsGridView list_view_library;
+		private StationsListView list_view_library;
+		private StationsGridView grid_view_library;
 
 		public LibraryBox(){
-			list_view_library = new StationsGridView();
+			list_view_library = new StationsListView();
 			list_view_library.set_stations(ref App.library.lib);
 
-			ContentBox.add(list_view_library);
+			grid_view_library = new StationsGridView();
+			grid_view_library.set_stations(ref App.library.lib);
+
+			ContentBox.add(grid_view_library);
 
 			App.library.added_radio_station.connect(() => list_view_library.reload_view());
 			App.library.removed_radio_station.connect(() => list_view_library.reload_view());
-
+			App.library.added_radio_station.connect(() => grid_view_library.reload_view());
+			App.library.removed_radio_station.connect(() => grid_view_library.reload_view());
 
 			ContentBox.show_all();
-			//reload_radio_stations();
 		}	
+
+		public void show_grid_view(){
+			ContentBox.remove(list_view_library);
+			ContentBox.add(grid_view_library);
+			ContentBox.show_all();
+		}
+
+		public void show_list_view(){
+			ContentBox.remove(grid_view_library);
+			ContentBox.add(list_view_library);
+			ContentBox.show_all();
+		}
 	}
 }
