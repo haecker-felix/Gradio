@@ -1,5 +1,5 @@
 # Gradio
-A GTK3 application for finding and listening to internet radio stations.
+A GTK3 app for finding and listening to internet radio stations.
 
 <p align="center">
   <img alt="Library View" src="http://i.imgur.com/yMK0v1b.png" />
