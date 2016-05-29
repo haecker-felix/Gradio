@@ -32,7 +32,7 @@ namespace Gradio{
 		}
 
 		public void reload_view(){
-			Util.remove_all_widgets((Gtk.ListBox) this);
+			Util.remove_all_items_from_list_box((Gtk.ListBox) this);
 
 			if(stations != null){
 				if(!stations.is_empty){

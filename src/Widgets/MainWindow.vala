@@ -54,17 +54,19 @@ namespace Gradio{
 				player_toolbar.set_radio_station(a);
 			});
 		}
-		
+
 		[GtkCallback]
 		private void GridListButton_clicked(Gtk.Button button){
 			if(ListImage.get_visible()){
 				GridImage.set_visible(true);
 				ListImage.set_visible(false);
 				library_box.show_list_view();
+				discover_box.show_list_view();
 			}else{
 				GridImage.set_visible(false);
 				ListImage.set_visible(true);
 				library_box.show_grid_view();
+				discover_box.show_grid_view();
 			}
 		}
 

@@ -1,16 +1,20 @@
 public class Util{
 	public static string get_string_from_uri (string url){	
-		var session = new Soup.Session ();
-		session.user_agent = "gradio/2.01";
-		var message = new Soup.Message ("GET", url);
+		if(url != ""){
+			message("url:" + url);
+			var session = new Soup.Session ();
+			session.user_agent = "gradio/2.01";
+			var message = new Soup.Message ("GET", url);
 
-		session.send_message (message);
+			session.send_message (message);
 
-		return (string)message.response_body.data;
+			return (string)message.response_body.data;
+		}else{
+			return null;
+		}
 	}
 
 	public static Gdk.Pixbuf get_image_from_url (string url, int height, int width){
-
 		if(url != ""){
 			var session = new Soup.Session ();
 			session.user_agent = "gradio/2.01";
@@ -26,21 +30,24 @@ public class Util{
 				}else{
 					return null;
 				}
-			
-			}catch (Error e){
-				error("Pixbufloader: " + e.message);
-			}
-
 
 			var pixbuf = loader.get_pixbuf();
 			return pixbuf.scale_simple(width, height, Gdk.InterpType.BILINEAR);
+			
+			}catch (Error e){
+				warning("Pixbufloader: " + e.message);
+				return null;
+			}
 		}else{
 			return null;
 		}
-		
 	}
 
-	public static void remove_all_widgets (Gtk.ListBox container) {
+	public static void remove_all_items_from_list_box (Gtk.ListBox container) {
+		container.foreach(remove_all_cb);
+	}
+
+	public static void remove_all_items_from_flow_box (Gtk.FlowBox container) {
 		container.foreach(remove_all_cb);
 	}
 

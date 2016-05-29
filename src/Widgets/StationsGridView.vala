@@ -35,7 +35,7 @@ namespace Gradio{
 		}
 
 		public void reload_view(){
-			//Util.remove_all_widgets((Gtk.ListBox) this);
+			Util.remove_all_items_from_flow_box((Gtk.FlowBox) this);
 
 			if(stations != null){
 				if(!stations.is_empty){
