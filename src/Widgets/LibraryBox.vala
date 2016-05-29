@@ -10,10 +10,10 @@ namespace Gradio{
 		[GtkChild]
 		private Box ContentBox;
 
-		private StationsListView list_view_library;
+		private StationsGridView list_view_library;
 
 		public LibraryBox(){
-			list_view_library = new StationsListView();
+			list_view_library = new StationsGridView();
 			list_view_library.set_stations(ref App.library.lib);
 
 			ContentBox.add(list_view_library);

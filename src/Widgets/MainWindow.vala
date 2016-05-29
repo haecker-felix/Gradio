@@ -6,6 +6,11 @@ namespace Gradio{
 	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/main-window.ui")]
 	public class MainWindow : Gtk.ApplicationWindow {
 
+
+		[GtkChild]
+		private Image GridImage;
+		[GtkChild]
+		private Image ListImage;
 		[GtkChild]
 		private Stack ContentStack;
 		[GtkChild]
@@ -16,6 +21,8 @@ namespace Gradio{
 		PlayerToolbar player_toolbar;
 		DiscoverBox discover_box;
 		LibraryBox library_box;
+
+		public signal void toggle_view();
 
 		public MainWindow (App app) {
 	       		GLib.Object(application: app);
@@ -46,6 +53,17 @@ namespace Gradio{
 			App.player.radio_station_changed.connect((t,a) => {
 				player_toolbar.set_radio_station(a);
 			});
+		}
+		
+		[GtkCallback]
+		private void GridListButton_clicked(Gtk.Button button){
+			if(ListImage.get_visible()){
+				GridImage.set_visible(true);
+				ListImage.set_visible(false);
+			}else{
+				GridImage.set_visible(false);
+				ListImage.set_visible(true);
+			}
 		}
 
 	}
