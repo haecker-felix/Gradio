@@ -1,12 +1,10 @@
 # gradio
 GTK 3 application for finding and listening to internet radio.
 
-<div style="text-align: center;">
-
-![Library](http://i.imgur.com/yMK0v1b.png)
-![Search](http://i.imgur.com/WibRApn.png)
-
-</div>
+<p align="center">
+  <img alt="Library View" src="http://i.imgur.com/yMK0v1b.png" />
+  <img alt="Search View" src="http://i.imgur.com/WibRApn.png)" />
+</p>
 
 ## Features
 * Search radio stations (worldwide)
