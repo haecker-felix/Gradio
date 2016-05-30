@@ -68,10 +68,13 @@ namespace Gradio{
 
 		public void play () {
 			stream.set_state (State.PLAYING);
+			state_changed();
+			
 		}
 
 		public void stop(){
 			stream.set_state (State.NULL);
+			state_changed();
 		}
 
 		public void toggle_play_stop(){

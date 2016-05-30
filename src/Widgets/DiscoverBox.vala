@@ -24,7 +24,7 @@ namespace Gradio{
 
 		public DiscoverBox(){
 			settings = new GLib.Settings ("de.haecker-felix.gradio");
-			provider = new Gradio.DataProvider();
+			provider = new DataProvider();
 
 			list_view_search = new StationsListView();
 			grid_view_search = new StationsGridView();

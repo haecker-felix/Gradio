@@ -25,7 +25,7 @@ enable_testing ()
 # Project info
 set (EXEC_NAME "gradio")
 set (APP_NAME "Gradio")
-set (VERSION "2.01")
+set (VERSION "2.02")
 set (VERSION_INFO "Alpha")
 set (COPYRIGHT "Copyright 2016 Felix Häcker")
 set (DESCRIPTION "Generate QR Codes")
@@ -111,6 +111,7 @@ VALA_C ${EXEC_NAME}
 	src/Util.vala
 	src/DataProvider.vala
 	src/Library.vala
+	src/MPRIS.vala
 #CUSTOM_VAPIS
 #	vapi/libqrencode.vapi
 PACKAGES

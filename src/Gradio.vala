@@ -10,6 +10,7 @@ namespace Gradio {
 
 		public static Library library;
 		public GLib.Settings settings;
+		public MPRIS mpris;
 
 		public string version = "2.01";
 
@@ -18,17 +19,17 @@ namespace Gradio {
 		}
 
 		protected override void activate () {
-			Gradio.App app = this;
-
 			create_app_menu();
 
 			player = new AudioPlayer();
 			settings = new GLib.Settings ("de.haecker-felix.gradio");
+			mpris = new MPRIS();
+			mpris.initialize();
 
 			library = new Library();
 			library.read_data();
 			
-			window = new MainWindow(app);	
+			window = new MainWindow(this);	
 
 			this.add_window(window);
 			window.show_all();
@@ -112,6 +113,8 @@ namespace Gradio {
 					notify.set_body(_("Now playing: ") + player.current_station.Title);
 					this.send_notification("1212", notify);	
 				}
+
+				mpris.set_station(player.current_station);
 			});
 		}
 
