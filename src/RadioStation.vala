@@ -33,8 +33,7 @@ namespace Gradio{
 		}
 
 		public void vote (){
-			DataProvider dataprovider = new DataProvider();
-			Votes = dataprovider.vote_for_station(this).to_string();
+			Votes = App.data_provider.vote_for_station(this).to_string();
 			data_changed();
 		}
 	}

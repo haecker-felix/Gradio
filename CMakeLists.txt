@@ -109,7 +109,7 @@ VALA_C ${EXEC_NAME}
 	src/AudioPlayer.vala
 	src/RadioStation.vala
 	src/Util.vala
-	src/DataProvider.vala
+	src/StationDataProvider.vala
 	src/Library.vala
 	src/MPRIS.vala
 #CUSTOM_VAPIS

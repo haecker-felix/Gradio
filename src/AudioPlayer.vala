@@ -50,8 +50,8 @@ namespace Gradio{
 		}
 
 		public void set_radio_station(RadioStation station){
-			DataProvider.get_stream_address.begin(station.ID, (obj, res) => {
-		        	string address = DataProvider.get_stream_address.end(res);
+			App.data_provider.get_stream_address.begin(station.ID, (obj, res) => {
+		        	string address = App.data_provider.get_stream_address.end(res);
 				current_station = station;
 				connect_to_stream_address(address);
 				radio_station_changed(station);			
