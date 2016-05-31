@@ -68,7 +68,6 @@ namespace Gradio{
 		public RadioStation parse_station_data_from_json (Json.Object radio_station_data){
 			string title = radio_station_data.get_string_member("name");
 			string homepage = radio_station_data.get_string_member("homepage");
-			string source = radio_station_data.get_string_member("url");
 			string language = radio_station_data.get_string_member("language");
 			string id = radio_station_data.get_string_member("id");
 			string icon = radio_station_data.get_string_member("favicon");

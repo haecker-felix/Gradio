@@ -21,12 +21,8 @@ namespace Gradio{
 			LocationLabel.set_text(station.Country + " " + station.State);
 
 			Gdk.Pixbuf icon = null;
-			Util.get_image_from_url(station.Icon, 32, 32, (obj, res) => {
-		    		try {
-		        		icon = Util.get_image_from_url.end(res);
-		    		} catch (ThreadError e) {
-		        		stderr.printf("Error: Thread:" + e.message + "\n");
-		    		}
+			Util.get_image_from_url.begin(station.Icon, 32, 32, (obj, res) => {
+		        	icon = Util.get_image_from_url.end(res);
 
 				if(icon != null){
 					ChannelLogoImage.set_from_pixbuf(icon);	

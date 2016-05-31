@@ -50,17 +50,11 @@ namespace Gradio{
 		}
 
 		public void set_radio_station(RadioStation station){
-			DataProvider.get_stream_address(station.ID, (obj, res) => {
-		    		try {
-		        		string address = DataProvider.get_stream_address.end(res);
-					current_station = station;
-					connect_to_stream_address(address);
-					radio_station_changed(station);
-		    		} catch (ThreadError e) {
-		        		stderr.printf("Error: Thread:" + e.message + "\n");
-		    		}
-
-				
+			DataProvider.get_stream_address.begin(station.ID, (obj, res) => {
+		        	string address = DataProvider.get_stream_address.end(res);
+				current_station = station;
+				connect_to_stream_address(address);
+				radio_station_changed(station);			
         		});
 		}
 

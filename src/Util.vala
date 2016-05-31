@@ -11,7 +11,7 @@ public class Util{
 				return (string)message.response_body.data;
 			}
 		}
-		return null;
+		return "";
 	}
 
 	public static async Gdk.Pixbuf get_image_from_url (string url, int height, int width){
@@ -19,32 +19,28 @@ public class Util{
 		Gdk.Pixbuf output = null;
 
 		ThreadFunc<void*> run = () => {
-			try{
-				if(check_connection(url)){			
-					if(url != ""){	
-						var session = new Soup.Session ();
-						session.user_agent = "gradio/2.01";
-						var message = new Soup.Message ("GET", url);
-						session.send_message (message);
-						var loader = new Gdk.PixbufLoader();
+			if(check_connection(url)){			
+				if(url != ""){	
+					var session = new Soup.Session ();
+					session.user_agent = "gradio/2.01";
+					var message = new Soup.Message ("GET", url);
+					session.send_message (message);
+					var loader = new Gdk.PixbufLoader();
 
-						try{
-							if(message.response_body.data != null){
-								loader.write(message.response_body.data);
-							}
-						loader.close();
-						var pixbuf = loader.get_pixbuf();
-						output = pixbuf.scale_simple(width, height, Gdk.InterpType.BILINEAR);
-			
-						}catch (Error e){
-							warning("Pixbufloader: " + e.message);
+					try{
+						if(message.response_body.data != null){
+							loader.write(message.response_body.data);
 						}
+					loader.close();
+					var pixbuf = loader.get_pixbuf();
+					output = pixbuf.scale_simple(width, height, Gdk.InterpType.BILINEAR);
+			
+					}catch (Error e){
+						warning("Pixbufloader: " + e.message);
 					}
 				}
-			}catch(GLib.Error e){
-				warning(e.message);
 			}
-				
+			
 			Idle.add((owned) callback);
 			Thread.exit (1.to_pointer ());
 			return null;
@@ -87,7 +83,7 @@ public class Util{
 
 	public static bool check_database_connection(){
 		try {
-			File file = File.new_for_uri ("http://www.radio-browser.info/webservice/json/stats");
+			File file = File.new_for_uri ("http://www.radio-browser.info/");
 			file.read ();
 			return true;
 		} catch (Error e) {
