@@ -78,19 +78,52 @@ namespace Gradio{
 			string votes = radio_station_data.get_string_member("votes");
 			string codec = radio_station_data.get_string_member("codec");
 			string bitrate = radio_station_data.get_string_member("bitrate");
-			bool available;
+			bool broken;
 						
 			if(radio_station_data.get_string_member("lastcheckok") == "1")
-				available = true;
+				broken = false;
 			else
-				available = false;
+				broken = true;
 
-			if(source.contains(".m3u") || source.contains(".pls"))
-				available = false;
-
-			RadioStation station = new RadioStation(title, homepage, source, language, id, icon, country, tags, state, votes, codec, bitrate, available);
+			RadioStation station = new RadioStation(title, homepage, language, id, icon, country, tags, state, votes, codec, bitrate, broken);
 			return station;	
 		}
+
+		public static async string get_stream_address (string ID){
+			SourceFunc callback = get_stream_address.callback;
+			string url = "";
+
+			ThreadFunc<void*> run = () => {
+				string tmp = "";				
+				try{			
+					Json.Parser parser = new Json.Parser ();
+					parser.load_from_data (Util.get_string_from_uri("http://www.radio-browser.info/webservice/v2/json/url/" + ID ));
+					var root = parser.get_root ();			
+
+					if(root != null){
+						var radio_station_data = root.get_object ();		
+						if(radio_station_data.get_string_member("ok") ==  "true"){
+							tmp = radio_station_data.get_string_member("url");
+						}
+					}
+				}catch(GLib.Error e){
+					warning(e.message);
+				}
+				
+				url = tmp;
+
+				Idle.add((owned) callback);
+				Thread.exit (1.to_pointer ());
+				return null;
+			};
+
+			new Thread<void*> ("get_url_thread", run);
+
+			yield;
+
+			return url;
+		}
+		
 
 		public async HashMap<int,RadioStation> get_radio_stations(string address, int max_results) throws ThreadError{
 			SourceFunc callback = get_radio_stations.callback;

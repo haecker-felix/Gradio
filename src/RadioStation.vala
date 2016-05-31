@@ -3,7 +3,6 @@ namespace Gradio{
 
 		public string Title = "";
 		public string Homepage = "";
-		public string Source = "";
 		public string Language = "";
 		public string ID = "";
 		public string Icon = "";
@@ -14,14 +13,13 @@ namespace Gradio{
 		public string Codec = "";
 		public string Bitrate = "";
 		public string DataAddress = "";
-		public bool Available = false;
+		public bool Broken = true;
 
 		public signal void data_changed();
 
-		public RadioStation(string title, string homepage, string source, string language, string id, string icon, string country, string tags, string state, string votes, string codec, string bitrate, bool available){
+		public RadioStation(string title, string homepage, string language, string id, string icon, string country, string tags, string state, string votes, string codec, string bitrate, bool broken){
 			Title = title;
 			Homepage = homepage;
-			Source = source;
 			Language = language;
 			ID = id;
 			Icon = icon;
@@ -31,7 +29,7 @@ namespace Gradio{
 			Votes = votes;
 			Codec = codec;
 			Bitrate = bitrate;
-			Available = available;
+			Broken = broken;
 		}
 
 		public void vote (){

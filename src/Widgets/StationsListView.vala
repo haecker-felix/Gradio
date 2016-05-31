@@ -38,7 +38,7 @@ namespace Gradio{
 				if(!stations.is_empty){
 					foreach (var element in stations.entries){
 						ListItem box = new ListItem(element.value);
-						if(element.value.Available){
+						if(!(element.value.Broken)){
 							this.add(box);
 						}else if(!settings.get_boolean("only-show-working-stations")){
 							this.add(box);

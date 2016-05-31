@@ -198,7 +198,9 @@
             <property name="halign">start</property>
             <property name="ellipsize">start</property>
             <attributes>
-              <attribute name="weight" value="bold"/>
+              <attribute name="font-desc" value="&lt;Geben Sie den Wert ein&gt; 10"/>
+              <attribute name="weight" value="heavy"/>
+              <attribute name="gravity-hint" value="line"/>
             </attributes>
           </object>
           <packing>
@@ -214,6 +216,7 @@
             <property name="halign">start</property>
             <property name="ellipsize">start</property>
             <attributes>
+              <attribute name="font-desc" value="Cantarell Oblique 10"/>
               <attribute name="gravity-hint" value="line"/>
             </attributes>
           </object>
@@ -232,4 +235,3 @@
     </child>
   </template>
 </interface>
-
