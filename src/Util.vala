@@ -1,16 +1,14 @@
 public class Util{
 	public static string get_string_from_uri (string url){
-		if(check_connection(url)){
-			if(url != ""){
-				var session = new Soup.Session ();
-				session.user_agent = "gradio/2.01";
-				var message = new Soup.Message ("GET", url);
+		if(url != ""){
+			var session = new Soup.Session ();
+			session.user_agent = "gradio/2.01";
+			var message = new Soup.Message ("GET", url);
 
-				session.send_message (message);
+			session.send_message (message);
 
-				return (string)message.response_body.data;
+			return (string)message.response_body.data;
 			}
-		}
 		return "";
 	}
 
@@ -93,6 +91,7 @@ public class Util{
 	}
 
 	public static bool check_connection(string url){
+		warning(url);
 		try {
 			File file = File.new_for_uri (url);
 			file.read ();
