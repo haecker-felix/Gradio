@@ -2,7 +2,7 @@ public class Util{
 	public static string get_string_from_uri (string url){
 		if(url != ""){
 			var session = new Soup.Session ();
-			session.user_agent = "gradio/2.01";
+			session.user_agent = "gradio/2.2";
 			var message = new Soup.Message ("GET", url);
 
 			session.send_message (message);
@@ -20,7 +20,7 @@ public class Util{
 			if(check_connection(url)){			
 				if(url != ""){	
 					var session = new Soup.Session ();
-					session.user_agent = "gradio/2.01";
+					session.user_agent = "gradio/2.2";
 					var message = new Soup.Message ("GET", url);
 					session.send_message (message);
 					var loader = new Gdk.PixbufLoader();
@@ -91,7 +91,6 @@ public class Util{
 	}
 
 	public static bool check_connection(string url){
-		warning(url);
 		try {
 			File file = File.new_for_uri (url);
 			file.read ();

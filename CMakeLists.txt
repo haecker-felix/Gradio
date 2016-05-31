@@ -25,10 +25,10 @@ enable_testing ()
 # Project info
 set (EXEC_NAME "gradio")
 set (APP_NAME "Gradio")
-set (VERSION "2.02")
-set (VERSION_INFO "Alpha")
+set (VERSION "2.2")
+set (VERSION_INFO "Beta")
 set (COPYRIGHT "Copyright 2016 Felix Häcker")
-set (DESCRIPTION "Generate QR Codes")
+set (DESCRIPTION "")
 set (RELEASE_NAME "${DESCRIPTION}")
 set (WEBSITE "http://haecker-felix.github.io/gradio/")
 
