@@ -8,11 +8,12 @@ A GTK3 app for finding and listening to internet radio stations.
 
 ## Features
 * Search radio stations (worldwide)
-* Create your own library
+* Manageable library
 * Vote for radio stations
-* Visit their homepage
+* See details of the station
 * Notifications
-* Grid/List view
+* Grid/List view 
+* MPRIS Support (Sound menu)
 
 ## Dependencies
 For gradio:
@@ -65,5 +66,8 @@ sudo xargs rm < install_manifest.txt
 ```
 
 ## To-do
-* MPRIS support
-* Playlists (*.m3u) support
+* Create new radio stations
+* Edit radio stations
+* Delete radio stations
+* Advanced search
+* Adding server stats
