@@ -6,9 +6,9 @@ namespace Gradio{
 	public class ActionPopover : Gtk.Popover{
 
 		[GtkChild]
-		private Image AddImage;
+		private Box AddBox;
 		[GtkChild]
-		private Image RemoveImage;
+		private Box RemoveBox;
 		[GtkChild]
 		private Label VotesLabel;
 
@@ -56,11 +56,11 @@ namespace Gradio{
 
 		private void refresh_add_remove_button(){
 			if(App.library.contains_station(int.parse(station.ID))){
-				AddImage.set_visible(false);
-				RemoveImage.set_visible(true);
+				AddBox.set_visible(false);
+				RemoveBox.set_visible(true);
 			}else{
-				AddImage.set_visible(true);
-				RemoveImage.set_visible(false);
+				AddBox.set_visible(true);
+				RemoveBox.set_visible(false);
 			}
 		}
 	}

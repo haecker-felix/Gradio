@@ -29,7 +29,7 @@ namespace Gradio{
 				GridItem item = (GridItem)a;
 				ActionPopover apop = new ActionPopover(item.station);
 				apop.set_relative_to(a);
-				apop.set_position(PositionType.BOTTOM);
+				apop.set_position(PositionType.RIGHT);
 				apop.show();
 			});
 		}

@@ -2,17 +2,50 @@
 <!-- Generated with glade 3.20.0 -->
 <interface>
   <requires lib="gtk+" version="3.18"/>
+  <object class="GtkImage" id="Edit">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="icon_name">document-edit-symbolic</property>
+  </object>
+  <object class="GtkButton" id="EditButton">
+    <property name="label" translatable="yes">Edit</property>
+    <property name="visible">True</property>
+    <property name="can_focus">True</property>
+    <property name="receives_default">True</property>
+    <property name="halign">start</property>
+    <property name="margin_top">3</property>
+    <property name="margin_bottom">3</property>
+    <property name="image">Edit</property>
+    <property name="relief">none</property>
+    <property name="always_show_image">True</property>
+    <signal name="clicked" handler="EditButton_clicked" swapped="no"/>
+  </object>
+  <object class="GtkImage" id="Homepage">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="margin_right">5</property>
+    <property name="icon_name">go-home-symbolic</property>
+  </object>
+  <object class="GtkImage" id="Play">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="margin_right">5</property>
+    <property name="icon_name">media-playback-start-symbolic</property>
+  </object>
   <template class="GradioActionPopover" parent="GtkPopover">
     <property name="can_focus">False</property>
+    <property name="position">right</property>
     <child>
-      <object class="GtkBox" id="ActionBox">
+      <object class="GtkBox">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
         <child>
           <object class="GtkButton" id="VoteButton">
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
+            <property name="halign">start</property>
             <property name="margin_left">3</property>
             <property name="margin_right">3</property>
             <property name="margin_top">3</property>
@@ -49,6 +82,18 @@
                     <property name="position">1</property>
                   </packing>
                 </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Vote</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">2</property>
+                  </packing>
+                </child>
               </object>
             </child>
           </object>
@@ -60,22 +105,19 @@
         </child>
         <child>
           <object class="GtkButton" id="HomepageButton">
+            <property name="label" translatable="yes">Open Homepage</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
+            <property name="halign">start</property>
             <property name="margin_left">3</property>
             <property name="margin_right">3</property>
             <property name="margin_top">3</property>
             <property name="margin_bottom">3</property>
+            <property name="image">Homepage</property>
             <property name="relief">none</property>
+            <property name="always_show_image">True</property>
             <signal name="clicked" handler="HomepageButton_clicked" swapped="no"/>
-            <child>
-              <object class="GtkImage">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="icon_name">go-home-symbolic</property>
-              </object>
-            </child>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -85,22 +127,19 @@
         </child>
         <child>
           <object class="GtkButton" id="PlayButton">
+            <property name="label" translatable="yes">Play</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
+            <property name="halign">start</property>
             <property name="margin_left">3</property>
             <property name="margin_right">3</property>
             <property name="margin_top">3</property>
             <property name="margin_bottom">3</property>
+            <property name="image">Play</property>
             <property name="relief">none</property>
+            <property name="always_show_image">True</property>
             <signal name="clicked" handler="PlayButton_clicked" swapped="no"/>
-            <child>
-              <object class="GtkImage">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="icon_name">media-playback-start-symbolic</property>
-              </object>
-            </child>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -113,6 +152,7 @@
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
+            <property name="halign">start</property>
             <property name="margin_left">3</property>
             <property name="margin_right">4</property>
             <property name="margin_top">3</property>
@@ -126,26 +166,76 @@
                 <property name="orientation">vertical</property>
                 <property name="homogeneous">True</property>
                 <child>
-                  <object class="GtkImage" id="AddImage">
+                  <object class="GtkBox" id="AddBox">
+                    <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="no_show_all">True</property>
-                    <property name="icon_name">list-add-symbolic</property>
+                    <property name="halign">start</property>
+                    <child>
+                      <object class="GtkImage" id="AddImage">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="margin_right">5</property>
+                        <property name="icon_name">list-add-symbolic</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="label" translatable="yes">Add to library</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
                   </object>
                   <packing>
                     <property name="expand">False</property>
-                    <property name="fill">True</property>
+                    <property name="fill">False</property>
                     <property name="position">0</property>
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkImage" id="RemoveImage">
+                  <object class="GtkBox" id="RemoveBox">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="icon_name">list-remove-symbolic</property>
+                    <property name="halign">start</property>
+                    <child>
+                      <object class="GtkImage" id="RemoveImage">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="margin_right">5</property>
+                        <property name="icon_name">list-remove-symbolic</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="label" translatable="yes">Remove from library</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
                   </object>
                   <packing>
                     <property name="expand">False</property>
-                    <property name="fill">True</property>
+                    <property name="fill">False</property>
                     <property name="position">1</property>
                   </packing>
                 </child>
@@ -155,6 +245,7 @@
           <packing>
             <property name="expand">False</property>
             <property name="fill">True</property>
+            <property name="pack_type">end</property>
             <property name="position">3</property>
           </packing>
         </child>
