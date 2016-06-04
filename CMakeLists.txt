@@ -25,7 +25,7 @@ enable_testing ()
 # Project info
 set (EXEC_NAME "gradio")
 set (APP_NAME "Gradio")
-set (VERSION "2.2")
+set (VERSION "2.3")
 set (VERSION_INFO "Beta")
 set (COPYRIGHT "Copyright 2016 Felix Häcker")
 set (DESCRIPTION "")
