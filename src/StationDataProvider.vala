@@ -57,21 +57,23 @@ namespace Gradio{
 		// Increase the vote count for the station by one.
 		public int vote_for_station(RadioStation station){
 			Json.Parser parser = new Json.Parser ();
-			RadioStation new_station = null;
-			try{
-				parser.load_from_data (Util.get_string_from_uri(radio_station_vote + station.ID));
-				var root = parser.get_root ();
-				var radio_stations = root.get_array ();
 
-				var radio_station = radio_stations.get_element(0);
-				var radio_station_data = radio_station.get_object ();
-						
-				new_station = parse_station_data_from_json(radio_station_data);
-			}catch (Error e){
-				error("Parser: " + e.message);
+			try{
+				parser.load_from_data (Util.get_string_from_uri(radio_station_vote + station.ID ));
+				var root = parser.get_root ();			
+
+				if(root != null){
+					var radio_station_data = root.get_object ();		
+					if(radio_station_data.get_string_member("ok") ==  "true"){
+						return (int.parse(station.Votes)+1);
+					}
+				}
+			
+				return int.parse(station.Votes);
+			}catch(GLib.Error e){
+				return int.parse(station.Votes);
 			}
 			
-			return int.parse(new_station.Votes);
 		}
 
 
