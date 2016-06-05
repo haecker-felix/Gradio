@@ -86,6 +86,10 @@ namespace Gradio{
 				var root = parser.get_root ();
 				var radio_stations = root.get_array ();
 
+				if(radio_stations.get_length() == 0){
+					return null;
+				}
+
 				var radio_station = radio_stations.get_element(0);
 				var radio_station_data = radio_station.get_object ();
 

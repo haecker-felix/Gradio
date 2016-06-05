@@ -99,7 +99,11 @@ namespace Gradio{
 					while ((line = dis.read_line (null)) != null) {
 						
 						RadioStation station = App.data_provider.parse_station_data_from_id(int.parse(line));
-						lib[int.parse(line)] = station;
+
+						if(station != null){
+							lib[int.parse(line)] = station;
+						}
+						
 					}
 				}else{
 					message("No gradio library found. ");
