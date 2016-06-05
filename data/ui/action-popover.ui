@@ -18,7 +18,6 @@
     <property name="image">Edit</property>
     <property name="relief">none</property>
     <property name="always_show_image">True</property>
-    <signal name="clicked" handler="EditButton_clicked" swapped="no"/>
   </object>
   <object class="GtkImage" id="Homepage">
     <property name="visible">True</property>
