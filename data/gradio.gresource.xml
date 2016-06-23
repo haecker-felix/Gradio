@@ -1,5 +1,6 @@
 <gresources>
   <gresource prefix="/de/haecker-felix/gradio">
+    <file>ui/station-editor-dialog.ui</file>
     <file>ui/main-window.ui</file>
     <file>ui/settings-dialog.ui</file>
     <file>ui/discover-box.ui</file>

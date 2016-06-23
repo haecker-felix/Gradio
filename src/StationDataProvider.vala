@@ -9,6 +9,7 @@ namespace Gradio{
 		public static const string radio_stations_by_id = "http://www.radio-browser.info/webservice/json/stations/byid/";
 		public static const string radio_station_vote = "http://www.radio-browser.info/webservice/json/vote/";
 		public static const string radio_station_stream_url = "http://www.radio-browser.info/webservice/v2/json/url/";
+		public static const string radio_station_edit = "http://www.radio-browser.info/webservice/json/edit/";
 
 
 		// for the search thread
@@ -53,6 +54,40 @@ namespace Gradio{
 			return url;
 		}
 
+		// Edit a radiostation
+		public async bool edit_radio_station(RadioStation edited){
+			SourceFunc callback = edit_radio_station.callback;
+			bool success = false;
+			string changed = "&name=" + edited.Title + "&url=" + edited.DataAddress;
+
+			ThreadFunc<void*> run = () => {
+				try{
+					Json.Parser parser = new Json.Parser ();
+					parser.load_from_data (Util.get_string_from_uri(radio_station_edit + edited.ID + changed));
+					var root = parser.get_root ();
+
+					if(root != null){
+						var radio_station_data = root.get_object ();
+						if(radio_station_data.get_string_member("ok") ==  "true"){
+							message("Successfully edited: " + edited.Title);
+							success = true;
+						}
+					}
+				}catch(GLib.Error e){
+					warning(e.message);
+				}
+
+				Idle.add((owned) callback);
+				Thread.exit (1.to_pointer ());
+				return null;
+			};
+
+			new Thread<void*> ("get_url_thread", run);
+
+			yield;
+
+			return success;
+		}
 
 		// Increase the vote count for the station by one.
 		public int vote_for_station(RadioStation station){

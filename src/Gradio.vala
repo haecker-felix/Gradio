@@ -5,14 +5,14 @@ namespace Gradio {
 
 	public class App : Gtk.Application {
 
-		public MainWindow window;
+		public static MainWindow window;
 		public static AudioPlayer player;
 		public static Library library;
 		public static StationDataProvider data_provider;
 		public GLib.Settings settings;
 		public MPRIS mpris;
 
-		public string version = "2.3";
+		public static string version = "3.0";
 
 		public App () {
 			Object(application_id: "de.haecker-felix.gradio", flags: ApplicationFlags.FLAGS_NONE);
@@ -130,6 +130,7 @@ namespace Gradio {
 
 			var app = new App ();
 			if(Util.check_database_connection()){
+				message("Starting Gradio version " + version + "!");
 				app.run (args);
 			}else{
 				warning("Cannot connect to the database. Is your internet connection working?");

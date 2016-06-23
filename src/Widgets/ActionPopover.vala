@@ -54,6 +54,14 @@ namespace Gradio{
 			}
 		}
 
+		[GtkCallback]
+		private void EditButton_clicked (Button button) {
+			StationEditorDialog editor = new StationEditorDialog(station);
+			editor.set_transient_for(Gradio.App.window);
+			editor.set_modal(true);
+			editor.show();
+		}
+
 		private void refresh_add_remove_button(){
 			if(App.library.contains_station(int.parse(station.ID))){
 				AddBox.set_visible(false);
