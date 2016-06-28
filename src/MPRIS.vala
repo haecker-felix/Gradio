@@ -10,6 +10,7 @@ namespace Gradio {
 		private unowned DBusConnection conn;
 		private uint owner_id;
 
+		private RadioStation current_station;
 
 		public void initialize(){
 			owner_id = Bus.own_name(BusType.SESSION, "org.mpris.MediaPlayer2.gradio", GLib.BusNameOwnerFlags.NONE, on_bus_acquired, on_name_acquired, on_name_lost);
@@ -36,6 +37,7 @@ namespace Gradio {
 
 					player.set_playback_status(status);
 				});
+				App.player.tag_changed.connect(() => player.set_metadata(current_station.ID, current_station.Icon, current_station.Title));
 			    	connection.register_object("/org/mpris/MediaPlayer2", player);
 		    	}catch(IOError e) {
 			    	warning("Could not create MPRIS player: %s\n", e.message);
@@ -43,7 +45,8 @@ namespace Gradio {
 	    	}
 
 		public void set_station(RadioStation s){
-			player.set_metadata(s.ID, s.Icon, s.Title, s.Country);
+			current_station = s;
+			player.set_metadata(current_station.ID, current_station.Icon, current_station.Title);
 		}
 
 		private void on_name_acquired(DBusConnection connection, string name) {}	
@@ -65,18 +68,23 @@ namespace Gradio {
 			this.conn = conn;
 		}
 
-		public void set_metadata (string station_id, string station_icon, string station_name, string station_country) {
+		public void set_metadata (string station_id, string station_icon, string station_name) {
 			if(_metadata != null)
 				_metadata = null;
 
+			string[] artists = {station_name};
 			_metadata = new HashTable<string, Variant> (null, null);
 
 			_metadata.insert("mpris:trackid", station_id);
 			_metadata.insert("mpris:artUrl", station_icon);
-			_metadata.insert("xesam:title", station_name);
+			_metadata.insert("xesam:artist", artists);
+
+			if(App.player.tag_title != null)
+				_metadata.insert("xesam:title", App.player.tag_title);
 
 			trigger_metadata_update();
 		}
+
 
 		private bool send_property_change() {
 			if(changed_properties == null)

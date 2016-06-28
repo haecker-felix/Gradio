@@ -13,7 +13,7 @@ namespace Gradio{
 			this.expand = true;
 			this.set_homogeneous(true);
 			this.valign = Gtk.Align.START;
-			//this.halign = Gtk.Align.START;
+			this.halign = Gtk.Align.START;
 			connect_signals();
 
 			reload_view();

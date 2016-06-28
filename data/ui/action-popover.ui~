@@ -22,7 +22,7 @@
   </object>
   <template class="GradioActionPopover" parent="GtkPopover">
     <property name="can_focus">False</property>
-    <property name="position">bottom</property>
+    <property name="position">right</property>
     <child>
       <object class="GtkBox">
         <property name="visible">True</property>

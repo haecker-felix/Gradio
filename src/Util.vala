@@ -1,4 +1,20 @@
 public class Util{
+	public static string encode_url(string s){
+		var sb = new StringBuilder();
+		for (var i = 0; i < s.length; i++) {
+			var c = s[i];
+			if (('0' <= c && c <= '9')
+			 || ('A' <= c && c <= 'Z')
+			 || ('a' <= c && c <= 'z')
+			 || (c == '-' || c == '_' || c == '.' || c == '~')) {
+				sb.append_c(c);
+			} else {
+				sb.append("%%%02X".printf((uint8)c));
+			}
+		}
+		return sb.str;
+	}
+
 	public static string get_string_from_uri (string url){
 		if(url != ""){
 			var session = new Soup.Session ();
@@ -6,9 +22,10 @@ public class Util{
 			var message = new Soup.Message ("GET", url);
 
 			session.send_message (message);
+			session.abort();
 
 			return (string)message.response_body.data;
-			}
+		}
 		return "";
 	}
 
@@ -17,25 +34,27 @@ public class Util{
 		Gdk.Pixbuf output = null;
 
 		ThreadFunc<void*> run = () => {
-			if(check_connection(url)){			
+			if(check_connection(url)){
 				if(url != ""){	
 					var session = new Soup.Session ();
-					session.user_agent = "gradio/"+Gradio.App.version;
 					var message = new Soup.Message ("GET", url);
-					session.send_message (message);
 					var loader = new Gdk.PixbufLoader();
 
+					session.user_agent = "gradio/"+Gradio.App.version;
+					session.send_message (message);
+
 					try{
-						if(message.response_body.data != null){
+						if(message.response_body.data != null)
 							loader.write(message.response_body.data);
-						}
-					loader.close();
-					var pixbuf = loader.get_pixbuf();
-					output = pixbuf.scale_simple(width, height, Gdk.InterpType.BILINEAR);
-			
+
+						loader.close();
+						var pixbuf = loader.get_pixbuf();
+						output = pixbuf.scale_simple(width, height, Gdk.InterpType.BILINEAR);
 					}catch (Error e){
 						warning("Pixbufloader: " + e.message);
 					}
+
+					session.abort();
 				}
 			}
 			

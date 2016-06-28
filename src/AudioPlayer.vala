@@ -8,6 +8,16 @@ namespace Gradio{
 		public signal void radio_station_changed(RadioStation station);
 		public signal void connection_error(string text);
 		public signal void state_changed();
+		public signal void tag_changed();
+
+		public string tag_title;
+		public bool   tag_has_crc;
+		public string tag_audio_codec;
+		public int    tag_nominal_bitrate;
+		public int    tag_minimum_bitrate;
+		public int    tag_maximum_bitrate;
+		public int    tag_bitrate;
+		public string tag_channel_mode;
 
 		public RadioStation current_station;
 
@@ -15,13 +25,13 @@ namespace Gradio{
 			stream = ElementFactory.make ("playbin", "play");
 		}
 
-		private bool bus_callback (Gst.Bus bus, Gst.Message message) {
-			switch (message.type) {
+		private bool bus_callback (Gst.Bus bus, Gst.Message m) {
+			switch (m.type) {
 				case MessageType.ERROR:
 					GLib.Error err;
 					string debug;
 
-					message.parse_error (out err, out debug);
+					m.parse_error (out err, out debug);
 					print (err.message);
 
 					stream.set_state (State.NULL);
@@ -38,10 +48,22 @@ namespace Gradio{
 					Gst.State oldstate;
 					Gst.State newstate;
 					Gst.State pending;
-					message.parse_state_changed (out oldstate, out newstate, out pending);
-					GLib.message ("State changed: %s -> %s", oldstate.to_string (), newstate.to_string ());					
+					m.parse_state_changed (out oldstate, out newstate, out pending);
+					GLib.debug ("State changed: %s -> %s", oldstate.to_string (), newstate.to_string ());
 
 					state_changed();				
+					break;
+				case MessageType.TAG:
+					Gst.TagList tag_list = null;
+					m.parse_tag(out tag_list);
+
+					tag_list.get_string("title", out tag_title);
+					//message("Title: " + tag_title);
+
+					// ...
+					// TODO: Add missing tags... (bitrate)
+
+					tag_changed();
 					break;
 				default:
 					break;
@@ -72,7 +94,6 @@ namespace Gradio{
 		public void play () {
 			stream.set_state (State.PLAYING);
 			state_changed();
-			
 		}
 
 		public void stop(){

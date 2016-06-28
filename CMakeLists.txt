@@ -25,7 +25,7 @@ enable_testing ()
 # Project info
 set (EXEC_NAME "gradio")
 set (APP_NAME "Gradio")
-set (VERSION "2.3")
+set (VERSION "3.0")
 set (VERSION_INFO "Beta")
 set (COPYRIGHT "Copyright 2016 Felix Häcker")
 set (DESCRIPTION "")
@@ -50,7 +50,7 @@ set (CPACK_SOURCE_IGNORE_FILES "/build/;/.git/;/.gitignore/~$;${CPACK_SOURCE_IGN
 include (CPack)
 add_custom_target (dist COMMAND "$CMAKE_MAKE_PROGRAM} package_source")
 
-set(COMPILE_OPTIONS_VALA ${COMPILE_OPTIONS_VALA} --pkg gstreamer-1.0 json-glib-1.0 gio-2.0 gee-0.8 libsoup-2.4)
+set(COMPILE_OPTIONS_VALA ${COMPILE_OPTIONS_VALA} --pkg  gstreamer-1.0 json-glib-1.0 gio-2.0 gee-0.8 libsoup-2.4)
 
 ### PKGCONFIG ###
 find_package ( PkgConfig REQUIRED )

@@ -33,16 +33,19 @@ namespace Gradio{
 		[GtkCallback]
 		private void HomepageButton_clicked (Button button) {
 			Util.open_website(station.Homepage);
+			this.destroy();
 		}
 
 		[GtkCallback]
 		private void VoteButton_clicked (Button button) {
 			station.vote();
+			this.destroy();
 		}
 
 		[GtkCallback]
 		private void PlayButton_clicked (Button button) {
 			App.player.set_radio_station(station);
+			this.destroy();
 		}
 
 		[GtkCallback]
@@ -52,6 +55,7 @@ namespace Gradio{
 			}else{
 				App.library.add_radio_station_by_id(int.parse(station.ID));
 			}
+			this.destroy();
 		}
 
 		[GtkCallback]
@@ -60,6 +64,7 @@ namespace Gradio{
 			editor.set_transient_for(Gradio.App.window);
 			editor.set_modal(true);
 			editor.show();
+			this.destroy();
 		}
 
 		private void refresh_add_remove_button(){

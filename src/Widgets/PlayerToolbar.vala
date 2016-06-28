@@ -12,7 +12,7 @@ namespace Gradio{
 		[GtkChild]
 		private Label ChannelNameLabel;
 		[GtkChild]
-		private Label ChannelHomepageLabel;
+		private Label ChannelCurrentTitleLabel;
 		[GtkChild]
 		private Image StationLogo;
 
@@ -20,12 +20,12 @@ namespace Gradio{
 
 		public PlayerToolbar(){
 			App.player.state_changed.connect (() => refresh_play_stop_button());
+			App.player.tag_changed.connect (() => set_current_title());
 		}
 
 		public void set_radio_station (RadioStation s){
 			station = s;
 
-			ChannelHomepageLabel.set_text(station.Homepage);
 			ChannelNameLabel.set_text(station.Title);
 
 			Gdk.Pixbuf icon = null;
@@ -47,6 +47,10 @@ namespace Gradio{
         	private void PlayStopButton_clicked (Button button) {
 			App.player.toggle_play_stop();
 			refresh_play_stop_button();
+		}
+
+		private void set_current_title(){
+			ChannelCurrentTitleLabel.set_text(App.player.tag_title);
 		}
 
 		private void refresh_play_stop_button(){

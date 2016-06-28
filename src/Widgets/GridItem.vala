@@ -19,6 +19,15 @@ namespace Gradio{
 		public GridItem(RadioStation s){
 			station = s;
 
+			ChannelNameLabel.set_ellipsize(Pango.EllipsizeMode.END);
+			ChannelNameLabel.set_max_width_chars(22);
+
+			ChannelLocationLabel.set_ellipsize(Pango.EllipsizeMode.END);
+			ChannelLocationLabel.set_max_width_chars(22);
+
+			ChannelTagsLabel.set_ellipsize(Pango.EllipsizeMode.END);
+			ChannelTagsLabel.set_max_width_chars(22);
+
 			load_information();
 			station.data_changed.connect(() => load_information());
 		}

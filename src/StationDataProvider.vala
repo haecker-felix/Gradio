@@ -5,6 +5,9 @@ namespace Gradio{
 
 	public class StationDataProvider{
 		// API urls
+		public static const string radio_stations_most_votes = "http://www.radio-browser.info/webservice/json/stations/topvote";
+		public static const string radio_stations_recently_clicked = "http://www.radio-browser.info/webservice/json/stations/lastclick";
+		public static const string radio_stations_recently_changed = "http://www.radio-browser.info/webservice/json/stations/lastchange";
 		public static const string radio_stations_by_name = "http://www.radio-browser.info/webservice/json/stations/byname/";
 		public static const string radio_stations_by_id = "http://www.radio-browser.info/webservice/json/stations/byid/";
 		public static const string radio_station_vote = "http://www.radio-browser.info/webservice/json/vote/";
@@ -58,12 +61,14 @@ namespace Gradio{
 		public async bool edit_radio_station(RadioStation edited){
 			SourceFunc callback = edit_radio_station.callback;
 			bool success = false;
-			string changed = "&name=" + edited.Title + "&url=" + edited.DataAddress;
+			string changed = "name=" + Util.encode_url(edited.Title) + "&url=" + Util.encode_url(edited.DataAddress);
 
 			ThreadFunc<void*> run = () => {
 				try{
 					Json.Parser parser = new Json.Parser ();
-					parser.load_from_data (Util.get_string_from_uri(radio_station_edit + edited.ID + changed));
+					string url = Util.get_string_from_uri(radio_station_edit + edited.ID + "?" + changed);
+					warning(url);
+					parser.load_from_data (url);
 					var root = parser.get_root ();
 
 					if(root != null){

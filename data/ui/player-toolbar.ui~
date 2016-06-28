@@ -208,7 +208,7 @@
           </packing>
         </child>
         <child>
-          <object class="GtkLabel" id="ChannelCurrentTitleLabel">
+          <object class="GtkLabel" id="ChannelCurrentTitle">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="halign">start</property>

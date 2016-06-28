@@ -32,7 +32,7 @@ namespace Gradio{
 			library_box = new LibraryBox();
 
 			ContentStack.add_titled(library_box, "library_box", _("Library"));
-	       		ContentStack.add_titled(discover_box, "discover_box", _("Search"));
+	       		ContentStack.add_titled(discover_box, "discover_box", _("Discover"));
 
 			var builder = new Gtk.Builder.from_resource ("/de/haecker-felix/gradio/app-menu.ui");
 			var app_menu = builder.get_object ("app-menu") as GLib.MenuModel;
