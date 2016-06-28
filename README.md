@@ -2,23 +2,16 @@
 A GTK3 app for finding and listening to internet radio stations.
 
 <p align="center">
-  <img alt="Library View" src="http://i.imgur.com/yMK0v1b.png" />
-  <img alt="Search View" src="http://i.imgur.com/WibRApn.png)" />
+  <img alt="Library View" src="http://i.imgur.com/AOP92Mg.png" />
 </p>
 
-## Features
-* Search radio stations (worldwide)
-* Manageable library
-* Vote for radio stations
-* See details of the station
-* Notifications
-* Grid/List view 
-* MPRIS Support (Sound menu)
+## Releases and packages
+- All Gradio releases can be found here: https://github.com/haecker-felix/gradio/releases
 
 ## Dependencies
 For gradio:
 * glib-2.0
-* gtk+-3.0 _>=3.14_
+* gtk+-3.0 _>=3.18_
 * gstreamer-1.0
 * json-glib-1.0
 * gio-2.0
@@ -30,11 +23,6 @@ For compiling:
 * cmake
 * git
 * valac
-
-**Debian**
-```bash
-sudo apt-get install build-essential valac cmake glib2.0 gtk+3.0 gstreamer1.0 libjson-glib-dev libsoup2.4
-```
 
 ## Install
 ### Source
@@ -71,9 +59,3 @@ cd ~/Downloads/gradio/build
 sudo xargs rm < install_manifest.txt
 ```
 
-## To-do
-* Create new radio stations
-* Edit radio stations
-* Delete radio stations
-* Advanced search
-* Adding server stats
