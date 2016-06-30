@@ -20,7 +20,8 @@ namespace Gradio{
 		}
 
 		public void set_stations(ref HashMap<int,RadioStation> s){
-			stations = s;
+			if(s != null)
+				stations = s;
 			reload_view();
 		}
 

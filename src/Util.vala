@@ -24,7 +24,8 @@ public class Util{
 			session.send_message (message);
 			session.abort();
 
-			return (string)message.response_body.data;
+			if((string)message.response_body.data != null)
+				return (string)message.response_body.data;
 		}
 		return "";
 	}

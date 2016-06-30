@@ -59,39 +59,8 @@ namespace Gradio{
 
 		// Edit a radiostation
 		public async bool edit_radio_station(RadioStation edited){
-			SourceFunc callback = edit_radio_station.callback;
-			bool success = false;
-			string changed = "name=" + Util.encode_url(edited.Title) + "&url=" + Util.encode_url(edited.DataAddress);
 
-			ThreadFunc<void*> run = () => {
-				try{
-					Json.Parser parser = new Json.Parser ();
-					string url = Util.get_string_from_uri(radio_station_edit + edited.ID + "?" + changed);
-					warning(url);
-					parser.load_from_data (url);
-					var root = parser.get_root ();
-
-					if(root != null){
-						var radio_station_data = root.get_object ();
-						if(radio_station_data.get_string_member("ok") ==  "true"){
-							message("Successfully edited: " + edited.Title);
-							success = true;
-						}
-					}
-				}catch(GLib.Error e){
-					warning(e.message);
-				}
-
-				Idle.add((owned) callback);
-				Thread.exit (1.to_pointer ());
-				return null;
-			};
-
-			new Thread<void*> ("get_url_thread", run);
-
-			yield;
-
-			return success;
+			return false;
 		}
 
 		// Increase the vote count for the station by one.
@@ -100,20 +69,20 @@ namespace Gradio{
 
 			try{
 				parser.load_from_data (Util.get_string_from_uri(radio_station_vote + station.ID ));
-				var root = parser.get_root ();			
+				var root = parser.get_root ();
 
 				if(root != null){
-					var radio_station_data = root.get_object ();		
+					var radio_station_data = root.get_object ();
 					if(radio_station_data.get_string_member("ok") ==  "true"){
 						return (int.parse(station.Votes)+1);
 					}
 				}
-			
+
 				return int.parse(station.Votes);
 			}catch(GLib.Error e){
 				return int.parse(station.Votes);
 			}
-			
+
 		}
 
 
@@ -121,19 +90,25 @@ namespace Gradio{
 		public RadioStation parse_station_data_from_id (int id){
 			Json.Parser parser = new Json.Parser ();
 			RadioStation new_station = null;
-			try{
-				parser.load_from_data (Util.get_string_from_uri(radio_stations_by_id + id.to_string()));
-				var root = parser.get_root ();
-				var radio_stations = root.get_array ();
 
-				if(radio_stations.get_length() == 0){
+			string data = Util.get_string_from_uri(radio_stations_by_id + id.to_string());
+			try{
+				if(data != ""){
+					parser.load_from_data (data);
+					var root = parser.get_root ();
+					var radio_stations = root.get_array ();
+
+					if(radio_stations.get_length() == 0){
+						return null;
+					}
+
+					var radio_station = radio_stations.get_element(0);
+					var radio_station_data = radio_station.get_object ();
+
+					new_station = parse_station_data_from_json(radio_station_data);
+				}else{
 					return null;
 				}
-
-				var radio_station = radio_stations.get_element(0);
-				var radio_station_data = radio_station.get_object ();
-
-				new_station = parse_station_data_from_json(radio_station_data);
 			}catch (Error e){
 				error("Parser: " + e.message);
 			}
@@ -176,26 +151,32 @@ namespace Gradio{
 			ThreadFunc<void*> run = () => {
 				try{
 		   			HashMap<int,RadioStation> results = new HashMap<int,RadioStation>();
-					
+					string data = Util.get_string_from_uri(address);
 					Json.Parser parser = new Json.Parser ();
-					parser.load_from_data (Util.get_string_from_uri(address));
-					var root = parser.get_root ();
-					var radio_stations = root.get_array ();
 
-					int max_items = (int)radio_stations.get_length();
-					if(max_items < max_results)
-						max_results = max_items;					
+					if(data != ""){
+						parser.load_from_data (data);
+						var root = parser.get_root ();
+						var radio_stations = root.get_array ();
 
-					for(int a = 0; a < max_results; a++){
-						var radio_station = radio_stations.get_element(a);
-						var radio_station_data = radio_station.get_object ();
+						int max_items = (int)radio_stations.get_length();
+						if(max_items < max_results)
+							max_results = max_items;
+
+						for(int a = 0; a < max_results; a++){
+							var radio_station = radio_stations.get_element(a);
+							var radio_station_data = radio_station.get_object ();
 						
-						var station = parse_station_data_from_json(radio_station_data);
+							var station = parse_station_data_from_json(radio_station_data);
 
-						results[int.parse(station.ID)] = station;
+							results[int.parse(station.ID)] = station;
+						}
+
+						output = results;
+					}else{
+						output = null;
 					}
 					
-					output = results;
 				}catch(GLib.Error e){
 					warning(e.message);
 				}

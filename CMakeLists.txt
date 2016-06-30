@@ -126,6 +126,7 @@ PACKAGES
 OPTIONS
 	--thread
 	--target-glib=2.38
+	--enable-experimental
 	--gresources ${GRESOURCES}
 	${VALA_FLAGS}
 )

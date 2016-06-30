@@ -23,7 +23,7 @@ namespace Gradio{
 			station.Title = NameEntry.get_text();
 			station.DataAddress = UrlEntry.get_text();
 
-			Gradio.App.data_provider.edit_radio_station(station);
+			Gradio.App.data_provider.edit_radio_station.begin(station);
 
 
 			this.destroy();
