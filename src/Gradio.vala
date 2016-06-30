@@ -22,23 +22,24 @@ namespace Gradio {
 			create_app_menu();
 
 			data_provider = new StationDataProvider();
-
 			player = new AudioPlayer();
 			settings = new GLib.Settings ("de.haecker-felix.gradio");
+
 			mpris = new MPRIS();
 			mpris.initialize();
 
 			library = new Library();
 			library.read_data();
-			
-			window = new MainWindow(this);	
 
+			window = new MainWindow(this);
 			this.add_window(window);
 			window.show_all();
-
 			connect_signals();
-			create_app_menu();
-		}	
+
+			if(!Util.check_database_connection()){
+				window.show_no_connection_message();
+			}
+		}
 
 		public void report_an_error(){
 			Util.open_website("https://github.com/haecker-felix/gradio/issues/new");
@@ -129,13 +130,8 @@ namespace Gradio {
 			Gtk.init(ref args);
 
 			var app = new App ();
-			if(Util.check_database_connection()){
-				message("Starting Gradio version " + version + "!");
-				app.run (args);
-			}else{
-				warning("Cannot connect to the database. Is your internet connection working?");
-			}
-
+			message("Starting Gradio version " + version + "!");
+			app.run (args);
 		}
     }
 }

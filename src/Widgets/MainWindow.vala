@@ -12,6 +12,8 @@ namespace Gradio{
 		[GtkChild]
 		private Image ListImage;
 		[GtkChild]
+		private Stack DatabaseStack;
+		[GtkChild]
 		private Stack ContentStack;
 		[GtkChild]
 		private Box Bottom;
@@ -31,8 +33,8 @@ namespace Gradio{
 	       		discover_box = new DiscoverBox();
 			library_box = new LibraryBox();
 
-			ContentStack.add_titled(library_box, "library_box", _("Library"));
-	       		ContentStack.add_titled(discover_box, "discover_box", _("Discover"));
+			DatabaseStack.add_titled(library_box, "library_box", _("Library"));
+	       		DatabaseStack.add_titled(discover_box, "discover_box", _("Discover"));
 
 			var builder = new Gtk.Builder.from_resource ("/de/haecker-felix/gradio/app-menu.ui");
 			var app_menu = builder.get_object ("app-menu") as GLib.MenuModel;
@@ -44,9 +46,13 @@ namespace Gradio{
 				MenuButton.set_visible (true);
 			
 
+			ContentStack.set_visible_child_name("database");
 	       		Bottom.pack_end(player_toolbar);
-
 			connect_signals();
+		}
+
+		public void show_no_connection_message (){
+			ContentStack.set_visible_child_name("no_connection");
 		}
 
 		private void connect_signals(){
