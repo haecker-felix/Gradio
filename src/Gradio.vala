@@ -12,7 +12,7 @@ namespace Gradio {
 		public GLib.Settings settings;
 		public MPRIS mpris;
 
-		public static string version = "3.0.1";
+		public static string version = "3.0.2";
 
 		public App () {
 			Object(application_id: "de.haecker-felix.gradio", flags: ApplicationFlags.FLAGS_NONE);
