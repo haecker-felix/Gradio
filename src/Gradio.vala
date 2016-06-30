@@ -63,7 +63,7 @@ namespace Gradio {
 				"Felix Häcker <haecker.felix1207@gmail.com>"
 			};
 			string[] artists = {
-				"Felix Häcker <haecker.felix1207@gmail.com>"
+				"Juan Pablo Lozano <lozanotux@gmail.com>"
 			};
 			Gtk.show_about_dialog (window,
 				"artists", artists,

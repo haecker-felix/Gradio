@@ -99,15 +99,23 @@ public class Util{
 	}
 
 	public static bool check_database_connection(){
+		var host = "www.radio-browser.info";
+
 		try {
-			File file = File.new_for_uri ("http://www.radio-browser.info/");
-			file.read ();
-			return true;
-		} catch (Error e) {
-			warning (e.message);
-			return false;
-		}
+            		// Resolve hostname to IP address
+            		var resolver = Resolver.get_default ();
+            		var addresses = resolver.lookup_by_name (host, null);
+            		var address = addresses.nth_data (0);
+            		if (address == null) {
+                		return false;
+            		}
+        	} catch (Error e) {
+            		debug ("%s\n", e.message);
+            		return false;
+        	}
+        	return true;
 	}
+
 
 	public static bool check_connection(string url){
 		try {
