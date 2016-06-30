@@ -3,7 +3,7 @@ using Gst;
 namespace Gradio{
 	public class AudioPlayer {
 
-		dynamic Element stream;
+		private dynamic Element stream;
 
 		public signal void radio_station_changed(RadioStation station);
 		public signal void connection_error(string text);
@@ -23,6 +23,7 @@ namespace Gradio{
 
 		public AudioPlayer(){
 			stream = ElementFactory.make ("playbin", "play");
+			set_volume(1.0);
 		}
 
 		private bool bus_callback (Gst.Bus bus, Gst.Message m) {
@@ -117,6 +118,18 @@ namespace Gradio{
 			}else{
 				return true;
 			}
+		}
+
+		public void mute_audio (){
+			stream.mute = true;
+		}
+
+		public void unmute_audio(){
+			stream.mute = false;
+		}
+
+		public void set_volume (double v){
+			stream.volume = v;
 		}
 	}
 }

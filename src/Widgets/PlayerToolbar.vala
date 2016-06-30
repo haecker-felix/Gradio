@@ -49,6 +49,11 @@ namespace Gradio{
 			refresh_play_stop_button();
 		}
 
+		[GtkCallback]
+        	private void VolumeButton_value_changed (double value) {
+			App.player.set_volume(value);
+		}
+
 		private void set_current_title(){
 			ChannelCurrentTitleLabel.set_text(App.player.tag_title);
 		}
