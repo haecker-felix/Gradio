@@ -36,6 +36,9 @@ namespace Gradio{
 		[GtkChild]
 		private Box recently_clicked;
 
+		private string search_by = StationDataProvider.radio_stations_by_name;
+		private signal void search_by_changed();
+
 		public DiscoverBox(){
 			settings = new GLib.Settings ("de.haecker-felix.gradio");
 
@@ -59,6 +62,8 @@ namespace Gradio{
 	
 		private void connect_signals(){
 			SearchEntry.activate.connect(() => SearchButton_clicked());
+
+			search_by_changed.connect(() => SearchButton_clicked());
 
 			App.data_provider.status_changed.connect(() => {
 				if(App.data_provider.isWorking){
@@ -113,7 +118,7 @@ namespace Gradio{
 
 		[GtkCallback]
 		private void SearchButton_clicked(){
-			string address = StationDataProvider.radio_stations_by_name + Util.optimize_string(SearchEntry.get_text());
+			string address = search_by + Util.optimize_string(SearchEntry.get_text());
 
 			if(!App.data_provider.isWorking){
 				show_overview = false;
@@ -182,6 +187,41 @@ namespace Gradio{
 			show_overview = true;
 		}
 
+		[GtkCallback]
+		private void TagsRadioButton_toggled(ToggleButton button){
+			search_by = StationDataProvider.radio_stations_by_tag;
+			search_by_changed();
+		}
+
+		[GtkCallback]
+		private void NameRadioButton_toggled(ToggleButton button){
+			search_by = StationDataProvider.radio_stations_by_name;
+			search_by_changed();
+		}
+
+		[GtkCallback]
+		private void CountryRadioButton_toggled(ToggleButton button){
+			search_by = StationDataProvider.radio_stations_by_country;
+			search_by_changed();
+		}
+
+		[GtkCallback]
+		private void LanguageRadioButton_toggled(ToggleButton button){
+			search_by = StationDataProvider.radio_stations_by_language;
+			search_by_changed();
+		}
+
+		[GtkCallback]
+		private void StateRadioButton_toggled(ToggleButton button){
+			search_by = StationDataProvider.radio_stations_by_state;
+			search_by_changed();
+		}
+
+		[GtkCallback]
+		private void CodecRadioButton_toggled(ToggleButton button){
+			search_by = StationDataProvider.radio_stations_by_codec;
+			search_by_changed();
+		}
 
 		// Switch
 		public void show_grid_view(){
