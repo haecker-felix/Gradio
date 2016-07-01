@@ -10,7 +10,7 @@ namespace Gradio{
 
 		public StationsGridView(){
 			settings = new GLib.Settings ("de.haecker-felix.gradio");
-			this.expand = true;
+			this.expand = false;
 			this.set_homogeneous(true);
 			this.valign = Gtk.Align.START;
 			this.halign = Gtk.Align.START;

@@ -100,12 +100,12 @@ VALA_C ${EXEC_NAME}
 	src/Widgets/DiscoverBox.vala
 	src/Widgets/LibraryBox.vala
 	src/Widgets/PlayerToolbar.vala
-	src/Widgets/ListItem.vala
-	src/Widgets/GridItem.vala
+	src/Widgets/StationsView/ListItem.vala
+	src/Widgets/StationsView/GridItem.vala
 	src/Widgets/ActionPopover.vala
 	src/Widgets/SettingsDialog.vala
-	src/Widgets/StationsGridView.vala
-	src/Widgets/StationsListView.vala
+	src/Widgets/StationsView/StationsGridView.vala
+	src/Widgets/StationsView/StationsListView.vala
 	src/Widgets/StationEditorDialog.vala
 	src/AudioPlayer.vala
 	src/RadioStation.vala

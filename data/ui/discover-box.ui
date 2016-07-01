@@ -5,37 +5,42 @@
   <template class="GradioDiscoverBox" parent="GtkBox">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
-    <property name="margin_left">7</property>
-    <property name="margin_right">7</property>
-    <property name="margin_top">7</property>
-    <property name="margin_bottom">7</property>
     <property name="orientation">vertical</property>
     <child>
-      <object class="GtkBox" id="HeaderBox">
+      <object class="GtkSearchBar" id="SearchBar">
         <property name="visible">True</property>
+        <property name="app_paintable">True</property>
         <property name="can_focus">False</property>
+        <property name="search_mode_enabled">True</property>
         <child>
-          <object class="GtkButton" id="HomeButton">
-            <property name="label" translatable="yes">Overview</property>
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">True</property>
-            <property name="margin_right">5</property>
-            <signal name="clicked" handler="HomeButton_clicked" swapped="no"/>
-            <style>
-              <class name="suggested-action"/>
-            </style>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkBox">
+          <object class="GtkBox" id="HeaderBox">
+            <property name="width_request">400</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="vexpand">False</property>
+            <child>
+              <object class="GtkButton" id="HomeButton">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <signal name="clicked" handler="HomeButton_clicked" swapped="no"/>
+                <child>
+                  <object class="GtkImage">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="icon_name">go-home-symbolic</property>
+                  </object>
+                </child>
+                <style>
+                  <class name="suggested-action"/>
+                </style>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
             <child>
               <object class="GtkSearchEntry" id="SearchEntry">
                 <property name="visible">True</property>
@@ -43,11 +48,12 @@
                 <property name="primary_icon_name">edit-find-symbolic</property>
                 <property name="primary_icon_activatable">False</property>
                 <property name="primary_icon_sensitive">False</property>
+                <property name="placeholder_text" translatable="yes">Search for radio stations</property>
               </object>
               <packing>
                 <property name="expand">True</property>
                 <property name="fill">True</property>
-                <property name="position">0</property>
+                <property name="position">1</property>
               </packing>
             </child>
             <child>
@@ -63,23 +69,38 @@
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
-                <property name="position">1</property>
+                <property name="pack_type">end</property>
+                <property name="position">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkMenuButton" id="FilterButton">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">False</property>
+                <child>
+                  <object class="GtkImage">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="icon_name">open-menu-symbolic.symbolic</property>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">3</property>
               </packing>
             </child>
             <style>
               <class name="linked"/>
             </style>
           </object>
-          <packing>
-            <property name="expand">True</property>
-            <property name="fill">True</property>
-            <property name="position">2</property>
-          </packing>
         </child>
       </object>
       <packing>
         <property name="expand">False</property>
-        <property name="fill">False</property>
+        <property name="fill">True</property>
         <property name="position">0</property>
       </packing>
     </child>
@@ -87,7 +108,6 @@
       <object class="GtkStack" id="ContentStack">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="margin_top">7</property>
         <child>
           <object class="GtkBox">
             <property name="visible">True</property>
@@ -97,9 +117,8 @@
               <object class="GtkScrolledWindow">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
-                <property name="shadow_type">in</property>
                 <child>
-                  <object class="GtkViewport">
+                  <object class="GtkViewport" id="viewport1">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <child>
@@ -341,4 +360,10 @@
       </packing>
     </child>
   </template>
+  <object class="GtkSizeGroup">
+    <widgets>
+      <widget name="HeaderBox"/>
+      <widget name="viewport1"/>
+    </widgets>
+  </object>
 </interface>
