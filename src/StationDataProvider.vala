@@ -18,7 +18,11 @@ namespace Gradio{
 		public static const string radio_station_vote = "http://www.radio-browser.info/webservice/json/vote/";
 		public static const string radio_station_stream_url = "http://www.radio-browser.info/webservice/v2/json/url/";
 		public static const string radio_station_edit = "http://www.radio-browser.info/webservice/json/edit/";
+		public static const string radio_station_languages = "http://www.radio-browser.info/webservice/json/languages";
 
+
+		// Aviable lists
+		public static GLib.List<string> languages_list;
 
 		// for the search thread
 		private bool _isWorking = false;
@@ -196,6 +200,46 @@ namespace Gradio{
 			yield;
 			isWorking = false;
            		return output;
+        	}
+
+        	public async void load_lists (){
+        		SourceFunc callback = load_lists.callback;
+
+			isWorking = true;
+			ThreadFunc<void*> run = () => {
+				languages_list = null;
+				languages_list = new GLib.List<string>();
+
+				try{
+					Json.Parser parser = new Json.Parser ();
+					string data;
+
+					// Languages
+					data = Util.get_string_from_uri(radio_station_languages);
+					if(data != ""){
+						parser.load_from_data (data);
+						var root = parser.get_root ();
+						var languages = root.get_array ();
+						int max_items = (int)languages.get_length();
+						for(int a = 0; a < max_items; a++){
+							var language = languages.get_element(a);
+							var language_data = language.get_object ();
+							languages_list.append(language_data.get_string_member("value"));
+						}
+					}
+
+				}catch(GLib.Error e){
+					warning(e.message);
+				}
+				Idle.add((owned) callback);
+				Thread.exit (1.to_pointer ());
+				return null;
+			};
+
+			new Thread<void*> ("load_list_thread", run);
+
+			yield;
+			isWorking = false;
         	}
 	}
 }

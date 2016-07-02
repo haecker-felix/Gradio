@@ -9,6 +9,8 @@
     <file>ui/list-item.ui</file>
     <file>ui/grid-item.ui</file>
     <file>ui/action-popover.ui</file>
+    <file>ui/discover-sidebar.ui</file>
+    <file>ui/categories-row.ui</file>
     <file>gradio.desktop</file>
     <file>app-menu.ui</file>
   </gresource>

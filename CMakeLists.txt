@@ -97,7 +97,9 @@ vala_precompile (
 VALA_C ${EXEC_NAME}
 	src/Gradio.vala
 	src/Widgets/MainWindow.vala
-	src/Widgets/DiscoverBox.vala
+	src/Widgets/DiscoverBox/DiscoverBox.vala
+	src/Widgets/DiscoverBox/DiscoverSidebar.vala
+	src/Widgets/DiscoverBox/CategoriesRow.vala
 	src/Widgets/LibraryBox.vala
 	src/Widgets/PlayerToolbar.vala
 	src/Widgets/StationsView/ListItem.vala

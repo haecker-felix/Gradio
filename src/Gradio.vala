@@ -22,6 +22,8 @@ namespace Gradio {
 			create_app_menu();
 
 			data_provider = new StationDataProvider();
+			data_provider.load_lists();
+
 			player = new AudioPlayer();
 			settings = new GLib.Settings ("de.haecker-felix.gradio");
 
