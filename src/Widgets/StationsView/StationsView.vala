@@ -8,6 +8,9 @@ namespace Gradio{
 
 		HashMap<int,RadioStation> stations;
 
+		private bool no_stations = true;
+		private bool list_view = false;
+
 		[GtkChild]
 		private Box HeaderBox;
 		[GtkChild]
@@ -116,11 +119,15 @@ namespace Gradio{
 		}
 
 		public void show_list_view(){
-			StationsStack.set_visible_child_name("list-view");
+			if(!no_stations)
+				StationsStack.set_visible_child_name("list-view");
+			list_view = true;
 		}
 
 		public void show_grid_view(){
-			StationsStack.set_visible_child_name("grid-view");
+			if(!no_stations)
+				StationsStack.set_visible_child_name("grid-view");
+			list_view = false;
 		}
 
 		public void reload_view(){
@@ -129,6 +136,7 @@ namespace Gradio{
 
 			if(stations != null){
 				if(!stations.is_empty){
+					no_stations = false;
 					foreach (var element in stations.entries){
 						GridItem grid_box = new GridItem(element.value);
 						ListItem list_box = new ListItem(element.value);
@@ -140,6 +148,14 @@ namespace Gradio{
 							ListViewListBox.add(list_box);
 						}
 					}
+					if(list_view)
+						show_list_view();
+					else
+						show_grid_view();
+
+				}else{
+					no_stations = true;
+					StationsStack.set_visible_child_name("no-results");
 				}
 			}
 

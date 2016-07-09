@@ -142,12 +142,12 @@
                 <property name="can_focus">False</property>
                 <property name="halign">center</property>
                 <property name="valign">center</property>
-                <property name="orientation">vertical</property>
                 <child>
                   <object class="GtkImage" id="NoResultsImage">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="icon_name">action-unavailable-symbolic</property>
+                    <property name="icon_name">application-rss+xml-symbolic</property>
+                    <property name="icon_size">6</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -159,7 +159,11 @@
                   <object class="GtkLabel" id="NoResultsLabel">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">No Stations to view</property>
+                    <property name="margin_left">4</property>
+                    <property name="label" translatable="yes">No stations found</property>
+                    <attributes>
+                      <attribute name="font-desc" value="&lt;Geben Sie den Wert ein&gt; 13"/>
+                    </attributes>
                   </object>
                   <packing>
                     <property name="expand">False</property>
