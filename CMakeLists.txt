@@ -106,8 +106,8 @@ VALA_C ${EXEC_NAME}
 	src/Widgets/StationsView/GridItem.vala
 	src/Widgets/ActionPopover.vala
 	src/Widgets/SettingsDialog.vala
-	src/Widgets/StationsView/StationsGridView.vala
-	src/Widgets/StationsView/StationsListView.vala
+	src/Widgets/StationsView/StationsView.vala
+	src/Widgets/StationsView/StationsViewButton.vala
 	src/Widgets/StationEditorDialog.vala
 	src/AudioPlayer.vala
 	src/RadioStation.vala

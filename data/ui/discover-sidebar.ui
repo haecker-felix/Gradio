@@ -10,18 +10,22 @@
       <object class="GtkBox" id="SearchBox">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="vexpand">False</property>
+        <property name="margin_left">5</property>
+        <property name="margin_right">5</property>
+        <property name="margin_top">5</property>
+        <property name="margin_bottom">5</property>
         <child>
-          <object class="GtkButton" id="BackButton">
+          <object class="GtkButton" id="HomeButton">
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
-            <signal name="clicked" handler="BackButton_clicked" swapped="no"/>
+            <property name="margin_right">5</property>
+            <signal name="clicked" handler="HomeButton_clicked" swapped="no"/>
             <child>
               <object class="GtkImage">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="icon_name">go-previous-symbolic</property>
+                <property name="icon_name">go-home-symbolic</property>
               </object>
             </child>
           </object>
@@ -32,41 +36,58 @@
           </packing>
         </child>
         <child>
-          <object class="GtkSearchEntry" id="SearchEntry">
+          <object class="GtkBox">
             <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="primary_icon_name">edit-find-symbolic</property>
-            <property name="primary_icon_activatable">False</property>
-            <property name="primary_icon_sensitive">False</property>
-            <property name="placeholder_text" translatable="yes">Search for radio stations</property>
-          </object>
-          <packing>
-            <property name="expand">True</property>
-            <property name="fill">True</property>
-            <property name="position">1</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkButton" id="SearchButton">
-            <property name="label">gtk-find</property>
-            <property name="width_request">80</property>
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">True</property>
-            <property name="use_stock">True</property>
-            <signal name="clicked" handler="SearchButton_clicked" swapped="no"/>
+            <property name="can_focus">False</property>
+            <child>
+              <object class="GtkSearchEntry" id="SearchEntry">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="primary_icon_name">edit-find-symbolic</property>
+                <property name="primary_icon_activatable">False</property>
+                <property name="primary_icon_sensitive">False</property>
+                <property name="placeholder_text" translatable="yes">Search </property>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="SearchButton">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <signal name="clicked" handler="SearchButton_clicked" swapped="no"/>
+                <child>
+                  <object class="GtkImage">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="icon_name">system-search-symbolic</property>
+                  </object>
+                </child>
+                <style>
+                  <class name="linked"/>
+                </style>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="pack_type">end</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+            <style>
+              <class name="linked"/>
+            </style>
           </object>
           <packing>
             <property name="expand">False</property>
             <property name="fill">True</property>
-            <property name="pack_type">end</property>
-            <property name="position">2</property>
+            <property name="position">1</property>
           </packing>
         </child>
-        <style>
-          <class name="linked"/>
-          <class name="packed"/>
-        </style>
       </object>
       <packing>
         <property name="expand">False</property>
@@ -75,60 +96,60 @@
       </packing>
     </child>
     <child>
-      <object class="GtkSeparator">
+      <object class="GtkStack" id="SidebarStack">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="margin_top">3</property>
-      </object>
-      <packing>
-        <property name="expand">False</property>
-        <property name="fill">True</property>
-        <property name="position">1</property>
-      </packing>
-    </child>
-    <child>
-      <object class="GtkScrolledWindow">
-        <property name="visible">True</property>
-        <property name="can_focus">True</property>
+        <property name="transition_type">over-left-right</property>
         <child>
-          <object class="GtkViewport">
+          <object class="GtkScrolledWindow">
             <property name="visible">True</property>
-            <property name="can_focus">False</property>
+            <property name="can_focus">True</property>
             <child>
-              <object class="GtkStack" id="SidebarStack">
+              <object class="GtkViewport">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="transition_type">over-left-right</property>
-                <child>
-                  <object class="GtkListBox" id="CategoriesBox">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                  </object>
-                  <packing>
-                    <property name="name">catergories</property>
-                    <property name="title" translatable="yes">categories-box</property>
-                  </packing>
-                </child>
                 <child>
                   <object class="GtkListBox" id="ItemsBox">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                   </object>
-                  <packing>
-                    <property name="name">items</property>
-                    <property name="title" translatable="yes">items-box</property>
-                    <property name="position">1</property>
-                  </packing>
                 </child>
               </object>
             </child>
           </object>
+          <packing>
+            <property name="name">items</property>
+            <property name="title" translatable="yes">items-box</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkScrolledWindow">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <child>
+              <object class="GtkViewport">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <child>
+                  <object class="GtkListBox" id="CategoriesBox">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="name">catergories</property>
+            <property name="title" translatable="yes">categories-box</property>
+            <property name="position">1</property>
+          </packing>
         </child>
       </object>
       <packing>
         <property name="expand">True</property>
         <property name="fill">True</property>
-        <property name="position">2</property>
+        <property name="position">1</property>
       </packing>
     </child>
   </template>

@@ -10,36 +10,26 @@ namespace Gradio{
 		[GtkChild]
 		private Box ContentBox;
 
-		private StationsListView list_view_library;
-		private StationsGridView grid_view_library;
+		private StationsView library_view;
 
 		public LibraryBox(){
-			list_view_library = new StationsListView();
-			list_view_library.set_stations(ref App.library.lib);
+			library_view = new StationsView("Library", true);
+			library_view.set_stations(ref App.library.lib);
 
-			grid_view_library = new StationsGridView();
-			grid_view_library.set_stations(ref App.library.lib);
+			ContentBox.add(library_view);
 
-			ContentBox.add(grid_view_library);
+			App.library.added_radio_station.connect(() => library_view.reload_view());
+			App.library.removed_radio_station.connect(() => library_view.reload_view());
 
-			App.library.added_radio_station.connect(() => list_view_library.reload_view());
-			App.library.removed_radio_station.connect(() => list_view_library.reload_view());
-			App.library.added_radio_station.connect(() => grid_view_library.reload_view());
-			App.library.removed_radio_station.connect(() => grid_view_library.reload_view());
-
-			ContentBox.show_all();
-		}	
-
-		public void show_grid_view(){
-			ContentBox.remove(list_view_library);
-			ContentBox.add(grid_view_library);
 			ContentBox.show_all();
 		}
 
+		public void show_grid_view(){
+			library_view.show_grid_view();
+		}
+
 		public void show_list_view(){
-			ContentBox.remove(grid_view_library);
-			ContentBox.add(list_view_library);
-			ContentBox.show_all();
+			library_view.show_list_view();
 		}
 	}
 }

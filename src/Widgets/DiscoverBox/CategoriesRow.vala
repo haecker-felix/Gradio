@@ -14,9 +14,11 @@ namespace Gradio{
 
 		public string action = "none";
 
-		public CategoriesRow(string text, string a){
+		public CategoriesRow(string text, string a, string i){
 			Label.set_text(text);
 			action = a;
+
+			Image.set_from_icon_name (i, IconSize.LARGE_TOOLBAR);
 
 		}
 

@@ -9,13 +9,16 @@ namespace Gradio{
 
 		private GLib.Settings settings;
 
-		public StationsListView list_view_results;
-		public StationsGridView grid_view_results;
+		public StationsView stations_view_results;
 		public bool show_overview = true;
 
-		private StationsGridView grid_view_recently_clicked;
-		private StationsGridView grid_view_most_votes;
-		private StationsGridView grid_view_recently_changed;
+		private StationsView grid_view_recently_clicked;
+		private StationsView grid_view_most_votes;
+		private StationsView grid_view_recently_changed;
+
+		private StationsViewButton button_recently_clicked;
+		private StationsViewButton button_recently_changed;
+		private StationsViewButton button_most_votes;
 
 		[GtkChild]
 		private Box SearchBox;
@@ -23,14 +26,14 @@ namespace Gradio{
 		private Stack ContentStack;
 
 		[GtkChild]
-		private Paned DiscoverPaned;
-
-		[GtkChild]
 		private Box most_votes;
 		[GtkChild]
 		private Box recently_changed;
 		[GtkChild]
 		private Box recently_clicked;
+		[GtkChild]
+		private Box SidebarBox;
+
 
 		private DiscoverSidebar sidebar;
 
@@ -40,21 +43,28 @@ namespace Gradio{
 		public DiscoverBox(){
 			settings = new GLib.Settings ("de.haecker-felix.gradio");
 
-			list_view_results = new StationsListView();
-			grid_view_results = new StationsGridView();
+			stations_view_results = new StationsView("Results", true, "system-search-symbolic");
 
-			grid_view_recently_changed = new StationsGridView();
-			grid_view_recently_clicked = new StationsGridView();
-			grid_view_most_votes = new StationsGridView();
+			grid_view_recently_changed = new StationsView("Recently Changed", false, "text-editor-symbolic");
+			grid_view_recently_clicked = new StationsView("Recently Clicked", false, "view-refresh-symbolic");
+			grid_view_most_votes = new StationsView("Most Popular", false, "emote-love-symbolic");
+
+			button_most_votes = new StationsViewButton();
+			button_recently_changed = new StationsViewButton();
+			button_recently_clicked = new StationsViewButton();
+
+			grid_view_recently_changed.set_extra_item(button_recently_changed);
+			grid_view_recently_clicked.set_extra_item(button_recently_clicked);
+			grid_view_most_votes.set_extra_item(button_most_votes);
 
 			most_votes.add(grid_view_most_votes);
 			recently_changed.add(grid_view_recently_changed);
 			recently_clicked.add(grid_view_recently_clicked);
 
-			SearchBox.add(grid_view_results);
+			SearchBox.add(stations_view_results);
 
 			sidebar = new DiscoverSidebar(this);
-			DiscoverPaned.add(sidebar);
+			SidebarBox.pack_start(sidebar);
 
 			connect_signals();
 			load_data();
@@ -72,6 +82,10 @@ namespace Gradio{
 						ContentStack.set_visible_child_name("results");
 				}
 			});
+
+			button_recently_clicked.clicked.connect(() => show_recently_clicked());
+			button_recently_changed.clicked.connect(() => show_recently_changed());
+			button_most_votes.clicked.connect(() => show_most_votes());
 		}
 
 		public void show_overview_page(){
@@ -113,16 +127,13 @@ namespace Gradio{
 
 		}
 
-
-
-		[GtkCallback]
-		private void RecentlyChangedButton_clicked(){
+		private void show_recently_changed(){
 			show_overview = false;
 			App.data_provider.get_radio_stations.begin(App.data_provider.radio_stations_recently_changed, 100, (obj, res) => {
 		    		try {
 		        		var results = App.data_provider.get_radio_stations.end(res);
-		        		list_view_results.set_stations(ref results);
-					grid_view_results.set_stations(ref results);
+		        		stations_view_results.set_stations(ref results);
+					stations_view_results.set_stations(ref results);
 		    		} catch (ThreadError e) {
 		        		string msg = e.message;
 		        		stderr.printf("Error: Thread:" + msg+ "\n");
@@ -130,14 +141,13 @@ namespace Gradio{
         		});
 		}
 
-		[GtkCallback]
-		private void RecentlyClickedButton_clicked(){
+		private void show_recently_clicked(){
 			show_overview = false;
 			App.data_provider.get_radio_stations.begin(App.data_provider.radio_stations_recently_clicked, 100, (obj, res) => {
 		    		try {
 		        		var results = App.data_provider.get_radio_stations.end(res);
-		        		list_view_results.set_stations(ref results);
-					grid_view_results.set_stations(ref results);
+		        		stations_view_results.set_stations(ref results);
+					stations_view_results.set_stations(ref results);
 		    		} catch (ThreadError e) {
 		        		string msg = e.message;
 		        		stderr.printf("Error: Thread:" + msg+ "\n");
@@ -145,14 +155,13 @@ namespace Gradio{
         		});
 		}
 
-		[GtkCallback]
-		private void MostVotesButton_clicked(){
+		private void show_most_votes(){
 			show_overview = false;
 			App.data_provider.get_radio_stations.begin(App.data_provider.radio_stations_most_votes, 100, (obj, res) => {
 		    		try {
 		        		var results = App.data_provider.get_radio_stations.end(res);
-		        		list_view_results.set_stations(ref results);
-					grid_view_results.set_stations(ref results);
+		        		stations_view_results.set_stations(ref results);
+					stations_view_results.set_stations(ref results);
 		    		} catch (ThreadError e) {
 		        		string msg = e.message;
 		        		stderr.printf("Error: Thread:" + msg+ "\n");
@@ -160,24 +169,19 @@ namespace Gradio{
         		});
 		}
 
-		//[GtkCallback]
-		//private void HomeButton_clicked(){
-		//	ContentStack.set_visible_child_name("overview");
-		//	show_overview = true;
-		//}
-
-
 
 		// Switch
 		public void show_grid_view(){
-			//SearchBox.remove(list_view_search);
-			//SearchBox.add(grid_view_search);
-			//SearchBox.show_all();
+			stations_view_results.show_grid_view();
+			grid_view_recently_clicked.show_grid_view();
+			grid_view_recently_changed.show_grid_view();
+			grid_view_most_votes.show_grid_view();
 		}
 		public void show_list_view(){
-			//SearchBox.remove(grid_view_search);
-			//SearchBox.add(list_view_search);
-			//SearchBox.show_all();
+			stations_view_results.show_list_view();
+			grid_view_recently_clicked.show_list_view();
+			grid_view_recently_changed.show_list_view();
+			grid_view_most_votes.show_list_view();
 		}
 	}
 }

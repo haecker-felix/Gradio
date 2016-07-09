@@ -35,28 +35,30 @@ public class Util{
 		Gdk.Pixbuf output = null;
 
 		ThreadFunc<void*> run = () => {
-			if(check_connection(url)){
-				if(url != ""){	
-					var session = new Soup.Session ();
-					var message = new Soup.Message ("GET", url);
-					var loader = new Gdk.PixbufLoader();
+			if(url != ""){
+				var session = new Soup.Session ();
+				var message = new Soup.Message ("GET", url);
+				var loader = new Gdk.PixbufLoader();
 
-					session.user_agent = "gradio/"+Gradio.App.version;
-					session.send_message (message);
-
-					try{
-						if(message.response_body.data != null)
-							loader.write(message.response_body.data);
-
-						loader.close();
-						var pixbuf = loader.get_pixbuf();
-						output = pixbuf.scale_simple(width, height, Gdk.InterpType.BILINEAR);
-					}catch (Error e){
-						warning("Pixbufloader: " + e.message);
-					}
-
-					session.abort();
+				session.user_agent = "gradio/"+Gradio.App.version;
+				if(message == null){
+					loader.close();
+					return null;
 				}
+				session.send_message (message);
+
+				try{
+					if(message.response_body.data != null)
+						loader.write(message.response_body.data);
+
+					loader.close();
+					var pixbuf = loader.get_pixbuf();
+					output = pixbuf.scale_simple(width, height, Gdk.InterpType.BILINEAR);
+				}catch (Error e){
+					warning("Pixbufloader: " + e.message);
+				}
+
+				session.abort();
 			}
 			
 			Idle.add((owned) callback);
@@ -117,23 +119,12 @@ public class Util{
         	return true;
 	}
 
-
-	public static bool check_connection(string url){
-		try {
-			File file = File.new_for_uri (url);
-			file.read ();
-			return true;
-		} catch (Error e) {
-			return false;
-		}
-	}
-
 	public static void open_website(string address){
 		try{
 			Gtk.show_uri(null, address, 0);
 		}catch(Error e){
 			error("Cannot open website. " + e.message);
 		}
-		
+
 	}
 }

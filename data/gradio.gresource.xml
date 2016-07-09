@@ -11,6 +11,9 @@
     <file>ui/action-popover.ui</file>
     <file>ui/discover-sidebar.ui</file>
     <file>ui/categories-row.ui</file>
+    <file>ui/stations-view.ui</file>
+    <file>ui/stations-view-button.ui</file>
+    <file>ui/style.css</file>
     <file>gradio.desktop</file>
     <file>app-menu.ui</file>
   </gresource>
