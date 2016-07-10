@@ -71,6 +71,7 @@ namespace Gradio{
 
 			GridViewFlowBox.set_homogeneous(true);
 			GridViewFlowBox.halign = Gtk.Align.FILL;
+			GridViewFlowBox.valign = Gtk.Align.START;
 			GridViewFlowBox.set_min_children_per_line(2);
 
 			string css = """

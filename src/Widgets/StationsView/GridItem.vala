@@ -13,6 +13,8 @@ namespace Gradio{
 		private Label ChannelTagsLabel;
 		[GtkChild]
 		private Image ChannelLogoImage;
+		[GtkChild]
+		private Overlay OverlayBox;
 
 		public RadioStation station;
 
@@ -20,13 +22,13 @@ namespace Gradio{
 			station = s;
 
 			ChannelNameLabel.set_ellipsize(Pango.EllipsizeMode.END);
-			ChannelNameLabel.set_max_width_chars(22);
+			ChannelNameLabel.set_max_width_chars(25);
 
 			ChannelLocationLabel.set_ellipsize(Pango.EllipsizeMode.END);
-			ChannelLocationLabel.set_max_width_chars(22);
+			ChannelLocationLabel.set_max_width_chars(25);
 
 			ChannelTagsLabel.set_ellipsize(Pango.EllipsizeMode.END);
-			ChannelTagsLabel.set_max_width_chars(22);
+			ChannelTagsLabel.set_max_width_chars(25);
 
 			string css = """
 			* {
@@ -41,6 +43,18 @@ namespace Gradio{
 			Gtk.CssProvider provider = new Gtk.CssProvider();
 			provider.load_from_data(css, css.length);
 			this.get_style_context().add_provider(provider, 1);
+
+			if(station.Broken){
+				string css_broken = """
+					* {
+						background-color: mix(@theme_base_color,#DC143C,0.5);
+					}
+					""";
+
+				Gtk.CssProvider provider_broken = new Gtk.CssProvider();
+				provider_broken.load_from_data(css_broken, css_broken.length);
+				this.get_style_context().add_provider(provider_broken, 1);
+			}
 
 			load_information();
 			station.data_changed.connect(() => load_information());
