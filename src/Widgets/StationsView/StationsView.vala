@@ -70,8 +70,8 @@ namespace Gradio{
 			TitleLabel.set_text(title);
 
 			GridViewFlowBox.set_homogeneous(true);
-			GridViewFlowBox.valign = Gtk.Align.START;
-			GridViewFlowBox.halign = Gtk.Align.START;
+			GridViewFlowBox.halign = Gtk.Align.FILL;
+			GridViewFlowBox.set_min_children_per_line(2);
 
 			string css = """
 			* {
