@@ -1,7 +1,7 @@
 using Gst;
 
 namespace Gradio{
-	public class AudioPlayer {
+	public class AudioPlayer : GLib.Object {
 
 		private dynamic Element stream;
 
@@ -11,12 +11,12 @@ namespace Gradio{
 		public signal void tag_changed();
 
 		public string tag_title;
-		public bool   tag_has_crc;
+		public bool tag_has_crc;
 		public string tag_audio_codec;
-		public int    tag_nominal_bitrate;
-		public int    tag_minimum_bitrate;
-		public int    tag_maximum_bitrate;
-		public int    tag_bitrate;
+		public uint tag_nominal_bitrate;
+		public uint tag_minimum_bitrate;
+		public uint tag_maximum_bitrate;
+		public uint tag_bitrate;
 		public string tag_channel_mode;
 
 		public RadioStation current_station;
@@ -24,6 +24,8 @@ namespace Gradio{
 		public AudioPlayer(){
 			stream = ElementFactory.make ("playbin", "play");
 			set_volume(1.0);
+
+			this.notify.connect ((s, p) => stdout.printf ("Property %s changed\n", p.name));
 		}
 
 		private bool bus_callback (Gst.Bus bus, Gst.Message m) {
@@ -59,10 +61,24 @@ namespace Gradio{
 					m.parse_tag(out tag_list);
 
 					tag_list.get_string("title", out tag_title);
-					//message("Title: " + tag_title);
 
-					// ...
-					// TODO: Add missing tags... (bitrate)
+					tag_list.get_boolean("has-crc", out tag_has_crc);
+
+					tag_list.get_string("audio-codec", out tag_audio_codec);
+
+					tag_list.get_uint("nominal-bitrate", out tag_nominal_bitrate);
+					tag_nominal_bitrate = tag_nominal_bitrate/1000;
+
+					tag_list.get_uint("minimum-bitrate", out tag_minimum_bitrate);
+					tag_minimum_bitrate = tag_minimum_bitrate/1000;
+
+					tag_list.get_uint("maximum-bitrate", out tag_maximum_bitrate);
+					tag_maximum_bitrate = tag_maximum_bitrate/1000;
+
+					tag_list.get_uint("bitrate", out tag_bitrate);
+					tag_bitrate = tag_bitrate/1000;
+
+					tag_list.get_string("channel-mode", out tag_channel_mode);
 
 					tag_changed();
 					break;

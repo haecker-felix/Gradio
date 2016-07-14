@@ -19,10 +19,17 @@ namespace Gradio{
 		public static const string radio_station_stream_url = "http://www.radio-browser.info/webservice/v2/json/url/";
 		public static const string radio_station_edit = "http://www.radio-browser.info/webservice/json/edit/";
 		public static const string radio_station_languages = "http://www.radio-browser.info/webservice/json/languages";
-
+		public static const string radio_station_countries = "http://www.radio-browser.info/webservice/json/countries";
+		public static const string radio_station_codecs = "http://www.radio-browser.info/webservice/json/codecs";
+		public static const string radio_station_states = "http://www.radio-browser.info/webservice/json/states";
+		public static const string radio_station_tags = "http://www.radio-browser.info/webservice/json/tags";
 
 		// Aviable lists
 		public static GLib.List<string> languages_list;
+		public static GLib.List<string> countries_list;
+		public static GLib.List<string> codecs_list;
+		public static GLib.List<string> states_list;
+		public static GLib.List<string> tags_list;
 
 		// for the search thread
 		private bool _isWorking = false;
@@ -225,6 +232,62 @@ namespace Gradio{
 							var language = languages.get_element(a);
 							var language_data = language.get_object ();
 							languages_list.append(language_data.get_string_member("value"));
+						}
+					}
+
+					// Codecs
+					data = Util.get_string_from_uri(radio_station_codecs);
+					if(data != ""){
+						parser.load_from_data (data);
+						var root = parser.get_root ();
+						var codecs = root.get_array ();
+						int max_items = (int)codecs.get_length();
+						for(int a = 0; a < max_items; a++){
+							var codec = codecs.get_element(a);
+							var codec_data = codec.get_object ();
+							codecs_list.append(codec_data.get_string_member("value"));
+						}
+					}
+
+					// Countries
+					data = Util.get_string_from_uri(radio_station_countries);
+					if(data != ""){
+						parser.load_from_data (data);
+						var root = parser.get_root ();
+						var countries = root.get_array ();
+						int max_items = (int)countries.get_length();
+						for(int a = 0; a < max_items; a++){
+							var country = countries.get_element(a);
+							var country_data = country.get_object ();
+							countries_list.append(country_data.get_string_member("value"));
+						}
+					}
+
+					// States
+					data = Util.get_string_from_uri(radio_station_states);
+					if(data != ""){
+						parser.load_from_data (data);
+						var root = parser.get_root ();
+						var states = root.get_array ();
+						int max_items = (int)states.get_length();
+						for(int a = 0; a < max_items; a++){
+							var state = states.get_element(a);
+							var state_data = state.get_object ();
+							states_list.append(state_data.get_string_member("value"));
+						}
+					}
+
+					// Tags
+					data = Util.get_string_from_uri(radio_station_tags);
+					if(data != ""){
+						parser.load_from_data (data);
+						var root = parser.get_root ();
+						var tags = root.get_array ();
+						int max_items = (int)tags.get_length();
+						for(int a = 0; a < max_items; a++){
+							var tag = tags.get_element(a);
+							var tag_data = tag.get_object ();
+							tags_list.append(tag_data.get_string_member("value"));
 						}
 					}
 

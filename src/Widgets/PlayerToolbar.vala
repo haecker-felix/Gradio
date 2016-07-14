@@ -16,11 +16,24 @@ namespace Gradio{
 		[GtkChild]
 		private Image StationLogo;
 
+		[GtkChild]
+		private Label NominalBitrateLabel;
+		[GtkChild]
+		private Label MinimumBitrateLabel;
+		[GtkChild]
+		private Label MaximumBitrateLabel;
+		[GtkChild]
+		private Label BitrateLabel;
+		[GtkChild]
+		private Label CodecLabel;
+		[GtkChild]
+		private Label ChannelModeLabel;
+
 		RadioStation station;
 
 		public PlayerToolbar(){
 			App.player.state_changed.connect (() => refresh_play_stop_button());
-			App.player.tag_changed.connect (() => set_current_title());
+			App.player.tag_changed.connect (() => set_information());
 		}
 
 		public void set_radio_station (RadioStation s){
@@ -40,6 +53,17 @@ namespace Gradio{
 				
         		});
 			
+			string css = """
+			* {
+				border-width: 1px 1px 1px 1px;
+				border-style: solid;
+				border-color: @borders;
+			}
+			""";
+
+			Gtk.CssProvider provider = new Gtk.CssProvider();
+			provider.load_from_data(css, css.length);
+			StationLogo.get_style_context().add_provider(provider, 1);
 
 			this.set_visible(true);
 		}
@@ -55,8 +79,14 @@ namespace Gradio{
 			App.player.set_volume(value);
 		}
 
-		private void set_current_title(){
+		private void set_information(){
 			ChannelCurrentTitleLabel.set_text(App.player.tag_title);
+			NominalBitrateLabel.set_text(App.player.tag_nominal_bitrate.to_string() + " Bit/s");
+			MinimumBitrateLabel.set_text(App.player.tag_minimum_bitrate.to_string() + " Bit/s");
+			MaximumBitrateLabel.set_text(App.player.tag_maximum_bitrate.to_string() + " Bit/s");
+			BitrateLabel.set_text(App.player.tag_bitrate.to_string()  + " Bit/s");
+			CodecLabel.set_text(App.player.tag_audio_codec);
+			ChannelModeLabel.set_text(App.player.tag_channel_mode);
 		}
 
 		private void refresh_play_stop_button(){

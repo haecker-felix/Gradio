@@ -44,7 +44,7 @@ namespace Gradio{
 				MenuButton.set_visible (false);
 			else
 				MenuButton.set_visible (true);
-			
+			message(GLib.Environment.get_variable("DESKTOP_SESSION"));
 
 			ContentStack.set_visible_child_name("database");
 	       		Bottom.pack_end(player_toolbar);
