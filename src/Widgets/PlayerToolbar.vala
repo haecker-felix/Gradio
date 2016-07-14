@@ -42,7 +42,7 @@ namespace Gradio{
 			ChannelNameLabel.set_text(station.Title);
 
 			Gdk.Pixbuf icon = null;
-			Util.get_image_from_url.begin(station.Icon, 40, 40, (obj, res) => {
+			Util.get_image_from_url.begin(station.Icon, 41, 41, (obj, res) => {
 		        	icon = Util.get_image_from_url.end(res);
 
 				if(icon != null){
