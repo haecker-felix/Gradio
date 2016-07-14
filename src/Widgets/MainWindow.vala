@@ -30,6 +30,7 @@ namespace Gradio{
 	       		GLib.Object(application: app);
 
 	       		player_toolbar = new PlayerToolbar();
+	       		player_toolbar.set_visible(false);
 	       		discover_box = new DiscoverBox();
 			library_box = new LibraryBox();
 

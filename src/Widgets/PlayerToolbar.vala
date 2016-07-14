@@ -3,7 +3,7 @@ using Gtk;
 namespace Gradio{
 
 	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/player-toolbar.ui")]
-	public class PlayerToolbar : Gtk.Box{
+	public class PlayerToolbar : Gtk.ActionBar{
 
 		[GtkChild]
 		private Image PlayImage;
@@ -15,6 +15,10 @@ namespace Gradio{
 		private Label ChannelCurrentTitleLabel;
 		[GtkChild]
 		private Image StationLogo;
+		[GtkChild]
+		private Box MediaControlBox;
+		[GtkChild]
+		private Box InfoBox;
 
 		[GtkChild]
 		private Label NominalBitrateLabel;
@@ -28,12 +32,36 @@ namespace Gradio{
 		private Label CodecLabel;
 		[GtkChild]
 		private Label ChannelModeLabel;
+		[GtkChild]
+		private VolumeButton VolumeButton;
+		[GtkChild]
+		private MenuButton InfoMenuButton;
 
 		RadioStation station;
 
 		public PlayerToolbar(){
+			this.pack_start(MediaControlBox);
+			this.pack_start(StationLogo);
+			this.pack_start(InfoBox);
+			this.pack_end(VolumeButton);
+			this.pack_end(InfoMenuButton);
+
+			string css = """
+			* {
+				border-width: 1px 1px 1px 1px;
+				border-style: solid;
+				border-color: @borders;
+			}
+			""";
+
+			Gtk.CssProvider provider = new Gtk.CssProvider();
+			provider.load_from_data(css, css.length);
+			StationLogo.get_style_context().add_provider(provider, 1);
+
 			App.player.state_changed.connect (() => refresh_play_stop_button());
 			App.player.tag_changed.connect (() => set_information());
+
+			this.set_visible(false);
 		}
 
 		public void set_radio_station (RadioStation s){
@@ -52,18 +80,6 @@ namespace Gradio{
 				}
 				
         		});
-			
-			string css = """
-			* {
-				border-width: 1px 1px 1px 1px;
-				border-style: solid;
-				border-color: @borders;
-			}
-			""";
-
-			Gtk.CssProvider provider = new Gtk.CssProvider();
-			provider.load_from_data(css, css.length);
-			StationLogo.get_style_context().add_provider(provider, 1);
 
 			this.set_visible(true);
 		}
