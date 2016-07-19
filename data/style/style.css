@@ -1,0 +1,5 @@
+entry, button{
+	background: linear-gradient(to right, transparent, alpha(red,0.3));
+	border-radius: 0px;
+	border: none;
+}

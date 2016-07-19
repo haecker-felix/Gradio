@@ -18,6 +18,8 @@ namespace Gradio{
 			Label.set_text(text);
 			action = a;
 
+			this.height_request = 44;
+
 			Image.set_from_icon_name (i, IconSize.LARGE_TOOLBAR);
 
 		}

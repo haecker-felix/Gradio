@@ -18,7 +18,7 @@ public class Util{
 	public static string get_string_from_uri (string url){
 		if(url != ""){
 			var session = new Soup.Session ();
-			session.user_agent = "gradio/"+Gradio.App.version;
+			session.user_agent = "gradio/"+Constants.VERSION;
 			var message = new Soup.Message ("GET", url);
 
 			session.send_message (message);
@@ -40,7 +40,7 @@ public class Util{
 				var message = new Soup.Message ("GET", url);
 				var loader = new Gdk.PixbufLoader();
 
-				session.user_agent = "gradio/"+Gradio.App.version;
+				session.user_agent = "gradio/"+Constants.VERSION;
 				if(message == null){
 					loader.close();
 					return null;
@@ -127,4 +127,8 @@ public class Util{
 		}
 
 	}
+
+	public static void add_stylesheet (string path) {
+
+        }
 }

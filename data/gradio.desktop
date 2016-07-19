@@ -1,11 +1,14 @@
 [Desktop Entry]
+Type=Application
 Name=Gradio
-GenericName=Internet Radio
-Comment=GTK3 Internet Radio Player
-Categories=GTK;Utility;
+Version=4.0.0
+_Comment=Listen to radio stations worldwide
+_GenericName=Internet Radio
+StartupWMClass=gradio
 Exec=gradio
 Icon=gradio
 Terminal=false
-Type=Application
+Categories=GNOME;GTK;Utility;Productivity
+Keywords=Station;Radio;Productivity;
+StartupNotify=true
 X-GNOME-Gettext-Domain=gradio
-X-GNOME-Keywords=Internet;Radio;Player;

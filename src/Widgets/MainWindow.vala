@@ -47,6 +47,18 @@ namespace Gradio{
 				MenuButton.set_visible (true);
 			message(GLib.Environment.get_variable("DESKTOP_SESSION"));
 
+			// Load css
+			string css_file = (string)GLib.Environment.get_user_data_dir;
+			css_file = css_file.to_string() + "/style.css";
+		    		var provider = new Gtk.CssProvider ();
+		    		try {
+		        		provider.load_from_path (css_file);
+		        		Gtk.StyleContext.add_provider_for_screen (Gdk.Screen.get_default (),
+		            		provider, Gtk.STYLE_PROVIDER_PRIORITY_USER);
+		    		} catch (Error e) {
+		        		stderr.printf ("Error: %s", e.message);
+		    	}
+
 			ContentStack.set_visible_child_name("database");
 	       		Bottom.pack_end(player_toolbar);
 			connect_signals();

@@ -1,6 +1,5 @@
 ##
-# Copyright 2009-2010 Jakob Westhoff, 2014 Raster Software Vigo
-# All rights reserved.
+# Copyright 2009-2010 Jakob Westhoff. All rights reserved.
 # 
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
@@ -45,36 +44,22 @@
 
 
 # Search for the valac executable in the usual system paths.
-find_program(VALA_EXECUTABLE NAMES valac)
-
-if (VALA_EXECUTABLE STREQUAL "VALA_EXECUTABLE-NOTFOUND")
-
-# if valac executable is not found, it can be that valac is not installed, or
-# that the OS is source-based (like gentoo), and doesn't do a link from
-# valac-X.YY to valac. In that case, search for the specific valac binary after
-
-	if (NOT VALA_DEFERRING_COMPILER_SEARCH)
-		message (STATUS "VALAC not found. Deferring compiler search")
-	endif(NOT VALA_DEFERRING_COMPILER_SEARCH)
-	set(VALA_DEFERRING_COMPILER_SEARCH TRUE)
-	unset(VALA_EXECUTABLE)
-	unset(VALA_VERSION)
-
-else(VALA_EXECUTABLE STREQUAL "VALA_EXECUTABLE-NOTFOUND")
+find_program(VALA_EXECUTABLE
+  NAMES valac)
 
 # Handle the QUIETLY and REQUIRED arguments, which may be given to the find call.
 # Furthermore set VALA_FOUND to TRUE if Vala has been found (aka.
 # VALA_EXECUTABLE is set)
 
-	include(FindPackageHandleStandardArgs)
-	find_package_handle_standard_args(Vala DEFAULT_MSG VALA_EXECUTABLE)
+include(FindPackageHandleStandardArgs)
+find_package_handle_standard_args(Vala DEFAULT_MSG VALA_EXECUTABLE)
 
-	mark_as_advanced(VALA_EXECUTABLE)
+mark_as_advanced(VALA_EXECUTABLE)
 
 # Determine the valac version
-	if(VALA_FOUND)
-	    execute_process(COMMAND ${VALA_EXECUTABLE} "--version" OUTPUT_VARIABLE "VALA_VERSION")
-	    string(REPLACE "Vala" "" "VALA_VERSION" ${VALA_VERSION})
-	    string(STRIP ${VALA_VERSION} "VALA_VERSION")
-	endif(VALA_FOUND)
-endif(VALA_EXECUTABLE STREQUAL "VALA_EXECUTABLE-NOTFOUND")
+if(VALA_FOUND)
+    execute_process(COMMAND ${VALA_EXECUTABLE} "--version" 
+                    OUTPUT_VARIABLE "VALA_VERSION")
+    string(REPLACE "Vala" "" "VALA_VERSION" ${VALA_VERSION})
+    string(STRIP ${VALA_VERSION} "VALA_VERSION")
+endif(VALA_FOUND)

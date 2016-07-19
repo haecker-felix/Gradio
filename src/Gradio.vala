@@ -12,8 +12,6 @@ namespace Gradio {
 		public GLib.Settings settings;
 		public MPRIS mpris;
 
-		public static string version = "3.0.2";
-
 		public App () {
 			Object(application_id: "de.haecker-felix.gradio", flags: ApplicationFlags.FLAGS_NONE);
 		}
@@ -76,7 +74,7 @@ namespace Gradio {
 				"title", _("About Gradio"),
 				"license-type", Gtk.License.GPL_3_0,
 				"logo-icon-name", "gradio",
-				"version", version,
+				"version", Constants.VERSION,
 				"comments", "Database: www.radio-browser.info",
 				"website", "https://github.com/haecker-felix/gradio",
 				"wrap-license", true);
@@ -99,10 +97,10 @@ namespace Gradio {
 			action.activate.connect (() => { this.report_an_error (); });
 			this.add_action (action);
 
-			var builder = new Gtk.Builder.from_resource ("/de/haecker-felix/gradio/app-menu.ui");
-			var app_menu = builder.get_object ("app-menu") as GLib.MenuModel;
+			//var builder = new Gtk.Builder.from_resource ("/de/haecker-felix/gradio/app-menu.ui");
+			//var app_menu = builder.get_object ("app-menu") as GLib.MenuModel;
 
-			set_app_menu (app_menu);	
+			//set_app_menu (app_menu);
 		}
 
 		private void connect_signals(){
@@ -132,7 +130,7 @@ namespace Gradio {
 			Gtk.init(ref args);
 
 			var app = new App ();
-			message("Starting Gradio version " + version + "!");
+			message("Starting Gradio version " + Constants.VERSION + "!");
 			app.run (args);
 		}
     }

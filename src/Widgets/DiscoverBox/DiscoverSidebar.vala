@@ -17,12 +17,28 @@ namespace Gradio{
 		private ListBox ItemsBox;
 		[GtkChild]
 		private Stack SidebarStack;
+		[GtkChild]
+		private Button HomeButton;
 
 		private DiscoverBox dbox;
 		private string actual_view = "catergories";
 
 		public DiscoverSidebar(DiscoverBox box){
 			dbox = box;
+
+			string css = "
+				button, entry{
+					background: linear-gradient(to right, transparent, alpha(red,0.3));
+					border-radius: 0px;
+					border: none;
+				  }
+			";
+
+			Gtk.CssProvider provider = new Gtk.CssProvider();
+			provider.load_from_data(css, css.length);
+			SearchButton.get_style_context().add_provider(provider, 0);
+			SearchEntry.get_style_context().add_provider(provider, 0);
+			HomeButton.get_style_context().add_provider(provider, 0);
 
 			CategoriesRow languages_row = new CategoriesRow("Languages", "languages","user-invisible-symbolic");
 			CategoriesBox.add(languages_row);
@@ -38,18 +54,6 @@ namespace Gradio{
 
 			CategoriesRow tags_row = new CategoriesRow("Tags", "tags","dialog-information-symbolic");
 			CategoriesBox.add(tags_row);
-
-			string css = """
-			* {
-				border-width: 0px 1px 0px 0px;
-				border-style: solid;
-				border-color: @borders;
-			}
-			""";
-
-			Gtk.CssProvider provider = new Gtk.CssProvider();
-			provider.load_from_data(css, css.length);
-			this.get_style_context().add_provider(provider, 1);
 
 			SidebarStack.set_visible_child_name("catergories");
 			this.show_all();

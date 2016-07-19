@@ -1,78 +1,38 @@
-# GRADIO POT
-# Copyright (C) 2016 Felix Häcker
-# This file is distributed under the same license as the gradio package.
-# Felix Häcker <haecker.felix1207@gmail.com>, 2016.
-
-
-#: /src//Widgets/MainWindow.vala:27
-msgid "Library"
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
 msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-07-19 14:16+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
 
-#: /src//Widgets/MainWindow.vala:28
-msgid "Search"
-msgstr ""
-
-#: /src//Gradio.vala:63
+#: src/Gradio.vala:72
 msgid "translator-credits"
 msgstr ""
 
-#: /src//Gradio.vala:65
+#: src/Gradio.vala:74
 msgid "About Gradio"
 msgstr ""
 
-#: /data//app-menu.ui:6
-#: /data//ui/settings-dialog.ui:8
-msgid "Settings"
+#: src/Gradio.vala:116
+msgid "Now playing: "
 msgstr ""
 
-#: /data//app-menu.ui:12
-msgid "Report an error"
+#: src/Widgets/MainWindow.vala:37
+msgid "Library"
 msgstr ""
 
-#: /data//app-menu.ui:16
-msgid "About"
-msgstr ""
-
-#: /data//app-menu.ui:22
-msgid "Quit"
-msgstr ""
-
-#: /data//ui/discover-box.ui:98
-msgid "Most clicks"
-msgstr ""
-
-#: /data//ui/discover-box.ui:115
-msgid "Most Votes"
-msgstr ""
-
-#: /data//ui/discover-box.ui:132
-msgid "Last played"
-msgstr ""
-
-#: /data//ui/discover-box.ui:191
-msgid "No radio stations found."
-msgstr ""
-
-#: /data//ui/settings-dialog.ui:70
-msgid "Only show playable radio stations:"
-msgstr ""
-
-#: /data//ui/settings-dialog.ui:97
-msgid "Search settings"
-msgstr ""
-
-#: /data//ui/settings-dialog.ui:131
-msgid "Show notifications:"
-msgstr ""
-
-#: /data//ui/settings-dialog.ui:167
-msgid "Use dark design:"
-msgstr ""
-
-#: /data//ui/settings-dialog.ui:182
-msgid "General settings"
-msgstr ""
-
-#: /data//ui/library-box.ui:44
-msgid "Your library is empty!"
+#: src/Widgets/MainWindow.vala:38
+msgid "Discover"
 msgstr ""
