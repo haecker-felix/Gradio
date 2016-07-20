@@ -39,6 +39,7 @@ set (SOURCE_LIST
 	src/Widgets/DiscoverBox/DiscoverBox.vala
 	src/Widgets/DiscoverBox/DiscoverSidebar.vala
 	src/Widgets/DiscoverBox/CategoriesRow.vala
+	src/Widgets/DiscoverBox/CategoryTile.vala
 	src/Widgets/LibraryBox.vala
 	src/Widgets/PlayerToolbar.vala
 	src/Widgets/StationsView/ListItem.vala

@@ -14,7 +14,7 @@ namespace Gradio{
 		[GtkChild]
 		private Image ChannelLogoImage;
 		[GtkChild]
-		private Overlay OverlayBox;
+		private Button button;
 
 		public RadioStation station;
 
@@ -30,32 +30,6 @@ namespace Gradio{
 			ChannelTagsLabel.set_ellipsize(Pango.EllipsizeMode.END);
 			ChannelTagsLabel.set_max_width_chars(25);
 
-			string css = """
-			* {
-				padding: 0;
-				box-shadow: inset 0 1px @theme_base_color, 0 1px 1px alpha(black,0.4);
-				border: 1px solid mix(@theme_base_color,@theme_fg_color,0.3);
-				background-image: none;
-				background-color: mix(@theme_base_color,@theme_bg_color,0.3);
-			}
-			""";
-
-			Gtk.CssProvider provider = new Gtk.CssProvider();
-			provider.load_from_data(css, css.length);
-			this.get_style_context().add_provider(provider, 1);
-
-			if(station.Broken){
-				string css_broken = """
-					* {
-						background-color: mix(@theme_base_color,#DC143C,0.5);
-					}
-					""";
-
-				Gtk.CssProvider provider_broken = new Gtk.CssProvider();
-				provider_broken.load_from_data(css_broken, css_broken.length);
-				this.get_style_context().add_provider(provider_broken, 1);
-			}
-
 			load_information();
 			station.data_changed.connect(() => load_information());
 		}
@@ -70,9 +44,14 @@ namespace Gradio{
 		        	icon = Util.get_image_from_url.end(res);
 
 				if(icon != null){
-					ChannelLogoImage.set_from_pixbuf(icon);	
+					ChannelLogoImage.set_from_pixbuf(icon);
 				}
         		});
+		}
+
+		[GtkCallback]
+		private void GradioGridItem_clicked(Button b){
+			this.activate();
 		}
 	}
 }

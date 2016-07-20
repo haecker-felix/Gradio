@@ -30,6 +30,9 @@ namespace Gradio{
 			Codec = codec;
 			Bitrate = bitrate;
 			Broken = broken;
+
+			if(Broken)
+				Title = "[BROKEN] " + Title;
 		}
 
 		public void vote (){

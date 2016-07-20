@@ -1,3 +1,5 @@
+using Gtk;
+
 public class Util{
 	public static string encode_url(string s){
 		var sb = new StringBuilder();
@@ -42,7 +44,12 @@ public class Util{
 
 				session.user_agent = "gradio/"+Constants.VERSION;
 				if(message == null){
-					loader.close();
+					try{
+						loader.close();
+					}catch(GLib.Error e){
+						warning(e.message);
+					}
+
 					return null;
 				}
 				session.send_message (message);
@@ -129,6 +136,14 @@ public class Util{
 	}
 
 	public static void add_stylesheet (string path) {
-
-        }
+            var css_file = Constants.PKG_DATADIR + "/" + path;
+            var provider = new CssProvider ();
+            try {
+                provider.load_from_path (css_file);
+                StyleContext.add_provider_for_screen (Gdk.Screen.get_default (), provider, Gtk.STYLE_PROVIDER_PRIORITY_USER);
+                message ("Loaded %s", css_file);
+            } catch (Error e) {
+                error ("Error with stylesheet: %s", e.message);
+            }
+}
 }

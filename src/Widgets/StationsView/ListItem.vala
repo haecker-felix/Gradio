@@ -28,18 +28,6 @@ namespace Gradio{
 					ChannelLogoImage.set_from_pixbuf(icon);	
 				}
         		});
-
-        		if(station.Broken){
-				string css_broken = """
-					* {
-						background-color: mix(@theme_base_color,#DC143C,0.5);
-					}
-					""";
-
-				Gtk.CssProvider provider_broken = new Gtk.CssProvider();
-				provider_broken.load_from_data(css_broken, css_broken.length);
-				this.get_style_context().add_provider(provider_broken, 1);
-			}
 		}
 
 	}

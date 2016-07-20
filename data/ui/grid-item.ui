@@ -5,14 +5,16 @@
   <template class="GradioGridItem" parent="GtkFlowBoxChild">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
-    <property name="margin_left">7</property>
-    <property name="margin_right">7</property>
-    <property name="margin_top">7</property>
-    <property name="margin_bottom">7</property>
+    <property name="margin_left">2</property>
+    <property name="margin_right">2</property>
+    <property name="margin_top">2</property>
+    <property name="margin_bottom">2</property>
     <child>
-      <object class="GtkOverlay" id="OverlayBox">
+      <object class="GtkButton" id="button">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
+        <property name="receives_default">True</property>
+        <signal name="clicked" handler="GradioGridItem_clicked" swapped="no"/>
         <child>
           <object class="GtkBox">
             <property name="visible">True</property>
@@ -42,8 +44,6 @@
                 <property name="can_focus">False</property>
                 <property name="halign">start</property>
                 <property name="valign">center</property>
-                <property name="margin_left">7</property>
-                <property name="margin_right">7</property>
                 <property name="margin_top">7</property>
                 <property name="margin_bottom">7</property>
                 <property name="orientation">vertical</property>
@@ -100,10 +100,10 @@
               </packing>
             </child>
           </object>
-          <packing>
-            <property name="index">-1</property>
-          </packing>
         </child>
+        <style>
+          <class name="grid-item"/>
+        </style>
       </object>
     </child>
   </template>

@@ -23,6 +23,8 @@ namespace Gradio{
 		[GtkChild]
 		private Box SearchBox;
 		[GtkChild]
+		private FlowBox categories;
+		[GtkChild]
 		private Stack ContentStack;
 
 		[GtkChild]
@@ -33,12 +35,24 @@ namespace Gradio{
 		private Box recently_clicked;
 		[GtkChild]
 		private Box SidebarBox;
+		[GtkChild]
+		private SearchEntry SearchEntry;
 
+		[GtkChild]
+		private Button HomeButton;
+		[GtkChild]
+		private Button ReloadButton;
+		[GtkChild]
+		private Button SearchButton;
 
 		private DiscoverSidebar sidebar;
 
-		private string search_by = StationDataProvider.radio_stations_by_name;
-		private signal void search_by_changed();
+		public signal void languages_clicked();
+		public signal void countries_clicked();
+		public signal void states_clicked();
+		public signal void tags_clicked();
+		public signal void codecs_clicked();
+
 
 		public DiscoverBox(){
 			settings = new GLib.Settings ("de.haecker-felix.gradio");
@@ -63,23 +77,59 @@ namespace Gradio{
 
 			SearchBox.add(stations_view_results);
 
+			CategoryTile languages = new CategoryTile ("Languages", "languages", "user-invisible-symbolic");
+			categories.add(languages);
+
+			CategoryTile codecs = new CategoryTile ("Codecs", "codecs", "application-x-addon-symbolic");
+			categories.add(codecs);
+
+			CategoryTile countries = new CategoryTile ("Countries", "countries", "help-about-symbolic");
+			categories.add(countries);
+
+			CategoryTile tags = new CategoryTile ("Tags", "tags", "dialog-information-symbolic");
+			categories.add(tags);
+
+			CategoryTile states = new CategoryTile ("States", "states", "mark-location-symbolic");
+			categories.add(states);
+
 			sidebar = new DiscoverSidebar(this);
 			SidebarBox.pack_start(sidebar);
+			sidebar.set_visible(false);
 
 			connect_signals();
 			load_data();
-			ContentStack.set_visible_child_name("overview");
+			ContentStack.set_visible_child_name("loading");
 		}
 
 		private void connect_signals(){
 			App.data_provider.status_changed.connect(() => {
 				if(App.data_provider.isWorking){
+					HomeButton.set_sensitive(false);
+					ReloadButton.set_sensitive(false);
+					SearchButton.set_sensitive(false);
+					SearchEntry.set_sensitive(false);
 					ContentStack.set_visible_child_name("loading");
 				}else{
+					HomeButton.set_sensitive(true);
+					ReloadButton.set_sensitive(true);
+					SearchButton.set_sensitive(true);
+					SearchEntry.set_sensitive(true);
 					if(show_overview)
 						ContentStack.set_visible_child_name("overview");
 					else
 						ContentStack.set_visible_child_name("results");
+				}
+			});
+
+			categories.child_activated.connect((t,a) => {
+				CategoryTile item = (CategoryTile)a;
+				message("child_activated");
+				switch(item.action){
+					case "languages": languages_clicked(); ContentStack.set_visible_child_name("select-item"); sidebar.set_visible(true); break;
+					case "countries": countries_clicked(); ContentStack.set_visible_child_name("select-item"); sidebar.set_visible(true); break;
+					case "states": states_clicked(); ContentStack.set_visible_child_name("select-item"); sidebar.set_visible(true); break;
+					case "codecs": codecs_clicked(); ContentStack.set_visible_child_name("select-item"); sidebar.set_visible(true); break;
+					case "tags": tags_clicked(); ContentStack.set_visible_child_name("select-item"); sidebar.set_visible(true); break;
 				}
 			});
 
@@ -91,10 +141,11 @@ namespace Gradio{
 		public void show_overview_page(){
 			ContentStack.set_visible_child_name("overview");
 			show_overview = true;
+			sidebar.set_visible(false);
 		}
 
 		private void load_data(){
-			App.data_provider.get_radio_stations.begin(App.data_provider.radio_stations_most_votes, 9, (obj, res) => {
+			App.data_provider.get_radio_stations.begin(StationDataProvider.radio_stations_most_votes, 12, (obj, res) => {
 		    		try {
 		        		var results = App.data_provider.get_radio_stations.end(res);
 		        		grid_view_most_votes.set_stations(ref results);
@@ -104,7 +155,7 @@ namespace Gradio{
 		    		}
         		});
 
-        		App.data_provider.get_radio_stations.begin(App.data_provider.radio_stations_recently_clicked, 9, (obj, res) => {
+        		App.data_provider.get_radio_stations.begin(StationDataProvider.radio_stations_recently_clicked, 12, (obj, res) => {
 		    		try {
 		        		var results = App.data_provider.get_radio_stations.end(res);
 		        		grid_view_recently_clicked.set_stations(ref results);
@@ -114,7 +165,7 @@ namespace Gradio{
 		    		}
         		});
 
-        		App.data_provider.get_radio_stations.begin(App.data_provider.radio_stations_recently_changed, 9, (obj, res) => {
+        		App.data_provider.get_radio_stations.begin(StationDataProvider.radio_stations_recently_changed, 12, (obj, res) => {
 		    		try {
 		        		var results = App.data_provider.get_radio_stations.end(res);
 		        		grid_view_recently_changed.set_stations(ref results);
@@ -129,7 +180,7 @@ namespace Gradio{
 
 		private void show_recently_changed(){
 			show_overview = false;
-			App.data_provider.get_radio_stations.begin(App.data_provider.radio_stations_recently_changed, 100, (obj, res) => {
+			App.data_provider.get_radio_stations.begin(StationDataProvider.radio_stations_recently_changed, 100, (obj, res) => {
 		    		try {
 		        		var results = App.data_provider.get_radio_stations.end(res);
 		        		stations_view_results.set_stations(ref results);
@@ -143,7 +194,7 @@ namespace Gradio{
 
 		private void show_recently_clicked(){
 			show_overview = false;
-			App.data_provider.get_radio_stations.begin(App.data_provider.radio_stations_recently_clicked, 100, (obj, res) => {
+			App.data_provider.get_radio_stations.begin(StationDataProvider.radio_stations_recently_clicked, 100, (obj, res) => {
 		    		try {
 		        		var results = App.data_provider.get_radio_stations.end(res);
 		        		stations_view_results.set_stations(ref results);
@@ -157,7 +208,7 @@ namespace Gradio{
 
 		private void show_most_votes(){
 			show_overview = false;
-			App.data_provider.get_radio_stations.begin(App.data_provider.radio_stations_most_votes, 100, (obj, res) => {
+			App.data_provider.get_radio_stations.begin(StationDataProvider.radio_stations_most_votes, 100, (obj, res) => {
 		    		try {
 		        		var results = App.data_provider.get_radio_stations.end(res);
 		        		stations_view_results.set_stations(ref results);
@@ -167,6 +218,38 @@ namespace Gradio{
 		        		stderr.printf("Error: Thread:" + msg+ "\n");
 		    		}
         		});
+		}
+
+		[GtkCallback]
+		private void SearchButton_clicked(){
+			sidebar.set_visible(false);
+			string address = StationDataProvider.radio_stations_by_name + Util.optimize_string(SearchEntry.get_text());
+
+			if(!App.data_provider.isWorking){
+				show_overview = false;
+				App.data_provider.get_radio_stations.begin(address, 100, (obj, res) => {
+			    		try {
+						var search_results = App.data_provider.get_radio_stations.end(res);
+						stations_view_results.set_stations(ref search_results);
+						stations_view_results.set_stations(ref search_results);
+			    		} catch (ThreadError e) {
+						string msg = e.message;
+						stderr.printf("Error: Thread:" + msg+ "\n");
+			    		}
+        			});
+			}
+
+		}
+
+		[GtkCallback]
+		private void HomeButton_clicked(Button button){
+			sidebar.set_visible(false);
+			show_overview_page();
+		}
+
+		[GtkCallback]
+		private void ReloadButton_clicked(Button button){
+			load_data();
 		}
 
 

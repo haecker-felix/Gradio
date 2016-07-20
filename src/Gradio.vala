@@ -97,10 +97,10 @@ namespace Gradio {
 			action.activate.connect (() => { this.report_an_error (); });
 			this.add_action (action);
 
-			//var builder = new Gtk.Builder.from_resource ("/de/haecker-felix/gradio/app-menu.ui");
-			//var app_menu = builder.get_object ("app-menu") as GLib.MenuModel;
+			var builder = new Gtk.Builder.from_resource ("/de/haecker-felix/gradio/app-menu.ui");
+			var app_menu = builder.get_object ("app-menu") as GLib.MenuModel;
 
-			//set_app_menu (app_menu);
+			set_app_menu (app_menu);
 		}
 
 		private void connect_signals(){

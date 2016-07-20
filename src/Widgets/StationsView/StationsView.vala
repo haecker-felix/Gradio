@@ -29,10 +29,6 @@ namespace Gradio{
 		[GtkChild]
 		private Viewport ListScrolledViewport;
 
-		[GtkChild]
-		private ScrolledWindow GridScrolled;
-		[GtkChild]
-		private ScrolledWindow ListScrolled;
 
 		[GtkChild]
 		private Box GridNormal;
@@ -74,18 +70,6 @@ namespace Gradio{
 			GridViewFlowBox.valign = Gtk.Align.START;
 			GridViewFlowBox.set_min_children_per_line(2);
 
-			string css = """
-			* {
-				border-width: 0px 0px 1px 0px;
-				border-style: solid;
-				border-color: @borders;
-			}
-			""";
-
-			Gtk.CssProvider provider = new Gtk.CssProvider();
-			provider.load_from_data(css, css.length);
-			HeaderBox.get_style_context().add_provider(provider, 1);
-
 			connect_signals();
 			reload_view();
 		}
@@ -108,6 +92,7 @@ namespace Gradio{
 				apop.set_position(PositionType.BOTTOM);
 				apop.show();
 			});
+
 
 			GridViewFlowBox.child_activated.connect((t,a) => {
 				GridItem item = (GridItem)a;
