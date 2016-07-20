@@ -13,8 +13,6 @@ namespace Gradio{
 		private Label ChannelTagsLabel;
 		[GtkChild]
 		private Image ChannelLogoImage;
-		[GtkChild]
-		private Button button;
 
 		public RadioStation station;
 

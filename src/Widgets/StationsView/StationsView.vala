@@ -12,8 +12,6 @@ namespace Gradio{
 		private bool list_view = false;
 
 		[GtkChild]
-		private Box HeaderBox;
-		[GtkChild]
 		private FlowBox GridViewFlowBox;
 		[GtkChild]
 		private ListBox ListViewListBox;

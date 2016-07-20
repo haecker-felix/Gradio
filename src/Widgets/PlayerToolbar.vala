@@ -46,18 +46,6 @@ namespace Gradio{
 			this.pack_end(VolumeButton);
 			this.pack_end(InfoMenuButton);
 
-			string css = """
-			* {
-				border-width: 1px 1px 1px 1px;
-				border-style: solid;
-				border-color: @borders;
-			}
-			""";
-
-			Gtk.CssProvider provider = new Gtk.CssProvider();
-			provider.load_from_data(css, css.length);
-			StationLogo.get_style_context().add_provider(provider, 1);
-
 			App.player.state_changed.connect (() => refresh_play_stop_button());
 			App.player.tag_changed.connect (() => set_information());
 

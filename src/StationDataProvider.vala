@@ -114,16 +114,12 @@ namespace Gradio{
 					var root = parser.get_root ();
 					var radio_stations = root.get_array ();
 
-					if(radio_stations.get_length() == 0){
-						return null;
+					if(radio_stations.get_length() != 0){
+						var radio_station = radio_stations.get_element(0);
+						var radio_station_data = radio_station.get_object ();
+
+						new_station = parse_station_data_from_json(radio_station_data);
 					}
-
-					var radio_station = radio_stations.get_element(0);
-					var radio_station_data = radio_station.get_object ();
-
-					new_station = parse_station_data_from_json(radio_station_data);
-				}else{
-					return null;
 				}
 			}catch (Error e){
 				error("Parser: " + e.message);

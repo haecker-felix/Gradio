@@ -123,7 +123,6 @@ namespace Gradio{
 
 			categories.child_activated.connect((t,a) => {
 				CategoryTile item = (CategoryTile)a;
-				message("child_activated");
 				switch(item.action){
 					case "languages": languages_clicked(); ContentStack.set_visible_child_name("select-item"); sidebar.set_visible(true); break;
 					case "countries": countries_clicked(); ContentStack.set_visible_child_name("select-item"); sidebar.set_visible(true); break;

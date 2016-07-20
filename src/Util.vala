@@ -1,21 +1,6 @@
 using Gtk;
 
 public class Util{
-	public static string encode_url(string s){
-		var sb = new StringBuilder();
-		for (var i = 0; i < s.length; i++) {
-			var c = s[i];
-			if (('0' <= c && c <= '9')
-			 || ('A' <= c && c <= 'Z')
-			 || ('a' <= c && c <= 'z')
-			 || (c == '-' || c == '_' || c == '.' || c == '~')) {
-				sb.append_c(c);
-			} else {
-				sb.append("%%%02X".printf((uint8)c));
-			}
-		}
-		return sb.str;
-	}
 
 	public static string get_string_from_uri (string url){
 		if(url != ""){
@@ -62,7 +47,7 @@ public class Util{
 					var pixbuf = loader.get_pixbuf();
 					output = pixbuf.scale_simple(width, height, Gdk.InterpType.BILINEAR);
 				}catch (Error e){
-					warning("Pixbufloader: " + e.message);
+					debug("Pixbufloader: " + e.message);
 				}
 
 				session.abort();
