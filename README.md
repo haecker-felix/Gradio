@@ -38,8 +38,11 @@ sudo make install
 ```
 
 ### Ubuntu
-For Ubuntu based distros (16.04) you can add the [daily ppa](https://code.launchpad.net/~haecker-felix/+archive/ubuntu/gradio-daily).
-```
+
+Stable versions of gradio is available on GetDeb repositories for Xenial release (16.04 LTS). You can [learn more](http://www.getdeb.net/updates/ubuntu/16.04/) about adding GetDeb repositories to your system.
+
+For daily releases, you can add the [this ppa](https://code.launchpad.net/~haecker-felix/+archive/ubuntu/gradio-daily).
+```shell
 deb http://ppa.launchpad.net/haecker-felix/gradio-daily/ubuntu xenial main
 deb-src http://ppa.launchpad.net/haecker-felix/gradio-daily/ubuntu xenial main
 sudo apt-get update
