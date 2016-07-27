@@ -1,0 +1,78 @@
+# GRADIO FRENCH PO
+# Copyright (C) 2016 Felix Häcker
+# This file is distributed under the same license as the gradio package.
+# Felix Häcker <haecker.felix1207@gmail.com>, 2016.
+
+
+#: /src//Widgets/MainWindow.vala:27
+msgid "Library"
+msgstr "Bibliothèque"
+
+#: /src//Widgets/MainWindow.vala:28
+msgid "Search"
+msgstr "Rechercher"
+
+#: /src//Gradio.vala:63
+msgid "translator-credits"
+msgstr "Contributions des traducteurs"
+
+#: /src//Gradio.vala:65
+msgid "About Gradio"
+msgstr "À propos de Gradio"
+
+#: /data//app-menu.ui:6
+#: /data//ui/settings-dialog.ui:8
+msgid "Settings"
+msgstr "Paramètres"
+
+#: /data//app-menu.ui:12
+msgid "Report an error"
+msgstr "Signaler une erreur"
+
+#: /data//app-menu.ui:16
+msgid "About"
+msgstr "À propos"
+
+#: /data//app-menu.ui:22
+msgid "Quit"
+msgstr "Quitter"
+
+#: /data//ui/discover-box.ui:98
+msgid "Most clicks"
+msgstr "Le plus de clics"
+
+#: /data//ui/discover-box.ui:115
+msgid "Most Votes"
+msgstr "Le plus de votes"
+
+#: /data//ui/discover-box.ui:132
+msgid "Last played"
+msgstr "Écoutées en dernier"
+
+#: /data//ui/discover-box.ui:191
+msgid "No radio stations found."
+msgstr "Aucune station de radio trouvée."
+
+#: /data//ui/settings-dialog.ui:70
+msgid "Only show playable radio stations:"
+msgstr "Afficher uniquement les stations de radio lisibles :"
+
+#: /data//ui/settings-dialog.ui:97
+msgid "Search settings"
+msgstr "Paramètres de recherche"
+
+#: /data//ui/settings-dialog.ui:131
+msgid "Show notifications:"
+msgstr "Afficher les notifications :"
+
+#: /data//ui/settings-dialog.ui:167
+msgid "Use dark design:"
+msgstr "Utiliser un thème sombre :"
+
+#: /data//ui/settings-dialog.ui:182
+msgid "General settings"
+msgstr "Paramètres généraux"
+
+#: /data//ui/library-box.ui:44
+msgid "Your library is empty!"
+msgstr "Votre bibliothèque est vide !"
