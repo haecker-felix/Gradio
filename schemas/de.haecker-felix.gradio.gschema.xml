@@ -1,8 +1,8 @@
 <schemalist>
   <schema id="de.haecker-felix.gradio" path="/de/haecker-felix/gradio/" gettext-domain="gradio">
-    <key name="search-results-list-length" type="i">
-      <default>25</default>
-      <summary>Set the length of the result list</summary>
+    <key name="list-max-items" type="i">
+      <default>100</default>
+      <summary>Maximum items to show. More items need more memory.</summary>
     </key>
 
     <key name="only-show-working-stations" type="b">
@@ -15,10 +15,24 @@
       <summary>Dark design of the user interface</summary>
     </key>
 
-    <key name="show-notifications" type="b">
+    <key name="load-pictures" type="b">
       <default>true</default>
-      <summary>Show notifications (play/stop etc.)</summary>
+      <summary>Show stations icons or not.</summary>
     </key>
 
+    <key name="window-height" type="i">
+      <default>500</default>
+      <summary>Height of the window</summary>
+    </key>
+
+    <key name="window-width" type="i">
+      <default>870</default>
+      <summary>Width of the window</summary>
+    </key>
+
+    <key name="window-is-maximized" type="b">
+      <default>false</default>
+      <summary>Maximized window</summary>
+    </key>
   </schema>
 </schemalist>

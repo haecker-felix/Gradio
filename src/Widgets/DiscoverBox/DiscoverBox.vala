@@ -80,7 +80,7 @@ namespace Gradio{
 			CategoryTile languages = new CategoryTile ("Languages", "languages", "user-invisible-symbolic");
 			categories.add(languages);
 
-			CategoryTile codecs = new CategoryTile ("Codecs", "codecs", "application-x-addon-symbolic");
+			CategoryTile codecs = new CategoryTile ("Codecs", "codecs", "emblem-system-symbolic");
 			categories.add(codecs);
 
 			CategoryTile countries = new CategoryTile ("Countries", "countries", "help-about-symbolic");

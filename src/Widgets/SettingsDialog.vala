@@ -9,7 +9,7 @@ namespace Gradio{
 		[GtkChild]
 		private Switch UseDarkDesignSwitch;
 		[GtkChild]
-		private Switch ShowNotificationsSwitch;
+		private Switch LoadPicturesSwitch;
 
 		private GLib.Settings settings;
 
@@ -35,11 +35,11 @@ namespace Gradio{
 				
 			});
 
-			ShowNotificationsSwitch.notify["active"].connect (() => {
-				if (ShowNotificationsSwitch.active) {
-					settings.set_boolean ("show-notifications", true);
+			LoadPicturesSwitch.notify["active"].connect (() => {
+				if (LoadPicturesSwitch.active) {
+					settings.set_boolean ("load-pictures", true);
 				} else {
-					settings.set_boolean ("show-notifications", false);
+					settings.set_boolean ("load-pictures", false);
 				}
 				
 			});
@@ -48,7 +48,7 @@ namespace Gradio{
 
 		private void load_settings(GLib.Settings settings){
 			UseDarkDesignSwitch.set_active(settings.get_boolean ("use-dark-design"));
-			ShowNotificationsSwitch.set_active(settings.get_boolean ("show-notifications"));
+			LoadPicturesSwitch.set_active(settings.get_boolean ("load-pictures"));
 			OnlyShowWorkingStationsSwitch.set_active(settings.get_boolean ("only-show-working-stations"));
 		}
 

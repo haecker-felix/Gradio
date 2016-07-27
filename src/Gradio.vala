@@ -108,17 +108,6 @@ namespace Gradio {
 				Util.show_info_dialog(t, window);
 				return;	
 			});
-
-			player.radio_station_changed.connect((t,a) => {
-				if(settings.get_boolean ("show-notifications")){
-					Notification notify = new Notification("Gradio");
-					notify.set_priority (NotificationPriority.LOW);
-					notify.set_body(_("Now playing: ") + player.current_station.Title);
-					this.send_notification("1212", notify);	
-				}
-
-				mpris.set_station(player.current_station);
-			});
 		}
 
 		public static void main (string [] args){
