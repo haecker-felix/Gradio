@@ -204,8 +204,6 @@
         </child>
         <child>
           <object class="GtkButton" id="GridListButton">
-            <property name="width_request">40</property>
-            <property name="height_request">40</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
