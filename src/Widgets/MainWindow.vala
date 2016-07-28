@@ -20,6 +20,12 @@ namespace Gradio{
 		[GtkChild]
 		private MenuButton MenuButton;
 
+		private int height;
+		private int width;
+
+		private int pos_x;
+		private int pos_y;
+
 		PlayerToolbar player_toolbar;
 		DiscoverBox discover_box;
 		LibraryBox library_box;
@@ -28,6 +34,12 @@ namespace Gradio{
 
 		public MainWindow (App app) {
 	       		GLib.Object(application: app);
+
+			width = App.settings.get_int ("window-width");
+			height = App.settings.get_int ("window-height");
+			this.set_default_size(width, height);
+
+			this.move(pos_x, pos_y);
 
 	       		player_toolbar = new PlayerToolbar();
 	       		player_toolbar.set_visible(false);
@@ -62,6 +74,22 @@ namespace Gradio{
 		private void connect_signals(){
 			App.player.radio_station_changed.connect((t,a) => {
 				player_toolbar.set_radio_station(a);
+			});
+
+			this.destroy.connect(() => {
+				App.settings.set_int("window-width", width);
+				App.settings.set_int("window-height", height);
+			});
+
+			this.size_allocate.connect((a) => {
+				width = a.width;
+				height = a.height;
+			});
+
+			this.drag_motion.connect((c, x, y) => {
+				App.settings.set_int("window-position-x", x);
+				App.settings.set_int("window-position-y", y);
+				return true;
 			});
 		}
 

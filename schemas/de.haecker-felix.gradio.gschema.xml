@@ -5,6 +5,11 @@
       <summary>Maximum items to show. More items need more memory.</summary>
     </key>
 
+    <key name="use-grid-view" type="b">
+      <default>true</default>
+      <summary>Show the stations as a grid view</summary>
+    </key>
+
     <key name="only-show-working-stations" type="b">
       <default>true</default>
       <summary>Only show working radio stations</summary>
@@ -30,9 +35,14 @@
       <summary>Width of the window</summary>
     </key>
 
-    <key name="window-is-maximized" type="b">
-      <default>false</default>
-      <summary>Maximized window</summary>
+   <key name="window-position-x" type="i">
+      <default>0</default>
+      <summary>Position of the window</summary>
+    </key>
+
+    <key name="window-position-y" type="i">
+      <default>0</default>
+      <summary>Position of the window</summary>
     </key>
   </schema>
 </schemalist>

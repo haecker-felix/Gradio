@@ -9,7 +9,7 @@ namespace Gradio {
 		public static AudioPlayer player;
 		public static Library library;
 		public static StationDataProvider data_provider;
-		public GLib.Settings settings;
+		public static GLib.Settings settings;
 		public MPRIS mpris;
 
 		public App () {
