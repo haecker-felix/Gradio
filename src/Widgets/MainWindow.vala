@@ -38,7 +38,6 @@ namespace Gradio{
 			width = App.settings.get_int ("window-width");
 			height = App.settings.get_int ("window-height");
 			this.set_default_size(width, height);
-
 			this.move(pos_x, pos_y);
 
 	       		player_toolbar = new PlayerToolbar();
@@ -61,6 +60,20 @@ namespace Gradio{
 
 			// Load css
 			Util.add_stylesheet("style/style.css");
+
+			if(!(App.settings.get_boolean ("use-grid-view"))){
+				GridImage.set_visible(true);
+				ListImage.set_visible(false);
+				library_box.show_list_view();
+				discover_box.show_list_view();
+				App.settings.set_boolean("use-grid-view", false);
+			}else{
+				GridImage.set_visible(false);
+				ListImage.set_visible(true);
+				library_box.show_grid_view();
+				discover_box.show_grid_view();
+				App.settings.set_boolean("use-grid-view", true);
+			}
 
 			ContentStack.set_visible_child_name("database");
 	       		Bottom.pack_end(player_toolbar);
@@ -100,11 +113,13 @@ namespace Gradio{
 				ListImage.set_visible(false);
 				library_box.show_list_view();
 				discover_box.show_list_view();
+				App.settings.set_boolean("use-grid-view", false);
 			}else{
 				GridImage.set_visible(false);
 				ListImage.set_visible(true);
 				library_box.show_grid_view();
 				discover_box.show_grid_view();
+				App.settings.set_boolean("use-grid-view", true);
 			}
 		}
 

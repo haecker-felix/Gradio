@@ -224,6 +224,7 @@
                     <property name="halign">center</property>
                     <property name="valign">center</property>
                     <property name="pixel_size">16</property>
+                    <property name="no_show_all">True</property>
                     <property name="icon_name">view-grid-symbolic</property>
                   </object>
                   <packing>
@@ -237,6 +238,7 @@
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="pixel_size">16</property>
+                    <property name="no_show_all">True</property>
                     <property name="icon_name">view-list-symbolic</property>
                   </object>
                   <packing>
