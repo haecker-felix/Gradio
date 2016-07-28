@@ -18,49 +18,53 @@ public class Util{
 	}
 
 	public static async Gdk.Pixbuf get_image_from_url (string url, int height, int width){
-		SourceFunc callback = get_image_from_url.callback;
-		Gdk.Pixbuf output = null;
+		if(Gradio.App.settings.get_boolean ("load-pictures")){
+			SourceFunc callback = get_image_from_url.callback;
+			Gdk.Pixbuf output = null;
 
-		ThreadFunc<void*> run = () => {
-			if(url != ""){
-				var session = new Soup.Session ();
-				var message = new Soup.Message ("GET", url);
-				var loader = new Gdk.PixbufLoader();
+			ThreadFunc<void*> run = () => {
+				if(url != ""){
+					var session = new Soup.Session ();
+					var message = new Soup.Message ("GET", url);
+					var loader = new Gdk.PixbufLoader();
 
-				session.user_agent = "gradio/"+Constants.VERSION;
-				if(message == null){
+					session.user_agent = "gradio/"+Constants.VERSION;
+					if(message == null){
+						try{
+							loader.close();
+						}catch(GLib.Error e){
+							warning(e.message);
+						}
+
+						return null;
+					}
+					session.send_message (message);
+
 					try{
+						if(message.response_body.data != null)
+							loader.write(message.response_body.data);
+
 						loader.close();
-					}catch(GLib.Error e){
-						warning(e.message);
+						var pixbuf = loader.get_pixbuf();
+						output = pixbuf.scale_simple(width, height, Gdk.InterpType.BILINEAR);
+					}catch (Error e){
+						debug("Pixbufloader: " + e.message);
 					}
 
-					return null;
-				}
-				session.send_message (message);
-
-				try{
-					if(message.response_body.data != null)
-						loader.write(message.response_body.data);
-
-					loader.close();
-					var pixbuf = loader.get_pixbuf();
-					output = pixbuf.scale_simple(width, height, Gdk.InterpType.BILINEAR);
-				}catch (Error e){
-					debug("Pixbufloader: " + e.message);
+					session.abort();
 				}
 
-				session.abort();
-			}
-			
-			Idle.add((owned) callback);
-			Thread.exit (1.to_pointer ());
+				Idle.add((owned) callback);
+				Thread.exit (1.to_pointer ());
+				return null;
+			};
+
+			new Thread<void*> ("image_thread", run);
+			yield;
+			return output;
+		}else{
 			return null;
-		};
-
-		new Thread<void*> ("image_thread", run);
-		yield;
-		return output;
+		}
 	}
 
 	public static void remove_all_items_from_list_box (Gtk.ListBox container) {

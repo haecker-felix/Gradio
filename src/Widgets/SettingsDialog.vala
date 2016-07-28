@@ -14,14 +14,17 @@ namespace Gradio{
 		private GLib.Settings settings;
 
 		public SettingsDialog () {
+			var gtk_settings = Gtk.Settings.get_default ();
 			settings = new GLib.Settings ("de.haecker-felix.gradio");
 			load_settings(settings);
 
 			OnlyShowWorkingStationsSwitch.notify["active"].connect (() => {
 				if (OnlyShowWorkingStationsSwitch.active) {
 					settings.set_boolean ("only-show-working-stations", true);
+					gtk_settings.gtk_application_prefer_dark_theme = true;
 				} else {
 					settings.set_boolean ("only-show-working-stations", false);
+					gtk_settings.gtk_application_prefer_dark_theme = false;
 				}
 				
 			});

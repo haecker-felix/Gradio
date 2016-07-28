@@ -72,7 +72,8 @@
             </child>
             <child>
               <object class="GtkSwitch" id="UseDarkDesignSwitch">
-                <property name="visible">True</property>
+                <property name="visible">False</property>
+                <property name="no_show_all">True</property>
                 <property name="can_focus">True</property>
                 <property name="halign">start</property>
                 <property name="hexpand">True</property>
@@ -84,7 +85,7 @@
             </child>
             <child>
               <object class="GtkLabel" id="label4">
-                <property name="visible">True</property>
+                <property name="visible">false</property>
                 <property name="can_focus">False</property>
                 <property name="halign">end</property>
                 <property name="label" translatable="yes">Use dark design:</property>
