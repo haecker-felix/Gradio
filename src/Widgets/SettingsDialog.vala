@@ -21,19 +21,19 @@ namespace Gradio{
 			OnlyShowWorkingStationsSwitch.notify["active"].connect (() => {
 				if (OnlyShowWorkingStationsSwitch.active) {
 					settings.set_boolean ("only-show-working-stations", true);
-					gtk_settings.gtk_application_prefer_dark_theme = true;
 				} else {
 					settings.set_boolean ("only-show-working-stations", false);
-					gtk_settings.gtk_application_prefer_dark_theme = false;
 				}
-				
+
 			});
 
 			UseDarkDesignSwitch.notify["active"].connect (() => {
 				if (UseDarkDesignSwitch.active) {
 					settings.set_boolean ("use-dark-design", true);
+					gtk_settings.gtk_application_prefer_dark_theme = true;
 				} else {
 					settings.set_boolean ("use-dark-design", false);
+					gtk_settings.gtk_application_prefer_dark_theme = false;
 				}
 				
 			});

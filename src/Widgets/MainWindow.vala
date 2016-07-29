@@ -40,6 +40,13 @@ namespace Gradio{
 			this.set_default_size(width, height);
 			this.move(pos_x, pos_y);
 
+			var gtk_settings = Gtk.Settings.get_default ();
+			if (App.settings.get_boolean ("use-dark-design")) {
+				gtk_settings.gtk_application_prefer_dark_theme = true;
+			} else {
+				gtk_settings.gtk_application_prefer_dark_theme = false;
+			}
+
 	       		player_toolbar = new PlayerToolbar();
 	       		player_toolbar.set_visible(false);
 	       		discover_box = new DiscoverBox();
@@ -52,10 +59,10 @@ namespace Gradio{
 			var app_menu = builder.get_object ("app-menu") as GLib.MenuModel;
 			MenuButton.set_menu_model(app_menu);
 
- 			if(GLib.Environment.get_variable("DESKTOP_SESSION") == "gnome")
-				MenuButton.set_visible (false);
-			else
+ 			if(GLib.Environment.get_variable("DESKTOP_SESSION") == "unity")
 				MenuButton.set_visible (true);
+			else
+				MenuButton.set_visible (false);
 			message("Desktop session is: " + GLib.Environment.get_variable("DESKTOP_SESSION"));
 
 			// Load css
