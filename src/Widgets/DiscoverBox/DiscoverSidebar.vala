@@ -13,8 +13,12 @@ namespace Gradio{
 		private DiscoverBox dbox;
 		private string actual_view;
 
+		private CategoryItemProvider cip;
+
 		public DiscoverSidebar(DiscoverBox box){
 			dbox = box;
+
+			cip = new CategoryItemProvider();
 
 			this.show_all();
 			connect_signals();
@@ -56,11 +60,11 @@ namespace Gradio{
 				string address = "";
 
 				switch (category){
-					case "languages": address = StationDataProvider.radio_stations_by_language + item; break;
-					case "countries": address = StationDataProvider.radio_stations_by_country + item; break;
-					case "states": address = StationDataProvider.radio_stations_by_state + item; break;
-					case "codecs": address = StationDataProvider.radio_stations_by_codec + item; break;
-					case "tags": address = StationDataProvider.radio_stations_by_tag + item; break;
+					case "languages": address = RadioBrowser.radio_stations_by_language + item; break;
+					case "countries": address = RadioBrowser.radio_stations_by_country + item; break;
+					case "states": address = RadioBrowser.radio_stations_by_state + item; break;
+					case "codecs": address = RadioBrowser.radio_stations_by_codec + item; break;
+					case "tags": address = RadioBrowser.radio_stations_by_tag + item; break;
 				}
 
 				App.data_provider.get_radio_stations.begin(address, 100, (obj, res) => {
@@ -83,8 +87,8 @@ namespace Gradio{
 			switch(category){
 				case "languages": {
 					actual_view = "languages";
-					if(StationDataProvider.languages_list != null){
-						foreach (string language in StationDataProvider.languages_list){
+					if(cip.languages_list != null){
+						foreach (string language in cip.languages_list){
 							CategoriesRow box = new CategoriesRow(language, language, "");
 							ItemsBox.add(box);
 						}
@@ -93,8 +97,8 @@ namespace Gradio{
 				};
 				case "countries": {
 					actual_view = "countries";
-					if(StationDataProvider.languages_list != null){
-						foreach (string country in StationDataProvider.countries_list){
+					if(cip.languages_list != null){
+						foreach (string country in cip.countries_list){
 							CategoriesRow box = new CategoriesRow(country, country, "");
 							ItemsBox.add(box);
 						}
@@ -103,8 +107,8 @@ namespace Gradio{
 				};
 				case "states": {
 					actual_view = "states";
-					if(StationDataProvider.states_list != null){
-						foreach (string state in StationDataProvider.states_list){
+					if(cip.states_list != null){
+						foreach (string state in cip.states_list){
 							CategoriesRow box = new CategoriesRow(state, state, "");
 							ItemsBox.add(box);
 						}
@@ -113,8 +117,8 @@ namespace Gradio{
 				};
 				case "codecs": {
 					actual_view = "codecs";
-					if(StationDataProvider.codecs_list != null){
-						foreach (string codec in StationDataProvider.codecs_list){
+					if(cip.codecs_list != null){
+						foreach (string codec in cip.codecs_list){
 							CategoriesRow box = new CategoriesRow(codec, codec, "");
 							ItemsBox.add(box);
 						}
@@ -123,8 +127,8 @@ namespace Gradio{
 				};
 				case "tags": {
 					actual_view = "tags";
-					if(StationDataProvider.tags_list != null){
-						foreach (string tag in StationDataProvider.tags_list){
+					if(cip.tags_list != null){
+						foreach (string tag in cip.tags_list){
 							CategoriesRow box = new CategoriesRow(tag, tag, "");
 							ItemsBox.add(box);
 						}

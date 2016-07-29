@@ -35,6 +35,9 @@ add_custom_target (dist COMMAND ${CMAKE_MAKE_PROGRAM} package_source)
 
 # define variable for sources
 set (SOURCE_LIST
+	src/Data/StationProvider.vala
+	src/Data/RadioBrowser.vala
+	src/Data/CategoryItemProvider.vala
 	src/Widgets/DiscoverBox/DiscoverBox.vala
 	src/Widgets/DiscoverBox/DiscoverSidebar.vala
 	src/Widgets/DiscoverBox/CategoriesRow.vala
@@ -53,7 +56,6 @@ set (SOURCE_LIST
 	src/Util.vala
 	src/Gradio.vala
 	src/Widgets/MainWindow.vala
-	src/StationDataProvider.vala
 	src/Config.vala
 	src/Library.vala
 	src/MPRIS.vala

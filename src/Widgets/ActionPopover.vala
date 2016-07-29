@@ -27,7 +27,7 @@ namespace Gradio{
 		}
 
 		private void load_information(){
-			VotesLabel.set_text(station.Votes);
+			VotesLabel.set_text(station.Votes.to_string());
 		}
 
 		[GtkCallback]

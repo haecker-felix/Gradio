@@ -12,7 +12,6 @@ namespace Gradio{
 		public string Votes = "";
 		public string Codec = "";
 		public string Bitrate = "";
-		public string DataAddress = "";
 		public bool Broken = true;
 
 		public signal void data_changed();
@@ -35,8 +34,62 @@ namespace Gradio{
 				Title = "[BROKEN] " + Title;
 		}
 
+		// Returns the playable url for the station
+		public static async string get_stream_address (string ID){
+			SourceFunc callback = get_stream_address.callback;
+			string url = "";
+
+			ThreadFunc<void*> run = () => {
+				string tmp = "";
+				try{
+					Json.Parser parser = new Json.Parser ();
+					parser.load_from_data (Util.get_string_from_uri(RadioBrowser.radio_station_stream_url + ID ));
+					var root = parser.get_root ();
+
+					if(root != null){
+						var radio_station_data = root.get_object ();
+						if(radio_station_data.get_string_member("ok") ==  "true"){
+							tmp = radio_station_data.get_string_member("url");
+						}
+					}
+				}catch(GLib.Error e){
+					warning(e.message);
+				}
+
+				url = tmp;
+
+				Idle.add((owned) callback);
+				Thread.exit (1.to_pointer ());
+				return null;
+			};
+
+			new Thread<void*> ("get_url_thread", run);
+
+			yield;
+
+			return url;
+		}
+
+
 		public void vote (){
-			Votes = App.data_provider.vote_for_station(this).to_string();
+			Json.Parser parser = new Json.Parser ();
+
+			try{
+				parser.load_from_data (Util.get_string_from_uri(RadioBrowser.radio_station_vote + ID ));
+				var root = parser.get_root ();
+
+				if(root != null){
+					var radio_station_data = root.get_object ();
+					if(radio_station_data.get_string_member("ok") ==  "true"){
+						int v = int.parse(Votes);
+						v++;
+						Votes=v.to_string();
+					}
+				}
+			}catch(GLib.Error e){
+				warning(e.message);
+			}
+
 			data_changed();
 		}
 	}

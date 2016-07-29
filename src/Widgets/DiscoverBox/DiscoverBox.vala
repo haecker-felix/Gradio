@@ -144,7 +144,7 @@ namespace Gradio{
 		}
 
 		private void load_data(){
-			App.data_provider.get_radio_stations.begin(StationDataProvider.radio_stations_most_votes, 12, (obj, res) => {
+			App.data_provider.get_radio_stations.begin(RadioBrowser.radio_stations_most_votes, 12, (obj, res) => {
 		    		try {
 		        		var results = App.data_provider.get_radio_stations.end(res);
 		        		grid_view_most_votes.set_stations(ref results);
@@ -154,7 +154,7 @@ namespace Gradio{
 		    		}
         		});
 
-        		App.data_provider.get_radio_stations.begin(StationDataProvider.radio_stations_recently_clicked, 12, (obj, res) => {
+        		App.data_provider.get_radio_stations.begin(RadioBrowser.radio_stations_recently_clicked, 12, (obj, res) => {
 		    		try {
 		        		var results = App.data_provider.get_radio_stations.end(res);
 		        		grid_view_recently_clicked.set_stations(ref results);
@@ -164,7 +164,7 @@ namespace Gradio{
 		    		}
         		});
 
-        		App.data_provider.get_radio_stations.begin(StationDataProvider.radio_stations_recently_changed, 12, (obj, res) => {
+        		App.data_provider.get_radio_stations.begin(RadioBrowser.radio_stations_recently_changed, 12, (obj, res) => {
 		    		try {
 		        		var results = App.data_provider.get_radio_stations.end(res);
 		        		grid_view_recently_changed.set_stations(ref results);
@@ -179,7 +179,7 @@ namespace Gradio{
 
 		private void show_recently_changed(){
 			show_overview = false;
-			App.data_provider.get_radio_stations.begin(StationDataProvider.radio_stations_recently_changed, 100, (obj, res) => {
+			App.data_provider.get_radio_stations.begin(RadioBrowser.radio_stations_recently_changed, 100, (obj, res) => {
 		    		try {
 		        		var results = App.data_provider.get_radio_stations.end(res);
 		        		stations_view_results.set_stations(ref results);
@@ -193,7 +193,7 @@ namespace Gradio{
 
 		private void show_recently_clicked(){
 			show_overview = false;
-			App.data_provider.get_radio_stations.begin(StationDataProvider.radio_stations_recently_clicked, 100, (obj, res) => {
+			App.data_provider.get_radio_stations.begin(RadioBrowser.radio_stations_recently_clicked, 100, (obj, res) => {
 		    		try {
 		        		var results = App.data_provider.get_radio_stations.end(res);
 		        		stations_view_results.set_stations(ref results);
@@ -207,7 +207,7 @@ namespace Gradio{
 
 		private void show_most_votes(){
 			show_overview = false;
-			App.data_provider.get_radio_stations.begin(StationDataProvider.radio_stations_most_votes, 100, (obj, res) => {
+			App.data_provider.get_radio_stations.begin(RadioBrowser.radio_stations_most_votes, 100, (obj, res) => {
 		    		try {
 		        		var results = App.data_provider.get_radio_stations.end(res);
 		        		stations_view_results.set_stations(ref results);
@@ -222,7 +222,7 @@ namespace Gradio{
 		[GtkCallback]
 		private void SearchButton_clicked(){
 			sidebar.set_visible(false);
-			string address = StationDataProvider.radio_stations_by_name + Util.optimize_string(SearchEntry.get_text());
+			string address = RadioBrowser.radio_stations_by_name + Util.optimize_string(SearchEntry.get_text());
 
 			if(!App.data_provider.isWorking){
 				show_overview = false;
