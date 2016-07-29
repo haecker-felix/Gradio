@@ -1,14 +1,13 @@
 [Desktop Entry]
 Type=Application
 Name=@APP_NAME@
-Version=@VERSION@
-_Comment=@COMMENT@
-_GenericName=@GENERIC_NAME@
+Comment=@COMMENT@
+GenericName=@GENERIC_NAME@
 StartupWMClass=@EXEC_NAME@
 Exec=@EXEC_NAME@
 Icon=@ICON_NAME@
 Terminal=false
-Categories=GNOME;GTK;Utility;Productivity
+Categories=GNOME;GTK;Utility;
 Keywords=Station;Radio;Productivity;
 StartupNotify=true
 X-GNOME-Gettext-Domain=@GETTEXT_PACKAGE@
