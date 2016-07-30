@@ -52,6 +52,9 @@ For Arch users, you can install the latest git version from AUR package using
 yaourt -S gradio-git
 ```
 
+### openSUSE
+A [package](https://software.opensuse.org/package/gradio) for openSUSE Tumbleweed is available.
+
 ## Uninstall
 If you install from source you must have the original compiled source to uninstall. `cmake` does not provide a `make uninstall` but list all the files installed on the system in `install_manifest.txt`. You can delete each file listed seperatly or run:
 ```bash
