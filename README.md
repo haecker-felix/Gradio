@@ -50,6 +50,9 @@ sudo apt-get update
 sudo apt-get install gradio
 ```
 
+### Fedora
+For fedora is a copr available. For more information [click here](https://copr.fedorainfracloud.org/coprs/heikoada/gradio/)
+
 ### Arch
 For Arch users, you can install the latest stable release from AUR package using 
 ```
