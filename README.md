@@ -36,6 +36,10 @@ cmake -DCMAKE_INSTALL_PREFIX=/usr ..
 make
 sudo make install
 ```
+Arch users can install from source code using 
+```
+yaourt -S gradio-git
+```
 
 ### Ubuntu
 For Ubuntu based distros (16.04) you can add the [daily ppa](https://code.launchpad.net/~haecker-felix/+archive/ubuntu/gradio-daily).
@@ -47,9 +51,9 @@ sudo apt-get install gradio
 ```
 
 ### Arch
-For Arch users, you can install the latest git version from AUR package using 
+For Arch users, you can install the latest stable release from AUR package using 
 ```
-yaourt -S gradio-git
+yaourt -S gradio
 ```
 
 ### openSUSE
