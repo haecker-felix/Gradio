@@ -96,6 +96,8 @@ namespace Gradio{
 			SidebarBox.pack_start(sidebar);
 			sidebar.set_visible(false);
 
+			SearchEntry.activate.connect(() => SearchButton_clicked());
+
 			connect_signals();
 			load_data();
 			ContentStack.set_visible_child_name("loading");
