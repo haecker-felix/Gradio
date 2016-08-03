@@ -36,6 +36,8 @@ cmake -DCMAKE_INSTALL_PREFIX=/usr ..
 make
 sudo make install
 ```
+#### For Gentoo: ```cmake -DVALA_EXECUTABLE:NAMES=valac-0.32 -DCMAKE_INSTALL_PREFIX=/usr ..```
+
 Arch users can install from source code using 
 ```
 yaourt -S gradio-git
