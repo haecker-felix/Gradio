@@ -5,6 +5,11 @@ A GTK3 app for finding and listening to internet radio stations.
   <img alt="Library View" src="http://i.imgur.com/AN4df36.png" />
 </p>
 
+## Add a new station
+It is possible to add new stations here: (No registration needed)
+
+http://www.radio-browser.info
+
 ## Releases and packages
 - All Gradio releases can be found here: https://github.com/haecker-felix/gradio/releases
 
