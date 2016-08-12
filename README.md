@@ -5,15 +5,66 @@ A GTK3 app for finding and listening to internet radio stations.
   <img alt="Library View" src="http://i.imgur.com/AN4df36.png" />
 </p>
 
-## Add a new station
-It is possible to add new stations here: (No registration needed)
+
+## Install Gradio
+
+### Ubuntu 
+A PPA is available. Gradio needs Ubuntu 16.04 or higher.
+
+[More details](https://code.launchpad.net/~haecker-felix/+archive/ubuntu/gradio-daily)
+
+
+### Fedora
+A copr is available. Gradio needs Fedora 24 or higher.
+
+[More details](https://copr.fedorainfracloud.org/coprs/heikoada/gradio/)
+
+
+### openSUSE 
+Gradio is available in the official openSUSE repository. 
+
+
+### Arch Linux
+Gradio is available in the AUR. 
+
+[More details](https://aur.archlinux.org/packages/?O=0&K=Gradio)
+
+
+### Other 
+For unsupported distributions you can install gradio from source:
+
+```bash
+cd ~/Downloads
+git clone https://github.com/haecker-felix/gradio.git
+cd gradio
+mkdir build
+cd build
+cmake -DCMAKE_INSTALL_PREFIX= usr ..
+make
+sudo make install
+```
+
+## Releases
+All Gradio releases can be found [here](https://github.com/haecker-felix/gradio/releases)
+
+
+## FAQ
+
+### A station is missing. How I can add a new station to the database?
+It is possible to add new stations here: 
 
 http://www.radio-browser.info
 
-## Releases and packages
-- All Gradio releases can be found here: https://github.com/haecker-felix/gradio/releases
+In a further release of gradio it will be easier to add new stations.
 
-## Dependencies
+
+### A feature is missing. Can you add it?
+Maybe. Open a new Github issue and I'll look at it.
+
+
+## Technical Information 
+
+### Dependencies
 For gradio:
 * glib-2.0
 * gtk+-3.0 _>=3.18_
@@ -27,52 +78,3 @@ For compiling:
 * General c/c++ libs & compiler
 * cmake
 * git
-* valac
-
-## Install
-### Source
-```bash
-cd ~/Downloads
-git clone https://github.com/haecker-felix/gradio.git
-cd gradio
-mkdir build
-cd build
-cmake -DCMAKE_INSTALL_PREFIX=/usr ..
-make
-sudo make install
-```
-#### For Gentoo: ```cmake -DVALA_EXECUTABLE:NAMES=valac-0.32 -DCMAKE_INSTALL_PREFIX=/usr ..```
-
-Arch users can install from source code using 
-```
-yaourt -S gradio-git
-```
-
-### Ubuntu
-For Ubuntu based distros (16.04) you can add the [daily ppa](https://code.launchpad.net/~haecker-felix/+archive/ubuntu/gradio-daily).
-```
-deb http://ppa.launchpad.net/haecker-felix/gradio-daily/ubuntu xenial main
-deb-src http://ppa.launchpad.net/haecker-felix/gradio-daily/ubuntu xenial main
-sudo apt-get update
-sudo apt-get install gradio
-```
-
-### Fedora
-For fedora is a copr available. For more information [click here](https://copr.fedorainfracloud.org/coprs/heikoada/gradio/)
-
-### Arch
-For Arch users, you can install the latest stable release from AUR package using 
-```
-yaourt -S gradio
-```
-
-### openSUSE
-A [package](https://software.opensuse.org/package/gradio) for openSUSE Tumbleweed is available.
-
-## Uninstall
-If you install from source you must have the original compiled source to uninstall. `cmake` does not provide a `make uninstall` but list all the files installed on the system in `install_manifest.txt`. You can delete each file listed seperatly or run:
-```bash
-cd ~/Downloads/gradio/build
-sudo xargs rm < install_manifest.txt
-```
-
