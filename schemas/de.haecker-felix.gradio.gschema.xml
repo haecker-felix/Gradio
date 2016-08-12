@@ -25,6 +25,11 @@
       <summary>Show stations icons or not.</summary>
     </key>
 
+    <key name="close-to-tray" type="b">
+      <default>true</default>
+      <summary>Close window to tray</summary>
+    </key>
+
     <key name="window-height" type="i">
       <default>500</default>
       <summary>Height of the window</summary>

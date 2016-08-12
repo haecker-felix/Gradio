@@ -92,6 +92,7 @@ pkg_check_modules(DEPS REQUIRED
 	gio-2.0
 	gee-0.8
 	libsoup-2.4
+	libnotify
 )
 
 set(NORMAL_CFLAGS ${DEPS_CFLAGS} ${LIBSOURCE_CFLAGS} ${GCONF_CFLAGS})
@@ -131,6 +132,7 @@ PACKAGES
 	gio-2.0
 	gee-0.8
 	libsoup-2.4
+	libnotify
 OPTIONS
 	--thread
 	--target-glib=2.38

@@ -38,6 +38,7 @@ namespace Gradio{
 		private MenuButton InfoMenuButton;
 
 		RadioStation station;
+		private string current_title = null;
 
 		public PlayerToolbar(){
 			this.pack_start(MediaControlBox);
@@ -50,6 +51,13 @@ namespace Gradio{
 			App.player.tag_changed.connect (() => set_information());
 
 			this.set_visible(false);
+		}
+
+		private void send_notification(string summary, string body, Gdk.Pixbuf? icon = null){
+			var noti = new Notify.Notification (summary, body, null);
+			if (icon != null)
+				noti.set_image_from_pixbuf(icon);
+			noti.show();
 		}
 
 		public void set_radio_station (RadioStation s){
@@ -91,6 +99,28 @@ namespace Gradio{
 			BitrateLabel.set_text(App.player.tag_bitrate.to_string()  + " Bit/s");
 			CodecLabel.set_text(App.player.tag_audio_codec);
 			ChannelModeLabel.set_text(App.player.tag_channel_mode);
+			if(current_title != App.player.tag_title && App.player.tag_title != null) {
+				if (App.player.tag_homepage != "") {
+					Util.get_image_from_url.begin(App.player.tag_homepage, 48, 48, (obj, res) => {
+			        	var icon = Util.get_image_from_url.end(res);
+						if(icon != null){
+						 send_notification(station.Title, App.player.tag_title, icon);
+						}else{
+						 send_notification(station.Title, App.player.tag_title, null);
+						}		
+	        		});				
+				}else{
+						Util.get_image_from_url.begin(station.Icon, 48, 48, (obj, res) => {
+			        	var icon = Util.get_image_from_url.end(res);
+						if(icon != null){
+						 send_notification(station.Title, App.player.tag_title, icon);
+						}else{
+						 send_notification(station.Title, App.player.tag_title, null);
+						}		
+						});
+				}
+			current_title = App.player.tag_title;
+			}
 		}
 
 		private void refresh_play_stop_button(){

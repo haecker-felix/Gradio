@@ -10,6 +10,8 @@ namespace Gradio{
 		private Switch UseDarkDesignSwitch;
 		[GtkChild]
 		private Switch LoadPicturesSwitch;
+		[GtkChild]
+		private Switch CloseToTraySwitch;
 
 		private GLib.Settings settings;
 
@@ -47,12 +49,22 @@ namespace Gradio{
 				
 			});
 
+			CloseToTraySwitch.notify["active"].connect (() => {
+				if (CloseToTraySwitch.active) {
+					settings.set_boolean ("close-to-tray", true);
+				} else {
+					settings.set_boolean ("close-to-tray", false);
+				}
+				
+			});
+
 		}
 
 		private void load_settings(GLib.Settings settings){
 			UseDarkDesignSwitch.set_active(settings.get_boolean ("use-dark-design"));
 			LoadPicturesSwitch.set_active(settings.get_boolean ("load-pictures"));
 			OnlyShowWorkingStationsSwitch.set_active(settings.get_boolean ("only-show-working-stations"));
+			CloseToTraySwitch.set_active(settings.get_boolean ("close-to-tray"));
 		}
 
 	}
