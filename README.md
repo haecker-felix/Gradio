@@ -62,8 +62,15 @@ In a further release of gradio it will be easier to add new stations.
 Maybe. Open a new Github issue and I'll look at it.
 
 
-## Technical Information 
+### Why is there no ubuntu 14.04 support?
+Gradio needs GTK 3.18 or higher. Ubuntu 14.04 provides GTK 3.12 which is definitely too old. 
 
+
+### Does a flatpak/snap exist?
+Not yet, but soon!
+
+
+## Technical Details
 ### Dependencies
 For gradio:
 * glib-2.0
