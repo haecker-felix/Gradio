@@ -11,6 +11,7 @@ namespace Gradio{
 		public signal void tag_changed();
 
 		public string tag_title;
+		public string tag_homepage;
 		public bool tag_has_crc;
 		public string tag_audio_codec;
 		public uint tag_nominal_bitrate;
@@ -26,6 +27,22 @@ namespace Gradio{
 			set_volume(1.0);
 
 			this.notify.connect ((s, p) => stdout.printf ("Property %s changed\n", p.name));
+		}
+
+		private int EndsWithFoo(string s)
+		{
+		  int ret = 0;
+	      int si = s.length;
+		  if (s != null)
+		  {
+		    if (si >= 4 && s[si-4] == '.' && s[si-3] == 'j' && s[si-2] == 'p' && s[si-1] == 'g')
+		      ret = 1;
+		    if (si >= 4 && s[si-4] == '.' && s[si-3] == 'p' && s[si-2] == 'n' && s[si-1] == 'g')
+		      ret = 1;
+		    if (si >= 4 && s[si-4] == '.' && s[si-3] == 'b' && s[si-2] == 'm' && s[si-1] == 'p')
+		      ret = 1;
+		  }
+		  return ret;
 		}
 
 		private bool bus_callback (Gst.Bus bus, Gst.Message m) {
@@ -61,6 +78,8 @@ namespace Gradio{
 					m.parse_tag(out tag_list);
 
 					tag_list.get_string("title", out tag_title);
+					tag_list.get_string("homepage", out tag_homepage);
+					if (EndsWithFoo(tag_homepage) == 0) tag_homepage = "";
 
 					tag_list.get_boolean("has-crc", out tag_has_crc);
 

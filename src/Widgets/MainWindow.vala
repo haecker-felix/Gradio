@@ -38,6 +38,8 @@ namespace Gradio{
 			width = App.settings.get_int ("window-width");
 			height = App.settings.get_int ("window-height");
 			this.set_default_size(width, height);
+			pos_x = App.settings.get_int ("window-position-x");
+			pos_y = App.settings.get_int ("window-position-y");
 			this.move(pos_x, pos_y);
 
 			var gtk_settings = Gtk.Settings.get_default ();
@@ -91,26 +93,37 @@ namespace Gradio{
 			ContentStack.set_visible_child_name("no_connection");
 		}
 
+		public void save_geometry (){
+			this.get_position (out pos_x, out pos_y);
+			this.get_size (out width, out height);
+			App.settings.set_int("window-width", width);
+			App.settings.set_int("window-height", height);
+			App.settings.set_int("window-position-x", pos_x);
+			App.settings.set_int("window-position-y", pos_y);
+		}
+
 		private void connect_signals(){
 			App.player.radio_station_changed.connect((t,a) => {
 				player_toolbar.set_radio_station(a);
 			});
 
 			this.destroy.connect(() => {
-				App.settings.set_int("window-width", width);
-				App.settings.set_int("window-height", height);
+				save_geometry ();
 			});
+
+			this.delete_event.connect (() => {
+				save_geometry ();
+				if (App.settings.get_boolean ("close-to-tray")) {
+					this.hide_on_delete ();
+				    return true;
+				} else return false;
+		    });
 
 			this.size_allocate.connect((a) => {
 				width = a.width;
 				height = a.height;
 			});
 
-			this.drag_motion.connect((c, x, y) => {
-				App.settings.set_int("window-position-x", x);
-				App.settings.set_int("window-position-y", y);
-				return true;
-			});
 		}
 
 		[GtkCallback]

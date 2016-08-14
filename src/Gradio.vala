@@ -11,6 +11,7 @@ namespace Gradio {
 		public static StationProvider data_provider;
 		public static GLib.Settings settings;
 		public MPRIS mpris;
+		private Gtk.Menu menuSystem;
 
 		public App () {
 			Object(application_id: "de.haecker-felix.gradio", flags: ApplicationFlags.FLAGS_NONE);
@@ -89,7 +90,7 @@ namespace Gradio {
 			this.add_action (action);
 
 			action = new GLib.SimpleAction ("quit", null);
-			action.activate.connect (() => { this.quit (); });
+			action.activate.connect (() => { this.quit_application (); });
 			this.add_action (action);
 
 			action = new GLib.SimpleAction ("report_an_error", null);
@@ -109,15 +110,52 @@ namespace Gradio {
 			});
 		}
 
+		private void restore_window () {
+			var active_window = get_active_window ();
+			active_window.present ();
+		}
+
+		private void quit_application(){
+			restore_window ();
+			window.save_geometry ();
+			base.quit ();
+		}
+
+		private void play_and_stop () {
+			App.player.toggle_play_stop();
+		}
+
+	    /* Create menu for right button */
+	    private void create_menuSystem() {
+			menuSystem = new Gtk.Menu();
+			var menuPlayStop = new Gtk.MenuItem.with_label("Play / Stop");
+			menuPlayStop.activate.connect(play_and_stop);
+			menuSystem.append(menuPlayStop);
+			var menuQuit = new ImageMenuItem.from_stock(Stock.QUIT, null);
+			menuQuit.activate.connect(this.quit_application);
+			menuSystem.append(menuQuit);
+			menuSystem.show_all();
+    }
+
+	    /* Show popup menu on right button */
+	    private void menuSystem_popup(uint button, uint time) {
+			menuSystem.popup(null, null, null, button, time);
+		}
+
 		public static void main (string [] args){
 			// Init gstreamer
 			unowned string[] argv = null;
+			var app = new App ();
 			Gst.init (ref argv);
 
 			// Init gtk
 			Gtk.init(ref args);
+			Notify.init("Gradio");
+			var trayicon = new Gtk.StatusIcon.from_icon_name("gradio");
+			trayicon.activate.connect(app.restore_window);
+			app.create_menuSystem();
+			trayicon.popup_menu.connect(app.menuSystem_popup);
 
-			var app = new App ();
 			message("Starting Gradio version " + Constants.VERSION + "!");
 			app.run (args);
 		}
