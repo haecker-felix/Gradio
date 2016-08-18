@@ -26,8 +26,13 @@
     </key>
 
     <key name="close-to-tray" type="b">
-      <default>true</default>
+      <default>false</default>
       <summary>Close window to tray</summary>
+    </key>
+
+    <key name="show-notifications" type="b">
+      <default>false</default>
+      <summary>Show notifications</summary>
     </key>
 
     <key name="window-height" type="i">

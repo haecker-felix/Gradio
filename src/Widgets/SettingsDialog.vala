@@ -12,6 +12,8 @@ namespace Gradio{
 		private Switch LoadPicturesSwitch;
 		[GtkChild]
 		private Switch CloseToTraySwitch;
+		[GtkChild]
+		private Switch ShowNotificationsSwitch;
 
 		private GLib.Settings settings;
 
@@ -58,6 +60,15 @@ namespace Gradio{
 				
 			});
 
+			ShowNotificationsSwitch.notify["active"].connect (() => {
+				if (ShowNotificationsSwitch.active) {
+					settings.set_boolean ("show-notifications", true);
+				} else {
+					settings.set_boolean ("show-notifications", false);
+				}
+				
+			});
+
 		}
 
 		private void load_settings(GLib.Settings settings){
@@ -65,6 +76,7 @@ namespace Gradio{
 			LoadPicturesSwitch.set_active(settings.get_boolean ("load-pictures"));
 			OnlyShowWorkingStationsSwitch.set_active(settings.get_boolean ("only-show-working-stations"));
 			CloseToTraySwitch.set_active(settings.get_boolean ("close-to-tray"));
+			ShowNotificationsSwitch.set_active(settings.get_boolean ("show-notifications"));
 		}
 
 	}
