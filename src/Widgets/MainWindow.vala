@@ -107,10 +107,6 @@ namespace Gradio{
 				player_toolbar.set_radio_station(a);
 			});
 
-			this.destroy.connect(() => {
-				save_geometry ();
-			});
-
 			this.delete_event.connect (() => {
 				save_geometry ();
 				if (App.settings.get_boolean ("close-to-tray")) {
