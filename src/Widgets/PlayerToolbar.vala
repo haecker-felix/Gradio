@@ -49,6 +49,7 @@ namespace Gradio{
 
 			App.player.state_changed.connect (() => refresh_play_stop_button());
 			App.player.tag_changed.connect (() => set_information());
+			VolumeButton.set_value(App.settings.get_double ("volume-position"));
 
 			this.set_visible(false);
 		}
@@ -89,6 +90,7 @@ namespace Gradio{
 		[GtkCallback]
         	private void VolumeButton_value_changed (double value) {
 			App.player.set_volume(value);
+			App.settings.set_double("volume-position", value);
 		}
 
 		private void set_information(){

@@ -24,7 +24,7 @@ namespace Gradio{
 
 		public AudioPlayer(){
 			stream = ElementFactory.make ("playbin", "play");
-			set_volume(1.0);
+			set_volume(App.settings.get_double ("volume-position"));
 
 			this.notify.connect ((s, p) => stdout.printf ("Property %s changed\n", p.name));
 		}
