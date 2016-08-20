@@ -35,6 +35,11 @@
       <summary>Show notifications</summary>
     </key>
 
+    <key name="volume-position" type="d">
+      <default>0.99</default>
+      <summary>Volume position</summary>
+    </key>
+
     <key name="window-height" type="i">
       <default>500</default>
       <summary>Height of the window</summary>
