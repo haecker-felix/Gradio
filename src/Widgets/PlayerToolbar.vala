@@ -90,6 +90,7 @@ namespace Gradio{
 		[GtkCallback]
         	private void VolumeButton_value_changed (double value) {
 			App.player.set_volume(value);
+			App.settings.set_double("volume-position", value);
 		}
 
 		private void set_information(){
