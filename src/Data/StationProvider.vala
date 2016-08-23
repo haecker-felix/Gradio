@@ -3,11 +3,8 @@ using Gee;
 namespace Gradio{
 
 	public class StationProvider{
-		// for the search thread
-		private bool _isWorking = false;
-		public signal void status_changed();
-		public bool isWorking { get { return _isWorking;} set { _isWorking = value; status_changed();}}
-
+		public signal void finished();
+		public signal void started();
 
 		// Get the station data from ID
 		public RadioStation parse_station_data_from_id (int id){
@@ -66,7 +63,7 @@ namespace Gradio{
 			SourceFunc callback = get_radio_stations.callback;
 			HashMap<int,RadioStation> output = new HashMap<int,RadioStation>();
 
-			isWorking = true;
+			started();
 			ThreadFunc<void*> run = () => {
 				try{
 		   			HashMap<int,RadioStation> results = new HashMap<int,RadioStation>();
@@ -108,7 +105,7 @@ namespace Gradio{
 			new Thread<void*> ("search_thread", run);
 
 			yield;
-			isWorking = false;
+			finished();
            		return output;
         	}
 

@@ -115,6 +115,15 @@ namespace Gradio{
 				apop.show();
 			});
 
+			provider.started.connect(() => {
+				StationsStack.set_visible_child_name("loading");
+			});
+
+			provider.finished.connect(() => {
+				//TODO: set correct grid/list
+				StationsStack.set_visible_child_name("grid-view");
+			});
+
 		}
 
 		public void show_list_view(){

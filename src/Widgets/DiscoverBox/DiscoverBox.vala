@@ -10,7 +10,6 @@ namespace Gradio{
 		private GLib.Settings settings;
 
 		public StationsView stations_view_results;
-		public bool show_overview = true;
 
 		private StationsView grid_view_recently_clicked;
 		private StationsView grid_view_most_votes;
@@ -100,37 +99,18 @@ namespace Gradio{
 
 			connect_signals();
 			load_data();
-			ContentStack.set_visible_child_name("loading");
+			show_overview_page();
 		}
 
 		private void connect_signals(){
-			App.data_provider.status_changed.connect(() => {
-				if(App.data_provider.isWorking){
-					HomeButton.set_sensitive(false);
-					ReloadButton.set_sensitive(false);
-					SearchButton.set_sensitive(false);
-					SearchEntry.set_sensitive(false);
-					ContentStack.set_visible_child_name("loading");
-				}else{
-					HomeButton.set_sensitive(true);
-					ReloadButton.set_sensitive(true);
-					SearchButton.set_sensitive(true);
-					SearchEntry.set_sensitive(true);
-					if(show_overview)
-						ContentStack.set_visible_child_name("overview");
-					else
-						ContentStack.set_visible_child_name("results");
-				}
-			});
-
 			categories.child_activated.connect((t,a) => {
 				CategoryTile item = (CategoryTile)a;
 				switch(item.action){
-					case "languages": languages_clicked(); ContentStack.set_visible_child_name("select-item"); sidebar.set_visible(true); break;
-					case "countries": countries_clicked(); ContentStack.set_visible_child_name("select-item"); sidebar.set_visible(true); break;
-					case "states": states_clicked(); ContentStack.set_visible_child_name("select-item"); sidebar.set_visible(true); break;
-					case "codecs": codecs_clicked(); ContentStack.set_visible_child_name("select-item"); sidebar.set_visible(true); break;
-					case "tags": tags_clicked(); ContentStack.set_visible_child_name("select-item"); sidebar.set_visible(true); break;
+					case "languages": languages_clicked(); 	show_select_item(); break;
+					case "countries": countries_clicked(); 	show_select_item(); break;
+					case "states": states_clicked(); 	show_select_item(); break;
+					case "codecs": codecs_clicked(); 	show_select_item(); break;
+					case "tags": tags_clicked(); 		show_select_item(); break;
 				}
 			});
 
@@ -139,9 +119,17 @@ namespace Gradio{
 			button_most_votes.clicked.connect(() => show_most_votes());
 		}
 
+		public void show_select_item(){
+			ContentStack.set_visible_child_name("select-item");
+			sidebar.set_visible(true);
+		}
+
+		public void show_results(){
+			ContentStack.set_visible_child_name("results");
+		}
+
 		public void show_overview_page(){
 			ContentStack.set_visible_child_name("overview");
-			show_overview = true;
 			sidebar.set_visible(false);
 		}
 
@@ -152,29 +140,23 @@ namespace Gradio{
 		}
 
 		private void show_recently_changed(){
-			show_overview = false;
 			stations_view_results.set_stations_from_address(RadioBrowser.radio_stations_recently_changed);
 		}
 
 		private void show_recently_clicked(){
-			show_overview = false;
 			stations_view_results.set_stations_from_address(RadioBrowser.radio_stations_recently_clicked);
 		}
 
 		private void show_most_votes(){
-			show_overview = false;
 			stations_view_results.set_stations_from_address(RadioBrowser.radio_stations_most_votes);
 		}
 
 		[GtkCallback]
 		private void SearchButton_clicked(){
 			sidebar.set_visible(false);
+			show_results();
 			string address = RadioBrowser.radio_stations_by_name + Util.optimize_string(SearchEntry.get_text());
-
-			if(!App.data_provider.isWorking){
-				show_overview = false;
-				stations_view_results.set_stations_from_address(address);
-			}
+			stations_view_results.set_stations_from_address(address);
 
 		}
 

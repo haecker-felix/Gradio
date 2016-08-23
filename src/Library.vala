@@ -8,11 +8,14 @@ namespace Gradio{
 
 		public HashMap<int,RadioStation> lib;
 
+		private StationProvider provider;
+
 		string data_path;
 		string dir_path;
 
 		public Library(){
 			lib = new HashMap<int,RadioStation>();
+			provider = new StationProvider();
 
 			data_path = Path.build_filename (Environment.get_user_data_dir (), "gradio", "library.gradio");
 			dir_path = Path.build_filename (Environment.get_user_data_dir (), "gradio");
@@ -29,14 +32,14 @@ namespace Gradio{
 		}
 
 		public void add_radio_station_by_id(int id){
-			RadioStation station = App.data_provider.parse_station_data_from_id(id);
+			RadioStation station = provider.parse_station_data_from_id(id);
 			lib[id] = station;
 
 			added_radio_station();
 		}
 
 		public void remove_radio_station_by_id(int id){
-			RadioStation station = App.data_provider.parse_station_data_from_id(id);
+			RadioStation station = provider.parse_station_data_from_id(id);
 			lib.unset(int.parse(station.ID));
 
 			removed_radio_station();
@@ -98,7 +101,7 @@ namespace Gradio{
 
 					while ((line = dis.read_line (null)) != null) {
 						
-						RadioStation station = App.data_provider.parse_station_data_from_id(int.parse(line));
+						RadioStation station = provider.parse_station_data_from_id(int.parse(line));
 
 						if(station != null){
 							lib[int.parse(line)] = station;

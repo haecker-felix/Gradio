@@ -55,22 +55,18 @@ namespace Gradio{
 		}
 
 		private void show_stations_by_category_item (string category, string item){
-			if(!App.data_provider.isWorking){
-				dbox.show_overview = false;
-				string address = "";
+			string address = "";
 
-				switch (category){
-					case "languages": address = RadioBrowser.radio_stations_by_language + item; break;
-					case "countries": address = RadioBrowser.radio_stations_by_country + item; break;
-					case "states": address = RadioBrowser.radio_stations_by_state + item; break;
-					case "codecs": address = RadioBrowser.radio_stations_by_codec + item; break;
-					case "tags": address = RadioBrowser.radio_stations_by_tag + item; break;
-				}
-
-				dbox.stations_view_results.set_stations_from_address(address);
-
-
+			switch (category){
+				case "languages": address = RadioBrowser.radio_stations_by_language + item; break;
+				case "countries": address = RadioBrowser.radio_stations_by_country + item; break;
+				case "states": address = RadioBrowser.radio_stations_by_state + item; break;
+				case "codecs": address = RadioBrowser.radio_stations_by_codec + item; break;
+				case "tags": address = RadioBrowser.radio_stations_by_tag + item; break;
 			}
+
+			dbox.show_results();
+			dbox.stations_view_results.set_stations_from_address(address);
 		}
 
 		private void show_catergory_items (string category){

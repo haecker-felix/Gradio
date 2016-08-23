@@ -8,7 +8,6 @@ namespace Gradio {
 		public static MainWindow window;
 		public static AudioPlayer player;
 		public static Library library;
-		public static StationProvider data_provider;
 		public static GLib.Settings settings;
 		public MPRIS mpris;
 		private Gtk.Menu menuSystem;
@@ -19,8 +18,6 @@ namespace Gradio {
 
 		protected override void activate () {
 			create_app_menu();
-
-			data_provider = new StationProvider();
 
 			player = new AudioPlayer();
 			settings = new GLib.Settings ("de.haecker-felix.gradio");

@@ -358,6 +358,9 @@
                   </packing>
                 </child>
                 <child>
+                  <placeholder/>
+                </child>
+                <child>
                   <object class="GtkBox" id="Select">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
@@ -397,7 +400,7 @@
                   <packing>
                     <property name="name">select-item</property>
                     <property name="title" translatable="yes">select-item</property>
-                    <property name="position">2</property>
+                    <property name="position">3</property>
                   </packing>
                 </child>
               </object>
