@@ -8,6 +8,8 @@ namespace Gradio{
 
 		HashMap<int,RadioStation> stations;
 
+		private StationProvider provider;
+
 		private bool no_stations = true;
 		private bool list_view = false;
 
@@ -44,6 +46,7 @@ namespace Gradio{
 
 		public StationsView(string title, bool scrollable, string image_name = "emblem-documents-symbolic"){
 			settings = new GLib.Settings ("de.haecker-felix.gradio");
+			provider = new StationProvider();
 
 			HeaderImage.set_from_icon_name(image_name, IconSize.MENU);
 
@@ -72,10 +75,22 @@ namespace Gradio{
 			reload_view();
 		}
 
-		public void set_stations(ref HashMap<int,RadioStation> s){
+		public void set_stations_from_list(HashMap<int,RadioStation> s){
 			if(s != null)
 				stations = s;
 			reload_view();
+		}
+
+		public void set_stations_from_address(string address){
+			provider.get_radio_stations.begin(address, 100, (obj, res) => {
+			    	try {
+					var result = provider.get_radio_stations.end(res);
+					set_stations_from_list(result);
+			    	} catch (ThreadError e) {
+					string msg = e.message;
+					stderr.printf("Error: Thread:" + msg+ "\n");
+			    	}
+        		});
 		}
 
 		public void set_extra_item(Gtk.Widget w){

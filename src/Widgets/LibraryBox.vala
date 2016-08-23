@@ -14,12 +14,12 @@ namespace Gradio{
 
 		public LibraryBox(){
 			library_view = new StationsView("Library", true);
-			library_view.set_stations(ref App.library.lib);
+			//library_view.set_stations(ref App.library.lib);
 
 			ContentBox.add(library_view);
 
-			App.library.added_radio_station.connect(() => library_view.reload_view());
-			App.library.removed_radio_station.connect(() => library_view.reload_view());
+			//App.library.added_radio_station.connect(() => library_view.reload_view());
+			//App.library.removed_radio_station.connect(() => library_view.reload_view());
 
 			ContentBox.show_all();
 		}

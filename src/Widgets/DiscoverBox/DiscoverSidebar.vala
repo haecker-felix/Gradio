@@ -67,16 +67,9 @@ namespace Gradio{
 					case "tags": address = RadioBrowser.radio_stations_by_tag + item; break;
 				}
 
-				App.data_provider.get_radio_stations.begin(address, 100, (obj, res) => {
-			    		try {
-						var search_results = App.data_provider.get_radio_stations.end(res);
-						dbox.stations_view_results.set_stations(ref search_results);
-						dbox.stations_view_results.set_stations(ref search_results);
-			    		} catch (ThreadError e) {
-						string msg = e.message;
-						stderr.printf("Error: Thread:" + msg+ "\n");
-			    		}
-        			});
+				dbox.stations_view_results.set_stations_from_address(address);
+
+
 			}
 		}
 

@@ -146,79 +146,24 @@ namespace Gradio{
 		}
 
 		private void load_data(){
-			App.data_provider.get_radio_stations.begin(RadioBrowser.radio_stations_most_votes, 12, (obj, res) => {
-		    		try {
-		        		var results = App.data_provider.get_radio_stations.end(res);
-		        		grid_view_most_votes.set_stations(ref results);
-		    		} catch (ThreadError e) {
-		        		string msg = e.message;
-		        		stderr.printf("Error: Thread:" + msg+ "\n");
-		    		}
-        		});
-
-        		App.data_provider.get_radio_stations.begin(RadioBrowser.radio_stations_recently_clicked, 12, (obj, res) => {
-		    		try {
-		        		var results = App.data_provider.get_radio_stations.end(res);
-		        		grid_view_recently_clicked.set_stations(ref results);
-		    		} catch (ThreadError e) {
-		        		string msg = e.message;
-		        		stderr.printf("Error: Thread:" + msg+ "\n");
-		    		}
-        		});
-
-        		App.data_provider.get_radio_stations.begin(RadioBrowser.radio_stations_recently_changed, 12, (obj, res) => {
-		    		try {
-		        		var results = App.data_provider.get_radio_stations.end(res);
-		        		grid_view_recently_changed.set_stations(ref results);
-		    		} catch (ThreadError e) {
-		        		string msg = e.message;
-		        		stderr.printf("Error: Thread:" + msg+ "\n");
-		    		}
-        		});
-
-
+			grid_view_most_votes.set_stations_from_address(RadioBrowser.radio_stations_most_votes);
+			grid_view_recently_clicked.set_stations_from_address(RadioBrowser.radio_stations_recently_clicked);
+			grid_view_recently_changed.set_stations_from_address(RadioBrowser.radio_stations_recently_changed);
 		}
 
 		private void show_recently_changed(){
 			show_overview = false;
-			App.data_provider.get_radio_stations.begin(RadioBrowser.radio_stations_recently_changed, 100, (obj, res) => {
-		    		try {
-		        		var results = App.data_provider.get_radio_stations.end(res);
-		        		stations_view_results.set_stations(ref results);
-					stations_view_results.set_stations(ref results);
-		    		} catch (ThreadError e) {
-		        		string msg = e.message;
-		        		stderr.printf("Error: Thread:" + msg+ "\n");
-		    		}
-        		});
+			stations_view_results.set_stations_from_address(RadioBrowser.radio_stations_recently_changed);
 		}
 
 		private void show_recently_clicked(){
 			show_overview = false;
-			App.data_provider.get_radio_stations.begin(RadioBrowser.radio_stations_recently_clicked, 100, (obj, res) => {
-		    		try {
-		        		var results = App.data_provider.get_radio_stations.end(res);
-		        		stations_view_results.set_stations(ref results);
-					stations_view_results.set_stations(ref results);
-		    		} catch (ThreadError e) {
-		        		string msg = e.message;
-		        		stderr.printf("Error: Thread:" + msg+ "\n");
-		    		}
-        		});
+			stations_view_results.set_stations_from_address(RadioBrowser.radio_stations_recently_clicked);
 		}
 
 		private void show_most_votes(){
 			show_overview = false;
-			App.data_provider.get_radio_stations.begin(RadioBrowser.radio_stations_most_votes, 100, (obj, res) => {
-		    		try {
-		        		var results = App.data_provider.get_radio_stations.end(res);
-		        		stations_view_results.set_stations(ref results);
-					stations_view_results.set_stations(ref results);
-		    		} catch (ThreadError e) {
-		        		string msg = e.message;
-		        		stderr.printf("Error: Thread:" + msg+ "\n");
-		    		}
-        		});
+			stations_view_results.set_stations_from_address(RadioBrowser.radio_stations_most_votes);
 		}
 
 		[GtkCallback]
@@ -228,16 +173,7 @@ namespace Gradio{
 
 			if(!App.data_provider.isWorking){
 				show_overview = false;
-				App.data_provider.get_radio_stations.begin(address, 100, (obj, res) => {
-			    		try {
-						var search_results = App.data_provider.get_radio_stations.end(res);
-						stations_view_results.set_stations(ref search_results);
-						stations_view_results.set_stations(ref search_results);
-			    		} catch (ThreadError e) {
-						string msg = e.message;
-						stderr.printf("Error: Thread:" + msg+ "\n");
-			    		}
-        			});
+				stations_view_results.set_stations_from_address(address);
 			}
 
 		}
