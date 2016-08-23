@@ -12,6 +12,8 @@ namespace Gradio{
 		private bool no_stations = true;
 		private bool list_view = false;
 
+		private int max_results = -1;
+
 		[GtkChild]
 		private FlowBox GridViewFlowBox;
 		[GtkChild]
@@ -28,7 +30,6 @@ namespace Gradio{
 		[GtkChild]
 		private Viewport ListScrolledViewport;
 
-
 		[GtkChild]
 		private Box GridNormal;
 		[GtkChild]
@@ -43,9 +44,14 @@ namespace Gradio{
 
 		private GLib.Settings settings;
 
-		public StationsView(string title, bool scrollable, string image_name = "emblem-documents-symbolic"){
+		public StationsView(string title, bool scrollable, string image_name = "emblem-documents-symbolic", int max = -1){
 			settings = new GLib.Settings ("de.haecker-felix.gradio");
 			provider = new StationProvider();
+
+			if(max == -1)
+				max_results = 200;
+			else
+			max_results = max;
 
 			HeaderImage.set_from_icon_name(image_name, IconSize.MENU);
 
@@ -72,28 +78,6 @@ namespace Gradio{
 
 			connect_signals();
 			reload_view();
-		}
-
-		public void set_stations_from_list(HashTable<int,RadioStation> s){
-			if(s != null)
-				stations = s;
-			reload_view();
-		}
-
-		public void set_stations_from_address(string address){
-			provider.get_radio_stations.begin(address, 100, (obj, res) => {
-			    	try {
-					var result = provider.get_radio_stations.end(res);
-					set_stations_from_list(result);
-			    	} catch (ThreadError e) {
-					string msg = e.message;
-					stderr.printf("Error: Thread:" + msg+ "\n");
-			    	}
-        		});
-		}
-
-		public void set_extra_item(Gtk.Widget w){
-			ExtraItemBox.add(w);
 		}
 
 		private void connect_signals(){
@@ -123,6 +107,28 @@ namespace Gradio{
 				StationsStack.set_visible_child_name("grid-view");
 			});
 
+		}
+
+		public void set_stations_from_list(HashTable<int,RadioStation> s){
+			if(s != null)
+				stations = s;
+			reload_view();
+		}
+
+		public void set_stations_from_address(string address){
+			provider.get_radio_stations.begin(address, max_results, (obj, res) => {
+			    	try {
+					var result = provider.get_radio_stations.end(res);
+					set_stations_from_list(result);
+			    	} catch (ThreadError e) {
+					string msg = e.message;
+					stderr.printf("Error: Thread:" + msg+ "\n");
+			    	}
+        		});
+		}
+
+		public void set_extra_item(Gtk.Widget w){
+			ExtraItemBox.add(w);
 		}
 
 		public void show_list_view(){

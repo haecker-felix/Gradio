@@ -74,6 +74,7 @@ namespace Gradio{
 						var radio_stations = root.get_array ();
 
 						int max_items = (int)radio_stations.get_length();
+
 						if(max_items < max_results)
 							max_results = max_items;
 

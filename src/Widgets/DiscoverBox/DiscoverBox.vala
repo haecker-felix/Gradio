@@ -56,9 +56,9 @@ namespace Gradio{
 
 			stations_view_results = new StationsView("Results", true, "system-search-symbolic");
 
-			grid_view_recently_changed = new StationsView("Recently Changed", false, "text-editor-symbolic");
-			grid_view_recently_clicked = new StationsView("Recently Clicked", false, "view-refresh-symbolic");
-			grid_view_most_votes = new StationsView("Most Popular", false, "emote-love-symbolic");
+			grid_view_recently_changed = new StationsView("Recently Changed", false, "text-editor-symbolic", 12);
+			grid_view_recently_clicked = new StationsView("Recently Clicked", false, "view-refresh-symbolic", 12);
+			grid_view_most_votes = new StationsView("Most Popular", false, "emote-love-symbolic", 12);
 
 			button_most_votes = new StationsViewButton();
 			button_recently_changed = new StationsViewButton();
@@ -139,14 +139,17 @@ namespace Gradio{
 
 		private void show_recently_changed(){
 			stations_view_results.set_stations_from_address(RadioBrowser.radio_stations_recently_changed);
+			show_results();
 		}
 
 		private void show_recently_clicked(){
 			stations_view_results.set_stations_from_address(RadioBrowser.radio_stations_recently_clicked);
+			show_results();
 		}
 
 		private void show_most_votes(){
 			stations_view_results.set_stations_from_address(RadioBrowser.radio_stations_most_votes);
+			show_results();
 		}
 
 		[GtkCallback]
