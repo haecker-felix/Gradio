@@ -84,6 +84,7 @@
               <object class="GtkStack" id="GridViewStack">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="transition_type">crossfade</property>
                 <child>
                   <object class="GtkScrolledWindow" id="GridScrolled">
                     <property name="visible">True</property>
@@ -198,6 +199,7 @@
               <object class="GtkStack" id="ListViewStack">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="transition_type">crossfade</property>
                 <child>
                   <object class="GtkScrolledWindow" id="ListScrolled">
                     <property name="visible">True</property>
