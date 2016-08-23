@@ -1,5 +1,3 @@
-using Gee;
-
 namespace Gradio{
 
 	public class StationProvider{
@@ -59,14 +57,14 @@ namespace Gradio{
 
 
 		// Handle several stations and return them as a map
-		public async HashMap<int,RadioStation> get_radio_stations(string address, int max_results) throws ThreadError{
+		public async HashTable<int,RadioStation> get_radio_stations(string address, int max_results) throws ThreadError{
 			SourceFunc callback = get_radio_stations.callback;
-			HashMap<int,RadioStation> output = new HashMap<int,RadioStation>();
+			HashTable<int,RadioStation> output = new HashTable<int,RadioStation>(str_hash, str_equal);
 
 			started();
 			ThreadFunc<void*> run = () => {
 				try{
-		   			HashMap<int,RadioStation> results = new HashMap<int,RadioStation>();
+		   			HashTable<int,RadioStation> results = new HashTable<int,RadioStation>(direct_hash, direct_equal);
 					string data = Util.get_string_from_uri(address);
 					Json.Parser parser = new Json.Parser ();
 

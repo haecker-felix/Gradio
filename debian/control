@@ -10,7 +10,6 @@ Build-Depends: 	cmake (>= 2.8),
 		libgstreamer1.0-dev,
 		libjson-glib-dev,
 		libgio2.0-cil-dev,
-		libgee-0.8-dev,
 		libsoup2.4-dev,
 Standards-Version: 3.9.3
 

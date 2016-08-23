@@ -1,6 +1,4 @@
 using Gtk;
-using Gee;
-
 
 namespace Gradio{
 

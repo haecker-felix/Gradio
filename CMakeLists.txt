@@ -90,7 +90,6 @@ pkg_check_modules(DEPS REQUIRED
 	gstreamer-1.0
 	json-glib-1.0
 	gio-2.0
-	gee-0.8
 	libsoup-2.4
 	libnotify
 )
@@ -130,7 +129,6 @@ PACKAGES
 	gstreamer-1.0
 	json-glib-1.0
 	gio-2.0
-	gee-0.8
 	libsoup-2.4
 	libnotify
 OPTIONS

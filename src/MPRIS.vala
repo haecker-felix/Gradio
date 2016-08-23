@@ -1,7 +1,4 @@
-using Gee;
-using GLib;
- 
-namespace Gradio { 
+namespace Gradio {
 
 	public class MPRIS : GLib.Object {
 		public MprisPlayer player = null;

@@ -1,12 +1,10 @@
-using Gee;
-
 namespace Gradio{
 
 	public class Library : Gtk.Box{
 		public signal void added_radio_station();
 		public signal void removed_radio_station();
 
-		public HashMap<int,RadioStation> lib;
+		public HashTable<int,RadioStation> lib;
 
 		private StationProvider provider;
 
@@ -14,7 +12,7 @@ namespace Gradio{
 		string dir_path;
 
 		public Library(){
-			lib = new HashMap<int,RadioStation>();
+			lib = new HashTable<int,RadioStation>(direct_hash, direct_equal);
 			provider = new StationProvider();
 
 			data_path = Path.build_filename (Environment.get_user_data_dir (), "gradio", "library.gradio");
@@ -40,7 +38,7 @@ namespace Gradio{
 
 		public void remove_radio_station_by_id(int id){
 			RadioStation station = provider.parse_station_data_from_id(id);
-			lib.unset(int.parse(station.ID));
+			lib.remove(int.parse(station.ID));
 
 			removed_radio_station();
 		}
@@ -52,7 +50,7 @@ namespace Gradio{
 		}
 
 		public void remove_radio_station(RadioStation station){
-			lib.unset(int.parse(station.ID));
+			lib.remove(int.parse(station.ID));
 
 			removed_radio_station();
 		}
@@ -81,9 +79,9 @@ namespace Gradio{
 				OutputStream ostream = iostream.output_stream;
 				DataOutputStream dostream = new DataOutputStream (ostream);
 
-				foreach (var element in lib.entries){
-					dostream.put_string (element.key.to_string()+"\n");
-				}	
+				lib.foreach ((key, val) => {
+					dostream.put_string (key.to_string()+"\n");
+				});
 			}catch(Error e){
 				error(e.message);
 			}

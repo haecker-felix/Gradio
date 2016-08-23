@@ -1,12 +1,11 @@
 using Gtk;
-using Gee;
 
 namespace Gradio{
 
 	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/stations-view.ui")]
 	public class StationsView : Gtk.Box{
 
-		HashMap<int,RadioStation> stations;
+		HashTable<int,RadioStation> stations;
 
 		private StationProvider provider;
 
@@ -75,7 +74,7 @@ namespace Gradio{
 			reload_view();
 		}
 
-		public void set_stations_from_list(HashMap<int,RadioStation> s){
+		public void set_stations_from_list(HashTable<int,RadioStation> s){
 			if(s != null)
 				stations = s;
 			reload_view();
@@ -143,19 +142,19 @@ namespace Gradio{
 			Util.remove_all_items_from_list_box((Gtk.ListBox) ListViewListBox);
 
 			if(stations != null){
-				if(!stations.is_empty){
+				if(stations.length != 0){
 					no_stations = false;
-					foreach (var element in stations.entries){
-						GridItem grid_box = new GridItem(element.value);
-						ListItem list_box = new ListItem(element.value);
-						if(!(element.value.Broken)){
+					stations.foreach ((key, val) => {
+						GridItem grid_box = new GridItem(val);
+						ListItem list_box = new ListItem(val);
+						if(!(val.Broken)){
 							GridViewFlowBox.add(grid_box);
 							ListViewListBox.add(list_box);
 						}else if(!settings.get_boolean("only-show-working-stations")){
 							GridViewFlowBox.add(grid_box);
 							ListViewListBox.add(list_box);
 						}
-					}
+					});
 					if(list_view)
 						show_list_view();
 					else
