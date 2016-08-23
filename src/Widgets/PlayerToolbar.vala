@@ -101,29 +101,30 @@ namespace Gradio{
 			BitrateLabel.set_text(App.player.tag_bitrate.to_string()  + " Bit/s");
 			CodecLabel.set_text(App.player.tag_audio_codec);
 			ChannelModeLabel.set_text(App.player.tag_channel_mode);
+
 			if (App.settings.get_boolean ("show-notifications")) {
-	  		 if(current_title != App.player.tag_title && App.player.tag_title != null) {
-				if (App.player.tag_homepage != "") {
-					Util.get_image_from_url.begin(App.player.tag_homepage, 48, 48, (obj, res) => {
-			        	var icon = Util.get_image_from_url.end(res);
-						if(icon != null){
-						 send_notification(station.Title, App.player.tag_title, icon);
-						}else{
-						 send_notification(station.Title, App.player.tag_title, null);
-						}		
-	        		});				
-				}else{
+				if(current_title != App.player.tag_title && App.player.tag_title != null) {
+					if (App.player.tag_homepage != "") {
+						Util.get_image_from_url.begin(App.player.tag_homepage, 48, 48, (obj, res) => {
+			        			var icon = Util.get_image_from_url.end(res);
+							if(icon != null){
+						 		send_notification(station.Title, App.player.tag_title, icon);
+							}else{
+						 		send_notification(station.Title, App.player.tag_title, null);
+							}
+	        				});
+					}else{
 						Util.get_image_from_url.begin(station.Icon, 48, 48, (obj, res) => {
-			        	var icon = Util.get_image_from_url.end(res);
-						if(icon != null){
-						 send_notification(station.Title, App.player.tag_title, icon);
-						}else{
-						 send_notification(station.Title, App.player.tag_title, null);
-						}		
+							var icon = Util.get_image_from_url.end(res);
+							if(icon != null){
+								send_notification(station.Title, App.player.tag_title, icon);
+							}else{
+								send_notification(station.Title, App.player.tag_title, null);
+							}
 						});
-				}
-		    	current_title = App.player.tag_title;
-		 	 }
+					}
+			    		current_title = App.player.tag_title;
+		 	 	}
 			}
 		}
 
