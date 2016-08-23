@@ -95,9 +95,9 @@ namespace Gradio{
 
 		private void set_information(){
 			ChannelCurrentTitleLabel.set_text(App.player.tag_title);
-			NominalBitrateLabel.set_text(App.player.tag_nominal_bitrate.to_string() + " Bit/s");
-			MinimumBitrateLabel.set_text(App.player.tag_minimum_bitrate.to_string() + " Bit/s");
-			MaximumBitrateLabel.set_text(App.player.tag_maximum_bitrate.to_string() + " Bit/s");
+			NominalBitrateLabel.set_text(App.player.tag_nominal_bitrate.to_string() + " kBit/s");
+			MinimumBitrateLabel.set_text(App.player.tag_minimum_bitrate.to_string() + " kBit/s");
+			MaximumBitrateLabel.set_text(App.player.tag_maximum_bitrate.to_string() + " kBit/s");
 			BitrateLabel.set_text(App.player.tag_bitrate.to_string()  + " Bit/s");
 			CodecLabel.set_text(App.player.tag_audio_codec);
 			ChannelModeLabel.set_text(App.player.tag_channel_mode);
