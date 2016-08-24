@@ -12,7 +12,10 @@ namespace Gradio{
 		private bool no_stations = true;
 		private bool list_view = false;
 
-		private int max_results = -1;
+		private int results_chunk = -1;
+		private int results_loaded = 0;
+
+		private string address;
 
 		[GtkChild]
 		private FlowBox GridViewFlowBox;
@@ -27,6 +30,8 @@ namespace Gradio{
 		[GtkChild]
 		private ProgressBar Progress;
 
+		[GtkChild]
+		private Box BottomBox;
 		[GtkChild]
 		private Viewport GridScrolledViewport;
 		[GtkChild]
@@ -51,9 +56,9 @@ namespace Gradio{
 			provider = new StationProvider();
 
 			if(max == -1)
-				max_results = 1000;
+				results_chunk = 100;
 			else
-			max_results = max;
+			results_chunk = max;
 
 			HeaderImage.set_from_icon_name(image_name, IconSize.MENU);
 
@@ -121,16 +126,36 @@ namespace Gradio{
 		}
 
 		public void set_stations_from_list(HashTable<int,RadioStation> s){
-			if(s != null)
-				stations = s;
+			reset();
+			stations = s;
+
 			reload_view();
 		}
 
-		public void set_stations_from_address(string address){
-			provider.get_radio_stations.begin(address, max_results, (obj, res) => {
+		public void set_stations_from_address(string a){
+			reset();
+			address = a;
+
+			load_items_from_address();
+		}
+
+		public void add_stations_from_list(HashTable<int,RadioStation> s){
+			if(stations == null)
+				stations = new HashTable<int, RadioStation>(direct_hash, direct_equal);
+
+			s.foreach ((key, val) => {
+				stations[key] = val;
+			});
+
+			reload_view();
+		}
+
+		private void load_items_from_address(){
+			provider.get_radio_stations.begin(address, results_loaded, (results_loaded+results_chunk), (obj, res) => {
 			    	try {
 					var result = provider.get_radio_stations.end(res);
-					set_stations_from_list(result);
+					results_loaded = results_loaded + results_chunk;
+					add_stations_from_list(result);
 			    	} catch (ThreadError e) {
 					string msg = e.message;
 					stderr.printf("Error: Thread:" + msg+ "\n");
@@ -140,6 +165,11 @@ namespace Gradio{
 
 		public void set_extra_item(Gtk.Widget w){
 			ExtraItemBox.add(w);
+		}
+
+		[GtkCallback]
+		private void LoadMoreItems_clicked(Button button){
+			load_items_from_address();
 		}
 
 		public void show_list_view(){
@@ -154,9 +184,23 @@ namespace Gradio{
 			list_view = false;
 		}
 
-		public void reload_view(){
+		private void reset (){
+			reset_data();
+			reset_view();
+		}
+
+		private void reset_data(){
+			results_loaded = 0;
+			stations = null;
+		}
+
+		private void reset_view(){
 			Util.remove_all_items_from_flow_box((Gtk.FlowBox) GridViewFlowBox);
 			Util.remove_all_items_from_list_box((Gtk.ListBox) ListViewListBox);
+		}
+
+		public void reload_view(){
+			reset_view();
 
 			if(stations != null){
 				if(stations.length != 0){

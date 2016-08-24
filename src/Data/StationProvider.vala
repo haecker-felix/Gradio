@@ -59,9 +59,11 @@ namespace Gradio{
 
 
 		// Handle several stations and return them as a map
-		public async HashTable<int,RadioStation> get_radio_stations(string address, int max_results) throws ThreadError{
+		public async HashTable<int,RadioStation> get_radio_stations(string address, int start, int end) throws ThreadError{
 			SourceFunc callback = get_radio_stations.callback;
 			HashTable<int,RadioStation> output = null;
+
+			message("Requested results from %i to %i", start, end);
 
 			started();
 			ThreadFunc<void*> run = () => {
@@ -77,16 +79,16 @@ namespace Gradio{
 
 						int max_items = (int)radio_stations.get_length();
 
-						if(max_items < max_results)
-							max_results = max_items;
+						if(max_items < end)
+							end = max_items;
 
-						for(int a = 0; a < max_results; a++){
+						for(int a = start; a < end; a++){
 							var radio_station = radio_stations.get_element(a);
 							var radio_station_data = radio_station.get_object ();
 
 							var station = parse_station_data_from_json(radio_station_data);
 
-							double max_r = max_results;
+							double max_r = end;
 							double actual_r = a;
 
 							double p = actual_r/max_r;
