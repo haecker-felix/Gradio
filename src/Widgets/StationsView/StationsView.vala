@@ -24,6 +24,8 @@ namespace Gradio{
 		private Label TitleLabel;
 		[GtkChild]
 		private Box ExtraItemBox;
+		[GtkChild]
+		private ProgressBar Progress;
 
 		[GtkChild]
 		private Viewport GridScrolledViewport;
@@ -49,7 +51,7 @@ namespace Gradio{
 			provider = new StationProvider();
 
 			if(max == -1)
-				max_results = 200;
+				max_results = 1000;
 			else
 			max_results = max;
 
@@ -99,12 +101,21 @@ namespace Gradio{
 			});
 
 			provider.started.connect(() => {
+				Progress.set_visible(true);
+				Idle.add(() => { Progress.set_fraction(0.01); return false;});
 				StationsStack.set_visible_child_name("loading");
 			});
 
 			provider.finished.connect(() => {
+				Idle.add(() => { Progress.set_fraction(1.0); return false;});
+				Progress.set_visible(false);
+
 				//TODO: set correct grid/list
 				StationsStack.set_visible_child_name("grid-view");
+			});
+
+			provider.progress.connect((t) => {
+				Idle.add(() => { Progress.set_fraction(t); return false;});
 			});
 
 		}

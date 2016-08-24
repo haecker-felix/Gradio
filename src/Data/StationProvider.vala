@@ -4,6 +4,8 @@ namespace Gradio{
 		public signal void finished();
 		public signal void started();
 
+		public signal void progress(double p);
+
 		// Get the station data from ID
 		public RadioStation parse_station_data_from_id (int id){
 			Json.Parser parser = new Json.Parser ();
@@ -59,7 +61,7 @@ namespace Gradio{
 		// Handle several stations and return them as a map
 		public async HashTable<int,RadioStation> get_radio_stations(string address, int max_results) throws ThreadError{
 			SourceFunc callback = get_radio_stations.callback;
-			HashTable<int,RadioStation> output = new HashTable<int,RadioStation>(str_hash, str_equal);
+			HashTable<int,RadioStation> output = null;
 
 			started();
 			ThreadFunc<void*> run = () => {
@@ -83,6 +85,14 @@ namespace Gradio{
 							var radio_station_data = radio_station.get_object ();
 
 							var station = parse_station_data_from_json(radio_station_data);
+
+							double max_r = max_results;
+							double actual_r = a;
+
+							double p = actual_r/max_r;
+							message("Progress in double: " + p.to_string());
+							progress(p);
+							GLib.Thread.usleep(1000);
 
 							results[int.parse(station.ID)] = station;
 						}
