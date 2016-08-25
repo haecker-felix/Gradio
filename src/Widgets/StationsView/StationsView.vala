@@ -54,7 +54,7 @@ namespace Gradio{
 			provider = new StationProvider();
 
 			if(max == -1)
-				results_chunk = 50;
+				results_chunk = 100;
 			else
 			results_chunk = max;
 

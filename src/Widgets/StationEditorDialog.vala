@@ -6,8 +6,6 @@ namespace Gradio{
 
 		[GtkChild]
 		private Entry NameEntry;
-		[GtkChild]
-		private Entry UrlEntry;
 
 		private RadioStation station;
 

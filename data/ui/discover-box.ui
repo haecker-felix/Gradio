@@ -84,19 +84,14 @@
             </child>
             <child>
               <object class="GtkButton" id="AddStationButton">
+                <property name="label" translatable="yes">Create</property>
+                <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
-                <property name="no_show_all">True</property>
                 <property name="margin_left">4</property>
                 <property name="margin_top">4</property>
                 <property name="margin_bottom">4</property>
-                <child>
-                  <object class="GtkImage">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="icon_name">list-add-symbolic</property>
-                  </object>
-                </child>
+                <signal name="clicked" handler="AddStationButton_clicked" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>

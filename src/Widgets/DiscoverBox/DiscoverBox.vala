@@ -35,13 +35,6 @@ namespace Gradio{
 		[GtkChild]
 		private SearchEntry SearchEntry;
 
-		[GtkChild]
-		private Button HomeButton;
-		[GtkChild]
-		private Button ReloadButton;
-		[GtkChild]
-		private Button SearchButton;
-
 		private DiscoverSidebar sidebar;
 
 		public signal void languages_clicked();
@@ -171,6 +164,12 @@ namespace Gradio{
 		private void ReloadButton_clicked(Button button){
 			load_data();
 		}
+
+		[GtkCallback]
+		private void AddStationButton_clicked(Button button){
+			Util.open_website("http://www.radio-browser.info");
+		}
+
 
 
 		// Switch

@@ -35,7 +35,7 @@ namespace Gradio{
 		}
 
 		// Returns the playable url for the station
-		public static async string get_stream_address (string ID){
+		public async string get_stream_address (string ID){
 			SourceFunc callback = get_stream_address.callback;
 			string url = "";
 
