@@ -9,11 +9,11 @@ namespace Gradio {
 		public static AudioPlayer player;
 		public static Library library;
 		public static GLib.Settings settings;
-		public MPRIS mpris;
+		public static MPRIS mpris;
 		private Gtk.Menu menuSystem;
 
 		public App () {
-			Object(application_id: "de.haecker-felix.gradio", flags: ApplicationFlags.FLAGS_NONE);
+			Object(application_id: "de.haeckerfelix.gradio", flags: ApplicationFlags.FLAGS_NONE);
 		}
 
 		protected override void activate () {
@@ -40,14 +40,6 @@ namespace Gradio {
 
 		public void report_an_error(){
 			Util.open_website("https://github.com/haecker-felix/gradio/issues/new");
-		}
-
-		public void add_radio_station(){
-
-		}
-
-		public void edit_radio_station(){
-
 		}
 
 		private void show_preferences_dialog(){
@@ -122,8 +114,8 @@ namespace Gradio {
 			App.player.toggle_play_stop();
 		}
 
-	    /* Create menu for right button */
-	    private void create_menuSystem() {
+	    	/* Create menu for right button */
+	   	private void create_menuSystem() {
 			menuSystem = new Gtk.Menu();
 			var menuPlayStop = new Gtk.MenuItem.with_label("Play / Stop");
 			menuPlayStop.activate.connect(play_and_stop);
@@ -132,10 +124,10 @@ namespace Gradio {
 			menuQuit.activate.connect(this.quit_application);
 			menuSystem.append(menuQuit);
 			menuSystem.show_all();
-    }
+    		}
 
-	    /* Show popup menu on right button */
-	    private void menuSystem_popup(uint button, uint time) {
+	    	/* Show popup menu on right button */
+	    	private void menuSystem_popup(uint button, uint time) {
 			menuSystem.popup(null, null, null, button, time);
 		}
 
@@ -147,7 +139,6 @@ namespace Gradio {
 
 			// Init gtk
 			Gtk.init(ref args);
-			Notify.init("Gradio");
 			var trayicon = new Gtk.StatusIcon.from_icon_name("gradio");
 			trayicon.activate.connect(app.restore_window);
 			app.create_menuSystem();

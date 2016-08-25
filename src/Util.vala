@@ -120,14 +120,21 @@ public class Util{
 	}
 
 	public static void add_stylesheet (string path) {
-            var css_file = Constants.PKG_DATADIR + "/" + path;
-            var provider = new CssProvider ();
-            try {
-                provider.load_from_path (css_file);
-                StyleContext.add_provider_for_screen (Gdk.Screen.get_default (), provider, Gtk.STYLE_PROVIDER_PRIORITY_USER);
-                message ("Loaded %s", css_file);
-            } catch (Error e) {
-                error ("Error with stylesheet: %s", e.message);
-            }
-}
+		var css_file = Constants.PKG_DATADIR + "/" + path;
+		var provider = new CssProvider ();
+
+		try {
+			provider.load_from_path (css_file);
+			StyleContext.add_provider_for_screen (Gdk.Screen.get_default (), provider, Gtk.STYLE_PROVIDER_PRIORITY_USER);
+			message ("Loaded %s", css_file);
+		} catch (Error e) {
+			error ("Error with stylesheet: %s", e.message);
+		}
+	}
+
+	public static void send_notification(string summary, string body, Gdk.Pixbuf? icon = null){
+		var notification = new GLib.Notification (summary);
+		notification.set_body (body);
+		GLib.Application.get_default ().send_notification (null, notification);
+	}
 }

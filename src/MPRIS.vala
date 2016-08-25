@@ -35,9 +35,9 @@ namespace Gradio {
 					player.set_playback_status(status);
 				});
 				App.player.tag_changed.connect(() => {
-					if(current_station != null)
+					if(current_station != null){
 						player.set_metadata(current_station.ID, current_station.Icon, current_station.Title);
-
+					}
 				});
 			    	connection.register_object("/org/mpris/MediaPlayer2", player);
 		    	}catch(IOError e) {

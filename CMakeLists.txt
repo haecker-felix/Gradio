@@ -63,7 +63,7 @@ set (SOURCE_LIST
 
 # Some configuration
 configure_file (${CMAKE_CURRENT_SOURCE_DIR}/src/Config.vala.cmake ${CMAKE_CURRENT_SOURCE_DIR}/src/Config.vala)
-configure_file (${CMAKE_CURRENT_SOURCE_DIR}/data/gradio.desktop.in ${CMAKE_CURRENT_SOURCE_DIR}/data/gradio.desktop)
+configure_file (${CMAKE_CURRENT_SOURCE_DIR}/data/de.haeckerfelix.gradio.desktop.in ${CMAKE_CURRENT_SOURCE_DIR}/data/de.haeckerfelix.gradio.desktop)
 
 # Some definitions
 add_definitions(-DGETTEXT_PACKAGE=\"${GETTEXT_PACKAGE}\")
@@ -91,7 +91,6 @@ pkg_check_modules(DEPS REQUIRED
 	json-glib-1.0
 	gio-2.0
 	libsoup-2.4
-	libnotify
 )
 
 set(NORMAL_CFLAGS ${DEPS_CFLAGS} ${LIBSOURCE_CFLAGS} ${GCONF_CFLAGS})
@@ -130,7 +129,6 @@ PACKAGES
 	json-glib-1.0
 	gio-2.0
 	libsoup-2.4
-	libnotify
 OPTIONS
 	--thread
 	--target-glib=2.38
@@ -153,7 +151,7 @@ add_subdirectory (schemas)
 add_subdirectory (po)
 
 # install our .desktop file so the Applications menu will see it
-install (FILES ${CMAKE_CURRENT_SOURCE_DIR}/data/gradio.desktop DESTINATION ${DATADIR}/applications)
+install (FILES ${CMAKE_CURRENT_SOURCE_DIR}/data/de.haeckerfelix.gradio.desktop DESTINATION ${DATADIR}/applications)
 install (FILES ${CMAKE_CURRENT_SOURCE_DIR}/data/style/style.css DESTINATION ${PKG_DATADIR}/style)
 install (DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/data/icons/ DESTINATION ${DATADIR}/icons/hicolor)
 install (FILES ${CMAKE_CURRENT_SOURCE_DIR}/data/gradio.svg DESTINATION ${DATADIR}/pixmaps)

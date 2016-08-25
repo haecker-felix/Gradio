@@ -54,15 +54,14 @@ namespace Gradio{
 			this.set_visible(false);
 		}
 
-		private void send_notification(string summary, string body, Gdk.Pixbuf? icon = null){
-			var noti = new Notify.Notification (summary, body, null);
-			if (icon != null)
-				noti.set_image_from_pixbuf(icon);
-			noti.show();
+		private void send_notification(string summary, string body){
+			Util.send_notification(summary, body);
 		}
 
 		public void set_radio_station (RadioStation s){
 			station = s;
+
+			Gradio.App.mpris.set_station(station);
 
 			ChannelNameLabel.set_text(station.Title);
 
@@ -104,25 +103,8 @@ namespace Gradio{
 
 			if (App.settings.get_boolean ("show-notifications")) {
 				if(current_title != App.player.tag_title && App.player.tag_title != null) {
-					if (App.player.tag_homepage != "") {
-						Util.get_image_from_url.begin(App.player.tag_homepage, 48, 48, (obj, res) => {
-			        			var icon = Util.get_image_from_url.end(res);
-							if(icon != null){
-						 		send_notification(station.Title, App.player.tag_title, icon);
-							}else{
-						 		send_notification(station.Title, App.player.tag_title, null);
-							}
-	        				});
-					}else{
-						Util.get_image_from_url.begin(station.Icon, 48, 48, (obj, res) => {
-							var icon = Util.get_image_from_url.end(res);
-							if(icon != null){
-								send_notification(station.Title, App.player.tag_title, icon);
-							}else{
-								send_notification(station.Title, App.player.tag_title, null);
-							}
-						});
-					}
+					send_notification(station.Title, App.player.tag_title);
+
 			    		current_title = App.player.tag_title;
 		 	 	}
 			}

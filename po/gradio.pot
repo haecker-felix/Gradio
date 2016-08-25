@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-25 15:10+0200\n"
+"POT-Creation-Date: 2016-08-25 17:23+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,11 +17,11 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/Gradio.vala:69
+#: src/Gradio.vala:61
 msgid "translator-credits"
 msgstr ""
 
-#: src/Gradio.vala:71
+#: src/Gradio.vala:63
 msgid "About Gradio"
 msgstr ""
 
