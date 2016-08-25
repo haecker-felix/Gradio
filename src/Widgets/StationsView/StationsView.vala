@@ -22,16 +22,12 @@ namespace Gradio{
 		[GtkChild]
 		private Stack StationsStack;
 		[GtkChild]
-		private Stack BottomStack;
-		[GtkChild]
 		private Label TitleLabel;
 		[GtkChild]
 		private Box ExtraItemBox;
 		[GtkChild]
 		private ProgressBar Progress;
 
-		[GtkChild]
-		private Box BottomBox;
 		[GtkChild]
 		private Viewport GridScrolledViewport;
 		[GtkChild]
@@ -48,6 +44,8 @@ namespace Gradio{
 		private Stack ListViewStack;
 		[GtkChild]
 		private Image HeaderImage;
+		[GtkChild]
+		private Spinner Spinner;
 
 		private GLib.Settings settings;
 
@@ -56,7 +54,7 @@ namespace Gradio{
 			provider = new StationProvider();
 
 			if(max == -1)
-				results_chunk = 100;
+				results_chunk = 50;
 			else
 			results_chunk = max;
 
@@ -107,7 +105,7 @@ namespace Gradio{
 			provider.started.connect(() => {
 				Progress.set_visible(true);
 				Idle.add(() => { Progress.set_fraction(0.01); return false;});
-				BottomStack.set_visible_child_name("loading");
+				Spinner.start();
 			});
 
 			provider.finished.connect(() => {
@@ -115,7 +113,7 @@ namespace Gradio{
 				Progress.set_visible(false);
 
 				//TODO: set correct grid/list
-				BottomStack.set_visible_child_name("ready");
+				Spinner.stop();
 			});
 
 			provider.progress.connect((t) => {
@@ -178,11 +176,6 @@ namespace Gradio{
 			ExtraItemBox.add(w);
 		}
 
-		[GtkCallback]
-		private void LoadMoreItems_clicked(Button button){
-			load_items_from_address();
-		}
-
 		public void show_list_view(){
 			if(!no_stations)
 				StationsStack.set_visible_child_name("list-view");
@@ -207,6 +200,18 @@ namespace Gradio{
 		private void reset_view(){
 			Util.remove_all_items_from_flow_box((Gtk.FlowBox) GridViewFlowBox);
 			Util.remove_all_items_from_list_box((Gtk.ListBox) ListViewListBox);
+		}
+
+		[GtkCallback]
+		private void ListScrolled_edge_reached(PositionType t){
+			if(t == PositionType.BOTTOM)
+				load_items_from_address();
+		}
+
+		[GtkCallback]
+		private void GridScrolled_edge_reached(PositionType t){
+			if(t == PositionType.BOTTOM)
+				load_items_from_address();
 		}
 
 		public void add_to_view(List<RadioStation> new_stations){

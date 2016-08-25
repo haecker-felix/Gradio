@@ -93,7 +93,6 @@ namespace Gradio{
 
 							double p = actual_r/max_r;
 							progress(p);
-							GLib.Thread.usleep(1000);
 
 							results.append(station);
 						}

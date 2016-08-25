@@ -55,7 +55,19 @@
           <packing>
             <property name="expand">False</property>
             <property name="fill">True</property>
+            <property name="pack_type">end</property>
             <property name="position">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSpinner" id="Spinner">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">3</property>
           </packing>
         </child>
         <style>
@@ -66,21 +78,6 @@
         <property name="expand">False</property>
         <property name="fill">True</property>
         <property name="position">0</property>
-      </packing>
-    </child>
-    <child>
-      <object class="GtkProgressBar" id="Progress">
-        <property name="can_focus">False</property>
-        <property name="no_show_all">True</property>
-        <property name="pulse_step">0.20000000000000001</property>
-        <style>
-          <class name="osd"/>
-        </style>
-      </object>
-      <packing>
-        <property name="expand">False</property>
-        <property name="fill">True</property>
-        <property name="position">1</property>
       </packing>
     </child>
     <child>
@@ -104,6 +101,7 @@
                   <object class="GtkScrolledWindow" id="GridScrolled">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
+                    <signal name="edge-reached" handler="GridScrolled_edge_reached" swapped="no"/>
                     <child>
                       <object class="GtkViewport" id="GridScrolledViewport">
                         <property name="visible">True</property>
@@ -219,6 +217,7 @@
                   <object class="GtkScrolledWindow" id="ListScrolled">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
+                    <signal name="edge-reached" handler="ListScrolled_edge_reached" swapped="no"/>
                     <child>
                       <object class="GtkViewport" id="ListScrolledViewport">
                         <property name="visible">True</property>
@@ -268,81 +267,25 @@
       <packing>
         <property name="expand">True</property>
         <property name="fill">True</property>
-        <property name="position">2</property>
+        <property name="position">1</property>
       </packing>
     </child>
     <child>
-      <object class="GtkStack" id="BottomStack">
-        <property name="height_request">50</property>
-        <property name="visible">True</property>
+      <object class="GtkProgressBar" id="Progress">
         <property name="can_focus">False</property>
-        <property name="transition_type">crossfade</property>
-        <child>
-          <object class="GtkBox" id="BottomBox">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <child>
-              <object class="GtkLabel">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="halign">center</property>
-                <property name="valign">center</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkButton" id="LoadMoreItems">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="halign">center</property>
-                <property name="valign">center</property>
-                <signal name="clicked" handler="LoadMoreItems_clicked" swapped="no"/>
-                <child>
-                  <object class="GtkImage">
-                    <property name="width_request">60</property>
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="icon_name">view-more-horizontal-symbolic</property>
-                  </object>
-                </child>
-                <style>
-                  <class name="circular"/>
-                </style>
-              </object>
-              <packing>
-                <property name="expand">True</property>
-                <property name="fill">True</property>
-                <property name="position">1</property>
-              </packing>
-            </child>
-          </object>
-          <packing>
-            <property name="name">ready</property>
-            <property name="title" translatable="yes">ready</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkSpinner" id="Loading">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="active">True</property>
-          </object>
-          <packing>
-            <property name="name">loading</property>
-            <property name="title" translatable="yes">loading</property>
-            <property name="position">1</property>
-          </packing>
-        </child>
+        <property name="no_show_all">True</property>
+        <property name="pulse_step">0.10000000022351742</property>
+        <property name="text" translatable="yes">Loading...</property>
+        <property name="ellipsize">middle</property>
+        <style>
+          <class name="osd"/>
+        </style>
       </object>
       <packing>
         <property name="expand">False</property>
         <property name="fill">True</property>
-        <property name="position">3</property>
+        <property name="pack_type">end</property>
+        <property name="position">5</property>
       </packing>
     </child>
   </template>
