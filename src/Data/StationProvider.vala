@@ -92,7 +92,6 @@ namespace Gradio{
 							double actual_r = a;
 
 							double p = actual_r/max_r;
-							message("Progress in double: " + p.to_string());
 							progress(p);
 							GLib.Thread.usleep(1000);
 
@@ -118,7 +117,6 @@ namespace Gradio{
 			yield;
 			finished();
            		return output.copy();
-           		//return null;
         	}
 
 	}

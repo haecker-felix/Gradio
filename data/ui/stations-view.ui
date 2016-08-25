@@ -264,6 +264,68 @@
             <property name="position">2</property>
           </packing>
         </child>
+      </object>
+      <packing>
+        <property name="expand">True</property>
+        <property name="fill">True</property>
+        <property name="position">2</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkStack" id="BottomStack">
+        <property name="height_request">50</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="transition_type">crossfade</property>
+        <child>
+          <object class="GtkBox" id="BottomBox">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <child>
+              <object class="GtkLabel">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="LoadMoreItems">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <signal name="clicked" handler="LoadMoreItems_clicked" swapped="no"/>
+                <child>
+                  <object class="GtkImage">
+                    <property name="width_request">60</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="icon_name">view-more-horizontal-symbolic</property>
+                  </object>
+                </child>
+                <style>
+                  <class name="circular"/>
+                </style>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="name">ready</property>
+            <property name="title" translatable="yes">ready</property>
+          </packing>
+        </child>
         <child>
           <object class="GtkSpinner" id="Loading">
             <property name="visible">True</property>
@@ -273,46 +335,6 @@
           <packing>
             <property name="name">loading</property>
             <property name="title" translatable="yes">loading</property>
-            <property name="position">3</property>
-          </packing>
-        </child>
-      </object>
-      <packing>
-        <property name="expand">True</property>
-        <property name="fill">True</property>
-        <property name="position">2</property>
-      </packing>
-    </child>
-    <child>
-      <object class="GtkBox" id="BottomBox">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <child>
-          <object class="GtkLabel">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="halign">center</property>
-            <property name="valign">center</property>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkButton" id="LoadMoreItems">
-            <property name="label" translatable="yes">LoadMoreItems</property>
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">True</property>
-            <property name="halign">center</property>
-            <property name="valign">center</property>
-            <signal name="clicked" handler="LoadMoreItems_clicked" swapped="no"/>
-          </object>
-          <packing>
-            <property name="expand">True</property>
-            <property name="fill">True</property>
             <property name="position">1</property>
           </packing>
         </child>

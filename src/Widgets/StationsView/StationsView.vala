@@ -22,6 +22,8 @@ namespace Gradio{
 		[GtkChild]
 		private Stack StationsStack;
 		[GtkChild]
+		private Stack BottomStack;
+		[GtkChild]
 		private Label TitleLabel;
 		[GtkChild]
 		private Box ExtraItemBox;
@@ -105,7 +107,7 @@ namespace Gradio{
 			provider.started.connect(() => {
 				Progress.set_visible(true);
 				Idle.add(() => { Progress.set_fraction(0.01); return false;});
-				StationsStack.set_visible_child_name("loading");
+				BottomStack.set_visible_child_name("loading");
 			});
 
 			provider.finished.connect(() => {
@@ -113,7 +115,7 @@ namespace Gradio{
 				Progress.set_visible(false);
 
 				//TODO: set correct grid/list
-				StationsStack.set_visible_child_name("grid-view");
+				BottomStack.set_visible_child_name("ready");
 			});
 
 			provider.progress.connect((t) => {
