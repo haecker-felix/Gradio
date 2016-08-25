@@ -59,16 +59,16 @@ namespace Gradio{
 
 
 		// Handle several stations and return them as a map
-		public async HashTable<int,RadioStation> get_radio_stations(string address, int start, int end) throws ThreadError{
+		public async List<RadioStation> get_radio_stations(string address, int start, int end) throws ThreadError{
 			SourceFunc callback = get_radio_stations.callback;
-			HashTable<int,RadioStation> output = null;
+			List<RadioStation> output = null;
 
 			message("Requested results from %i to %i", start, end);
 
 			started();
 			ThreadFunc<void*> run = () => {
 				try{
-		   			HashTable<int,RadioStation> results = new HashTable<int,RadioStation>(direct_hash, direct_equal);
+		   			List<RadioStation> results = new List<RadioStation>();
 					string data = Util.get_string_from_uri(address);
 					Json.Parser parser = new Json.Parser ();
 
@@ -96,10 +96,10 @@ namespace Gradio{
 							progress(p);
 							GLib.Thread.usleep(1000);
 
-							results[int.parse(station.ID)] = station;
+							results.append(station);
 						}
 
-						output = results;
+						output = (owned)results;
 					}else{
 						output = null;
 					}
@@ -117,7 +117,8 @@ namespace Gradio{
 
 			yield;
 			finished();
-           		return output;
+           		return output.copy();
+           		//return null;
         	}
 
 	}

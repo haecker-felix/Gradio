@@ -5,7 +5,7 @@ namespace Gradio{
 	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/stations-view.ui")]
 	public class StationsView : Gtk.Box{
 
-		HashTable<int,RadioStation> stations;
+		List<RadioStation> stations;
 
 		private StationProvider provider;
 
@@ -125,13 +125,6 @@ namespace Gradio{
 
 		}
 
-		public void set_stations_from_list(HashTable<int,RadioStation> s){
-			reset();
-			stations = s;
-
-			reload_view();
-		}
-
 		public void set_stations_from_address(string a){
 			reset();
 			address = a;
@@ -139,12 +132,35 @@ namespace Gradio{
 			load_items_from_address();
 		}
 
-		public void add_stations_from_list(HashTable<int,RadioStation> s){
-			if(stations == null)
-				stations = new HashTable<int, RadioStation>(direct_hash, direct_equal);
+		public void set_stations_from_list(List<RadioStation> s){
+			reset();
+			stations = s.copy();
+
+			reload_view();
+		}
+
+		public void add_stations_from_list(ref List<RadioStation> s){
+			stations.concat((owned)s);
+
+			reload_view();
+		}
+
+		public void set_stations_from_hash_table(HashTable<int,RadioStation> s){
+			reset();
 
 			s.foreach ((key, val) => {
-				stations[key] = val;
+				stations.append(val);
+			});
+
+			reload_view();
+		}
+
+		public void add_stations_from_hash_table(HashTable<int,RadioStation> s){
+			if(stations == null)
+				stations = new List<RadioStation>();
+
+			s.foreach ((key, val) => {
+				stations.append(val);
 			});
 
 			reload_view();
@@ -155,7 +171,7 @@ namespace Gradio{
 			    	try {
 					var result = provider.get_radio_stations.end(res);
 					results_loaded = results_loaded + results_chunk;
-					add_stations_from_list(result);
+					add_stations_from_list(ref result);
 			    	} catch (ThreadError e) {
 					string msg = e.message;
 					stderr.printf("Error: Thread:" + msg+ "\n");
@@ -203,9 +219,9 @@ namespace Gradio{
 			reset_view();
 
 			if(stations != null){
-				if(stations.length != 0){
+				if((int)stations.length != 0){
 					no_stations = false;
-					stations.foreach ((key, val) => {
+					stations.foreach ((val) => {
 						GridItem grid_box = new GridItem(val);
 						ListItem list_box = new ListItem(val);
 						if(!(val.Broken)){
