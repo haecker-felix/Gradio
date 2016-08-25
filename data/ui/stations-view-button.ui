@@ -5,6 +5,10 @@
   <template class="GradioStationsViewButton" parent="GtkBox">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
+    <property name="margin_left">2</property>
+    <property name="margin_right">2</property>
+    <property name="margin_top">2</property>
+    <property name="margin_bottom">2</property>
     <property name="orientation">vertical</property>
     <child>
       <object class="GtkButton">
@@ -20,6 +24,9 @@
             <property name="icon_name">view-more-horizontal-symbolic</property>
           </object>
         </child>
+        <style>
+          <class name="circular"/>
+        </style>
       </object>
       <packing>
         <property name="expand">False</property>
