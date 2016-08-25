@@ -16,8 +16,8 @@ namespace Gradio{
 
 			ContentBox.add(library_view);
 
-			App.library.added_radio_station.connect(() => library_view.reload_view());
-			App.library.removed_radio_station.connect(() => library_view.reload_view());
+			App.library.added_radio_station.connect(() => library_view.set_stations_from_hash_table(App.library.lib));
+			App.library.removed_radio_station.connect(() => library_view.set_stations_from_hash_table(App.library.lib));
 
 			ContentBox.show_all();
 		}

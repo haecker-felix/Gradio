@@ -5,8 +5,6 @@ namespace Gradio{
 	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/stations-view.ui")]
 	public class StationsView : Gtk.Box{
 
-		List<RadioStation> stations;
-
 		private StationProvider provider;
 
 		private bool no_stations = true;
@@ -84,7 +82,6 @@ namespace Gradio{
 			GridViewFlowBox.set_min_children_per_line(2);
 
 			connect_signals();
-			reload_view();
 		}
 
 		private void connect_signals(){
@@ -134,36 +131,32 @@ namespace Gradio{
 
 		public void set_stations_from_list(List<RadioStation> s){
 			reset();
-			stations = s.copy();
 
-			reload_view();
+			add_to_view(s.copy());
 		}
 
 		public void add_stations_from_list(ref List<RadioStation> s){
-			stations.concat((owned)s);
-
-			reload_view();
+			add_to_view(s.copy());
 		}
 
 		public void set_stations_from_hash_table(HashTable<int,RadioStation> s){
 			reset();
 
+			List<RadioStation> stations = new List<RadioStation>();
 			s.foreach ((key, val) => {
 				stations.append(val);
 			});
 
-			reload_view();
+			add_to_view(stations.copy());
 		}
 
 		public void add_stations_from_hash_table(HashTable<int,RadioStation> s){
-			if(stations == null)
-				stations = new List<RadioStation>();
-
+			List<RadioStation> stations = new List<RadioStation>();
 			s.foreach ((key, val) => {
 				stations.append(val);
 			});
 
-			reload_view();
+			add_to_view(stations.copy());
 		}
 
 		private void load_items_from_address(){
@@ -207,7 +200,6 @@ namespace Gradio{
 
 		private void reset_data(){
 			results_loaded = 0;
-			stations = null;
 		}
 
 		private void reset_view(){
@@ -215,34 +207,30 @@ namespace Gradio{
 			Util.remove_all_items_from_list_box((Gtk.ListBox) ListViewListBox);
 		}
 
-		public void reload_view(){
-			reset_view();
+		public void add_to_view(List<RadioStation> new_stations){
+			if((int)new_stations.length != 0){
+				no_stations = false;
 
-			if(stations != null){
-				if((int)stations.length != 0){
-					no_stations = false;
-					stations.foreach ((val) => {
-						GridItem grid_box = new GridItem(val);
-						ListItem list_box = new ListItem(val);
-						if(!(val.Broken)){
-							GridViewFlowBox.add(grid_box);
-							ListViewListBox.add(list_box);
-						}else if(!settings.get_boolean("only-show-working-stations")){
-							GridViewFlowBox.add(grid_box);
-							ListViewListBox.add(list_box);
-						}
-					});
-					if(list_view)
-						show_list_view();
-					else
-						show_grid_view();
+				new_stations.foreach ((val) => {
+					GridItem grid_box = new GridItem(val);
+					ListItem list_box = new ListItem(val);
+					if(!(val.Broken)){
+						GridViewFlowBox.add(grid_box);
+						ListViewListBox.add(list_box);
+					}else if(!settings.get_boolean("only-show-working-stations")){
+						GridViewFlowBox.add(grid_box);
+						ListViewListBox.add(list_box);
+					}
+				});
 
-				}else{
-					no_stations = true;
-					StationsStack.set_visible_child_name("no-results");
-				}
+				if(list_view)
+					show_list_view();
+				else
+					show_grid_view();
+			}else{
+				no_stations = true;
+				StationsStack.set_visible_child_name("no-results");
 			}
-
 		}
 	}
 }
