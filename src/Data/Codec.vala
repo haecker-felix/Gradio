@@ -20,22 +20,22 @@ namespace Gradio{
 				Gst.PbUtils.install_plugins_async(installer_detail, context, install_callback);
 			}else{
 				warning("Installation failed. Codec installation is not supported by your distribution. Please install the missin codec by yourself.");
-				Util.show_info_dialog("Automatic codec installation isn't supported by your distribution.\n Please install " + description + " manually.", Gradio.App.window);
+				Util.show_info_dialog("Automatic codec installation isn't supported by your distribution.\nPlease install " + description + " manually.", Gradio.App.window);
 			}
 		}
 
 		private void install_callback(Gst.PbUtils.InstallPluginsReturn result){
 			message("resulted");
 			switch(result){
-				case Gst.PbUtils.InstallPluginsReturn.SUCCESS: message("SUCCESS"); break;
-				case Gst.PbUtils.InstallPluginsReturn.NOT_FOUND: message("NOT_FOUND"); break;
-				case Gst.PbUtils.InstallPluginsReturn.ERROR: message("ERROR"); break;
-				case Gst.PbUtils.InstallPluginsReturn.PARTIAL_SUCCESS: message("PARTIAL_SUCCESS"); break;
-				case Gst.PbUtils.InstallPluginsReturn.USER_ABORT: message("USER_ABORT"); break;
-				case Gst.PbUtils.InstallPluginsReturn.CRASHED: message("CRASHED"); break;
-				case Gst.PbUtils.InstallPluginsReturn.INVALID: message("INVALID"); break;
-				default: message(""); break;
+				case Gst.PbUtils.InstallPluginsReturn.SUCCESS: close(); break;
+				case Gst.PbUtils.InstallPluginsReturn.PARTIAL_SUCCESS: close(); break;
+				default: Util.show_info_dialog("Could not install new codec.", Gradio.App.window); break;
 			}
+		}
+
+		private void close(){
+			message("Successfully installed new codec.");
+			Util.show_info_dialog("Installed new codec successfully. Gradio must be restarted.", Gradio.App.window);
 		}
 
 	}

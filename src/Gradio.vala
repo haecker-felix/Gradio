@@ -104,7 +104,7 @@ namespace Gradio {
 			active_window.present ();
 		}
 
-		private void quit_application(){
+		public void quit_application(){
 			restore_window ();
 			window.save_geometry ();
 			base.quit ();
