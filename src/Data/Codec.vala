@@ -20,6 +20,7 @@ namespace Gradio{
 				Gst.PbUtils.install_plugins_async(installer_detail, context, install_callback);
 			}else{
 				warning("Installation failed. Codec installation is not supported by your distribution. Please install the missin codec by yourself.");
+				Util.show_info_dialog("Automatic codec installation isn't supported by your distribution.\n Please install " + description + " manually.", Gradio.App.window);
 			}
 		}
 

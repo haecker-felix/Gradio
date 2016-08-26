@@ -53,20 +53,22 @@ namespace Gradio{
 		private bool bus_callback (Gst.Bus bus, Gst.Message m) {
 			switch (m.type) {
 				case Gst.MessageType.ELEMENT:
+					message("Check if codec is missing...");
 				    	if(m.get_structure() != null && Gst.PbUtils.is_missing_plugin_message(m)) {
 				    		codec.install_missing_codec(m);
 				    	}
             				break;
 				case MessageType.ERROR:
+					message("Got an error message:");
 					GLib.Error err;
 					string debug;
 
 					m.parse_error (out err, out debug);
-					print (err.message);
+					message (err.message);
 
 					stream.set_state (State.NULL);
-					connection_error(err.message);
-					state_changed();
+					//connection_error(err.message);
+					//state_changed();
 					break;
 				case MessageType.EOS:
 					print ("End of stream.");
