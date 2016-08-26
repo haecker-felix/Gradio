@@ -10,6 +10,8 @@ namespace Gradio{
 		public signal void state_changed();
 		public signal void tag_changed();
 
+		private Codec codec;
+
 		public string tag_title;
 		public string tag_homepage;
 		public bool tag_has_crc;
@@ -23,30 +25,38 @@ namespace Gradio{
 		public RadioStation current_station;
 
 		public AudioPlayer(){
+			Gst.PbUtils.init();
+
+			codec = new Codec();
+
 			stream = ElementFactory.make ("playbin", "play");
 			set_volume(App.settings.get_double ("volume-position"));
 
 			this.notify.connect ((s, p) => stdout.printf ("Property %s changed\n", p.name));
 		}
 
-		private int EndsWithFoo(string s)
-		{
-		  int ret = 0;
-	      int si = s.length;
-		  if (s != null)
-		  {
-		    if (si >= 4 && s[si-4] == '.' && s[si-3] == 'j' && s[si-2] == 'p' && s[si-1] == 'g')
-		      ret = 1;
-		    if (si >= 4 && s[si-4] == '.' && s[si-3] == 'p' && s[si-2] == 'n' && s[si-1] == 'g')
-		      ret = 1;
-		    if (si >= 4 && s[si-4] == '.' && s[si-3] == 'b' && s[si-2] == 'm' && s[si-1] == 'p')
-		      ret = 1;
-		  }
-		  return ret;
+		private int EndsWithFoo(string s){
+			int ret = 0;
+			int si = s.length;
+
+			if (s != null){
+		    		if (si >= 4 && s[si-4] == '.' && s[si-3] == 'j' && s[si-2] == 'p' && s[si-1] == 'g')
+		      			ret = 1;
+		    		if (si >= 4 && s[si-4] == '.' && s[si-3] == 'p' && s[si-2] == 'n' && s[si-1] == 'g')
+		      			ret = 1;
+		    		if (si >= 4 && s[si-4] == '.' && s[si-3] == 'b' && s[si-2] == 'm' && s[si-1] == 'p')
+		      			ret = 1;
+		  	}
+		  	return ret;
 		}
 
 		private bool bus_callback (Gst.Bus bus, Gst.Message m) {
 			switch (m.type) {
+				case Gst.MessageType.ELEMENT:
+				    	if(m.get_structure() != null && Gst.PbUtils.is_missing_plugin_message(m)) {
+				    		codec.install_missing_codec(m);
+				    	}
+            				break;
 				case MessageType.ERROR:
 					GLib.Error err;
 					string debug;
@@ -79,7 +89,9 @@ namespace Gradio{
 
 					tag_list.get_string("title", out tag_title);
 					tag_list.get_string("homepage", out tag_homepage);
-					if (EndsWithFoo(tag_homepage) == 0) tag_homepage = "";
+
+					if (EndsWithFoo(tag_homepage) == 0)
+						tag_homepage = "";
 
 					tag_list.get_boolean("has-crc", out tag_has_crc);
 

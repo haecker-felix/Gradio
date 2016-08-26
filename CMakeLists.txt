@@ -35,6 +35,7 @@ add_custom_target (dist COMMAND ${CMAKE_MAKE_PROGRAM} package_source)
 
 # define variable for sources
 set (SOURCE_LIST
+	src/Data/Codec.vala
 	src/Data/StationProvider.vala
 	src/Data/RadioBrowser.vala
 	src/Data/CategoryItemProvider.vala
@@ -88,6 +89,8 @@ pkg_check_modules(DEPS REQUIRED
 	glib-2.0
 	gtk+-3.0>=3.18
 	gstreamer-1.0
+	gstreamer-pbutils-1.0
+	gstreamer-plugins-base-1.0
 	json-glib-1.0
 	gio-2.0
 	libsoup-2.4
@@ -129,6 +132,7 @@ PACKAGES
 	json-glib-1.0
 	gio-2.0
 	libsoup-2.4
+	gstreamer-pbutils-1.0
 OPTIONS
 	--thread
 	--target-glib=2.38
