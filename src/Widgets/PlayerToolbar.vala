@@ -103,9 +103,11 @@ namespace Gradio{
 
 			if (App.settings.get_boolean ("show-notifications")) {
 				if(current_title != App.player.tag_title && App.player.tag_title != null) {
-					send_notification(station.Title, App.player.tag_title);
+					string tmp = App.player.tag_title;
+					tmp = tmp.replace ("&", "&amp;");
+					send_notification(station.Title, tmp);
 
-			    		current_title = App.player.tag_title;
+					current_title = App.player.tag_title;
 		 	 	}
 			}
 		}
