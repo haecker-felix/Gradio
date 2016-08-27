@@ -507,6 +507,7 @@ audio-volume-medium-symbolic</property>
                 </child>
               </object>
             </child>
+            <accelerator key="space" signal="activate"/>
           </object>
           <packing>
             <property name="expand">False</property>
