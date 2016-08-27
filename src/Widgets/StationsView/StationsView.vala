@@ -7,6 +7,8 @@ namespace Gradio{
 
 		private StationProvider provider;
 
+		public signal void clicked(RadioStation s);
+
 		private bool no_stations = true;
 		private bool list_view = false;
 
@@ -87,19 +89,13 @@ namespace Gradio{
 		private void connect_signals(){
 			ListViewListBox.row_activated.connect((t,a) => {
 				ListItem item = (ListItem)a;
-				ActionPopover apop = new ActionPopover(item.station);
-				apop.set_relative_to(a);
-				apop.set_position(PositionType.BOTTOM);
-				apop.show();
+				clicked(item.station);
 			});
 
 
 			GridViewFlowBox.child_activated.connect((t,a) => {
 				GridItem item = (GridItem)a;
-				ActionPopover apop = new ActionPopover(item.station);
-				apop.set_relative_to(a);
-				apop.set_position(PositionType.BOTTOM);
-				apop.show();
+				clicked(item.station);
 			});
 
 			provider.started.connect(() => {

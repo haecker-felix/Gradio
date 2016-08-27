@@ -19,6 +19,14 @@ namespace Gradio{
 		private Box MediaControlBox;
 		[GtkChild]
 		private Box InfoBox;
+		[GtkChild]
+		private Box ActionBox;
+		[GtkChild]
+		private Image AddImage;
+		[GtkChild]
+		private Image RemoveImage;
+		[GtkChild]
+		private Label LikesLabel;
 
 		[GtkChild]
 		private Label NominalBitrateLabel;
@@ -34,8 +42,6 @@ namespace Gradio{
 		private Label ChannelModeLabel;
 		[GtkChild]
 		private VolumeButton VolumeButton;
-		[GtkChild]
-		private MenuButton InfoMenuButton;
 
 		RadioStation station;
 		private string current_title = null;
@@ -44,8 +50,7 @@ namespace Gradio{
 			this.pack_start(MediaControlBox);
 			this.pack_start(StationLogo);
 			this.pack_start(InfoBox);
-			this.pack_end(VolumeButton);
-			this.pack_end(InfoMenuButton);
+			this.pack_end(ActionBox);
 
 			App.player.state_changed.connect (() => refresh_play_stop_button());
 			App.player.tag_changed.connect (() => set_information());
@@ -77,6 +82,10 @@ namespace Gradio{
 				
         		});
 
+			refresh_add_remove_button();
+			refresh_like_button();
+			refresh_play_stop_button();
+
 			this.set_visible(true);
 		}
 
@@ -90,6 +99,28 @@ namespace Gradio{
         	private void VolumeButton_value_changed (double value) {
 			App.player.set_volume(value);
 			App.settings.set_double("volume-position", value);
+		}
+
+		[GtkCallback]
+		private void AddRemoveButton_clicked(Button button){
+			if(App.library.contains_station(int.parse(station.ID))){
+				App.library.remove_radio_station_by_id(int.parse(station.ID));
+			}else{
+				App.library.add_radio_station_by_id(int.parse(station.ID));
+			}
+
+			refresh_add_remove_button();
+		}
+
+		[GtkCallback]
+		private void LikeButton_clicked(Button button){
+			station.vote();
+			refresh_like_button();
+		}
+
+		[GtkCallback]
+		private void OpenHomepageButton_clicked (Button button) {
+			Util.open_website(station.Homepage);
 		}
 
 		private void set_information(){
@@ -107,6 +138,20 @@ namespace Gradio{
 
 			    		current_title = App.player.tag_title;
 		 	 	}
+			}
+		}
+
+		private void refresh_like_button(){
+			LikesLabel.set_text(station.Votes.to_string());
+		}
+
+		private void refresh_add_remove_button(){
+			if(Gradio.App.library.contains_station(int.parse(station.ID))){
+				AddImage.set_visible(false);
+				RemoveImage.set_visible(true);
+			}else{
+				AddImage.set_visible(true);
+				RemoveImage.set_visible(false);
 			}
 		}
 

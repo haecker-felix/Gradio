@@ -63,6 +63,7 @@
           <object class="GtkSpinner" id="Spinner">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="margin_right">5</property>
           </object>
           <packing>
             <property name="expand">False</property>

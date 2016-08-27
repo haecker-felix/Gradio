@@ -54,7 +54,7 @@ namespace Gradio{
 	       		discover_box = new DiscoverBox();
 			library_box = new LibraryBox();
 
-			DatabaseStack.add_titled(library_box, "library_box", _("Library"));
+			DatabaseStack.add_titled(library_box, "library_box", _("Favorites"));
 	       		DatabaseStack.add_titled(discover_box, "discover_box", _("Discover"));
 
 			var builder = new Gtk.Builder.from_resource ("/de/haecker-felix/gradio/app-menu.ui");

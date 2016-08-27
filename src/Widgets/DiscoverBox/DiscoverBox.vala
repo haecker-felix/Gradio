@@ -48,10 +48,14 @@ namespace Gradio{
 			settings = new GLib.Settings ("de.haecker-felix.gradio");
 
 			stations_view_results = new StationsView("Results", true, "system-search-symbolic");
-
 			grid_view_recently_changed = new StationsView("Recently Changed", false, "text-editor-symbolic", 12);
 			grid_view_recently_clicked = new StationsView("Recently Clicked", false, "view-refresh-symbolic", 12);
 			grid_view_most_votes = new StationsView("Most Popular", false, "emote-love-symbolic", 12);
+
+			grid_view_recently_changed.clicked.connect((t) => Gradio.App.player.set_radio_station(t));
+			grid_view_recently_clicked.clicked.connect((t) => Gradio.App.player.set_radio_station(t));
+			grid_view_most_votes.clicked.connect((t) => Gradio.App.player.set_radio_station(t));
+			stations_view_results.clicked.connect((t) => Gradio.App.player.set_radio_station(t));
 
 			button_most_votes = new StationsViewButton();
 			button_recently_changed = new StationsViewButton();
