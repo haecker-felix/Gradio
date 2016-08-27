@@ -47,7 +47,6 @@ set (SOURCE_LIST
 	src/Widgets/PlayerToolbar.vala
 	src/Widgets/StationsView/ListItem.vala
 	src/Widgets/StationsView/GridItem.vala
-	src/Widgets/ActionPopover.vala
 	src/Widgets/SettingsDialog.vala
 	src/Widgets/StationsView/StationsView.vala
 	src/Widgets/StationsView/StationsViewButton.vala
