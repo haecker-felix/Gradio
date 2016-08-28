@@ -6,26 +6,48 @@ namespace Gradio{
 	public class ListItem : Gtk.ListBoxRow{
 
 		[GtkChild]
-		private Image ChannelLogoImage;
-		[GtkChild]
 		private Label ChannelNameLabel;
 		[GtkChild]
-		private Label LocationLabel;
+		private Label ChannelLocationLabel;
+		[GtkChild]
+		private Label ChannelTagsLabel;
+		[GtkChild]
+		private Label LikesLabel;
+		[GtkChild]
+		private Image ChannelLogoImage;
+		[GtkChild]
+		private Image InLibraryImage;
+		[GtkChild]
+		private Image NotInLibraryImage;
 
 		public RadioStation station;
 
 		public ListItem(RadioStation s){
 			station = s;
 
+			load_information();
+		}
+
+		private void load_information(){
 			ChannelNameLabel.set_text(station.Title);
-			LocationLabel.set_text(station.Country + " " + station.State);
+			ChannelLocationLabel.set_text(station.Country + " " + station.State);
+			ChannelTagsLabel.set_text(station.Tags);
+			LikesLabel.set_text(station.Votes.to_string());
+
+			if(Gradio.App.library.contains_station(int.parse(station.ID))){
+				NotInLibraryImage.set_visible(false);
+				InLibraryImage.set_visible(true);
+			}else{
+				NotInLibraryImage.set_visible(true);
+				InLibraryImage.set_visible(false);
+			}
 
 			Gdk.Pixbuf icon = null;
 			Util.get_image_from_url.begin(station.Icon, 32, 32, (obj, res) => {
 		        	icon = Util.get_image_from_url.end(res);
 
 				if(icon != null){
-					ChannelLogoImage.set_from_pixbuf(icon);	
+					ChannelLogoImage.set_from_pixbuf(icon);
 				}
         		});
 		}

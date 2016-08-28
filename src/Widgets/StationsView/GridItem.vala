@@ -27,14 +27,20 @@ namespace Gradio{
 
 			ChannelNameLabel.set_ellipsize(Pango.EllipsizeMode.END);
 			ChannelNameLabel.set_max_width_chars(25);
-
 			ChannelLocationLabel.set_ellipsize(Pango.EllipsizeMode.END);
 			ChannelLocationLabel.set_max_width_chars(25);
-
 			ChannelTagsLabel.set_ellipsize(Pango.EllipsizeMode.END);
 			ChannelTagsLabel.set_max_width_chars(25);
 
+			load_information();
+		}
+
+		private void load_information(){
+			ChannelNameLabel.set_text(station.Title);
+			ChannelLocationLabel.set_text(station.Country + " " + station.State);
+			ChannelTagsLabel.set_text(station.Tags);
 			LikesLabel.set_text(station.Votes.to_string());
+
 			if(Gradio.App.library.contains_station(int.parse(station.ID))){
 				NotInLibraryImage.set_visible(false);
 				InLibraryImage.set_visible(true);
@@ -42,15 +48,6 @@ namespace Gradio{
 				NotInLibraryImage.set_visible(true);
 				InLibraryImage.set_visible(false);
 			}
-
-			load_information();
-			station.data_changed.connect(() => load_information());
-		}
-
-		private void load_information(){
-			ChannelNameLabel.set_text(station.Title);
-			ChannelLocationLabel.set_text(station.Country + " " + station.State);
-			ChannelTagsLabel.set_text(station.Tags);
 
 			Gdk.Pixbuf icon = null;
 			Util.get_image_from_url.begin(station.Icon, 64, 64, (obj, res) => {
