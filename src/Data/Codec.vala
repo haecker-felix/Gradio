@@ -15,7 +15,6 @@ namespace Gradio{
 
 			if(Gst.PbUtils.install_plugins_supported()){
 				var context = new Gst.PbUtils.InstallPluginsContext();
-				context.set_desktop_id("de.haeckerfelix.gradio.desktop");
 
 				Gst.PbUtils.install_plugins_async(installer_detail, context, install_callback);
 			}else{
