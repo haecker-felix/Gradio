@@ -12,7 +12,13 @@ namespace Gradio{
 		[GtkChild]
 		private Label ChannelTagsLabel;
 		[GtkChild]
+		private Label LikesLabel;
+		[GtkChild]
 		private Image ChannelLogoImage;
+		[GtkChild]
+		private Image InLibraryImage;
+		[GtkChild]
+		private Image NotInLibraryImage;
 
 		public RadioStation station;
 
@@ -27,6 +33,15 @@ namespace Gradio{
 
 			ChannelTagsLabel.set_ellipsize(Pango.EllipsizeMode.END);
 			ChannelTagsLabel.set_max_width_chars(25);
+
+			LikesLabel.set_text(station.Votes.to_string());
+			if(Gradio.App.library.contains_station(int.parse(station.ID))){
+				NotInLibraryImage.set_visible(false);
+				InLibraryImage.set_visible(true);
+			}else{
+				NotInLibraryImage.set_visible(true);
+				InLibraryImage.set_visible(false);
+			}
 
 			load_information();
 			station.data_changed.connect(() => load_information());

@@ -37,3 +37,13 @@
 	border-color: @borders;
 	background-color: mix(@theme_base_color,#000000,0.2);
 }
+
+.grid-overlay-box {
+	font-size: smaller;
+	background-color: mix(@theme_base_color,#000000,0.2);
+	border-radius: 0;
+}
+
+.grid-overlay-box:backdrop label {
+        color: @theme_selected_fg_color;
+}

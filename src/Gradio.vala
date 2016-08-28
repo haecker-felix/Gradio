@@ -17,6 +17,9 @@ namespace Gradio {
 		}
 
 		protected override void activate () {
+			library = new Library();
+			library.read_data();
+
 			create_app_menu();
 
 			player = new AudioPlayer();
@@ -24,9 +27,6 @@ namespace Gradio {
 
 			mpris = new MPRIS();
 			mpris.initialize();
-
-			library = new Library();
-			library.read_data();
 
 			window = new MainWindow(this);
 			this.add_window(window);
