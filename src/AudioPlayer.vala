@@ -67,8 +67,8 @@ namespace Gradio{
 					message (err.message);
 
 					stream.set_state (State.NULL);
-					//connection_error(err.message);
-					//state_changed();
+					connection_error(err.message);
+					state_changed();
 					break;
 				case MessageType.EOS:
 					print ("End of stream.");
