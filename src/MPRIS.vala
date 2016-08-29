@@ -27,6 +27,9 @@ namespace Gradio {
 			    	connection.register_object("/org/mpris/MediaPlayer2", root);
 			    
 			    	player = new MprisPlayer(connection);
+
+			    	App.player.radio_station_changed.connect((t) => set_station(t));
+
 				App.player.state_changed.connect(() => {
 					string status = "Stopped";
 					if(App.player.is_playing())
@@ -34,6 +37,7 @@ namespace Gradio {
 
 					player.set_playback_status(status);
 				});
+
 				App.player.tag_changed.connect(() => {
 					if(current_station != null){
 						player.set_metadata(current_station.ID, current_station.Icon, current_station.Title);
@@ -45,7 +49,7 @@ namespace Gradio {
 		    	}
 	    	}
 
-		public void set_station(RadioStation s){
+		private void set_station(RadioStation s){
 			current_station = s;
 			player.set_metadata(current_station.ID, current_station.Icon, current_station.Title);
 		}

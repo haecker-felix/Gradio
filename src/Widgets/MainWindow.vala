@@ -19,6 +19,14 @@ namespace Gradio{
 		private Box Bottom;
 		[GtkChild]
 		private MenuButton MenuButton;
+		[GtkChild]
+		private StackSwitcher StackSwitcher;
+		[GtkChild]
+		private ToggleButton MiniPlayerButton;
+		[GtkChild]
+		private Button GridListButton;
+
+		private MiniPlayer mplayer;
 
 		private int height;
 		private int width;
@@ -66,6 +74,9 @@ namespace Gradio{
 			DatabaseStack.add_titled(library_box, "library_box", _("Library"));
 	       		DatabaseStack.add_titled(discover_box, "discover_box", _("Discover"));
 
+			mplayer = new MiniPlayer();
+			ContentStack.add_titled(mplayer, "miniplayer", _("MiniPlayer"));
+
 			// Load css
 			Util.add_stylesheet("style/style.css");
 
@@ -88,10 +99,6 @@ namespace Gradio{
 		}
 
 		private void connect_signals(){
-			App.player.radio_station_changed.connect((t,a) => {
-				player_toolbar.set_radio_station(a);
-			});
-
 			this.delete_event.connect (() => {
 				save_geometry ();
 				if (App.settings.get_boolean ("close-to-tray")) {
@@ -108,11 +115,29 @@ namespace Gradio{
 		}
 
 		public void show_mini_player(){
+			StackSwitcher.set_visible(false);
+			GridListButton.set_visible(false);
 
+			this.set_size_request (10,10);
+			this.resize(10,10);
+			this.set_resizable(false);
+			ContentStack.set_visible_child_name("miniplayer");
 		}
 
 		public void show_no_connection_message (){
+			MiniPlayerButton.set_visible(false);
+			StackSwitcher.set_visible(false);
+			GridListButton.set_visible(false);
 			ContentStack.set_visible_child_name("no_connection");
+		}
+
+		public void show_database(){
+			this.set_size_request (920,500);
+			this.set_resizable(true);
+			MiniPlayerButton.set_visible(true);
+			GridListButton.set_visible(true);
+			StackSwitcher.set_visible(true);
+			ContentStack.set_visible_child_name("database");
 		}
 
 		public void save_geometry (){
@@ -123,6 +148,15 @@ namespace Gradio{
 			App.settings.set_int("window-position-x", pos_x);
 			App.settings.set_int("window-position-y", pos_y);
 			this.move(pos_x, pos_y);
+		}
+
+		[GtkCallback]
+		private void MiniPlayerButton_toggled(Gtk.ToggleButton button){
+			if (button.active) {
+				show_mini_player();
+			} else {
+				show_database();
+			}
 		}
 
 		public void restore_geometry(){

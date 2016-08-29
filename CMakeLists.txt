@@ -51,6 +51,7 @@ set (SOURCE_LIST
 	src/Widgets/StationsView/StationsView.vala
 	src/Widgets/StationsView/StationsViewButton.vala
 	src/Widgets/StationEditorDialog.vala
+	src/Widgets/MiniPlayer.vala
 	src/AudioPlayer.vala
 	src/RadioStation.vala
 	src/Util.vala
