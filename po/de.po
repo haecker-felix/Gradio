@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-26 23:21+0200\n"
+"POT-Creation-Date: 2016-09-11 17:27+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Heiko Adams <heiko.adams@gmail.com>\n"
 "Language-Team: \n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Poedit 1.8.8\n"
+"X-Generator: Poedit 1.8.9\n"
 
 #: src/Gradio.vala:61
 msgid "translator-credits"
@@ -21,10 +21,14 @@ msgstr "Übersetzer Credits"
 msgid "About Gradio"
 msgstr "Über Gradio"
 
-#: src/Widgets/MainWindow.vala:57
+#: src/Widgets/MainWindow.vala:80
 msgid "Library"
 msgstr "Bibliothek"
 
-#: src/Widgets/MainWindow.vala:58
+#: src/Widgets/MainWindow.vala:81
 msgid "Discover"
 msgstr "Entdecken"
+
+#: src/Widgets/MainWindow.vala:84
+msgid "MiniPlayer"
+msgstr "MiniPlayer"
