@@ -7,13 +7,20 @@ namespace Gradio{
 
 		private StationProvider provider;
 
+		public signal void clicked(RadioStation s);
+
 		private bool no_stations = true;
 		private bool list_view = false;
 
-		private int results_chunk = -1;
+		private int results_chunk = 100;
 		private int results_loaded = 0;
 
 		private string address;
+
+		[GtkChild]
+		private ScrolledWindow GridScrolledWindow;
+		[GtkChild]
+		private ScrolledWindow ListScrolledWindow;
 
 		[GtkChild]
 		private FlowBox GridViewFlowBox;
@@ -29,57 +36,31 @@ namespace Gradio{
 		private ProgressBar Progress;
 
 		[GtkChild]
-		private Viewport GridScrolledViewport;
-		[GtkChild]
-		private Viewport ListScrolledViewport;
-
-		[GtkChild]
-		private Box GridNormal;
-		[GtkChild]
-		private Box ListNormal;
-
-		[GtkChild]
-		private Stack GridViewStack;
-		[GtkChild]
-		private Stack ListViewStack;
-		[GtkChild]
 		private Image HeaderImage;
 		[GtkChild]
 		private Spinner Spinner;
 
 		private GLib.Settings settings;
 
-		public StationsView(string title, bool scrollable, string image_name = "emblem-documents-symbolic", int max = -1){
+		public StationsView(string title = "Items", string image_name = "emblem-documents-symbolic", bool discover_mode = false){
 			settings = new GLib.Settings ("de.haecker-felix.gradio");
 			provider = new StationProvider();
-
-			if(max == -1)
-				results_chunk = 100;
-			else
-			results_chunk = max;
 
 			HeaderImage.set_from_icon_name(image_name, IconSize.MENU);
 
 			this.expand = true;
-
-			if(scrollable){
-				GridScrolledViewport.add(GridViewFlowBox);
-				ListScrolledViewport.add(ListViewListBox);
-				GridViewStack.set_visible_child_name("grid-scrolled");
-				ListViewStack.set_visible_child_name("list-scrolled");
-			}else{
-				GridNormal.add(GridViewFlowBox);
-				ListNormal.add(ListViewListBox);
-				GridViewStack.set_visible_child_name("grid-normal");
-				ListViewStack.set_visible_child_name("list-normal");
-			}
 
 			TitleLabel.set_text(title);
 
 			GridViewFlowBox.set_homogeneous(true);
 			GridViewFlowBox.halign = Gtk.Align.FILL;
 			GridViewFlowBox.valign = Gtk.Align.START;
-			GridViewFlowBox.set_min_children_per_line(2);
+
+			if(discover_mode){
+				GridViewFlowBox.set_max_children_per_line(1);
+				GridViewFlowBox.set_max_children_per_line(1);
+				results_chunk = 20;
+			}
 
 			connect_signals();
 		}
@@ -87,20 +68,14 @@ namespace Gradio{
 		private void connect_signals(){
 			ListViewListBox.row_activated.connect((t,a) => {
 				ListItem item = (ListItem)a;
-				ActionPopover apop = new ActionPopover(item.station);
-				apop.set_relative_to(a);
-				apop.set_position(PositionType.BOTTOM);
-				apop.show();
+				clicked(item.station);
 			});
-
 
 			GridViewFlowBox.child_activated.connect((t,a) => {
 				GridItem item = (GridItem)a;
-				ActionPopover apop = new ActionPopover(item.station);
-				apop.set_relative_to(a);
-				apop.set_position(PositionType.BOTTOM);
-				apop.show();
+				clicked(item.station);
 			});
+
 
 			provider.started.connect(() => {
 				Progress.set_visible(true);
@@ -111,8 +86,6 @@ namespace Gradio{
 			provider.finished.connect(() => {
 				Idle.add(() => { Progress.set_fraction(1.0); return false;});
 				Progress.set_visible(false);
-
-				//TODO: set correct grid/list
 				Spinner.stop();
 			});
 
@@ -202,6 +175,7 @@ namespace Gradio{
 			Util.remove_all_items_from_list_box((Gtk.ListBox) ListViewListBox);
 		}
 
+		/* TODO: Add this feature in GTK 3.14 way
 		[GtkCallback]
 		private void ListScrolled_edge_reached(PositionType t){
 			if(t == PositionType.BOTTOM)
@@ -213,6 +187,8 @@ namespace Gradio{
 			if(t == PositionType.BOTTOM)
 				load_items_from_address();
 		}
+		*/
+
 
 		public void add_to_view(List<RadioStation> new_stations){
 			if((int)new_stations.length != 0){

@@ -2,63 +2,40 @@ using Gtk;
 
 namespace Gradio{
 
-	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/player-toolbar.ui")]
-	public class PlayerToolbar : Gtk.ActionBar{
+	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/mini-player.ui")]
+	public class MiniPlayer : Gtk.Box{
 
 		[GtkChild]
 		private Image PlayImage;
 		[GtkChild]
 		private Image StopImage;
+
 		[GtkChild]
 		private Label ChannelNameLabel;
 		[GtkChild]
 		private Label ChannelCurrentTitleLabel;
+
 		[GtkChild]
 		private Image StationLogo;
-		[GtkChild]
-		private Box MediaControlBox;
-		[GtkChild]
-		private Box InfoBox;
-		[GtkChild]
-		private Box ActionBox;
+
 		[GtkChild]
 		private Image AddImage;
 		[GtkChild]
 		private Image RemoveImage;
+
 		[GtkChild]
 		private Label LikesLabel;
 
-		[GtkChild]
-		private Label NominalBitrateLabel;
-		[GtkChild]
-		private Label MinimumBitrateLabel;
-		[GtkChild]
-		private Label MaximumBitrateLabel;
-		[GtkChild]
-		private Label BitrateLabel;
-		[GtkChild]
-		private Label CodecLabel;
-		[GtkChild]
-		private Label ChannelModeLabel;
 		[GtkChild]
 		private VolumeButton VolumeButton;
 
 		RadioStation station;
 
-		public PlayerToolbar(){
-			this.pack_start(MediaControlBox);
-			this.pack_start(StationLogo);
-			this.pack_start(InfoBox);
-			this.pack_end(ActionBox);
-
+		public MiniPlayer(){
 			App.player.state_changed.connect (() => refresh_play_stop_button());
 			App.player.tag_changed.connect (() => set_information());
 			App.player.radio_station_changed.connect((t) => new_station(t));
 			VolumeButton.set_value(App.settings.get_double ("volume-position"));
-		}
-
-		private void send_notification(string summary, string body){
-			Util.send_notification(summary, body);
 		}
 
 		private void new_station (RadioStation s){
@@ -69,15 +46,15 @@ namespace Gradio{
 
 			StationLogo.set_from_icon_name("application-rss+xml-symbolic", IconSize.DND);
 			Gdk.Pixbuf icon = null;
-			Util.get_image_from_url.begin(station.Icon, 41, 41, (obj, res) => {
+			Util.get_image_from_url.begin(station.Icon, 90, 90, (obj, res) => {
 		        	icon = Util.get_image_from_url.end(res);
 
 				if(icon != null){
 					StationLogo.set_from_pixbuf(icon);
 				}else{
-					StationLogo.set_from_icon_name("application-rss+xml-symbolic", IconSize.DND);		
+					StationLogo.set_from_icon_name("application-rss+xml-symbolic", IconSize.DND);
 				}
-				
+
         		});
 
 			refresh_add_remove_button();
@@ -122,16 +99,6 @@ namespace Gradio{
 
 		private void set_information(){
 			ChannelCurrentTitleLabel.set_text(App.player.tag_title);
-			NominalBitrateLabel.set_text(App.player.tag_nominal_bitrate.to_string() + " kBit/s");
-			MinimumBitrateLabel.set_text(App.player.tag_minimum_bitrate.to_string() + " kBit/s");
-			MaximumBitrateLabel.set_text(App.player.tag_maximum_bitrate.to_string() + " kBit/s");
-			BitrateLabel.set_text(App.player.tag_bitrate.to_string()  + " kBit/s");
-			CodecLabel.set_text(App.player.tag_audio_codec);
-			ChannelModeLabel.set_text(App.player.tag_channel_mode);
-
-			if (App.settings.get_boolean ("show-notifications"))
-				if(App.player.tag_title != null)
-					send_notification(station.Title, App.player.tag_title);
 		}
 
 		private void refresh_like_button(){

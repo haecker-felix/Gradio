@@ -42,16 +42,16 @@ set (SOURCE_LIST
 	src/Widgets/DiscoverBox/DiscoverBox.vala
 	src/Widgets/DiscoverBox/DiscoverSidebar.vala
 	src/Widgets/DiscoverBox/CategoriesRow.vala
-	src/Widgets/DiscoverBox/CategoryTile.vala
+	src/Widgets/DiscoverBox/SidebarTile.vala
 	src/Widgets/LibraryBox.vala
 	src/Widgets/PlayerToolbar.vala
 	src/Widgets/StationsView/ListItem.vala
 	src/Widgets/StationsView/GridItem.vala
-	src/Widgets/ActionPopover.vala
 	src/Widgets/SettingsDialog.vala
 	src/Widgets/StationsView/StationsView.vala
 	src/Widgets/StationsView/StationsViewButton.vala
 	src/Widgets/StationEditorDialog.vala
+	src/Widgets/MiniPlayer.vala
 	src/AudioPlayer.vala
 	src/RadioStation.vala
 	src/Util.vala
@@ -87,7 +87,7 @@ find_package(PkgConfig)
 # now let's actually check for the required dependencies
 pkg_check_modules(DEPS REQUIRED
 	glib-2.0
-	gtk+-3.0>=3.18
+	gtk+-3.0>=3.14
 	gstreamer-1.0
 	gstreamer-pbutils-1.0
 	gstreamer-plugins-base-1.0

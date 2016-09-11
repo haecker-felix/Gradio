@@ -8,12 +8,12 @@
     <file>ui/player-toolbar.ui</file>
     <file>ui/list-item.ui</file>
     <file>ui/grid-item.ui</file>
-    <file>ui/action-popover.ui</file>
     <file>ui/discover-sidebar.ui</file>
     <file>ui/categories-row.ui</file>
     <file>ui/stations-view.ui</file>
     <file>ui/stations-view-button.ui</file>
-    <file>ui/category-tile.ui</file>
+    <file>ui/sidebar-tile.ui</file>
+    <file>ui/mini-player.ui</file>
     <file>app-menu.ui</file>
   </gresource>
 </gresources>

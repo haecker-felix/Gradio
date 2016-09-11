@@ -31,9 +31,81 @@
 	border-color: @borders;
 }
 
-.discover-header{
+.grid-overlay-box {
+	font-size: smaller;
+	background-color: mix(@theme_base_color,#000000,0.2);
+	border-radius: 0;
+}
+
+.grid-overlay-box:backdrop label {
+        color: @theme_selected_fg_color;
+}
+
+.border-top{
+	border-width: 1px 0px 0px 0px;
+	border-style: solid;
+	border-color: @borders;
+}
+.border-bottom{
 	border-width: 0px 0px 1px 0px;
 	border-style: solid;
 	border-color: @borders;
-	background-color: mix(@theme_base_color,#000000,0.2);
+}
+.border-left{
+	border-width: 0px 0px 0px 1px;
+	border-style: solid;
+	border-color: @borders;
+}
+.border-right{
+	border-width: 0px 1px 0px 0px;
+	border-style: solid;
+	border-color: @borders;
+}
+
+
+.sidebar{
+	border-width: 0px 1px 0px 0px;
+	border-style: solid;
+	border-color: @borders;
+}
+
+.sidebar button image,
+.sidebar .button GtkImage {
+	icon-shadow: none;
+}
+
+.sidebar button,
+.sidebar .button {
+	border: none;
+	box-shadow: none;
+	background-image: none;
+	border-radius: 0px;
+	outline-color: #999;
+	margin: 0px;
+	-GtkWidget-window-dragging: 1;
+}
+
+.sidebar button:hover,
+.sidebar .button:hover {
+	background-color: @theme_selected_bg_color;
+}
+
+
+.sidebar button:checked,
+.sidebar .button:checked {
+	background-color: @theme_selected_bg_color;
+}
+
+.sidebar button .badge,
+.sidebar .button .badge {
+	background-color: shade(blue, 4.0);
+	background-image: none;
+	border-radius: 20px;
+	border: 1px solid white;
+	padding: 3px 2px;
+}
+
+.sidebar button .badge:backdrop,
+.sidebar .button .badge:backdrop {
+	background-color: grey;
 }

@@ -35,21 +35,6 @@ namespace Gradio{
 			this.notify.connect ((s, p) => stdout.printf ("Property %s changed\n", p.name));
 		}
 
-		private int EndsWithFoo(string s){
-			int ret = 0;
-			int si = s.length;
-
-			if (s != null){
-		    		if (si >= 4 && s[si-4] == '.' && s[si-3] == 'j' && s[si-2] == 'p' && s[si-1] == 'g')
-		      			ret = 1;
-		    		if (si >= 4 && s[si-4] == '.' && s[si-3] == 'p' && s[si-2] == 'n' && s[si-1] == 'g')
-		      			ret = 1;
-		    		if (si >= 4 && s[si-4] == '.' && s[si-3] == 'b' && s[si-2] == 'm' && s[si-1] == 'p')
-		      			ret = 1;
-		  	}
-		  	return ret;
-		}
-
 		private bool bus_callback (Gst.Bus bus, Gst.Message m) {
 			switch (m.type) {
 				case Gst.MessageType.ELEMENT:
@@ -67,8 +52,8 @@ namespace Gradio{
 					message (err.message);
 
 					stream.set_state (State.NULL);
-					//connection_error(err.message);
-					//state_changed();
+					connection_error(err.message);
+					state_changed();
 					break;
 				case MessageType.EOS:
 					print ("End of stream.");
@@ -83,7 +68,7 @@ namespace Gradio{
 					m.parse_state_changed (out oldstate, out newstate, out pending);
 					GLib.debug ("State changed: %s -> %s", oldstate.to_string (), newstate.to_string ());
 
-					state_changed();				
+					state_changed();
 					break;
 				case MessageType.TAG:
 					Gst.TagList tag_list = null;
@@ -91,9 +76,6 @@ namespace Gradio{
 
 					tag_list.get_string("title", out tag_title);
 					tag_list.get_string("homepage", out tag_homepage);
-
-					if (EndsWithFoo(tag_homepage) == 0)
-						tag_homepage = "";
 
 					tag_list.get_boolean("has-crc", out tag_has_crc);
 
@@ -124,9 +106,15 @@ namespace Gradio{
 		public void set_radio_station(RadioStation station){
 			station.get_stream_address.begin(station.ID, (obj, res) => {
 		        	string address = station.get_stream_address.end(res);
-				current_station = station;
-				connect_to_stream_address(address);
-				radio_station_changed(station);			
+
+		        	//check if new == old
+		        	if(current_station != null && current_station.ID == station.ID){
+					toggle_play_stop();
+		        	}else{
+					current_station = station;
+					connect_to_stream_address(address);
+					radio_station_changed(station);
+		        	}
         		});
 		}
 

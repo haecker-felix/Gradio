@@ -135,6 +135,6 @@ public class Util{
 	public static void send_notification(string summary, string body, Gdk.Pixbuf? icon = null){
 		var notification = new GLib.Notification (summary);
 		notification.set_body (body);
-		GLib.Application.get_default ().send_notification (null, notification);
+		GLib.Application.get_default ().send_notification ("de.haeckerfelix.gradio", notification);
 	}
 }

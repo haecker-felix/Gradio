@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Generated with glade 3.20.0 -->
 <interface>
-  <requires lib="gtk+" version="3.18"/>
+  <requires lib="gtk+" version="3.14"/>
   <template class="GradioStationsView" parent="GtkBox">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
@@ -63,6 +63,7 @@
           <object class="GtkSpinner" id="Spinner">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="margin_right">5</property>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -84,68 +85,7 @@
       <object class="GtkStack" id="StationsStack">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="hhomogeneous">False</property>
-        <property name="vhomogeneous">False</property>
         <property name="transition_type">crossfade</property>
-        <child>
-          <object class="GtkBox" id="GridView">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="orientation">vertical</property>
-            <child>
-              <object class="GtkStack" id="GridViewStack">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="transition_type">crossfade</property>
-                <child>
-                  <object class="GtkScrolledWindow" id="GridScrolled">
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <signal name="edge-reached" handler="GridScrolled_edge_reached" swapped="no"/>
-                    <child>
-                      <object class="GtkViewport" id="GridScrolledViewport">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="shadow_type">none</property>
-                        <child>
-                          <placeholder/>
-                        </child>
-                      </object>
-                    </child>
-                  </object>
-                  <packing>
-                    <property name="name">grid-scrolled</property>
-                    <property name="title" translatable="yes">page0</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkBox" id="GridNormal">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="orientation">vertical</property>
-                    <child>
-                      <placeholder/>
-                    </child>
-                  </object>
-                  <packing>
-                    <property name="name">grid-normal</property>
-                    <property name="title" translatable="yes">page1</property>
-                    <property name="position">1</property>
-                  </packing>
-                </child>
-              </object>
-              <packing>
-                <property name="expand">True</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-          </object>
-          <packing>
-            <property name="name">grid-view</property>
-            <property name="title" translatable="yes">Grid View</property>
-          </packing>
-        </child>
         <child>
           <object class="GtkBox" id="NoResultsBox">
             <property name="visible">True</property>
@@ -200,6 +140,48 @@
           <packing>
             <property name="name">no-results</property>
             <property name="title" translatable="yes">No Results</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkBox" id="GridView">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="orientation">vertical</property>
+            <child>
+              <object class="GtkScrolledWindow" id="GridScrolledWindow">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="margin_left">1</property>
+                <property name="margin_right">1</property>
+                <child>
+                  <object class="GtkViewport">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="shadow_type">none</property>
+                    <child>
+                      <object class="GtkFlowBox" id="GridViewFlowBox">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="margin_top">12</property>
+                        <property name="margin_bottom">12</property>
+                        <property name="homogeneous">True</property>
+                        <property name="min_children_per_line">1</property>
+                        <property name="selection_mode">none</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="name">grid-view</property>
+            <property name="title" translatable="yes">Grid View</property>
             <property name="position">1</property>
           </packing>
         </child>
@@ -209,45 +191,23 @@
             <property name="can_focus">False</property>
             <property name="orientation">vertical</property>
             <child>
-              <object class="GtkStack" id="ListViewStack">
+              <object class="GtkScrolledWindow" id="ListScrolledWindow">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="transition_type">crossfade</property>
+                <property name="can_focus">True</property>
+                <property name="margin_left">1</property>
+                <property name="margin_right">1</property>
                 <child>
-                  <object class="GtkScrolledWindow" id="ListScrolled">
+                  <object class="GtkViewport">
                     <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <signal name="edge-reached" handler="ListScrolled_edge_reached" swapped="no"/>
+                    <property name="can_focus">False</property>
+                    <property name="shadow_type">none</property>
                     <child>
-                      <object class="GtkViewport" id="ListScrolledViewport">
+                      <object class="GtkListBox" id="ListViewListBox">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="shadow_type">none</property>
-                        <child>
-                          <placeholder/>
-                        </child>
                       </object>
                     </child>
                   </object>
-                  <packing>
-                    <property name="name">list-scrolled</property>
-                    <property name="title" translatable="yes">page0</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkBox" id="ListNormal">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="orientation">vertical</property>
-                    <child>
-                      <placeholder/>
-                    </child>
-                  </object>
-                  <packing>
-                    <property name="name">list-normal</property>
-                    <property name="title" translatable="yes">page1</property>
-                    <property name="position">1</property>
-                  </packing>
                 </child>
               </object>
               <packing>
@@ -259,7 +219,7 @@
           </object>
           <packing>
             <property name="name">list-view</property>
-            <property name="title" translatable="yes">List view</property>
+            <property name="title" translatable="yes">list-view</property>
             <property name="position">2</property>
           </packing>
         </child>
@@ -288,22 +248,4 @@
       </packing>
     </child>
   </template>
-  <object class="GtkFlowBox" id="GridViewFlowBox">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="margin_left">24</property>
-    <property name="margin_right">24</property>
-    <property name="margin_top">12</property>
-    <property name="margin_bottom">12</property>
-    <property name="hexpand">True</property>
-    <property name="vexpand">True</property>
-    <property name="min_children_per_line">2</property>
-    <property name="selection_mode">none</property>
-  </object>
-  <object class="GtkListBox" id="ListViewListBox">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="hexpand">True</property>
-    <property name="vexpand">True</property>
-  </object>
 </interface>
