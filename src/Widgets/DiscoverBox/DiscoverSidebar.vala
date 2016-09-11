@@ -6,6 +6,13 @@ namespace Gradio{
 	public class DiscoverSidebar : Gtk.Box{
 
 		[GtkChild]
+		private ScrolledWindow ItemsWindow;
+		[GtkChild]
+		private Box CategoriesBox;
+		[GtkChild]
+		private Box ActionBox;
+
+		[GtkChild]
 		private ListBox ItemsBox;
 
 		private DiscoverBox dbox;
@@ -16,19 +23,47 @@ namespace Gradio{
 		public DiscoverSidebar(DiscoverBox box){
 			dbox = box;
 
+			SidebarTile languages = new SidebarTile ("Languages", "user-invisible-symbolic");
+			CategoriesBox.pack_start(languages);
+			languages.clicked.connect(() => {show_catergory_items("languages"); dbox.show_select_item();});
+
+			SidebarTile codecs = new SidebarTile ("Codecs", "emblem-system-symbolic");
+			CategoriesBox.pack_start(codecs);
+			codecs.clicked.connect(() => {show_catergory_items("codecs"); dbox.show_select_item();});
+
+			SidebarTile countries = new SidebarTile ("Countries", "mark-location-symbolic");
+			CategoriesBox.pack_start(countries);
+			countries.clicked.connect(() => {show_catergory_items("countries"); dbox.show_select_item();});
+
+			SidebarTile tags = new SidebarTile ("Tags", "dialog-information-symbolic");
+			CategoriesBox.pack_start(tags);
+			tags.clicked.connect(() => {show_catergory_items("tags"); dbox.show_select_item();});
+
+			SidebarTile states = new SidebarTile ("States", "mark-location-symbolic");
+			CategoriesBox.pack_start(states);
+			states.clicked.connect(() => {show_catergory_items("states"); dbox.show_select_item();});
+
+			SidebarTile home = new SidebarTile ("Home", "go-home-symbolic");
+			ActionBox.pack_end(home);
+			home.clicked.connect(() => {dbox.show_home();});
+
+			SidebarTile reload = new SidebarTile ("Reload", "emblem-synchronizing-symbolic");
+			ActionBox.pack_end(reload);
+			reload.clicked.connect(() => {dbox.reload();});
+
+			SidebarTile add = new SidebarTile ("Create", "document-new-symbolic");
+			ActionBox.pack_end(add);
+			add.clicked.connect(() => {dbox.add_station();});
+
 			cip = new CategoryItemProvider();
+
+			show_categories();
 
 			this.show_all();
 			connect_signals();
 		}
 
 		private void connect_signals(){
-			dbox.languages_clicked.connect(() => show_catergory_items("languages"));
-			dbox.countries_clicked.connect(() => show_catergory_items("countries"));
-			dbox.states_clicked.connect(() => show_catergory_items("states"));
-			dbox.codecs_clicked.connect(() => show_catergory_items("codecs"));
-			dbox.tags_clicked.connect(() => show_catergory_items("tags"));
-
 			ItemsBox.row_activated.connect((t,a) => {
 				CategoriesRow item = (CategoriesRow)a;
 
@@ -52,8 +87,17 @@ namespace Gradio{
 			});
 		}
 
+		public void show_categories(){
+			ItemsWindow.set_visible(false);
+		}
+
+		private void show_items(){
+			ItemsWindow.set_visible(true);
+		}
+
 		private void show_stations_by_category_item (string category, string item){
 			string address = "";
+			show_items();
 
 			switch (category){
 				case "languages": address = RadioBrowser.radio_stations_by_language + item; break;
@@ -68,8 +112,9 @@ namespace Gradio{
 		}
 
 		private void show_catergory_items (string category){
-
 			Util.remove_all_items_from_list_box((Gtk.ListBox) ItemsBox);
+
+			show_items();
 
 			switch(category){
 				case "languages": {

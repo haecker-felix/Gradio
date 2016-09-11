@@ -20,8 +20,6 @@ namespace Gradio{
 		[GtkChild]
 		private Box SearchBox;
 		[GtkChild]
-		private FlowBox categories;
-		[GtkChild]
 		private Stack ContentStack;
 
 		[GtkChild]
@@ -32,25 +30,16 @@ namespace Gradio{
 		private Box recently_clicked;
 		[GtkChild]
 		private Box SidebarBox;
-		[GtkChild]
-		private SearchEntry SearchEntry;
 
 		private DiscoverSidebar sidebar;
-
-		public signal void languages_clicked();
-		public signal void countries_clicked();
-		public signal void states_clicked();
-		public signal void tags_clicked();
-		public signal void codecs_clicked();
-
 
 		public DiscoverBox(){
 			settings = new GLib.Settings ("de.haecker-felix.gradio");
 
-			stations_view_results = new StationsView("Results", true, "system-search-symbolic");
-			grid_view_recently_changed = new StationsView("Recently Changed", false, "text-editor-symbolic", 12);
-			grid_view_recently_clicked = new StationsView("Recently Clicked", false, "view-refresh-symbolic", 12);
-			grid_view_most_votes = new StationsView("Most Popular", false, "emote-love-symbolic", 12);
+			stations_view_results = new StationsView("Results", "system-search-symbolic");
+			grid_view_recently_changed = new StationsView("Recently Changed", "text-editor-symbolic", true);
+			grid_view_recently_clicked = new StationsView("Recently Clicked", "view-refresh-symbolic", true);
+			grid_view_most_votes = new StationsView("Most Popular", "emote-love-symbolic", true);
 
 			grid_view_recently_changed.clicked.connect((t) => Gradio.App.player.set_radio_station(t));
 			grid_view_recently_clicked.clicked.connect((t) => Gradio.App.player.set_radio_station(t));
@@ -71,26 +60,8 @@ namespace Gradio{
 
 			SearchBox.add(stations_view_results);
 
-			CategoryTile languages = new CategoryTile ("Languages", "languages", "user-invisible-symbolic");
-			categories.add(languages);
-
-			CategoryTile codecs = new CategoryTile ("Codecs", "codecs", "emblem-system-symbolic");
-			categories.add(codecs);
-
-			CategoryTile countries = new CategoryTile ("Countries", "countries", "help-about-symbolic");
-			categories.add(countries);
-
-			CategoryTile tags = new CategoryTile ("Tags", "tags", "dialog-information-symbolic");
-			categories.add(tags);
-
-			CategoryTile states = new CategoryTile ("States", "states", "mark-location-symbolic");
-			categories.add(states);
-
 			sidebar = new DiscoverSidebar(this);
 			SidebarBox.pack_start(sidebar);
-			sidebar.set_visible(false);
-
-			SearchEntry.activate.connect(() => SearchButton_clicked());
 
 			connect_signals();
 			load_data();
@@ -98,17 +69,6 @@ namespace Gradio{
 		}
 
 		private void connect_signals(){
-			categories.child_activated.connect((t,a) => {
-				CategoryTile item = (CategoryTile)a;
-				switch(item.action){
-					case "languages": languages_clicked(); 	show_select_item(); break;
-					case "countries": countries_clicked(); 	show_select_item(); break;
-					case "states": states_clicked(); 	show_select_item(); break;
-					case "codecs": codecs_clicked(); 	show_select_item(); break;
-					case "tags": tags_clicked(); 		show_select_item(); break;
-				}
-			});
-
 			button_recently_clicked.clicked.connect(() => show_recently_clicked());
 			button_recently_changed.clicked.connect(() => show_recently_changed());
 			button_most_votes.clicked.connect(() => show_most_votes());
@@ -116,7 +76,6 @@ namespace Gradio{
 
 		public void show_select_item(){
 			ContentStack.set_visible_child_name("select-item");
-			sidebar.set_visible(true);
 		}
 
 		public void show_results(){
@@ -125,7 +84,7 @@ namespace Gradio{
 
 		public void show_overview_page(){
 			ContentStack.set_visible_child_name("overview");
-			sidebar.set_visible(false);
+			sidebar.show_categories();
 		}
 
 		private void load_data(){
@@ -149,32 +108,27 @@ namespace Gradio{
 			show_results();
 		}
 
-		[GtkCallback]
-		private void SearchButton_clicked(){
-			sidebar.set_visible(false);
+		public void SearchButton_clicked(string search){
 			show_results();
-			string address = RadioBrowser.radio_stations_by_name + Util.optimize_string(SearchEntry.get_text());
+			sidebar.show_categories();
+			string address = RadioBrowser.radio_stations_by_name + Util.optimize_string(search);
 			stations_view_results.set_stations_from_address(address);
 
 		}
 
-		[GtkCallback]
-		private void HomeButton_clicked(Button button){
-			sidebar.set_visible(false);
+		public void show_home(){
+			sidebar.show_categories();
+
 			show_overview_page();
 		}
 
-		[GtkCallback]
-		private void ReloadButton_clicked(Button button){
+		public void reload(){
 			load_data();
 		}
 
-		[GtkCallback]
-		private void AddStationButton_clicked(Button button){
+		public void add_station(){
 			Util.open_website("http://www.radio-browser.info");
 		}
-
-
 
 		// Switch
 		public void show_grid_view(){

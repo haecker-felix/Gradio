@@ -11,7 +11,7 @@ namespace Gradio{
 		private StationsView library_view;
 
 		public LibraryBox(){
-			library_view = new StationsView("Library", true);
+			library_view = new StationsView("Library");
 			library_view.set_stations_from_hash_table(App.library.lib);
 
 			ContentBox.add(library_view);

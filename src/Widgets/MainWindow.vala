@@ -6,6 +6,12 @@ namespace Gradio{
 	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/main-window.ui")]
 	public class MainWindow : Gtk.ApplicationWindow {
 
+		[GtkChild]
+		private Box SearchBox;
+		[GtkChild]
+		private Entry SearchEntry;
+		[GtkChild]
+		private Button SearchButton;
 
 		[GtkChild]
 		private Image GridImage;
@@ -165,6 +171,11 @@ namespace Gradio{
 			this.set_default_size(width, height);
 			pos_x = App.settings.get_int ("window-position-x");
 			pos_y = App.settings.get_int ("window-position-y");
+		}
+
+		[GtkCallback]
+		private void SearchButton_clicked(Gtk.Button button){
+			discover_box.SearchButton_clicked(SearchEntry.get_text());
 		}
 
 		[GtkCallback]
