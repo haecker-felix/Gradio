@@ -176,6 +176,13 @@ namespace Gradio{
 		[GtkCallback]
 		private void SearchButton_clicked(Gtk.Button button){
 			discover_box.SearchButton_clicked(SearchEntry.get_text());
+			DatabaseStack.set_visible_child_name("discover_box");
+		}
+
+		[GtkCallback]
+		private void SearchEntry_activate(Gtk.Entry entry){
+			discover_box.SearchButton_clicked(SearchEntry.get_text());
+			DatabaseStack.set_visible_child_name("discover_box");
 		}
 
 		[GtkCallback]
