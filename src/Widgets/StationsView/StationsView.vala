@@ -71,11 +71,11 @@ namespace Gradio{
 				clicked(item.station);
 			});
 
-
 			GridViewFlowBox.child_activated.connect((t,a) => {
 				GridItem item = (GridItem)a;
 				clicked(item.station);
 			});
+
 
 			provider.started.connect(() => {
 				Progress.set_visible(true);
@@ -86,8 +86,6 @@ namespace Gradio{
 			provider.finished.connect(() => {
 				Idle.add(() => { Progress.set_fraction(1.0); return false;});
 				Progress.set_visible(false);
-
-				//TODO: set correct grid/list
 				Spinner.stop();
 			});
 

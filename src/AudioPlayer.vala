@@ -106,9 +106,15 @@ namespace Gradio{
 		public void set_radio_station(RadioStation station){
 			station.get_stream_address.begin(station.ID, (obj, res) => {
 		        	string address = station.get_stream_address.end(res);
-				current_station = station;
-				connect_to_stream_address(address);
-				radio_station_changed(station);
+
+		        	//check if new == old
+		        	if(current_station != null && current_station.ID == station.ID){
+					toggle_play_stop();
+		        	}else{
+					current_station = station;
+					connect_to_stream_address(address);
+					radio_station_changed(station);
+		        	}
         		});
 		}
 
