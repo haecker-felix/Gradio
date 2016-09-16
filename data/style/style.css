@@ -21,10 +21,6 @@
 	border-color: @unfocused_borders;
 }
 
-.no-border{
-	border-radius: 0px;
-}
-
 .stations-view{
 	border-width: 0px 0px 1px 0px;
 	border-style: solid;

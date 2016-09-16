@@ -20,5 +20,8 @@
         <property name="position">0</property>
       </packing>
     </child>
+    <style>
+      <class name="linked"/>
+    </style>
   </template>
 </interface>
