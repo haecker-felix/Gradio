@@ -18,6 +18,17 @@ namespace Gradio{
 		private string address;
 
 		[GtkChild]
+		private Box LoadMoreBox;
+		[GtkChild]
+		private Button LoadMoreButton;
+
+		[GtkChild]
+		private Box GridViewBox;
+
+		[GtkChild]
+		private Box ListViewBox;
+
+		[GtkChild]
 		private ScrolledWindow GridScrolledWindow;
 		[GtkChild]
 		private ScrolledWindow ListScrolledWindow;
@@ -59,6 +70,7 @@ namespace Gradio{
 			if(discover_mode){
 				GridViewFlowBox.set_max_children_per_line(1);
 				GridViewFlowBox.set_max_children_per_line(1);
+				LoadMoreButton.set_visible(false);
 				results_chunk = 20;
 			}
 
@@ -78,15 +90,23 @@ namespace Gradio{
 
 
 			provider.started.connect(() => {
-				Progress.set_visible(true);
-				Idle.add(() => { Progress.set_fraction(0.01); return false;});
-				Spinner.start();
+				Idle.add(() => {
+					Progress.set_fraction(0.01);
+					Progress.set_visible(true);
+					LoadMoreButton.set_sensitive(false);
+					Spinner.start();
+					return false;
+				});
 			});
 
 			provider.finished.connect(() => {
-				Idle.add(() => { Progress.set_fraction(1.0); return false;});
-				Progress.set_visible(false);
-				Spinner.stop();
+				Idle.add(() => {
+					Progress.set_fraction(1.0);
+					Progress.set_visible(false);
+					LoadMoreButton.set_sensitive(true);
+					Spinner.stop();
+					return false;
+				});
 			});
 
 			provider.progress.connect((t) => {
@@ -150,8 +170,10 @@ namespace Gradio{
 		}
 
 		public void show_list_view(){
-			if(!no_stations)
+			if(!no_stations){
 				StationsStack.set_visible_child_name("list-view");
+			}
+
 			list_view = true;
 		}
 
@@ -174,21 +196,6 @@ namespace Gradio{
 			Util.remove_all_items_from_flow_box((Gtk.FlowBox) GridViewFlowBox);
 			Util.remove_all_items_from_list_box((Gtk.ListBox) ListViewListBox);
 		}
-
-		/* TODO: Add this feature in GTK 3.14 way
-		[GtkCallback]
-		private void ListScrolled_edge_reached(PositionType t){
-			if(t == PositionType.BOTTOM)
-				load_items_from_address();
-		}
-
-		[GtkCallback]
-		private void GridScrolled_edge_reached(PositionType t){
-			if(t == PositionType.BOTTOM)
-				load_items_from_address();
-		}
-		*/
-
 
 		public void add_to_view(List<RadioStation> new_stations){
 			if((int)new_stations.length != 0){
@@ -214,6 +221,11 @@ namespace Gradio{
 				no_stations = true;
 				StationsStack.set_visible_child_name("no-results");
 			}
+		}
+
+		[GtkCallback]
+		private void LoadMoreButton_clicked(Button button){
+			load_items_from_address();
 		}
 	}
 }
