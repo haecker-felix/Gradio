@@ -9,6 +9,7 @@ namespace Gradio{
 
 		public signal void clicked(RadioStation s);
 
+		private bool discover_mode = false;
 		private bool no_stations = true;
 		private bool list_view = false;
 
@@ -53,9 +54,10 @@ namespace Gradio{
 
 		private GLib.Settings settings;
 
-		public StationsView(string title = "Items", string image_name = "emblem-documents-symbolic", bool discover_mode = false){
+		public StationsView(string title = "Items", string image_name = "emblem-documents-symbolic", bool dm = false){
 			settings = new GLib.Settings ("de.haecker-felix.gradio");
 			provider = new StationProvider();
+			discover_mode = dm;
 
 			HeaderImage.set_from_icon_name(image_name, IconSize.MENU);
 
@@ -67,7 +69,10 @@ namespace Gradio{
 			GridViewFlowBox.halign = Gtk.Align.FILL;
 			GridViewFlowBox.valign = Gtk.Align.START;
 
+			GridViewBox.add(LoadMoreBox);
+
 			if(discover_mode){
+				show_grid_view();
 				GridViewFlowBox.set_max_children_per_line(1);
 				GridViewFlowBox.set_max_children_per_line(1);
 				LoadMoreButton.set_visible(false);
@@ -140,6 +145,8 @@ namespace Gradio{
 				stations.append(val);
 			});
 
+			disable_load_more();
+
 			add_to_view(stations.copy());
 		}
 
@@ -148,6 +155,8 @@ namespace Gradio{
 			s.foreach ((key, val) => {
 				stations.append(val);
 			});
+
+			disable_load_more();
 
 			add_to_view(stations.copy());
 		}
@@ -170,16 +179,21 @@ namespace Gradio{
 		}
 
 		public void show_list_view(){
-			if(!no_stations){
+			if(!discover_mode){
+				if(!no_stations)
 				StationsStack.set_visible_child_name("list-view");
-			}
 
-			list_view = true;
+				LoadMoreBox.reparent(ListViewBox);
+
+				list_view = true;
+			}
 		}
 
 		public void show_grid_view(){
 			if(!no_stations)
 				StationsStack.set_visible_child_name("grid-view");
+
+			LoadMoreBox.reparent(GridViewBox);
 			list_view = false;
 		}
 
@@ -221,6 +235,12 @@ namespace Gradio{
 				no_stations = true;
 				StationsStack.set_visible_child_name("no-results");
 			}
+		}
+
+		private void disable_load_more(){
+			LoadMoreBox.set_visible(false);
+			Progress.set_visible(false);
+			LoadMoreButton.set_visible(false);
 		}
 
 		[GtkCallback]
