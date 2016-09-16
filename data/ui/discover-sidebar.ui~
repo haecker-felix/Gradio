@@ -8,7 +8,7 @@
     <property name="no_show_all">True</property>
     <child>
       <object class="GtkScrolledWindow" id="CategoryBox">
-        <property name="width_request">120</property>
+        <property name="width_request">100</property>
         <property name="visible">True</property>
         <property name="can_focus">True</property>
         <child>
