@@ -67,6 +67,7 @@
 	border-width: 0px 1px 0px 0px;
 	border-style: solid;
 	border-color: @borders;
+	background-color: mix(@theme_base_color,#000000,0.2);
 }
 
 .sidebar button image,
@@ -87,13 +88,13 @@
 
 .sidebar button:hover,
 .sidebar .button:hover {
-	background-color: @theme_selected_bg_color;
+	background-color: mix(@theme_base_color,#000000,0.5);
 }
 
 
 .sidebar button:checked,
 .sidebar .button:checked {
-	background-color: @theme_selected_bg_color;
+	background-color: mix(@theme_base_color,#000000,0.5);
 }
 
 .sidebar button .badge,
