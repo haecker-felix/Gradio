@@ -39,6 +39,7 @@ set (SOURCE_LIST
 	src/Data/StationProvider.vala
 	src/Data/RadioBrowser.vala
 	src/Data/CategoryItemProvider.vala
+	src/Data/ImageProvider.vala
 	src/Widgets/DiscoverBox/DiscoverBox.vala
 	src/Widgets/DiscoverBox/DiscoverSidebar.vala
 	src/Widgets/DiscoverBox/CategoriesRow.vala

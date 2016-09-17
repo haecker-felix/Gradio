@@ -5,6 +5,7 @@ namespace Gradio {
 
 	public class App : Gtk.Application {
 
+		public static ImageProvider imgprovider;
 		public static MainWindow window;
 		public static AudioPlayer player;
 		public static Library library;
@@ -27,6 +28,8 @@ namespace Gradio {
 
 			mpris = new MPRIS();
 			mpris.initialize();
+
+			imgprovider = new ImageProvider();
 
 			window = new MainWindow(this);
 			this.add_window(window);

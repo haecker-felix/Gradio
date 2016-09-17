@@ -18,7 +18,7 @@
 
 .grid-item:backdrop {
 	box-shadow: none;
-	border-color: @unfocused_borders;
+	border-color: @un3ocused_borders;
 }
 
 .stations-view{
@@ -35,6 +35,16 @@
 
 .grid-overlay-box:backdrop label {
         color: @theme_selected_fg_color;
+}
+
+.round-border{
+	border-radius: 3px;
+}
+
+.border{
+	border-width: 1px 1px 1px 1px;
+	border-style: solid;
+	border-color: @borders;
 }
 
 .border-top{

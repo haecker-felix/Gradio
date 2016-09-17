@@ -16,6 +16,8 @@ namespace Gradio{
 		[GtkChild]
 		private Image StationLogo;
 		[GtkChild]
+		private Box StationLogoBox;
+		[GtkChild]
 		private Box MediaControlBox;
 		[GtkChild]
 		private Box InfoBox;
@@ -47,7 +49,7 @@ namespace Gradio{
 
 		public PlayerToolbar(){
 			this.pack_start(MediaControlBox);
-			this.pack_start(StationLogo);
+			this.pack_start(StationLogoBox);
 			this.pack_start(InfoBox);
 			this.pack_end(ActionBox);
 
@@ -69,15 +71,15 @@ namespace Gradio{
 
 			StationLogo.set_from_icon_name("application-rss+xml-symbolic", IconSize.DND);
 			Gdk.Pixbuf icon = null;
-			Util.get_image_from_url.begin(station.Icon, 41, 41, (obj, res) => {
-		        	icon = Util.get_image_from_url.end(res);
+
+			Gradio.App.imgprovider.get_station_logo.begin(station, 41, (obj, res) => {
+		        	icon = Gradio.App.imgprovider.get_station_logo.end(res);
 
 				if(icon != null){
 					StationLogo.set_from_pixbuf(icon);
 				}else{
 					StationLogo.set_from_icon_name("application-rss+xml-symbolic", IconSize.DND);		
 				}
-				
         		});
 
 			refresh_add_remove_button();

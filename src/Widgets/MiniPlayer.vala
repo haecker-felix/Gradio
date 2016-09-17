@@ -45,17 +45,6 @@ namespace Gradio{
 			ChannelCurrentTitleLabel.set_text("");
 
 			StationLogo.set_from_icon_name("application-rss+xml-symbolic", IconSize.DND);
-			Gdk.Pixbuf icon = null;
-			Util.get_image_from_url.begin(station.Icon, 90, 90, (obj, res) => {
-		        	icon = Util.get_image_from_url.end(res);
-
-				if(icon != null){
-					StationLogo.set_from_pixbuf(icon);
-				}else{
-					StationLogo.set_from_icon_name("application-rss+xml-symbolic", IconSize.DND);
-				}
-
-        		});
 
 			refresh_add_remove_button();
 			refresh_like_button();

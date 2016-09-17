@@ -1,0 +1,18 @@
+sub scale_pixbuf {
+    my ($pixbuf, $parent) = @_;
+    my $max_w = $parent->get_allocation()->{width};
+    my $max_h = $parent->get_allocation()->{height};
+    my $pixb_w = $pixbuf->get_width();
+    my $pixb_h = $pixbuf->get_height();
+    if (($pixb_w > $max_w) || ($pixb_h > $max_h)) {
+        my $sc_factor_w = $max_w / $pixb_w;
+        my $sc_factor_h = $max_h / $pixb_h;
+        my $sc_factor = min $sc_factor_w, $sc_factor_h;
+        my $sc_w = int($pixb_w * $sc_factor);
+        my $sc_h = int($pixb_h * $sc_factor);
+        my $scaled
+            = $pixbuf->scale_simple($sc_w, $sc_h, 'GDK_INTERP_HYPER');
+        return $scaled;
+    }
+    return $pixbuf;
+}

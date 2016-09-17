@@ -42,7 +42,6 @@
                         <property name="icon_size">6</property>
                         <style>
                           <class name="border"/>
-                          <class name="round-border"/>
                         </style>
                       </object>
                       <packing>

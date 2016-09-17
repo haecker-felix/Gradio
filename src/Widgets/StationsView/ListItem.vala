@@ -43,8 +43,8 @@ namespace Gradio{
 			}
 
 			Gdk.Pixbuf icon = null;
-			Util.get_image_from_url.begin(station.Icon, 32, 32, (obj, res) => {
-		        	icon = Util.get_image_from_url.end(res);
+			Gradio.App.imgprovider.get_station_logo.begin(station, 32, (obj, res) => {
+		        	icon = Gradio.App.imgprovider.get_station_logo.end(res);
 
 				if(icon != null){
 					ChannelLogoImage.set_from_pixbuf(icon);
