@@ -6,23 +6,39 @@ namespace Gradio{
 	public class DiscoverSidebar : Gtk.Box{
 
 		[GtkChild]
-		private ScrolledWindow ItemsWindow;
-		[GtkChild]
 		private Box CategoriesBox;
 		[GtkChild]
 		private Box ActionBox;
 
 		[GtkChild]
-		private ListBox ItemsBox;
+		private ListBox LanguageItemsBox;
+		[GtkChild]
+		private ListBox CountryItemsBox;
+		[GtkChild]
+		private ListBox StateItemsBox;
+		[GtkChild]
+		private ListBox CodecItemsBox;
+		[GtkChild]
+		private ListBox TagItemsBox;
+
+		[GtkChild]
+		private Stack Items;
 
 		private DiscoverBox dbox;
-		private string actual_view;
 
 		private CategoryItemProvider cip;
 
 		public DiscoverSidebar(DiscoverBox box){
 			dbox = box;
+			cip = new CategoryItemProvider();
 
+			setup_view();
+			connect_signals();
+
+			this.show_all();
+		}
+
+		private void setup_view(){
 			SidebarTile languages = new SidebarTile ("Languages", "user-invisible-symbolic");
 			CategoriesBox.pack_start(languages);
 			languages.clicked.connect(() => {show_catergory_items("languages"); dbox.show_select_item();});
@@ -47,7 +63,7 @@ namespace Gradio{
 			ActionBox.pack_end(home);
 			home.clicked.connect(() => {dbox.show_home();});
 
-			SidebarTile reload = new SidebarTile ("Reload", "emblem-synchronizing-symbolic");
+			SidebarTile reload = new SidebarTile ("Reload", "emblem-synchronzing-symbolic");
 			ActionBox.pack_end(reload);
 			reload.clicked.connect(() => {dbox.reload();});
 
@@ -55,44 +71,92 @@ namespace Gradio{
 			ActionBox.pack_end(add);
 			add.clicked.connect(() => {dbox.add_station();});
 
-			cip = new CategoryItemProvider();
-
 			show_categories();
-
-			this.show_all();
-			connect_signals();
 		}
 
 		private void connect_signals(){
-			ItemsBox.row_activated.connect((t,a) => {
-				CategoriesRow item = (CategoriesRow)a;
+			cip.loaded.connect(() => load_information());
 
-				switch(actual_view){
-					case "languages": {
-							show_stations_by_category_item("languages", item.action); break;
-					};
-					case "countries": {
-							show_stations_by_category_item("countries", item.action); break;
-					};
-					case "states": {
-							show_stations_by_category_item("states", item.action); break;
-					};
-					case "codecs": {
-							show_stations_by_category_item("codecs", item.action); break;
-					};
-					case "tags": {
-							show_stations_by_category_item("tags", item.action); break;
-					};
-				}
+			LanguageItemsBox.row_activated.connect((t,a) => {
+				CategoriesRow item = (CategoriesRow)a;
+				show_stations_by_category_item("languages", item.action);
+			});
+			CountryItemsBox.row_activated.connect((t,a) => {
+				CategoriesRow item = (CategoriesRow)a;
+				show_stations_by_category_item("countries", item.action);
+			});
+			StateItemsBox.row_activated.connect((t,a) => {
+				CategoriesRow item = (CategoriesRow)a;
+				show_stations_by_category_item("states", item.action);
+			});
+			CodecItemsBox.row_activated.connect((t,a) => {
+				CategoriesRow item = (CategoriesRow)a;
+				show_stations_by_category_item("codecs", item.action);
+			});
+			TagItemsBox.row_activated.connect((t,a) => {
+				CategoriesRow item = (CategoriesRow)a;
+				show_stations_by_category_item("tags", item.action);
 			});
 		}
 
+		private void load_information(){
+			message("Loading category items...");
+			Util.remove_all_items_from_list_box((Gtk.ListBox) CodecItemsBox);
+			Util.remove_all_items_from_list_box((Gtk.ListBox) LanguageItemsBox);
+			Util.remove_all_items_from_list_box((Gtk.ListBox) CountryItemsBox);
+			Util.remove_all_items_from_list_box((Gtk.ListBox) StateItemsBox);
+			Util.remove_all_items_from_list_box((Gtk.ListBox) TagItemsBox);
+
+			foreach (string codec in cip.codecs_list){
+				CategoriesRow box = new CategoriesRow(codec, codec, "");
+				CodecItemsBox.add(box);
+			}
+			foreach (string language in cip.languages_list){
+				CategoriesRow box = new CategoriesRow(language, language, "");
+				LanguageItemsBox.add(box);
+			}
+			foreach (string tag in cip.tags_list){
+				CategoriesRow box = new CategoriesRow(tag, tag, "");
+				TagItemsBox.add(box);
+			}
+			foreach (string state in cip.states_list){
+				CategoriesRow box = new CategoriesRow(state, state, "");
+				StateItemsBox.add(box);
+			}
+			foreach (string country in cip.countries_list){
+				CategoriesRow box = new CategoriesRow(country, country, "");
+				CountryItemsBox.add(box);
+			}
+		}
+
 		public void show_categories(){
-			ItemsWindow.set_visible(false);
+			Items.set_visible(false);
 		}
 
 		private void show_items(){
-			ItemsWindow.set_visible(true);
+			Items.set_visible(true);
+		}
+
+		private void show_catergory_items (string category){
+			show_items();
+
+			switch(category){
+				case "languages": {
+					Items.set_visible_child_name("languages"); break;
+				};
+				case "countries": {
+					Items.set_visible_child_name("countries"); break;
+				};
+				case "states": {
+					Items.set_visible_child_name("states"); break;
+				};
+				case "codecs": {
+					Items.set_visible_child_name("codecs"); break;
+				};
+				case "tags": {
+					Items.set_visible_child_name("tags"); break;
+				};
+			}
 		}
 
 		private void show_stations_by_category_item (string category, string item){
@@ -110,65 +174,5 @@ namespace Gradio{
 			dbox.show_results();
 			dbox.stations_view_results.set_stations_from_address(address);
 		}
-
-		private void show_catergory_items (string category){
-			Util.remove_all_items_from_list_box((Gtk.ListBox) ItemsBox);
-
-			show_items();
-
-			switch(category){
-				case "languages": {
-					actual_view = "languages";
-					if(cip.languages_list != null){
-						foreach (string language in cip.languages_list){
-							CategoriesRow box = new CategoriesRow(language, language, "");
-							ItemsBox.add(box);
-						}
-					}
-					break;
-				};
-				case "countries": {
-					actual_view = "countries";
-					if(cip.languages_list != null){
-						foreach (string country in cip.countries_list){
-							CategoriesRow box = new CategoriesRow(country, country, "");
-							ItemsBox.add(box);
-						}
-					}
-					break;
-				};
-				case "states": {
-					actual_view = "states";
-					if(cip.states_list != null){
-						foreach (string state in cip.states_list){
-							CategoriesRow box = new CategoriesRow(state, state, "");
-							ItemsBox.add(box);
-						}
-					}
-					break;
-				};
-				case "codecs": {
-					actual_view = "codecs";
-					if(cip.codecs_list != null){
-						foreach (string codec in cip.codecs_list){
-							CategoriesRow box = new CategoriesRow(codec, codec, "");
-							ItemsBox.add(box);
-						}
-					}
-					break;
-				};
-				case "tags": {
-					actual_view = "tags";
-					if(cip.tags_list != null){
-						foreach (string tag in cip.tags_list){
-							CategoriesRow box = new CategoriesRow(tag, tag, "");
-							ItemsBox.add(box);
-						}
-					}
-					break;
-				};
-			}
-		}
-
 	}
 }

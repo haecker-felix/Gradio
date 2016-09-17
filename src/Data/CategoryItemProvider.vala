@@ -8,6 +8,8 @@ namespace Gradio{
 		public GLib.List<string> states_list;
 		public GLib.List<string> tags_list;
 
+		public signal void loaded();
+
 		public CategoryItemProvider(){
 			load_lists.begin();
 		}
@@ -104,6 +106,7 @@ namespace Gradio{
 			new Thread<void*> ("load_list_thread", run);
 
 			yield;
+			loaded();
         	}
 
 	}

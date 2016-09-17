@@ -5,8 +5,6 @@ namespace Gradio{
 	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/discover-box.ui")]
 	public class DiscoverBox : Gtk.Box{
 
-		private GLib.Settings settings;
-
 		public StationsView stations_view_results;
 
 		private StationsView grid_view_recently_clicked;
@@ -34,8 +32,6 @@ namespace Gradio{
 		private DiscoverSidebar sidebar;
 
 		public DiscoverBox(){
-			settings = new GLib.Settings ("de.haecker-felix.gradio");
-
 			stations_view_results = new StationsView("Results", "system-search-symbolic");
 			grid_view_recently_changed = new StationsView("Recently Changed", "text-editor-symbolic", true);
 			grid_view_recently_clicked = new StationsView("Recently Clicked", "view-refresh-symbolic", true);

@@ -52,10 +52,7 @@ namespace Gradio{
 		[GtkChild]
 		private Spinner Spinner;
 
-		private GLib.Settings settings;
-
 		public StationsView(string title = "Items", string image_name = "emblem-documents-symbolic", bool dm = false){
-			settings = new GLib.Settings ("de.haecker-felix.gradio");
 			provider = new StationProvider();
 			discover_mode = dm;
 
@@ -221,7 +218,7 @@ namespace Gradio{
 					if(!(val.Broken)){
 						GridViewFlowBox.add(grid_box);
 						ListViewListBox.add(list_box);
-					}else if(!settings.get_boolean("only-show-working-stations")){
+					}else if(!Gradio.App.settings.get_boolean("only-show-working-stations")){
 						GridViewFlowBox.add(grid_box);
 						ListViewListBox.add(list_box);
 					}

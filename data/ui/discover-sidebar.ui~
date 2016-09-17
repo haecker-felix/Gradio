@@ -203,7 +203,7 @@
                 <property name="can_focus">False</property>
                 <property name="shadow_type">none</property>
                 <child>
-                  <object class="GtkListBox" id="LanguageItemsBox">
+                  <object class="GtkListBox" id="ItemsBox4">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                   </object>

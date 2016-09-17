@@ -15,68 +15,67 @@ namespace Gradio{
 		[GtkChild]
 		private Switch ShowNotificationsSwitch;
 
-		private GLib.Settings settings;
 
 		public SettingsDialog () {
+			load_settings();
 			var gtk_settings = Gtk.Settings.get_default ();
-			settings = new GLib.Settings ("de.haecker-felix.gradio");
-			load_settings(settings);
+
 
 			OnlyShowWorkingStationsSwitch.notify["active"].connect (() => {
 				if (OnlyShowWorkingStationsSwitch.active) {
-					settings.set_boolean ("only-show-working-stations", true);
+					Gradio.App.settings.set_boolean ("only-show-working-stations", true);
 				} else {
-					settings.set_boolean ("only-show-working-stations", false);
+					Gradio.App.settings.set_boolean ("only-show-working-stations", false);
 				}
 
 			});
 
 			UseDarkDesignSwitch.notify["active"].connect (() => {
 				if (UseDarkDesignSwitch.active) {
-					settings.set_boolean ("use-dark-design", true);
+					Gradio.App.settings.set_boolean ("use-dark-design", true);
 					gtk_settings.gtk_application_prefer_dark_theme = true;
 				} else {
-					settings.set_boolean ("use-dark-design", false);
+					Gradio.App.settings.set_boolean ("use-dark-design", false);
 					gtk_settings.gtk_application_prefer_dark_theme = false;
 				}
-				
+
 			});
 
 			LoadPicturesSwitch.notify["active"].connect (() => {
 				if (LoadPicturesSwitch.active) {
-					settings.set_boolean ("load-pictures", true);
+					Gradio.App.settings.set_boolean ("load-pictures", true);
 				} else {
-					settings.set_boolean ("load-pictures", false);
+					Gradio.App.settings.set_boolean ("load-pictures", false);
 				}
 				
 			});
 
 			CloseToTraySwitch.notify["active"].connect (() => {
 				if (CloseToTraySwitch.active) {
-					settings.set_boolean ("close-to-tray", true);
+					Gradio.App.settings.set_boolean ("close-to-tray", true);
 				} else {
-					settings.set_boolean ("close-to-tray", false);
+					Gradio.App.settings.set_boolean ("close-to-tray", false);
 				}
 				
 			});
 
 			ShowNotificationsSwitch.notify["active"].connect (() => {
 				if (ShowNotificationsSwitch.active) {
-					settings.set_boolean ("show-notifications", true);
+					Gradio.App.settings.set_boolean ("show-notifications", true);
 				} else {
-					settings.set_boolean ("show-notifications", false);
+					Gradio.App.settings.set_boolean ("show-notifications", false);
 				}
 				
 			});
 
 		}
 
-		private void load_settings(GLib.Settings settings){
-			UseDarkDesignSwitch.set_active(settings.get_boolean ("use-dark-design"));
-			LoadPicturesSwitch.set_active(settings.get_boolean ("load-pictures"));
-			OnlyShowWorkingStationsSwitch.set_active(settings.get_boolean ("only-show-working-stations"));
-			CloseToTraySwitch.set_active(settings.get_boolean ("close-to-tray"));
-			ShowNotificationsSwitch.set_active(settings.get_boolean ("show-notifications"));
+		private void load_settings(){
+			UseDarkDesignSwitch.set_active(Gradio.App.settings.get_boolean ("use-dark-design"));
+			LoadPicturesSwitch.set_active(Gradio.App.settings.get_boolean ("load-pictures"));
+			OnlyShowWorkingStationsSwitch.set_active(Gradio.App.settings.get_boolean ("only-show-working-stations"));
+			CloseToTraySwitch.set_active(Gradio.App.settings.get_boolean ("close-to-tray"));
+			ShowNotificationsSwitch.set_active(Gradio.App.settings.get_boolean ("show-notifications"));
 		}
 
 	}
