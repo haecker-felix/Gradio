@@ -234,6 +234,10 @@ namespace Gradio{
 			}
 		}
 
+		public void set_title(string t){
+			TitleLabel.set_text(t);
+		}
+
 		private void disable_load_more(){
 			LoadMoreBox.set_visible(false);
 			Progress.set_visible(false);

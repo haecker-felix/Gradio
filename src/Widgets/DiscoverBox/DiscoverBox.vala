@@ -91,21 +91,25 @@ namespace Gradio{
 
 		private void show_recently_changed(){
 			stations_view_results.set_stations_from_address(RadioBrowser.radio_stations_recently_changed);
+			stations_view_results.set_title("Recently Changed");
 			show_results();
 		}
 
 		private void show_recently_clicked(){
 			stations_view_results.set_stations_from_address(RadioBrowser.radio_stations_recently_clicked);
+			stations_view_results.set_title("Recently Clicked");
 			show_results();
 		}
 
 		private void show_most_votes(){
 			stations_view_results.set_stations_from_address(RadioBrowser.radio_stations_most_votes);
+			stations_view_results.set_title("Most Popular");
 			show_results();
 		}
 
 		public void SearchButton_clicked(string search){
 			show_results();
+			stations_view_results.set_title("Search results for \"" + search + "\"");
 			sidebar.show_categories();
 			string address = RadioBrowser.radio_stations_by_name + Util.optimize_string(search);
 			stations_view_results.set_stations_from_address(address);

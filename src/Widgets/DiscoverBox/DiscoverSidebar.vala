@@ -173,8 +173,9 @@ namespace Gradio{
 				case "tags": address = RadioBrowser.radio_stations_by_tag + item; break;
 			}
 
-			dbox.show_results();
+			dbox.stations_view_results.set_title("Results for \"" + item + "\"");
 			dbox.stations_view_results.set_stations_from_address(address);
+			dbox.show_results();
 			show_categories();
 		}
 	}
