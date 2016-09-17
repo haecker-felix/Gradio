@@ -72,16 +72,10 @@
                     <property name="position">1</property>
                   </packing>
                 </child>
-                <style>
-                  <class name="sidebar"/>
-                </style>
               </object>
             </child>
           </object>
         </child>
-        <style>
-          <class name="border-right"/>
-        </style>
       </object>
       <packing>
         <property name="expand">False</property>
@@ -90,132 +84,139 @@
       </packing>
     </child>
     <child>
-      <object class="GtkStack" id="Items">
+      <object class="GtkRevealer" id="ItemsBox">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
+        <property name="transition_type">slide-right</property>
         <child>
-          <object class="GtkScrolledWindow" id="Tags">
-            <property name="width_request">250</property>
+          <object class="GtkStack" id="Items">
             <property name="visible">True</property>
-            <property name="can_focus">True</property>
+            <property name="can_focus">False</property>
             <child>
-              <object class="GtkViewport">
+              <object class="GtkScrolledWindow" id="Tags">
+                <property name="width_request">250</property>
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="shadow_type">none</property>
+                <property name="can_focus">True</property>
                 <child>
-                  <object class="GtkListBox" id="TagItemsBox">
+                  <object class="GtkViewport">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="shadow_type">none</property>
+                    <child>
+                      <object class="GtkListBox" id="TagItemsBox">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                      </object>
+                    </child>
                   </object>
                 </child>
               </object>
+              <packing>
+                <property name="name">tags</property>
+                <property name="title" translatable="yes">page0</property>
+              </packing>
             </child>
-          </object>
-          <packing>
-            <property name="name">tags</property>
-            <property name="title" translatable="yes">page0</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkScrolledWindow" id="States">
-            <property name="width_request">250</property>
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
             <child>
-              <object class="GtkViewport">
+              <object class="GtkScrolledWindow" id="States">
+                <property name="width_request">250</property>
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="shadow_type">none</property>
+                <property name="can_focus">True</property>
                 <child>
-                  <object class="GtkListBox" id="StateItemsBox">
+                  <object class="GtkViewport">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="shadow_type">none</property>
+                    <child>
+                      <object class="GtkListBox" id="StateItemsBox">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                      </object>
+                    </child>
                   </object>
                 </child>
               </object>
+              <packing>
+                <property name="name">states</property>
+                <property name="title" translatable="yes">page1</property>
+                <property name="position">1</property>
+              </packing>
             </child>
-          </object>
-          <packing>
-            <property name="name">states</property>
-            <property name="title" translatable="yes">page1</property>
-            <property name="position">1</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkScrolledWindow" id="Countries">
-            <property name="width_request">250</property>
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
             <child>
-              <object class="GtkViewport">
+              <object class="GtkScrolledWindow" id="Countries">
+                <property name="width_request">250</property>
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="shadow_type">none</property>
+                <property name="can_focus">True</property>
                 <child>
-                  <object class="GtkListBox" id="CountryItemsBox">
+                  <object class="GtkViewport">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="shadow_type">none</property>
+                    <child>
+                      <object class="GtkListBox" id="CountryItemsBox">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                      </object>
+                    </child>
                   </object>
                 </child>
               </object>
+              <packing>
+                <property name="name">countries</property>
+                <property name="title" translatable="yes">page0</property>
+                <property name="position">2</property>
+              </packing>
             </child>
-          </object>
-          <packing>
-            <property name="name">countries</property>
-            <property name="title" translatable="yes">page0</property>
-            <property name="position">2</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkScrolledWindow" id="Codecs">
-            <property name="width_request">250</property>
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
             <child>
-              <object class="GtkViewport">
+              <object class="GtkScrolledWindow" id="Codecs">
+                <property name="width_request">250</property>
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="shadow_type">none</property>
+                <property name="can_focus">True</property>
                 <child>
-                  <object class="GtkListBox" id="CodecItemsBox">
+                  <object class="GtkViewport">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="shadow_type">none</property>
+                    <child>
+                      <object class="GtkListBox" id="CodecItemsBox">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                      </object>
+                    </child>
                   </object>
                 </child>
               </object>
+              <packing>
+                <property name="name">codecs</property>
+                <property name="title" translatable="yes">page1</property>
+                <property name="position">3</property>
+              </packing>
             </child>
-          </object>
-          <packing>
-            <property name="name">codecs</property>
-            <property name="title" translatable="yes">page1</property>
-            <property name="position">3</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkScrolledWindow" id="Languages">
-            <property name="width_request">250</property>
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
             <child>
-              <object class="GtkViewport">
+              <object class="GtkScrolledWindow" id="Languages">
+                <property name="width_request">250</property>
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="shadow_type">none</property>
+                <property name="can_focus">True</property>
                 <child>
-                  <object class="GtkListBox" id="ItemsBox4">
+                  <object class="GtkViewport">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="shadow_type">none</property>
+                    <child>
+                      <object class="GtkListBox" id="LanguageItemsBox">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                      </object>
+                    </child>
                   </object>
                 </child>
               </object>
+              <packing>
+                <property name="name">languages</property>
+                <property name="title" translatable="yes">page2</property>
+                <property name="position">4</property>
+              </packing>
             </child>
           </object>
-          <packing>
-            <property name="name">languages</property>
-            <property name="title" translatable="yes">page2</property>
-            <property name="position">4</property>
-          </packing>
         </child>
       </object>
       <packing>
@@ -224,5 +225,8 @@
         <property name="position">1</property>
       </packing>
     </child>
+    <style>
+      <class name="sidebar"/>
+    </style>
   </template>
 </interface>

@@ -84,13 +84,13 @@
 
 .sidebar button:hover,
 .sidebar .button:hover {
-	background-color: mix(@theme_base_color,#000000,0.5);
+	background-color: @theme_selected_bg_color;
 }
 
 
 .sidebar button:checked,
 .sidebar .button:checked {
-	background-color: mix(@theme_base_color,#000000,0.5);
+	background-color: @theme_selected_bg_color;
 }
 
 .sidebar button .badge,

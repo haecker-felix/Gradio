@@ -175,9 +175,6 @@
               <placeholder/>
             </child>
           </object>
-          <packing>
-            <property name="pass_through">True</property>
-          </packing>
         </child>
       </object>
       <packing>

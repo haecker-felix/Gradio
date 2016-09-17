@@ -9,6 +9,8 @@ namespace Gradio{
 		private Box CategoriesBox;
 		[GtkChild]
 		private Box ActionBox;
+		[GtkChild]
+		private Revealer ItemsBox;
 
 		[GtkChild]
 		private ListBox LanguageItemsBox;
@@ -41,23 +43,23 @@ namespace Gradio{
 		private void setup_view(){
 			SidebarTile languages = new SidebarTile ("Languages", "user-invisible-symbolic");
 			CategoriesBox.pack_start(languages);
-			languages.clicked.connect(() => {show_catergory_items("languages"); dbox.show_select_item();});
+			languages.clicked.connect(() => {show_catergory_items("languages"); });
 
 			SidebarTile codecs = new SidebarTile ("Codecs", "emblem-system-symbolic");
 			CategoriesBox.pack_start(codecs);
-			codecs.clicked.connect(() => {show_catergory_items("codecs"); dbox.show_select_item();});
+			codecs.clicked.connect(() => {show_catergory_items("codecs"); });
 
 			SidebarTile countries = new SidebarTile ("Countries", "mark-location-symbolic");
 			CategoriesBox.pack_start(countries);
-			countries.clicked.connect(() => {show_catergory_items("countries"); dbox.show_select_item();});
+			countries.clicked.connect(() => {show_catergory_items("countries"); });
 
 			SidebarTile tags = new SidebarTile ("Tags", "dialog-information-symbolic");
 			CategoriesBox.pack_start(tags);
-			tags.clicked.connect(() => {show_catergory_items("tags"); dbox.show_select_item();});
+			tags.clicked.connect(() => {show_catergory_items("tags"); });
 
 			SidebarTile states = new SidebarTile ("States", "mark-location-symbolic");
 			CategoriesBox.pack_start(states);
-			states.clicked.connect(() => {show_catergory_items("states"); dbox.show_select_item();});
+			states.clicked.connect(() => {show_catergory_items("states"); });
 
 			SidebarTile home = new SidebarTile ("Home", "go-home-symbolic");
 			ActionBox.pack_end(home);
@@ -130,11 +132,11 @@ namespace Gradio{
 		}
 
 		public void show_categories(){
-			Items.set_visible(false);
+			ItemsBox.set_reveal_child(false);
 		}
 
 		private void show_items(){
-			Items.set_visible(true);
+			ItemsBox.set_reveal_child(true);
 		}
 
 		private void show_catergory_items (string category){
@@ -173,6 +175,7 @@ namespace Gradio{
 
 			dbox.show_results();
 			dbox.stations_view_results.set_stations_from_address(address);
+			show_categories();
 		}
 	}
 }
