@@ -178,5 +178,10 @@ namespace Gradio{
 			dbox.show_results();
 			show_categories();
 		}
+
+		[GtkCallback]
+		private void BackButton_clicked(Button button){
+			show_categories();
+		}
 	}
 }
