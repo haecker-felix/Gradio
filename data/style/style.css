@@ -78,6 +78,7 @@
 }
 
 .sidebar .button {
+	background-color: transparent;
 	border: none;
 	box-shadow: none;
 	background-image: none;
