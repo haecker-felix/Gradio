@@ -64,14 +64,19 @@
 	border-style: solid;
 	border-color: @borders;
 	background-color: mix(@theme_base_color,#000000,0.2);
+	box-shadow: none;
+	background-image: none;
 }
 
-.sidebar button image,
-.sidebar .button GtkImage {
-	icon-shadow: none;
+.sidebar .listbox{
+	border-width: 0px 1px 0px 0px;
+	border-style: solid;
+	border-color: @borders;
+	background-color: mix(@theme_base_color,#000000,0.2);
+	box-shadow: none;
+	background-image: none;
 }
 
-.sidebar button,
 .sidebar .button {
 	border: none;
 	box-shadow: none;
@@ -82,27 +87,11 @@
 	-GtkWidget-window-dragging: 1;
 }
 
-.sidebar button:hover,
 .sidebar .button:hover {
 	background-color: @theme_selected_bg_color;
 }
 
 
-.sidebar button:checked,
 .sidebar .button:checked {
 	background-color: @theme_selected_bg_color;
-}
-
-.sidebar button .badge,
-.sidebar .button .badge {
-	background-color: shade(blue, 4.0);
-	background-image: none;
-	border-radius: 20px;
-	border: 1px solid white;
-	padding: 3px 2px;
-}
-
-.sidebar button .badge:backdrop,
-.sidebar .button .badge:backdrop {
-	background-color: grey;
 }
