@@ -106,3 +106,7 @@
 .sidebar .button:checked {
 	background-color: @theme_selected_bg_color;
 }
+
+.shadow {
+	box-shadow: 0px 20px 20px 20px alpha(black, 0.5);
+}
