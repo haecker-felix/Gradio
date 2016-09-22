@@ -29,7 +29,7 @@ set (ICON_NAME ${CMAKE_PROJECT_NAME})
 set (APP_NAME "Gradio")
 set (GENERIC_NAME "Internet Radio")
 set (COMMENT "Listen to radio stations worldwide")
-set (VERSION "5.0 Beta")
+set (VERSION "5.0 Beta 1")
 set (VERSION_INFO "Stable")
 
 # where we install data directory (if we have any)
