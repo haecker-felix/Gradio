@@ -36,7 +36,7 @@ namespace Gradio{
 			notes.show();
 			notes.set_vexpand(true);
 
-			notes.load_uri("https://raw.githubusercontent.com/haecker-felix/gradio/master/README.md");
+			notes.load_uri("https://gradio.haecker-felix.de/release_notes.html");
 		}
 
 		[GtkCallback]
@@ -46,7 +46,7 @@ namespace Gradio{
 
 		[GtkCallback]
 		private void MoreInformationButton_clicked (Button button){
-			Util.open_website("https://raw.githubusercontent.com/haecker-felix/gradio/master/README.md");
+			Util.open_website("https://github.com/haecker-felix/gradio/releases");
 		}
 	}
 }
