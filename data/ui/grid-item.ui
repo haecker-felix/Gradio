@@ -55,7 +55,6 @@
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">True</property>
-                    <property name="position">0</property>
                   </packing>
                 </child>
                 <child>
@@ -120,9 +119,6 @@
                   </packing>
                 </child>
               </object>
-              <packing>
-                <property name="index">-1</property>
-              </packing>
             </child>
             <child type="overlay">
               <object class="GtkEventBox">

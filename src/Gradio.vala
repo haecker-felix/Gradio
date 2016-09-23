@@ -151,19 +151,31 @@ namespace Gradio {
 		}
 
 		public static void main (string [] args){
+			message("Starting Gradio version " + Constants.VERSION + "!");
+
 			// Init gstreamer
 			unowned string[] argv = null;
-			var app = new App ();
 			Gst.init (ref argv);
 
 			// Init gtk
 			Gtk.init(ref args);
+
+			// Init app
+			var app = new App ();
+
+			// Create tray icon
 			var trayicon = new Gtk.StatusIcon.from_icon_name("gradio");
 			trayicon.activate.connect(app.restore_window);
 			app.create_menuSystem();
 			trayicon.popup_menu.connect(app.menuSystem_popup);
 
-			message("Starting Gradio version " + Constants.VERSION + "!");
+			// Show release notes if neccesary
+			if(!(settings.get_string("release-notes") == Constants.VERSION)){
+				ReleaseNotes rn = new ReleaseNotes();
+				rn.show();
+			}
+
+			// Run app
 			app.run (args);
 		}
     }

@@ -11,6 +11,7 @@ Build-Depends: 	cmake (>= 2.8),
 		libjson-glib-dev,
 		libgio2.0-cil-dev,
 		libsoup2.4-dev,
+		webkit2gtk-4.0,
 Standards-Version: 3.9.3
 
 Package: gradio

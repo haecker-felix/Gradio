@@ -69,6 +69,7 @@ set (SOURCE_LIST
 	src/Widgets/StationsView/StationsViewButton.vala
 	src/Widgets/StationEditorDialog.vala
 	src/Widgets/MiniPlayer.vala
+	src/Widgets/ReleaseNotes.vala
 	src/AudioPlayer.vala
 	src/RadioStation.vala
 	src/Util.vala
@@ -111,6 +112,7 @@ pkg_check_modules(DEPS REQUIRED
 	json-glib-1.0
 	gio-2.0
 	libsoup-2.4
+	webkit2gtk-4.0
 )
 
 set(NORMAL_CFLAGS ${DEPS_CFLAGS} ${LIBSOURCE_CFLAGS} ${GCONF_CFLAGS})
@@ -150,6 +152,7 @@ PACKAGES
 	gio-2.0
 	libsoup-2.4
 	gstreamer-pbutils-1.0
+	webkit2gtk-4.0
 OPTIONS
 	--thread
 	--target-glib=2.38
