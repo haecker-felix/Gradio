@@ -30,6 +30,7 @@ namespace Gradio {
 		private Gtk.Menu menuSystem;
 
 		public App () {
+			settings = new GLib.Settings ("de.haecker-felix.gradio");
 			Object(application_id: "de.haeckerfelix.gradio", flags: ApplicationFlags.FLAGS_NONE);
 		}
 
@@ -40,7 +41,6 @@ namespace Gradio {
 			create_app_menu();
 
 			player = new AudioPlayer();
-			settings = new GLib.Settings ("de.haecker-felix.gradio");
 
 			mpris = new MPRIS();
 			mpris.initialize();
@@ -82,7 +82,7 @@ namespace Gradio {
 				"title", _("About Gradio"),
 				"license-type", Gtk.License.GPL_3_0,
 				"logo-icon-name", "gradio",
-				"version", Constants.VERSION,
+				"version", Constants.VERSION_INFO,
 				"comments", "Database: www.radio-browser.info",
 				"website", "https://github.com/haecker-felix/gradio",
 				"wrap-license", true);
@@ -170,6 +170,10 @@ namespace Gradio {
 			trayicon.popup_menu.connect(app.menuSystem_popup);
 
 			// Show release notes if neccesary
+			if(settings != null)
+				message("Release notes: " + settings.get_string("release-notes"));
+
+			message("Current: " + Constants.VERSION);
 			if(!(settings.get_string("release-notes") == Constants.VERSION)){
 				ReleaseNotes rn = new ReleaseNotes();
 				rn.show();

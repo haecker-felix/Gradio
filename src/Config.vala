@@ -19,8 +19,8 @@ namespace Constants {
 	public const string PKG_DATADIR = "/usr/share/gradio";
 	public const string GETTEXT_PACKAGE = "gradio";
 	public const string RELEASE_NAME = "";
-	public const string VERSION = "5.0 Beta 1";
-	public const string VERSION_INFO = "Stable";
+	public const string VERSION = "5_0_0_Beta_1";
+	public const string VERSION_INFO = "5.0.0 Beta 1";
 	public const string INSTALL_PREFIX = "/usr";
     	public const string APP_NAME = "Gradio";
 	public const string EXEC_NAME = "gradio";

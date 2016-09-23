@@ -25,6 +25,9 @@ namespace Gradio{
 		[GtkChild]
 		private Box Placeholder;
 
+		[GtkChild]
+		private Label VersionLabel;
+
 		private WebView notes;
 
 		public ReleaseNotes(){
@@ -33,14 +36,17 @@ namespace Gradio{
 			notes = new WebView();
 			Placeholder.add(notes);
 
+			VersionLabel.set_text(Constants.VERSION_INFO);
+
 			notes.show();
 			notes.set_vexpand(true);
 
-			notes.load_uri("https://gradio.haecker-felix.de/release_notes.html");
+			notes.load_uri("https://gradio.haecker-felix.de/release_notes/"+Constants.VERSION+".html");
 		}
 
 		[GtkCallback]
 		private void CloseButton_clicked (Button button){
+			App.settings.set_string("release-notes", Constants.VERSION);
 			this.close();
 		}
 

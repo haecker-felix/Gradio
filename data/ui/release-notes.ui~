@@ -158,7 +158,7 @@
       <object class="GtkHeaderBar" id="Header">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="title">What's New?</property>
+        <property name="title">Release Notes</property>
       </object>
     </child>
   </template>
