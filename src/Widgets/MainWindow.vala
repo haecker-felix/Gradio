@@ -100,7 +100,7 @@ namespace Gradio{
 			ContentStack.add_titled(mplayer, "miniplayer", _("MiniPlayer"));
 
 			// Load css
-			Util.add_stylesheet("style/style.css");
+			Util.add_stylesheet("gradio.css");
 
 			if(!(App.settings.get_boolean ("use-grid-view"))){
 				GridImage.set_visible(true);

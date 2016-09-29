@@ -1,0 +1,22 @@
+<Project xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:foaf="http://xmlns.com/foaf/0.1/"
+         xmlns:gnome="http://api.gnome.org/doap-extensions#"
+         xmlns="http://usefulinc.com/ns/doap#">
+
+  <name xml:lang="en">gradio</name>
+  <shortdesc xml:lang="en">Application for finding and listening to internet radio stations</shortdesc>
+  <description xml:lang="en">Application for finding and listening to internet radio stations</description>
+  <homepage rdf:resource="https://github.com/haecker-felix/gradio" />
+  <download-page rdf:resource="https://github.com/haecker-felix/gradio/releases" />
+  <bug-database rdf:resource="https://github.com/haecker-felix/gradio/issues" />
+  <category rdf:resource="http://api.gnome.org/doap-extensions#apps" />
+  <programming-language>Vala</programming-language>
+
+  <maintainer>
+    <foaf:Person>
+      <foaf:name>Felix Häcker</foaf:name>
+      <foaf:mbox rdf:resource="mailto:haecker.felix1207@gmail.com" />
+    </foaf:Person>
+  </maintainer>
+</Project>

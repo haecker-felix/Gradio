@@ -32,6 +32,12 @@ namespace Gradio {
 		public App () {
 			settings = new GLib.Settings ("de.haecker-felix.gradio");
 			Object(application_id: "de.haeckerfelix.gradio", flags: ApplicationFlags.FLAGS_NONE);
+
+			// Create tray icon
+			var trayicon = new Gtk.StatusIcon.from_icon_name("gradio");
+			trayicon.activate.connect(restore_window);
+			create_menuSystem();
+			trayicon.popup_menu.connect(menuSystem_popup);
 		}
 
 		protected override void activate () {
@@ -50,6 +56,7 @@ namespace Gradio {
 			window = new MainWindow(this);
 			this.add_window(window);
 			window.show_all();
+
 			connect_signals();
 
 			if(!Util.check_database_connection()){
@@ -82,7 +89,7 @@ namespace Gradio {
 				"title", _("About Gradio"),
 				"license-type", Gtk.License.GPL_3_0,
 				"logo-icon-name", "gradio",
-				"version", Constants.VERSION_INFO,
+				"version", VERSION,
 				"comments", "Database: www.radio-browser.info",
 				"website", "https://github.com/haecker-felix/gradio",
 				"wrap-license", true);
@@ -114,7 +121,7 @@ namespace Gradio {
 		private void connect_signals(){
 			player.connection_error.connect((o,t) => {
 				Util.show_info_dialog(t, window);
-				return;	
+				return;
 			});
 		}
 
@@ -148,39 +155,6 @@ namespace Gradio {
 	    	/* Show popup menu on right button */
 	    	private void menuSystem_popup(uint button, uint time) {
 			menuSystem.popup(null, null, null, button, time);
-		}
-
-		public static void main (string [] args){
-			message("Starting Gradio version " + Constants.VERSION + "!");
-
-			// Init gstreamer
-			unowned string[] argv = null;
-			Gst.init (ref argv);
-
-			// Init gtk
-			Gtk.init(ref args);
-
-			// Init app
-			var app = new App ();
-
-			// Create tray icon
-			var trayicon = new Gtk.StatusIcon.from_icon_name("gradio");
-			trayicon.activate.connect(app.restore_window);
-			app.create_menuSystem();
-			trayicon.popup_menu.connect(app.menuSystem_popup);
-
-			// Show release notes if neccesary
-			if(settings != null)
-				message("Release notes: " + settings.get_string("release-notes"));
-
-			message("Current: " + Constants.VERSION);
-			if(!(settings.get_string("release-notes") == Constants.VERSION)){
-				ReleaseNotes rn = new ReleaseNotes();
-				rn.show();
-			}
-
-			// Run app
-			app.run (args);
 		}
     }
 }
