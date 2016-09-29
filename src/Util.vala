@@ -22,7 +22,7 @@ public class Util{
 	public static string get_string_from_uri (string url){
 		if(url != ""){
 			var session = new Soup.Session ();
-			session.user_agent = "gradio/"+Constants.VERSION;
+			session.user_agent = "gradio/"+VERSION;
 			var message = new Soup.Message ("GET", url);
 
 			session.send_message (message);
@@ -87,7 +87,8 @@ public class Util{
 	}
 
 	public static void add_stylesheet (string path) {
-		var css_file = Constants.PKG_DATADIR + "/" + path;
+		var css_file = DATA_DIRECTORY + "/" + path;
+		message(css_file);
 		var provider = new CssProvider ();
 
 		try {
