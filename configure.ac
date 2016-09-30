@@ -2,7 +2,7 @@ dnl ###########################################################################
 dnl General
 dnl ###########################################################################
 AC_PREREQ([2.63])
-AC_INIT([Gradio], [5.0.1], [https://github.com/haecker-felix/gradio/issues],
+AC_INIT([Gradio], [5.0.0], [https://github.com/haecker-felix/gradio/issues],
         [gradio], [https://github.com/haecker-felix/gradio/])
 AC_CONFIG_MACRO_DIR([m4])
 
@@ -46,6 +46,13 @@ PKG_CHECK_MODULES(GRADIO, [
 AC_SUBST([GLIB_REQUIRED])
 
 AC_PATH_PROG([DESKTOP_FILE_VALIDATE], [desktop-file-validate], [/bin/true])
+
+dnl ###########################################################################
+dnl Internationalization
+dnl ###########################################################################
+
+IT_PROG_INTLTOOL([0.50])
+AC_SUBST(GETTEXT_PACKAGE, gradio)
 
 
 dnl ###########################################################################
