@@ -2,7 +2,7 @@
 _Name=Gradio
 _Comment=Find and listen to internet radio stations
 Exec=gradio
-Icon=gradio
+Icon=de.haeckerfelix.gradio
 Terminal=false
 Type=Application
 Categories=GNOME;GTK;
