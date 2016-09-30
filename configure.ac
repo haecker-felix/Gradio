@@ -1,6 +1,3 @@
-dnl ###########################################################################
-dnl General
-dnl ###########################################################################
 AC_PREREQ([2.63])
 AC_INIT([Gradio], [5.0.0], [https://github.com/haecker-felix/gradio/issues],
         [gradio], [https://github.com/haecker-felix/gradio/])
@@ -61,6 +58,7 @@ dnl ###########################################################################
 
 AC_CONFIG_FILES([
 Makefile
+po/Makefile.in
 data/Makefile
 data/icons/Makefile
 data/icons/hicolor/Makefile
