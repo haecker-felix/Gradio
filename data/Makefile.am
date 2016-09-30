@@ -20,11 +20,11 @@ appstream_XML = $(appstream_in_files:.xml.in=.xml)
 @INTLTOOL_XML_RULE@
 
 EXTRA_DIST = \
-             $(appstream_in_files) \
-             $(gsettings_SCHEMAS) \
-             $(desktop_in_files) \
-             $(css_DATA) \
-             $(gresource_file)
+	$(appstream_in_files) \
+	$(gsettings_SCHEMAS) \
+	$(desktop_in_files) \
+	$(css_DATA) \
+	$(gresource_file)
 
 CLEANFILES = \
 	$(appstream_XML) \
