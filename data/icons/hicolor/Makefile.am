@@ -6,13 +6,13 @@ icon128dir=$(datadir)/icons/hicolor/128x128/apps
 icon192dir=$(datadir)/icons/hicolor/192x192/apps
 iconscalabledir=$(datadir)/icons/hicolor/scalable/apps
 
-icon16_DATA = 16x16/gradio.png
-icon32_DATA = 32x32/gradio.png
-icon48_DATA = 48x48/gradio.png
-icon64_DATA = 64x64/gradio.png
-icon128_DATA = 128x128/gradio.png
-icon192_DATA = 192x192/gradio.png
-iconscalable_DATA = scalable/gradio-symbolic.svg
+icon16_DATA = 16x16/de.haeckerfelix.gradio.png
+icon32_DATA = 32x32/de.haeckerfelix.gradio.png
+icon48_DATA = 48x48/de.haeckerfelix.gradio.png
+icon64_DATA = 64x64/de.haeckerfelix.gradio.png
+icon128_DATA = 128x128/de.haeckerfelix.gradio.png
+icon192_DATA = 192x192/de.haeckerfelix.gradio.png
+iconscalable_DATA = scalable/de.haeckerfelix.gradio.svg
 
 EXTRA_DIST = $(icon16_DATA) $(icon32_DATA) $(icon48_DATA) $(icon64_DATA) $(icon128_DATA) $(icon192_DATA) $(iconscalable_DATA)
 
