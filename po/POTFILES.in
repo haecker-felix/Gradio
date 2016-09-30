@@ -1,7 +1,0 @@
-# List of source files containing translatable strings.
-# Please keep this file in alphabetical order.
-[encoding: UTF-8]
-data/gradio.appdata.xml.in
-data/gradio.desktop.in
-data/gradio.gschema.xml
-#incomplete!
