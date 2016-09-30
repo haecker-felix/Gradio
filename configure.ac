@@ -47,13 +47,6 @@ AC_SUBST([GLIB_REQUIRED])
 
 AC_PATH_PROG([DESKTOP_FILE_VALIDATE], [desktop-file-validate], [/bin/true])
 
-dnl ###########################################################################
-dnl Internationalization
-dnl ###########################################################################
-
-IT_PROG_INTLTOOL([0.50])
-AC_SUBST(GETTEXT_PACKAGE, gradio)
-
 
 dnl ###########################################################################
 dnl Files to generate
