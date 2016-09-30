@@ -10,7 +10,7 @@ gresource_file = gradio.gresource.xml
 resource_files = $(shell $(GLIB_COMPILE_RESOURCES) --generate-dependencies $(gresource_file))
 
 desktopdir = $(datadir)/applications
-desktop_in_files = gradio.desktop.in
+desktop_in_files = de.haeckerfelix.gradio.desktop.in
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
