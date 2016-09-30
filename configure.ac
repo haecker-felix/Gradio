@@ -61,7 +61,6 @@ dnl ###########################################################################
 
 AC_CONFIG_FILES([
 Makefile
-po/Makefile.in
 data/Makefile
 data/icons/Makefile
 data/icons/hicolor/Makefile
