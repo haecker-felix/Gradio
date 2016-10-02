@@ -20,23 +20,18 @@ using WebKit;
 namespace Gradio{
 
 	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/release-notes.ui")]
-	public class ReleaseNotes : Gtk.Window{
+	public class ReleaseNotesWindow : Gtk.Window{
 
 		[GtkChild]
 		private Box Placeholder;
 
-		[GtkChild]
-		private Label VersionLabel;
-
 		private WebView notes;
 
-		public ReleaseNotes(){
+		public ReleaseNotesWindow(){
 			this.set_keep_above(true);
 
 			notes = new WebView();
 			Placeholder.add(notes);
-
-			VersionLabel.set_text(VERSION);
 
 			notes.show();
 			notes.set_vexpand(true);
@@ -46,13 +41,12 @@ namespace Gradio{
 
 		[GtkCallback]
 		private void CloseButton_clicked (Button button){
-			App.settings.set_string("release-notes", VERSION);
 			this.close();
 		}
 
 		[GtkCallback]
-		private void MoreInformationButton_clicked (Button button){
-			Util.open_website("https://github.com/haecker-felix/gradio/releases");
+		private void OpenHomepageButton_clicked (Button button){
+			Util.open_website("https://github.com/haecker-felix/gradio/");
 		}
 	}
 }

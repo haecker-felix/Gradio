@@ -2,7 +2,7 @@
 <!-- Generated with glade 3.20.0 -->
 <interface>
   <requires lib="gtk+" version="3.14"/>
-  <template class="GradioReleaseNotes" parent="GtkWindow">
+  <template class="GradioReleaseNotesWindow" parent="GtkWindow">
     <property name="width_request">500</property>
     <property name="height_request">400</property>
     <property name="can_focus">False</property>
@@ -22,8 +22,8 @@
             <property name="can_focus">False</property>
             <property name="halign">center</property>
             <child>
-              <object class="GtkButton" id="MoreInformationButton">
-                <property name="label">gtk-info</property>
+              <object class="GtkButton" id="OpenHomepageButton">
+                <property name="label">Open Homepage</property>
                 <property name="width_request">100</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
@@ -31,8 +31,7 @@
                 <property name="halign">center</property>
                 <property name="margin_top">5</property>
                 <property name="margin_bottom">5</property>
-                <property name="use_stock">True</property>
-                <signal name="clicked" handler="MoreInformationButton_clicked" swapped="no"/>
+                <signal name="clicked" handler="OpenHomepageButton_clicked" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -85,37 +84,6 @@
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="orientation">vertical</property>
-                    <child>
-                      <object class="GtkImage">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="margin_top">10</property>
-                        <property name="margin_bottom">10</property>
-                        <property name="icon_name">gradio</property>
-                        <property name="icon_size">6</property>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">0</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkLabel" id="VersionLabel">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="halign">center</property>
-                        <property name="label" translatable="yes">Gradio 5.0.1 Beta 1</property>
-                        <attributes>
-                          <attribute name="font-desc" value="&lt;Geben Sie den Wert ein&gt; 20"/>
-                        </attributes>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">1</property>
-                      </packing>
-                    </child>
                     <child>
                       <object class="GtkViewport">
                         <property name="visible">True</property>

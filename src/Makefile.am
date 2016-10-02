@@ -34,7 +34,7 @@ gradio_SOURCES = \
 	Widgets/StationsView/StationsViewButton.vala \
 	Widgets/StationEditorDialog.vala \
 	Widgets/MiniPlayer.vala \
-	Widgets/ReleaseNotes.vala \
+	Widgets/ReleaseNotesWindow.vala \
 	AudioPlayer.vala \
 	RadioStation.vala \
 	Util.vala \
