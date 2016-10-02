@@ -1,6 +1,9 @@
 SUBDIRS = icons
 
 gsettings_SCHEMAS = de.haecker-felix.gradio.gschema.xml
+
+.PRECIOUS: $(gsettings_SCHEMAS)
+
 @GSETTINGS_RULES@
 
 cssdir = $(pkgdatadir)

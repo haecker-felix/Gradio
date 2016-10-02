@@ -1,0 +1,7 @@
+[default]
+name=Gradio (Host)
+device=local
+runtime=host
+config-opts=
+prefix=/opt/gnome
+default=true

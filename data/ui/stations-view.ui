@@ -34,7 +34,7 @@
             <property name="margin_left">3</property>
             <property name="label" translatable="yes">label</property>
             <attributes>
-              <attribute name="font-desc" value="&lt;Geben Sie den Wert ein&gt; 16"/>
+              <attribute name="font-desc" value="&lt;&gt; 16"/>
             </attributes>
           </object>
           <packing>
@@ -119,9 +119,6 @@
                     <property name="margin_left">4</property>
                     <property name="margin_top">5</property>
                     <property name="label" translatable="yes">No stations found</property>
-                    <attributes>
-                      <attribute name="font-desc" value="Cantarell 13"/>
-                    </attributes>
                   </object>
                   <packing>
                     <property name="expand">False</property>
