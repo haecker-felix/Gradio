@@ -58,9 +58,6 @@
             </child>
           </object>
         </child>
-        <style>
-          <class name="grid-item"/>
-        </style>
       </object>
     </child>
   </template>

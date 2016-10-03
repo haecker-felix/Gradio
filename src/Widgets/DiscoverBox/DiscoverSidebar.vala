@@ -93,7 +93,8 @@ namespace Gradio{
 		}
 
 		private void connect_signals(){
-			cip.loaded.connect(() => load_information());
+
+			cip.loaded.connect(() => Idle.add(() => { load_information(); return false;}));
 
 			LanguageItemsBox.row_activated.connect((t,a) => {
 				CategoriesRow item = (CategoriesRow)a;

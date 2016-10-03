@@ -83,6 +83,7 @@ namespace Gradio{
 
 			yield;
 
+			message("Playable url: " + url);
 			return url;
 		}
 

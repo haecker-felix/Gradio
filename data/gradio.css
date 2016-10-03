@@ -78,7 +78,7 @@
 	background-image: none;
 }
 
-.sidebar .listbox{
+.sidebar listbox{
 	border-width: 0px 1px 0px 0px;
 	border-style: solid;
 	border-color: @borders;
@@ -87,7 +87,7 @@
 	background-image: none;
 }
 
-.sidebar .button {
+.sidebar button {
 	background-color: transparent;
 	border: none;
 	box-shadow: none;
@@ -98,12 +98,12 @@
 	-GtkWidget-window-dragging: 1;
 }
 
-.sidebar .button:hover {
+.sidebar button:hover {
 	background-color: @theme_selected_bg_color;
 }
 
 
-.sidebar .button:checked {
+.sidebar button:checked {
 	background-color: @theme_selected_bg_color;
 }
 
