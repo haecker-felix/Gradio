@@ -33,6 +33,8 @@ namespace Gradio{
 		private async void load_lists (){
         		SourceFunc callback = load_lists.callback;
 
+			message("Fetching category items...");
+
 			ThreadFunc<void*> run = () => {
 				languages_list = null;
 				languages_list = new GLib.List<string>();
@@ -122,6 +124,7 @@ namespace Gradio{
 			new Thread<void*> ("load_list_thread", run);
 
 			yield;
+			message("Successfully loaded category items!");
 			loaded();
         	}
 

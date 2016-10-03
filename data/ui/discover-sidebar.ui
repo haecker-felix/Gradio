@@ -36,9 +36,6 @@
                     <child>
                       <placeholder/>
                     </child>
-                    <style>
-                      <class name="sidebar"/>
-                    </style>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -62,9 +59,6 @@
                     <child>
                       <placeholder/>
                     </child>
-                    <style>
-                      <class name="sidebar"/>
-                    </style>
                   </object>
                   <packing>
                     <property name="expand">True</property>

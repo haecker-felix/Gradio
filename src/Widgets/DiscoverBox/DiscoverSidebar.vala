@@ -93,8 +93,13 @@ namespace Gradio{
 		}
 
 		private void connect_signals(){
+			cip.loaded.connect(() => {
+				Idle.add(() => {
+					load_information();
+					return false;
+				});
+			});
 
-			cip.loaded.connect(() => Idle.add(() => { load_information(); return false;}));
 
 			LanguageItemsBox.row_activated.connect((t,a) => {
 				CategoriesRow item = (CategoriesRow)a;
@@ -119,8 +124,6 @@ namespace Gradio{
 		}
 
 		private async void load_information (){
-        		SourceFunc callback = load_information.callback;
-
 			message("Loading category items...");
 			Util.remove_all_items_from_list_box((Gtk.ListBox) CodecItemsBox);
 			Util.remove_all_items_from_list_box((Gtk.ListBox) LanguageItemsBox);
@@ -128,36 +131,27 @@ namespace Gradio{
 			Util.remove_all_items_from_list_box((Gtk.ListBox) StateItemsBox);
 			Util.remove_all_items_from_list_box((Gtk.ListBox) TagItemsBox);
 
-			ThreadFunc<void*> run = () => {
-				foreach (string codec in cip.codecs_list){
-					CategoriesRow box = new CategoriesRow(codec, codec, "");
-					Idle.add(() => { CodecItemsBox.add(box); return false;});
-				}
-				foreach (string language in cip.languages_list){
-					CategoriesRow box = new CategoriesRow(language, language, "");
-					Idle.add(() => { LanguageItemsBox.add(box); return false;});
-				}
-				foreach (string tag in cip.tags_list){
-					CategoriesRow box = new CategoriesRow(tag, tag, "");
-					Idle.add(() => { TagItemsBox.add(box);; return false;});
-				}
-				foreach (string state in cip.states_list){
-					CategoriesRow box = new CategoriesRow(state, state, "");
-					Idle.add(() => { StateItemsBox.add(box); return false;});
-				}
-				foreach (string country in cip.countries_list){
-					CategoriesRow box = new CategoriesRow(country, country, "");
-					Idle.add(() => { CountryItemsBox.add(box); return false;});
-				}
+			foreach (string codec in cip.codecs_list){
+				CategoriesRow box = new CategoriesRow(codec, codec, "");
+				Idle.add(() => { CodecItemsBox.add(box); return false;});
+			}
+			foreach (string language in cip.languages_list){
+				CategoriesRow box = new CategoriesRow(language, language, "");
+				Idle.add(() => { LanguageItemsBox.add(box); return false;});
+			}
+			foreach (string tag in cip.tags_list){
+				CategoriesRow box = new CategoriesRow(tag, tag, "");
+				Idle.add(() => { TagItemsBox.add(box);; return false;});
+			}
+			foreach (string state in cip.states_list){
+				CategoriesRow box = new CategoriesRow(state, state, "");
+				Idle.add(() => { StateItemsBox.add(box); return false;});
+			}
+			foreach (string country in cip.countries_list){
+				CategoriesRow box = new CategoriesRow(country, country, "");
+				Idle.add(() => { CountryItemsBox.add(box); return false;});
+			}
 
-				Idle.add((owned) callback);
-				Thread.exit (1.to_pointer ());
-				return null;
-			};
-
-			new Thread<void*> ("load_list_thread", run);
-
-			yield;
         	}
 
 		public void show_categories(){

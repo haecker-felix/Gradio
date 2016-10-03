@@ -70,18 +70,12 @@
 
 
 .sidebar{
-	border-width: 0px 1px 0px 0px;
-	border-style: solid;
-	border-color: @borders;
 	background-color: mix(@theme_base_color,#000000,0.2);
 	box-shadow: none;
 	background-image: none;
 }
 
 .sidebar listbox{
-	border-width: 0px 1px 0px 0px;
-	border-style: solid;
-	border-color: @borders;
 	background-color: mix(@theme_base_color,#000000,0.2);
 	box-shadow: none;
 	background-image: none;
@@ -90,9 +84,9 @@
 .sidebar button {
 	background-color: transparent;
 	border: none;
+	border-radius: 0px;
 	box-shadow: none;
 	background-image: none;
-	border-radius: 0px;
 	outline-color: #999;
 	margin: 0px;
 	-GtkWidget-window-dragging: 1;

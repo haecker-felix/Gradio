@@ -50,7 +50,6 @@ namespace Gradio{
 
 		private void close(){
 			message("Successfully installed new codec.");
-			Util.show_info_dialog("Installed new codec successfully. Gradio must be restarted.", Gradio.App.window);
 		}
 
 	}
