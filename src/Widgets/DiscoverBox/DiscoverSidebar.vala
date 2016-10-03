@@ -81,7 +81,7 @@ namespace Gradio{
 			ActionBox.pack_end(home);
 			home.clicked.connect(() => {dbox.show_home();});
 
-			SidebarTile reload = new SidebarTile ("Reload", "emblem-synchronzing-symbolic");
+			SidebarTile reload = new SidebarTile ("Reload", "view-refresh-symbolic");
 			ActionBox.pack_end(reload);
 			reload.clicked.connect(() => {dbox.reload();});
 

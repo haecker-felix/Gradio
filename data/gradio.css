@@ -102,5 +102,9 @@
 }
 
 .shadow {
-	box-shadow: 0px 20px 20px 20px alpha(black, 0.5);
+	box-shadow: 0px 0px 5px 0px alpha(black, 0.5);
+}
+
+.whitebg {
+	background-color: white;
 }

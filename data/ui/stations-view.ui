@@ -164,8 +164,6 @@
                           <object class="GtkFlowBox" id="GridViewFlowBox">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="margin_top">12</property>
-                            <property name="margin_bottom">12</property>
                             <property name="homogeneous">True</property>
                             <property name="min_children_per_line">1</property>
                             <property name="selection_mode">none</property>
@@ -264,6 +262,19 @@
     <property name="no_show_all">True</property>
     <property name="orientation">vertical</property>
     <child>
+      <object class="GtkProgressBar" id="Progress">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="margin_top">3</property>
+        <property name="margin_bottom">3</property>
+      </object>
+      <packing>
+        <property name="expand">False</property>
+        <property name="fill">True</property>
+        <property name="position">0</property>
+      </packing>
+    </child>
+    <child>
       <object class="GtkButton" id="LoadMoreButton">
         <property name="visible">True</property>
         <property name="can_focus">True</property>
@@ -279,17 +290,6 @@
             <property name="icon_name">content-loading-symbolic</property>
           </object>
         </child>
-      </object>
-      <packing>
-        <property name="expand">False</property>
-        <property name="fill">True</property>
-        <property name="position">0</property>
-      </packing>
-    </child>
-    <child>
-      <object class="GtkProgressBar" id="Progress">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
       </object>
       <packing>
         <property name="expand">False</property>

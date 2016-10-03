@@ -111,7 +111,7 @@ namespace Gradio{
 				Idle.add(() => {
 					Progress.set_fraction(0.01);
 					Progress.set_visible(true);
-					LoadMoreButton.set_sensitive(false);
+					LoadMoreButton.set_visible(false);
 					Spinner.start();
 					return false;
 				});
@@ -121,7 +121,7 @@ namespace Gradio{
 				Idle.add(() => {
 					Progress.set_fraction(1.0);
 					Progress.set_visible(false);
-					LoadMoreButton.set_sensitive(true);
+					LoadMoreButton.set_visible(true);
 					Spinner.stop();
 					return false;
 				});

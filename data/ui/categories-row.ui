@@ -55,5 +55,8 @@
         </child>
       </object>
     </child>
+    <style>
+      <class name="categoryitem"/>
+    </style>
   </template>
 </interface>
