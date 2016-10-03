@@ -252,6 +252,7 @@ $(srcdir)/.gitignore: Makefile.am $(top_srcdir)/git.mk
 			"*~" \
 			".*.sw[nop]" \
 			".dirstamp" \
+			".buildconfig" \
 		; do echo "/$$x"; done; \
 	} | \
 	sed "s@^/`echo "$(srcdir)" | sed 's/\(.\)/[\1]/g'`/@/@" | \

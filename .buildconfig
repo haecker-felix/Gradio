@@ -1,7 +1,0 @@
-[default 3]
-name=Standard
-device=local
-runtime=host
-config-opts=
-prefix=/home/haecker-felix/.cache/gnome-builder/install/gradio/host
-default=true
