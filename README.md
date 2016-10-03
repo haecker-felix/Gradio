@@ -37,9 +37,7 @@ For unsupported distributions you can install gradio from source:
 cd ~/Downloads
 git clone https://github.com/haecker-felix/gradio.git
 cd gradio
-mkdir build
-cd build
-cmake -DCMAKE_INSTALL_PREFIX= usr ..
+./autogen.sh
 make
 sudo make install
 ```
@@ -63,7 +61,7 @@ Maybe. Open a new Github issue and I'll look at it.
 
 
 ### Why is there no ubuntu 14.04 support?
-Gradio needs GTK 3.18 or higher. Ubuntu 14.04 provides GTK 3.12 which is definitely too old. 
+Gradio needs GTK 3.14 or higher. Ubuntu 14.04 provides GTK 3.12 which is definitely too old.
 
 
 ### Does a flatpak/snap exist?
@@ -74,14 +72,13 @@ Not yet, but soon!
 ### Dependencies
 For gradio:
 * glib-2.0
-* gtk+-3.0 _>=3.18_
+* gtk+-3.0 _>=3.14_
 * gstreamer-1.0
 * json-glib-1.0
 * gio-2.0
-* gee-0.8
+* webkit2gtk-4.0
 * libsoup-2.4
 
 For compiling:
 * General c/c++ libs & compiler
-* cmake
 * git
