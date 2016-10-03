@@ -246,6 +246,7 @@ $(srcdir)/.gitignore: Makefile.am $(top_srcdir)/git.mk
 			$(patsubst %.vapi,%.h,$(filter %.vapi,$(DIST_COMMON))) \
 			Makefile \
 			Makefile.in \
+			Makefile.in.in \
 			"*.orig" \
 			"*.rej" \
 			"*.bak" \
