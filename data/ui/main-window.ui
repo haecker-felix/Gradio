@@ -5,7 +5,7 @@
   <template class="GradioMainWindow" parent="GtkApplicationWindow">
     <property name="can_focus">False</property>
     <property name="title" translatable="yes">Gradio</property>
-    <property name="icon_name">gradio-symbolic</property>
+    <property name="icon_name">gradio</property>
     <child>
       <object class="GtkStack" id="ContentStack">
         <property name="visible">True</property>
