@@ -1,10 +1,10 @@
 [Desktop Entry]
-_Name=Gradio
-_Comment=Find and listen to internet radio stations
+Name=Gradio
+Comment=Find and listen to internet radio stations
 Exec=gradio
 Icon=de.haeckerfelix.gradio
 Terminal=false
 Type=Application
-Categories=GNOME;GTK;
-_Keywords=gradio;internet;radio;
+Categories=GNOME;GTK;Network;
+Keywords=gradio;internet;radio;
 StartupNotify=true
