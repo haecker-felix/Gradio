@@ -10,16 +10,15 @@ AM_MAINTAINER_MODE
 AM_PROG_VALAC([0.24])
 AM_PROG_CC_C_O
 
-GLIB_GSETTINGS
-
-APPSTREAM_XML
-
 # GResource
 AC_PATH_PROG(GLIB_COMPILE_RESOURCES, glib-compile-resources)
 
 # GSettings support
 GLIB_GSETTINGS
 
+# APPSTREAM
+AX_REQUIRE_DEFINED([APPSTREAM_XML])
+APPSTREAM_XML
 
 dnl ###########################################################################
 dnl Dependencies

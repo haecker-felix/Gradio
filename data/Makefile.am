@@ -17,10 +17,12 @@ desktop_in_files = de.haeckerfelix.gradio.desktop.in
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
+
 appstream_in_files = gradio.appdata.xml.in
 appstream_XML = $(appstream_in_files:.xml.in=.xml)
 @APPSTREAM_XML_RULES@
 @INTLTOOL_XML_RULE@
+
 
 EXTRA_DIST = \
 	$(appstream_in_files) \
