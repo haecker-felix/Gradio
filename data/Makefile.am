@@ -18,9 +18,9 @@ desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
 
-appstream_in_files = gradio.appdata.xml.in
-appstream_XML = $(appstream_in_files:.xml.in=.xml)
-@APPSTREAM_XML_RULES@
+appdatadir = $(datadir)/appdata
+appdata_in_files = de.haeckerfelix.gradio.appdata.xml.in
+appdata_DATA = $(appdata_in_files:.appdata.xml.in=.appdata.xml)
 @INTLTOOL_XML_RULE@
 
 

@@ -16,9 +16,6 @@ AC_PATH_PROG(GLIB_COMPILE_RESOURCES, glib-compile-resources)
 # GSettings support
 GLIB_GSETTINGS
 
-# APPSTREAM
-AX_REQUIRE_DEFINED([APPSTREAM_XML])
-APPSTREAM_XML
 
 dnl ###########################################################################
 dnl Dependencies
