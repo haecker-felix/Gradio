@@ -82,3 +82,4 @@ For gradio:
 For compiling:
 * General c/c++ libs & compiler
 * git
+* appstream-util / appstream-glib
