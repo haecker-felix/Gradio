@@ -18,7 +18,7 @@
 
 .grid-item:backdrop {
 	box-shadow: none;
-	border-color: @un3ocused_borders;
+	border-color: @unfocused_borders;
 }
 
 .stations-view{
