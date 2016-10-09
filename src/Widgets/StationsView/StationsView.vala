@@ -29,7 +29,7 @@ namespace Gradio{
 		private bool no_stations = true;
 		private bool list_view = false;
 
-		private int results_chunk = 100;
+		private int results_chunk = 50;
 		private int results_loaded = 0;
 
 		private string address;
@@ -89,7 +89,7 @@ namespace Gradio{
 				GridViewFlowBox.set_max_children_per_line(1);
 				GridViewFlowBox.set_max_children_per_line(1);
 				LoadMoreButton.set_visible(false);
-				results_chunk = 20;
+				results_chunk = 10;
 			}
 
 			connect_signals();
