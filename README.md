@@ -2,7 +2,7 @@
 A GTK3 app for finding and listening to internet radio stations.
 
 <p align="center">
-  <img alt="Library View" src="https://github.com/haecker-felix/gradio/blob/master/data/gradio01.png/>
+  <img alt="demo_img" src="https://raw.githubusercontent.com/haecker-felix/gradio/master/data/gradio01.png">
 </p>
 
 
