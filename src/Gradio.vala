@@ -93,7 +93,7 @@ namespace Gradio {
 				"program-name", "Gradio",
 				"title", _("About Gradio"),
 				"license-type", Gtk.License.GPL_3_0,
-				"logo-icon-name", "gradio",
+				"logo-icon-name", "de.haeckerfelix.gradio",
 				"version", VERSION,
 				"comments", "Database: www.radio-browser.info",
 				"website", "https://github.com/haecker-felix/gradio",

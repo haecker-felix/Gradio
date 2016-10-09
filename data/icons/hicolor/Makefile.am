@@ -12,7 +12,7 @@ icon48_DATA = 48x48/de.haeckerfelix.gradio.png
 icon64_DATA = 64x64/de.haeckerfelix.gradio.png
 icon128_DATA = 128x128/de.haeckerfelix.gradio.png
 icon192_DATA = 192x192/de.haeckerfelix.gradio.png
-iconscalable_DATA = scalable/de.haeckerfelix.gradio.svg
+iconscalable_DATA = scalable/de.haeckerfelix.gradio-symbolic.svg
 
 EXTRA_DIST = $(icon16_DATA) $(icon32_DATA) $(icon48_DATA) $(icon64_DATA) $(icon128_DATA) $(icon192_DATA) $(iconscalable_DATA)
 
