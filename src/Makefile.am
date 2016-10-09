@@ -15,34 +15,33 @@ BUILT_SOURCES = resources.c
 gradio_SOURCES = \
 	$(BUILT_SOURCES) \
 	config.vapi \
-	main.vala \
-	Data/SettingsManager.vala \
-	Data/Codec.vala \
-	Data/StationProvider.vala \
-	Data/RadioBrowser.vala \
-	Data/CategoryItemProvider.vala \
-	Data/ImageProvider.vala \
-	Widgets/DiscoverBox/DiscoverBox.vala \
-	Widgets/DiscoverBox/DiscoverSidebar.vala \
-	Widgets/DiscoverBox/CategoriesRow.vala \
-	Widgets/DiscoverBox/SidebarTile.vala \
-	Widgets/LibraryBox.vala \
-	Widgets/PlayerToolbar.vala \
-	Widgets/StationsView/ListItem.vala \
-	Widgets/StationsView/GridItem.vala \
-	Widgets/SettingsDialog.vala \
-	Widgets/StationsView/StationsView.vala \
-	Widgets/StationsView/StationsViewButton.vala \
-	Widgets/StationEditorDialog.vala \
-	Widgets/MiniPlayer.vala \
-	Widgets/ReleaseNotesWindow.vala \
-	AudioPlayer.vala \
-	RadioStation.vala \
-	Util.vala \
-	Gradio.vala \
-	Widgets/MainWindow.vala \
-	Library.vala \
-	MPRIS.vala
+	data/codec-installer.vala \
+	data/radio-browser.vala \
+	data/settings.vala \
+	data/provider/category-item-provider.vala \
+	data/provider/image-provider.vala \
+	data/provider/radio-station-provider.vala \
+	core/audio-player.vala \
+	core/library.vala \
+	core/mpris.vala \
+	core/radio-station.vala \
+	core/utils.vala \
+	core/gradio.vala \
+	ui/library-box.vala \
+	ui/main-window.vala \
+	ui/mini-player.vala \
+	ui/player-toolbar.vala \
+	ui/release-notes-window.vala \
+	ui/settings-window.vala \
+	ui/station-editor-dialog.vala \
+	ui/discoverbox/discover-box.vala \
+	ui/discoverbox/discover-box-sidebar.vala \
+	ui/discoverbox/discover-box-sidebar-tile.vala \
+	ui/discoverbox/discover-box-sidebar-row.vala \
+	ui/stationsview/stations-view.vala \
+	ui/stationsview/stations-view-button.vala \
+	ui/stationsview/stations-view-grid-item.vala \
+	ui/stationsview/stations-view-list-item.vala
 
 gradio_CFLAGS = \
 	-DVERSION=\"$(VERSION)\" \

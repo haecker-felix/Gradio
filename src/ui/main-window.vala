@@ -65,7 +65,7 @@ namespace Gradio{
 		public MainWindow (App app) {
 	       		GLib.Object(application: app);
 
-			var builder = new Gtk.Builder.from_resource ("/de/haecker-felix/gradio/app-menu.ui");
+			var builder = new Gtk.Builder.from_resource ("/de/haecker-felix/gradio/ui/app-menu.ui");
 			var app_menu = builder.get_object ("app-menu") as GLib.MenuModel;
 			MenuButton.set_menu_model(app_menu);
 
