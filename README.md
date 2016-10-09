@@ -2,7 +2,7 @@
 A GTK3 app for finding and listening to internet radio stations.
 
 <p align="center">
-  <img alt="Library View" src="http://i.imgur.com/AN4df36.png" />
+  <img alt="Library View" src="https://github.com/haecker-felix/gradio/blob/master/data/gradio01.png/>
 </p>
 
 
@@ -64,8 +64,9 @@ Maybe. Open a new Github issue and I'll look at it.
 Gradio needs GTK 3.14 or higher. Ubuntu 14.04 provides GTK 3.12 which is definitely too old.
 
 
-### Does a flatpak/snap exist?
-Not yet, but soon!
+### Does a flatpak exist?
+Yes! More information here:
+https://github.com/haecker-felix/gradio/wiki/How-to-install-Gradio-as-Flatpak
 
 
 ## Technical Details
