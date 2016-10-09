@@ -16,6 +16,7 @@ gradio_SOURCES = \
 	$(BUILT_SOURCES) \
 	config.vapi \
 	main.vala \
+	Data/SettingsManager.vala \
 	Data/Codec.vala \
 	Data/StationProvider.vala \
 	Data/RadioBrowser.vala \

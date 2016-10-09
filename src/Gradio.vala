@@ -74,7 +74,7 @@ namespace Gradio {
 		}
 
 		private void show_preferences_dialog(){
-			SettingsDialog swindow = new SettingsDialog();
+			SettingsWindow swindow = new SettingsWindow();
 			swindow.set_transient_for(window);
 			swindow.show();
 		}

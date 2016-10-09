@@ -1,10 +1,5 @@
 <schemalist>
   <schema id="de.haecker-felix.gradio" path="/de/haecker-felix/gradio/" gettext-domain="gradio">
-    <key name="list-max-items" type="i">
-      <default>100</default>
-      <summary>Maximum items to show. More items need more memory.</summary>
-    </key>
-
     <key name="use-grid-view" type="b">
       <default>true</default>
       <summary>Show the stations as a grid view</summary>
@@ -23,6 +18,16 @@
     <key name="load-pictures" type="b">
       <default>true</default>
       <summary>Show stations icons or not.</summary>
+    </key>
+
+    <key name="enable-mpris" type="b">
+      <default>true</default>
+      <summary>Close window to tray</summary>
+    </key>
+
+    <key name="enable-background-playback" type="b">
+      <default>true</default>
+      <summary>Close window to tray</summary>
     </key>
 
     <key name="close-to-tray" type="b">
@@ -58,6 +63,31 @@
     <key name="window-position-y" type="i">
       <default>0</default>
       <summary>Position of the window</summary>
+    </key>
+
+    <key name="show-languages-category" type="b">
+      <default>true</default>
+      <summary>Show languages in discover tab</summary>
+    </key>
+
+    <key name="show-codecs-category" type="b">
+      <default>false</default>
+      <summary>Show codecs in discover tab</summary>
+    </key>
+
+    <key name="show-countries-category" type="b">
+      <default>true</default>
+      <summary>Show countries in discover tab</summary>
+    </key>
+
+    <key name="show-tags-category" type="b">
+      <default>true</default>
+      <summary>Show tags in discover tab</summary>
+    </key>
+
+    <key name="show-states-category" type="b">
+      <default>true</default>
+      <summary>Show states in discover tab</summary>
     </key>
   </schema>
 </schemalist>
