@@ -16,7 +16,7 @@
 
 namespace Gradio{
 
-	public class SettingsManager{
+	public class Settings{
 
 		public static bool show_notifications{
 			get{

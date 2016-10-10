@@ -48,33 +48,33 @@ namespace Gradio{
 		public SettingsWindow () {
 			load_settings();
 
-			EnableNotifications.toggled.connect(() => SettingsManager.show_notifications = EnableNotifications.get_active());
-			EnableMPRIS.toggled.connect(() => SettingsManager.enable_mpris = EnableMPRIS.get_active());
-			UseDarkDesign.toggled.connect(() => SettingsManager.enable_dark_design = UseDarkDesign.get_active());
-			EnableBackgroundPlayback.toggled.connect(() => SettingsManager.enable_background_playback = EnableBackgroundPlayback.get_active());
-			EnableMinimizeToTray.toggled.connect(() => SettingsManager.enable_close_to_tray = EnableMinimizeToTray.get_active());
-			ShowLanguagesC.toggled.connect(() => SettingsManager.show_languages_c = ShowLanguagesC.get_active());
-			ShowCodecsC.toggled.connect(() => SettingsManager.show_codecs_c = ShowCodecsC.get_active());
-			ShowCountriesC.toggled.connect(() => SettingsManager.show_countries_c = ShowCountriesC.get_active());
-			ShowTagsC.toggled.connect(() => SettingsManager.show_tags_c = ShowTagsC.get_active());
-			ShowStatesC.toggled.connect(() => SettingsManager.show_states_c = ShowStatesC.get_active());
-			ShowStationIcons.toggled.connect(() => SettingsManager.show_station_icons = ShowStationIcons.get_active());
-			HideBrokenStations.toggled.connect(() => SettingsManager.hide_broken_stations = HideBrokenStations.get_active());
+			EnableNotifications.toggled.connect(() => Settings.show_notifications = EnableNotifications.get_active());
+			EnableMPRIS.toggled.connect(() => Settings.enable_mpris = EnableMPRIS.get_active());
+			UseDarkDesign.toggled.connect(() => Settings.enable_dark_design = UseDarkDesign.get_active());
+			EnableBackgroundPlayback.toggled.connect(() => Settings.enable_background_playback = EnableBackgroundPlayback.get_active());
+			EnableMinimizeToTray.toggled.connect(() => Settings.enable_close_to_tray = EnableMinimizeToTray.get_active());
+			ShowLanguagesC.toggled.connect(() => Settings.show_languages_c = ShowLanguagesC.get_active());
+			ShowCodecsC.toggled.connect(() => Settings.show_codecs_c = ShowCodecsC.get_active());
+			ShowCountriesC.toggled.connect(() => Settings.show_countries_c = ShowCountriesC.get_active());
+			ShowTagsC.toggled.connect(() => Settings.show_tags_c = ShowTagsC.get_active());
+			ShowStatesC.toggled.connect(() => Settings.show_states_c = ShowStatesC.get_active());
+			ShowStationIcons.toggled.connect(() => Settings.show_station_icons = ShowStationIcons.get_active());
+			HideBrokenStations.toggled.connect(() => Settings.hide_broken_stations = HideBrokenStations.get_active());
 		}
 
 		private void load_settings(){
-			EnableNotifications.set_active(SettingsManager.show_notifications);
-			EnableMPRIS.set_active(SettingsManager.enable_mpris);
-			UseDarkDesign.set_active(SettingsManager.enable_dark_design);
-			EnableBackgroundPlayback.set_active(SettingsManager.enable_background_playback);
-			EnableMinimizeToTray.set_active(SettingsManager.enable_close_to_tray);
-			ShowLanguagesC.set_active(SettingsManager.show_languages_c);
-			ShowCodecsC.set_active(SettingsManager.show_codecs_c);
-			ShowCountriesC.set_active(SettingsManager.show_countries_c);
-			ShowStatesC.set_active(SettingsManager.show_states_c);
-			ShowTagsC.set_active(SettingsManager.show_tags_c);
-			ShowStationIcons.set_active(SettingsManager.show_station_icons);
-			HideBrokenStations.set_active(SettingsManager.hide_broken_stations);
+			EnableNotifications.set_active(Settings.show_notifications);
+			EnableMPRIS.set_active(Settings.enable_mpris);
+			UseDarkDesign.set_active(Settings.enable_dark_design);
+			EnableBackgroundPlayback.set_active(Settings.enable_background_playback);
+			EnableMinimizeToTray.set_active(Settings.enable_close_to_tray);
+			ShowLanguagesC.set_active(Settings.show_languages_c);
+			ShowCodecsC.set_active(Settings.show_codecs_c);
+			ShowCountriesC.set_active(Settings.show_countries_c);
+			ShowStatesC.set_active(Settings.show_states_c);
+			ShowTagsC.set_active(Settings.show_tags_c);
+			ShowStationIcons.set_active(Settings.show_station_icons);
+			HideBrokenStations.set_active(Settings.hide_broken_stations);
 		}
 
 	}

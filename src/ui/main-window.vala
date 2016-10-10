@@ -121,14 +121,6 @@ namespace Gradio{
 		}
 
 		private void connect_signals(){
-			this.delete_event.connect (() => {
-				save_geometry ();
-				if (App.settings.get_boolean ("close-to-tray")) {
-					this.hide_on_delete ();
-				    return true;
-				} else return false;
-		    	});
-
 			this.size_allocate.connect((a) => {
 				width = a.width;
 				height = a.height;

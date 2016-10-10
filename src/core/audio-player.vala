@@ -26,6 +26,9 @@ namespace Gradio{
 		public signal void state_changed();
 		public signal void tag_changed();
 
+		public signal void stopped();
+		public signal void played();
+
 		private Codec codec;
 
 		public string tag_title;
@@ -69,12 +72,13 @@ namespace Gradio{
 
 					stream.set_state (State.NULL);
 					connection_error(err.message);
+					stopped();
 					state_changed();
 					break;
 				case MessageType.EOS:
 					print ("End of stream.");
 					stream.set_state (State.NULL);
-
+					stopped();
 					state_changed();
 					break;
 				case MessageType.STATE_CHANGED:
@@ -148,11 +152,13 @@ namespace Gradio{
 		public void play () {
 			stream.set_state (State.PLAYING);
 			state_changed();
+			played();
 		}
 
 		public void stop(){
 			stream.set_state (State.NULL);
 			state_changed();
+			stopped();
 		}
 
 		public void toggle_play_stop(){
@@ -183,6 +189,10 @@ namespace Gradio{
 
 		public void set_volume (double v){
 			stream.volume = v;
+		}
+
+		public double get_volume (){
+			return stream.volume;
 		}
 	}
 }

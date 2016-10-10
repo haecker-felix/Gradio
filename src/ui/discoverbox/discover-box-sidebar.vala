@@ -58,27 +58,27 @@ namespace Gradio{
 
 		private void setup_view(){
 			SidebarTile languages = new SidebarTile ("Languages", "user-invisible-symbolic");
-			if(SettingsManager.show_languages_c)
+			if(Settings.show_languages_c)
 				CategoriesBox.pack_start(languages);
 			languages.clicked.connect(() => {show_catergory_items("languages"); });
 
 			SidebarTile codecs = new SidebarTile ("Codecs", "emblem-system-symbolic");
-			if(SettingsManager.show_codecs_c)
+			if(Settings.show_codecs_c)
 				CategoriesBox.pack_start(codecs);
 			codecs.clicked.connect(() => {show_catergory_items("codecs"); });
 
 			SidebarTile countries = new SidebarTile ("Countries", "mark-location-symbolic");
-			if(SettingsManager.show_countries_c)
+			if(Settings.show_countries_c)
 				CategoriesBox.pack_start(countries);
 			countries.clicked.connect(() => {show_catergory_items("countries"); });
 
 			SidebarTile tags = new SidebarTile ("Tags", "dialog-information-symbolic");
-			if(SettingsManager.show_tags_c)
+			if(Settings.show_tags_c)
 				CategoriesBox.pack_start(tags);
 			tags.clicked.connect(() => {show_catergory_items("tags"); });
 
 			SidebarTile states = new SidebarTile ("States", "mark-location-symbolic");
-			if(SettingsManager.show_states_c)
+			if(Settings.show_states_c)
 				CategoriesBox.pack_start(states);
 			states.clicked.connect(() => {show_catergory_items("states"); });
 

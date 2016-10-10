@@ -27,17 +27,10 @@ namespace Gradio {
 		public static Library library;
 		public static GLib.Settings settings;
 		public static MPRIS mpris;
-		private Gtk.Menu menuSystem;
 
 		public App () {
 			settings = new GLib.Settings ("de.haecker-felix.gradio");
 			Object(application_id: "de.haeckerfelix.gradio", flags: ApplicationFlags.FLAGS_NONE);
-
-			// Create tray icon
-			var trayicon = new Gtk.StatusIcon.from_icon_name("gradio");
-			trayicon.activate.connect(restore_window);
-			create_menuSystem();
-			trayicon.popup_menu.connect(menuSystem_popup);
 		}
 
 		protected override void activate () {
@@ -62,6 +55,52 @@ namespace Gradio {
 			if(!Util.check_database_connection()){
 				window.show_no_connection_message();
 			}
+		}
+
+		private void connect_signals(){
+			player.connection_error.connect((o,t) => {
+				Util.show_info_dialog(t, window);
+				return;
+			});
+
+			window.delete_event.connect (() => {
+				window.save_geometry ();
+				if (Settings.enable_background_playback) {
+					window.hide_on_delete ();
+					if(Settings.enable_close_to_tray){
+						show_tray_icon();
+						message("Minimized to tray");
+					}
+				    	return true;
+				} else return false;
+		    	});
+		}
+
+		private void create_app_menu () {
+			var action = new GLib.SimpleAction ("preferences", null);
+			action.activate.connect (() => { this.show_preferences_dialog (); });
+			this.add_action (action);
+
+			action = new GLib.SimpleAction ("about", null);
+			action.activate.connect (() => { this.show_about_dialog (); });
+			this.add_action (action);
+
+			action = new GLib.SimpleAction ("quit", null);
+			action.activate.connect (() => { this.quit_application (); });
+			this.add_action (action);
+
+			action = new GLib.SimpleAction ("release_notes", null);
+			action.activate.connect (() => { this.release_notes (); });
+			this.add_action (action);
+
+			action = new GLib.SimpleAction ("report_an_error", null);
+			action.activate.connect (() => { this.report_an_error (); });
+			this.add_action (action);
+
+			var builder = new Gtk.Builder.from_resource ("/de/haecker-felix/gradio/ui/app-menu.ui");
+			var app_menu = builder.get_object ("app-menu") as GLib.MenuModel;
+
+			set_app_menu (app_menu);
 		}
 
 		public void report_an_error(){
@@ -100,43 +139,18 @@ namespace Gradio {
 				"wrap-license", true);
 		}
 
-		private void create_app_menu () {
-			var action = new GLib.SimpleAction ("preferences", null);
-			action.activate.connect (() => { this.show_preferences_dialog (); });
-			this.add_action (action);
+		private void show_tray_icon(){
 
-			action = new GLib.SimpleAction ("about", null);
-			action.activate.connect (() => { this.show_about_dialog (); });
-			this.add_action (action);
-
-			action = new GLib.SimpleAction ("quit", null);
-			action.activate.connect (() => { this.quit_application (); });
-			this.add_action (action);
-
-			action = new GLib.SimpleAction ("release_notes", null);
-			action.activate.connect (() => { this.release_notes (); });
-			this.add_action (action);
-
-			action = new GLib.SimpleAction ("report_an_error", null);
-			action.activate.connect (() => { this.report_an_error (); });
-			this.add_action (action);
-
-			var builder = new Gtk.Builder.from_resource ("/de/haecker-felix/gradio/ui/app-menu.ui");
-			var app_menu = builder.get_object ("app-menu") as GLib.MenuModel;
-
-			set_app_menu (app_menu);
 		}
 
-		private void connect_signals(){
-			player.connection_error.connect((o,t) => {
-				Util.show_info_dialog(t, window);
-				return;
-			});
+		private void hide_tray_icon(){
+
 		}
 
-		private void restore_window () {
+		public void restore_window () {
 			var active_window = get_active_window ();
 			active_window.present ();
+			hide_tray_icon();
 		}
 
 		public void quit_application(){
@@ -144,28 +158,7 @@ namespace Gradio {
 			window.save_geometry ();
 			base.quit ();
 		}
-
-		private void play_and_stop () {
-			App.player.toggle_play_stop();
-		}
-
-	    	/* Create menu for right button */
-	   	private void create_menuSystem() {
-			menuSystem = new Gtk.Menu();
-			var menuPlayStop = new Gtk.MenuItem.with_label("Play / Stop");
-			menuPlayStop.activate.connect(play_and_stop);
-			menuSystem.append(menuPlayStop);
-			var menuQuit = new ImageMenuItem.from_stock(Stock.QUIT, null);
-			menuQuit.activate.connect(this.quit_application);
-			menuSystem.append(menuQuit);
-			menuSystem.show_all();
-    		}
-
-	    	/* Show popup menu on right button */
-	    	private void menuSystem_popup(uint button, uint time) {
-			menuSystem.popup(null, null, null, button, time);
-		}
-    }
+	}
 
 	int main (string[] args){
 		message("Starting Gradio version " + VERSION + "!");

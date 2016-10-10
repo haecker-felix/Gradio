@@ -1,261 +1,403 @@
-/* This file is part of Gradio.
+/*-Original Authors: Andreas Obergrusberger
+ *		     Jörn Magens
  *
- * Gradio is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * Edited by: Felix Häcker for Gradio
  *
- * Gradio is distributed in the hope that it will be useful,
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	See the GNU
+ * Library General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License
- * along with Gradio.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, write to the
+ * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+ * Boston, MA 02111-1307, USA.
  */
 
-namespace Gradio {
+using GLib;
 
-	public class MPRIS : GLib.Object {
-		public MprisPlayer player = null;
-		public MprisRoot root = null;
+public class Gradio.MPRIS : GLib.Object {
+	public MprisPlayer player = null;
+	public MprisRoot root = null;
 
-		private unowned DBusConnection conn;
-		private uint owner_id;
+	private unowned DBusConnection conn;
+	private uint owner_id;
 
-		private RadioStation current_station;
+	public void initialize() {
+		owner_id = Bus.own_name(BusType.SESSION,
+					"org.mpris.MediaPlayer2.gradio",
+					GLib.BusNameOwnerFlags.NONE,
+					on_bus_acquired,
+					on_name_acquired,
+					on_name_lost);
 
-		public void initialize(){
-			owner_id = Bus.own_name(BusType.SESSION, "org.mpris.MediaPlayer2.gradio", GLib.BusNameOwnerFlags.NONE, on_bus_acquired, on_name_acquired, on_name_lost);
-
-			if(owner_id == 0) {
-				warning("Could not initialize MPRIS session.\n");
-		    	}else{
-				message("Successfully initialized MPRIS session.");
-			}
-	    	}
-
-
-	  	private void on_bus_acquired(DBusConnection connection, string name) {
-		    	this.conn = connection;
-		    	try {
-			    	root = new MprisRoot();
-			    	connection.register_object("/org/mpris/MediaPlayer2", root);
-			    
-			    	player = new MprisPlayer(connection);
-
-			    	App.player.radio_station_changed.connect((t) => set_station(t));
-
-				App.player.state_changed.connect(() => {
-					string status = "Stopped";
-					if(App.player.is_playing())
-						status = "Playing";
-
-					player.set_playback_status(status);
-				});
-
-				App.player.tag_changed.connect(() => {
-					if(current_station != null){
-						player.set_metadata(current_station.ID, current_station.Icon, current_station.Title);
-					}
-				});
-			    	connection.register_object("/org/mpris/MediaPlayer2", player);
-		    	}catch(IOError e) {
-			    	warning("Could not create MPRIS player: %s\n", e.message);
-		    	}
-	    	}
-
-		private void set_station(RadioStation s){
-			current_station = s;
-			player.set_metadata(current_station.ID, current_station.Icon, current_station.Title);
+		if(owner_id == 0) {
+			warning("Could not initialize MPRIS session.\n");
 		}
-
-		private void on_name_acquired(DBusConnection connection, string name) {}	
-		private void on_name_lost(DBusConnection connection, string name) {}
 	}
-    
-	[DBus(name = "org.mpris.MediaPlayer2.Player")]
-	public class MprisPlayer : GLib.Object {
-		private unowned DBusConnection conn;
 
-		private uint send_property_source = 0;
-		private uint update_metadata_source = 0;
-		private HashTable<string,Variant> changed_properties = null;
-		private HashTable<string,Variant> _metadata = null;
-		private string playback_status = "Playing";
-		private const string INTERFACE_NAME = "org.mpris.MediaPlayer2.Player";
+	private void on_bus_acquired(DBusConnection connection, string name) {
+		this.conn = connection;
 
-		public MprisPlayer(DBusConnection conn) {
-			this.conn = conn;
+		try {
+			root = new MprisRoot();
+			connection.register_object("/org/mpris/MediaPlayer2", root);
+			player = new MprisPlayer(connection);
+			connection.register_object("/org/mpris/MediaPlayer2", player);
 		}
+		catch(IOError e) {
+			warning("Could not create MPRIS player: %s\n", e.message);
+		}
+	}
 
-		public void set_metadata (string station_id, string station_icon, string station_name) {
-			if(_metadata != null)
-				_metadata = null;
+	private void on_name_acquired(DBusConnection connection, string name) {
+		message("name acquired\n");
+	}
 
-			string[] artists = {station_name};
-			_metadata = new HashTable<string, Variant> (null, null);
+	private void on_name_lost(DBusConnection connection, string name) {
+		message("name_lost\n");
+	}
+}
 
-			_metadata.insert("mpris:trackid", station_id);
-			_metadata.insert("mpris:artUrl", station_icon);
-			_metadata.insert("xesam:artist", artists);
+[DBus(name = "org.mpris.MediaPlayer2")]
+public class Gradio.MprisRoot : GLib.Object {
+
+	public bool CanQuit {
+		get {
+			return true;
+		}
+	}
+
+	public bool CanRaise {
+		get {
+			return true;
+		}
+	}
+
+	public bool CanSetFullscreen {
+		get {
+			return false;
+		}
+	}
+
+	public bool Fullscreen {
+		get {
+			return false;
+		}
+		set {
+			// Can't full screen
+		}
+	}
+
+	public bool HasTrackList {
+		get {
+			return false;
+		}
+	}
+	public string DesktopEntry {
+		owned get {
+			return "de.haeckerfelix.gradio";
+		}
+	}
+
+	public string Identity {
+		owned get {
+			return "Gradio";
+		}
+	}
+
+	public string[] SupportedUriSchemes {
+		owned get {
+			string[] sa = {"http", "https"};
+			return sa;
+		}
+	}
+
+	public string[] SupportedMimeTypes {
+		owned get {
+			string[] sa = {
+				 "application/x-ogg",
+				 "application/ogg",
+				 "audio/x-vorbis+ogg",
+				 "audio/x-scpls",
+				 "audio/x-mp3",
+				 "audio/x-mpeg",
+				 "audio/mpeg",
+				 "audio/x-mpegurl",
+				 "audio/x-flac",
+				 "x-content/audio-cdda",
+				 "x-content/audio-player"
+			};
+			return sa;
+		}
+	}
+
+	public void Quit() {
+		//TODO: ...:
+		//App.window.destroy ();
+	}
+
+	public void Raise() {
+		//TODO: .... :
+		//App.window.present ();
+	}
+}
+
+
+[DBus(name = "org.mpris.MediaPlayer2.Player")]
+public class Gradio.MprisPlayer : GLib.Object {
+	private unowned DBusConnection conn;
+
+	private const string INTERFACE_NAME = "org.mpris.MediaPlayer2.Player";
+	const string TRACK_ID = "/de/haeckerfelix/gradio/Track/%d";
+
+	private uint send_property_source = 0;
+	private uint update_metadata_source = 0;
+	private HashTable<string,Variant> changed_properties = null;
+	private HashTable<string,Variant> _metadata;
+
+	private enum Direction {
+		NEXT = 0,
+		PREVIOUS,
+		STOP
+	}
+
+	public MprisPlayer(DBusConnection conn) {
+		this.conn = conn;
+		_metadata = new HashTable<string,Variant>(str_hash, str_equal);
+
+		App.player.tag_changed.connect (song_changed);
+		App.player.stopped.connect (playing_changed);
+		App.player.played.connect (playing_changed);
+	}
+
+	private void fill_metadata() {
+		if(App.player.current_station != null){
+			string[] artists = {App.player.current_station.Title};
 
 			if(App.player.tag_title != null)
 				_metadata.insert("xesam:title", App.player.tag_title);
+			_metadata.insert("mpris:artUrl", App.player.current_station.Icon);
+			_metadata.insert("xesam:artist", artists);
+		}
+	}
 
-			trigger_metadata_update();
+	private void song_changed () {
+		fill_metadata ();
+		trigger_metadata_update ();
+	}
+
+	private void playing_changed () {
+		trigger_metadata_update ();
+	}
+
+	private void trigger_metadata_update() {
+		if(update_metadata_source != 0)
+			Source.remove(update_metadata_source);
+
+			update_metadata_source = Timeout.add(300, () => {
+			Variant variant = this.PlaybackStatus;
+
+			queue_property_for_notification("PlaybackStatus", variant);
+			queue_property_for_notification("Metadata", _metadata);
+			update_metadata_source = 0;
+			return false;
+		});
+	}
+
+	private bool send_property_change() {
+		if(changed_properties == null)
+			return false;
+
+		var builder						 = new VariantBuilder(VariantType.ARRAY);
+		var invalidated_builder = new VariantBuilder(new VariantType("as"));
+
+		foreach(string name in changed_properties.get_keys()) {
+			Variant variant = changed_properties.lookup(name);
+			builder.add("{sv}", name, variant);
 		}
 
+		changed_properties = null;
 
-		private bool send_property_change() {
-			if(changed_properties == null)
-			    return false;
-			
-			var builder             = new VariantBuilder(VariantType.ARRAY);
-			var invalidated_builder = new VariantBuilder(new VariantType("as"));
-			
-			foreach(string name in changed_properties.get_keys()) {
-			    Variant variant = changed_properties.lookup(name);
-			    builder.add("{sv}", name, variant);
-			}
-			
-			changed_properties = null;
-			
-			try {
-			    conn.emit_signal (null,
-			                      "/org/mpris/MediaPlayer2", 
-			                      "org.freedesktop.DBus.Properties", 
-			                      "PropertiesChanged", 
-			                      new Variant("(sa{sv}as)", 
-			                                 INTERFACE_NAME, 
-			                                 builder, 
-			                                 invalidated_builder)
-			                     );
-			}
-			catch(Error e) {
-			    print("Could not send MPRIS property change: %s\n", e.message);
-			}
-			send_property_source = 0;
+		try {
+			conn.emit_signal(null,
+					"/org/mpris/MediaPlayer2",
+					"org.freedesktop.DBus.Properties",
+					"PropertiesChanged",
+					new Variant("(sa{sv}as)",
+							 INTERFACE_NAME,
+							 builder,
+							 invalidated_builder)
+			);
+		}
+		catch(Error e) {
+			print("Could not send MPRIS property change: %s\n", e.message);
+		}
+
+		send_property_source = 0;
+		return false;
+	}
+
+	private void queue_property_for_notification(string property, Variant val) {
+		if(changed_properties == null)
+			changed_properties = new HashTable<string,Variant>(str_hash, str_equal);
+
+		changed_properties.insert(property, val);
+
+		if(send_property_source == 0) {
+			send_property_source = Idle.add(send_property_change);
+		}
+	}
+
+	public string PlaybackStatus {
+		owned get {
+			if (App.player.is_playing())
+				return "Playing";
+			else
+				return "Paused";
+		}
+	}
+
+	public double Rate {
+		get {
+			return (double)1.0;
+		}
+		set {
+
+		}
+	}
+
+	public bool Shuffle {
+		get {
 			return false;
 		}
-		    
+		set {
 
-		private void queue_property_for_notification(string property, Variant val) {
-			if(changed_properties == null)
-			    changed_properties = new HashTable<string,Variant>(str_hash, str_equal);
-			
-			changed_properties.insert(property, val);
-			
-			if(send_property_source == 0) {
-			    send_property_source = Idle.add(send_property_change);
-			}
-		}
-
-		private void trigger_metadata_update(){
-			if(_metadata != null){
-				if(update_metadata_source != 0)
-				    Source.remove(update_metadata_source);
-
-				update_metadata_source = Timeout.add(300, () => {
-				    Variant variant = this.PlaybackStatus;
-				    queue_property_for_notification("PlaybackStatus", variant);
-				    queue_property_for_notification("Metadata", _metadata);
-				    update_metadata_source = 0;
-				    return false;
-				});
-			}else{
-				warning("MPRIS metadata is null");
-			}
-		}
-
-		public void set_playback_status(string status)
-		{
-		    	this.playback_status = status;
-			trigger_metadata_update();
-		}
-
-
-		public bool CanPlay {
-			get {
-				return true;
-			}
-		}
-
-		public bool CanControl {
-			get {
-				return true;
-			}
-		}
-
-
-		public void PlayPause() {
-			App.player.toggle_play_stop();
-		}
-
-		public void Stop() {
-		    	App.player.stop();
-		}
-
-		public void Play() {
-		    	App.player.play();
-		}
-
-		public string PlaybackStatus {
-		    	get {
-		    		return playback_status;
-			}
-		}
-
-		/*public HashTable<string,Variant>? Metadata {
-			owned get {
-			    return _metadata;
-			}
-		}*/
-	}
-
-	[DBus(name = "org.mpris.MediaPlayer2")]
-	public class MprisRoot : GLib.Object {
-		public bool CanQuit { 
-			get {
-				return false;
-			} 
-		}
-
-		public bool CanRaise { 
-			get {
-			    return false;
-			} 
-		}
-	    
-		public string DesktopEntry { 
-			owned get {
-			    return "gradio";
-			} 
-		}
-	    
-		public bool HasTrackList {
-			get {
-			    return false;
-			}
-		}
-	    
-		public string Identity {
-			owned get {
-			    return "gradio";
-			}
-		}
-	    
-
-		public void Quit () {
-			//message("MPRIS: quit");
-	    	}
-	    
-		public void Raise () {
-			//message("MPRIS: raise");
 		}
 	}
 
+	public HashTable<string,Variant>? Metadata { //a{sv}
+		owned get {
+			fill_metadata();
 
-    
+			return _metadata;
+		}
+	}
+
+	public double Volume {
+		get{
+			return App.player.get_volume();
+		}
+		set {
+			App.player.set_volume(value);
+		}
+	}
+
+	public int64 Position {
+		//not supported
+		get{
+			message("mpris position is not supported");
+			return 0;
+		}
+		set {
+			message("mpris position is not supported");
+		}
+	}
+
+	public double MinimumRate {
+		get {
+			return (double)1.0;
+		}
+	}
+
+	public double MaximumRate {
+		get {
+			return (double)1.0;
+		}
+	}
+
+	public bool CanGoNext {
+		get {
+			return App.player.is_playing();
+		}
+	}
+
+	public bool CanGoPrevious {
+		get {
+			return App.player.is_playing();
+		}
+	}
+
+	public bool CanPlay {
+		get {
+			return !App.player.is_playing();
+		}
+	}
+
+	public bool CanPause {
+		get {
+			return App.player.is_playing();
+		}
+	}
+
+	public bool CanSeek {
+		get {
+			return false;
+		}
+	}
+
+	public bool CanControl {
+		get {
+			return false;
+		}
+	}
+
+	public signal void Seeked(int64 Position);
+
+	public void Next() {
+		//TODO: do this!
+		//App.middleware.next ();
+	}
+
+	public void Previous() {
+		//TODO: do this
+		//App.middleware.previous ();
+	}
+
+	public void Pause() {
+		App.player.stop ();
+	}
+
+	public void PlayPause() {
+		App.player.toggle_play_stop ();
+	}
+
+	public void Stop() {
+		App.player.stop ();
+	}
+
+	public void Play() {
+		App.player.play ();
+	}
+
+
+	public void Seek(int64 Offset) {
+		//not supported
+		message("mpris seek is not supported");
+	}
+
+	public void SetPosition(string TrackId, int64 Position) {
+		//not supported
+		message("mpris set position is not supported");
+	}
+
+	public void OpenUri(string Uri) {
+
+	}
 }
 
