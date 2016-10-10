@@ -63,6 +63,9 @@ namespace Gradio {
 				return;
 			});
 
+			mpris.requested_quit.connect(() => quit_application());
+			mpris.requested_raise.connect(() => restore_window());
+
 			window.delete_event.connect (() => {
 				window.save_geometry ();
 				if (Settings.enable_background_playback) {

@@ -28,6 +28,9 @@ public class Gradio.MPRIS : GLib.Object {
 	private unowned DBusConnection conn;
 	private uint owner_id;
 
+	public signal void requested_raise();
+	public signal void requested_quit();
+
 	public void initialize() {
 		owner_id = Bus.own_name(BusType.SESSION,
 					"org.mpris.MediaPlayer2.gradio",
@@ -35,6 +38,9 @@ public class Gradio.MPRIS : GLib.Object {
 					on_bus_acquired,
 					on_name_acquired,
 					on_name_lost);
+
+		root.quit.connect(() => requested_quit());
+		root.raise.connect(() => requested_raise());
 
 		if(owner_id == 0) {
 			warning("Could not initialize MPRIS session.\n");
@@ -66,6 +72,9 @@ public class Gradio.MPRIS : GLib.Object {
 
 [DBus(name = "org.mpris.MediaPlayer2")]
 public class Gradio.MprisRoot : GLib.Object {
+
+	public signal void raise();
+	public signal void quit();
 
 	public bool CanQuit {
 		get {
@@ -138,13 +147,13 @@ public class Gradio.MprisRoot : GLib.Object {
 	}
 
 	public void Quit() {
-		//TODO: ...:
-		//App.window.destroy ();
+		message("Requested _quit_");
+		quit();
 	}
 
 	public void Raise() {
-		//TODO: .... :
-		//App.window.present ();
+		message("Requested _raise_");
+		raise();
 	}
 }
 
