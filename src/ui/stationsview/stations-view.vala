@@ -46,11 +46,6 @@ namespace Gradio{
 		private Box ListViewBox;
 
 		[GtkChild]
-		private ScrolledWindow GridScrolledWindow;
-		[GtkChild]
-		private ScrolledWindow ListScrolledWindow;
-
-		[GtkChild]
 		private FlowBox GridViewFlowBox;
 		[GtkChild]
 		private ListBox ListViewListBox;
@@ -266,4 +261,3 @@ namespace Gradio{
 		}
 	}
 }
-

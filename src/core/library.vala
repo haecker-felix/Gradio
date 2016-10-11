@@ -36,8 +36,8 @@ namespace Gradio{
 
 			added_radio_station.connect(() => write_data());
 			removed_radio_station.connect(() => write_data());
-		}		
-	
+		}
+
 		public bool contains_station(int id){
 			if(lib[id] != null)
 				return true;
@@ -73,10 +73,10 @@ namespace Gradio{
 
 		public void write_data (){
 			message("Writing library data to: " + data_path);
-	
+
 			try{
 				var file = File.new_for_path (data_path);
-				var dir = File.new_for_path (dir_path);	
+				var dir = File.new_for_path (dir_path);
 
 				if(!file.query_exists ()){
 					if(!dir.query_exists ()){
@@ -96,7 +96,11 @@ namespace Gradio{
 				DataOutputStream dostream = new DataOutputStream (ostream);
 
 				lib.foreach ((key, val) => {
-					dostream.put_string (key.to_string()+"\n");
+					try {
+						dostream.put_string (key.to_string()+"\n");
+					} catch (GLib.IOError e) {
+						error(e.message);
+					}
 				});
 			}catch(Error e){
 				error(e.message);
@@ -114,13 +118,13 @@ namespace Gradio{
 					string line;
 
 					while ((line = dis.read_line (null)) != null) {
-						
+
 						RadioStation station = provider.parse_station_data_from_id(int.parse(line));
 
 						if(station != null){
 							lib[int.parse(line)] = station;
 						}
-						
+
 					}
 				}else{
 					message("No gradio library found. ");

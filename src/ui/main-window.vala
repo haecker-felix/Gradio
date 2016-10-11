@@ -23,11 +23,7 @@ namespace Gradio{
 	public class MainWindow : Gtk.ApplicationWindow {
 
 		[GtkChild]
-		private Box SearchBox;
-		[GtkChild]
 		private Entry SearchEntry;
-		[GtkChild]
-		private Button SearchButton;
 
 		[GtkChild]
 		private Image GridImage;
