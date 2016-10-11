@@ -56,7 +56,11 @@ namespace Gradio{
 		DiscoverBox discover_box;
 		LibraryBox library_box;
 
+		private StatusIcon trayicon;
+    		private Gtk.Menu menuSystem;
+
 		public signal void toggle_view();
+		public signal void tray_activate();
 
 		public MainWindow (App app) {
 	       		GLib.Object(application: app);
@@ -71,9 +75,26 @@ namespace Gradio{
 				MenuButton.set_visible (true);
 			message("Desktop session is: " + GLib.Environment.get_variable("DESKTOP_SESSION"));
 
+			setup_tray_icon();
 			setup_view();
 			restore_geometry();
 			connect_signals();
+		}
+
+		private void setup_tray_icon(){
+			trayicon = new StatusIcon.from_icon_name("de.haeckerfelix.gradio-symbolic");
+      			trayicon.set_tooltip_text ("Click to restore...");
+      			trayicon.set_visible(false);
+
+      			trayicon.activate.connect(() => tray_activate());
+		}
+
+		public void show_tray_icon(){
+			trayicon.set_visible(true);
+		}
+
+		public void hide_tray_icon(){
+			trayicon.set_visible(false);
 		}
 
 		private void setup_view(){

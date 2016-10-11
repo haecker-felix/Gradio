@@ -28,13 +28,14 @@ namespace Gradio {
 		public static GLib.Settings settings;
 		public static MPRIS mpris;
 
+		Gtk.Menu menuSystem;
+
 		public App () {
 			settings = new GLib.Settings ("de.haecker-felix.gradio");
 			Object(application_id: "de.haeckerfelix.gradio", flags: ApplicationFlags.FLAGS_NONE);
 		}
 
 		protected override void activate () {
-
 			if (get_windows () == null) {
 				message("No existing window, starting new session.");
 
@@ -59,8 +60,8 @@ namespace Gradio {
 					window.show_no_connection_message();
 				}
             		} else {
-            			message("Found existing session!");
-                		window.present ();
+            			message("Found existing window!");
+                		restore_window();
 			}
 		}
 
@@ -78,11 +79,15 @@ namespace Gradio {
 				if (Settings.enable_background_playback) {
 					window.hide_on_delete ();
 					if(Settings.enable_close_to_tray){
-						show_tray_icon();
-						message("Minimized to tray");
+						window.show_tray_icon();
 					}
 				    	return true;
 				} else return false;
+		    	});
+
+		    	window.tray_activate.connect(() => {
+		    		restore_window();
+		    		window.hide_tray_icon();
 		    	});
 		}
 
@@ -149,18 +154,11 @@ namespace Gradio {
 				"wrap-license", true);
 		}
 
-		private void show_tray_icon(){
-
-		}
-
-		private void hide_tray_icon(){
-
-		}
 
 		public void restore_window () {
-			var active_window = get_active_window ();
-			active_window.present ();
-			hide_tray_icon();
+			message("restore?");
+			if(window != null)
+				window.present();
 		}
 
 		public void quit_application(){
@@ -181,6 +179,7 @@ namespace Gradio {
 
 		// Init app
 		var app = new App ();
+
 
 		// Run app
 		app.run (args);
