@@ -172,7 +172,6 @@
                               <object class="GtkCheckButton" id="EnableBackgroundPlayback">
                                 <property name="label" translatable="yes">Enable background playback</property>
                                 <property name="visible">True</property>
-                                <property name="sensitive">False</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
                                 <property name="valign">start</property>
