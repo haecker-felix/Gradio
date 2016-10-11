@@ -34,26 +34,33 @@ namespace Gradio {
 		}
 
 		protected override void activate () {
-			library = new Library();
-			library.read_data();
 
-			create_app_menu();
+			if (get_windows () == null) {
+				message("No existing window, starting new session.");
 
-			player = new AudioPlayer();
+                		library = new Library();
+				library.read_data();
 
-			mpris = new MPRIS();
-			mpris.initialize();
+				create_app_menu();
 
-			imgprovider = new ImageProvider();
+				player = new AudioPlayer();
 
-			window = new MainWindow(this);
-			this.add_window(window);
-			window.show_all();
+				mpris = new MPRIS();
+				mpris.initialize();
 
-			connect_signals();
+				imgprovider = new ImageProvider();
 
-			if(!Util.check_database_connection()){
-				window.show_no_connection_message();
+				window = new MainWindow(this);
+				this.add_window(window);
+				window.show_all();
+
+				connect_signals();
+				if(!Util.check_database_connection()){
+					window.show_no_connection_message();
+				}
+            		} else {
+            			message("Found existing session!");
+                		window.present ();
 			}
 		}
 
