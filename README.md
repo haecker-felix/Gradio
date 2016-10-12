@@ -8,6 +8,12 @@ A GTK3 app for finding and listening to internet radio stations.
 
 ## Install Gradio
 
+### [ALL DISTROS] Flatpak
+A Flatpak repo for Gradio is available.
+
+[More details](https://github.com/haecker-felix/gradio/wiki/How-to-install-Gradio-as-Flatpak)
+
+
 ### Ubuntu 
 A PPA is available. Gradio needs Ubuntu 16.04 or higher.
 
