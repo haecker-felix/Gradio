@@ -21,10 +21,12 @@ namespace Gradio{
 
 		private dynamic Element stream;
 
-		public signal void radio_station_changed(RadioStation station);
 		public signal void connection_error(string text);
-		public signal void state_changed();
+		public signal void connection_established();
+		public signal void no_connection();
+
 		public signal void tag_changed();
+		public signal void radio_station_changed(RadioStation station);
 
 		public signal void stopped();
 		public signal void played();
@@ -59,11 +61,12 @@ namespace Gradio{
 				case Gst.MessageType.ELEMENT:
 					message("Check if codec is missing...");
 				    	if(m.get_structure() != null && Gst.PbUtils.is_missing_plugin_message(m)) {
+				    		connection_error("Missing Codec!");
 				    		codec.install_missing_codec(m);
 				    	}
+				    	connection_error("Unknow error");
             				break;
 				case MessageType.ERROR:
-					message("Got an error message:");
 					GLib.Error err;
 					string debug;
 
@@ -73,22 +76,22 @@ namespace Gradio{
 					stream.set_state (State.NULL);
 					connection_error(err.message);
 					stopped();
-					state_changed();
 					break;
 				case MessageType.EOS:
-					print ("End of stream.");
 					stream.set_state (State.NULL);
+					connection_error("End of stream!");
 					stopped();
-					state_changed();
 					break;
 				case MessageType.STATE_CHANGED:
 					Gst.State oldstate;
 					Gst.State newstate;
 					Gst.State pending;
 					m.parse_state_changed (out oldstate, out newstate, out pending);
-					GLib.debug ("State changed: %s -> %s", oldstate.to_string (), newstate.to_string ());
 
-					state_changed();
+					if(newstate.to_string() == "GST_STATE_READY" || newstate.to_string() == "GST_STATE_NULL" || newstate.to_string() == "GST_STATE_PAUSED")
+						no_connection();
+					else
+						connection_established();
 					break;
 				case MessageType.TAG:
 					Gst.TagList tag_list = null;
@@ -96,23 +99,16 @@ namespace Gradio{
 
 					tag_list.get_string("title", out tag_title);
 					tag_list.get_string("homepage", out tag_homepage);
-
 					tag_list.get_boolean("has-crc", out tag_has_crc);
-
 					tag_list.get_string("audio-codec", out tag_audio_codec);
-
 					tag_list.get_uint("nominal-bitrate", out tag_nominal_bitrate);
 					tag_nominal_bitrate = tag_nominal_bitrate/1000;
-
 					tag_list.get_uint("minimum-bitrate", out tag_minimum_bitrate);
 					tag_minimum_bitrate = tag_minimum_bitrate/1000;
-
 					tag_list.get_uint("maximum-bitrate", out tag_maximum_bitrate);
 					tag_maximum_bitrate = tag_maximum_bitrate/1000;
-
 					tag_list.get_uint("bitrate", out tag_bitrate);
 					tag_bitrate = tag_bitrate/1000;
-
 					tag_list.get_string("channel-mode", out tag_channel_mode);
 
 					tag_changed();
@@ -151,13 +147,11 @@ namespace Gradio{
 
 		public void play () {
 			stream.set_state (State.PLAYING);
-			state_changed();
 			played();
 		}
 
 		public void stop(){
 			stream.set_state (State.NULL);
-			state_changed();
 			stopped();
 		}
 

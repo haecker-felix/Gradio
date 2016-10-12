@@ -40,6 +40,8 @@ namespace Gradio{
 		[GtkChild]
 		private Box ActionBox;
 		[GtkChild]
+		private Box StatusBox;
+		[GtkChild]
 		private Image AddImage;
 		[GtkChild]
 		private Image RemoveImage;
@@ -61,6 +63,8 @@ namespace Gradio{
 		[GtkChild]
 		private VolumeButton VolumeButton;
 
+		private StatusLabel sl;
+
 		RadioStation station;
 
 		public PlayerToolbar(){
@@ -69,10 +73,24 @@ namespace Gradio{
 			this.pack_start(InfoBox);
 			this.pack_end(ActionBox);
 
-			App.player.state_changed.connect (() => refresh_play_stop_button());
+			sl = new StatusLabel();
+			StatusBox.pack_start(sl);
+			this.show_all();
+
+			VolumeButton.set_value(App.settings.get_double ("volume-position"));
+
+			connect_signals();
+		}
+
+		private void connect_signals(){
+			App.player.connection_established.connect(() => sl.show_connected());
+			App.player.connection_error.connect(() => sl.show_error());
+			App.player.no_connection.connect(() => sl.show_no_connection());
+
+			App.player.played.connect (() => refresh_play_stop_button());
+			App.player.stopped.connect (() => refresh_play_stop_button());
 			App.player.tag_changed.connect (() => set_information());
 			App.player.radio_station_changed.connect((t) => new_station(t));
-			VolumeButton.set_value(App.settings.get_double ("volume-position"));
 		}
 
 		private void send_notification(string summary, string body){
@@ -94,7 +112,7 @@ namespace Gradio{
 				if(icon != null){
 					StationLogo.set_from_pixbuf(icon);
 				}else{
-					StationLogo.set_from_icon_name("application-rss+xml-symbolic", IconSize.DND);		
+					StationLogo.set_from_icon_name("application-rss+xml-symbolic", IconSize.DND);
 				}
         		});
 

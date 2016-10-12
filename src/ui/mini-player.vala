@@ -53,7 +53,8 @@ namespace Gradio{
 		RadioStation station;
 
 		public MiniPlayer(){
-			App.player.state_changed.connect (() => refresh_play_stop_button());
+			App.player.played.connect (() => refresh_play_stop_button());
+			App.player.stopped.connect (() => refresh_play_stop_button());
 			App.player.tag_changed.connect (() => set_information());
 			App.player.radio_station_changed.connect((t) => new_station(t));
 			VolumeButton.set_value(App.settings.get_double ("volume-position"));

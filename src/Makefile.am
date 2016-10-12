@@ -27,6 +27,7 @@ gradio_SOURCES = \
 	core/radio-station.vala \
 	core/utils.vala \
 	core/gradio.vala \
+	ui/status-label.vala \
 	ui/library-box.vala \
 	ui/main-window.vala \
 	ui/mini-player.vala \
