@@ -100,7 +100,9 @@ namespace Gradio{
 		private void connect_signals(){
 			cip.loaded.connect(() => {
 				Idle.add(() => {
-					load_information();
+					load_information.begin ((obj, res) => {
+						load_information.end (res);
+					});
 					return false;
 				});
 			});
@@ -156,8 +158,7 @@ namespace Gradio{
 				CategoriesRow box = new CategoriesRow(country, country, "");
 				Idle.add(() => { CountryItemsBox.add(box); return false;});
 			}
-
-        	}
+  	}
 
 		public void show_categories(){
 			ItemsBox.set_reveal_child(false);

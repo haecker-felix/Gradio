@@ -57,7 +57,6 @@ namespace Gradio{
 		LibraryBox library_box;
 
 		private StatusIcon trayicon;
-    		private Gtk.Menu menuSystem;
 
 		public signal void toggle_view();
 		public signal void tray_activate();
