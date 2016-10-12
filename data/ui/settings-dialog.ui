@@ -3,10 +3,9 @@
 <interface>
   <requires lib="gtk+" version="3.14"/>
   <template class="GradioSettingsWindow" parent="GtkWindow">
-    <property name="width_request">400</property>
+    <property name="width_request">500</property>
     <property name="height_request">350</property>
     <property name="can_focus">False</property>
-    <property name="title" translatable="yes">Settings</property>
     <property name="resizable">False</property>
     <property name="modal">True</property>
     <property name="icon_name">applications-system-symbolic.symbolic</property>
@@ -20,10 +19,9 @@
         <property name="can_focus">False</property>
         <property name="orientation">vertical</property>
         <child>
-          <object class="GtkNotebook">
+          <object class="GtkStack" id="SettingsStack">
             <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="show_border">False</property>
+            <property name="can_focus">False</property>
             <child>
               <object class="GtkBox">
                 <property name="visible">True</property>
@@ -220,15 +218,9 @@
                   </packing>
                 </child>
               </object>
-            </child>
-            <child type="tab">
-              <object class="GtkLabel">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label" translatable="yes">General</property>
-              </object>
               <packing>
-                <property name="tab_fill">False</property>
+                <property name="name">General</property>
+                <property name="title" translatable="yes">General</property>
               </packing>
             </child>
             <child>
@@ -420,18 +412,9 @@
                 </child>
               </object>
               <packing>
+                <property name="name">View</property>
+                <property name="title" translatable="yes">View</property>
                 <property name="position">1</property>
-              </packing>
-            </child>
-            <child type="tab">
-              <object class="GtkLabel">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label" translatable="yes">View</property>
-              </object>
-              <packing>
-                <property name="position">1</property>
-                <property name="tab_fill">False</property>
               </packing>
             </child>
           </object>
@@ -442,44 +425,14 @@
           </packing>
         </child>
         <child>
-          <object class="GtkBox">
+          <object class="GtkSeparator">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="margin_left">3</property>
-            <property name="margin_right">3</property>
-            <property name="margin_top">3</property>
-            <property name="margin_bottom">3</property>
-            <child>
-              <object class="GtkImage">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="icon_name">application-x-executable-symbolic</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="margin_left">5</property>
-                <property name="label" translatable="yes">Some settings are currently not available</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">1</property>
-              </packing>
-            </child>
           </object>
           <packing>
             <property name="expand">False</property>
             <property name="fill">True</property>
-            <property name="pack_type">end</property>
-            <property name="position">1</property>
+            <property name="position">2</property>
           </packing>
         </child>
         <child>
@@ -520,19 +473,23 @@
             <property name="expand">False</property>
             <property name="fill">True</property>
             <property name="pack_type">end</property>
-            <property name="position">1</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkSeparator">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
             <property name="position">2</property>
           </packing>
+        </child>
+      </object>
+    </child>
+    <child type="titlebar">
+      <object class="GtkHeaderBar" id="HeaderBar">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="show_close_button">True</property>
+        <child type="title">
+          <object class="GtkStackSwitcher" id="StackSwitcher">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="no_show_all">True</property>
+            <property name="stack">SettingsStack</property>
+          </object>
         </child>
       </object>
     </child>
