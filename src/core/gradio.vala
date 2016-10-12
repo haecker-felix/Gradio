@@ -28,8 +28,6 @@ namespace Gradio {
 		public static GLib.Settings settings;
 		public static MPRIS mpris;
 
-		Gtk.Menu menuSystem;
-
 		public App () {
 			settings = new GLib.Settings ("de.haecker-felix.gradio");
 			Object(application_id: "de.haeckerfelix.gradio", flags: ApplicationFlags.FLAGS_NONE);
