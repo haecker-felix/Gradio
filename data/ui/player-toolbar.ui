@@ -13,6 +13,7 @@
         <property name="visible">True</property>
         <property name="can_focus">True</property>
         <property name="receives_default">True</property>
+        <property name="tooltip_text" translatable="yes">Open homepage</property>
         <property name="relief">none</property>
         <signal name="clicked" handler="OpenHomepageButton_clicked" swapped="no"/>
         <child>
@@ -34,6 +35,7 @@
         <property name="visible">True</property>
         <property name="can_focus">True</property>
         <property name="receives_default">True</property>
+        <property name="tooltip_text" translatable="yes">Library</property>
         <property name="relief">none</property>
         <signal name="clicked" handler="AddRemoveButton_clicked" swapped="no"/>
         <child>
@@ -153,6 +155,9 @@ audio-volume-medium-symbolic</property>
             <property name="relief">none</property>
           </object>
         </child>
+        <style>
+          <class name="Volume"/>
+        </style>
       </object>
       <packing>
         <property name="expand">False</property>
@@ -299,6 +304,9 @@ audio-volume-medium-symbolic</property>
                 </child>
               </object>
             </child>
+            <style>
+              <class name="Play/Stop"/>
+            </style>
           </object>
           <packing>
             <property name="expand">False</property>
