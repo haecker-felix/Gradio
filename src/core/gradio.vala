@@ -73,7 +73,7 @@ namespace Gradio {
 
 			window.delete_event.connect (() => {
 				window.save_geometry ();
-				if (Settings.enable_background_playback) {
+				if (Settings.enable_background_playback && player.is_playing()) {
 					window.hide_on_delete ();
 					if(Settings.enable_close_to_tray){
 						window.show_tray_icon();
