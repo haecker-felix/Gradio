@@ -7,7 +7,6 @@
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="valign">center</property>
-    <property name="orientation">vertical</property>
     <child>
       <object class="GtkStack" id="StatusStack">
         <property name="visible">True</property>
@@ -61,8 +60,7 @@
       </packing>
     </child>
     <style>
-      <class name="border"/>
-      <class name="round-border"/>
+      <class name="border-right"/>
     </style>
   </template>
 </interface>
