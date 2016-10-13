@@ -47,19 +47,6 @@ namespace Gradio{
 		private Image RemoveImage;
 		[GtkChild]
 		private Label LikesLabel;
-
-		[GtkChild]
-		private Label NominalBitrateLabel;
-		[GtkChild]
-		private Label MinimumBitrateLabel;
-		[GtkChild]
-		private Label MaximumBitrateLabel;
-		[GtkChild]
-		private Label BitrateLabel;
-		[GtkChild]
-		private Label CodecLabel;
-		[GtkChild]
-		private Label ChannelModeLabel;
 		[GtkChild]
 		private VolumeButton VolumeButton;
 
@@ -83,10 +70,6 @@ namespace Gradio{
 		}
 
 		private void connect_signals(){
-			App.player.connection_established.connect(() => sl.show_connected());
-			App.player.connection_error.connect(() => sl.show_error());
-			App.player.no_connection.connect(() => sl.show_no_connection());
-
 			App.player.played.connect (() => refresh_play_stop_button());
 			App.player.stopped.connect (() => refresh_play_stop_button());
 			App.player.tag_changed.connect (() => set_information());
@@ -158,12 +141,6 @@ namespace Gradio{
 
 		private void set_information(){
 			ChannelCurrentTitleLabel.set_text(App.player.tag_title);
-			NominalBitrateLabel.set_text(App.player.tag_nominal_bitrate.to_string() + " kBit/s");
-			MinimumBitrateLabel.set_text(App.player.tag_minimum_bitrate.to_string() + " kBit/s");
-			MaximumBitrateLabel.set_text(App.player.tag_maximum_bitrate.to_string() + " kBit/s");
-			BitrateLabel.set_text(App.player.tag_bitrate.to_string()  + " kBit/s");
-			CodecLabel.set_text(App.player.tag_audio_codec);
-			ChannelModeLabel.set_text(App.player.tag_channel_mode);
 
 			if (App.settings.get_boolean ("show-notifications"))
 				if(App.player.tag_title != null)

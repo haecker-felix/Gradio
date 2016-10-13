@@ -24,20 +24,63 @@ namespace Gradio{
 
 		[GtkChild]
 		private Stack StatusStack;
+		[GtkChild]
+		private Stack PopoverStack;
+		[GtkChild]
+		private Popover InfoPopover;
+
+		[GtkChild]
+		private Label NominalBitrateLabel;
+		[GtkChild]
+		private Label MinimumBitrateLabel;
+		[GtkChild]
+		private Label MaximumBitrateLabel;
+		[GtkChild]
+		private Label BitrateLabel;
+		[GtkChild]
+		private Label CodecLabel;
+		[GtkChild]
+		private Label ChannelModeLabel;
 
 		public StatusLabel(){
 			this.show_all();
+			connect_signals();
 		}
 
-		public void show_no_connection(){
+		private void connect_signals(){
+			App.player.connection_established.connect(() => show_connected());
+			App.player.connection_error.connect(() => show_error());
+			App.player.no_connection.connect(() => show_no_connection());
+			App.player.tag_changed.connect (() => set_information());
+		}
+
+		[GtkCallback]
+		private bool status_clicked (Gdk.EventButton button){
+			message("clicked");
+			InfoPopover.set_relative_to(this);
+			InfoPopover.show_all();
+
+			return false;
+		}
+
+		private void set_information(){
+			NominalBitrateLabel.set_text(App.player.tag_nominal_bitrate.to_string() + " kBit/s");
+			MinimumBitrateLabel.set_text(App.player.tag_minimum_bitrate.to_string() + " kBit/s");
+			MaximumBitrateLabel.set_text(App.player.tag_maximum_bitrate.to_string() + " kBit/s");
+			BitrateLabel.set_text(App.player.tag_bitrate.to_string()  + " kBit/s");
+			CodecLabel.set_text(App.player.tag_audio_codec);
+			ChannelModeLabel.set_text(App.player.tag_channel_mode);
+		}
+
+		private void show_no_connection(){
 			StatusStack.set_visible_child_name("no-connection");
 		}
 
-		public void show_connected(){
+		private void show_connected(){
 			StatusStack.set_visible_child_name("connected");
 		}
 
-		public void show_error(){
+		private void show_error(){
 			StatusStack.set_visible_child_name("error");
 		}
 
