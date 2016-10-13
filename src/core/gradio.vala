@@ -68,11 +68,6 @@ namespace Gradio {
 		}
 
 		private void connect_signals(){
-			player.connection_error.connect((o,t) => {
-				Util.show_info_dialog(t, window);
-				return;
-			});
-
 			mpris.requested_quit.connect(() => quit_application());
 			mpris.requested_raise.connect(() => restore_window());
 

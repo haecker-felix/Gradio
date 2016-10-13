@@ -261,7 +261,7 @@
             </child>
           </object>
           <packing>
-            <property name="name">page0</property>
+            <property name="name">info</property>
             <property name="title" translatable="yes">page0</property>
           </packing>
         </child>
@@ -269,15 +269,18 @@
           <object class="GtkBox">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="valign">center</property>
             <property name="margin_left">5</property>
             <property name="margin_right">5</property>
             <property name="margin_top">5</property>
             <property name="margin_bottom">5</property>
+            <property name="orientation">vertical</property>
             <property name="spacing">5</property>
             <child>
               <object class="GtkImage">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="margin_bottom">5</property>
                 <property name="icon_name">dialog-warning-symbolic</property>
               </object>
               <packing>
@@ -287,9 +290,11 @@
               </packing>
             </child>
             <child>
-              <object class="GtkLabel">
+              <object class="GtkLabel" id="ErrorLabel">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="margin_left">5</property>
+                <property name="margin_right">5</property>
                 <property name="label" translatable="yes">Error Message</property>
               </object>
               <packing>
@@ -300,7 +305,7 @@
             </child>
           </object>
           <packing>
-            <property name="name">page1</property>
+            <property name="name">error</property>
             <property name="title" translatable="yes">page1</property>
             <property name="position">1</property>
           </packing>

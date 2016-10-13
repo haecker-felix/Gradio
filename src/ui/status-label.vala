@@ -41,6 +41,8 @@ namespace Gradio{
 		private Label CodecLabel;
 		[GtkChild]
 		private Label ChannelModeLabel;
+		[GtkChild]
+		private Label ErrorLabel;
 
 		public StatusLabel(){
 			this.show_all();
@@ -52,11 +54,18 @@ namespace Gradio{
 			App.player.connection_error.connect(() => show_error());
 			App.player.no_connection.connect(() => show_no_connection());
 			App.player.tag_changed.connect (() => set_information());
+
+			App.player.connection_error.connect((o,t) => {
+				ErrorLabel.set_text(t);
+				PopoverStack.set_visible_child_name("error");
+				InfoPopover.set_relative_to(this);
+				InfoPopover.show_all();
+				return;
+			});
 		}
 
 		[GtkCallback]
 		private bool status_clicked (Gdk.EventButton button){
-			message("clicked");
 			InfoPopover.set_relative_to(this);
 			InfoPopover.show_all();
 
@@ -64,6 +73,7 @@ namespace Gradio{
 		}
 
 		private void set_information(){
+			PopoverStack.set_visible_child_name("info");
 			NominalBitrateLabel.set_text(App.player.tag_nominal_bitrate.to_string() + " kBit/s");
 			MinimumBitrateLabel.set_text(App.player.tag_minimum_bitrate.to_string() + " kBit/s");
 			MaximumBitrateLabel.set_text(App.player.tag_maximum_bitrate.to_string() + " kBit/s");
