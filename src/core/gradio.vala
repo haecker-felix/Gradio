@@ -65,6 +65,14 @@ namespace Gradio {
 			if(!Util.check_database_connection()){
 				window.show_no_connection_message();
 			}
+
+			if(Settings.resume_playback_on_startup && Settings.previous_station != 0){
+				message("Continue playback");
+
+				StationProvider provider = new StationProvider();
+				RadioStation s = provider.parse_station_data_from_id(Settings.previous_station);
+				player.set_radio_station(s);
+			}
 		}
 
 		private void connect_signals(){

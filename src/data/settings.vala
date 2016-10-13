@@ -128,6 +128,23 @@ namespace Gradio{
 			}
 		}
 
+		public static bool resume_playback_on_startup{
+			get{
+				return Gradio.App.settings.get_boolean ("resume-playback-on-startup");
+			}
+			set{
+				Gradio.App.settings.set_boolean ("resume-playback-on-startup", value);
+			}
+		}
+
+		public static int previous_station{
+			get{
+				return Gradio.App.settings.get_int ("previous-station");
+			}
+			set{
+				Gradio.App.settings.set_int ("previous-station", value);
+			}
+		}
 
 	}
 }

@@ -123,6 +123,8 @@ namespace Gradio{
 			station.get_stream_address.begin(station.ID, (obj, res) => {
 		        	string address = station.get_stream_address.end(res);
 
+				Settings.previous_station = int.parse(station.ID);
+
 		        	//check if new == old
 		        	if(current_station != null && current_station.ID == station.ID){
 					toggle_play_stop();

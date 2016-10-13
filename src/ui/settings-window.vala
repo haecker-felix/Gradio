@@ -44,6 +44,8 @@ namespace Gradio{
 		private CheckButton ShowStationIcons;
 		[GtkChild]
 		private CheckButton HideBrokenStations;
+		[GtkChild]
+		private CheckButton ResumePlaybackOnStartup;
 
 		public SettingsWindow () {
 			load_settings();
@@ -60,6 +62,7 @@ namespace Gradio{
 			ShowStatesC.toggled.connect(() => Settings.show_states_c = ShowStatesC.get_active());
 			ShowStationIcons.toggled.connect(() => Settings.show_station_icons = ShowStationIcons.get_active());
 			HideBrokenStations.toggled.connect(() => Settings.hide_broken_stations = HideBrokenStations.get_active());
+			ResumePlaybackOnStartup.toggled.connect(() => Settings.resume_playback_on_startup = ResumePlaybackOnStartup.get_active());
 		}
 
 		private void load_settings(){
@@ -75,6 +78,7 @@ namespace Gradio{
 			ShowTagsC.set_active(Settings.show_tags_c);
 			ShowStationIcons.set_active(Settings.show_station_icons);
 			HideBrokenStations.set_active(Settings.hide_broken_stations);
+			ResumePlaybackOnStartup.set_active(Settings.resume_playback_on_startup);
 		}
 
 	}

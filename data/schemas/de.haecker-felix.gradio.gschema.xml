@@ -89,5 +89,15 @@
       <default>true</default>
       <summary>Show states in discover tab</summary>
     </key>
+
+    <key name="resume-playback-on-startup" type="b">
+      <default>false</default>
+      <summary>Resume Playback On Startup</summary>
+    </key>
+
+    <key name="previous-station" type="i">
+      <default>0</default>
+      <summary>The last played station</summary>
+    </key>
   </schema>
 </schemalist>
