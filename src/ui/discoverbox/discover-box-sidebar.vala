@@ -58,30 +58,36 @@ namespace Gradio{
 
 		private void setup_view(){
 			SidebarTile languages = new SidebarTile ("Languages", "user-invisible-symbolic");
-			if(Settings.show_languages_c)
-				CategoriesBox.pack_start(languages);
+			CategoriesBox.pack_start(languages);
+			if(!Settings.show_languages_c)
+				languages.set_visible(false);
 			languages.clicked.connect(() => {show_catergory_items("languages"); });
 
 			SidebarTile codecs = new SidebarTile ("Codecs", "emblem-system-symbolic");
-			if(Settings.show_codecs_c)
-				CategoriesBox.pack_start(codecs);
+			CategoriesBox.pack_start(codecs);
+			if(!Settings.show_codecs_c)
+				codecs.set_visible(false);
 			codecs.clicked.connect(() => {show_catergory_items("codecs"); });
 
 			SidebarTile countries = new SidebarTile ("Countries", "mark-location-symbolic");
-			if(Settings.show_countries_c)
-				CategoriesBox.pack_start(countries);
+			CategoriesBox.pack_start(countries);
+			if(!Settings.show_countries_c)
+				countries.set_visible(false);
 			countries.clicked.connect(() => {show_catergory_items("countries"); });
 
 			SidebarTile tags = new SidebarTile ("Tags", "dialog-information-symbolic");
-			if(Settings.show_tags_c)
-				CategoriesBox.pack_start(tags);
+			CategoriesBox.pack_start(tags);
+			if(!Settings.show_tags_c)
+				tags.set_visible(false);
 			tags.clicked.connect(() => {show_catergory_items("tags"); });
 
 			SidebarTile states = new SidebarTile ("States", "mark-location-symbolic");
-			if(Settings.show_states_c)
-				CategoriesBox.pack_start(states);
+			CategoriesBox.pack_start(states);
+			if(!Settings.show_states_c)
+				states.set_visible(false);
 			states.clicked.connect(() => {show_catergory_items("states"); });
 
+			// Navigation
 			SidebarTile home = new SidebarTile ("Home", "go-home-symbolic");
 			ActionBox.pack_end(home);
 			home.clicked.connect(() => {dbox.show_home();});
