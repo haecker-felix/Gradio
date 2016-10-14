@@ -98,7 +98,7 @@ namespace Gradio{
 
 		private void setup_view(){
 			var gtk_settings = Gtk.Settings.get_default ();
-			if (App.settings.get_boolean ("use-dark-design")) {
+			if (Settings.enable_dark_design) {
 				gtk_settings.gtk_application_prefer_dark_theme = true;
 			} else {
 				gtk_settings.gtk_application_prefer_dark_theme = false;
@@ -118,18 +118,17 @@ namespace Gradio{
 			// Load css
 			Util.add_stylesheet("gradio.css");
 
-			if(!(App.settings.get_boolean ("use-grid-view"))){
+			if(!(Settings.use_grid_view)){
 				GridImage.set_visible(true);
 				ListImage.set_visible(false);
 				library_box.show_list_view();
 				discover_box.show_list_view();
-				App.settings.set_boolean("use-grid-view", false);
+				Settings.use_grid_view = false;
 			}else{
 				GridImage.set_visible(false);
 				ListImage.set_visible(true);
 				library_box.show_grid_view();
-				discover_box.show_grid_view();
-				App.settings.set_boolean("use-grid-view", true);
+				Settings.use_grid_view = true;
 			}
 
 			ContentStack.set_visible_child_name("database");
@@ -173,10 +172,13 @@ namespace Gradio{
 		public void save_geometry (){
 			this.get_position (out pos_x, out pos_y);
 			this.get_size (out width, out height);
-			App.settings.set_int("window-width", width);
-			App.settings.set_int("window-height", height);
-			App.settings.set_int("window-position-x", pos_x);
-			App.settings.set_int("window-position-y", pos_y);
+
+			Settings.window_height = height;
+			Settings.window_width = width;
+
+			Settings.window_position_x = pos_x;
+			Settings.window_position_y = pos_y;
+
 			this.move(pos_x, pos_y);
 		}
 
@@ -190,11 +192,11 @@ namespace Gradio{
 		}
 
 		public void restore_geometry(){
-			width = App.settings.get_int ("window-width");
-			height = App.settings.get_int ("window-height");
+			width = Settings.window_width;
+			height = Settings.window_height;
 			this.set_default_size(width, height);
-			pos_x = App.settings.get_int ("window-position-x");
-			pos_y = App.settings.get_int ("window-position-y");
+			pos_x = Settings.window_position_x;
+			pos_y = Settings.window_position_y;
 		}
 
 		[GtkCallback]
@@ -220,13 +222,13 @@ namespace Gradio{
 				ListImage.set_visible(false);
 				library_box.show_list_view();
 				discover_box.show_list_view();
-				App.settings.set_boolean("use-grid-view", false);
+				Settings.use_grid_view = false;
 			}else{
 				GridImage.set_visible(false);
 				ListImage.set_visible(true);
 				library_box.show_grid_view();
 				discover_box.show_grid_view();
-				App.settings.set_boolean("use-grid-view", true);
+				Settings.use_grid_view = true;
 			}
 		}
 

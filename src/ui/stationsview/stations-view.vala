@@ -229,7 +229,7 @@ namespace Gradio{
 					if(!(val.Broken)){
 						GridViewFlowBox.add(grid_box);
 						ListViewListBox.add(list_box);
-					}else if(!Gradio.App.settings.get_boolean("only-show-working-stations")){
+					}else if(!Settings.hide_broken_stations){
 						GridViewFlowBox.add(grid_box);
 						ListViewListBox.add(list_box);
 					}

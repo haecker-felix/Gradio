@@ -25,11 +25,9 @@ namespace Gradio {
 		public static MainWindow window;
 		public static AudioPlayer player;
 		public static Library library;
-		public static GLib.Settings settings;
 		public static MPRIS mpris;
 
 		public App () {
-			settings = new GLib.Settings ("de.haecker-felix.gradio");
 			Object(application_id: "de.haeckerfelix.gradio", flags: ApplicationFlags.FLAGS_NONE);
 		}
 
@@ -45,6 +43,7 @@ namespace Gradio {
 		}
 
 		private void start_new_session(){
+			Settings settings = new Settings();
 		 	library = new Library();
 			library.read_data();
 

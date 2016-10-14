@@ -57,7 +57,8 @@ namespace Gradio{
 			App.player.stopped.connect (() => refresh_play_stop_button());
 			App.player.tag_changed.connect (() => set_information());
 			App.player.radio_station_changed.connect((t) => new_station(t));
-			VolumeButton.set_value(App.settings.get_double ("volume-position"));
+			VolumeButton.set_value(Settings.volume_position);
+
 		}
 
 		private void new_station (RadioStation s){
@@ -84,7 +85,7 @@ namespace Gradio{
 		[GtkCallback]
         	private void VolumeButton_value_changed (double value) {
 			App.player.set_volume(value);
-			App.settings.set_double("volume-position", value);
+			Settings.volume_position = value;
 		}
 
 		[GtkCallback]

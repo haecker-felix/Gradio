@@ -64,7 +64,7 @@ namespace Gradio{
 			StatusBox.pack_start(sl);
 			this.show_all();
 
-			VolumeButton.set_value(App.settings.get_double ("volume-position"));
+			VolumeButton.set_value(Settings.volume_position);
 
 			connect_signals();
 		}
@@ -115,7 +115,7 @@ namespace Gradio{
 		[GtkCallback]
         	private void VolumeButton_value_changed (double value) {
 			App.player.set_volume(value);
-			App.settings.set_double("volume-position", value);
+			Settings.volume_position = value;
 		}
 
 		[GtkCallback]
@@ -142,7 +142,7 @@ namespace Gradio{
 		private void set_information(){
 			ChannelCurrentTitleLabel.set_text(App.player.tag_title);
 
-			if (App.settings.get_boolean ("show-notifications"))
+			if (Settings.show_notifications)
 				if(App.player.tag_title != null)
 					send_notification(station.Title, App.player.tag_title);
 		}

@@ -23,7 +23,7 @@ namespace Gradio{
 		}
 
 		public async Gdk.Pixbuf? get_station_logo (RadioStation station, int size){
-			if(Gradio.App.settings.get_boolean ("load-pictures")){
+			if(Settings.load_pictures){
 				SourceFunc callback = get_station_logo.callback;
 				Gdk.Pixbuf output = null;
 
