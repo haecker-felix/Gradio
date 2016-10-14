@@ -281,17 +281,24 @@
         <property name="visible">True</property>
         <property name="can_focus">True</property>
         <property name="receives_default">True</property>
-        <property name="no_show_all">True</property>
         <property name="halign">center</property>
-        <property name="relief">none</property>
+        <property name="valign">center</property>
+        <property name="margin_top">10</property>
+        <property name="margin_bottom">10</property>
         <signal name="clicked" handler="LoadMoreButton_clicked" swapped="no"/>
         <child>
-          <object class="GtkImage">
+          <object class="GtkLabel">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="icon_name">content-loading-symbolic</property>
+            <property name="label" translatable="yes">More ...</property>
+            <attributes>
+              <attribute name="font-desc" value="&lt;Geben Sie den Wert ein&gt; 8"/>
+            </attributes>
           </object>
         </child>
+        <style>
+          <class name="overview-more-button"/>
+        </style>
       </object>
       <packing>
         <property name="expand">False</property>
