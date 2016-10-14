@@ -108,3 +108,8 @@
 .whitebg {
 	background-color: white;
 }
+
+.overview-more-button {
+	font-size: smaller;
+	padding: 0px 15px;
+}

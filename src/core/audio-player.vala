@@ -31,7 +31,7 @@ namespace Gradio{
 		public signal void stopped();
 		public signal void played();
 
-		private Codec codec;
+		private CodecInstaller codec;
 
 		public string tag_title;
 		public string tag_homepage;
@@ -48,12 +48,10 @@ namespace Gradio{
 		public AudioPlayer(){
 			Gst.PbUtils.init();
 
-			codec = new Codec();
+			codec = new CodecInstaller();
 
 			stream = ElementFactory.make ("playbin", "play");
 			set_volume(Settings.volume_position);
-
-			this.notify.connect ((s, p) => stdout.printf ("Property %s changed\n", p.name));
 		}
 
 		private bool bus_callback (Gst.Bus bus, Gst.Message m) {

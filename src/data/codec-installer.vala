@@ -18,8 +18,9 @@ using Gst.PbUtils;
 
 namespace Gradio{
 
-	public class Codec{
-		public Codec(){
+	public class CodecInstaller{
+
+		public CodecInstaller(){
 			init();
 		}
 
