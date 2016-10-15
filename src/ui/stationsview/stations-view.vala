@@ -127,8 +127,15 @@ namespace Gradio{
 			reset();
 			address = a;
 
-			max_results = provider.get_max_items(address);
-			load_items_from_address();
+			provider.get_max_items(address, (obj, res) => {
+			    	try {
+					max_results = provider.get_max_items.end(res);
+					load_items_from_address();
+			    	} catch (ThreadError e) {
+					string msg = e.message;
+					stderr.printf("Error: Thread:" + msg+ "\n");
+			    	}
+			});
 		}
 
 		public void set_stations_from_list(List<RadioStation> s){
@@ -183,9 +190,6 @@ namespace Gradio{
 					stderr.printf("Error: Thread:" + msg+ "\n");
 			    	}
 			});
-
-
-
 		}
 
 		public void set_extra_item(Gtk.Widget w){

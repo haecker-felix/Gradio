@@ -74,23 +74,35 @@ namespace Gradio{
 		}
 
 
-		public int get_max_items(string address){
-			try{
-				string data = Util.get_string_from_uri(address);
-				Json.Parser parser = new Json.Parser ();
+		public async int get_max_items(string address){
+			SourceFunc callback = get_max_items.callback;
+			int output = 1;
 
-				if(data != ""){
-					parser.load_from_data (data);
-					var root = parser.get_root ();
-					var radio_stations = root.get_array ();
+			ThreadFunc<void*> run = () => {
+				try{
+					string data = Util.get_string_from_uri(address);
+					Json.Parser parser = new Json.Parser ();
 
-					return (int)radio_stations.get_length();
+					if(data != ""){
+						parser.load_from_data (data);
+						var root = parser.get_root ();
+						var radio_stations = root.get_array ();
+
+						output = (int)radio_stations.get_length();
+					}
+				}catch(GLib.Error e){
+					warning(e.message);
 				}
-			}catch(GLib.Error e){
-				warning(e.message);
-			}
 
-			return 0;
+				Idle.add((owned) callback);
+				Thread.exit (1.to_pointer ());
+				return null;
+			};
+
+			new Thread<void*> ("search_thread", run);
+
+			yield;
+           		return output;
 		}
 
 		// Handle several stations and return them as a map
