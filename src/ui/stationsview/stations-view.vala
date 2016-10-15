@@ -31,6 +31,7 @@ namespace Gradio{
 
 		private int results_chunk = 50;
 		private int results_loaded = 0;
+		private int max_results = 0;
 
 		private string address;
 
@@ -38,13 +39,10 @@ namespace Gradio{
 		private Box LoadMoreBox;
 		[GtkChild]
 		private Button LoadMoreButton;
-
 		[GtkChild]
 		private Box GridViewBox;
-
 		[GtkChild]
 		private Box ListViewBox;
-
 		[GtkChild]
 		private FlowBox GridViewFlowBox;
 		[GtkChild]
@@ -57,7 +55,6 @@ namespace Gradio{
 		private Box ExtraItemBox;
 		[GtkChild]
 		private ProgressBar Progress;
-
 		[GtkChild]
 		private Image HeaderImage;
 		[GtkChild]
@@ -83,8 +80,8 @@ namespace Gradio{
 				show_grid_view();
 				GridViewFlowBox.set_max_children_per_line(1);
 				GridViewFlowBox.set_max_children_per_line(1);
-				LoadMoreButton.set_visible(false);
 				results_chunk = 10;
+				disable_load_more();
 			}
 
 			connect_signals();
@@ -101,7 +98,7 @@ namespace Gradio{
 				clicked(item.station);
 			});
 
-
+			// ProgressBar
 			provider.started.connect(() => {
 				Idle.add(() => {
 					Progress.set_fraction(0.01);
@@ -111,7 +108,6 @@ namespace Gradio{
 					return false;
 				});
 			});
-
 			provider.finished.connect(() => {
 				Idle.add(() => {
 					Progress.set_fraction(1.0);
@@ -121,7 +117,6 @@ namespace Gradio{
 					return false;
 				});
 			});
-
 			provider.progress.connect((t) => {
 				Idle.add(() => { Progress.set_fraction(t); return false;});
 			});
@@ -132,6 +127,7 @@ namespace Gradio{
 			reset();
 			address = a;
 
+			max_results = provider.get_max_items(address);
 			load_items_from_address();
 		}
 
@@ -170,16 +166,21 @@ namespace Gradio{
 		}
 
 		private void load_items_from_address(){
-			provider.get_radio_stations.begin(address, results_loaded, (results_loaded+results_chunk), (obj, res) => {
-			    	try {
-					var result = provider.get_radio_stations.end(res);
-					results_loaded = results_loaded + results_chunk;
-					add_stations_from_list(ref result);
-			    	} catch (ThreadError e) {
-					string msg = e.message;
-					stderr.printf("Error: Thread:" + msg+ "\n");
-			    	}
-        		});
+			if(!(results_loaded >= max_results)){
+				if(!discover_mode) enable_load_more();
+				provider.get_radio_stations.begin(address, results_loaded, (results_loaded+results_chunk), (obj, res) => {
+				    	try {
+						var result = provider.get_radio_stations.end(res);
+						results_loaded = results_loaded + results_chunk;
+						add_stations_from_list(ref result);
+				    	} catch (ThreadError e) {
+						string msg = e.message;
+						stderr.printf("Error: Thread:" + msg+ "\n");
+				    	}
+				});
+			}else{
+				disable_load_more();
+			}
 		}
 
 		public void set_extra_item(Gtk.Widget w){
@@ -253,6 +254,11 @@ namespace Gradio{
 			LoadMoreBox.set_visible(false);
 			Progress.set_visible(false);
 			LoadMoreButton.set_visible(false);
+		}
+		private void enable_load_more(){
+			LoadMoreBox.set_visible(true);
+			Progress.set_visible(true);
+			LoadMoreButton.set_visible(true);
 		}
 
 		[GtkCallback]

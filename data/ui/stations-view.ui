@@ -34,7 +34,7 @@
             <property name="margin_left">3</property>
             <property name="label" translatable="yes">label</property>
             <attributes>
-              <attribute name="font-desc" value="&lt;&gt; 16"/>
+              <attribute name="font-desc" value="16"/>
             </attributes>
           </object>
           <packing>
@@ -292,7 +292,7 @@
             <property name="can_focus">False</property>
             <property name="label" translatable="yes">More ...</property>
             <attributes>
-              <attribute name="font-desc" value="&lt;Geben Sie den Wert ein&gt; 8"/>
+              <attribute name="font-desc" value="8"/>
             </attributes>
           </object>
         </child>

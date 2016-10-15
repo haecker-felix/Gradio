@@ -74,6 +74,25 @@ namespace Gradio{
 		}
 
 
+		public int get_max_items(string address){
+			try{
+				string data = Util.get_string_from_uri(address);
+				Json.Parser parser = new Json.Parser ();
+
+				if(data != ""){
+					parser.load_from_data (data);
+					var root = parser.get_root ();
+					var radio_stations = root.get_array ();
+
+					return (int)radio_stations.get_length();
+				}
+			}catch(GLib.Error e){
+				warning(e.message);
+			}
+
+			return 0;
+		}
+
 		// Handle several stations and return them as a map
 		public async List<RadioStation> get_radio_stations(string address, int start, int end) throws ThreadError{
 			SourceFunc callback = get_radio_stations.callback;

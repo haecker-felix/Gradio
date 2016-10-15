@@ -22,7 +22,7 @@
             <property name="can_focus">False</property>
             <property name="label" translatable="yes">More ...</property>
             <attributes>
-              <attribute name="font-desc" value="&lt;Geben Sie den Wert ein&gt; 8"/>
+              <attribute name="font-desc" value="8"/>
             </attributes>
           </object>
         </child>
