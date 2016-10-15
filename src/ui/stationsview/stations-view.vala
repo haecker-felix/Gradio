@@ -133,7 +133,6 @@ namespace Gradio{
 
 		public void set_stations_from_list(List<RadioStation> s){
 			reset();
-
 			add_to_view(s.copy());
 		}
 
@@ -166,21 +165,27 @@ namespace Gradio{
 		}
 
 		private void load_items_from_address(){
-			if(!(results_loaded >= max_results)){
-				if(!discover_mode) enable_load_more();
-				provider.get_radio_stations.begin(address, results_loaded, (results_loaded+results_chunk), (obj, res) => {
-				    	try {
-						var result = provider.get_radio_stations.end(res);
-						results_loaded = results_loaded + results_chunk;
-						add_stations_from_list(ref result);
-				    	} catch (ThreadError e) {
-						string msg = e.message;
-						stderr.printf("Error: Thread:" + msg+ "\n");
-				    	}
-				});
-			}else{
-				disable_load_more();
-			}
+			provider.get_radio_stations.begin(address, results_loaded, (results_loaded+results_chunk), (obj, res) => {
+			    	try {
+					var result = provider.get_radio_stations.end(res);
+					results_loaded = results_loaded + results_chunk;
+					add_stations_from_list(ref result);
+
+					message("Results_loaded: %i\n", results_loaded);
+					message("max_results: %i\n", max_results);
+					if(results_loaded <= max_results && !discover_mode){
+						enable_load_more();
+					}else{
+						disable_load_more();
+					}
+			    	} catch (ThreadError e) {
+					string msg = e.message;
+					stderr.printf("Error: Thread:" + msg+ "\n");
+			    	}
+			});
+
+
+
 		}
 
 		public void set_extra_item(Gtk.Widget w){
@@ -255,6 +260,7 @@ namespace Gradio{
 			Progress.set_visible(false);
 			LoadMoreButton.set_visible(false);
 		}
+
 		private void enable_load_more(){
 			LoadMoreBox.set_visible(true);
 			Progress.set_visible(true);
