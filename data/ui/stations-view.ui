@@ -262,7 +262,6 @@
         </child>
         <child type="overlay">
           <object class="GtkProgressBar" id="Progress">
-            <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="valign">start</property>
             <style>
@@ -283,9 +282,6 @@
     <property name="can_focus">False</property>
     <property name="no_show_all">True</property>
     <property name="orientation">vertical</property>
-    <child>
-      <placeholder/>
-    </child>
     <child>
       <object class="GtkButton" id="LoadMoreButton">
         <property name="visible">True</property>

@@ -130,7 +130,10 @@ namespace Gradio{
 			provider.get_max_items(address, (obj, res) => {
 			    	try {
 					max_results = provider.get_max_items.end(res);
-					load_items_from_address();
+					if(max_results != 0)
+						load_items_from_address();
+					else
+						StationsStack.set_visible_child_name("no-results");
 			    	} catch (ThreadError e) {
 					string msg = e.message;
 					stderr.printf("Error: Thread:" + msg+ "\n");
