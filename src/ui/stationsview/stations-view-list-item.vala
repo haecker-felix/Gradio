@@ -50,7 +50,7 @@ namespace Gradio{
 			ChannelTagsLabel.set_text(station.Tags);
 			LikesLabel.set_text(station.Votes.to_string());
 
-			if(Gradio.App.library.contains_station(int.parse(station.ID))){
+			if(Gradio.App.library.contains_station(station.ID)){
 				NotInLibraryImage.set_visible(false);
 				InLibraryImage.set_visible(true);
 			}else{

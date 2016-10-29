@@ -43,13 +43,14 @@ namespace Gradio {
 		}
 
 		private void start_new_session(){
+			player = new AudioPlayer();
+
 			Settings settings = new Settings();
+
 		 	library = new Library();
 			library.read_data();
 
 			create_app_menu();
-
-			player = new AudioPlayer();
 
 			mpris = new MPRIS();
 			mpris.initialize();

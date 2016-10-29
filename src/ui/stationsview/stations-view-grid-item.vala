@@ -21,6 +21,8 @@ namespace Gradio{
 	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/grid-item.ui")]
 	public class GridItem : Gtk.FlowBoxChild{
 
+		//public signal void clicked
+
 		[GtkChild]
 		private Label ChannelNameLabel;
 		[GtkChild]
@@ -34,7 +36,11 @@ namespace Gradio{
 		[GtkChild]
 		private Image InLibraryImage;
 		[GtkChild]
-		private Image NotInLibraryImage;
+		private Box PlayBox;
+		[GtkChild]
+		private Box StopBox;
+		[GtkChild]
+		private Stack GridStack;
 
 		public RadioStation station;
 
@@ -48,23 +54,31 @@ namespace Gradio{
 			ChannelTagsLabel.set_ellipsize(Pango.EllipsizeMode.END);
 			ChannelTagsLabel.set_max_width_chars(25);
 
-			load_information();
-		}
+			connect_signals();
 
-		private void load_information(){
+			// Load basic information
+			set_logo();
 			ChannelNameLabel.set_text(station.Title);
 			ChannelLocationLabel.set_text(station.Country + " " + station.State);
 			ChannelTagsLabel.set_text(station.Tags);
-			LikesLabel.set_text(station.Votes.to_string());
 
-			if(Gradio.App.library.contains_station(int.parse(station.ID))){
-				NotInLibraryImage.set_visible(false);
-				InLibraryImage.set_visible(true);
-			}else{
-				NotInLibraryImage.set_visible(true);
-				InLibraryImage.set_visible(false);
-			}
+			// Load advanced information
+			refresh_information();
+		}
 
+		private void connect_signals(){
+			station.played.connect(() => {
+				StopBox.set_visible(true);
+				PlayBox.set_visible(false);
+			});
+
+			station.stopped.connect(() => {
+				StopBox.set_visible(false);
+				PlayBox.set_visible(true);
+			});
+		}
+
+		private void set_logo(){
 			Gdk.Pixbuf icon = null;
 			Gradio.App.imgprovider.get_station_logo.begin(station, 64, (obj, res) => {
 		        	icon = Gradio.App.imgprovider.get_station_logo.end(res);
@@ -75,9 +89,55 @@ namespace Gradio{
         		});
 		}
 
+		private void refresh_information(){
+			// Show likes number
+			LikesLabel.set_text(station.Votes.to_string());
+
+			// Show star if station is in library
+			if(Gradio.App.library.contains_station(station.ID)){
+				InLibraryImage.set_visible(true);
+			}
+		}
+
+		private void show_menu(bool b){
+			if(b){
+				GridStack.set_visible_child_name("actions");
+			}else{
+				GridStack.set_visible_child_name("info");
+			}
+		}
+
 		[GtkCallback]
-		private void GradioGridItem_clicked(Button b){
-			this.activate();
+		private void LikeButton_clicked(Button b){
+			station.vote();
+			refresh_information();
+		}
+
+		[GtkCallback]
+        	private void PlayStopButton_clicked (Button button) {
+        		if(App.player.current_station.ID == station.ID)
+				App.player.toggle_play_stop();
+			else
+				App.player.set_radio_station(station);
+
+			refresh_information();
+		}
+
+		[GtkCallback]
+		private void BackButton_clicked(Button b){
+			show_menu(false);
+		}
+
+		[GtkCallback]
+		private bool GradioGridItem_clicked(Gdk.EventButton b){
+			//right-click
+			if(b.button == 3){
+				refresh_information();
+				show_menu(true);
+			}
+
+
+			return false;
 		}
 	}
 }

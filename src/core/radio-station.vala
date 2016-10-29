@@ -20,7 +20,7 @@ namespace Gradio{
 		public string Title = "";
 		public string Homepage = "";
 		public string Language = "";
-		public string ID = "";
+		public int ID = 0;
 		public string Icon = "";
 		public string Country = "";
 		public string Tags = "";
@@ -30,13 +30,15 @@ namespace Gradio{
 		public string Bitrate = "";
 		public bool Broken = true;
 
-		public signal void data_changed();
+		public bool is_playing = false;
+		public signal void stopped();
+		public signal void played();
 
 		public RadioStation(string title, string homepage, string language, string id, string icon, string country, string tags, string state, string votes, string codec, string bitrate, bool broken){
 			Title = title;
 			Homepage = homepage;
 			Language = language;
-			ID = id;
+			ID = int.parse(id);
 			Icon = icon;
 			Country = country;
 			Tags = tags;
@@ -45,6 +47,24 @@ namespace Gradio{
 			Codec = codec;
 			Bitrate = bitrate;
 			Broken = broken;
+
+			App.player.played.connect(() => {
+				if(App.player.current_station.ID == ID){
+					is_playing = true;
+					played();
+				}else{
+					stopped();
+				}
+			});
+
+			App.player.stopped.connect(() => {
+				if(App.player.current_station.ID == ID){
+					is_playing = false;
+					stopped();
+				}else{
+					stopped();
+				}
+			});
 
 			if(Broken)
 				Title = "[BROKEN] " + Title;
@@ -83,16 +103,15 @@ namespace Gradio{
 
 			yield;
 
-			message("Playable url: " + url);
 			return url;
 		}
 
 
-		public void vote (){
+		public bool vote (){
 			Json.Parser parser = new Json.Parser ();
 
 			try{
-				parser.load_from_data (Util.get_string_from_uri(RadioBrowser.radio_station_vote + ID ));
+				parser.load_from_data (Util.get_string_from_uri(RadioBrowser.radio_station_vote + ID.to_string() ));
 				var root = parser.get_root ();
 
 				if(root != null){
@@ -101,13 +120,14 @@ namespace Gradio{
 						int v = int.parse(Votes);
 						v++;
 						Votes=v.to_string();
+						return true;
 					}
 				}
 			}catch(GLib.Error e){
 				warning(e.message);
 			}
 
-			data_changed();
+			return false;
 		}
 	}
 }

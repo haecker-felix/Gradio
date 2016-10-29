@@ -6,35 +6,21 @@
 	background-color: mix(@theme_base_color,@theme_bg_color,0.3);
 }
 
-.grid-item:hover {
-	background-color: @theme_base_color;
+.action-box {
+	border-radius: 0px;
+	padding: 0;
+	background-image: none;
+	background-color: mix(@theme_base_color,#000000,0.2);
 }
 
-.grid-item:active {
-	border-color: @theme_selected_bg_color;
-	box-shadow: none;
-	color: @theme_selected_bg_color;
-}
-
-.grid-item:backdrop {
-	box-shadow: none;
-	border-color: @unfocused_borders;
+.action-box:backdrop label {
+        color: @theme_selected_fg_color;
 }
 
 .stations-view{
 	border-width: 0px 0px 1px 0px;
 	border-style: solid;
 	border-color: @borders;
-}
-
-.grid-overlay-box {
-	font-size: smaller;
-	background-color: mix(@theme_base_color,#000000,0.2);
-	border-radius: 0;
-}
-
-.grid-overlay-box:backdrop label {
-        color: @theme_selected_fg_color;
 }
 
 .round-border{
@@ -112,4 +98,9 @@
 .overview-more-button {
 	font-size: smaller;
 	padding: 0px 15px;
+}
+
+.small-button {
+	font-size: smaller;
+	padding: 0px 0px;
 }

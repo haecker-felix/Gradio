@@ -54,19 +54,19 @@ namespace Gradio{
 
 		public void remove_radio_station_by_id(int id){
 			RadioStation station = provider.parse_station_data_from_id(id);
-			lib.remove(int.parse(station.ID));
+			lib.remove(station.ID);
 
 			removed_radio_station();
 		}
 
 		public void add_radio_station(RadioStation station){
-			lib[int.parse(station.ID)] = station;
+			lib[station.ID] = station;
 
 			added_radio_station();
 		}
 
 		public void remove_radio_station(RadioStation station){
-			lib.remove(int.parse(station.ID));
+			lib.remove(station.ID);
 
 			removed_radio_station();
 		}
