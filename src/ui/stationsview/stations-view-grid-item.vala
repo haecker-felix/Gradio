@@ -115,6 +115,8 @@ namespace Gradio{
 		private void LikeButton_clicked(Button b){
 			station.vote();
 			refresh_information();
+
+			show_menu(false);
 		}
 
 		[GtkCallback]
@@ -125,6 +127,7 @@ namespace Gradio{
 				App.player.set_radio_station(station);
 
 			refresh_information();
+			show_menu(false);
 		}
 
 		[GtkCallback]
