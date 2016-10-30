@@ -56,6 +56,10 @@ namespace Gradio{
 
 			connect_signals();
 
+			if(App.player.is_playing_station(station))
+				StopBox.set_visible(true);
+				PlayBox.set_visible(false);
+
 			// Load basic information
 			set_logo();
 			ChannelNameLabel.set_text(station.Title);

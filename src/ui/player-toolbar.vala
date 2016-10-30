@@ -70,10 +70,23 @@ namespace Gradio{
 		}
 
 		private void connect_signals(){
-			App.player.played.connect (() => refresh_play_stop_button());
-			App.player.stopped.connect (() => refresh_play_stop_button());
+			station.played.connect(show_stop_icon);
+			station.stopped.connect(show_play_icon);
+
 			App.player.tag_changed.connect (() => set_information());
 			App.player.radio_station_changed.connect((t) => new_station(t));
+		}
+
+		private void show_stop_icon(){
+			message("Station %s is played", station.Title);
+			StopImage.set_visible(true);
+			PlayImage.set_visible(false);
+		}
+
+		private void show_play_icon(){
+			message("Station %s is stopped", station.Title);
+			StopImage.set_visible(false);
+			PlayImage.set_visible(true);
 		}
 
 		private void send_notification(string summary, string body){
@@ -81,7 +94,18 @@ namespace Gradio{
 		}
 
 		private void new_station (RadioStation s){
+			// Disconnect the old signals
+			station.played.disconnect(show_stop_icon);
+			station.stopped.disconnect(show_play_icon);
+
+			station = null;
 			station = s;
+
+			// connect the signals to the new station
+			connect_signals();
+
+			if(station.is_playing)
+				show_stop_icon();
 
 			ChannelNameLabel.set_text(station.Title);
 			ChannelCurrentTitleLabel.set_text("");
@@ -101,7 +125,6 @@ namespace Gradio{
 
 			refresh_add_remove_button();
 			refresh_like_button();
-			refresh_play_stop_button();
 
 			this.set_visible(true);
 		}
@@ -109,7 +132,6 @@ namespace Gradio{
 		[GtkCallback]
         	private void PlayStopButton_clicked (Button button) {
 			App.player.toggle_play_stop();
-			refresh_play_stop_button();
 		}
 
 		[GtkCallback]
@@ -161,14 +183,5 @@ namespace Gradio{
 			}
 		}
 
-		private void refresh_play_stop_button(){
-			if(App.player.is_playing()){
-				StopImage.set_visible(true);
-				PlayImage.set_visible(false);
-			}else{
-				PlayImage.set_visible(true);
-				StopImage.set_visible(false);
-			}
-		}
 	}
 }

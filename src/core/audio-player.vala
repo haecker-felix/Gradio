@@ -164,12 +164,20 @@ namespace Gradio{
 			}
 		}
 
-		public bool is_playing(){
-			if(stream.current_state == Gst.State.NULL){
-				return false;
-			}else{
+		//check if a specific station is being played
+		public bool is_playing_station(RadioStation station){
+			if(current_station != null && station != null && station.ID == current_station.ID)
 				return true;
-			}
+			else
+				return false;
+		}
+
+		//check if any station is being played
+		public bool is_playing(){
+			if(stream.current_state == Gst.State.NULL)
+				return false;
+			else
+				return true;
 		}
 
 		public void mute_audio (){

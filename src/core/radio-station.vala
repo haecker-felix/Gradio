@@ -34,6 +34,10 @@ namespace Gradio{
 		public signal void stopped();
 		public signal void played();
 
+		public bool is_in_library = false;
+		public signal void added_to_library();
+		public signal void removed_from_library();
+
 		public RadioStation(string title, string homepage, string language, string id, string icon, string country, string tags, string state, string votes, string codec, string bitrate, bool broken){
 			Title = title;
 			Homepage = homepage;
@@ -48,6 +52,16 @@ namespace Gradio{
 			Bitrate = bitrate;
 			Broken = broken;
 
+			if(App.player.is_playing_station(this))
+				is_playing = true;
+
+			if(Broken)
+				Title = "[BROKEN] " + Title;
+
+			connect_signals();
+		}
+
+		private void connect_signals(){
 			App.player.played.connect(() => {
 				if(App.player.current_station.ID == ID){
 					is_playing = true;
@@ -65,9 +79,6 @@ namespace Gradio{
 					stopped();
 				}
 			});
-
-			if(Broken)
-				Title = "[BROKEN] " + Title;
 		}
 
 		// Returns the playable url for the station
