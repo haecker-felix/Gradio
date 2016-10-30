@@ -33,8 +33,12 @@ namespace Gradio{
 		private Label LikesLabel;
 		[GtkChild]
 		private Image ChannelLogoImage;
+
 		[GtkChild]
 		private Image InLibraryImage;
+		[GtkChild]
+		private Image IsPlayingImage;
+
 		[GtkChild]
 		private Box PlayBox;
 		[GtkChild]
@@ -56,9 +60,11 @@ namespace Gradio{
 
 			connect_signals();
 
-			if(App.player.is_playing_station(station))
+			if(App.player.is_playing_station(station)){
 				StopBox.set_visible(true);
 				PlayBox.set_visible(false);
+				IsPlayingImage.set_visible(true);
+			}
 
 			// Load basic information
 			set_logo();
@@ -74,11 +80,13 @@ namespace Gradio{
 			station.played.connect(() => {
 				StopBox.set_visible(true);
 				PlayBox.set_visible(false);
+				IsPlayingImage.set_visible(true);
 			});
 
 			station.stopped.connect(() => {
 				StopBox.set_visible(false);
 				PlayBox.set_visible(true);
+				IsPlayingImage.set_visible(false);
 			});
 		}
 

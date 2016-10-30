@@ -348,18 +348,44 @@
                             <property name="receives_default">True</property>
                             <property name="no_show_all">True</property>
                             <property name="relief">none</property>
+                            <signal name="clicked" handler="LibraryButton_clicked" swapped="no"/>
                             <child>
                               <object class="GtkBox">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="valign">center</property>
                                 <property name="orientation">vertical</property>
+                                <property name="homogeneous">True</property>
                                 <child>
-                                  <object class="GtkImage">
+                                  <object class="GtkBox" id="AddBox">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
-                                    <property name="icon_name">accessories-text-editor-symbolic</property>
-                                    <property name="icon_size">3</property>
+                                    <property name="orientation">vertical</property>
+                                    <child>
+                                      <object class="GtkImage">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
+                                        <property name="icon_name">list-add-symbolic</property>
+                                        <property name="icon_size">3</property>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">0</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkLabel">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
+                                        <property name="margin_top">3</property>
+                                        <property name="label" translatable="yes">Add</property>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">1</property>
+                                      </packing>
+                                    </child>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -368,11 +394,36 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkLabel">
+                                  <object class="GtkBox" id="RemoveBox">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
-                                    <property name="margin_top">3</property>
-                                    <property name="label" translatable="yes">Library</property>
+                                    <property name="orientation">vertical</property>
+                                    <child>
+                                      <object class="GtkImage">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
+                                        <property name="icon_name">list-remove-symbolic</property>
+                                        <property name="icon_size">3</property>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">0</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkLabel">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
+                                        <property name="margin_top">3</property>
+                                        <property name="label" translatable="yes">Remove</property>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">1</property>
+                                      </packing>
+                                    </child>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -423,12 +474,23 @@
               <object class="GtkBox">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="valign">center</property>
                 <property name="margin_top">3</property>
                 <property name="margin_bottom">3</property>
                 <property name="orientation">vertical</property>
-                <property name="spacing">3</property>
-                <property name="homogeneous">True</property>
+                <property name="spacing">4</property>
+                <child>
+                  <object class="GtkImage" id="IsPlayingImage">
+                    <property name="can_focus">False</property>
+                    <property name="no_show_all">True</property>
+                    <property name="valign">center</property>
+                    <property name="icon_name">audio-volume-high-symbolic</property>
+                  </object>
+                  <packing>
+                    <property name="expand">True</property>
+                    <property name="fill">True</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
                 <child>
                   <object class="GtkImage" id="InLibraryImage">
                     <property name="can_focus">False</property>
@@ -437,9 +499,9 @@
                     <property name="icon_name">starred-symbolic</property>
                   </object>
                   <packing>
-                    <property name="expand">False</property>
+                    <property name="expand">True</property>
                     <property name="fill">True</property>
-                    <property name="position">0</property>
+                    <property name="position">1</property>
                   </packing>
                 </child>
                 <child>
@@ -448,7 +510,6 @@
                     <property name="can_focus">False</property>
                     <property name="valign">center</property>
                     <property name="orientation">vertical</property>
-                    <property name="spacing">1</property>
                     <child>
                       <object class="GtkImage">
                         <property name="visible">True</property>
@@ -478,7 +539,7 @@
                     </child>
                   </object>
                   <packing>
-                    <property name="expand">False</property>
+                    <property name="expand">True</property>
                     <property name="fill">True</property>
                     <property name="position">2</property>
                   </packing>
