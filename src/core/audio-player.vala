@@ -62,7 +62,7 @@ namespace Gradio{
 				    		connection_error("Missing Codec!");
 				    		codec.install_missing_codec(m);
 				    	}
-				    	connection_error("Missing Codec!\n");
+				    	connection_error("A codec is missing!\n");
             				break;
 				case MessageType.ERROR:
 					GLib.Error err;
