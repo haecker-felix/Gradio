@@ -53,11 +53,6 @@ namespace Gradio{
 			grid_view_recently_clicked = new StationsView("Recently Clicked", "view-refresh-symbolic", true);
 			grid_view_most_votes = new StationsView("Most Popular", "emote-love-symbolic", true);
 
-			grid_view_recently_changed.clicked.connect((t) => Gradio.App.player.set_radio_station(t));
-			grid_view_recently_clicked.clicked.connect((t) => Gradio.App.player.set_radio_station(t));
-			grid_view_most_votes.clicked.connect((t) => Gradio.App.player.set_radio_station(t));
-			stations_view_results.clicked.connect((t) => Gradio.App.player.set_radio_station(t));
-
 			button_most_votes = new StationsViewButton();
 			button_recently_changed = new StationsViewButton();
 			button_recently_clicked = new StationsViewButton();

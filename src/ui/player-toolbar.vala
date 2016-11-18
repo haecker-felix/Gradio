@@ -66,16 +66,15 @@ namespace Gradio{
 
 			VolumeButton.set_value(Settings.volume_position);
 
-			connect_signals();
-		}
-
-		private void connect_signals(){
+			station = new RadioStation();
 			station.played.connect(show_stop_icon);
 			station.stopped.connect(show_play_icon);
 
 			App.player.tag_changed.connect (() => set_information());
-			App.player.radio_station_changed.connect((t) => new_station(t));
+			App.player.radio_station_changed.connect(() => station_changed());
+
 		}
+
 
 		private void show_stop_icon(){
 			message("Station %s is played", station.Title);
@@ -93,16 +92,8 @@ namespace Gradio{
 			Util.send_notification(summary, body);
 		}
 
-		private void new_station (RadioStation s){
-			// Disconnect the old signals
-			station.played.disconnect(show_stop_icon);
-			station.stopped.disconnect(show_play_icon);
-
-			station = null;
-			station = s;
-
-			// connect the signals to the new station
-			connect_signals();
+		private void station_changed (){
+			station.set_from_station(App.player.current_station);
 
 			if(station.is_playing)
 				show_stop_icon();

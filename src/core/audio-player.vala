@@ -26,7 +26,7 @@ namespace Gradio{
 		public signal void no_connection();
 
 		public signal void tag_changed();
-		public signal void radio_station_changed(RadioStation station);
+		public signal void radio_station_changed();
 
 		public signal void stopped();
 		public signal void played();
@@ -49,6 +49,7 @@ namespace Gradio{
 			Gst.PbUtils.init();
 
 			codec = new CodecInstaller();
+			current_station = new RadioStation();
 
 			stream = ElementFactory.make ("playbin", "play");
 			set_volume(Settings.volume_position);
@@ -126,9 +127,9 @@ namespace Gradio{
 					toggle_play_stop();
 		        	}else{
 		        		Settings.previous_station = station.ID;
-					current_station = station;
+					current_station.set_from_station(station);
 					connect_to_stream_address(address);
-					radio_station_changed(station);
+					radio_station_changed();
 		        	}
         		});
 		}

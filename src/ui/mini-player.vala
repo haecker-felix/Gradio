@@ -53,88 +53,9 @@ namespace Gradio{
 		RadioStation station;
 
 		public MiniPlayer(){
-			App.player.played.connect (() => refresh_play_stop_button());
-			App.player.stopped.connect (() => refresh_play_stop_button());
-			App.player.tag_changed.connect (() => set_information());
-			App.player.radio_station_changed.connect((t) => new_station(t));
-			VolumeButton.set_value(Settings.volume_position);
+
 
 		}
 
-		private void new_station (RadioStation s){
-			station = s;
-
-			ChannelNameLabel.set_text(station.Title);
-			ChannelCurrentTitleLabel.set_text("");
-
-			StationLogo.set_from_icon_name("application-rss+xml-symbolic", IconSize.DND);
-
-			refresh_add_remove_button();
-			refresh_like_button();
-			refresh_play_stop_button();
-
-			this.set_visible(true);
-		}
-
-		[GtkCallback]
-        	private void PlayStopButton_clicked (Button button) {
-			App.player.toggle_play_stop();
-			refresh_play_stop_button();
-		}
-
-		[GtkCallback]
-        	private void VolumeButton_value_changed (double value) {
-			App.player.set_volume(value);
-			Settings.volume_position = value;
-		}
-
-		[GtkCallback]
-		private void AddRemoveButton_clicked(Button button){
-			if(App.library.contains_station(station.ID))
-				App.library.remove_radio_station_by_id(station.ID);
-			else
-				App.library.add_radio_station_by_id(station.ID);
-
-			refresh_add_remove_button();
-		}
-
-		[GtkCallback]
-		private void LikeButton_clicked(Button button){
-			station.vote();
-			refresh_like_button();
-		}
-
-		[GtkCallback]
-		private void OpenHomepageButton_clicked (Button button) {
-			Util.open_website(station.Homepage);
-		}
-
-		private void set_information(){
-			ChannelCurrentTitleLabel.set_text(App.player.tag_title);
-		}
-
-		private void refresh_like_button(){
-			LikesLabel.set_text(station.Votes.to_string());
-		}
-
-		private void refresh_add_remove_button(){
-			if(Gradio.App.library.contains_station(station.ID)){
-				AddImage.set_visible(false);
-				RemoveImage.set_visible(true);
-			}else{
-				AddImage.set_visible(true);
-				RemoveImage.set_visible(false);
-			}
-		}
-
-		private void refresh_play_stop_button(){
-			if(App.player.is_playing()){
-				StopImage.set_visible(true);
-				PlayImage.set_visible(false);
-			}else{
-				PlayImage.set_visible(true);
-				StopImage.set_visible(false);
-			}
-		}
 	}
 }

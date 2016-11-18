@@ -149,6 +149,9 @@ namespace Gradio{
 			if(b.button == 3){
 				refresh_information();
 				show_menu(true);
+			}else{
+
+				App.player.set_radio_station(station);
 			}
 
 

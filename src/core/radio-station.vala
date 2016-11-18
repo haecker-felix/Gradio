@@ -38,7 +38,19 @@ namespace Gradio{
 		public signal void added_to_library();
 		public signal void removed_from_library();
 
-		public RadioStation(string title, string homepage, string language, string id, string icon, string country, string tags, string state, string votes, string codec, string bitrate, bool broken){
+		public RadioStation(	string title = "",
+					string homepage = "",
+					string language = "",
+					string id = "",
+					string icon = "",
+					string country = "",
+					string tags = "",
+					string state = "",
+					string votes = "",
+					string codec = "",
+					string bitrate = "",
+					bool broken = false){
+
 			Title = title;
 			Homepage = homepage;
 			Language = language;
@@ -51,6 +63,8 @@ namespace Gradio{
 			Codec = codec;
 			Bitrate = bitrate;
 			Broken = broken;
+
+			message("created new station ->" + Title + "<-");
 
 			if(App.player.is_playing_station(this))
 				is_playing = true;
@@ -67,6 +81,7 @@ namespace Gradio{
 					is_playing = true;
 					played();
 				}else{
+					is_playing = false;
 					stopped();
 				}
 			});
@@ -74,8 +89,6 @@ namespace Gradio{
 			App.player.stopped.connect(() => {
 				if(App.player.current_station.ID == ID){
 					is_playing = false;
-					stopped();
-				}else{
 					stopped();
 				}
 			});
@@ -139,6 +152,28 @@ namespace Gradio{
 			}
 
 			return false;
+		}
+
+		//copy data from a other station
+		public void set_from_station(RadioStation s){
+			Title = s.Title;
+			Homepage = s.Homepage;
+			Language = s.Language;
+			ID = s.ID;
+			Icon = s.Icon;
+			Country = s.Country;
+			Tags = s.Tags;
+			State = s.State;
+			Votes = s.Votes;
+			Codec = s.Codec;
+			Bitrate = s.Bitrate;
+			Broken = s.Broken;
+
+			if(App.player.is_playing_station(this))
+				is_playing = true;
+
+			if(Broken)
+				Title = "[BROKEN] " + Title;
 		}
 	}
 }
