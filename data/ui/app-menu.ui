@@ -13,10 +13,6 @@
         <attribute name="action">app.report_an_error</attribute>
       </item>
       <item>
-        <attribute name="label" translatable="yes">What's New</attribute>
-        <attribute name="action">app.release_notes</attribute>
-      </item>
-      <item>
         <attribute name="label" translatable="yes">About</attribute>
         <attribute name="action">app.about</attribute>
       </item>
