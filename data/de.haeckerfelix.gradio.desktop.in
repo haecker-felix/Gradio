@@ -5,6 +5,6 @@ Exec=gradio
 Icon=de.haeckerfelix.gradio
 Terminal=false
 Type=Application
-Categories=GNOME;GTK;Network;
+Categories=AudioVideo;Audio;Player;GNOME;
 Keywords=gradio;internet;radio;
 StartupNotify=true
