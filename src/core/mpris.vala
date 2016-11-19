@@ -181,8 +181,8 @@ public class Gradio.MprisPlayer : GLib.Object {
 		_metadata = new HashTable<string,Variant>(str_hash, str_equal);
 
 		App.player.tag_changed.connect (song_changed);
-		App.player.stopped.connect (playing_changed);
-		App.player.played.connect (playing_changed);
+		App.player.station_stopped.connect (playing_changed);
+		App.player.station_played.connect (playing_changed);
 	}
 
 	private void fill_metadata() {

@@ -73,22 +73,43 @@ namespace Gradio{
 			connect_signals();
 		}
 
-		private void connect_signals(){
-			App.player.played.connect(() => {
-				stopped();
-				if(App.player.current_station != null && App.player.current_station.ID == ID){
-					is_playing = true;
-					played();
-				}
-			});
+		~RadioStation(){
+			App.player.station_played.disconnect( play_handler );
+			App.player.station_stopped.disconnect( stop_handler );
+			stdout.printf( "radiostatation finalized\n" );
+		}
 
-			App.player.stopped.connect(() => {
-				if(App.player.current_station != null && App.player.current_station.ID == ID){
+		private void connect_signals(){
+			App.player.station_played.connect(play_handler);
+			App.player.station_stopped.connect(stop_handler);
+		}
+
+		private void stop_handler(){
+			if(Title != null){
+				if(App.player.current_station.ID == ID){
 					is_playing = false;
 					stopped();
 				}
-			});
+			}else{
+				warning("Caught crash of Gradio. This should not happen too often.");
+			}
+
 		}
+
+		private void play_handler(){
+			if(Title != null){
+				if(App.player.current_station.ID == ID){
+					is_playing = true;
+					played();
+				}else{
+					is_playing = false;
+					stopped();
+				}
+			}else{
+				warning("Caught crash of Gradio. This should not happen too often.");
+			}
+		}
+
 
 		// Returns the playable url for the station
 		public async string get_stream_address (string ID){

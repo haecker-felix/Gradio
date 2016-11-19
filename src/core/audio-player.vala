@@ -28,8 +28,8 @@ namespace Gradio{
 		public signal void tag_changed();
 		public signal void radio_station_changed();
 
-		public signal void stopped();
-		public signal void played();
+		public signal void station_stopped();
+		public signal void station_played();
 
 		private CodecInstaller codec;
 
@@ -74,12 +74,12 @@ namespace Gradio{
 
 					stream.set_state (State.NULL);
 					connection_error(err.message);
-					stopped();
+					station_stopped();
 					break;
 				case MessageType.EOS:
 					stream.set_state (State.NULL);
 					connection_error("End of stream!");
-					stopped();
+					station_stopped();
 					break;
 				case MessageType.STATE_CHANGED:
 					Gst.State oldstate;
@@ -119,7 +119,6 @@ namespace Gradio{
 		}
 
 		public void set_radio_station(RadioStation station){
-			message("set_radio_station");
 			station.get_stream_address.begin(station.ID.to_string(), (obj, res) => {
 		        	string address = station.get_stream_address.end(res);
 
@@ -145,23 +144,20 @@ namespace Gradio{
 			Gst.Bus bus = stream.get_bus ();
 			bus.add_watch (1, bus_callback);
 
-			play();
+			Idle.add(() => {
+				play();
+				return false;
+			});
 		}
 
 		public void play () {
 			stream.set_state (State.PLAYING);
-			Idle.add(() => {
-				played();
-				return false;
-			});
+			station_played();
 		}
 
 		public void stop(){
 			stream.set_state (State.NULL);
-			Idle.add(() => {
-				stopped();
-				return false;
-			});
+			station_stopped();
 		}
 
 		public void toggle_play_stop(){
