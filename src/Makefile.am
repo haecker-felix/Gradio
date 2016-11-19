@@ -61,7 +61,6 @@ gradio_VALAFLAGS = \
 	--pkg gstreamer-1.0 \
 	--pkg json-glib-1.0 \
 	--pkg libsoup-2.4 \
-	--pkg webkit2gtk-4.0 \
 	--gresources $(gresource_file)
 
 gradio_LDADD = \
