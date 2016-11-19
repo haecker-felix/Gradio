@@ -44,9 +44,7 @@ namespace Gradio {
 
 		private void start_new_session(){
 			player = new AudioPlayer();
-
-			Settings settings = new Settings();
-
+			
 		 	library = new Library();
 			library.read_data();
 
@@ -175,7 +173,6 @@ namespace Gradio {
 
 		// Init app
 		var app = new App ();
-
 
 		// Run app
 		app.run (args);
