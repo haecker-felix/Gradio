@@ -108,11 +108,7 @@ namespace Gradio {
 			action = new GLib.SimpleAction ("quit", null);
 			action.activate.connect (() => { this.quit_application (); });
 			this.add_action (action);
-
-			action = new GLib.SimpleAction ("release_notes", null);
-			action.activate.connect (() => { this.release_notes (); });
-			this.add_action (action);
-
+			
 			action = new GLib.SimpleAction ("report_an_error", null);
 			action.activate.connect (() => { this.report_an_error (); });
 			this.add_action (action);
@@ -125,11 +121,6 @@ namespace Gradio {
 
 		public void report_an_error(){
 			Util.open_website("https://github.com/haecker-felix/gradio/issues/new");
-		}
-
-		public void release_notes(){
-			ReleaseNotesWindow rn = new ReleaseNotesWindow();
-			rn.show_all();
 		}
 
 		private void show_preferences_dialog(){
