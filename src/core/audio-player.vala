@@ -119,6 +119,7 @@ namespace Gradio{
 		}
 
 		public void set_radio_station(RadioStation station){
+			message("set_radio_station");
 			station.get_stream_address.begin(station.ID.to_string(), (obj, res) => {
 		        	string address = station.get_stream_address.end(res);
 
@@ -137,6 +138,8 @@ namespace Gradio{
 		private void connect_to_stream_address(string address){
 			stop();
 
+			message("connect to: " + address);
+
 			stream.uri = address;
 
 			Gst.Bus bus = stream.get_bus ();
@@ -146,16 +149,16 @@ namespace Gradio{
 		}
 
 		public void play () {
+			stream.set_state (State.PLAYING);
 			Idle.add(() => {
-				stream.set_state (State.PLAYING);
 				played();
 				return false;
 			});
 		}
 
 		public void stop(){
+			stream.set_state (State.NULL);
 			Idle.add(() => {
-				stream.set_state (State.NULL);
 				stopped();
 				return false;
 			});

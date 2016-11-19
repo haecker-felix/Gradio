@@ -75,6 +75,7 @@ namespace Gradio{
 
 		private void connect_signals(){
 			App.player.played.connect(() => {
+				stopped();
 				if(App.player.current_station != null && App.player.current_station.ID == ID){
 					is_playing = true;
 					played();

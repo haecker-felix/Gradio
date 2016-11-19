@@ -82,13 +82,11 @@ namespace Gradio{
 
 
 		private void show_stop_icon(){
-			message("Station %s is played", station.Title);
 			StopImage.set_visible(true);
 			PlayImage.set_visible(false);
 		}
 
 		private void show_play_icon(){
-			message("Station %s is stopped", station.Title);
 			StopImage.set_visible(false);
 			PlayImage.set_visible(true);
 		}
