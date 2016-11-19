@@ -15,7 +15,6 @@
  */
 
 using Gtk;
-using WebKit;
 
 namespace Gradio{
 
