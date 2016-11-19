@@ -14,7 +14,6 @@
     <file>ui/stations-view-button.ui</file>
     <file>ui/sidebar-tile.ui</file>
     <file>ui/mini-player.ui</file>
-    <file>ui/release-notes.ui</file>
     <file>ui/status-label.ui</file>
     <file>ui/app-menu.ui</file>
   </gresource>
