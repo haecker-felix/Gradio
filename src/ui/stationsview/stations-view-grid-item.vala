@@ -44,6 +44,10 @@ namespace Gradio{
 		[GtkChild]
 		private Box StopBox;
 		[GtkChild]
+		private Box AddBox;
+		[GtkChild]
+		private Box RemoveBox;
+		[GtkChild]
 		private Stack GridStack;
 
 		public RadioStation station;
@@ -60,20 +64,32 @@ namespace Gradio{
 
 			connect_signals();
 
+			// Set information
 			if(App.player.is_playing_station(station)){
 				StopBox.set_visible(true);
 				PlayBox.set_visible(false);
 				IsPlayingImage.set_visible(true);
+			}else{
+				StopBox.set_visible(false);
+				PlayBox.set_visible(true);
+				IsPlayingImage.set_visible(false);
 			}
+			if(App.library.contains_station(station.ID)){
+				RemoveBox.set_visible(true);
+				AddBox.set_visible(false);
+				InLibraryImage.set_visible(true);
+			}else{
+				RemoveBox.set_visible(false);
+				AddBox.set_visible(true);
+				InLibraryImage.set_visible(false);
+			}
+			LikesLabel.set_text(station.Votes.to_string());
 
 			// Load basic information
 			set_logo();
 			ChannelNameLabel.set_text(station.Title);
 			ChannelLocationLabel.set_text(station.Country + " " + station.State);
 			ChannelTagsLabel.set_text(station.Tags);
-
-			// Load advanced information
-			refresh_information();
 		}
 
 		private void connect_signals(){
@@ -88,6 +104,18 @@ namespace Gradio{
 				PlayBox.set_visible(true);
 				IsPlayingImage.set_visible(false);
 			});
+
+			station.added_to_library.connect(() => {
+				AddBox.set_visible(false);
+				RemoveBox.set_visible(true);
+				InLibraryImage.set_visible(true);
+			});
+
+			station.removed_from_library.connect(() => {
+				AddBox.set_visible(true);
+				RemoveBox.set_visible(false);
+				InLibraryImage.set_visible(false);
+			});
 		}
 
 		private void set_logo(){
@@ -101,28 +129,22 @@ namespace Gradio{
         		});
 		}
 
-		private void refresh_information(){
-			// Show likes number
-			LikesLabel.set_text(station.Votes.to_string());
-
-			// Show star if station is in library
-			if(Gradio.App.library.contains_station(station.ID)){
-				InLibraryImage.set_visible(true);
-			}
-		}
-
 		private void show_menu(bool b){
-			if(b){
-				GridStack.set_visible_child_name("actions");
+			if(GridStack != null){
+				if(b){
+					GridStack.set_visible_child_name("actions");
+				}else{
+					GridStack.set_visible_child_name("info");
+				}
 			}else{
-				GridStack.set_visible_child_name("info");
+				warning("Catched crash of Gradio.");
 			}
 		}
 
 		[GtkCallback]
 		private void LikeButton_clicked(Button b){
 			station.vote();
-			refresh_information();
+			LikesLabel.set_text(station.Votes.to_string());
 
 			show_menu(false);
 		}
@@ -134,7 +156,15 @@ namespace Gradio{
 			else
 				App.player.set_radio_station(station);
 
-			refresh_information();
+			show_menu(false);
+		}
+
+		[GtkCallback]
+		private void AddRemoveButton_clicked(Button button){
+			if(App.library.contains_station(station.ID))
+				App.library.remove_radio_station(station);
+			else
+				App.library.add_radio_station(station);
 			show_menu(false);
 		}
 
@@ -147,7 +177,6 @@ namespace Gradio{
 		private bool GradioGridItem_clicked(Gdk.EventButton b){
 			//right-click
 			if(b.button == 3){
-				refresh_information();
 				show_menu(true);
 			}else{
 

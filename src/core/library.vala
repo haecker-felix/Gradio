@@ -17,8 +17,8 @@
 namespace Gradio{
 
 	public class Library : Gtk.Box{
-		public signal void added_radio_station();
-		public signal void removed_radio_station();
+		public signal void added_radio_station(RadioStation s);
+		public signal void removed_radio_station(RadioStation s);
 
 		public HashTable<int,RadioStation> lib;
 
@@ -49,26 +49,26 @@ namespace Gradio{
 			RadioStation station = provider.parse_station_data_from_id(id);
 			lib[id] = station;
 
-			added_radio_station();
+			added_radio_station(station);
 		}
 
 		public void remove_radio_station_by_id(int id){
 			RadioStation station = provider.parse_station_data_from_id(id);
 			lib.remove(station.ID);
 
-			removed_radio_station();
+			removed_radio_station(station);
 		}
 
 		public void add_radio_station(RadioStation station){
 			lib[station.ID] = station;
 
-			added_radio_station();
+			added_radio_station(station);
 		}
 
 		public void remove_radio_station(RadioStation station){
 			lib.remove(station.ID);
 
-			removed_radio_station();
+			removed_radio_station(station);
 		}
 
 		public void write_data (){

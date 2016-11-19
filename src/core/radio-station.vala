@@ -76,12 +76,17 @@ namespace Gradio{
 		~RadioStation(){
 			App.player.station_played.disconnect( play_handler );
 			App.player.station_stopped.disconnect( stop_handler );
+			App.library.added_radio_station.disconnect( added_to_library_handler );
+			App.library.removed_radio_station.disconnect( removed_from_library_handler );
 			stdout.printf( "radiostatation finalized\n" );
 		}
 
 		private void connect_signals(){
 			App.player.station_played.connect(play_handler);
 			App.player.station_stopped.connect(stop_handler);
+
+			App.library.added_radio_station.connect(added_to_library_handler);
+			App.library.removed_radio_station.connect(removed_from_library_handler);
 		}
 
 		private void stop_handler(){
@@ -106,10 +111,33 @@ namespace Gradio{
 					stopped();
 				}
 			}else{
-				warning("Caught crash of Gradio. This should not happen too often.");
+				warning("Catched crash of Gradio.");
 			}
 		}
 
+		private void added_to_library_handler(RadioStation s){
+			if(Title != null){
+				if(s.ID == ID){
+					is_in_library = true;
+					added_to_library();
+					message("[%s] Added to library.", Title);
+				}
+			}else{
+				warning("Catched crash of Gradio.");
+			}
+		}
+
+		private void removed_from_library_handler(RadioStation s){
+			if(Title != null){
+				if(s.ID == ID){
+					is_in_library = false;
+					removed_from_library();
+					message("[%s] Removed from library.", Title);
+				}
+			}else{
+				warning("Caught crash of Gradio. This should not happen too often.");
+			}
+		}
 
 		// Returns the playable url for the station
 		public async string get_stream_address (string ID){

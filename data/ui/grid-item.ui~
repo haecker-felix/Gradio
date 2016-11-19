@@ -249,8 +249,8 @@
                                 </child>
                                 <child>
                                   <object class="GtkBox" id="PlayBox">
+                                    <property name="visible">True</property>
                                     <property name="can_focus">False</property>
-                                    <property name="no_show_all">True</property>
                                     <property name="orientation">vertical</property>
                                     <child>
                                       <object class="GtkImage">
@@ -396,8 +396,8 @@
                                 </child>
                                 <child>
                                   <object class="GtkBox" id="AddBox">
+                                    <property name="visible">True</property>
                                     <property name="can_focus">False</property>
-                                    <property name="no_show_all">True</property>
                                     <property name="orientation">vertical</property>
                                     <child>
                                       <object class="GtkImage">
