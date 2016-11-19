@@ -64,8 +64,6 @@ namespace Gradio{
 			Bitrate = bitrate;
 			Broken = broken;
 
-			message("created new station ->" + Title + "<-");
-
 			if(App.player.is_playing_station(this))
 				is_playing = true;
 
@@ -77,17 +75,14 @@ namespace Gradio{
 
 		private void connect_signals(){
 			App.player.played.connect(() => {
-				if(App.player.current_station.ID == ID){
+				if(App.player.current_station != null && App.player.current_station.ID == ID){
 					is_playing = true;
 					played();
-				}else{
-					is_playing = false;
-					stopped();
 				}
 			});
 
 			App.player.stopped.connect(() => {
-				if(App.player.current_station.ID == ID){
+				if(App.player.current_station != null && App.player.current_station.ID == ID){
 					is_playing = false;
 					stopped();
 				}

@@ -146,21 +146,25 @@ namespace Gradio{
 		}
 
 		public void play () {
-			stream.set_state (State.PLAYING);
-			played();
+			Idle.add(() => {
+				stream.set_state (State.PLAYING);
+				played();
+				return false;
+			});
 		}
 
 		public void stop(){
-			stream.set_state (State.NULL);
-			stopped();
+			Idle.add(() => {
+				stream.set_state (State.NULL);
+				stopped();
+				return false;
+			});
 		}
 
 		public void toggle_play_stop(){
 			if(stream.current_state == Gst.State.NULL){
-				stream.set_state (State.PLAYING);
 				play();
 			}else{
-				stream.set_state (State.NULL);
 				stop();
 			}
 		}

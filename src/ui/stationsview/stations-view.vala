@@ -127,7 +127,7 @@ namespace Gradio{
 			reset();
 			address = a;
 
-			provider.get_max_items(address, (obj, res) => {
+			provider.get_max_items.begin(address, (obj, res) => {
 			    	try {
 					max_results = provider.get_max_items.end(res);
 					if(max_results != 0)

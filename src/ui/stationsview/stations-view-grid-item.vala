@@ -77,17 +77,17 @@ namespace Gradio{
 		}
 
 		private void connect_signals(){
-			station.played.connect(() => {
-				StopBox.set_visible(true);
-				PlayBox.set_visible(false);
-				IsPlayingImage.set_visible(true);
-			});
+			// station.played.connect(() => {
+			// 	StopBox.set_visible(true);
+			// 	PlayBox.set_visible(false);
+			// 	IsPlayingImage.set_visible(true);
+			// });
 
-			station.stopped.connect(() => {
-				StopBox.set_visible(false);
-				PlayBox.set_visible(true);
-				IsPlayingImage.set_visible(false);
-			});
+			// station.stopped.connect(() => {
+			// 	StopBox.set_visible(false);
+			// 	PlayBox.set_visible(true);
+			// 	IsPlayingImage.set_visible(false);
+			// });
 		}
 
 		private void set_logo(){

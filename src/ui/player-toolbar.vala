@@ -71,7 +71,12 @@ namespace Gradio{
 			station.stopped.connect(show_play_icon);
 
 			App.player.tag_changed.connect (() => set_information());
-			App.player.radio_station_changed.connect(() => station_changed());
+			App.player.radio_station_changed.connect(() => {
+				Idle.add(() => {
+					station_changed();
+					return false;
+				});
+			});
 
 		}
 
@@ -93,7 +98,8 @@ namespace Gradio{
 		}
 
 		private void station_changed (){
-			station.set_from_station(App.player.current_station);
+		   	if(App.player.current_station != null && station != null)
+				station.set_from_station(App.player.current_station);
 
 			if(station.is_playing)
 				show_stop_icon();
