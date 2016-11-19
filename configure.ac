@@ -33,7 +33,6 @@ PKG_CHECK_MODULES(GRADIO, [
   json-glib-1.0
   gio-2.0
   libsoup-2.4
-  webkit2gtk-4.0
 ])
 
 AC_SUBST([GLIB_REQUIRED])
