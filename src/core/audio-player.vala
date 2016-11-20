@@ -118,7 +118,7 @@ namespace Gradio{
 		}
 
 		//TODO: ref here             \/?
-		public void set_radio_station(ref RadioStation station){
+		public void set_radio_station(RadioStation station){
 			station.get_stream_address.begin(station.ID.to_string(), (obj, res) => {
 		        	string address = station.get_stream_address.end(res);
 
