@@ -181,8 +181,6 @@ namespace Gradio{
 					results_loaded = results_loaded + results_chunk;
 					add_stations_from_list(ref result);
 
-					message("Results_loaded: %i\n", results_loaded);
-					message("max_results: %i\n", max_results);
 					if(results_loaded <= max_results && !discover_mode){
 						enable_load_more();
 					}else{

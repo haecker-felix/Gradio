@@ -49,7 +49,6 @@ namespace Gradio{
 			Gst.PbUtils.init();
 
 			codec = new CodecInstaller();
-			current_station = new RadioStation();
 
 			stream = ElementFactory.make ("playbin", "play");
 			set_volume(Settings.volume_position);
@@ -122,6 +121,9 @@ namespace Gradio{
 			station.get_stream_address.begin(station.ID.to_string(), (obj, res) => {
 		        	string address = station.get_stream_address.end(res);
 
+				if(current_station == null)
+					current_station = new RadioStation();
+
 		        	//check if new == old
 		        	if(current_station != null && current_station.ID == station.ID){
 					toggle_play_stop();
@@ -137,7 +139,7 @@ namespace Gradio{
 		private void connect_to_stream_address(string address){
 			stop();
 
-			message("connect to: " + address);
+			message("Connecting to: " + address);
 
 			stream.uri = address;
 

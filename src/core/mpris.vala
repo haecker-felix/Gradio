@@ -39,9 +39,6 @@ public class Gradio.MPRIS : GLib.Object {
 					on_name_acquired,
 					on_name_lost);
 
-		root.quit.connect(() => requested_quit());
-		root.raise.connect(() => requested_raise());
-
 		if(owner_id == 0) {
 			warning("Could not initialize MPRIS session.\n");
 		}
@@ -55,6 +52,9 @@ public class Gradio.MPRIS : GLib.Object {
 			connection.register_object("/org/mpris/MediaPlayer2", root);
 			player = new MprisPlayer(connection);
 			connection.register_object("/org/mpris/MediaPlayer2", player);
+
+			root.quit.connect(() => requested_quit());
+			root.raise.connect(() => requested_raise());
 		}
 		catch(IOError e) {
 			warning("Could not create MPRIS player: %s\n", e.message);
@@ -62,11 +62,11 @@ public class Gradio.MPRIS : GLib.Object {
 	}
 
 	private void on_name_acquired(DBusConnection connection, string name) {
-		message("name acquired\n");
+		//message("name acquired\n");
 	}
 
 	private void on_name_lost(DBusConnection connection, string name) {
-		message("name_lost\n");
+		//message("name_lost\n");
 	}
 }
 
@@ -307,17 +307,6 @@ public class Gradio.MprisPlayer : GLib.Object {
 		}
 	}
 
-	public int64 Position {
-		//not supported
-		get{
-			message("mpris position is not supported");
-			return 0;
-		}
-		set {
-			message("mpris position is not supported");
-		}
-	}
-
 	public double MinimumRate {
 		get {
 			return (double)1.0;
@@ -392,17 +381,6 @@ public class Gradio.MprisPlayer : GLib.Object {
 
 	public void Play() {
 		App.player.play ();
-	}
-
-
-	public void Seek(int64 Offset) {
-		//not supported
-		message("mpris seek is not supported");
-	}
-
-	public void SetPosition(string TrackId, int64 Position) {
-		//not supported
-		message("mpris set position is not supported");
 	}
 
 	public void OpenUri(string Uri) {

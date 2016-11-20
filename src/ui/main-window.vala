@@ -72,7 +72,7 @@ namespace Gradio{
 				MenuButton.set_visible (false);
 			else
 				MenuButton.set_visible (true);
-			message("Desktop session is: " + GLib.Environment.get_variable("DESKTOP_SESSION"));
+			message("Desktop session is %s.", GLib.Environment.get_variable("DESKTOP_SESSION"));
 
 			setup_tray_icon();
 			setup_view();
@@ -104,18 +104,19 @@ namespace Gradio{
 				gtk_settings.gtk_application_prefer_dark_theme = false;
 			}
 
-	       		player_toolbar = new PlayerToolbar();
+	        	player_toolbar = new PlayerToolbar();
 	       		player_toolbar.set_visible(false);
-	       		discover_box = new DiscoverBox();
+	      		discover_box = new DiscoverBox();
 			library_box = new LibraryBox();
 
 			DatabaseStack.add_titled(library_box, "library_box", _("Library"));
-	       		DatabaseStack.add_titled(discover_box, "discover_box", _("Discover"));
+	        		DatabaseStack.add_titled(discover_box, "discover_box", _("Discover"));
 
-			mplayer = new MiniPlayer();
-			ContentStack.add_titled(mplayer, "miniplayer", _("MiniPlayer"));
+			//TODO: miniplayer
+			//mplayer = new MiniPlayer();
+			//ContentStack.add_titled(mplayer, "miniplayer", _("MiniPlayer"));
 
-			// Load css
+			//Load css
 			Util.add_stylesheet("gradio.css");
 
 			if(!(Settings.use_grid_view)){

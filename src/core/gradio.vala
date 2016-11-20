@@ -43,9 +43,10 @@ namespace Gradio {
 		}
 
 		private void start_new_session(){
-			player = new AudioPlayer();
-
+			// ignore the vala warning!
 			Settings settings = new Settings();
+
+			player = new AudioPlayer();
 
 		 	library = new Library();
 			library.read_data();
@@ -152,7 +153,6 @@ namespace Gradio {
 
 
 		public void restore_window () {
-			message("restore?");
 			if(window != null)
 				window.present();
 		}
@@ -165,7 +165,7 @@ namespace Gradio {
 	}
 
 	int main (string[] args){
-		message("Starting Gradio version " + VERSION + "!");
+		message(">> Starting Gradio version %s <<", VERSION);
 
 		// Init gstreamer
 		Gst.init (ref args);

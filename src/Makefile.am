@@ -21,6 +21,7 @@ gradio_SOURCES = \
 	data/provider/category-item-provider.vala \
 	data/provider/image-provider.vala \
 	data/provider/radio-station-provider.vala \
+	core/station-registry.vala \
 	core/audio-player.vala \
 	core/library.vala \
 	core/mpris.vala \

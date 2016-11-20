@@ -110,8 +110,6 @@ namespace Gradio{
 			SourceFunc callback = get_radio_stations.callback;
 			List<RadioStation> output = null;
 
-			message("Requested results from %i to %i", start, end);
-
 			started();
 			ThreadFunc<void*> run = () => {
 				try{

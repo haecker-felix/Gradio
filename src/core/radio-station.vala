@@ -17,10 +17,12 @@
 namespace Gradio{
 	public class RadioStation{
 
+		public int counter_id;
+
 		public string Title = "";
 		public string Homepage = "";
 		public string Language = "";
-		public int ID = 0;
+		public int ID = -1;
 		public string Icon = "";
 		public string Country = "";
 		public string Tags = "";
@@ -31,12 +33,12 @@ namespace Gradio{
 		public bool Broken = true;
 
 		public bool is_playing = false;
-		public signal void stopped();
-		public signal void played();
+		public signal void stopped(int cid);
+		public signal void played(int cid);
 
 		public bool is_in_library = false;
-		public signal void added_to_library();
-		public signal void removed_from_library();
+		public signal void added_to_library(int cid);
+		public signal void removed_from_library(int cid);
 
 		public RadioStation(	string title = "",
 					string homepage = "",
@@ -51,34 +53,40 @@ namespace Gradio{
 					string bitrate = "",
 					bool broken = false){
 
-			Title = title;
-			Homepage = homepage;
-			Language = language;
-			ID = int.parse(id);
-			Icon = icon;
-			Country = country;
-			Tags = tags;
-			State = state;
-			Votes = votes;
-			Codec = codec;
-			Bitrate = bitrate;
-			Broken = broken;
+			if(id != ""){
+				Title = title;
+				Homepage = homepage;
+				Language = language;
+				ID = int.parse(id);
+				Icon = icon;
+				Country = country;
+				Tags = tags;
+				State = state;
+				Votes = votes;
+				Codec = codec;
+				Bitrate = bitrate;
+				Broken = broken;
 
-			if(App.player.is_playing_station(this))
-				is_playing = true;
+				if(App.player.is_playing_station(this))
+					is_playing = true;
 
-			if(Broken)
-				Title = "[BROKEN] " + Title;
+				if(Broken)
+					Title = "[BROKEN] " + Title;
 
-			connect_signals();
+				connect_signals();
+
+				counter_id = Gradio.StationRegistry.register_station(this);
+			}else{
+				message("I'm a dummy station. I'm not registered!");
+			}
 		}
 
 		~RadioStation(){
+			Gradio.StationRegistry.unregister_station(this);
 			App.player.station_played.disconnect( play_handler );
 			App.player.station_stopped.disconnect( stop_handler );
 			App.library.added_radio_station.disconnect( added_to_library_handler );
 			App.library.removed_radio_station.disconnect( removed_from_library_handler );
-			stdout.printf( "radiostatation finalized\n" );
 		}
 
 		private void connect_signals(){
@@ -93,10 +101,10 @@ namespace Gradio{
 			if(Title != null){
 				if(App.player.current_station.ID == ID){
 					is_playing = false;
-					stopped();
+					stopped(counter_id);
 				}
 			}else{
-				warning("Caught crash of Gradio. This should not happen too often.");
+				warning("Catched crash of Gradio.");
 			}
 
 		}
@@ -105,10 +113,10 @@ namespace Gradio{
 			if(Title != null){
 				if(App.player.current_station.ID == ID){
 					is_playing = true;
-					played();
+					played(counter_id);
 				}else{
 					is_playing = false;
-					stopped();
+					stopped(counter_id);
 				}
 			}else{
 				warning("Catched crash of Gradio.");
@@ -119,8 +127,7 @@ namespace Gradio{
 			if(Title != null){
 				if(s.ID == ID){
 					is_in_library = true;
-					added_to_library();
-					message("[%s] Added to library.", Title);
+					added_to_library(counter_id);
 				}
 			}else{
 				warning("Catched crash of Gradio.");
@@ -131,11 +138,10 @@ namespace Gradio{
 			if(Title != null){
 				if(s.ID == ID){
 					is_in_library = false;
-					removed_from_library();
-					message("[%s] Removed from library.", Title);
+					removed_from_library(counter_id);
 				}
 			}else{
-				warning("Caught crash of Gradio. This should not happen too often.");
+				warning("Catched crash of Gradio.");
 			}
 		}
 
@@ -201,24 +207,33 @@ namespace Gradio{
 
 		//copy data from a other station
 		public void set_from_station(RadioStation s){
-			Title = s.Title;
-			Homepage = s.Homepage;
-			Language = s.Language;
-			ID = s.ID;
-			Icon = s.Icon;
-			Country = s.Country;
-			Tags = s.Tags;
-			State = s.State;
-			Votes = s.Votes;
-			Codec = s.Codec;
-			Bitrate = s.Bitrate;
-			Broken = s.Broken;
+			if(s.ID != -1){
+				Title = s.Title;
+				Homepage = s.Homepage;
+				Language = s.Language;
+				ID = s.ID;
+				Icon = s.Icon;
+				Country = s.Country;
+				Tags = s.Tags;
+				State = s.State;
+				Votes = s.Votes;
+				Codec = s.Codec;
+				Bitrate = s.Bitrate;
+				Broken = s.Broken;
 
-			if(App.player.is_playing_station(this))
-				is_playing = true;
+				if(App.player.is_playing_station(this))
+					is_playing = true;
 
-			if(Broken)
-				Title = "[BROKEN] " + Title;
+				if(Broken)
+					Title = "[BROKEN] " + Title;
+
+				counter_id = Gradio.StationRegistry.register_station(this);
+
+			}else{
+				warning("Copying data from a dummy station is not allowed.");
+			}
+
+
 		}
 	}
 }

@@ -80,7 +80,6 @@ namespace Gradio{
 
 				if(!file.query_exists ()){
 					if(!dir.query_exists ()){
-						message("Creating gradio data folder...");
 						dir.make_directory_with_parents ();
 					}
 					file.create (FileCreateFlags.NONE);
@@ -127,13 +126,13 @@ namespace Gradio{
 
 					}
 				}else{
-					message("No gradio library found. ");
+					message("No Gradio library found. ");
 				}
 			}catch(Error e){
 				error(e.message);
 			}
 
-			message("Successfully imported library");
+			message("Successfully imported library data");
 
 		}
 
