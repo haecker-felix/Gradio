@@ -204,36 +204,5 @@ namespace Gradio{
 
 			return false;
 		}
-
-		//copy data from a other station
-		public void set_from_station(RadioStation s){
-			if(s.ID != -1){
-				Title = s.Title;
-				Homepage = s.Homepage;
-				Language = s.Language;
-				ID = s.ID;
-				Icon = s.Icon;
-				Country = s.Country;
-				Tags = s.Tags;
-				State = s.State;
-				Votes = s.Votes;
-				Codec = s.Codec;
-				Bitrate = s.Bitrate;
-				Broken = s.Broken;
-
-				if(App.player.is_playing_station(this))
-					is_playing = true;
-
-				if(Broken)
-					Title = "[BROKEN] " + Title;
-
-				counter_id = Gradio.StationRegistry.register_station(this);
-
-			}else{
-				warning("Copying data from a dummy station is not allowed.");
-			}
-
-
-		}
 	}
 }

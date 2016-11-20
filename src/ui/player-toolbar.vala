@@ -52,7 +52,7 @@ namespace Gradio{
 
 		private StatusLabel sl;
 
-		RadioStation station;
+		RadioStation station = null;
 
 		public PlayerToolbar(){
 			this.pack_start(MediaControlBox);
@@ -65,10 +65,6 @@ namespace Gradio{
 			this.show_all();
 
 			VolumeButton.set_value(Settings.volume_position);
-
-			station = new RadioStation();
-			station.played.connect(show_stop_icon);
-			station.stopped.connect(show_play_icon);
 
 			App.player.tag_changed.connect (() => set_information());
 			App.player.radio_station_changed.connect(() => {
@@ -96,8 +92,18 @@ namespace Gradio{
 		}
 
 		private void station_changed (){
-		   	if(App.player.current_station != null && station != null)
-				station.set_from_station(App.player.current_station);
+			//disconnect old signals
+			if(station != null){
+				station.played.disconnect(show_stop_icon);
+				station.stopped.disconnect(show_play_icon);
+			}
+
+		   	if(App.player.current_station != null)
+				station = App.player.current_station;
+
+			//connect new signals
+			station.played.connect(show_stop_icon);
+			station.stopped.connect(show_play_icon);
 
 			if(station.is_playing)
 				show_stop_icon();

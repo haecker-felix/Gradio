@@ -117,19 +117,17 @@ namespace Gradio{
 			return true;
 		}
 
-		public void set_radio_station(RadioStation station){
+		//TODO: ref here             \/?
+		public void set_radio_station(ref RadioStation station){
 			station.get_stream_address.begin(station.ID.to_string(), (obj, res) => {
 		        	string address = station.get_stream_address.end(res);
-
-				if(current_station == null)
-					current_station = new RadioStation();
 
 		        	//check if new == old
 		        	if(current_station != null && current_station.ID == station.ID){
 					toggle_play_stop();
 		        	}else{
+		        		current_station = station;
 		        		Settings.previous_station = station.ID;
-					current_station.set_from_station(station);
 					connect_to_stream_address(address);
 					radio_station_changed();
 		        	}
