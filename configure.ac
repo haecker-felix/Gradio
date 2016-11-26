@@ -56,7 +56,6 @@ Makefile
 po/Makefile.in
 data/Makefile
 data/icons/Makefile
-data/icons/hicolor/Makefile
 src/Makefile
 ])
 AC_OUTPUT
