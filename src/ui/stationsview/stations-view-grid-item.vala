@@ -21,8 +21,6 @@ namespace Gradio{
 	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/grid-item.ui")]
 	public class GridItem : Gtk.FlowBoxChild{
 
-		//public signal void clicked
-
 		[GtkChild]
 		private Label ChannelNameLabel;
 		[GtkChild]
@@ -137,7 +135,7 @@ namespace Gradio{
 					GridStack.set_visible_child_name("info");
 				}
 			}else{
-				warning("Catched crash of Gradio.");
+				warning("Caught crash of Gradio.");
 			}
 		}
 
@@ -151,7 +149,7 @@ namespace Gradio{
 
 		[GtkCallback]
         	private void PlayStopButton_clicked (Button button) {
-        		if(App.player.current_station.ID == station.ID)
+        		if(App.player.current_station != null && App.player.current_station.ID == station.ID)
 				App.player.toggle_play_stop();
 			else
 				App.player.set_radio_station(station);

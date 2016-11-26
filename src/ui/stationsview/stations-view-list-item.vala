@@ -19,7 +19,7 @@ using Gtk;
 namespace Gradio{
 
 	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/list-item.ui")]
-	public class ListItem : Gtk.ListBoxRow{
+	public class ListItem : Gtk.Box{
 
 		[GtkChild]
 		private Label ChannelNameLabel;
@@ -31,33 +31,92 @@ namespace Gradio{
 		private Label LikesLabel;
 		[GtkChild]
 		private Image ChannelLogoImage;
+
 		[GtkChild]
 		private Image InLibraryImage;
 		[GtkChild]
-		private Image NotInLibraryImage;
+		private Image IsPlayingImage;
+
+		[GtkChild]
+		private Box PlayBox;
+		[GtkChild]
+		private Box StopBox;
+		[GtkChild]
+		private Box AddBox;
+		[GtkChild]
+		private Box RemoveBox;
+		[GtkChild]
+		private Stack ListStack;
 
 		public RadioStation station;
 
 		public ListItem(RadioStation s){
 			station = s;
 
-			load_information();
-		}
+			ChannelNameLabel.set_ellipsize(Pango.EllipsizeMode.END);
+			ChannelNameLabel.set_max_width_chars(25);
+			ChannelLocationLabel.set_ellipsize(Pango.EllipsizeMode.END);
+			ChannelLocationLabel.set_max_width_chars(25);
+			ChannelTagsLabel.set_ellipsize(Pango.EllipsizeMode.END);
+			ChannelTagsLabel.set_max_width_chars(25);
 
-		private void load_information(){
+			connect_signals();
+
+			// Set information
+			if(App.player.is_playing_station(station)){
+				StopBox.set_visible(true);
+				PlayBox.set_visible(false);
+				IsPlayingImage.set_visible(true);
+			}else{
+				StopBox.set_visible(false);
+				PlayBox.set_visible(true);
+				IsPlayingImage.set_visible(false);
+			}
+			if(App.library.contains_station(station.ID)){
+				RemoveBox.set_visible(true);
+				AddBox.set_visible(false);
+				InLibraryImage.set_visible(true);
+			}else{
+				RemoveBox.set_visible(false);
+				AddBox.set_visible(true);
+				InLibraryImage.set_visible(false);
+			}
+			LikesLabel.set_text(station.Votes.to_string());
+
+			// Load basic information
+			set_logo();
 			ChannelNameLabel.set_text(station.Title);
 			ChannelLocationLabel.set_text(station.Country + " " + station.State);
 			ChannelTagsLabel.set_text(station.Tags);
-			LikesLabel.set_text(station.Votes.to_string());
+		}
 
-			if(Gradio.App.library.contains_station(station.ID)){
-				NotInLibraryImage.set_visible(false);
+		private void connect_signals(){
+			station.played.connect(() => {
+				StopBox.set_visible(true);
+				PlayBox.set_visible(false);
+				IsPlayingImage.set_visible(true);
+			});
+
+			station.stopped.connect(() => {
+				StopBox.set_visible(false);
+				PlayBox.set_visible(true);
+				IsPlayingImage.set_visible(false);
+			});
+
+			station.added_to_library.connect(() => {
+				AddBox.set_visible(false);
+				RemoveBox.set_visible(true);
 				InLibraryImage.set_visible(true);
-			}else{
-				NotInLibraryImage.set_visible(true);
-				InLibraryImage.set_visible(false);
-			}
+			});
 
+			station.removed_from_library.connect(() => {
+				AddBox.set_visible(true);
+				RemoveBox.set_visible(false);
+				InLibraryImage.set_visible(false);
+			});
+		}
+
+		private void set_logo(){
 			Gdk.Pixbuf icon = null;
 			Gradio.App.imgprovider.get_station_logo.begin(station, 32, (obj, res) => {
 		        	icon = Gradio.App.imgprovider.get_station_logo.end(res);
@@ -68,6 +127,65 @@ namespace Gradio{
         		});
 		}
 
+		private void show_menu(bool b){
+			if(ListStack != null){
+				if(b){
+					ListStack.set_visible_child_name("actions");
+				}else{
+					ListStack.set_visible_child_name("info");
+				}
+			}else{
+				warning("Caught crash of Gradio.");
+			}
+		}
+
+		[GtkCallback]
+		private void LikeButton_clicked(Button b){
+			station.vote();
+			LikesLabel.set_text(station.Votes.to_string());
+
+			show_menu(false);
+		}
+
+		[GtkCallback]
+        	private void PlayStopButton_clicked (Button button) {
+			if(App.player.current_station != null && App.player.current_station.ID == station.ID)
+				App.player.toggle_play_stop();
+			else
+				App.player.set_radio_station(station);
+
+			show_menu(false);
+		}
+
+		[GtkCallback]
+		private void AddRemoveButton_clicked(Button button){
+			if(App.library.contains_station(station.ID))
+				App.library.remove_radio_station(station);
+			else
+				App.library.add_radio_station(station);
+			show_menu(false);
+		}
+
+		[GtkCallback]
+		private void BackButton_clicked(Button b){
+			show_menu(false);
+		}
+
+		[GtkCallback]
+		private bool GradioListItem_clicked(Gdk.EventButton b){
+			//right-click
+			if(b.button == 3){
+				show_menu(true);
+			}else{
+
+				App.player.set_radio_station(station);
+			}
+
+
+			return false;
+		}
 	}
+
 }
+
 
