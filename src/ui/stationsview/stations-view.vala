@@ -80,7 +80,7 @@ namespace Gradio{
 				show_grid_view();
 				GridViewFlowBox.set_max_children_per_line(1);
 				GridViewFlowBox.set_max_children_per_line(1);
-				results_chunk = 10;
+				results_chunk = 20;
 				disable_load_more();
 			}
 
