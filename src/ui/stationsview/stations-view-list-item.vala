@@ -52,14 +52,6 @@ namespace Gradio{
 
 		public ListItem(RadioStation s){
 			station = s;
-
-			ChannelNameLabel.set_ellipsize(Pango.EllipsizeMode.END);
-			ChannelNameLabel.set_max_width_chars(25);
-			ChannelLocationLabel.set_ellipsize(Pango.EllipsizeMode.END);
-			ChannelLocationLabel.set_max_width_chars(25);
-			ChannelTagsLabel.set_ellipsize(Pango.EllipsizeMode.END);
-			ChannelTagsLabel.set_max_width_chars(25);
-
 			connect_signals();
 
 			// Set information
