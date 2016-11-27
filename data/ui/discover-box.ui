@@ -161,6 +161,9 @@
               </packing>
             </child>
           </object>
+          <packing>
+            <property name="index">-1</property>
+          </packing>
         </child>
         <child type="overlay">
           <object class="GtkBox" id="SidebarBox">

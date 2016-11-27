@@ -90,7 +90,7 @@ namespace Gradio{
 			// Navigation
 			SidebarTile home = new SidebarTile ("Home", "go-home-symbolic");
 			ActionBox.pack_end(home);
-			home.clicked.connect(() => {dbox.show_home();});
+			home.clicked.connect(() => {dbox.show_overview_page();});
 
 			SidebarTile reload = new SidebarTile ("Reload", "view-refresh-symbolic");
 			ActionBox.pack_end(reload);

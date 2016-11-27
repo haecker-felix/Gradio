@@ -35,7 +35,6 @@ namespace Gradio{
 		private Box SearchBox;
 		[GtkChild]
 		private Stack ContentStack;
-
 		[GtkChild]
 		private Box most_votes;
 		[GtkChild]
@@ -46,6 +45,9 @@ namespace Gradio{
 		private Box SidebarBox;
 
 		private DiscoverSidebar sidebar;
+
+		public signal void overview_showed();
+		public signal void overview_hided();
 
 		public DiscoverBox(){
 			stations_view_results = new StationsView("Results", "system-search-symbolic");
@@ -72,6 +74,7 @@ namespace Gradio{
 
 			connect_signals();
 			load_data();
+
 			show_overview_page();
 		}
 
@@ -81,17 +84,15 @@ namespace Gradio{
 			button_most_votes.clicked.connect(() => show_most_votes());
 		}
 
-		public void show_select_item(){
-			ContentStack.set_visible_child_name("select-item");
-		}
-
 		public void show_results(){
 			ContentStack.set_visible_child_name("results");
+			overview_hided();
 		}
 
 		public void show_overview_page(){
 			ContentStack.set_visible_child_name("overview");
 			sidebar.show_categories();
+			overview_showed();
 		}
 
 		private void load_data(){
@@ -127,12 +128,6 @@ namespace Gradio{
 
 		}
 
-		public void show_home(){
-			sidebar.show_categories();
-
-			show_overview_page();
-		}
-
 		public void reload(){
 			load_data();
 		}
@@ -144,15 +139,10 @@ namespace Gradio{
 		// Switch
 		public void show_grid_view(){
 			stations_view_results.show_grid_view();
-			grid_view_recently_clicked.show_grid_view();
-			grid_view_recently_changed.show_grid_view();
-			grid_view_most_votes.show_grid_view();
 		}
+
 		public void show_list_view(){
 			stations_view_results.show_list_view();
-			grid_view_recently_clicked.show_list_view();
-			grid_view_recently_changed.show_list_view();
-			grid_view_most_votes.show_list_view();
 		}
 	}
 }

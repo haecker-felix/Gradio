@@ -43,6 +43,8 @@ namespace Gradio{
 		private ToggleButton MiniPlayerButton;
 		[GtkChild]
 		private Button GridListButton;
+		[GtkChild]
+		private Box SearchBox;
 
 		private MiniPlayer mplayer;
 
@@ -113,7 +115,7 @@ namespace Gradio{
 	        		DatabaseStack.add_titled(discover_box, "discover_box", _("Discover"));
 
 			//TODO: miniplayer
-			//mplayer = new MiniPlayer();
+			mplayer = new MiniPlayer();
 			//ContentStack.add_titled(mplayer, "miniplayer", _("MiniPlayer"));
 
 			//Load css
@@ -140,6 +142,20 @@ namespace Gradio{
 			this.size_allocate.connect((a) => {
 				width = a.width;
 				height = a.height;
+			});
+
+			discover_box.overview_hided.connect(() => GridListButton.set_visible(true));
+			discover_box.overview_showed.connect(() => GridListButton.set_visible(false));
+
+			DatabaseStack.notify.connect(() => {
+				if(DatabaseStack.get_visible_child_name() == "library_box"){
+					GridListButton.set_visible(true);
+					SearchBox.set_visible(false);
+				}else{
+					discover_box.show_overview_page();
+					GridListButton.set_visible(false);
+					SearchBox.set_visible(true);
+				}
 			});
 
 		}
@@ -204,6 +220,7 @@ namespace Gradio{
 		private void SearchButton_clicked(Gtk.Button button){
 			if(!(SearchEntry.get_text() == "")){
 				discover_box.SearchButton_clicked(SearchEntry.get_text());
+				SearchEntry.set_text("");
 				DatabaseStack.set_visible_child_name("discover_box");
 			}
 		}
@@ -212,6 +229,7 @@ namespace Gradio{
 		private void SearchEntry_activate(Gtk.Entry entry){
 			if(!(SearchEntry.get_text() == "")){
 				discover_box.SearchButton_clicked(SearchEntry.get_text());
+				SearchEntry.set_text("");
 				DatabaseStack.set_visible_child_name("discover_box");
 			}
 		}
