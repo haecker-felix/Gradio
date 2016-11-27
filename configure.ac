@@ -1,5 +1,5 @@
 AC_PREREQ([2.63])
-AC_INIT([Gradio], [5.0.0b2], [https://github.com/haecker-felix/gradio/issues],
+AC_INIT([Gradio], [4.9.9], [https://github.com/haecker-felix/gradio/issues],
         [gradio], [https://github.com/haecker-felix/gradio/])
 AC_CONFIG_MACRO_DIR([m4])
 
