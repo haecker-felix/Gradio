@@ -22,7 +22,7 @@
 
     <key name="enable-mpris" type="b">
       <default>true</default>
-      <summary>Close window to tray</summary>
+      <summary>MPRIS support</summary>
     </key>
 
     <key name="enable-background-playback" type="b">

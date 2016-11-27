@@ -131,9 +131,9 @@
                             <child>
                               <object class="GtkCheckButton" id="EnableMPRIS">
                                 <property name="label" translatable="yes">Enable MPRIS</property>
+                                <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
-                                <property name="no_show_all">True</property>
                                 <property name="valign">start</property>
                                 <property name="draw_indicator">True</property>
                               </object>

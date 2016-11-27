@@ -53,8 +53,11 @@ namespace Gradio {
 
 			create_app_menu();
 
-			mpris = new MPRIS();
-			mpris.initialize();
+			if(Settings.enable_mpris == true){
+				mpris = new MPRIS();
+				mpris.initialize();
+			}
+
 
 			imgprovider = new ImageProvider();
 
