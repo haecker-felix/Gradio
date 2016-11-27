@@ -82,13 +82,14 @@ namespace Gradio {
 
 			window.delete_event.connect (() => {
 				window.save_geometry ();
-				if (Settings.enable_background_playback && player.is_playing()) {
-					window.hide_on_delete ();
-					if(Settings.enable_close_to_tray){
-						window.show_tray_icon();
-					}
+
+				window.hide_on_delete ();
+				if(Settings.enable_close_to_tray){
+					window.show_tray_icon();
+
 				    	return true;
-				} else return false;
+				} else
+					return false;
 		    	});
 
 		    	window.tray_activate.connect(() => {

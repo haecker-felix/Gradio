@@ -41,13 +41,13 @@
                         <property name="can_focus">False</property>
                         <property name="left_padding">12</property>
                         <child>
-                          <object class="GtkBox" id="Resume playback on startup">
+                          <object class="GtkBox">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="orientation">vertical</property>
                             <child>
-                              <object class="GtkCheckButton" id="EnableNotifications">
-                                <property name="label" translatable="yes">Show Notifications</property>
+                              <object class="GtkCheckButton" id="EnableMinimizeToTray">
+                                <property name="label" translatable="yes">Minimize to tray icon</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
@@ -61,23 +61,8 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkCheckButton" id="EnableMPRIS">
-                                <property name="label" translatable="yes">Enable MPRIS</property>
-                                <property name="can_focus">True</property>
-                                <property name="receives_default">False</property>
-                                <property name="no_show_all">True</property>
-                                <property name="valign">start</property>
-                                <property name="draw_indicator">True</property>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="position">1</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkCheckButton" id="ResumePlaybackOnStartup">
-                                <property name="label" translatable="yes">Resume playback on startup</property>
+                              <object class="GtkCheckButton" id="UseDarkDesign">
+                                <property name="label" translatable="yes">Use dark design</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
@@ -87,7 +72,7 @@
                               <packing>
                                 <property name="expand">False</property>
                                 <property name="fill">True</property>
-                                <property name="position">2</property>
+                                <property name="position">1</property>
                               </packing>
                             </child>
                           </object>
@@ -98,7 +83,7 @@
                       <object class="GtkLabel">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="label" translatable="yes">Features</property>
+                        <property name="label" translatable="yes">Window preferences</property>
                         <attributes>
                           <attribute name="weight" value="bold"/>
                         </attributes>
@@ -129,8 +114,8 @@
                             <property name="can_focus">False</property>
                             <property name="orientation">vertical</property>
                             <child>
-                              <object class="GtkCheckButton" id="UseDarkDesign">
-                                <property name="label" translatable="yes">Use dark design</property>
+                              <object class="GtkCheckButton" id="EnableNotifications">
+                                <property name="label" translatable="yes">Enable Notifications</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
@@ -143,6 +128,21 @@
                                 <property name="position">0</property>
                               </packing>
                             </child>
+                            <child>
+                              <object class="GtkCheckButton" id="EnableMPRIS">
+                                <property name="label" translatable="yes">Enable MPRIS</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">False</property>
+                                <property name="no_show_all">True</property>
+                                <property name="valign">start</property>
+                                <property name="draw_indicator">True</property>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
                           </object>
                         </child>
                       </object>
@@ -151,7 +151,7 @@
                       <object class="GtkLabel">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="label" translatable="yes">Appearance</property>
+                        <property name="label" translatable="yes">Features</property>
                         <attributes>
                           <attribute name="weight" value="bold"/>
                         </attributes>
@@ -182,8 +182,8 @@
                             <property name="can_focus">False</property>
                             <property name="orientation">vertical</property>
                             <child>
-                              <object class="GtkCheckButton" id="EnableBackgroundPlayback">
-                                <property name="label" translatable="yes">Enable background playback</property>
+                              <object class="GtkCheckButton" id="ResumePlaybackOnStartup">
+                                <property name="label" translatable="yes">Resume playback on startup</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
@@ -197,8 +197,8 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkCheckButton" id="EnableMinimizeToTray">
-                                <property name="label" translatable="yes">Minimize to tray icon</property>
+                              <object class="GtkCheckButton" id="EnableBackgroundPlayback">
+                                <property name="label" translatable="yes">Enable background playback</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
@@ -219,7 +219,7 @@
                       <object class="GtkLabel">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="label" translatable="yes">Continue playback in background</property>
+                        <property name="label" translatable="yes">Playback preferences</property>
                         <attributes>
                           <attribute name="weight" value="bold"/>
                         </attributes>
