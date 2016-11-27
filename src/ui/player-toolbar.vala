@@ -47,8 +47,6 @@ namespace Gradio{
 		private Image RemoveImage;
 		[GtkChild]
 		private Label LikesLabel;
-		[GtkChild]
-		private VolumeButton VolumeButton;
 
 		private StatusLabel sl;
 
@@ -64,7 +62,7 @@ namespace Gradio{
 			StatusBox.pack_start(sl);
 			this.show_all();
 
-			VolumeButton.set_value(Settings.volume_position);
+
 
 			App.player.tag_changed.connect (() => set_information());
 			App.player.radio_station_changed.connect(() => {
@@ -133,12 +131,6 @@ namespace Gradio{
 		[GtkCallback]
         	private void PlayStopButton_clicked (Button button) {
 			App.player.toggle_play_stop();
-		}
-
-		[GtkCallback]
-        	private void VolumeButton_value_changed (double value) {
-			App.player.set_volume(value);
-			Settings.volume_position = value;
 		}
 
 		[GtkCallback]

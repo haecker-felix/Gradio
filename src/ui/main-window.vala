@@ -45,6 +45,8 @@ namespace Gradio{
 		private Button GridListButton;
 		[GtkChild]
 		private Box SearchBox;
+		[GtkChild]
+		private VolumeButton VolumeButton;
 
 		private MiniPlayer mplayer;
 
@@ -99,6 +101,9 @@ namespace Gradio{
 		}
 
 		private void setup_view(){
+			VolumeButton.set_relief(ReliefStyle.NORMAL);
+			VolumeButton.set_value(Settings.volume_position);
+
 			var gtk_settings = Gtk.Settings.get_default ();
 			if (Settings.enable_dark_design) {
 				gtk_settings.gtk_application_prefer_dark_theme = true;
@@ -232,6 +237,12 @@ namespace Gradio{
 				SearchEntry.set_text("");
 				DatabaseStack.set_visible_child_name("discover_box");
 			}
+		}
+
+		[GtkCallback]
+        	private void VolumeButton_value_changed (double value) {
+			App.player.set_volume(value);
+			Settings.volume_position = value;
 		}
 
 		[GtkCallback]
