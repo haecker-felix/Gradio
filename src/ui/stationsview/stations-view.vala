@@ -77,6 +77,8 @@ namespace Gradio{
 
 			GridViewBox.add(LoadMoreBox);
 
+			StationsStack.set_visible_child_name("empty-box");
+
 			if(discover_mode){
 				show_grid_view();
 				GridViewFlowBox.set_max_children_per_line(1);
@@ -198,14 +200,12 @@ namespace Gradio{
 		}
 
 		public void show_list_view(){
-			if(!discover_mode){
-				if(!no_stations)
+			if(!no_stations)
 				StationsStack.set_visible_child_name("list-view");
 
-				LoadMoreBox.reparent(ListViewBox);
+			LoadMoreBox.reparent(ListViewBox);
+			list_view = true;
 
-				list_view = true;
-			}
 		}
 
 		public void show_grid_view(){
@@ -226,6 +226,7 @@ namespace Gradio{
 		}
 
 		private void reset_view(){
+			StationsStack.set_visible_child_name("empty-box");
 			Util.remove_all_items_from_flow_box((Gtk.FlowBox) GridViewFlowBox);
 			Util.remove_all_items_from_list_box((Gtk.ListBox) ListViewListBox);
 		}
