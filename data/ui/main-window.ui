@@ -75,13 +75,13 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="orientation">vertical</property>
+                <property name="spacing">12</property>
                 <child>
                   <object class="GtkImage">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="margin_bottom">5</property>
-                    <property name="pixel_size">64</property>
-                    <property name="icon_name">action-unavailable-symbolic</property>
+                    <property name="pixel_size">128</property>
+                    <property name="icon_name">network-cellular-offline-symbolic</property>
                     <property name="icon_size">6</property>
                   </object>
                   <packing>
@@ -94,12 +94,34 @@
                   <object class="GtkLabel">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">Cannot connect to the database.</property>
+                    <property name="label" translatable="yes">Connection Error</property>
+                    <attributes>
+                      <attribute name="weight" value="bold"/>
+                      <attribute name="scale" value="2"/>
+                    </attributes>
+                    <style>
+                      <class name="dim-label"/>
+                    </style>
                   </object>
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">True</property>
                     <property name="position">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Cannot connect to the Database.</property>
+                    <style>
+                      <class name="dim-label"/>
+                    </style>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">2</property>
                   </packing>
                 </child>
               </object>
@@ -167,6 +189,7 @@ audio-volume-medium-symbolic</property>
           </object>
           <packing>
             <property name="pack_type">end</property>
+            <property name="position">1</property>
           </packing>
         </child>
         <child>

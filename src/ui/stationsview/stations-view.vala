@@ -26,6 +26,7 @@ namespace Gradio{
 		public signal void clicked(RadioStation s);
 
 		private bool discover_mode = false;
+		private bool library_mode = false;
 		private bool no_stations = true;
 		private bool list_view = false;
 
@@ -130,10 +131,7 @@ namespace Gradio{
 			provider.get_max_items.begin(address, (obj, res) => {
 			    	try {
 					max_results = provider.get_max_items.end(res);
-					if(max_results != 0)
-						load_items_from_address();
-					else
-						StationsStack.set_visible_child_name("no-results");
+					load_items_from_address();
 			    	} catch (ThreadError e) {
 					string msg = e.message;
 					stderr.printf("Error: Thread:" + msg+ "\n");
@@ -151,6 +149,7 @@ namespace Gradio{
 		}
 
 		public void set_stations_from_hash_table(HashTable<int,RadioStation> s){
+			library_mode = true;
 			reset();
 
 			List<RadioStation> stations = new List<RadioStation>();
@@ -159,18 +158,19 @@ namespace Gradio{
 			});
 
 			disable_load_more();
-
 			add_to_view(stations.copy());
 		}
 
 		public void add_stations_from_hash_table(HashTable<int,RadioStation> s){
+			library_mode = true;
+
 			List<RadioStation> stations = new List<RadioStation>();
 			s.foreach ((key, val) => {
 				stations.append(val);
 			});
 
-			disable_load_more();
 
+			disable_load_more();
 			add_to_view(stations.copy());
 		}
 
@@ -231,7 +231,9 @@ namespace Gradio{
 		}
 
 		public void add_to_view(List<RadioStation> new_stations){
-			if((int)new_stations.length != 0){
+			uint len = new_stations.length ();
+
+			if(len != 0){
 				no_stations = false;
 
 				new_stations.foreach ((val) => {
@@ -252,7 +254,10 @@ namespace Gradio{
 					show_grid_view();
 			}else{
 				no_stations = true;
-				StationsStack.set_visible_child_name("no-results");
+				if(library_mode)
+					StationsStack.set_visible_child_name("empty-library-box");
+				else
+					StationsStack.set_visible_child_name("no-results");
 			}
 		}
 
@@ -262,13 +267,11 @@ namespace Gradio{
 
 		private void disable_load_more(){
 			LoadMoreBox.set_visible(false);
-			Progress.set_visible(false);
 			LoadMoreButton.set_visible(false);
 		}
 
 		private void enable_load_more(){
 			LoadMoreBox.set_visible(true);
-			Progress.set_visible(true);
 			LoadMoreButton.set_visible(true);
 		}
 

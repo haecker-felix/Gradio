@@ -176,6 +176,8 @@ namespace Gradio{
 		}
 
 		public void show_no_connection_message (){
+			VolumeButton.set_visible(false);
+			SearchBox.set_visible(false);
 			MiniPlayerButton.set_visible(false);
 			StackSwitcher.set_visible(false);
 			GridListButton.set_visible(false);
