@@ -272,9 +272,14 @@ namespace Gradio{
 		public bool on_key_pressed (Gdk.EventKey event) {
 		var default_modifiers = Gtk.accelerator_get_default_mod_mask ();
 
-			if ((event.keyval == Gdk.Key.q || event.keyval == Gdk.Key.Q) &&
-			    (event.state & default_modifiers) == Gdk.ModifierType.CONTROL_MASK) {
+			if ((event.keyval == Gdk.Key.q || event.keyval == Gdk.Key.Q) && (event.state & default_modifiers) == Gdk.ModifierType.CONTROL_MASK) {
 				app.quit_application();
+
+				return true;
+			}
+
+			if ((event.keyval == Gdk.Key.space) && (event.state & default_modifiers) == Gdk.ModifierType.CONTROL_MASK) {
+				app.player.toggle_play_stop();
 
 				return true;
 			}
