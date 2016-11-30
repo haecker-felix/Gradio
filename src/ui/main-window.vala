@@ -65,8 +65,12 @@ namespace Gradio{
 		public signal void toggle_view();
 		public signal void tray_activate();
 
-		public MainWindow (App app) {
-	       		GLib.Object(application: app);
+		private App app;
+
+		public MainWindow (App appl) {
+	       		GLib.Object(application: appl);
+
+			app = appl;
 
 			var builder = new Gtk.Builder.from_resource ("/de/haecker-felix/gradio/ui/app-menu.ui");
 			var app_menu = builder.get_object ("app-menu") as GLib.MenuModel;
@@ -263,6 +267,21 @@ namespace Gradio{
 				Settings.use_grid_view = true;
 			}
 		}
+
+		[GtkCallback]
+		public bool on_key_pressed (Gdk.EventKey event) {
+		var default_modifiers = Gtk.accelerator_get_default_mod_mask ();
+
+			if ((event.keyval == Gdk.Key.q || event.keyval == Gdk.Key.Q) &&
+			    (event.state & default_modifiers) == Gdk.ModifierType.CONTROL_MASK) {
+				app.quit_application();
+
+				return true;
+			}
+
+			return false;
+		}
+
 
 	}
 }
