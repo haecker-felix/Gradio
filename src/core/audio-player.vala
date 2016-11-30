@@ -127,6 +127,19 @@ namespace Gradio{
 					toggle_play_stop();
 		        	}else{
 		        		current_station = station;
+
+		        		// reset tag data
+					tag_title = "";
+					tag_homepage = "";
+					tag_has_crc = false;
+					tag_audio_codec = "";
+					tag_nominal_bitrate = 0;
+					tag_minimum_bitrate = 0;
+					tag_maximum_bitrate = 0;
+					tag_bitrate = 0;
+					tag_channel_mode = "";
+					tag_changed();
+
 		        		Settings.previous_station = station.ID;
 					connect_to_stream_address(address);
 					radio_station_changed();
