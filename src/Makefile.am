@@ -57,6 +57,7 @@ gradio_VALAFLAGS = \
 	--enable-experimental \
 	--target-glib $(GLIB_REQUIRED) \
 	--pkg posix \
+	--pkg glib-2.0 \
 	--pkg gtk+-3.0 \
 	--pkg gstreamer-pbutils-1.0 \
 	--pkg gstreamer-1.0 \
