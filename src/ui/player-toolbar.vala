@@ -62,8 +62,6 @@ namespace Gradio{
 			StatusBox.pack_start(sl);
 			this.show_all();
 
-
-
 			App.player.tag_changed.connect (() => set_information());
 			App.player.radio_station_changed.connect(() => {
 				Idle.add(() => {
@@ -155,10 +153,11 @@ namespace Gradio{
 		}
 
 		private void set_information(){
-			ChannelCurrentTitleLabel.set_text(App.player.tag_title);
+			if(App.player.tag_title != null)
+				ChannelCurrentTitleLabel.set_text(App.player.tag_title);
 
-			if (Settings.show_notifications)
-				if(App.player.tag_title != null)
+			if (Settings.show_notifications && station != null)
+				if(station.Title != null && App.player.tag_title != null)
 					send_notification(station.Title, App.player.tag_title);
 		}
 

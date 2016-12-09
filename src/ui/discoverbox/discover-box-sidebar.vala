@@ -57,7 +57,7 @@ namespace Gradio{
 		}
 
 		private void setup_view(){
-			SidebarTile languages = new SidebarTile ("Languages", "user-invisible-symbolic");
+			SidebarTile languages = new SidebarTile ("Languages", "language-symbolic");
 			CategoriesBox.pack_start(languages);
 			if(!Settings.show_languages_c)
 				languages.set_visible(false);
@@ -69,19 +69,19 @@ namespace Gradio{
 				codecs.set_visible(false);
 			codecs.clicked.connect(() => {show_catergory_items("codecs"); });
 
-			SidebarTile countries = new SidebarTile ("Countries", "mark-location-symbolic");
+			SidebarTile countries = new SidebarTile ("Countries", "globe-symbolic");
 			CategoriesBox.pack_start(countries);
 			if(!Settings.show_countries_c)
 				countries.set_visible(false);
 			countries.clicked.connect(() => {show_catergory_items("countries"); });
 
-			SidebarTile tags = new SidebarTile ("Tags", "dialog-information-symbolic");
+			SidebarTile tags = new SidebarTile ("Tags", "tags-symbolic");
 			CategoriesBox.pack_start(tags);
 			if(!Settings.show_tags_c)
 				tags.set_visible(false);
 			tags.clicked.connect(() => {show_catergory_items("tags"); });
 
-			SidebarTile states = new SidebarTile ("States", "mark-location-symbolic");
+			SidebarTile states = new SidebarTile ("States", "map-marker-symbolic");
 			CategoriesBox.pack_start(states);
 			if(!Settings.show_states_c)
 				states.set_visible(false);

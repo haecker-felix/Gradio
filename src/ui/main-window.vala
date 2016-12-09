@@ -48,8 +48,6 @@ namespace Gradio{
 		[GtkChild]
 		private VolumeButton VolumeButton;
 
-		private MiniPlayer mplayer;
-
 		private int height;
 		private int width;
 
@@ -122,10 +120,6 @@ namespace Gradio{
 
 			DatabaseStack.add_titled(library_box, "library_box", _("Library"));
 	        		DatabaseStack.add_titled(discover_box, "discover_box", _("Discover"));
-
-			//TODO: miniplayer
-			mplayer = new MiniPlayer();
-			//ContentStack.add_titled(mplayer, "miniplayer", _("MiniPlayer"));
 
 			//Load css
 			Util.add_stylesheet("gradio.css");

@@ -19,7 +19,7 @@
 
 GETTEXT_PACKAGE = gradio
 PACKAGE = gradio
-VERSION = 5.0.0b2
+VERSION = 4.9.9
 
 SHELL = /bin/sh
 
@@ -28,14 +28,14 @@ top_srcdir = ..
 top_builddir = ..
 
 
-prefix = /home/haecker-felix/.var/app/org.gnome.Builder/cache/gnome-builder/install/gradio/host
+prefix = /home/haecker-felix/.cache/gnome-builder/install/gradio/host
 exec_prefix = ${prefix}
 datadir = ${datarootdir}
 datarootdir = ${prefix}/share
 libdir = ${exec_prefix}/lib
 localedir = ${datarootdir}/locale
 subdir = po
-install_sh = ${SHELL} /home/haecker-felix/Projects/gradio/install-sh
+install_sh = ${SHELL} /home/haecker-felix/Dokumente/Projekte/gradio/install-sh
 # Automake >= 1.8 provides $(MKDIR_P).
 # Until it can be supposed, use the safe fallback:
 mkdir_p = $(install_sh) -d

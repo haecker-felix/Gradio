@@ -138,7 +138,9 @@ namespace Gradio{
 					tag_maximum_bitrate = 0;
 					tag_bitrate = 0;
 					tag_channel_mode = "";
-					tag_changed();
+
+					if(current_station != null)
+						tag_changed();
 
 		        		Settings.previous_station = station.ID;
 					connect_to_stream_address(address);
