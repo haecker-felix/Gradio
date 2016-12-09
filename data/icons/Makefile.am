@@ -17,6 +17,10 @@ hicolor_icon_files = \
 	$(hicolor_icon128_DATA) \
 	$(hicolor_icon192_DATA) \
 	$(hicolor_iconscalable_DATA) \
+	hicolor/scalable/categories/globe-symbolic.svg \
+	hicolor/scalable/categories/language-symbolic.svg \
+	hicolor/scalable/categories/map-marker-symbolic.svg \
+	hicolor/scalable/categories/tags-symbolic.svg \
 	hicolor/de.haeckerfelix.gradio.svg
 
 gtk_update_icon_cache = gtk-update-icon-cache -f -t $(datadir)/icons/hicolor
