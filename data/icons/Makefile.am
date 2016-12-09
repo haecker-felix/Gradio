@@ -1,27 +1,20 @@
-hicolor_icon16dir = $(datadir)/icons/hicolor/16x16/apps
-hicolor_icon16_DATA = hicolor/16x16/apps/de.haeckerfelix.gradio.png
-hicolor_icon32dir = $(datadir)/icons/hicolor/32x32/apps
-hicolor_icon32_DATA = hicolor/32x32/apps/de.haeckerfelix.gradio.png
-hicolor_icon48dir = $(datadir)/icons/hicolor/48x48/apps
-hicolor_icon48_DATA = hicolor/48x48/apps/de.haeckerfelix.gradio.png
-hicolor_icon128dir = $(datadir)/icons/hicolor/128x128/apps
-hicolor_icon128_DATA = hicolor/128x128/apps/de.haeckerfelix.gradio.png
-hicolor_icon192dir = $(datadir)/icons/hicolor/192x192/apps
-hicolor_icon192_DATA = hicolor/192x192/apps/de.haeckerfelix.gradio.png
-hicolor_iconscalabledir = $(datadir)/icons/hicolor/scalable/apps
-hicolor_iconscalable_DATA = hicolor/scalable/apps/de.haeckerfelix.gradio-symbolic.svg
-hicolor_icon_files = \
-	$(hicolor_icon16_DATA) \
-	$(hicolor_icon32_DATA) \
-	$(hicolor_icon48_DATA) \
-	$(hicolor_icon128_DATA) \
-	$(hicolor_icon192_DATA) \
-	$(hicolor_iconscalable_DATA) \
+icondir = $(datadir)/icons
+
+nobase_icon_DATA = \
+	hicolor/192x192/apps/de.haeckerfelix.gradio.png \
+	hicolor/128x128/apps/de.haeckerfelix.gradio.png \
+	hicolor/64x64/apps/de.haeckerfelix.gradio.png \
+	hicolor/48x48/apps/de.haeckerfelix.gradio.png \
+	hicolor/32x32/apps/de.haeckerfelix.gradio.png \
+	hicolor/16x16/apps/de.haeckerfelix.gradio.png \
+	hicolor/symbolic/apps/de.haeckerfelix.gradio-symbolic.svg \
 	hicolor/scalable/categories/globe-symbolic.svg \
 	hicolor/scalable/categories/language-symbolic.svg \
 	hicolor/scalable/categories/map-marker-symbolic.svg \
 	hicolor/scalable/categories/tags-symbolic.svg \
-	hicolor/de.haeckerfelix.gradio.svg
+	$(NULL)
+
+EXTRA_DIST = $(nobase_icon_DATA)
 
 gtk_update_icon_cache = gtk-update-icon-cache -f -t $(datadir)/icons/hicolor
 
