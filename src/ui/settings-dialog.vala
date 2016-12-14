@@ -18,7 +18,7 @@ using Gtk;
 namespace Gradio{
 
 	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/settings-dialog.ui")]
-	public class SettingsWindow : Gtk.Window {
+	public class SettingsDialog : Gtk.Dialog {
 
 		[GtkChild]
 		private CheckButton EnableNotifications;
@@ -47,7 +47,7 @@ namespace Gradio{
 		[GtkChild]
 		private CheckButton ResumePlaybackOnStartup;
 
-		public SettingsWindow () {
+		public SettingsDialog () {
 			load_settings();
 
 			EnableNotifications.toggled.connect(() => Settings.show_notifications = EnableNotifications.get_active());

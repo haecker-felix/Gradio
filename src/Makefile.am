@@ -33,7 +33,7 @@ gradio_SOURCES = \
 	ui/main-window.vala \
 	ui/mini-player.vala \
 	ui/player-toolbar.vala \
-	ui/settings-window.vala \
+	ui/settings-dialog.vala \
 	ui/station-editor-dialog.vala \
 	ui/discoverbox/discover-box.vala \
 	ui/discoverbox/discover-box-sidebar.vala \
