@@ -1,7 +1,8 @@
 # Gradio
 ____
 
-Development is not dead! See actual WIP branch: https://github.com/haecker-felix/gradio/tree/wip_new_backend
+6.x development is here: https://github.com/haecker-felix/gradio/tree/wip_new_backend
+_VERY_ unstable. Work in Progress!
 ____
 
 
