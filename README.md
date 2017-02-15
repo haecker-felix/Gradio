@@ -15,12 +15,6 @@ A GTK3 app for finding and listening to internet radio stations.
 
 ## Install Gradio
 
-### [ALL DISTROS] Flatpak
-A Flatpak repo for Gradio is available.
-
-[More details](https://github.com/haecker-felix/gradio/wiki/How-to-install-Gradio-as-Flatpak)
-
-
 ### Ubuntu 
 A PPA is available. Gradio needs Ubuntu 16.04 or higher.
 
@@ -42,6 +36,11 @@ Gradio is available in the AUR.
 
 [More details](https://aur.archlinux.org/packages/?O=0&K=Gradio)
 
+
+### Solus
+Gradio is available in the official Solus repository. 
+
+[More details](https://git.solus-project.com/packages/gradio/)
 
 ### Other 
 For unsupported distributions you can install gradio from source:
