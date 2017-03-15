@@ -1,0 +1,1 @@
+public const string GRADIO_VERSION = "@VCS_TAG@";

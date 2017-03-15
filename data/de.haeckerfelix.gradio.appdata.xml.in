@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop">
+  <id>de.haeckerfelix.gradio.desktop</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0+</project_license>
+  <_name>Gradio</_name>
+  <_summary>Find and listen to internet radio stations</_summary>
+  <description>
+    Gradio is a application for findiing and listening to internet radio stations
+  </description>
+  <screenshots>
+    <screenshot type="default" height="563" width="748">
+      <image>https://raw.githubusercontent.com/haecker-felix/gradio/master/data/gradio01.png</image>
+    </screenshot>
+  </screenshots>
+  <url type="homepage">https://github.com/haecker-felix/gradio</url>
+  <url type="bugtracker">https://github.com/haecker-felix/gradio/issues</url>
+  <url type="help">https://github.com/haecker-felix/gradio/wiki</url>
+  <update_contact>haecker.felix1207@gmail.com</update_contact>
+  <kudos>
+    <kudo>AppMenu</kudo>
+    <kudo>HiDpiIcon</kudo>
+    <kudo>ModernToolkit</kudo>
+  </kudos>
+  <translation type="gettext">gradio</translation>
+  <_developer_name>Felix Häcker</_developer_name>
+  <content_rating type="oars-1.0">
+    <content_attribute id="violence-cartoon">none</content_attribute>
+    <content_attribute id="violence-fantasy">none</content_attribute>
+    <content_attribute id="violence-realistic">none</content_attribute>
+    <content_attribute id="violence-bloodshed">none</content_attribute>
+    <content_attribute id="violence-sexual">none</content_attribute>
+    <content_attribute id="drugs-alcohol">none</content_attribute>
+    <content_attribute id="drugs-narcotics">none</content_attribute>
+    <content_attribute id="drugs-tobacco">none</content_attribute>
+    <content_attribute id="sex-nudity">none</content_attribute>
+    <content_attribute id="sex-themes">none</content_attribute>
+    <content_attribute id="language-profanity">none</content_attribute>
+    <content_attribute id="language-humor">none</content_attribute>
+    <content_attribute id="language-discrimination">none</content_attribute>
+    <content_attribute id="social-chat">none</content_attribute>
+    <content_attribute id="social-info">none</content_attribute>
+    <content_attribute id="social-audio">none</content_attribute>
+    <content_attribute id="social-location">none</content_attribute>
+    <content_attribute id="social-contacts">none</content_attribute>
+    <content_attribute id="money-purchasing">none</content_attribute>
+    <content_attribute id="money-gambling">none</content_attribute>
+  </content_rating>
+</component>
