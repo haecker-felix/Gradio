@@ -1,10 +1,10 @@
+____
+
+Gradio 6.0 development is here: https://github.com/haecker-felix/gradio/tree/gradio_6
+Work in Progress!
+____
+
 # Gradio
-____
-
-6.x development is here: https://github.com/haecker-felix/gradio/tree/wip_new_backend
-_VERY_ unstable. Work in Progress!
-____
-
 
 A GTK3 app for finding and listening to internet radio stations.
 
