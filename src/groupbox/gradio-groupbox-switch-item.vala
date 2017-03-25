@@ -18,11 +18,35 @@ using Gtk;
 
 namespace Gradio{
 
-	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/item/small-tile-item.ui")]
-	public class SmallTile : Gtk.FlowBoxChild, Item{
+	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/item/switch-item.ui")]
+	public class SwitchItem : Gtk.ListBoxRow, GroupBoxItem{
 
-		public SmallTile(RadioStation s){
+		[GtkChild] private Label Title;
+		[GtkChild] private Label Subtitle;
+		[GtkChild] private Switch switchbutton;
 
+		public signal void toggled ();
+
+		public SwitchItem(string title, string subtitle = ""){
+			Title.set_text(title);
+			Subtitle.set_text(subtitle);
+
+			switchbutton.notify["active"].connect(() => {
+				toggled();
+			});
+		}
+
+		public new bool get_state(){
+			return switchbutton.get_state();
+		}
+
+		public new void set_state(bool b){
+			switchbutton.set_state(b);
+		}
+
+		private void clicked(){
+			switchbutton.set_state(!switchbutton.get_state());
+			toggled();
 		}
 	}
 }

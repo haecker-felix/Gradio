@@ -108,7 +108,7 @@ namespace Gradio{
 
 			Statement stmt;
 			int rc = 0;
-			int col, cols;
+			int cols;
 
 			if ((rc = db.prepare_v2 ("SELECT * FROM library;", -1, out stmt, null)) == 1) {
 				critical ("SQL error: %d, %s\n", rc, db.errmsg ());

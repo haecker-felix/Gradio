@@ -2,7 +2,8 @@
 <!-- Generated with glade 3.20.0 -->
 <interface>
   <requires lib="gtk+" version="3.18"/>
-  <template class="GradioItemGroup" parent="GtkBox">
+  <template class="GradioGroupBox" parent="GtkBox">
+    <property name="width_request">500</property>
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <child>
@@ -34,6 +35,7 @@
             <property name="label_xalign">0</property>
             <child>
               <object class="GtkListBox" id="Items">
+                <property name="height_request">40</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="selection_mode">none</property>

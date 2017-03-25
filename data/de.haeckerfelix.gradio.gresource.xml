@@ -4,6 +4,7 @@
 	<file>ui/item/small-tile-item.ui</file>
 	<file>ui/item/row-item.ui</file>
 	<file>ui/item/big-tile-item.ui</file>
+	<file>ui/item/switch-item.ui</file>
 	<file>ui/view/small-tile-view.ui</file>
 	<file>ui/view/row-view.ui</file>
 	<file>ui/view/big-tile-view.ui</file>
@@ -12,7 +13,7 @@
 	<file>ui/page/search-page.ui</file>
 	<file>ui/page/settings-page.ui</file>
 	<file>ui/page/station-detail-page.ui</file>
-	<file>ui/item-group.ui</file>
+	<file>ui/groupbox.ui</file>
 	<file>ui/app-menu.ui</file>
 	<file>ui/main-window.ui</file>
 	<file>ui/player-toolbar.ui</file>

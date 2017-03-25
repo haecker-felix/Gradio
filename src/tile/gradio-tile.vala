@@ -14,36 +14,8 @@
  * along with Gradio.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-using Gtk;
-
 namespace Gradio{
+	public interface Tile{
 
-	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/view/big-tile-view.ui")]
-	public class BigTileView : Gtk.FlowBox, View{
-
-		public StationModel model;
-
-		public BigTileView(ref StationModel m){
-			model = m;
-
-			connect_signals();
-		}
-
-		private void connect_signals(){
-			this.bind_model (this.model, (obj) => {
-     				assert (obj is RadioStation);
-
-				weak RadioStation station = (RadioStation)obj;
-				BigTile item = new BigTile(station);
-
-      				return item;
-			});
-
-			this.child_activated.connect((t,a) => {
-				BigTile btile = (BigTile)a;
-				Gradio.App.window.show_station_details(btile.station);
-			});
-
-		}
 	}
 }

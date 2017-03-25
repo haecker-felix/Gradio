@@ -37,8 +37,6 @@ namespace Gradio{
 		[GtkChild]
 		private Box Bottom;
 		[GtkChild]
-		private MenuButton MenuButton;
-		[GtkChild]
 		private VolumeButton VolumeButton;
 		[GtkChild]
 		private Button BackButton;

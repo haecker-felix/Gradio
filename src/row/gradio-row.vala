@@ -14,16 +14,8 @@
  * along with Gradio.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-using Gtk;
-
 namespace Gradio{
-
-	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/view/small-tile-view.ui")]
-	public class SmallTileView : Gtk.Box, View{
-
-		public SmallTileView(ref StationModel m){
-
-		}
+	public interface Row{
 
 	}
 }

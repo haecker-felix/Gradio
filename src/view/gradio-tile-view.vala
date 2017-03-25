@@ -18,32 +18,32 @@ using Gtk;
 
 namespace Gradio{
 
-	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/item/big-tile-item.ui")]
-	public class BigTile : Gtk.FlowBoxChild, Item{
+	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/view/big-tile-view.ui")]
+	public class TileView : Gtk.FlowBox, View{
 
-		[GtkChild]
-		private Label StationTitleLabel;
-		[GtkChild]
-		private Label StationLikesLabel;
-		[GtkChild]
-		private Image StationLogoImage;
+		public StationModel model;
 
+		public TileView(ref StationModel m){
+			model = m;
 
-		public RadioStation station;
-
-		public BigTile(RadioStation s){
-			station = s;
-
-			// Set information
-			StationTitleLabel.set_text(station.Title);
-			StationLikesLabel.set_text(station.Votes.to_string());
-			set_logo();
+			connect_signals();
 		}
 
-		private void set_logo(){
-			//TODO: insert logo loader here
-		}
+		private void connect_signals(){
+			this.bind_model (this.model, (obj) => {
+     				assert (obj is RadioStation);
 
+				weak RadioStation station = (RadioStation)obj;
+				BigTile item = new BigTile(station);
+
+      				return item;
+			});
+
+			this.child_activated.connect((t,a) => {
+				BigTile btile = (BigTile)a;
+				Gradio.App.window.show_station_details(btile.station);
+			});
+
+		}
 	}
 }
-

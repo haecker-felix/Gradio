@@ -52,7 +52,7 @@ namespace Gradio{
 
 		private StationProvider similar_station_provider;
 		private StationModel similar_station_model;
-		private BigTileView similar_btile_view;
+		private TileView similar_btile_view;
 
 		[GtkChild]
 		private Box Bottom;
@@ -75,24 +75,24 @@ namespace Gradio{
 		}
 
 		private void setup_view(){
-			ItemGroup action_group = new ItemGroup("Available actions");
-			action_group.add_row(ActionBox);
+			GroupBox action_group = new GroupBox("Available actions");
+			action_group.add_widget(ActionBox);
 			Bottom.pack_start(action_group);
 
-			ItemGroup description_group = new ItemGroup("Description");
-			description_group.add_row(StationDescriptionLabel);
+			GroupBox description_group = new GroupBox("Description");
+			description_group.add_widget(StationDescriptionLabel);
 			Bottom.pack_start(description_group);
 
-			ItemGroup tags_group = new ItemGroup("Tags");
+			GroupBox tags_group = new GroupBox("Tags");
 			tbox = new TagBox();
-			tags_group.add_row(tbox);
+			tags_group.add_widget(tbox);
 			Bottom.pack_start(tags_group);
 
-			ItemGroup similar_stations_group = new ItemGroup("Similar Stations");
+			GroupBox similar_stations_group = new GroupBox("Similar Stations");
 			similar_station_model = new StationModel();
 			similar_station_provider = new StationProvider(ref similar_station_model);
-			similar_btile_view = new BigTileView(ref similar_station_model);
-			similar_stations_group.add_row(similar_btile_view);
+			similar_btile_view = new TileView(ref similar_station_model);
+			similar_stations_group.add_widget(similar_btile_view);
 			Bottom.pack_start(similar_stations_group);
 		}
 
@@ -108,7 +108,7 @@ namespace Gradio{
 			set_data();
 		}
 
-		private void set_data(){
+		private new void set_data(){
 			// Disconnect old signals
 			if(station != null){
 				station.played.disconnect(show_stop_box);
@@ -193,9 +193,10 @@ namespace Gradio{
 			DetailsStack.set_visible_child_name("loading");
 		}
 
-		private void show_error(){
-			DetailsStack.set_visible_child_name("error");
-		}
+		//TODO: implement a timeout, and maybe show this error message
+		//private void show_error(){
+		//	DetailsStack.set_visible_child_name("error");
+		//}
 
 		private void show_details(){
 			if(StationDescriptionLabel.get_text() != "")

@@ -57,7 +57,7 @@ namespace Gradio{
 				}
 
 			}
-			return null;
+			return "";
 		}
 
 		public static void remove_all_items_from_list_box (Gtk.ListBox container) {
@@ -119,13 +119,9 @@ namespace Gradio{
 		public static void add_stylesheet () {
 			var provider = new CssProvider ();
 
-			try {
-				provider.load_from_resource ("/de/haecker-felix/gradio/de.haeckerfelix.gradio.style.css");
-				StyleContext.add_provider_for_screen (Gdk.Screen.get_default (), provider, Gtk.STYLE_PROVIDER_PRIORITY_USER);
-				message("Loaded from /de/haecker-felix/gradio/de.haeckerfelix.gradio.style.css");
-			} catch (Error e) {
-				error ("Error with stylesheet: %s", e.message);
-			}
+			provider.load_from_resource ("/de/haecker-felix/gradio/de.haeckerfelix.gradio.style.css");
+			StyleContext.add_provider_for_screen (Gdk.Screen.get_default (), provider, Gtk.STYLE_PROVIDER_PRIORITY_USER);
+			message("Loaded from /de/haecker-felix/gradio/de.haeckerfelix.gradio.style.css");
 		}
 
 		public static void send_notification(string summary, string body, Gdk.Pixbuf? icon = null){

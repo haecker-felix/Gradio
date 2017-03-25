@@ -18,8 +18,8 @@ using Gtk;
 
 namespace Gradio{
 
-	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/item-group.ui")]
-	public class ItemGroup : Gtk.Box{
+	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/groupbox.ui")]
+	public class GroupBox : Gtk.Box{
 
 		[GtkChild]
 		private Label Title;
@@ -28,10 +28,18 @@ namespace Gradio{
 		private ListBox Items;
 
 
-		public ItemGroup(string title){
+		public GroupBox(string title){
 			Title.set_text(title);
-
 			Items.set_header_func(header_func);
+
+			Label placeholder = new Label("No items available");
+			Items.set_placeholder(placeholder);
+			placeholder.set_visible(true);
+
+			Items.row_activated.connect((t,a) => {
+				GroupBoxItem row = (GroupBoxItem)a;
+				row.clicked();
+			});
 		}
 
 		private void header_func(ListBoxRow row, ListBoxRow? row_before){
@@ -49,7 +57,7 @@ namespace Gradio{
 			}
 		}
 
-		public void add_row(Gtk.Widget widget){
+		public void add_widget(Gtk.Widget widget){
 			widget.set_margin_top(6);
 			widget.set_margin_bottom(6);
 			widget.set_margin_start(6);
@@ -59,6 +67,11 @@ namespace Gradio{
 			row.set_size_request(1,40);
 			row.add(widget);
 
+			Items.add(row);
+		}
+
+		public void add_listbox_row(Gtk.ListBoxRow row){
+			row.set_size_request(1,40);
 			Items.add(row);
 		}
 

@@ -25,8 +25,8 @@ namespace Gradio{
 		private Label StationTitleLabel;
 		[GtkChild]
 		private Label StationMetadataLabel;
-		[GtkChild]
-		private Image StationLogo;
+		//[GtkChild]
+		//private Image StationLogo;
 		[GtkChild]
 		private Label StationLikesLabel;
 

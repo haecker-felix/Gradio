@@ -19,14 +19,14 @@ using Gtk;
 namespace Gradio{
 
 	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/item/row-item.ui")]
-	public class Row : Gtk.ListBoxRow, Item{
+	public class BigRow : Gtk.ListBoxRow, Row{
 
 		[GtkChild]
 		private Label StationTitleLabel;
 		[GtkChild]
 		private Label StationLikesLabel;
-		[GtkChild]
-		private Image StationLogoImage;
+		//[GtkChild]
+		//private Image StationLogoImage;
 
 		[GtkChild]
 		private Box PlayBox;
@@ -43,7 +43,7 @@ namespace Gradio{
 
 		public RadioStation station;
 
-		public Row(RadioStation s){
+		public BigRow(RadioStation s){
 			station = s;
 			tbox = new TagBox();
 			tbox.set_max(4);

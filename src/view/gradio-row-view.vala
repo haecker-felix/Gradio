@@ -49,14 +49,16 @@ namespace Gradio{
 			this.bind_model (this.model, (obj) => {
      				assert (obj is RadioStation);
 
+
+				// TODO: Use small/big row. Not only big.
 				weak RadioStation station = (RadioStation)obj;
-				Row item = new Row(station);
+				BigRow item = new BigRow(station);
 
       				return item;
 			});
 
 			this.row_activated.connect((t,a) => {
-				Row row = (Row)a;
+				BigRow row = (BigRow)a;
 				Gradio.App.window.show_station_details(row.station);
 			});
 

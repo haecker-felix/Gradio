@@ -102,7 +102,7 @@ namespace Gradio {
 
 		private void create_app_menu () {
 			var action = new GLib.SimpleAction ("preferences", null);
-			action.activate.connect (() => { this.window.show_settings (); });
+			action.activate.connect (() => { window.show_settings (); });
 			this.add_action (action);
 
 			action = new GLib.SimpleAction ("about", null);
@@ -162,7 +162,7 @@ namespace Gradio {
 	}
 
 	int main (string[] args){
-		message("Starting Gradio version %s ", GRADIO_VERSION);
+		message("Gradio %s ", GRADIO_VERSION);
 
 		// Init gstreamer
 		Gst.init (ref args);

@@ -14,8 +14,12 @@
  * along with Gradio.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Gradio{
-	public interface Item{
+using Gtk;
 
-	}
+namespace Gradio{
+
+
+
 }
+
+

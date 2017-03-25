@@ -188,11 +188,10 @@ namespace Gradio{
 			Json.Parser parser = new Json.Parser ();
 			bool vote = false;
 
+			Util.get_string_from_uri.begin(RadioBrowser.radio_station_vote + ID.to_string(), (obj, res) => {
+				string data = Util.get_string_from_uri.end(res);
 
-			try{
-				Util.get_string_from_uri.begin(RadioBrowser.radio_station_vote + ID.to_string(), (obj, res) => {
-					string data = Util.get_string_from_uri.end(res);
-
+				try{
 					parser.load_from_data (data);
 
 					var root = parser.get_root ();
@@ -206,13 +205,11 @@ namespace Gradio{
 							vote = true;
 						}
 					}
-				});
+				}catch(Error e){
+					critical("Could not vote station: " + e.message);
+				}
 
-
-			}catch(GLib.Error e){
-				warning(e.message);
-			}
-
+			});
 			return vote;
 		}
 	}
