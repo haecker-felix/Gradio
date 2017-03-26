@@ -63,9 +63,8 @@ namespace Gradio{
 			widget.set_margin_start(6);
 			widget.set_margin_end(6);
 
-			ListBoxRow row = new ListBoxRow();
+			WidgetItem row = new WidgetItem(widget);
 			row.set_size_request(1,40);
-			row.add(widget);
 
 			Items.add(row);
 		}
