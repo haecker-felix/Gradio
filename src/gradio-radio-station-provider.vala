@@ -36,9 +36,11 @@ namespace Gradio{
 		private int actual_id = 0;
 		private int id = 0;
 
+		private int maximum;
 
-		public StationProvider(ref StationModel m) {
+		public StationProvider(ref StationModel m, int max = 100) {
 			model = m;
+			maximum = max;
 		}
 
 		public void set_address(string a){
@@ -119,6 +121,8 @@ namespace Gradio{
 
 					int items = (int)radio_stations.get_length();
 					message("Items found: %i", items);
+
+					if(items > maximum) items = maximum;
 
 					for(int i = 0; i < items; i++){
 						//Check if actual thread should be cancelled

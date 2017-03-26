@@ -20,16 +20,35 @@ namespace Gradio{
 
 	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/page/discover-page.ui")]
 	public class DiscoverPage : Gtk.Box, Page{
+
+		[GtkChild]
+		private Box Home;
+
 		public DiscoverPage(){
-
+			setup_view();
 		}
 
-		public void show_grid_view(){
-			//station_view.show_grid_view();
-		}
+		private void setup_view(){
+			StationModel popular_station_model = new StationModel();
+			StationProvider popular_station_provider = new StationProvider(ref popular_station_model, 12);
+			popular_station_provider.set_address(RadioBrowser.radio_stations_most_votes);
 
-		public void show_list_view(){
-			//station_view.show_list_view();
+			GroupBox popular_stations_group = new GroupBox("Popular Stations");
+			TileView popular_btile_view = new TileView(ref popular_station_model);
+			popular_stations_group.add_widget(popular_btile_view);
+
+			Home.pack_start(popular_stations_group);
+
+
+			StationModel recently_clicked_station_model = new StationModel();
+			StationProvider recently_clicked_station_provider = new StationProvider(ref recently_clicked_station_model, 12);
+			recently_clicked_station_provider.set_address(RadioBrowser.radio_stations_recently_clicked);
+
+			GroupBox recently_clicked_stations_group = new GroupBox("Recently Clicked");
+			TileView recently_clicked_btile_view = new TileView(ref recently_clicked_station_model);
+			recently_clicked_stations_group.add_widget(recently_clicked_btile_view);
+
+			Home.pack_start(recently_clicked_stations_group);
 		}
 	}
 }

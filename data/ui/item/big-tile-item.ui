@@ -3,6 +3,7 @@
 <interface>
   <requires lib="gtk+" version="3.14"/>
   <template class="GradioBigTile" parent="GtkFlowBoxChild">
+    <property name="width_request">200</property>
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="margin_left">3</property>
@@ -34,11 +35,11 @@
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="halign">center</property>
-            <property name="label" translatable="yes">Station Title</property>
+            <property name="label" translatable="yes">Station Title fadf asdf asdf adf asdf adf </property>
             <property name="justify">fill</property>
             <property name="ellipsize">end</property>
             <property name="single_line_mode">True</property>
-            <property name="max_width_chars">90</property>
+            <property name="max_width_chars">23</property>
           </object>
           <packing>
             <property name="expand">False</property>
