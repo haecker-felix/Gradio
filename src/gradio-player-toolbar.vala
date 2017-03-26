@@ -164,6 +164,11 @@ namespace Gradio{
 			station.vote();
 			StationLikesLabel.set_text(station.Votes.to_string());
 		}
+
+		[GtkCallback]
+		private void ShowDetailsButton_clicked(Button button){
+			Gradio.App.window.show_station_details(station);
+		}
 	}
 }
 

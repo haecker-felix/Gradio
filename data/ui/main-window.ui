@@ -38,7 +38,7 @@
           <object class="GtkStack" id="MainStack">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="transition_type">slide-left</property>
+            <property name="transition_type">crossfade</property>
             <child>
               <object class="GtkBox" id="NoConnectionBox">
                 <property name="visible">True</property>
