@@ -17,7 +17,7 @@
   <img alt="demo_img" src="http://i.imgur.com/hjY07F8.png">
 </p>
 
-Note: **Everything you can see here, is WIP! Feel free to test the gradio_6 branch, but expect unfinished features and many bugs! Everything is actually WIP**
+**Everything you can see here, is WIP! Feel free to test the gradio_6 branch, but expect unfinished features and many bugs! Everything is actually WIP**
 
 I know the current development is a bit slow, but I'm a bit busy the last days...
 
