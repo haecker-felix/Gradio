@@ -1,7 +1,6 @@
 ____
-
-Gradio 6.0 development is here: https://github.com/haecker-felix/gradio/tree/gradio_6
-Work in Progress!
+You can find updated development information to Gradio 6.0 here: 
+https://github.com/haecker-felix/gradio/tree/gradio_6
 ____
 
 # Gradio
@@ -11,7 +10,6 @@ A GTK3 app for finding and listening to internet radio stations.
 <p align="center">
   <img alt="demo_img" src="https://raw.githubusercontent.com/haecker-felix/gradio/master/data/appdata/gradio01.png">
 </p>
-
 
 ## Install Gradio
 
