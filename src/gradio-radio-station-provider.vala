@@ -108,6 +108,8 @@ namespace Gradio{
 				return;
 			}
 
+			//TODO: Memory usage
+
 			message ("Parsing data from \"%s\" ...", address);
 			started();
 

@@ -24,12 +24,11 @@ namespace Gradio{
 
 		public string[] page_name = { "library", "discover", "search", "details", "settings", "loading" };
 
-		[GtkChild]
-		private Entry SearchEntry;
-		[GtkChild]
-		private SearchBar SearchBar;
-		[GtkChild]
-		private ToggleButton SearchButton;
+		[GtkChild] private Entry SearchEntry;
+		[GtkChild] SearchBar SearchBar;
+		[GtkChild] private ToggleButton SearchButton;
+		[GtkChild] private MenuButton SearchMenuButton;
+		private SearchPopover search_popover;
 
 		[GtkChild]
 		private Stack MainStack;
@@ -82,6 +81,8 @@ namespace Gradio{
 		private void setup_view(){
 			search_page = new SearchPage();
 			MainStack.add_named(search_page, page_name[WindowMode.SEARCH]);
+			search_popover = new SearchPopover();
+			SearchMenuButton.set_popover(search_popover);
 
 			station_detail_page = new StationDetailPage();
 			MainStack.add_named(station_detail_page, page_name[WindowMode.DETAILS]);
@@ -214,13 +215,13 @@ namespace Gradio{
 		private void go_back(){
 			BackEntry entry = back_entry_stack.pop_head();
 
-			switch(entry.mode){
-				case WindowMode.DETAILS: change_mode(entry.mode, entry.data); break;
-				case WindowMode.SEARCH: change_mode(entry.mode, entry.data); break;
-				default: change_mode (entry.mode); break;
+			if(entry != null){
+				switch(entry.mode){
+					case WindowMode.DETAILS: change_mode(entry.mode, entry.data); break;
+					case WindowMode.SEARCH: change_mode(entry.mode, entry.data); break;
+					default: change_mode (entry.mode); break;
+				}
 			}
-
-
 		}
 
 		private void save_back_entry(){
@@ -339,7 +340,7 @@ namespace Gradio{
 			// Toggle Search
 			if ((event.keyval == Gdk.Key.f) && (event.state & default_modifiers) == Gdk.ModifierType.CONTROL_MASK) {
 				if(SearchBar.get_search_mode()){
-					go_back();
+					SearchBar.set_search_mode(false);
 					SearchButton.set_active(false);
 				}else{
 					SearchBar.set_search_mode(true);

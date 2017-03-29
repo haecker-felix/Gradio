@@ -4,8 +4,6 @@ ver = vcs_tag(input : 'version.vala.in', output : 'version.vala',
               command : ['sh', '../print_git_version.sh'],
               fallback : meson.project_version())
 
-
-
 res = gnome.compile_resources('gt-resources', '../data/de.haeckerfelix.gradio.gresource.xml', source_dir : '../data')
 
 libgtk_dep = dependency('gtk+-3.0', version : '>=3.20')
@@ -59,6 +57,7 @@ src_gradio = ['gradio-app.vala',
 		'gradio-station-model.vala',
 		'gradio-status-label.vala',
 		'gradio-utils.vala',
+		'gradio-search-popover.vala',
 	      res,
               ver]
 

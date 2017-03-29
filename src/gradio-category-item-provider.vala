@@ -18,16 +18,28 @@ namespace Gradio{
 
 	public class CategoryItemProvider{
 
-		public GLib.List<string> languages_list;
-		public GLib.List<string> countries_list;
-		public GLib.List<string> codecs_list;
-		public GLib.List<string> states_list;
-		public GLib.List<string> tags_list;
+		public static GLib.List<string> languages_list;
+		public static GLib.List<string> countries_list;
+		public static GLib.List<string> codecs_list;
+		public static GLib.List<string> states_list;
+		public static GLib.List<string> tags_list;
 
 		public signal void loaded();
+		private signal void partial();
+		public bool is_ready = false;
 
 		public CategoryItemProvider(){
+			partial.connect(partial_loaded);
+
 			load_lists.begin();
+		}
+
+		private void partial_loaded(){
+			if(languages_list.length() != 0 && countries_list.length() != 0 && codecs_list.length() != 0 && states_list.length() != 0 && tags_list.length() != 0){
+				is_ready = true;
+				loaded();
+				message("Successfully loaded category items!");
+			}
 		}
 
 		private async void load_lists (){
@@ -36,9 +48,6 @@ namespace Gradio{
 			message("Fetching category items...");
 
 			ThreadFunc<void*> run = () => {
-				languages_list = null;
-				languages_list = new GLib.List<string>();
-
 				try{
 					Json.Parser parser = new Json.Parser ();
 					string data = "";
@@ -58,8 +67,8 @@ namespace Gradio{
 								languages_list.append(language_data.get_string_member("value"));
 							}
 						}
+						partial();
 					});
-
 
 					// Codecs
 					Util.get_string_from_uri.begin(RadioBrowser.radio_station_codecs, (obj, res) => {
@@ -76,9 +85,8 @@ namespace Gradio{
 								codecs_list.append(codec_data.get_string_member("value"));
 							}
 						}
+						partial();
 					});
-
-
 
 					// Countries
 					Util.get_string_from_uri.begin(RadioBrowser.radio_station_countries, (obj, res) => {
@@ -95,8 +103,8 @@ namespace Gradio{
 								countries_list.append(country_data.get_string_member("value"));
 							}
 						}
+						partial();
 					});
-
 
 					// States
 					Util.get_string_from_uri.begin(RadioBrowser.radio_station_states, (obj, res) => {
@@ -113,8 +121,8 @@ namespace Gradio{
 								states_list.append(state_data.get_string_member("value"));
 							}
 						}
+						partial();
 					});
-
 
 					// Tags
 					Util.get_string_from_uri.begin(RadioBrowser.radio_station_tags, (obj, res) => {
@@ -131,10 +139,8 @@ namespace Gradio{
 								tags_list.append(tag_data.get_string_member("value"));
 							}
 						}
+						partial();
 					});
-
-
-
 				}catch(GLib.Error e){
 					warning(e.message);
 				}
@@ -144,10 +150,7 @@ namespace Gradio{
 			};
 
 			new Thread<void*> ("load_list_thread", run);
-
 			yield;
-			message("Successfully loaded category items!");
-			loaded();
         	}
 
 	}

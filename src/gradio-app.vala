@@ -26,6 +26,7 @@ namespace Gradio {
 		public static AudioPlayer player;
 		public static Library library;
 		public static MPRIS mpris;
+		public static CategoryItemProvider ciprovider;
 
 		public App () {
 			Object(application_id: "de.haeckerfelix.gradio", flags: ApplicationFlags.FLAGS_NONE);
@@ -45,6 +46,8 @@ namespace Gradio {
 		private void start_new_session(){
 			// ignore the vala warning!
 			Settings settings = new Settings();
+
+			ciprovider = new CategoryItemProvider();
 
 			library = new Library();
 
