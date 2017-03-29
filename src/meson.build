@@ -6,9 +6,21 @@ ver = vcs_tag(input : 'version.vala.in', output : 'version.vala',
 
 res = gnome.compile_resources('gt-resources', '../data/de.haeckerfelix.gradio.gresource.xml', source_dir : '../data')
 
+pkglibdir = join_paths(get_option('libdir'), meson.project_name())
+libgd = subproject('libgd',
+  default_options: [
+    'pkglibdir=' + pkglibdir,
+    'with-notification=true',
+    'with-vapi=true'
+  ]
+)
+
+# Pass as dependency to a Vala target
+libgd_vapi_dep = libgd.get_variable('libgd_vapi_dep')
+
 libgtk_dep = dependency('gtk+-3.0', version : '>=3.20')
 
-deps_gradio = [libgtk_dep,
+deps_gradio = [libgtk_dep, libgd_vapi_dep,
            dependency('libsoup-2.4'),
            dependency('json-glib-1.0'),
            dependency('gstreamer-1.0'),

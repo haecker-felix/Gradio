@@ -1,0 +1,3 @@
+[submodule "subprojects/libgd"]
+	path = subprojects/libgd
+	url = https://git.gnome.org/browse/libgd

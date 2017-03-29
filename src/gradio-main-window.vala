@@ -76,6 +76,8 @@ namespace Gradio{
 			setup_view();
 			restore_geometry();
 			connect_signals();
+
+			Gd.Notification test = new Gd.Notification();
 		}
 
 		private void setup_view(){
