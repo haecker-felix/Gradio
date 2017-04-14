@@ -145,7 +145,7 @@ namespace Gradio {
 				"title", "About Gradio",
 				"license-type", Gtk.License.GPL_3_0,
 				"logo-icon-name", "de.haeckerfelix.gradio",
-				"version", GRADIO_VERSION,
+				"version", Config.VERSION,
 				"comments", "Database: www.radio-browser.info",
 				"website", "https://github.com/haecker-felix/gradio",
 				"wrap-license", true);
@@ -165,7 +165,7 @@ namespace Gradio {
 	}
 
 	int main (string[] args){
-		message("Gradio %s ", GRADIO_VERSION);
+		message("Gradio %s ", Config.VERSION);
 
 		// Init gstreamer
 		Gst.init (ref args);

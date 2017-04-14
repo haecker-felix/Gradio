@@ -1,21 +1,20 @@
-project('gradio', ['vala', 'C'],
-        version : '0.3.1',
-        meson_version : '>= 0.36.0',
-        license : 'GPL3',
-        default_options: [
-          'c_std=gnu11',
-          'b_lundef=false',
-        ])
+project('gradio', ['vala', 'C'], version : '0.6.0')
 
-# Used in config.h
-LOCALE_DIR = join_paths(get_option('prefix'), get_option('localedir'))
-LIB_DIR = join_paths(get_option('prefix'), get_option('libdir'))
-DATA_DIR = join_paths(get_option('prefix'), get_option('datadir'))
-
-meson.add_install_script('meson_post_install.sh')
+cc = meson.get_compiler('c')
 
 
-subdir('src')
+glib = dependency('glib-2.0')
+gobject = dependency('gobject-2.0')
+gio = dependency('gio-2.0')
+gtk = dependency('gtk+-3.0', version : '>=3.20')
+libsoup = dependency('libsoup-2.4')
+json_glib = dependency('json-glib-1.0')
+gstreamer = dependency('gstreamer-1.0')
+gstreamer_pbutils = dependency('gstreamer-pbutils-1.0')
+sqlite3 = dependency('sqlite3')
+
 subdir('data')
 subdir('po')
+subdir('external')
+subdir('src')
 

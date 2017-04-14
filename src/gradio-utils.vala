@@ -44,7 +44,7 @@ namespace Gradio{
 		public static async string get_string_from_uri (string url){
 			if(url != ""){
 				var session = new Soup.SessionAsync ();
-				session.user_agent = "gradio/"+ GRADIO_VERSION;
+				session.user_agent = "gradio/"+ Config.VERSION;
 				var message = new Soup.Message ("GET", url);
 
 				session.queue_message (message, (session, msg) => {

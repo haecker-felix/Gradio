@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/org/gnome/libgd/tagged-entry">
+    <file alias="default.css">gd-tagged-entry-default.css</file>
+  </gresource>
+</gresources>

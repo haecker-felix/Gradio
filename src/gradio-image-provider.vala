@@ -42,7 +42,7 @@ namespace Gradio{
 							return null;
 						}
 
-						session.user_agent = "gradio/"+ GRADIO_VERSION;
+						session.user_agent = "gradio/"+ Config.VERSION;
 						session.send_message (message);
 
 						try{

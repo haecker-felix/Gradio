@@ -1,38 +1,5 @@
-gnome = import('gnome')
-
-ver = vcs_tag(input : 'version.vala.in', output : 'version.vala',
-              command : ['sh', '../print_git_version.sh'],
-              fallback : meson.project_version())
-
-res = gnome.compile_resources('gt-resources', '../data/de.haeckerfelix.gradio.gresource.xml', source_dir : '../data')
-
-pkglibdir = join_paths(get_option('libdir'), meson.project_name())
-libgd = subproject('libgd',
-  default_options: [
-    'pkglibdir=' + pkglibdir,
-    'with-notification=true',
-    'with-vapi=true'
-  ]
-)
-
-# Pass as dependency to a Vala target
-libgd_vapi_dep = libgd.get_variable('libgd_vapi_dep')
-
-libgtk_dep = dependency('gtk+-3.0', version : '>=3.20')
-
-deps_gradio = [libgtk_dep, libgd_vapi_dep,
-           dependency('libsoup-2.4'),
-           dependency('json-glib-1.0'),
-           dependency('gstreamer-1.0'),
-           dependency('glib-2.0'),
-           dependency('gobject-2.0'),
-           dependency('sqlite3'),
-           dependency('gstreamer-pbutils-1.0')]
-
-cc = meson.get_compiler('c')
-deps_gradio += cc.find_library('m', required: false)
-
-src_gradio = ['gradio-app.vala',
+vala_sources = [
+		'gradio-app.vala',
 		'tile/gradio-big-tile.vala',
 		'tile/gradio-small-tile.vala',
 		'tile/gradio-tile.vala',
@@ -69,11 +36,19 @@ src_gradio = ['gradio-app.vala',
 		'gradio-station-model.vala',
 		'gradio-status-label.vala',
 		'gradio-utils.vala',
-		'gradio-search-popover.vala',
-	      res,
-              ver]
+		'gradio-search-popover.vala']
 
-executable('gradio', src_gradio, vala_args : '--target-glib=2.38 -X',
-           dependencies : deps_gradio,
-           install : true)
+vala_args = [
+	'--target-glib=2.38',
+	'--pkg=config',
+	'--pkg=gd-1.0',
+	'--pkg=posix',
+	'--vapidir=' + meson.current_source_dir() + '/vapis']
 
+executable('gradio',
+		vala_sources,
+		resources,
+ 		c_args : [ '-DVERSION="' + meson.project_version() + '"', '-DGETTEXT_PACKAGE="gradio"', '-DGNOMELOCALEDIR="' + get_option('prefix') + '/' + get_option('localedir') + '"' ],
+		vala_args: vala_args,
+		install : true,
+		dependencies : [glib, gobject, gio, gtk, gd, libsoup, json_glib, gstreamer, gstreamer_pbutils, sqlite3])
