@@ -28,6 +28,7 @@ namespace Gradio{
 		[GtkChild] SearchBar SearchBar;
 		[GtkChild] private ToggleButton SearchButton;
 		[GtkChild] private MenuButton SearchMenuButton;
+		[GtkChild] private Overlay NotificationOverlay;
 		private SearchPopover search_popover;
 
 		[GtkChild]
@@ -76,8 +77,6 @@ namespace Gradio{
 			setup_view();
 			restore_geometry();
 			connect_signals();
-
-			Gd.Notification test = new Gd.Notification();
 		}
 
 		private void setup_view(){
@@ -163,6 +162,12 @@ namespace Gradio{
 		public void restore_geometry(){
 			width = Settings.window_width;
 			height = Settings.window_height;
+		}
+
+
+		public void show_notification(Gradio.Notification notification){
+			NotificationOverlay.add_overlay(notification);
+			this.show_all();
 		}
 
 		private void change_mode(WindowMode mode, DataWrapper data = new DataWrapper()){

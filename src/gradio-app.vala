@@ -69,7 +69,8 @@ namespace Gradio {
 
 			connect_signals();
 			if(!Util.check_database_connection()){
-				window.show_no_connection_message();
+				Notification n = new Notification("No connection to the database could be established.\nMake sure you can connect to \"radio-browser.info\"!", 1000);
+				window.show_notification(n);
 			}
 
 			if(Settings.resume_playback_on_startup && Settings.previous_station != 0){

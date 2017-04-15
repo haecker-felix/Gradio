@@ -1,7 +1,7 @@
 {
     "app-id": "de.haeckerfelix.gradio",
     "version": "master",
-    "runtime": "org.gnome.Platform",
+    "runtime": "org.gnome.Sdk",
     "runtime-version": "3.22",
     "sdk": "org.gnome.Sdk",
     "command": "gradio",
@@ -34,10 +34,8 @@
         "cflags": "-O0 -g",
         "cxxflags": "-O0 -g",
         "env": {
-          "GST_PLUGIN_SYSTEM_PATH": "/app/lib/gstreamer-1.0/"
-        },
-        "strip": false,
-        "no-debuginfo": true
+            "GST_PLUGIN_SYSTEM_PATH": "/app/lib/gstreamer-1.0/"
+        }
     },
     "modules": [
         {

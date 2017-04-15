@@ -4,7 +4,7 @@
          xmlns:gnome="http://api.gnome.org/doap-extensions#"
          xmlns="http://usefulinc.com/ns/doap#">
 
-  <name xml:lang="en">gradio</name>
+  <name xml:lang="en">Gradio</name>
   <shortdesc xml:lang="en">Application for finding and listening to internet radio stations</shortdesc>
   <description xml:lang="en">Application for finding and listening to internet radio stations</description>
   <homepage rdf:resource="https://github.com/haecker-felix/gradio" />

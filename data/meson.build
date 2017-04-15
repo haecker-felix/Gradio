@@ -1,9 +1,6 @@
 gnome_module = import('gnome')
 
-resources = gnome_module.compile_resources('de.haeckerfelix.gradio',
-                                           'de.haeckerfelix.gradio.gresource.xml',
-                                           source_dir: '.',
-					   c_name: 'resources')
+resources = gnome_module.compile_resources('gradio-resources', 'de.haeckerfelix.gradio.gresource.xml', source_dir : '.')
 
 msgfmt = find_program('msgfmt')
 podir = join_paths(meson.source_root(), 'po')

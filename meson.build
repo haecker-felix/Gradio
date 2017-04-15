@@ -18,3 +18,4 @@ subdir('po')
 subdir('external')
 subdir('src')
 
+meson.add_install_script('meson_post_install.sh')
