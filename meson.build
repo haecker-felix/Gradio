@@ -2,7 +2,7 @@ project('gradio', ['vala', 'C'], version : '0.6.0')
 
 cc = meson.get_compiler('c')
 
-
+libm = cc.find_library('m', required: false)
 glib = dependency('glib-2.0')
 gobject = dependency('gobject-2.0')
 gio = dependency('gio-2.0')

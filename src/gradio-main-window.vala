@@ -14,6 +14,7 @@
  * along with Gradio.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+using Gd;
 using Gtk;
 using Gst;
 
@@ -24,29 +25,23 @@ namespace Gradio{
 
 		public string[] page_name = { "library", "discover", "search", "details", "settings", "loading" };
 
-		[GtkChild] private Entry SearchEntry;
+		[GtkChild] private Box SearchBox;
 		[GtkChild] SearchBar SearchBar;
 		[GtkChild] private ToggleButton SearchButton;
 		[GtkChild] private MenuButton SearchMenuButton;
-		[GtkChild] private Overlay NotificationOverlay;
 		private SearchPopover search_popover;
+		private TaggedEntry SearchEntry;
 
-		[GtkChild]
-		private Stack MainStack;
+		[GtkChild] private Stack MainStack;
+		[GtkChild] private Overlay NotificationOverlay;
 
-		[GtkChild]
-		private Box Bottom;
-		[GtkChild]
-		private VolumeButton VolumeButton;
-		[GtkChild]
-		private Button BackButton;
+		[GtkChild] private Box Bottom;
+		[GtkChild] private VolumeButton VolumeButton;
+		[GtkChild] private Button BackButton;
 
-		[GtkChild]
-		private ButtonBox MainButtonBox;
-		[GtkChild]
-		private ToggleButton DiscoverToggleButton;
-		[GtkChild]
-		private ToggleButton LibraryToggleButton;
+		[GtkChild] private ButtonBox MainButtonBox;
+		[GtkChild] private ToggleButton DiscoverToggleButton;
+		[GtkChild] private ToggleButton LibraryToggleButton;
 
 		private int height;
 		private int width;
@@ -80,10 +75,13 @@ namespace Gradio{
 		}
 
 		private void setup_view(){
+			SearchEntry = new TaggedEntry();
+			SearchEntry.set_size_request(400, -1);
 			search_page = new SearchPage();
 			MainStack.add_named(search_page, page_name[WindowMode.SEARCH]);
-			search_popover = new SearchPopover();
+			search_popover = new SearchPopover(ref SearchEntry);
 			SearchMenuButton.set_popover(search_popover);
+			SearchBox.pack_start(SearchEntry);
 
 			station_detail_page = new StationDetailPage();
 			MainStack.add_named(station_detail_page, page_name[WindowMode.DETAILS]);
@@ -129,6 +127,7 @@ namespace Gradio{
 			DiscoverToggleButton.clicked.connect(show_discover);
 			BackButton.clicked.connect(go_back);
 			SearchBar.notify["search-mode-enabled"].connect(() => SearchButton.set_active(SearchBar.get_search_mode()));
+			SearchEntry.search_changed.connect(SearchEntry_search_changed);
 		}
 
 		private void setup_tray_icon(){
@@ -302,7 +301,6 @@ namespace Gradio{
 
 		}
 
-		[GtkCallback]
 		private void SearchEntry_search_changed(){
 			string search_term = SearchEntry.get_text();
 

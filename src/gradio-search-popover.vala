@@ -15,6 +15,7 @@
  */
 
 using Gtk;
+using Gd;
 
 namespace Gradio{
 
@@ -26,9 +27,12 @@ namespace Gradio{
 		[GtkChild] private Button ClearCountryButton;
 		[GtkChild] private ListBox CountryListBox;
 
+		private TaggedEntry searchbar;
+
 		public string selected_country = "";
 
-		public SearchPopover(){
+		public SearchPopover(ref Gd.TaggedEntry entry){
+			searchbar = entry;
 			connect_signals();
 		}
 
@@ -45,6 +49,9 @@ namespace Gradio{
 
 				selected_country = l.get_text();
 				SelectCountryButton.set_label(selected_country);
+
+				Gd.TaggedEntryTag tag = new Gd.TaggedEntryTag(selected_country);
+				searchbar.add_tag(tag);
 
 				CountryRevealer.set_reveal_child(false);
 				ClearCountryButton.set_visible(true);

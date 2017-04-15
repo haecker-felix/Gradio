@@ -1,3 +1,7 @@
+gnome_module = import('gnome')
+
+subdir('libgd')
+
 sources = [
 	'libgd/gd.h',
 	'libgd/gd-types-catalog.h',
@@ -34,14 +38,16 @@ sources = [
 	'libgd/gd-notification.h',
 #	'libgd/gd-styled-text-renderer.c',
 #	'libgd/gd-styled-text-renderer.h',
-#	'libgd/gd-tagged-entry.c',
-#	'libgd/gd-tagged-entry.h',
+	gdres,
+	'libgd/gd-tagged-entry.c',
+	'libgd/gd-tagged-entry.h',
 #	'libgd/gd-toggle-pixbuf-renderer.c',
 #	'libgd/gd-toggle-pixbuf-renderer.h',
 #	'libgd/gd-two-lines-renderer.c',
 #	'libgd/gd-two-lines-renderer.h'
 ]
 
-gd_lib = static_library( 'libgd/gd', sources, dependencies : [glib, gobject, gio, gtk], include_directories : include_directories('.'), install : false)
+
+gd_lib = static_library( 'libgd', sources, dependencies : [glib, gobject, gio, gtk, libm], include_directories : include_directories('.'), install : false)
 
 gd = declare_dependency(link_with : gd_lib, include_directories : include_directories('.'))
