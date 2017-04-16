@@ -76,7 +76,7 @@ namespace Gradio{
 
 		private void setup_view(){
 			SearchEntry = new TaggedEntry();
-			SearchEntry.set_size_request(400, -1);
+			SearchEntry.set_size_request(550, -1);
 			search_page = new SearchPage();
 			MainStack.add_named(search_page, page_name[WindowMode.SEARCH]);
 			search_popover = new SearchPopover(ref SearchEntry);
