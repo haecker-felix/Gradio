@@ -113,10 +113,10 @@ namespace Gradio{
 
 
 			// Title
-			StationTitleLabel.set_text(station.Title);
+			StationTitleLabel.set_text(station.title);
 
 			// Likes
-			StationLikesLabel.set_text(station.Votes.to_string());
+			StationLikesLabel.set_text(station.votes.to_string());
 
 			this.set_visible(true);
 		}
@@ -162,7 +162,7 @@ namespace Gradio{
 		[GtkCallback]
 		private void LikeButton_clicked(Button button){
 			station.vote();
-			StationLikesLabel.set_text(station.Votes.to_string());
+			StationLikesLabel.set_text(station.votes.to_string());
 		}
 
 		[GtkCallback]

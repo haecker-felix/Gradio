@@ -15,13 +15,14 @@
  */
 
 using Gtk;
+using Gd;
 
 namespace Gradio{
 
 	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/page/library-page.ui")]
 	public class LibraryPage : Gtk.Box, Page{
 
-		private RowView station_view;
+		private MainBox mainbox;
 		private StationModel station_model;
 
 		[GtkChild]
@@ -29,11 +30,17 @@ namespace Gradio{
 
 
 		public LibraryPage(){
+			mainbox = new MainBox(MainBoxType.ICON);
+			mainbox.expand = true;
+			mainbox.set_show_primary_text(true);
+			mainbox.set_show_secondary_text(true);
+
 			station_model = Library.library_model;
-			station_view = new RowView(ref station_model);
+			mainbox.set_model(station_model);
+			mainbox.show_all();
 
 			connect_signals();
-			StationBox.add(station_view);
+			StationBox.add(mainbox);
 		}
 
 		private void connect_signals(){

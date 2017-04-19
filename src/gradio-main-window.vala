@@ -119,8 +119,8 @@ namespace Gradio{
 
 		private void connect_signals(){
 			this.size_allocate.connect((a) => {
-				width = a.width;
-				height = a.height;
+			 	width = a.width;
+			 	height = a.height;
 			});
 
 			LibraryToggleButton.clicked.connect(show_library);

@@ -49,7 +49,7 @@ namespace Gradio{
   		public bool contains_station (RadioStation station) {
 			for (int i = 0; i < stations.length; i ++) {
       				RadioStation fstation = stations.get (i);
-      				if (station.ID == fstation.ID)
+      				if (station.id == fstation.id)
         				return true;
 			}
 
@@ -66,7 +66,7 @@ namespace Gradio{
 			int pos = 0;
 			for (int i = 0; i < stations.length; i ++) {
        				RadioStation fstation = stations.get (i);
-       				if (fstation.ID == station.ID) {
+       				if (fstation.id == station.id) {
        					pos = i;
        					break;
        				}

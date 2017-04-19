@@ -24,7 +24,6 @@ vala_sources = [
 		'gradio-audio-player.vala',
 		'gradio-category-item-provider.vala',
 		'gradio-codec-installer.vala',
-		'gradio-image-provider.vala',
 		'gradio-library.vala',
 		'gradio-main-window.vala',
 		'gradio-mpris.vala',

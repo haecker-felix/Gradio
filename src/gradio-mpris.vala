@@ -187,12 +187,12 @@ public class Gradio.MprisPlayer : GLib.Object {
 
 	private void fill_metadata() {
 		if(App.player.current_station != null){
-			string[] artists = {App.player.current_station.Title};
+			string[] artists = {App.player.current_station.title};
 
 			if(App.player.tag_title != null)
 				_metadata.insert("xesam:title", App.player.tag_title);
 
-			_metadata.insert("mpris:artUrl", App.player.current_station.Icon);
+			_metadata.insert("mpris:artUrl", App.player.current_station.icon_address);
 			_metadata.insert("xesam:artist", artists);
 		}
 	}

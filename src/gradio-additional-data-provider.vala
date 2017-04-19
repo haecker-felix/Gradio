@@ -32,7 +32,7 @@ namespace Gradio{
 			string html = "";
 
 			// download the html
-			Util.get_string_from_uri.begin(station.Homepage, (obj, res) => {
+			Util.get_string_from_uri.begin(station.homepage, (obj, res) => {
 				string result = Util.get_string_from_uri.end(res);
 
 				if(result != null)
@@ -48,8 +48,8 @@ namespace Gradio{
 			int html_length = html.length;
 
 			// take the root if no description found. http://bla.org/da/da/da/da -> http://bla.org
-			if(start_index == -1 && station.Homepage != null && station.Homepage != ""){
-				string url = station.Homepage;
+			if(start_index == -1 && station.homepage != null && station.homepage != ""){
+				string url = station.homepage;
 				//message("Before: %s", url);
 
 				bool finished = false;
@@ -66,13 +66,13 @@ namespace Gradio{
 				}
 
 				//message("After: %s", url);
-				station.Homepage = url;
+				station.homepage = url;
 
 				// process the new address
 				descr = "";
 				html = "";
 
-				Util.get_string_from_uri.begin(station.Homepage, (obj, res) => {
+				Util.get_string_from_uri.begin(station.homepage, (obj, res) => {
 					string result = Util.get_string_from_uri.end(res);
 
 					if(result != null)

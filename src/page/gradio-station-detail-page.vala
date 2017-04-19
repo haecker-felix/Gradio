@@ -64,7 +64,6 @@ namespace Gradio{
 			show_loading();
 
 			setup_view();
-			connect_signals();
 		}
 
 		private void connect_signals(){
@@ -133,16 +132,16 @@ namespace Gradio{
 				show_add_box();
 
 			// Title
-			StationTitleLabel.set_text(station.Title);
+			StationTitleLabel.set_text(station.title);
 
 			// Tags
-			tbox.set_tags(station.Tags);
+			tbox.set_tags(station.tags);
 
 			// Location
-			StationLocationLabel.set_text(station.Country + " " + station.State);
+			StationLocationLabel.set_text(station.country + " " + station.state);
 
 			// Likes
-			StationLikesLabel.set_text(station.Votes.to_string());
+			StationLikesLabel.set_text(station.votes);
 
 			// Description
 			AdditionalDataProvider.get_description.begin(station, (obj,res) => {
@@ -152,11 +151,11 @@ namespace Gradio{
 			});
 
 			// Show warning if some information is missing
-			if(station.Tags == "" || station.Homepage == "" || station.Icon == "" || station.Title == "" || station.State == "" || station.Country == "")
+			if(station.tags == "" || station.homepage == "" || station.icon_address == "" || station.title == "" || station.state == "" || station.country == "")
 				InformationBox.set_visible(true);
 
 			// Similar Stations
-			string address = RadioBrowser.radio_stations_by_name + station.Title.substring(0, station.Title.index_of(" "));
+			string address = RadioBrowser.radio_stations_by_name + station.title.substring(0, station.title.index_of(" "));
 			similar_station_provider.set_address(address);
 		}
 
@@ -206,12 +205,12 @@ namespace Gradio{
 		[GtkCallback]
 		private void LikeButton_clicked(Button b){
 			station.vote();
-			StationLikesLabel.set_text(station.Votes.to_string());
+			StationLikesLabel.set_text(station.votes);
 		}
 
 		[GtkCallback]
         	private void PlayStopButton_clicked (Button button) {
-			if(App.player.current_station != null && App.player.current_station.ID == station.ID)
+			if(App.player.current_station != null && App.player.current_station.id == station.id)
 				App.player.toggle_play_stop();
 			else
 				App.player.set_radio_station(station);
@@ -228,12 +227,12 @@ namespace Gradio{
 
 		[GtkCallback]
 		private void OpenHomepageButton_clicked(Button button){
-			Util.open_website(station.Homepage);
+			Util.open_website(station.homepage);
 		}
 
 		[GtkCallback]
 		private void EditButton_clicked(Button button){
-			Util.open_website("http://www.radio-browser.info/gui/#/edit/" + station.ID.to_string());
+			Util.open_website("http://www.radio-browser.info/gui/#/edit/" + station.id);
 		}
 	}
 }		

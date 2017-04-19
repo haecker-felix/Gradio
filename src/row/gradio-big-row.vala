@@ -67,10 +67,10 @@ namespace Gradio{
 				AddBox.set_visible(true);
 			}
 
-			StationTitleLabel.set_text(station.Title);
-			StationLikesLabel.set_text(station.Votes.to_string());
+			StationTitleLabel.set_text(station.title);
+			StationLikesLabel.set_text(station.votes);
 			set_logo();
-			tbox.set_tags(station.Tags);
+			tbox.set_tags(station.tags);
 		}
 
 		private void connect_signals(){
@@ -103,12 +103,12 @@ namespace Gradio{
 		[GtkCallback]
 		private void LikeButton_clicked(Button b){
 			station.vote();
-			StationLikesLabel.set_text(station.Votes.to_string());
+			StationLikesLabel.set_text(station.votes);
 		}
 
 		[GtkCallback]
         	private void PlayStopButton_clicked (Button button) {
-			if(App.player.current_station != null && App.player.current_station.ID == station.ID)
+			if(App.player.current_station != null && App.player.current_station.id == station.id)
 				App.player.toggle_play_stop();
 			else
 				App.player.set_radio_station(station);

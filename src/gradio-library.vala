@@ -52,7 +52,7 @@ namespace Gradio{
 
 
 		public bool add_radio_station(RadioStation station){
-			string query = "INSERT INTO library (station_id,folder_id) VALUES ("+station.ID.to_string()+", '0');";
+			string query = "INSERT INTO library (station_id,folder_id) VALUES ("+station.id+", '0');";
 
 			int return_code = db.exec (query, null, out db_error_message);
 			if (return_code != Sqlite.OK) {
@@ -66,7 +66,7 @@ namespace Gradio{
 		}
 
 		public bool remove_radio_station(RadioStation station){
-			string query = "DELETE FROM library WHERE station_id=" + station.ID.to_string();
+			string query = "DELETE FROM library WHERE station_id=" + station.id;
 
 			int return_code = db.exec (query, null, out db_error_message);
 			if (return_code != Sqlite.OK) {

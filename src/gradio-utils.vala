@@ -129,6 +129,28 @@ namespace Gradio{
 			notification.set_body (body);
 			GLib.Application.get_default ().send_notification ("de.haeckerfelix.gradio", notification);
 		}
+
+		public static void optiscale (ref Gdk.Pixbuf pixbuf, int size) {
+			double pixb_w = pixbuf.get_width();
+			double pixb_h = pixbuf.get_height();
+
+			if((pixb_w > size) || (pixb_h > size)){
+				double sc_factor_w = size / pixb_w;
+				double sc_factor_h = size / pixb_h;
+
+				double sc_factor = 0;
+
+				if(sc_factor_w >= sc_factor_h)
+					sc_factor = sc_factor_h;
+				if(sc_factor_h >= sc_factor_w)
+					sc_factor = sc_factor_w;
+
+				double sc_w = pixb_w * sc_factor;
+				double sc_h = pixb_h * sc_factor;
+
+				pixbuf = pixbuf.scale_simple ((int)sc_w, (int)sc_h, Gdk.InterpType.BILINEAR);
+			}
+		}
 	}
 }
 

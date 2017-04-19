@@ -90,6 +90,7 @@ gd_zoom_image_surface (cairo_surface_t *surface, gint width_zoomed, gint height_
 static void
 gd_main_icon_box_icon_get_preferred_size (GdMainIconBoxIcon *self, gint *minimum, gint *natural)
 {
+  printf("gd_main_icon_box_icon_get_preferred_size\n");
   cairo_surface_t *surface;
   cairo_surface_type_t surface_type;
   gint height_scaled;
@@ -99,8 +100,11 @@ gd_main_icon_box_icon_get_preferred_size (GdMainIconBoxIcon *self, gint *minimum
   gint size_scaled;
 
   surface = gd_main_box_item_get_icon (self->item);
-  if (surface == NULL)
-    goto out;
+  if (surface == NULL){
+	printf("!! surface == NULL !!\n");
+	goto out;
+  }
+
 
   surface_type = cairo_surface_get_type (surface);
   g_return_if_fail (surface_type == CAIRO_SURFACE_TYPE_IMAGE);

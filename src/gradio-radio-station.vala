@@ -14,48 +14,151 @@
  * along with Gradio.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Gradio{
-	public class RadioStation : GLib.Object{
-		public string Title { get; set; }
-		public string Homepage { get; set; }
-		public string Language { get; set; }
-		public int ID { get; set; }
-		public string Icon { get; set; }
-		public string Country { get; set; }
-		public string Tags { get; set; }
-		public string State { get; set; }
-		public string Votes { get; set; }
-		public string Codec { get; set; }
-		public string Bitrate { get; set; }
-		public bool Broken { get; set; }
+using Gdk;
 
-		public bool is_playing = false;
+namespace Gradio{
+	public class RadioStation : GLib.Object, Gd.MainBoxItem{
+		private string _title;
+		private string _homepage;
+		private string _language;
+		private string _id;
+		private string _country;
+		private string _tags;
+		private string _state;
+		private string _votes;
+		private string _codec;
+		private string _bitrate;
+		private string _uri;
+		private string _icon_address;
+		private bool _is_broken;
+		private bool _is_playing;
+		private bool _pulse;
+		private int64 _mtime;
+		private Cairo.Surface _icon;
+		private Pixbuf _pixbuf;
+
+		public string title {
+			get{return _title;}
+			set{_title = value;}
+		}
+
+		public string homepage {
+			get{return _homepage;}
+			set{_homepage = value;}
+		}
+
+		public string language {
+			get{return _language;}
+			set{_language = value;}
+		}
+
+		public string id {
+			get{return _id;}
+		}
+		public string country {
+			get{return _country;}
+			set{_country = value;}
+		}
+
+		public string tags {
+			get{return _tags;}
+			set{_tags = value;}
+		}
+
+		public string state {
+			get{return _state;}
+			set{_state = value;}
+		}
+
+		public string votes {
+			get{return _votes;}
+			set{_votes = value;}
+		}
+
+		public string codec {
+			get{return _codec;}
+			set{_codec = value;}
+		}
+
+		public string bitrate {
+			get{return _bitrate;}
+			set{_bitrate = value;}
+		}
+
+		public string uri {
+			get{return _uri;}
+		}
+
+		public string primary_text {
+			get{return _title;}
+		}
+
+		public string secondary_text {
+			get{return _country;}
+		}
+
+		public string icon_address {
+			get{return _icon_address;}
+			set{_icon_address = value;}
+		}
+
+		public bool is_broken {
+			get{return _is_broken;}
+			set{_is_broken = value;}
+		}
+
+		public bool is_playing {
+			get{return _is_playing;}
+			set{_is_playing = value;}
+		}
+
+		public bool pulse {
+			get{return _pulse;}
+		}
+
+		public int64 mtime {
+			get{return _mtime;}
+		}
+
+		public Cairo.Surface icon {
+			get{
+				if(_pixbuf == null)
+					download_icon();
+
+				Util.optiscale(ref _pixbuf, 100);
+				Cairo.Surface surface = Gdk.cairo_surface_create_from_pixbuf(_pixbuf, 1, null);
+				_icon = surface;
+
+				return _icon;
+			}
+		}
+
 		public signal void stopped();
 		public signal void played();
 
 		public signal void added_to_library();
 		public signal void removed_from_library();
 
-		public RadioStation(string title = "", string homepage = "", string language = "", string id = "", string icon = "", string country = "", string tags = "", string state = "", string votes = "", string codec = "", string bitrate = "", bool broken = false){
+		public RadioStation(string title = "", string homepage = "", string language = "", string id = "", string icon = "", string country = "", string tags = "", string state = "", string votes = "", string codec = "", string bitrate = "", bool is_broken = false){
 			if(id != ""){
-				Title = title;
-				Homepage = homepage;
-				Language = language;
-				ID = int.parse(id);
-				Icon = icon;
-				Country = country;
-				Tags = tags;
-				State = state;
-				Votes = votes;
-				Codec = codec;
-				Bitrate = bitrate;
-				Broken = broken;
+				_title = title;
+				_homepage = homepage;
+				_language = language;
+				_id = id;
+				_icon_address = icon;
+				_country = country;
+				_tags = tags;
+				_state = state;
+				_votes = votes;
+				_codec = codec;
+				_bitrate = bitrate;
+				_is_broken = is_broken;
 
 				if(App.player.is_playing_station(this))
 					is_playing = true;
 
-				if(Broken)
-					Title = "[BROKEN] " + Title;
+				if(_is_broken)
+					_title = "[BROKEN] " + _title;
 
 				connect_signals();
 			}
@@ -82,26 +185,49 @@ namespace Gradio{
 		}
 
 		private void load_data_from_json(Json.Object radio_station_data){
-			Title = radio_station_data.get_string_member("name");
-			Homepage = radio_station_data.get_string_member("homepage");
-			Language = radio_station_data.get_string_member("language");
-			ID = int.parse(radio_station_data.get_string_member("id"));
-			Icon = radio_station_data.get_string_member("favicon");
-			Country = radio_station_data.get_string_member("country");
-			Tags = radio_station_data.get_string_member("tags");
-			State = radio_station_data.get_string_member("state");
-			Votes = radio_station_data.get_string_member("votes");
-			Codec = radio_station_data.get_string_member("codec");
-			Bitrate = radio_station_data.get_string_member("bitrate");
+			_title = radio_station_data.get_string_member("name");
+			_homepage = radio_station_data.get_string_member("homepage");
+			_language = radio_station_data.get_string_member("language");
+			_id = radio_station_data.get_string_member("id");
+			_icon_address = radio_station_data.get_string_member("favicon");
+			_country = radio_station_data.get_string_member("country");
+			_tags = radio_station_data.get_string_member("tags");
+			_state = radio_station_data.get_string_member("state");
+			_votes = radio_station_data.get_string_member("votes");
+			_codec = radio_station_data.get_string_member("codec");
+			_bitrate = radio_station_data.get_string_member("bitrate");
 
 			if(radio_station_data.get_string_member("lastcheckok") == "1")
-				Broken = false;
+				_is_broken = false;
+		}
+
+		private void download_icon(){
+			var session = new Soup.Session ();
+			var message = new Soup.Message ("GET", _icon_address);
+			var loader = new Gdk.PixbufLoader();
+
+			if(message == null){
+				try{
+					loader.close();
+				}catch(GLib.Error e){
+					warning(e.message);
+				}
+				return;
+			}
+
+			session.send_message (message);
+
+			if(message.response_body.data != null)
+				loader.write(message.response_body.data);
+
+			loader.close();
+			_pixbuf = loader.get_pixbuf();
 		}
 
 		private void stop_handler(){
-			if(Title != null){
-				if(App.player.current_station.ID == ID){
-					is_playing = false;
+			if(_title != null){
+				if(App.player.current_station.id == _id){
+					_is_playing = false;
 					stopped();
 				}
 			}else{
@@ -111,12 +237,12 @@ namespace Gradio{
 		}
 
 		private void play_handler(){
-			if(Title != null){
-				if(App.player.current_station.ID == ID){
-					is_playing = true;
+			if(_title != null){
+				if(App.player.current_station.id == _id){
+					_is_playing = true;
 					played();
 				}else{
-					is_playing = false;
+					_is_playing = false;
 					stopped();
 				}
 			}else{
@@ -125,8 +251,8 @@ namespace Gradio{
 		}
 
 		private void added_to_library_handler(RadioStation s){
-			if(Title != null){
-				if(s.ID == ID){
+			if(_title != null){
+				if(s.id == _id){
 					added_to_library();
 
 				}
@@ -136,8 +262,8 @@ namespace Gradio{
 		}
 
 		private void removed_from_library_handler(RadioStation s){
-			if(Title != null){
-				if(s.ID == ID){
+			if(_title != null){
+				if(s.id == _id){
 					removed_from_library();
 				}
 			}else{
@@ -188,7 +314,7 @@ namespace Gradio{
 			Json.Parser parser = new Json.Parser ();
 			bool vote = false;
 
-			Util.get_string_from_uri.begin(RadioBrowser.radio_station_vote + ID.to_string(), (obj, res) => {
+			Util.get_string_from_uri.begin(RadioBrowser.radio_station_vote + id, (obj, res) => {
 				string data = Util.get_string_from_uri.end(res);
 
 				try{
@@ -199,9 +325,9 @@ namespace Gradio{
 					if(root != null){
 						var radio_station_data = root.get_object ();
 						if(radio_station_data.get_string_member("ok") ==  "true"){
-							int v = int.parse(Votes);
+							int v = int.parse(votes);
 							v++;
-							Votes=v.to_string();
+							_votes=v.to_string();
 							vote = true;
 						}
 					}

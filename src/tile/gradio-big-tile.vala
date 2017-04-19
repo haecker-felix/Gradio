@@ -35,8 +35,8 @@ namespace Gradio{
 			station = s;
 
 			// Set information
-			StationTitleLabel.set_text(station.Title);
-			StationLikesLabel.set_text(station.Votes.to_string());
+			StationTitleLabel.set_text(station.title);
+			StationLikesLabel.set_text(station.votes);
 			set_logo();
 		}
 

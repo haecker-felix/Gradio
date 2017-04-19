@@ -119,11 +119,11 @@ namespace Gradio{
 
 		//TODO: ref here             \/?
 		public void set_radio_station(RadioStation station){
-			station.get_stream_address.begin(station.ID.to_string(), (obj, res) => {
+			station.get_stream_address.begin(station.id, (obj, res) => {
 		        	string address = station.get_stream_address.end(res);
 
 		        	//check if new == old
-		        	if(current_station != null && current_station.ID == station.ID){
+		        	if(current_station != null && current_station.id == station.id){
 					toggle_play_stop();
 		        	}else{
 		        		current_station = station;
@@ -142,7 +142,7 @@ namespace Gradio{
 					if(current_station != null)
 						tag_changed();
 
-		        		Settings.previous_station = station.ID;
+		        		Settings.previous_station = (int)station.id;
 					connect_to_stream_address(address);
 					radio_station_changed();
 		        	}
@@ -185,7 +185,7 @@ namespace Gradio{
 
 		//check if a specific station is being played
 		public bool is_playing_station(RadioStation station){
-			if(current_station != null && station != null && station.ID == current_station.ID)
+			if(current_station != null && station != null && station.id == current_station.id)
 				return true;
 			else
 				return false;
