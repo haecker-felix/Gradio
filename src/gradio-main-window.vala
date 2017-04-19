@@ -42,6 +42,10 @@ namespace Gradio{
 		[GtkChild] private ButtonBox MainButtonBox;
 		[GtkChild] private ToggleButton DiscoverToggleButton;
 		[GtkChild] private ToggleButton LibraryToggleButton;
+		[GtkChild] private Stack TitleStack;
+		[GtkChild] private Label PageTitle;
+		[GtkChild] private Button SelectButton;
+		[GtkChild] private Stack HeaderStack;
 
 		private int height;
 		private int width;
@@ -179,12 +183,17 @@ namespace Gradio{
 			// hide unless we're going to search
 			SearchBar.set_search_mode (mode == WindowMode.SEARCH);
 
-
 			// setting new mode
 			current_mode = mode;
 
 			// switch page
 			MainStack.set_visible_child_name(page_name[current_mode]);
+
+			// show defaults in the headerbar
+			TitleStack.set_visible_child_name("stackswitcher");
+			SelectButton.set_visible(true);
+			SearchButton.set_visible(true);
+
 
 			// do action for mode
 			switch(current_mode){
@@ -201,6 +210,11 @@ namespace Gradio{
 				};
 				case WindowMode.DETAILS: {
 					station_detail_page.set_station((RadioStation)data.station);
+					TitleStack.set_visible_child_name("label");
+
+					PageTitle.set_text(station_detail_page.get_title());
+					SelectButton.set_visible(false);
+					SearchButton.set_visible(false);
 					break;
 				};
 			}
@@ -322,6 +336,22 @@ namespace Gradio{
         	private void VolumeButton_value_changed (double value) {
 			App.player.set_volume(value);
 			Settings.volume_position = value;
+		}
+
+		[GtkCallback]
+		private void CancelSelectionButton_clicked(Button button){
+			Page page = (Page)MainStack.get_visible_child();
+
+			HeaderStack.set_visible_child_name("default");
+			page.set_selection_mode(false);
+		}
+
+		[GtkCallback]
+		private void SelectButton_clicked(Button button){
+			Page page = (Page)MainStack.get_visible_child();
+
+			HeaderStack.set_visible_child_name("selection");
+			page.set_selection_mode(true);
 		}
 
 		[GtkCallback]

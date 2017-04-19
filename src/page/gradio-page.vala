@@ -18,7 +18,15 @@ using Gtk;
 
 namespace Gradio{
 
-	public interface Page{
+	public interface Page : Gtk.Box{
+
+		public virtual string get_title(){
+			return "";
+		}
+
+
+		public virtual void set_selection_mode(bool b){}
+
 
 	}
 }

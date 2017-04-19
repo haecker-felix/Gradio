@@ -66,6 +66,10 @@ namespace Gradio{
 			setup_view();
 		}
 
+		public string get_title(){
+			return station.title;
+		}
+
 		private void connect_signals(){
 			station.played.connect(show_stop_box);
 			station.stopped.connect(show_play_box);

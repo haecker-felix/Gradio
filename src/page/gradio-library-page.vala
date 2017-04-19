@@ -29,5 +29,9 @@ namespace Gradio{
 
 			this.add(mainbox);
 		}
+
+		public void set_selection_mode(bool b){
+			mainbox.set_selection_mode(b);
+		}
 	}
 }
