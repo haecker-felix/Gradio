@@ -20,6 +20,7 @@ vala_sources = [
 		'groupbox/gradio-groupbox.vala',
 		'groupbox/gradio-groupbox-widget-item.vala',
 		'gradio-tag-box.vala',
+		'gradio-mainbox.vala',
 		'gradio-additional-data-provider.vala',
 		'gradio-audio-player.vala',
 		'gradio-category-item-provider.vala',

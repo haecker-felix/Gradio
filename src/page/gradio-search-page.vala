@@ -24,7 +24,7 @@ namespace Gradio{
 		[GtkChild]
 		Viewport ScrollViewport;
 
-		private Gd.MainBox mainbox;
+		private MainBox mainbox;
 		private StationModel station_model;
 		private StationProvider station_provider;
 
@@ -38,13 +38,8 @@ namespace Gradio{
 			station_model =  new StationModel();
 			station_provider = new StationProvider(ref station_model);
 
-			mainbox = new Gd.MainBox(Gd.MainBoxType.ICON);
-			mainbox.expand = true;
-			mainbox.set_show_primary_text(true);
-			mainbox.set_show_secondary_text(true);
-
+			mainbox = new MainBox();
 			mainbox.set_model(station_model);
-			mainbox.show_all();
 
 			ScrollViewport.add(mainbox);
 		}

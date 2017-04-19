@@ -18,16 +18,27 @@ using Gtk;
 
 namespace Gradio{
 
-	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/page/library-page.ui")]
-	public class LibraryPage : Gtk.Box, Page{
+	public class MainBox : Gd.MainBox{
 
-		private MainBox mainbox;
+		public MainBox(){
+			Object(box_type: Gd.MainBoxType.ICON);
 
-		public LibraryPage(){
-			mainbox = new MainBox();
-			mainbox.set_model(Library.library_model);
+			this.expand = true;
+			this.set_show_primary_text(true);
+			this.set_show_secondary_text(true);
+			this.show_all();
 
-			this.add(mainbox);
+			connect_signals();
+		}
+
+		private void connect_signals(){
+			this.selection_mode_request.connect(() => {
+				this.set_selection_mode(true);
+			});
+
+			this.item_activated.connect((t,a) => {
+				Gradio.App.window.show_station_details((RadioStation)a);
+			});
 		}
 	}
 }
