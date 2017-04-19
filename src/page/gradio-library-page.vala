@@ -23,11 +23,6 @@ namespace Gradio{
 	public class LibraryPage : Gtk.Box, Page{
 
 		private MainBox mainbox;
-		private StationModel station_model;
-
-		[GtkChild]
-		private Box StationBox;
-
 
 		public LibraryPage(){
 			mainbox = new MainBox(MainBoxType.ICON);
@@ -35,18 +30,10 @@ namespace Gradio{
 			mainbox.set_show_primary_text(true);
 			mainbox.set_show_secondary_text(true);
 
-			station_model = Library.library_model;
-			mainbox.set_model(station_model);
+			mainbox.set_model(Library.library_model);
 			mainbox.show_all();
 
-			connect_signals();
-			StationBox.add(mainbox);
-		}
-
-		private void connect_signals(){
-			//station_model.empty.connect(() => {
-			//	station_view.show_empty_library();
-			//});
+			this.add(mainbox);
 		}
 	}
 }

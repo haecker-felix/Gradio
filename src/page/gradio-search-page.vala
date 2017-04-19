@@ -24,7 +24,7 @@ namespace Gradio{
 		[GtkChild]
 		Viewport ScrollViewport;
 
-		private RowView row_view;
+		private Gd.MainBox mainbox;
 		private StationModel station_model;
 		private StationProvider station_provider;
 
@@ -36,15 +36,17 @@ namespace Gradio{
 
 		public SearchPage(){
 			station_model =  new StationModel();
-			row_view = new RowView(ref station_model);
 			station_provider = new StationProvider(ref station_model);
 
-			connect_signals();
-			ScrollViewport.add(row_view);
-		}
+			mainbox = new Gd.MainBox(Gd.MainBoxType.ICON);
+			mainbox.expand = true;
+			mainbox.set_show_primary_text(true);
+			mainbox.set_show_secondary_text(true);
 
-		private void connect_signals(){
+			mainbox.set_model(station_model);
+			mainbox.show_all();
 
+			ScrollViewport.add(mainbox);
 		}
 
 		public void set_search(string txt){

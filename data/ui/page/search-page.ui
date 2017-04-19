@@ -16,8 +16,6 @@
             <property name="width_request">800</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
-            <property name="halign">center</property>
-            <property name="vexpand">True</property>
             <child>
               <object class="GtkViewport" id="ScrollViewport">
                 <property name="visible">True</property>
@@ -30,7 +28,7 @@
             </child>
           </object>
           <packing>
-            <property name="expand">False</property>
+            <property name="expand">True</property>
             <property name="fill">True</property>
             <property name="position">0</property>
           </packing>
