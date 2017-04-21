@@ -25,27 +25,18 @@ namespace Gradio{
 
 		public string[] page_name = { "library", "discover", "search", "details", "settings", "loading" };
 
+		private Gradio.Headerbar header;
+		PlayerToolbar player_toolbar;
+
 		[GtkChild] private Box SearchBox;
 		[GtkChild] SearchBar SearchBar;
-		[GtkChild] private ToggleButton SearchButton;
 		[GtkChild] private MenuButton SearchMenuButton;
 		private SearchPopover search_popover;
 		private TaggedEntry SearchEntry;
 
 		[GtkChild] private Stack MainStack;
 		[GtkChild] private Overlay NotificationOverlay;
-
 		[GtkChild] private Box Bottom;
-		[GtkChild] private VolumeButton VolumeButton;
-		[GtkChild] private Button BackButton;
-
-		[GtkChild] private ButtonBox MainButtonBox;
-		[GtkChild] private ToggleButton DiscoverToggleButton;
-		[GtkChild] private ToggleButton LibraryToggleButton;
-		[GtkChild] private Stack TitleStack;
-		[GtkChild] private Label PageTitle;
-		[GtkChild] private Button SelectButton;
-		[GtkChild] private Stack HeaderStack;
 
 		private int height;
 		private int width;
@@ -53,8 +44,6 @@ namespace Gradio{
 		private StatusIcon trayicon;
 		public signal void toggle_view();
 		public signal void tray_activate();
-
-		PlayerToolbar player_toolbar;
 
 		DiscoverPage discover_page;
 		SearchPage search_page;
@@ -79,6 +68,9 @@ namespace Gradio{
 		}
 
 		private void setup_view(){
+			header = new Gradio.Headerbar();
+			this.set_titlebar(header);
+
 			SearchEntry = new TaggedEntry();
 			SearchEntry.set_size_request(550, -1);
 			search_page = new SearchPage();
@@ -102,9 +94,6 @@ namespace Gradio{
 			// showing library on startup
 			change_mode(WindowMode.LIBRARY);
 
-			VolumeButton.set_relief(ReliefStyle.NORMAL);
-			VolumeButton.set_value(Settings.volume_position);
-
 			var gtk_settings = Gtk.Settings.get_default ();
 			if (Settings.enable_dark_design) {
 				gtk_settings.gtk_application_prefer_dark_theme = true;
@@ -127,10 +116,29 @@ namespace Gradio{
 			 	height = a.height;
 			});
 
-			LibraryToggleButton.clicked.connect(show_library);
-			DiscoverToggleButton.clicked.connect(show_discover);
-			BackButton.clicked.connect(go_back);
-			SearchBar.notify["search-mode-enabled"].connect(() => SearchButton.set_active(SearchBar.get_search_mode()));
+			header.LibraryToggleButton.clicked.connect(show_library);
+			header.DiscoverToggleButton.clicked.connect(show_discover);
+			header.BackButton.clicked.connect(go_back);
+			header.selection_canceled.connect(() => {
+				Page page = (Page)MainStack.get_visible_child();
+				page.set_selection_mode(false);
+			});
+
+			header.selection_started.connect(() => {
+				Page page = (Page)MainStack.get_visible_child();
+				page.set_selection_mode(true);
+			});
+			header.search_toggled.connect(() => {
+			 	SearchBar.set_search_mode(header.SearchButton.get_active());
+
+			 	if(in_mode_change)
+			 		return;
+
+			 	if(current_mode == WindowMode.SEARCH && !(header.SearchButton.get_active()))
+			 		go_back();
+			});
+
+			SearchBar.notify["search-mode-enabled"].connect(() => header.SearchButton.set_active(SearchBar.get_search_mode()));
 			SearchEntry.search_changed.connect(SearchEntry_search_changed);
 		}
 
@@ -148,11 +156,6 @@ namespace Gradio{
 
 		public void hide_tray_icon(){
 			trayicon.set_visible(false);
-		}
-
-		public void show_no_connection_message (){
-			VolumeButton.set_visible(false);
-			MainStack.set_visible_child_name("no_connection");
 		}
 
 		public void save_geometry (){
@@ -176,9 +179,17 @@ namespace Gradio{
 		private void change_mode(WindowMode mode, DataWrapper data = new DataWrapper()){
 			in_mode_change = true;
 
+			// deactivate selection mode
+			Page page = (Page)MainStack.get_visible_child();
+			page.set_selection_mode(false);
+			header.show_default_bar();
+
+			// show defaults in the headerbar
+			header.show_default_buttons();
+
 			// update main buttons according to mode
-			DiscoverToggleButton.set_active(mode == WindowMode.DISCOVER);
-			LibraryToggleButton.set_active(mode == WindowMode.LIBRARY);
+			header.DiscoverToggleButton.set_active(mode == WindowMode.DISCOVER);
+			header.LibraryToggleButton.set_active(mode == WindowMode.LIBRARY);
 
 			// hide unless we're going to search
 			SearchBar.set_search_mode (mode == WindowMode.SEARCH);
@@ -188,12 +199,6 @@ namespace Gradio{
 
 			// switch page
 			MainStack.set_visible_child_name(page_name[current_mode]);
-
-			// show defaults in the headerbar
-			TitleStack.set_visible_child_name("stackswitcher");
-			SelectButton.set_visible(true);
-			SearchButton.set_visible(true);
-
 
 			// do action for mode
 			switch(current_mode){
@@ -210,17 +215,21 @@ namespace Gradio{
 				};
 				case WindowMode.DETAILS: {
 					station_detail_page.set_station((RadioStation)data.station);
-					TitleStack.set_visible_child_name("label");
-
-					PageTitle.set_text(station_detail_page.get_title());
-					SelectButton.set_visible(false);
-					SearchButton.set_visible(false);
+					header.show_title(station_detail_page.get_title());
+					header.SelectButton.set_visible(false);
+					header.SearchButton.set_visible(false);
+					break;
+				};
+				case WindowMode.SETTINGS: {
+					header.show_title("Settings");
+					header.SelectButton.set_visible(false);
+					header.SearchButton.set_visible(false);
 					break;
 				};
 			}
 
 			// show back button if needed
-			BackButton.set_visible(current_mode != WindowMode.SEARCH && !(back_entry_stack.is_empty()));
+			header.BackButton.set_visible(current_mode != WindowMode.SEARCH && !(back_entry_stack.is_empty()));
 
 			in_mode_change = false;
 
@@ -303,17 +312,6 @@ namespace Gradio{
 			change_mode(WindowMode.SETTINGS);
 		}
 
-		[GtkCallback]
-		private void SearchButton_toggled (){
-			SearchBar.set_search_mode(SearchButton.get_active());
-
-			if(in_mode_change)
-				return;
-
-			if(current_mode == WindowMode.SEARCH && !(SearchButton.get_active()))
-				go_back();
-
-		}
 
 		private void SearchEntry_search_changed(){
 			string search_term = SearchEntry.get_text();
@@ -329,29 +327,6 @@ namespace Gradio{
 					search_page.set_search(search_term);
 				}
 			}
-		}
-
-
-		[GtkCallback]
-        	private void VolumeButton_value_changed (double value) {
-			App.player.set_volume(value);
-			Settings.volume_position = value;
-		}
-
-		[GtkCallback]
-		private void CancelSelectionButton_clicked(Button button){
-			Page page = (Page)MainStack.get_visible_child();
-
-			HeaderStack.set_visible_child_name("default");
-			page.set_selection_mode(false);
-		}
-
-		[GtkCallback]
-		private void SelectButton_clicked(Button button){
-			Page page = (Page)MainStack.get_visible_child();
-
-			HeaderStack.set_visible_child_name("selection");
-			page.set_selection_mode(true);
 		}
 
 		[GtkCallback]
@@ -376,10 +351,10 @@ namespace Gradio{
 			if ((event.keyval == Gdk.Key.f) && (event.state & default_modifiers) == Gdk.ModifierType.CONTROL_MASK) {
 				if(SearchBar.get_search_mode()){
 					SearchBar.set_search_mode(false);
-					SearchButton.set_active(false);
+					header.SearchButton.set_active(false);
 				}else{
 					SearchBar.set_search_mode(true);
-					SearchButton.set_active(true);
+					header.SearchButton.set_active(true);
 				}
 			}
 

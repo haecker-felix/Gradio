@@ -20,5 +20,6 @@
 	<file>ui/status-label.ui</file>
 	<file>ui/tag-box.ui</file>
 	<file>ui/search-popover.ui</file>
+	<file>ui/headerbar.ui</file>
   </gresource>
 </gresources>

@@ -37,6 +37,7 @@ vala_sources = [
 		'gradio-status-label.vala',
 		'gradio-utils.vala',
 		'gradio-notification.vala',
+		'gradio-headerbar.vala',
 		'gradio-search-popover.vala']
 
 vala_args = [
