@@ -23,6 +23,9 @@ namespace Gradio{
 		public signal void selection_started();
 		public signal void search_toggled();
 
+		public signal void select_all();
+		public signal void select_none();
+
 		//
 		// Default
 		//
@@ -45,12 +48,11 @@ namespace Gradio{
 		public Headerbar(){
 			VolumeButton.set_relief(Gtk.ReliefStyle.NORMAL);
 			VolumeButton.set_value(Settings.volume_position);
-		}
 
-		private void connect_signals(){
-			CancelSelectionButton.clicked.connect(() => {
+			var builder = new Gtk.Builder.from_resource ("/de/haecker-felix/gradio/ui/selection-menu.ui");
+			var selection_menu = builder.get_object ("selection-menu") as GLib.MenuModel;
 
-			});
+			SelectionMenuButton.set_menu_model(selection_menu);
 		}
 
 		public void show_title(string t){

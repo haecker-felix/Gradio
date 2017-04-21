@@ -52,7 +52,7 @@ namespace Gradio {
 
 			player = new AudioPlayer();
 
-			create_app_menu();
+			setup_actions();
 
 			if(Settings.enable_mpris == true){
 				mpris = new MPRIS();
@@ -101,7 +101,8 @@ namespace Gradio {
 		    	});
 		}
 
-		private void create_app_menu () {
+		private void setup_actions () {
+			// Appmenu
 			var action = new GLib.SimpleAction ("preferences", null);
 			action.activate.connect (() => { window.show_settings (); });
 			this.add_action (action);
@@ -122,6 +123,15 @@ namespace Gradio {
 			var app_menu = builder.get_object ("app-menu") as GLib.MenuModel;
 
 			set_app_menu (app_menu);
+
+
+			action = new GLib.SimpleAction ("select-all", null);
+			action.activate.connect (() => { window.select_all(); });
+			this.add_action (action);
+
+			action = new GLib.SimpleAction ("select-none", null);
+			action.activate.connect (() => { window.select_none (); });
+			this.add_action (action);
 		}
 
 		public void report_an_error(){

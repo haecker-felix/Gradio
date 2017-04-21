@@ -170,6 +170,15 @@ namespace Gradio{
 			height = Settings.window_height;
 		}
 
+		public void select_all(){
+			Page page = (Page)MainStack.get_visible_child();
+			page.select_all();
+		}
+
+		public void select_none(){
+			Page page = (Page)MainStack.get_visible_child();
+			page.select_none();
+		}
 
 		public void show_notification(Gradio.Notification notification){
 			NotificationOverlay.add_overlay(notification);

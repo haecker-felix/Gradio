@@ -69,5 +69,19 @@ namespace Gradio{
 
 			return false;
 		}
+
+		public void set_selection_mode(bool b){
+			mainbox.set_selection_mode(b);
+		}
+
+		public void select_all(){
+			mainbox.select_all();
+		}
+
+		public void select_none(){
+			mainbox.unselect_all();
+		}
 	}
 }
+
+
