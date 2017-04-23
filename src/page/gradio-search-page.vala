@@ -42,6 +42,7 @@ namespace Gradio{
 
 			ScrollViewport.add(mainbox);
 			mainbox.selection_changed.connect(() => {selection_changed();});
+			mainbox.selection_mode_request.connect(() => {selection_mode_enabled();});
 		}
 
 		public void set_search(string txt){

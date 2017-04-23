@@ -127,17 +127,8 @@ namespace Gradio{
 			header.LibraryToggleButton.clicked.connect(show_library);
 			header.DiscoverToggleButton.clicked.connect(show_discover);
 			header.BackButton.clicked.connect(go_back);
-			header.selection_canceled.connect(() => {
-				Page page = (Page)MainStack.get_visible_child();
-				page.set_selection_mode(false);
-				SelectionToolbarRevealer.set_reveal_child(false);
-			});
-
-			header.selection_started.connect(() => {
-				Page page = (Page)MainStack.get_visible_child();
-				page.set_selection_mode(true);
-				SelectionToolbarRevealer.set_reveal_child(true);
-			});
+			header.selection_canceled.connect(disable_selection_mode);
+			header.selection_started.connect(enable_selection_mode);
 			header.search_toggled.connect(() => {
 			 	SearchBar.set_search_mode(header.SearchButton.get_active());
 
@@ -180,6 +171,20 @@ namespace Gradio{
 			height = Settings.window_height;
 		}
 
+		public void enable_selection_mode(){
+			Page page = (Page)MainStack.get_visible_child();
+			page.set_selection_mode(true);
+			SelectionToolbarRevealer.set_reveal_child(true);
+			header.show_selection_bar();
+		}
+
+		public void disable_selection_mode(){
+			Page page = (Page)MainStack.get_visible_child();
+			page.set_selection_mode(false);
+			SelectionToolbarRevealer.set_reveal_child(false);
+			header.show_default_bar();
+		}
+
 		public void select_all(){
 			Page page = (Page)MainStack.get_visible_child();
 			page.select_all();
@@ -213,6 +218,7 @@ namespace Gradio{
 
 			// disconnect old selection_changed signal
 			page.selection_changed.disconnect(selection_changed);
+			page.selection_mode_enabled.disconnect(enable_selection_mode);
 
 			// show defaults in the headerbar
 			header.show_default_buttons();
@@ -233,6 +239,7 @@ namespace Gradio{
 			// connect new signals
 			Page new_page = (Page)MainStack.get_visible_child();
 			new_page.selection_changed.connect(selection_changed);
+			new_page.selection_mode_enabled.connect(enable_selection_mode);
 
 			// do action for mode
 			switch(current_mode){

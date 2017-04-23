@@ -77,12 +77,10 @@ namespace Gradio{
 
 		public void show_selection_bar(){
 			this.set_visible_child_name("selection");
-			selection_started();
 		}
 
 		public void show_default_bar(){
 			this.set_visible_child_name("default");
-			selection_canceled();
 		}
 
 		[GtkCallback]
