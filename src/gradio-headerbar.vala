@@ -52,7 +52,16 @@ namespace Gradio{
 			var builder = new Gtk.Builder.from_resource ("/de/haecker-felix/gradio/ui/selection-menu.ui");
 			var selection_menu = builder.get_object ("selection-menu") as GLib.MenuModel;
 
+			SelectionMenuButtonLabel.set_text("Click on items to select them");
 			SelectionMenuButton.set_menu_model(selection_menu);
+		}
+
+		public void set_selected_items(int i){
+			if(i == 0){
+				SelectionMenuButtonLabel.set_text("Click on items to select them");
+			}else{
+				SelectionMenuButtonLabel.set_text(i.to_string() + " selected");
+			}
 		}
 
 		public void show_title(string t){

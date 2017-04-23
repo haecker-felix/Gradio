@@ -42,6 +42,7 @@ namespace Gradio{
 			mainbox.set_model(station_model);
 
 			ScrollViewport.add(mainbox);
+			mainbox.selection_changed.connect(() => {selection_changed();});
 		}
 
 		public void set_search(string txt){
@@ -80,6 +81,10 @@ namespace Gradio{
 
 		public void select_none(){
 			mainbox.unselect_all();
+		}
+
+		public GLib.List<Gd.MainBoxItem> get_selection(){
+			return mainbox.get_selection();
 		}
 	}
 }

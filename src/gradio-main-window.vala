@@ -55,6 +55,8 @@ namespace Gradio{
 		WindowMode current_mode;
 		bool in_mode_change;
 
+		private GLib.List<Gd.MainBoxItem> current_selection;
+
 		private App app;
 
 		public MainWindow (App appl) {
@@ -180,6 +182,13 @@ namespace Gradio{
 			page.select_none();
 		}
 
+		public void selection_changed(){
+			Page page = (Page)MainStack.get_visible_child();
+			current_selection = page.get_selection();
+
+			header.set_selected_items((int)current_selection.length());
+		}
+
 		public void show_notification(Gradio.Notification notification){
 			NotificationOverlay.add_overlay(notification);
 			this.show_all();
@@ -192,6 +201,9 @@ namespace Gradio{
 			Page page = (Page)MainStack.get_visible_child();
 			page.set_selection_mode(false);
 			header.show_default_bar();
+
+			// disconnect old selection_changed signal
+			page.selection_changed.disconnect(selection_changed);
 
 			// show defaults in the headerbar
 			header.show_default_buttons();
@@ -208,6 +220,10 @@ namespace Gradio{
 
 			// switch page
 			MainStack.set_visible_child_name(page_name[current_mode]);
+
+			// connect new signals
+			Page new_page = (Page)MainStack.get_visible_child();
+			new_page.selection_changed.connect(selection_changed);
 
 			// do action for mode
 			switch(current_mode){

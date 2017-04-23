@@ -26,6 +26,7 @@ namespace Gradio{
 		public LibraryPage(){
 			mainbox = new MainBox();
 			mainbox.set_model(Library.library_model);
+			mainbox.selection_changed.connect(() => {selection_changed();});
 
 			this.add(mainbox);
 		}
@@ -40,6 +41,10 @@ namespace Gradio{
 
 		public void select_none(){
 			mainbox.unselect_all();
+		}
+
+		public GLib.List<Gd.MainBoxItem> get_selection(){
+			return mainbox.get_selection();
 		}
 	}
 }

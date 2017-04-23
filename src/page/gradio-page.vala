@@ -27,7 +27,11 @@ namespace Gradio{
 		public virtual void set_selection_mode(bool b){}
 		public virtual void select_all(){}
 		public virtual void select_none(){}
+
 		public signal void selection_changed();
+		public virtual GLib.List<Gd.MainBoxItem> get_selection(){
+			return null;
+		}
 
 	}
 }
