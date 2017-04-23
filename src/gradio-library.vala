@@ -52,6 +52,9 @@ namespace Gradio{
 
 
 		public bool add_radio_station(RadioStation station){
+			if(contains_station(station) || station == null)
+				return true;
+
 			string query = "INSERT INTO library (station_id,folder_id) VALUES ("+station.id+", '0');";
 
 			int return_code = db.exec (query, null, out db_error_message);
@@ -66,6 +69,9 @@ namespace Gradio{
 		}
 
 		public bool remove_radio_station(RadioStation station){
+			if(!contains_station(station) || station == null)
+				return true;
+
 			string query = "DELETE FROM library WHERE station_id=" + station.id;
 
 			int return_code = db.exec (query, null, out db_error_message);

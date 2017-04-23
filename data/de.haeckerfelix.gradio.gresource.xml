@@ -22,5 +22,6 @@
 	<file>ui/search-popover.ui</file>
 	<file>ui/headerbar.ui</file>
 	<file>ui/selection-menu.ui</file>
+	<file>ui/selection-toolbar.ui</file>
   </gresource>
 </gresources>

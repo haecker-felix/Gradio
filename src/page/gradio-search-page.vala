@@ -21,8 +21,7 @@ namespace Gradio{
 	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/page/search-page.ui")]
 	public class SearchPage : Gtk.Box, Page{
 
-		[GtkChild]
-		Viewport ScrollViewport;
+		[GtkChild] Viewport ScrollViewport;
 
 		private MainBox mainbox;
 		private StationModel station_model;

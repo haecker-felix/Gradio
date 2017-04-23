@@ -21,6 +21,8 @@ namespace Gradio{
 	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/page/library-page.ui")]
 	public class LibraryPage : Gtk.Box, Page{
 
+		[GtkChild] Viewport ScrollViewport;
+
 		private MainBox mainbox;
 
 		public LibraryPage(){
@@ -28,7 +30,7 @@ namespace Gradio{
 			mainbox.set_model(Library.library_model);
 			mainbox.selection_changed.connect(() => {selection_changed();});
 
-			this.add(mainbox);
+			ScrollViewport.add(mainbox);
 		}
 
 		public void set_selection_mode(bool b){

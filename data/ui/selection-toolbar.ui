@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.20.0 -->
+<interface>
+  <requires lib="gtk+" version="3.20"/>
+  <template class="GradioSelectionToolbar" parent="GtkBox">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="margin_left">6</property>
+    <property name="margin_right">6</property>
+    <property name="margin_top">6</property>
+    <property name="margin_bottom">6</property>
+    <property name="spacing">6</property>
+    <child>
+      <object class="GtkButton" id="AddToLibraryButton">
+        <property name="label" translatable="yes">Add to library</property>
+        <property name="can_focus">True</property>
+        <property name="receives_default">True</property>
+        <property name="no_show_all">True</property>
+        <signal name="clicked" handler="AddToLibraryButton_clicked" swapped="no"/>
+      </object>
+      <packing>
+        <property name="expand">False</property>
+        <property name="fill">True</property>
+        <property name="position">0</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkButton" id="RemoveFromLibraryButton">
+        <property name="label" translatable="yes">Remove from Library</property>
+        <property name="can_focus">True</property>
+        <property name="receives_default">True</property>
+        <property name="no_show_all">True</property>
+        <signal name="clicked" handler="RemoveFromLibraryButton_clicked" swapped="no"/>
+      </object>
+      <packing>
+        <property name="expand">False</property>
+        <property name="fill">True</property>
+        <property name="position">1</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkButton" id="AddToCollectionButton">
+        <property name="label" translatable="yes">Add to collection</property>
+        <property name="can_focus">True</property>
+        <property name="receives_default">True</property>
+        <property name="no_show_all">True</property>
+        <signal name="clicked" handler="AddToCollectionButton_clicked" swapped="no"/>
+      </object>
+      <packing>
+        <property name="expand">False</property>
+        <property name="fill">True</property>
+        <property name="pack_type">end</property>
+        <property name="position">2</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkSeparator">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+      </object>
+      <packing>
+        <property name="expand">False</property>
+        <property name="fill">True</property>
+        <property name="position">3</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkButton" id="VoteButton">
+        <property name="can_focus">True</property>
+        <property name="receives_default">True</property>
+        <property name="no_show_all">True</property>
+        <child>
+          <object class="GtkImage">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="icon_name">emote-love-symbolic</property>
+          </object>
+        </child>
+      </object>
+      <packing>
+        <property name="expand">False</property>
+        <property name="fill">True</property>
+        <property name="position">4</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkButton" id="ShareButton">
+        <property name="can_focus">True</property>
+        <property name="receives_default">True</property>
+        <property name="no_show_all">True</property>
+        <signal name="clicked" handler="ShareButton_clicked" swapped="no"/>
+        <child>
+          <object class="GtkImage">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="icon_name">emblem-shared-symbolic</property>
+          </object>
+        </child>
+      </object>
+      <packing>
+        <property name="expand">False</property>
+        <property name="fill">True</property>
+        <property name="position">5</property>
+      </packing>
+    </child>
+  </template>
+</interface>

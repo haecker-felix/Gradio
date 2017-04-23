@@ -7,31 +7,19 @@
     <property name="can_focus">False</property>
     <property name="baseline_position">top</property>
     <child>
-      <object class="GtkBox">
+      <object class="GtkScrolledWindow">
+        <property name="width_request">800</property>
         <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="orientation">vertical</property>
+        <property name="can_focus">True</property>
         <child>
-          <object class="GtkScrolledWindow">
-            <property name="width_request">800</property>
+          <object class="GtkViewport" id="ScrollViewport">
             <property name="visible">True</property>
-            <property name="can_focus">True</property>
+            <property name="can_focus">False</property>
+            <property name="shadow_type">none</property>
             <child>
-              <object class="GtkViewport" id="ScrollViewport">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="shadow_type">none</property>
-                <child>
-                  <placeholder/>
-                </child>
-              </object>
+              <placeholder/>
             </child>
           </object>
-          <packing>
-            <property name="expand">True</property>
-            <property name="fill">True</property>
-            <property name="position">0</property>
-          </packing>
         </child>
       </object>
       <packing>

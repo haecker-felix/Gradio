@@ -55,7 +55,10 @@ namespace Gradio{
 		WindowMode current_mode;
 		bool in_mode_change;
 
-		private GLib.List<Gd.MainBoxItem> current_selection;
+		[GtkChild] private Revealer SelectionToolbarRevealer;
+		[GtkChild] private Box SelectionToolbarBox;
+		private SelectionToolbar selection_toolbar;
+		public GLib.List<Gd.MainBoxItem> current_selection;
 
 		private App app;
 
@@ -72,6 +75,9 @@ namespace Gradio{
 		private void setup_view(){
 			header = new Gradio.Headerbar();
 			this.set_titlebar(header);
+
+			selection_toolbar = new SelectionToolbar();
+			SelectionToolbarBox.add(selection_toolbar);
 
 			SearchEntry = new TaggedEntry();
 			SearchEntry.set_size_request(550, -1);
@@ -124,11 +130,13 @@ namespace Gradio{
 			header.selection_canceled.connect(() => {
 				Page page = (Page)MainStack.get_visible_child();
 				page.set_selection_mode(false);
+				SelectionToolbarRevealer.set_reveal_child(false);
 			});
 
 			header.selection_started.connect(() => {
 				Page page = (Page)MainStack.get_visible_child();
 				page.set_selection_mode(true);
+				SelectionToolbarRevealer.set_reveal_child(true);
 			});
 			header.search_toggled.connect(() => {
 			 	SearchBar.set_search_mode(header.SearchButton.get_active());
@@ -200,6 +208,7 @@ namespace Gradio{
 			// deactivate selection mode
 			Page page = (Page)MainStack.get_visible_child();
 			page.set_selection_mode(false);
+			selection_toolbar.set_library_mode(false);
 			header.show_default_bar();
 
 			// disconnect old selection_changed signal
@@ -235,6 +244,7 @@ namespace Gradio{
 					break;
 				};
 				case WindowMode.LIBRARY: {
+					selection_toolbar.set_library_mode(true);
 					clean_back_entry_stack();
 					break;
 				};
@@ -356,7 +366,7 @@ namespace Gradio{
 
 		[GtkCallback]
 		public bool on_key_pressed (Gdk.EventKey event) {
-		var default_modifiers = Gtk.accelerator_get_default_mod_mask ();
+			var default_modifiers = Gtk.accelerator_get_default_mod_mask ();
 
 			// Quit
 			if ((event.keyval == Gdk.Key.q || event.keyval == Gdk.Key.Q) && (event.state & default_modifiers) == Gdk.ModifierType.CONTROL_MASK) {
