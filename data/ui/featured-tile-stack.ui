@@ -35,6 +35,9 @@
             <property name="valign">end</property>
             <property name="margin_bottom">14</property>
             <property name="stack">FeaturedStack</property>
+            <style>
+              <class name="featured-tile-switcher"/>
+            </style>
           </object>
         </child>
       </object>

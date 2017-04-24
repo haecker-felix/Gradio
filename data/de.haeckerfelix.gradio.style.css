@@ -7,6 +7,14 @@
 	background: linear-gradient(@theme_base_color, @borders);
 }
 
+.featured-tile-switcher button{
+	padding-left: 0px;
+	padding-right: 0px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	min-width: 40px;
+}
+
 .app-list {
 	background-color: @theme_base_color;
 }
