@@ -14,8 +14,29 @@
  * along with Gradio.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Gradio{
-	public interface Row{
+using Gtk;
 
+namespace Gradio{
+
+	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/featured-tile-stack.ui")]
+	public class FeaturedTileStack : Gtk.Box{
+
+		[GtkChild] private Stack FeaturedStack;
+		private StationModel model;
+
+
+		public FeaturedTileStack(ref StationModel m){
+			model = m;
+
+			model.items_changed.connect((position, removed, added) => {
+				if(added == 1 && removed == 0){
+					RadioStation station = (RadioStation)model.get_item(position);
+					FeaturedTile tile = new FeaturedTile(station);
+
+					FeaturedStack.add_titled(tile, station.id.to_string(), "•");
+				}
+
+			});
+		}
 	}
 }

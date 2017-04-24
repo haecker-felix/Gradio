@@ -1,54 +1,30 @@
-.grid-item {
-	padding: 0;
-	box-shadow: inset 0 1px @theme_base_color, 0 1px 1px alpha(black,0.4);
-	border: 1px solid mix(@theme_base_color,@theme_fg_color,0.3);
-	background-image: none;
-	background-color: mix(@theme_base_color,@theme_bg_color,0.3);
+.featured-tile{
+	border-radius: 0px;
+	border-top: 1px mix(@theme_base_color,@theme_fg_color,0.3) solid;
+	border-bottom: 1px mix(@theme_base_color,@theme_fg_color,0.3) solid;
+	border-right: 0px;
+	border-left: 0px;
+	background: linear-gradient(@theme_base_color, @borders);
 }
 
-
-.round-border{
-	border-radius: 3px;
+.app-list {
+	background-color: @theme_base_color;
 }
 
-.border{
-	border-width: 1px 1px 1px 1px;
-	border-style: solid;
-	border-color: @borders;
+.featured-tile:hover {
+	background-color: @theme_base_color;
 }
 
-.no-border-radius{
-        border-radius: 0px;
+.featured-tile:active {
+	border-color: @theme_selected_bg_color;
+	box-shadow: none;
+	color: @theme_selected_bg_color;
 }
 
-
-.border-top{
-	border-width: 1px 0px 0px 0px;
-	border-style: solid;
-	border-color: @borders;
+.featured-tile:backdrop {
+	box-shadow: none;
+	border-color: @unfocused_borders;
 }
-.border-bottom{
-	border-width: 0px 0px 1px 0px;
-	border-style: solid;
-	border-color: @borders;
-}
-.border-left{
-	border-width: 0px 0px 0px 1px;
-	border-style: solid;
-	border-color: @borders;
-}
-.border-right{
-	border-width: 0px 1px 0px 0px;
-	border-style: solid;
-	border-color: @borders;
-}
-.border-left-right{
-        border-width: 0px 1px 0px 1px;
-        border-style: solid;
-        border-color: @borders;
-
-}
-
 
 .tag label {
         background-color: @theme_bg_color;

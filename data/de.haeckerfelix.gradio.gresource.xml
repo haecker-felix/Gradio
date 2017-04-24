@@ -23,5 +23,7 @@
 	<file>ui/headerbar.ui</file>
 	<file>ui/selection-menu.ui</file>
 	<file>ui/selection-toolbar.ui</file>
+	<file>ui/featured-tile.ui</file>
+	<file>ui/featured-tile-stack.ui</file>
   </gresource>
 </gresources>

@@ -121,7 +121,6 @@ namespace Gradio{
 
 			provider.load_from_resource ("/de/haecker-felix/gradio/de.haeckerfelix.gradio.style.css");
 			StyleContext.add_provider_for_screen (Gdk.Screen.get_default (), provider, Gtk.STYLE_PROVIDER_PRIORITY_USER);
-			message("Loaded from /de/haecker-felix/gradio/de.haeckerfelix.gradio.style.css");
 		}
 
 		public static void send_notification(string summary, string body, Gdk.Pixbuf? icon = null){

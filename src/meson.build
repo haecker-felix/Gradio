@@ -1,20 +1,11 @@
 vala_sources = [
 		'gradio-app.vala',
-		'tile/gradio-big-tile.vala',
-		'tile/gradio-small-tile.vala',
-		'tile/gradio-tile.vala',
-		'row/gradio-row.vala',
-		'row/gradio-big-row.vala',
-		'row/gradio-small-row.vala',
 		'page/gradio-discover-page.vala',
 		'page/gradio-library-page.vala',
 		'page/gradio-search-page.vala',
 		'page/gradio-station-detail-page.vala',
 		'page/gradio-settings-page.vala',
 		'page/gradio-page.vala',
-		'view/gradio-tile-view.vala',
-		'view/gradio-row-view.vala',
-		'view/gradio-view.vala',
 		'groupbox/gradio-groupbox-switch-item.vala',
 		'groupbox/gradio-groupbox-item.vala',
 		'groupbox/gradio-groupbox.vala',
@@ -39,6 +30,8 @@ vala_sources = [
 		'gradio-notification.vala',
 		'gradio-headerbar.vala',
 		'gradio-selection-toolbar.vala',
+		'gradio-featured-tile.vala',
+		'gradio-featured-tile-stack.vala',
 		'gradio-search-popover.vala']
 
 vala_args = [

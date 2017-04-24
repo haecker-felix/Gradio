@@ -52,7 +52,6 @@ namespace Gradio{
 
 		private StationProvider similar_station_provider;
 		private StationModel similar_station_model;
-		private TileView similar_btile_view;
 
 		[GtkChild]
 		private Box Bottom;
@@ -91,12 +90,12 @@ namespace Gradio{
 			tags_group.add_widget(tbox);
 			Bottom.pack_start(tags_group);
 
-			GroupBox similar_stations_group = new GroupBox("Similar Stations");
-			similar_station_model = new StationModel();
-			similar_station_provider = new StationProvider(ref similar_station_model, 12);
-			similar_btile_view = new TileView(ref similar_station_model);
-			similar_stations_group.add_widget(similar_btile_view);
-			Bottom.pack_start(similar_stations_group);
+			//GroupBox similar_stations_group = new GroupBox("Similar Stations");
+			//similar_station_model = new StationModel();
+			//similar_station_provider = new StationProvider(ref similar_station_model, 12);
+			//similar_btile_view = new TileView(ref similar_station_model);
+			//similar_stations_group.add_widget(similar_btile_view);
+			//Bottom.pack_start(similar_stations_group);
 		}
 
 		public RadioStation get_station(){

@@ -23,7 +23,7 @@ namespace Gradio{
 		public MainBox(){
 			Object(box_type: Gd.MainBoxType.ICON);
 
-			this.expand = true;
+			//this.expand = true;
 			this.set_show_primary_text(true);
 			this.set_show_secondary_text(true);
 			this.show_all();
