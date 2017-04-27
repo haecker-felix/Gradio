@@ -125,7 +125,7 @@ namespace Gradio{
 				if(_pixbuf == null)
 					download_icon();
 
-				Util.optiscale(ref _pixbuf, 150);
+				Util.optiscale(ref _pixbuf, 192);
 				Cairo.Surface surface = Gdk.cairo_surface_create_from_pixbuf(_pixbuf, 1, null);
 				_icon = surface;
 

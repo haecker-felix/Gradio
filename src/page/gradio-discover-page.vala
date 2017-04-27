@@ -29,20 +29,21 @@ namespace Gradio{
 		}
 
 		private void setup_view(){
-			StationModel popular_stations = new StationModel();
-			StationProvider popular_stations_provider = new StationProvider(ref popular_stations, 5);
+			// featured
+			StationModel featured_stations = new StationModel();
+			StationProvider popular_stations_provider = new StationProvider(ref featured_stations, 5);
 			popular_stations_provider.set_address(RadioBrowser.radio_stations_most_votes);
-
-			MainBox popular_stations_box = new MainBox();
-			popular_stations_box.set_model(popular_stations);
-
-			RadioStation test = new RadioStation("Deutschland Radio");
-
-			FeaturedTileStack featured_tile_stack = new FeaturedTileStack(ref popular_stations);
-
-
+			FeaturedTileStack featured_tile_stack = new FeaturedTileStack(ref featured_stations);
 			FeaturedBox.pack_start(featured_tile_stack);
-			PopularStationsBox.pack_start(popular_stations_box);
+
+			// recently changed
+			StationModel changed_stations = new StationModel();
+			StationProvider changed_station_provider = new StationProvider(ref changed_stations, 12);
+			changed_station_provider.set_address(RadioBrowser.radio_stations_recently_changed);
+			MainBox changed_stations_box = new MainBox();
+			changed_stations_box.set_model(changed_stations);
+
+			PopularStationsBox.pack_start(changed_stations_box);
 		}
 	}
 }
