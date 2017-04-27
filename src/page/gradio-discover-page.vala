@@ -22,7 +22,8 @@ namespace Gradio{
 	public class DiscoverPage : Gtk.Box, Page{
 
 		[GtkChild] private Box FeaturedBox;
-		[GtkChild] private Box PopularStationsBox;
+		[GtkChild] private Box ClickedStationsBox;
+		[GtkChild] private Box ChangedStationsBox;
 
 		public DiscoverPage(){
 			setup_view();
@@ -38,12 +39,21 @@ namespace Gradio{
 
 			// recently changed
 			StationModel changed_stations = new StationModel();
-			StationProvider changed_station_provider = new StationProvider(ref changed_stations, 12);
-			changed_station_provider.set_address(RadioBrowser.radio_stations_recently_changed);
+			StationProvider changed_stations_provider = new StationProvider(ref changed_stations, 12);
+			changed_stations_provider.set_address(RadioBrowser.radio_stations_recently_changed);
 			MainBox changed_stations_box = new MainBox();
 			changed_stations_box.set_model(changed_stations);
+			ChangedStationsBox.pack_start(changed_stations_box);
 
-			PopularStationsBox.pack_start(changed_stations_box);
+			// recently clicked
+			StationModel clicked_stations = new StationModel();
+			StationProvider clicked_stations_provider = new StationProvider(ref clicked_stations, 12);
+			clicked_stations_provider.set_address(RadioBrowser.radio_stations_recently_clicked);
+			MainBox clicked_stations_box = new MainBox();
+			clicked_stations_box.set_model(clicked_stations);
+			ClickedStationsBox.pack_end(clicked_stations_box);
+
+
 		}
 	}
 }
