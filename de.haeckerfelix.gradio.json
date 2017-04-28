@@ -43,7 +43,8 @@
             "sources": [
                 {
                     "type": "git",
-                    "url": "https://anongit.freedesktop.org/git/gstreamer/gstreamer.git"
+                    "url": "https://anongit.freedesktop.org/git/gstreamer/gstreamer.git",
+                    "branch": "1.8"
                 }
             ]
         },
@@ -52,7 +53,8 @@
             "sources": [
                 {
                     "type": "git",
-                    "url": "https://anongit.freedesktop.org/git/gstreamer/gst-plugins-base.git"
+                    "url": "https://anongit.freedesktop.org/git/gstreamer/gst-plugins-base.git",
+                    "branch": "1.8"
                 }
             ]
         },
@@ -61,7 +63,8 @@
             "sources": [
                 {
                     "type": "git",
-                    "url": "https://anongit.freedesktop.org/git/gstreamer/gst-plugins-good.git"
+                    "url": "https://anongit.freedesktop.org/git/gstreamer/gst-plugins-good.git",
+                    "branch": "1.8"
                 }
             ]
         },
@@ -70,7 +73,8 @@
             "sources": [
                 {
                     "type": "git",
-                    "url": "https://anongit.freedesktop.org/git/gstreamer/gst-plugins-ugly.git"
+                    "url": "https://anongit.freedesktop.org/git/gstreamer/gst-plugins-ugly.git",
+                    "branch": "1.8"
                 }
             ]
         },
@@ -79,7 +83,8 @@
             "sources": [
                 {
                     "type": "git",
-                    "url": "https://anongit.freedesktop.org/git/gstreamer/gst-plugins-bad.git"
+                    "url": "https://anongit.freedesktop.org/git/gstreamer/gst-plugins-bad.git",
+                    "branch": "1.8"
                 }
             ]
         },
@@ -110,7 +115,8 @@
             "sources": [
                 {
                     "type": "git",
-                    "url": "https://anongit.freedesktop.org/git/gstreamer/gst-devtools.git"
+                    "url": "https://anongit.freedesktop.org/git/gstreamer/gst-devtools.git",
+                    "branch": "1.8"
                 }
             ]
         },

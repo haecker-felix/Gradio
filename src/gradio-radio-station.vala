@@ -122,14 +122,24 @@ namespace Gradio{
 
 		public Cairo.Surface icon {
 			get{
-				if(_pixbuf == null)
-					download_icon();
+				message("request icon");
+				if(_pixbuf == null){
+					message ("pixbuf is null -> downloading");
+					download_icon.begin();
 
-				Util.optiscale(ref _pixbuf, 192);
-				Cairo.Surface surface = Gdk.cairo_surface_create_from_pixbuf(_pixbuf, 1, null);
-				_icon = surface;
+					_pixbuf = new Pixbuf (Gdk.Colorspace.RGB, true, 8, 192, 192);
+					Cairo.Surface surface = Gdk.cairo_surface_create_from_pixbuf(_pixbuf, 1, null);
 
-				return _icon;
+					_icon = surface;
+					return _icon;
+				}else{
+					message ("returning the local cached image");
+					Util.optiscale(ref _pixbuf, 192);
+					Cairo.Surface surface = Gdk.cairo_surface_create_from_pixbuf(_pixbuf, 1, null);
+					_icon = surface;
+
+					return _icon;
+				}
 			}
 		}
 
@@ -201,27 +211,22 @@ namespace Gradio{
 				_is_broken = false;
 		}
 
-		private void download_icon(){
-			var session = new Soup.Session ();
+		private async void download_icon(){
+			var session = new Soup.SessionAsync ();
+			session.user_agent = "gradio/"+ Config.VERSION;
 			var message = new Soup.Message ("GET", _icon_address);
 			var loader = new Gdk.PixbufLoader();
 
-			if(message == null){
-				try{
+			session.queue_message (message, (session, msg) => {
+				if(message.response_body.data != null){
+					loader.write(message.response_body.data);
 					loader.close();
-				}catch(GLib.Error e){
-					warning(e.message);
+					_pixbuf = loader.get_pixbuf();
+
+					notify_property("icon");
 				}
-				return;
-			}
-
-			session.send_message (message);
-
-			if(message.response_body.data != null)
-				loader.write(message.response_body.data);
-
-			loader.close();
-			_pixbuf = loader.get_pixbuf();
+		    	});
+			yield;
 		}
 
 		private void stop_handler(){
