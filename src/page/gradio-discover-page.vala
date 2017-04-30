@@ -25,8 +25,19 @@ namespace Gradio{
 		[GtkChild] private Box ClickedStationsBox;
 		[GtkChild] private Box ChangedStationsBox;
 
+		[GtkChild] private FlowBox LanguagesFlowBox;
+
 		public DiscoverPage(){
 			setup_view();
+			connect_signals();
+		}
+
+		private void connect_signals(){
+			if(!App.ciprovider.is_ready){
+				App.ciprovider.loaded.connect(fill_lists);
+			}else{
+				fill_lists();
+			}
 		}
 
 		private void setup_view(){
@@ -52,8 +63,16 @@ namespace Gradio{
 			MainBox clicked_stations_box = new MainBox();
 			clicked_stations_box.set_model(clicked_stations);
 			ClickedStationsBox.pack_end(clicked_stations_box);
+		}
 
-
+		private void fill_lists(){
+			App.ciprovider.languages_list.foreach ((s) => {
+				Label l = new Label (s);
+				l.height_request = 30;
+				l.set_halign(Align.START);
+				l.set_visible(true);
+				LanguagesFlowBox.add(l);
+			});
 		}
 	}
 }

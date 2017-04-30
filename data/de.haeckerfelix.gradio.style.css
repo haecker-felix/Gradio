@@ -12,6 +12,25 @@
 	min-width: 40px;
 }
 
+.itemsbox{
+	background-color: @theme_base_color;
+}
+
+.items-switcher button{
+	border: none;
+	border-bottom: none;
+	background: none;
+	box-shadow: none;
+	border-radius: 0px;
+}
+
+.items-switcher button:checked{
+	border: none;
+	border-bottom: 3px solid @theme_selected_bg_color;
+	background: none;
+	border-radius: 0px;
+}
+
 .tag label {
         background-color: @theme_bg_color;
 	border-color: @unfocused_borders;
