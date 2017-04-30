@@ -22,14 +22,19 @@ namespace Gradio{
 	public class FeaturedTileStack : Gtk.Box{
 
 		[GtkChild] private Stack FeaturedStack;
+		[GtkChild] private Stack MainStack;
 		private StationModel model;
 
 
 		public FeaturedTileStack(ref StationModel m){
+			MainStack.set_visible_child_name("loading");
+
 			model = m;
 
 			model.items_changed.connect((position, removed, added) => {
 				if(added == 1 && removed == 0){
+					MainStack.set_visible_child_name("content");
+
 					RadioStation station = (RadioStation)model.get_item(position);
 					FeaturedTile tile = new FeaturedTile(station);
 
