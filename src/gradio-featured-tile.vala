@@ -28,9 +28,9 @@ namespace Gradio{
 		public FeaturedTile(RadioStation station){
 			StationTitle.set_text(station.title);
 
-			StationLogo.set_from_surface(station.icon);
+			StationLogo.set_from_pixbuf(Util.optiscale(station.pixbuf, 192));
 			station.notify["icon"].connect(() => {
-				StationLogo.set_from_surface(station.icon);
+				StationLogo.set_from_pixbuf(Util.optiscale(station.pixbuf, 192));
 			});
 
 			// Description

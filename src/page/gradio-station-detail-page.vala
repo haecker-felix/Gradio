@@ -162,7 +162,7 @@ namespace Gradio{
 				InformationBox.set_visible(true);
 
 			// Logo
-			StationImage.set_from_surface(station.icon);
+			StationImage.set_from_pixbuf(Util.optiscale(station.pixbuf,192));
 
 			// Similar Stations
 			string address = RadioBrowser.radio_stations_by_name + station.title.substring(0, station.title.index_of(" "));
@@ -170,7 +170,7 @@ namespace Gradio{
 		}
 
 		private void set_logo(){
-			StationImage.set_from_surface(station.icon);
+			StationImage.set_from_pixbuf(Util.optiscale(station.pixbuf,192));
 		}
 
 		private void reset_view(){

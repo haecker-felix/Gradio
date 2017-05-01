@@ -121,7 +121,8 @@ namespace Gradio{
 			StationLikesLabel.set_text(station.votes.to_string());
 
 			// Logo
-			StationLogo.set_from_surface(station.icon);
+			StationLogo.set_from_pixbuf(Util.optiscale(station.pixbuf,48));
+
 
 			this.set_visible(true);
 		}
@@ -132,7 +133,7 @@ namespace Gradio{
 		}
 
 		private void set_logo(){
-			StationLogo.set_from_surface(station.icon);
+			StationLogo.set_from_pixbuf(Util.optiscale(station.pixbuf,48));
 		}
 
 		private void show_stop_icon(){

@@ -120,26 +120,27 @@ namespace Gradio{
 			get{return _mtime;}
 		}
 
+		// icon for the gd mainbox
 		public Cairo.Surface icon {
 			get{
-				message("request icon");
+				Cairo.Surface surface = Gdk.cairo_surface_create_from_pixbuf(Util.optiscale(pixbuf, 192), 1, null);
+				_icon = surface;
+
+				return _icon;
+
+			}
+		}
+
+		public Gdk.Pixbuf pixbuf{
+			get{
 				if(_pixbuf == null){
-					message ("pixbuf is null -> downloading");
-					download_icon.begin();
+					_pixbuf = new Pixbuf.from_resource("/de/haecker-felix/gradio/icons/hicolor/48x48/apps/de.haeckerfelix.gradio.png");
+					download_pixbuf.begin();
 
-					_pixbuf = new Pixbuf (Gdk.Colorspace.RGB, true, 8, 192, 192);
-					Cairo.Surface surface = Gdk.cairo_surface_create_from_pixbuf(_pixbuf, 1, null);
-
-					_icon = surface;
-					return _icon;
-				}else{
-					message ("returning the local cached image");
-					Util.optiscale(ref _pixbuf, 192);
-					Cairo.Surface surface = Gdk.cairo_surface_create_from_pixbuf(_pixbuf, 1, null);
-					_icon = surface;
-
-					return _icon;
+					return _pixbuf;
 				}
+
+				return _pixbuf;
 			}
 		}
 
@@ -211,7 +212,7 @@ namespace Gradio{
 				_is_broken = false;
 		}
 
-		private async void download_icon(){
+		private async void download_pixbuf(){
 			var session = new Soup.SessionAsync ();
 			session.user_agent = "gradio/"+ Config.VERSION;
 			var message = new Soup.Message ("GET", _icon_address);
