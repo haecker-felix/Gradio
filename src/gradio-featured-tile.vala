@@ -28,11 +28,20 @@ namespace Gradio{
 		public FeaturedTile(RadioStation station){
 			StationTitle.set_text(station.title);
 
+			StationLogo.set_from_surface(station.icon);
+			station.notify["icon"].connect(() => {
+				StationLogo.set_from_surface(station.icon);
+			});
+
 			// Description
 			AdditionalDataProvider.get_description.begin(station, (obj,res) => {
 				string desc = AdditionalDataProvider.get_description.end(res);
 				StationDescription.set_text(desc);
 				StationDescription.set_visible(true);
+			});
+
+			this.clicked.connect(() => {
+				Gradio.App.window.show_station_details(station);
 			});
 		}
 	}
