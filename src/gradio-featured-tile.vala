@@ -27,6 +27,13 @@ namespace Gradio{
 
 		public FeaturedTile(RadioStation station){
 			StationTitle.set_text(station.title);
+
+			// Description
+			AdditionalDataProvider.get_description.begin(station, (obj,res) => {
+				string desc = AdditionalDataProvider.get_description.end(res);
+				StationDescription.set_text(desc);
+				StationDescription.set_visible(true);
+			});
 		}
 	}
 }

@@ -1,3 +1,19 @@
+.player-title {
+    font-weight: bold;
+    font-size: smaller;
+    padding: 0px 12px;
+}
+
+.player-subtitle {
+    font-size: smaller;
+    padding: 0px 12px;
+}
+
+.player-frame {
+    border-left: 1px solid shade(@theme_bg_color, 0.7);
+    border-right: 1px solid shade(@theme_bg_color, 0.7);
+}
+
 .featured-tile{
 	border: none;
 	border-radius: 0px;
