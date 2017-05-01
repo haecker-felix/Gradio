@@ -25,8 +25,8 @@ namespace Gradio{
 		private Label StationTitleLabel;
 		[GtkChild]
 		private Label StationMetadataLabel;
-		//[GtkChild]
-		//private Image StationLogo;
+		[GtkChild]
+		private Image StationLogo;
 		[GtkChild]
 		private Label StationLikesLabel;
 
@@ -87,6 +87,7 @@ namespace Gradio{
 				station.stopped.disconnect(show_play_icon);
 				station.added_to_library.disconnect(show_remove_icon);
 				station.removed_from_library.disconnect(show_add_icon);
+				station.notify["icon"].disconnect(set_logo);
 			}
 
 			// set new station
@@ -98,6 +99,7 @@ namespace Gradio{
 			station.stopped.connect(show_play_icon);
 			station.added_to_library.connect(show_remove_icon);
 			station.removed_from_library.connect(show_add_icon);
+			station.notify["icon"].connect(set_logo);
 
 			// Play / Stop Button
 			if(App.player.is_playing_station(station))
@@ -118,12 +120,19 @@ namespace Gradio{
 			// Likes
 			StationLikesLabel.set_text(station.votes.to_string());
 
+			// Logo
+			StationLogo.set_from_surface(station.icon);
+
 			this.set_visible(true);
 		}
 
 		private void set_tag(){
 			if(App.player.tag_title != null)
 				StationMetadataLabel.set_text(App.player.tag_title);
+		}
+
+		private void set_logo(){
+			StationLogo.set_from_surface(station.icon);
 		}
 
 		private void show_stop_icon(){

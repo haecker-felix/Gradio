@@ -30,6 +30,8 @@ namespace Gradio{
 		private Label StationLocationLabel;
 		[GtkChild]
 		private Label StationDescriptionLabel;
+		[GtkChild]
+		private Image StationImage;
 
 		private TagBox tbox;
 
@@ -74,6 +76,7 @@ namespace Gradio{
 			station.stopped.connect(show_play_box);
 			station.added_to_library.connect(show_remove_box);
 			station.removed_from_library.connect(show_add_box);
+			station.notify["icon"].connect(set_logo);
 		}
 
 		private void setup_view(){
@@ -117,6 +120,7 @@ namespace Gradio{
 				station.stopped.disconnect(show_play_box);
 				station.added_to_library.disconnect(show_remove_box);
 				station.removed_from_library.disconnect(show_add_box);
+				station.notify["icon"].disconnect(set_logo);
 			}
 
 			//connect new signals
@@ -157,9 +161,16 @@ namespace Gradio{
 			if(station.tags == "" || station.homepage == "" || station.icon_address == "" || station.title == "" || station.state == "" || station.country == "")
 				InformationBox.set_visible(true);
 
+			// Logo
+			StationImage.set_from_surface(station.icon);
+
 			// Similar Stations
 			string address = RadioBrowser.radio_stations_by_name + station.title.substring(0, station.title.index_of(" "));
 			similar_station_provider.set_address(address);
+		}
+
+		private void set_logo(){
+			StationImage.set_from_surface(station.icon);
 		}
 
 		private void reset_view(){
