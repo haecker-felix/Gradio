@@ -13,6 +13,7 @@
 	<file>ui/page/search-page.ui</file>
 	<file>ui/page/settings-page.ui</file>
 	<file>ui/page/station-detail-page.ui</file>
+	<file>ui/page/station-page.ui</file>
 	<file>ui/groupbox.ui</file>
 	<file>ui/app-menu.ui</file>
 	<file>ui/main-window.ui</file>

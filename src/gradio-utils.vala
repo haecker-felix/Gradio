@@ -24,7 +24,8 @@ namespace Gradio{
 		SEARCH,
 		DETAILS,
 		SETTINGS,
-		LOADING
+		LOADING,
+		STATION
 	}
 
 	public class BackEntry{
@@ -36,6 +37,9 @@ namespace Gradio{
 	public class DataWrapper{
 		public RadioStation station {get;set;}
 		public string search {get;set;}
+
+		public string title {get;set;}
+		public string address {get;set;}
 	}
 
 

@@ -23,7 +23,7 @@ namespace Gradio{
 	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/main-window.ui")]
 	public class MainWindow : Gtk.ApplicationWindow {
 
-		public string[] page_name = { "library", "discover", "search", "details", "settings", "loading" };
+		public string[] page_name = { "library", "discover", "search", "details", "settings", "loading", "stations"};
 
 		private Gradio.Headerbar header;
 		PlayerToolbar player_toolbar;
@@ -45,6 +45,7 @@ namespace Gradio{
 		public signal void toggle_view();
 		public signal void tray_activate();
 
+		StationPage station_page;
 		DiscoverPage discover_page;
 		SearchPage search_page;
 		LibraryPage library_page;
@@ -98,6 +99,9 @@ namespace Gradio{
 
 			settings_page = new SettingsPage();
 			MainStack.add_named(settings_page, page_name[WindowMode.SETTINGS]);
+
+			station_page = new StationPage();
+			MainStack.add_named(station_page, page_name[WindowMode.STATION]);
 
 			// showing library on startup
 			change_mode(WindowMode.LIBRARY);
@@ -268,6 +272,12 @@ namespace Gradio{
 					header.SearchButton.set_visible(false);
 					break;
 				};
+				case WindowMode.STATION: {
+					station_page.set_address(data.address);
+					station_page.set_title(data.title);
+					header.show_title(station_page.get_title());
+					break;
+				};
 			}
 
 			// show back button if needed
@@ -354,6 +364,17 @@ namespace Gradio{
 			change_mode(WindowMode.SETTINGS);
 		}
 
+		public void show_stations(string address, string title){
+			if(in_mode_change)
+				return;
+
+			save_back_entry();
+
+			DataWrapper data = new DataWrapper();
+			data.address = address;
+			data.title  = title;
+			change_mode(WindowMode.STATION, data);
+		}
 
 		private void SearchEntry_search_changed(){
 			string search_term = SearchEntry.get_text();
@@ -406,4 +427,3 @@ namespace Gradio{
 
 	}
 }
-

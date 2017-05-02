@@ -74,5 +74,20 @@ namespace Gradio{
 				LanguagesFlowBox.add(l);
 			});
 		}
+
+		[GtkCallback]
+		private void MorePopularStations_clicked(){
+			App.window.show_stations(RadioBrowser.radio_stations_most_votes, "Popular Stations");
+		}
+
+		[GtkCallback]
+		private void MoreRecentlyChanged_clicked(){
+			App.window.show_stations(RadioBrowser.radio_stations_recently_changed, "Recently Changed Stations");
+		}
+
+		[GtkCallback]
+		private void MoreRecentlyClicked_clicked(){
+			App.window.show_stations(RadioBrowser.radio_stations_recently_clicked, "Recently Clicked Stations");
+		}
 	}
 }
