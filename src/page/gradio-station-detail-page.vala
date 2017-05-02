@@ -92,13 +92,6 @@ namespace Gradio{
 			tbox = new TagBox();
 			tags_group.add_widget(tbox);
 			Bottom.pack_start(tags_group);
-
-			//GroupBox similar_stations_group = new GroupBox("Similar Stations");
-			//similar_station_model = new StationModel();
-			//similar_station_provider = new StationProvider(ref similar_station_model, 12);
-			//similar_btile_view = new TileView(ref similar_station_model);
-			//similar_stations_group.add_widget(similar_btile_view);
-			//Bottom.pack_start(similar_stations_group);
 		}
 
 		public RadioStation get_station(){
@@ -163,10 +156,6 @@ namespace Gradio{
 
 			// Logo
 			StationImage.set_from_pixbuf(Util.optiscale(station.pixbuf,192));
-
-			// Similar Stations
-			string address = RadioBrowser.radio_stations_by_name + station.title.substring(0, station.title.index_of(" "));
-			similar_station_provider.set_address(address);
 		}
 
 		private void set_logo(){
@@ -212,8 +201,7 @@ namespace Gradio{
 		//}
 
 		private void show_details(){
-			if(StationDescriptionLabel.get_text() != "")
-				DetailsStack.set_visible_child_name("details");
+			DetailsStack.set_visible_child_name("details");
 		}
 
 		[GtkCallback]

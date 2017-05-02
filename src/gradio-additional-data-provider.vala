@@ -19,10 +19,6 @@ using Gtk;
 namespace Gradio{
 	public class AdditionalDataProvider{
 
-		public static void get_additional_image(RadioStation station){
-
-		}
-
 		// Returns the html description metadata
 		// Much mess here. Feel free to improve this crap :)
 		public static async string get_description(RadioStation station){
@@ -30,9 +26,24 @@ namespace Gradio{
 
 			string descr = "";
 			string html = "";
+			string url = station.homepage;
+
+			// http://bla.org/da/da/da/da -> http://bla.org
+			bool finished = false;
+			while(!finished){
+				int lastindex = url.last_index_of("/");
+
+				// http://
+				if(url.get_char(lastindex-1) != '/'){
+					url = url.slice(0, lastindex);
+				}else{
+					finished = true;
+				}
+			}
+
 
 			// download the html
-			Util.get_string_from_uri.begin(station.homepage, (obj, res) => {
+			Util.get_string_from_uri.begin(url, (obj, res) => {
 				string result = Util.get_string_from_uri.end(res);
 
 				if(result != null)
@@ -46,46 +57,6 @@ namespace Gradio{
 			int start_index = html.index_of("<meta name=\"description\" content=\"");
 			int end_index = -1;
 			int html_length = html.length;
-
-			// take the root if no description found. http://bla.org/da/da/da/da -> http://bla.org
-			if(start_index == -1 && station.homepage != null && station.homepage != ""){
-				string url = station.homepage;
-				//message("Before: %s", url);
-
-				bool finished = false;
-
-				while(!finished){
-					int lastindex = url.last_index_of("/");
-
-					// http://
-					if(url.get_char(lastindex-1) != '/'){
-						url = url.slice(0, lastindex);
-					}else{
-						finished = true;
-					}
-				}
-
-				//message("After: %s", url);
-				station.homepage = url;
-
-				// process the new address
-				descr = "";
-				html = "";
-
-				Util.get_string_from_uri.begin(station.homepage, (obj, res) => {
-					string result = Util.get_string_from_uri.end(res);
-
-					if(result != null)
-						html = result;
-					Idle.add((owned) callback);
-				});
-
-				yield;
-
-				start_index = html.index_of("<meta name=\"description\" content=\"");
-				end_index = -1;
-				html_length = html.length;
-			}
 
 			// now find the end of the metadata
 			if(start_index > -1){
@@ -115,17 +86,9 @@ namespace Gradio{
 					descr = desc1.slice(0,end_index);
 				}
 			}
-			//message(">> %s", station.Title);
-			//message("Homepage: %s", station.Homepage);
-			//message("HTML Lenght: %i", html_length);
-			//message("Start index: %i", start_index);
-			//message("End index: %i", end_index);
 
 			return descr;
 		}
 
-		public static void get_station_image(RadioStation station){
-
-		}
 	}
 }

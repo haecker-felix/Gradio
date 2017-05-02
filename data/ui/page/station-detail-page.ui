@@ -706,7 +706,6 @@ Some information is missing...</property>
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="halign">start</property>
-    <property name="label" translatable="yes">Lorem ipsum dolor sit amet, co accusam et justo! Lorem ipsum dolor sit amet, co accusam et justo! Lorem ipsum dolor sit amet, co accusam et justo!</property>
     <property name="justify">fill</property>
     <property name="wrap">True</property>
     <property name="max_width_chars">95</property>
