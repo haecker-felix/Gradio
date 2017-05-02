@@ -144,8 +144,8 @@ namespace Gradio{
 			StationLikesLabel.set_text(station.votes);
 
 			// Description
-			AdditionalDataProvider.get_description.begin(station, (obj,res) => {
-				string desc = AdditionalDataProvider.get_description.end(res);
+			station.get_description.begin((obj,res) => {
+				string desc = station.get_description.end(res);
 				StationDescriptionLabel.set_text(desc);
 				show_details();
 			});
@@ -155,11 +155,11 @@ namespace Gradio{
 				InformationBox.set_visible(true);
 
 			// Logo
-			StationImage.set_from_pixbuf(Util.optiscale(station.pixbuf,192));
+			StationImage.set_from_pixbuf(Util.optiscale(station.pixbuf,128));
 		}
 
 		private void set_logo(){
-			StationImage.set_from_pixbuf(Util.optiscale(station.pixbuf,192));
+			StationImage.set_from_pixbuf(Util.optiscale(station.pixbuf,128));
 		}
 
 		private void reset_view(){

@@ -34,8 +34,8 @@ namespace Gradio{
 			});
 
 			// Description
-			AdditionalDataProvider.get_description.begin(station, (obj,res) => {
-				string desc = AdditionalDataProvider.get_description.end(res);
+			station.get_description.begin((obj,res) => {
+				string desc = station.get_description.end(res);
 				StationDescription.set_text(desc);
 				StationDescription.set_visible(true);
 			});
