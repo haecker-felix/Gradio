@@ -106,21 +106,21 @@ namespace Gradio{
 		}
 
 		private void fill_lists(){
-			App.ciprovider.countries_list.foreach ((s) => {
+			CategoryItemProvider.countries_list.foreach ((s) => {
 				Label l = new Label (s);
 				l.set_halign(Align.START);
 				l.set_visible(true);
 				CountryListBox.add(l);
 			});
 
-			App.ciprovider.states_list.foreach ((s) => {
+			CategoryItemProvider.states_list.foreach ((s) => {
 				Label l = new Label (s);
 				l.set_halign(Align.START);
 				l.set_visible(true);
 				StateListBox.add(l);
 			});
 
-			App.ciprovider.languages_list.foreach ((s) => {
+			CategoryItemProvider.languages_list.foreach ((s) => {
 				Label l = new Label (s);
 				l.set_halign(Align.START);
 				l.set_visible(true);

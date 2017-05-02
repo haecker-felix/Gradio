@@ -37,7 +37,6 @@ namespace Gradio{
 		[GtkChild] private Gtk.VolumeButton VolumeButton;
 		[GtkChild] public Gtk.Button BackButton;
 		[GtkChild] public Gtk.ToggleButton SearchButton;
-		[GtkChild] private Gtk.Button CancelSelectionButton;
 
 		//
 		// Selection

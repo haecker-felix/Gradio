@@ -52,9 +52,6 @@ namespace Gradio{
 		[GtkChild]
 		private ButtonBox ActionBox;
 
-		private StationProvider similar_station_provider;
-		private StationModel similar_station_model;
-
 		[GtkChild]
 		private Box Bottom;
 

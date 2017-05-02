@@ -66,7 +66,7 @@ namespace Gradio{
 		}
 
 		private void fill_lists(){
-			App.ciprovider.languages_list.foreach ((s) => {
+			CategoryItemProvider.languages_list.foreach ((s) => {
 				Label l = new Label (s);
 				l.height_request = 30;
 				l.set_halign(Align.START);

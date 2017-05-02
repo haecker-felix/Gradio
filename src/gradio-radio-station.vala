@@ -220,11 +220,16 @@ namespace Gradio{
 
 			session.queue_message (message, (session, msg) => {
 				if(message.response_body.data != null){
-					loader.write(message.response_body.data);
-					loader.close();
-					_pixbuf = loader.get_pixbuf();
+					try{
+						loader.write(message.response_body.data);
+						loader.close();
+						_pixbuf = loader.get_pixbuf();
 
-					notify_property("icon");
+						notify_property("icon");
+					}catch(GLib.Error e){
+						warning ("Could not download icon for %s (%s)", _title, e.message);
+					}
+
 				}
 		    	});
 			yield;
@@ -382,7 +387,6 @@ namespace Gradio{
 			// search description metadata
 			int start_index = html.index_of("<meta name=\"description\" content=\"");
 			int end_index = -1;
-			int html_length = html.length;
 
 			// now find the end of the metadata
 			if(start_index > -1){
