@@ -73,7 +73,6 @@ namespace Gradio{
 			station.stopped.connect(show_play_box);
 			station.added_to_library.connect(show_remove_box);
 			station.removed_from_library.connect(show_add_box);
-			station.notify["icon"].connect(set_logo);
 		}
 
 		private void setup_view(){
@@ -110,7 +109,6 @@ namespace Gradio{
 				station.stopped.disconnect(show_play_box);
 				station.added_to_library.disconnect(show_remove_box);
 				station.removed_from_library.disconnect(show_add_box);
-				station.notify["icon"].disconnect(set_logo);
 			}
 
 			//connect new signals
@@ -152,11 +150,15 @@ namespace Gradio{
 				InformationBox.set_visible(true);
 
 			// Logo
-			StationImage.set_from_pixbuf(Util.optiscale(station.pixbuf,128));
-		}
-
-		private void set_logo(){
-			StationImage.set_from_pixbuf(Util.optiscale(station.pixbuf,128));
+			var image_cache = new ImageCache();
+                	image_cache.get_image.begin(station.icon_address, (obj, res) => {
+		            	Gdk.Pixbuf pixbuf = image_cache.get_image.end(res);
+		            	if (pixbuf != null) {
+		                	StationImage.clear();
+		                	pixbuf = pixbuf.scale_simple(128, 128, Gdk.InterpType.BILINEAR);
+		                	StationImage.set_from_pixbuf(pixbuf);
+		            	}
+			});
 		}
 
 		private void reset_view(){

@@ -87,7 +87,6 @@ namespace Gradio{
 				station.stopped.disconnect(show_play_icon);
 				station.added_to_library.disconnect(show_remove_icon);
 				station.removed_from_library.disconnect(show_add_icon);
-				station.notify["icon"].disconnect(set_logo);
 			}
 
 			// set new station
@@ -99,7 +98,6 @@ namespace Gradio{
 			station.stopped.connect(show_play_icon);
 			station.added_to_library.connect(show_remove_icon);
 			station.removed_from_library.connect(show_add_icon);
-			station.notify["icon"].connect(set_logo);
 
 			// Play / Stop Button
 			if(App.player.is_playing_station(station))
@@ -121,7 +119,15 @@ namespace Gradio{
 			StationLikesLabel.set_text(station.votes.to_string());
 
 			// Logo
-			StationLogo.set_from_pixbuf(Util.optiscale(station.pixbuf,48));
+			var image_cache = new ImageCache();
+                	image_cache.get_image.begin(station.icon_address, (obj, res) => {
+		            	Gdk.Pixbuf pixbuf = image_cache.get_image.end(res);
+		            	if (pixbuf != null) {
+		                	StationLogo.clear();
+		                	pixbuf = pixbuf.scale_simple(48, 48, Gdk.InterpType.BILINEAR);
+		                	StationLogo.set_from_pixbuf(pixbuf);
+		            	}
+			});
 
 
 			this.set_visible(true);
@@ -130,10 +136,6 @@ namespace Gradio{
 		private void set_tag(){
 			if(App.player.tag_title != null)
 				StationMetadataLabel.set_text(App.player.tag_title);
-		}
-
-		private void set_logo(){
-			StationLogo.set_from_pixbuf(Util.optiscale(station.pixbuf,48));
 		}
 
 		private void show_stop_icon(){

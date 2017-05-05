@@ -123,24 +123,15 @@ namespace Gradio{
 		// icon for the gd mainbox
 		public Cairo.Surface icon {
 			get{
-				Cairo.Surface surface = Gdk.cairo_surface_create_from_pixbuf(Util.optiscale(pixbuf, 192), 1, null);
+				if(_pixbuf == null){
+					//set_pixbuf();
+					return null;
+				}
+
+				Cairo.Surface surface = Gdk.cairo_surface_create_from_pixbuf(_pixbuf, 1, null);
 				_icon = surface;
 
 				return _icon;
-
-			}
-		}
-
-		public Gdk.Pixbuf pixbuf{
-			get{
-				if(_pixbuf == null){
-					_pixbuf = new Pixbuf.from_resource("/de/haecker-felix/gradio/icons/hicolor/48x48/apps/de.haeckerfelix.gradio.png");
-					download_pixbuf.begin();
-
-					return _pixbuf;
-				}
-
-				return _pixbuf;
 			}
 		}
 
@@ -212,27 +203,15 @@ namespace Gradio{
 				_is_broken = false;
 		}
 
-		private async void download_pixbuf(){
-			var session = new Soup.SessionAsync ();
-			session.user_agent = "gradio/"+ Config.VERSION;
-			var message = new Soup.Message ("GET", _icon_address);
-			var loader = new Gdk.PixbufLoader();
-
-			session.queue_message (message, (session, msg) => {
-				if(message.response_body.data != null){
-					try{
-						loader.write(message.response_body.data);
-						loader.close();
-						_pixbuf = loader.get_pixbuf();
-
-						notify_property("icon");
-					}catch(GLib.Error e){
-						warning ("Could not download icon for %s (%s)", _title, e.message);
-					}
-
-				}
-		    	});
-			yield;
+		private void set_pixbuf(){
+			var image_cache = new ImageCache();
+                	image_cache.get_image.begin(icon_address, (obj, res) => {
+		            	Gdk.Pixbuf pixbuf = image_cache.get_image.end(res);
+		            	if (pixbuf != null) {
+		                	_pixbuf = pixbuf.scale_simple(192, 192, Gdk.InterpType.BILINEAR);
+		                	notify_property("icon");
+		            	}
+			});
 		}
 
 		private void stop_handler(){

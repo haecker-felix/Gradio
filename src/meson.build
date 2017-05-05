@@ -32,6 +32,7 @@ vala_sources = [
 		'gradio-selection-toolbar.vala',
 		'gradio-featured-tile.vala',
 		'gradio-featured-tile-stack.vala',
+		'gradio-image-cache.vala',
 		'gradio-search-popover.vala']
 
 vala_args = [

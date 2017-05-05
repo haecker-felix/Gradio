@@ -36,11 +36,11 @@ namespace Gradio{
 		private int actual_id = 0;
 		private int id = 0;
 
-		private int maximum;
+		// the maximum of stations to parse
+		private int maximum = 100;
 
-		public StationProvider(ref StationModel m, int max = 100) {
+		public StationProvider(ref StationModel m) {
 			model = m;
-			maximum = max;
 		}
 
 		public void set_address(string a){
@@ -169,3 +169,4 @@ namespace Gradio{
 	}
 
 }
+

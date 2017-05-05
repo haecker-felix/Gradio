@@ -28,9 +28,15 @@ namespace Gradio{
 		public FeaturedTile(RadioStation station){
 			StationTitle.set_text(station.title);
 
-			StationLogo.set_from_pixbuf(Util.optiscale(station.pixbuf, 192));
-			station.notify["icon"].connect(() => {
-				StationLogo.set_from_pixbuf(Util.optiscale(station.pixbuf, 192));
+			// Logo
+			var image_cache = new ImageCache();
+                	image_cache.get_image.begin(station.icon_address, (obj, res) => {
+		            	Gdk.Pixbuf pixbuf = image_cache.get_image.end(res);
+		            	if (pixbuf != null) {
+		                	StationLogo.clear();
+		                	pixbuf = pixbuf.scale_simple(192, 192, Gdk.InterpType.BILINEAR);
+		                	StationLogo.set_from_pixbuf(pixbuf);
+		            	}
 			});
 
 			// Description

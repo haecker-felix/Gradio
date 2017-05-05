@@ -43,23 +43,23 @@ namespace Gradio{
 		private void setup_view(){
 			// featured
 			StationModel featured_stations = new StationModel();
-			StationProvider popular_stations_provider = new StationProvider(ref featured_stations, 5);
-			popular_stations_provider.set_address(RadioBrowser.radio_stations_most_votes);
+			StationProvider popular_stations_provider = new StationProvider(ref featured_stations);
+			popular_stations_provider.set_address(RadioBrowser.most_votes(5));
 			FeaturedTileStack featured_tile_stack = new FeaturedTileStack(ref featured_stations);
 			FeaturedBox.pack_start(featured_tile_stack);
 
 			// recently changed
 			StationModel changed_stations = new StationModel();
-			StationProvider changed_stations_provider = new StationProvider(ref changed_stations, 12);
-			changed_stations_provider.set_address(RadioBrowser.radio_stations_recently_changed);
+			StationProvider changed_stations_provider = new StationProvider(ref changed_stations);
+			changed_stations_provider.set_address(RadioBrowser.recently_changed(12));
 			MainBox changed_stations_box = new MainBox();
 			changed_stations_box.set_model(changed_stations);
 			ChangedStationsBox.pack_start(changed_stations_box);
 
 			// recently clicked
 			StationModel clicked_stations = new StationModel();
-			StationProvider clicked_stations_provider = new StationProvider(ref clicked_stations, 12);
-			clicked_stations_provider.set_address(RadioBrowser.radio_stations_recently_clicked);
+			StationProvider clicked_stations_provider = new StationProvider(ref clicked_stations);
+			clicked_stations_provider.set_address(RadioBrowser.recently_clicked(12));
 			MainBox clicked_stations_box = new MainBox();
 			clicked_stations_box.set_model(clicked_stations);
 			ClickedStationsBox.pack_end(clicked_stations_box);
@@ -77,17 +77,17 @@ namespace Gradio{
 
 		[GtkCallback]
 		private void MorePopularStations_clicked(){
-			App.window.show_stations(RadioBrowser.radio_stations_most_votes, "Popular Stations");
+			App.window.show_stations(RadioBrowser.most_votes(100), "Popular Stations");
 		}
 
 		[GtkCallback]
 		private void MoreRecentlyChanged_clicked(){
-			App.window.show_stations(RadioBrowser.radio_stations_recently_changed, "Recently Changed Stations");
+			App.window.show_stations(RadioBrowser.recently_changed(100), "Recently Changed Stations");
 		}
 
 		[GtkCallback]
 		private void MoreRecentlyClicked_clicked(){
-			App.window.show_stations(RadioBrowser.radio_stations_recently_clicked, "Recently Clicked Stations");
+			App.window.show_stations(RadioBrowser.recently_clicked(100), "Recently Clicked Stations");
 		}
 	}
 }
