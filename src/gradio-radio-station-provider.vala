@@ -20,57 +20,26 @@ namespace Gradio{
 
 	public class StationProvider{
 
-		public signal void finished();
-		public signal void started();
-		public signal void progress(double p);
-
 		string address = "";
 		string data = "";
 
+		Soup.Session soup_session;
 		Json.Parser parser = new Json.Parser();
 		StationModel model = null;
-
-		private bool parser_thread_running = false;
-		private Cancellable cancellable = new Cancellable();
-
-		private int actual_id = 0;
-		private int id = 0;
 
 		// the maximum of stations to parse
 		private int maximum = 100;
 
 		public StationProvider(ref StationModel m) {
 			model = m;
+
+			soup_session = new Soup.Session();
+            		soup_session.user_agent = "gradio/"+ Config.VERSION;
 		}
 
 		public void set_address(string a){
-			id++;
-			actual_id = id;
-
-			// Wait for old thread to exit and reset cancellable
-			cancellable.cancel();
-			while(parser_thread_running){
-				message("Cancelling earlier search...");
-			}
-			cancellable.reset();
-
 			address = a;
-
-			// Download the data and parse it
-			message ("Downloading data from \"%s\" ...", address);
-
-			Util.get_string_from_uri.begin(address, (obj, res) => {
-				data = Util.get_string_from_uri.end(res);
-
-				if(data != null && data != ""){
-					message("Dowloaded data. Starting parsing...");
-
-					model.clear();
-					parse_data.begin (id);
-				}
-			});
-
-
+			parse_data.begin ();
 		}
 
 		public void add_station_by_id(int id){
@@ -103,67 +72,34 @@ namespace Gradio{
 
 		}
 
-		private async void parse_data(int id){
-			if(id != actual_id){
-				return;
-			}
-
-			//TODO: Memory usage
-
+		private async void parse_data(){
 			message ("Parsing data from \"%s\" ...", address);
-			started();
 
-			ThreadFunc<void*> run = () => {
-				parser_thread_running = true;
+			try{
+				Soup.Request req = soup_session.request(address);
+            			InputStream stream = yield req.send_async(null);
+				yield parser.load_from_stream_async(stream);
 
-				try{
-					parser.load_from_data (data);
-					var root = parser.get_root ();
-					var radio_stations = root.get_array ();
+				var root = parser.get_root ();
+				var radio_stations = root.get_array ();
 
-					int items = (int)radio_stations.get_length();
-					message("Items found: %i", items);
+				int items = (int)radio_stations.get_length();
+				message("Items found: %i", items);
 
-					if(items > maximum) items = maximum;
+				if(items > maximum) items = maximum;
 
-					for(int i = 0; i < items; i++){
-						//Check if actual thread should be cancelled
-						cancellable.set_error_if_cancelled ();
+				for(int i = 0; i < items; i++){
 
-						double actual = i;
-						double max = items-1;
-						double p = actual/max;
-						progress(p);
+					var radio_station = radio_stations.get_element(i);
+					var radio_station_data = radio_station.get_object ();
 
-						message("Parsing station " + i.to_string() + "/" + (items-1).to_string() + ". " + (p*100).to_string() + " %");
-
-
-						var radio_station = radio_stations.get_element(i);
-						var radio_station_data = radio_station.get_object ();
-
-						var station = new RadioStation.from_json_data(radio_station_data);
-
-						Idle.add(() => {
-							model.add_station(station);
-							return false;
-						});
-					}
-
-				}catch(GLib.Error e){
-					warning ("Aborted parsing! " + e.message);
-					parser_thread_running = false;
+					var station = new RadioStation.from_json_data(radio_station_data);
+					model.add_station(station);
 				}
 
-				parser_thread_running = false;
-				Thread.exit (1.to_pointer ());
-				return null;
-			};
-
-			new Thread<void*> ("parser_thread", run);
-
-			yield;
-
-			finished();
+			}catch(GLib.Error e){
+				warning ("Aborted parsing! " + e.message);
+			}
         	}
 
 	}
