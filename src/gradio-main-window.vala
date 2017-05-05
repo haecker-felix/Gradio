@@ -94,9 +94,6 @@ namespace Gradio{
 			library_page = new LibraryPage();
 			MainStack.add_named(library_page, page_name[WindowMode.LIBRARY]);
 
-			discover_page = new DiscoverPage();
-			MainStack.add_named(discover_page, page_name[WindowMode.DISCOVER]);
-
 			settings_page = new SettingsPage();
 			MainStack.add_named(settings_page, page_name[WindowMode.SETTINGS]);
 
@@ -332,6 +329,12 @@ namespace Gradio{
 		public void show_discover(){
 			if(in_mode_change)
 				return;
+
+			if(discover_page == null){
+				discover_page = new DiscoverPage();
+				MainStack.add_named(discover_page, page_name[WindowMode.DISCOVER]);
+			}
+
 
 			save_back_entry();
 			change_mode(WindowMode.DISCOVER);
