@@ -119,9 +119,8 @@ namespace Gradio{
 			StationLikesLabel.set_text(station.votes.to_string());
 
 			// Logo
-			var image_cache = new ImageCache();
-                	image_cache.get_image.begin(station.icon_address, (obj, res) => {
-		            	Gdk.Pixbuf pixbuf = image_cache.get_image.end(res);
+                	App.image_cache.get_image.begin(station.icon_address, (obj, res) => {
+		            	Gdk.Pixbuf pixbuf = App.image_cache.get_image.end(res);
 		            	if (pixbuf != null) {
 		                	StationLogo.clear();
 		                	pixbuf = pixbuf.scale_simple(48, 48, Gdk.InterpType.BILINEAR);

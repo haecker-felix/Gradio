@@ -150,9 +150,8 @@ namespace Gradio{
 				InformationBox.set_visible(true);
 
 			// Logo
-			var image_cache = new ImageCache();
-                	image_cache.get_image.begin(station.icon_address, (obj, res) => {
-		            	Gdk.Pixbuf pixbuf = image_cache.get_image.end(res);
+                	App.image_cache.get_image.begin(station.icon_address, (obj, res) => {
+		            	Gdk.Pixbuf pixbuf = App.image_cache.get_image.end(res);
 		            	if (pixbuf != null) {
 		                	StationImage.clear();
 		                	pixbuf = pixbuf.scale_simple(128, 128, Gdk.InterpType.BILINEAR);

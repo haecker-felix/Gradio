@@ -124,7 +124,7 @@ namespace Gradio{
 		public Cairo.Surface icon {
 			get{
 				if(_pixbuf == null){
-					//set_pixbuf();
+					set_pixbuf();
 					return null;
 				}
 
@@ -204,9 +204,8 @@ namespace Gradio{
 		}
 
 		private void set_pixbuf(){
-			var image_cache = new ImageCache();
-                	image_cache.get_image.begin(icon_address, (obj, res) => {
-		            	Gdk.Pixbuf pixbuf = image_cache.get_image.end(res);
+                	App.image_cache.get_image.begin(icon_address, (obj, res) => {
+		            	Gdk.Pixbuf pixbuf = App.image_cache.get_image.end(res);
 		            	if (pixbuf != null) {
 		                	_pixbuf = pixbuf.scale_simple(192, 192, Gdk.InterpType.BILINEAR);
 		                	notify_property("icon");

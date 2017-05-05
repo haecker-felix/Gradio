@@ -26,6 +26,7 @@ namespace Gradio {
 		public static Library library;
 		public static MPRIS mpris;
 		public static CategoryItemProvider ciprovider;
+		public static ImageCache image_cache;
 
 		public App () {
 			Object(application_id: "de.haeckerfelix.gradio", flags: ApplicationFlags.FLAGS_NONE);
@@ -43,6 +44,8 @@ namespace Gradio {
 		}
 
 		private void start_new_session(){
+			image_cache = new ImageCache();
+
 			// ignore the vala warning!
 			Settings settings = new Settings();
 

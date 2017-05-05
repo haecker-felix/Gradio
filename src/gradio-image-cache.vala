@@ -80,7 +80,7 @@ namespace Gradio {
         private async Gdk.Pixbuf load_image_async(string url) {
         	Gdk.Pixbuf pixbuf = null;
             	Soup.Request req = soup_session.request(url);
-            	InputStream image_stream = req.send(null);
+            	InputStream image_stream = yield req.send_async(null);
 	        pixbuf = yield new Gdk.Pixbuf.from_stream_async(image_stream, null);
 
             	return pixbuf;
