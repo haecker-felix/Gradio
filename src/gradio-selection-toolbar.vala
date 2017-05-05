@@ -50,6 +50,8 @@ namespace Gradio{
 		public void RemoveFromLibraryButton_clicked (Gtk.Button button) {
 			List<Gd.MainBoxItem> list = App.window.current_selection.copy();
 
+			App.window.disable_selection_mode();
+
 			list.foreach ((station) => {
 				App.library.remove_radio_station((RadioStation)station);
 			});
@@ -58,6 +60,8 @@ namespace Gradio{
 		[GtkCallback]
 		public void AddToLibraryButton_clicked (Gtk.Button button) {
 			List<Gd.MainBoxItem> list = App.window.current_selection.copy();
+
+			App.window.disable_selection_mode();
 
 			list.foreach ((station) => {
 				App.library.add_radio_station((RadioStation)station);

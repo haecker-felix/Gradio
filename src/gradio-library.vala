@@ -72,6 +72,8 @@ namespace Gradio{
 			if(!contains_station(station) || station == null)
 				return true;
 
+			message("Removing %s from the library.", station.title);
+
 			string query = "DELETE FROM library WHERE station_id=" + station.id;
 
 			int return_code = db.exec (query, null, out db_error_message);
@@ -79,8 +81,12 @@ namespace Gradio{
 				critical ("Could not remove item from database: %s\n", db_error_message);
 				return false;
 			}else{
-				library_model.remove_station(station);
-				removed_radio_station(station);
+				Idle.add(() => {
+					library_model.remove_station(station);
+					removed_radio_station(station);
+					return false;
+				});
+
 				return true;
 			}
 		}
