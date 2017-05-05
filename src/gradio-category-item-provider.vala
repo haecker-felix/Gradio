@@ -31,7 +31,7 @@ namespace Gradio{
 		public CategoryItemProvider(){
 			partial.connect(partial_loaded);
 
-			//load_lists.begin();
+			load_lists.begin();
 		}
 
 		private void partial_loaded(){
