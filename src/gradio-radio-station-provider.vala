@@ -39,6 +39,7 @@ namespace Gradio{
 
 		public void set_address(string a){
 			address = a;
+			model.clear();
 			parse_data.begin ();
 		}
 

@@ -73,7 +73,7 @@ namespace Gradio{
 			}
 
 			stations.remove_index (pos);
-			items_changed (pos, 1, 0);;
+			items_changed (pos, 1, 0);
 	  	}
 
 	  	public void clear () {
