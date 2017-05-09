@@ -29,7 +29,7 @@ namespace Gradio{
 		//
 		// Default
 		//
-		[GtkChild] public Gtk.ToggleButton DiscoverToggleButton;
+		[GtkChild] public Gtk.Button AddButton;
 		[GtkChild] public Gtk.ToggleButton LibraryToggleButton;
 		[GtkChild] private Gtk.Stack TitleStack;
 		[GtkChild] private Gtk.Label PageTitle;
@@ -72,6 +72,7 @@ namespace Gradio{
 			TitleStack.set_visible_child_name("stackswitcher");
 			SelectButton.set_visible(true);
 			SearchButton.set_visible(true);
+			AddButton.set_visible(false);
 		}
 
 		public void show_selection_bar(){

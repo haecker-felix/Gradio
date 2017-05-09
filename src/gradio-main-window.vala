@@ -23,7 +23,7 @@ namespace Gradio{
 	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/main-window.ui")]
 	public class MainWindow : Gtk.ApplicationWindow {
 
-		public string[] page_name = { "library", "discover", "search", "details", "settings", "loading", "stations"};
+		public string[] page_name = { "library", "discover", "search", "details", "settings", "loading", "stations", "add"};
 
 		private Gradio.Headerbar header;
 		PlayerToolbar player_toolbar;
@@ -51,6 +51,7 @@ namespace Gradio{
 		LibraryPage library_page;
 		SettingsPage settings_page;
 		StationDetailPage station_detail_page;
+		AddPage add_page;
 
 		GLib.Queue<BackEntry> back_entry_stack = new GLib.Queue<BackEntry>();
 		WindowMode current_mode;
@@ -100,6 +101,9 @@ namespace Gradio{
 			station_page = new StationPage();
 			MainStack.add_named(station_page, page_name[WindowMode.STATION]);
 
+			add_page = new AddPage();
+			MainStack.add_named(add_page, page_name[WindowMode.ADD]);
+
 			// showing library on startup
 			change_mode(WindowMode.LIBRARY);
 
@@ -126,7 +130,7 @@ namespace Gradio{
 			});
 
 			header.LibraryToggleButton.clicked.connect(show_library);
-			header.DiscoverToggleButton.clicked.connect(show_discover);
+			header.AddButton.clicked.connect(show_add);
 			header.BackButton.clicked.connect(go_back);
 			header.selection_canceled.connect(disable_selection_mode);
 			header.selection_started.connect(enable_selection_mode);
@@ -225,7 +229,6 @@ namespace Gradio{
 			header.show_default_buttons();
 
 			// update main buttons according to mode
-			header.DiscoverToggleButton.set_active(mode == WindowMode.DISCOVER);
 			header.LibraryToggleButton.set_active(mode == WindowMode.LIBRARY);
 
 			// hide unless we're going to search
@@ -248,10 +251,11 @@ namespace Gradio{
 					SearchEntry.set_text(data.search); break;
 				};
 				case WindowMode.DISCOVER: {
-					clean_back_entry_stack();
+					header.show_title("Discover Stations");
 					break;
 				};
 				case WindowMode.LIBRARY: {
+					header.AddButton.set_visible(true);
 					selection_toolbar.set_library_mode(true);
 					clean_back_entry_stack();
 					break;
@@ -273,6 +277,11 @@ namespace Gradio{
 					station_page.set_address(data.address);
 					station_page.set_title(data.title);
 					header.show_title(station_page.get_title());
+					break;
+				};
+				case WindowMode.ADD: {
+					header.show_title("Add new stations to your library");
+					header.SelectButton.set_visible(false);
 					break;
 				};
 			}
@@ -377,6 +386,14 @@ namespace Gradio{
 			data.address = address;
 			data.title  = title;
 			change_mode(WindowMode.STATION, data);
+		}
+
+		public void show_add(){
+			if(in_mode_change)
+				return;
+
+			save_back_entry();
+			change_mode(WindowMode.ADD);
 		}
 
 		private void SearchEntry_search_changed(){
