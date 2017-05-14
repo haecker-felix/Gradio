@@ -12,6 +12,7 @@ vala_sources = [
 		'groupbox/gradio-groupbox-item.vala',
 		'groupbox/gradio-groupbox.vala',
 		'groupbox/gradio-groupbox-widget-item.vala',
+		'groupbox/gradio-groupbox-button.vala',
 		'gradio-tag-box.vala',
 		'gradio-mainbox.vala',
 		'gradio-audio-player.vala',

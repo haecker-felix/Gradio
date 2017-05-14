@@ -21,13 +21,23 @@ namespace Gradio{
 	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/page/add-page.ui")]
 	public class AddPage : Gtk.Box, Page{
 
+		[GtkChild] private Box AddBox;
+
 		public AddPage(){
+			GroupBox add_group = new GroupBox("Options");
 
-		}
+			ButtonItem discover_button = new ButtonItem("Discover new stations", "Show stations for different categories.");
+			discover_button.btn_clicked.connect(() => {App.window.show_discover();});
+			add_group.add_listbox_row(discover_button);
 
-		[GtkCallback]
-		private void DiscoverButton_clicked(Button b){
-			App.window.show_discover();
+			ButtonItem search_button = new ButtonItem("Search for stations", "Search for specific stations.");
+			search_button.btn_clicked.connect(() => {App.window.show_search();});
+			add_group.add_listbox_row(search_button);
+
+			//ButtonItem create_button = new ButtonItem("Create a new station", "Create a completely new station.");
+			//add_group.add_listbox_row(create_button);
+
+			AddBox.pack_end(add_group);
 		}
 	}
 
