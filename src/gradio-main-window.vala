@@ -23,7 +23,7 @@ namespace Gradio{
 	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/main-window.ui")]
 	public class MainWindow : Gtk.ApplicationWindow {
 
-		public string[] page_name = { "library", "discover", "search", "details", "settings", "loading", "stations", "add"};
+		public string[] page_name = { "library", "discover", "search", "details", "settings", "loading", "stations", "add", "collections"};
 
 		private Gradio.Headerbar header;
 		PlayerToolbar player_toolbar;
@@ -49,6 +49,7 @@ namespace Gradio{
 		DiscoverPage discover_page;
 		SearchPage search_page;
 		LibraryPage library_page;
+		CollectionsPage collections_page;
 		SettingsPage settings_page;
 		StationDetailPage station_detail_page;
 		AddPage add_page;
@@ -95,6 +96,9 @@ namespace Gradio{
 			library_page = new LibraryPage();
 			MainStack.add_named(library_page, page_name[WindowMode.LIBRARY]);
 
+			collections_page = new CollectionsPage();
+			MainStack.add_named(collections_page, page_name[WindowMode.COLLECTIONS]);
+
 			settings_page = new SettingsPage();
 			MainStack.add_named(settings_page, page_name[WindowMode.SETTINGS]);
 
@@ -130,6 +134,7 @@ namespace Gradio{
 			});
 
 			header.LibraryToggleButton.clicked.connect(show_library);
+			header.CollectionsToggleButton.clicked.connect(show_collections);
 			header.AddButton.clicked.connect(show_add);
 			header.BackButton.clicked.connect(go_back);
 			header.selection_canceled.connect(disable_selection_mode);
@@ -230,6 +235,7 @@ namespace Gradio{
 
 			// update main buttons according to mode
 			header.LibraryToggleButton.set_active(mode == WindowMode.LIBRARY);
+			header.CollectionsToggleButton.set_active(mode == WindowMode.COLLECTIONS);
 
 			// hide unless we're going to search
 			SearchBar.set_search_mode (mode == WindowMode.SEARCH);
@@ -257,6 +263,10 @@ namespace Gradio{
 				case WindowMode.LIBRARY: {
 					header.AddButton.set_visible(true);
 					selection_toolbar.set_library_mode(true);
+					clean_back_entry_stack();
+					break;
+				};
+				case WindowMode.COLLECTIONS: {
 					clean_back_entry_stack();
 					break;
 				};
@@ -333,6 +343,14 @@ namespace Gradio{
 
 			save_back_entry();
 			change_mode(WindowMode.LIBRARY);
+		}
+
+		public void show_collections(){
+			if(in_mode_change)
+				return;
+
+			save_back_entry();
+			change_mode(WindowMode.COLLECTIONS);
 		}
 
 		public void show_discover(){

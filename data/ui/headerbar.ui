@@ -73,7 +73,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkToggleButton" id="CollectionsButton">
+                      <object class="GtkToggleButton" id="CollectionsToggleButton">
                         <property name="label" translatable="yes">Collections</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>

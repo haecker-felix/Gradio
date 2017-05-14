@@ -26,7 +26,8 @@ namespace Gradio{
 		SETTINGS,
 		LOADING,
 		STATION,
-		ADD
+		ADD,
+		COLLECTIONS
 	}
 
 	public class BackEntry{

@@ -8,6 +8,7 @@ vala_sources = [
 		'page/gradio-page.vala',
 		'page/gradio-add-page.vala',
 		'page/gradio-station-page.vala',
+		'page/gradio-collections-page.vala',
 		'groupbox/gradio-groupbox-switch-item.vala',
 		'groupbox/gradio-groupbox-item.vala',
 		'groupbox/gradio-groupbox.vala',

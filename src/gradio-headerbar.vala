@@ -31,6 +31,7 @@ namespace Gradio{
 		//
 		[GtkChild] public Gtk.Button AddButton;
 		[GtkChild] public Gtk.ToggleButton LibraryToggleButton;
+		[GtkChild] public Gtk.ToggleButton CollectionsToggleButton;
 		[GtkChild] private Gtk.Stack TitleStack;
 		[GtkChild] private Gtk.Label PageTitle;
 		[GtkChild] public Gtk.Button SelectButton;
