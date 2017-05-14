@@ -92,14 +92,6 @@ namespace Gradio{
 
 		public string primary_text {
 			get{
-				if(_title.length > 25){
-					message("length is over 25...");
-					message("before: " + _title);
-;					_primary_text = _title.substring(0,3);
-					_primary_text = _primary_text + "...";
-					message("after: " + _primary_text);
-					return _primary_text;
-				}
 				return _title;
 			}
 		}
