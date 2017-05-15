@@ -158,6 +158,45 @@ namespace Gradio{
 
 			return pixbuf;
 		}
+
+		public static void remove_transparency(ref Gdk.Pixbuf pixbuf){
+			// Remove alpha channel
+        		if (pixbuf.get_has_alpha () && pixbuf.get_n_channels () == 4 && pixbuf.get_bits_per_sample () == 8) {
+		    		var width = pixbuf.get_width ();
+		    		var height = pixbuf.get_height ();
+		    		var rowstride = pixbuf.get_rowstride ();
+		    		unowned uint8[] orig_pixels = pixbuf.get_pixels ();
+		    		var pixels = new uint8[rowstride * height];
+
+		    		for (var i = 0; i < height; i++) {
+		        		for (var j = 0, k = 0; j < width * 4; j += 4, k += 3) {
+		            			var orig_index = rowstride * i + j;
+		            			var index = rowstride * i + k;
+
+					        if (orig_pixels[orig_index] == 0 && orig_pixels[orig_index + 1] == 0 && orig_pixels[orig_index + 2] == 0 && orig_pixels[orig_index + 3] == 0) {
+		                			pixels[index] = 0xFF;
+		                			pixels[index + 1] = 0xFF;
+		                			pixels[index + 2] = 0xFF;
+		            			} else {
+							pixels[index] = orig_pixels[orig_index];
+							pixels[index + 1] = orig_pixels[orig_index + 1];
+							pixels[index + 2] = orig_pixels[orig_index + 2];
+		            			}
+		        		}
+		    		}
+
+		    		pixbuf = new Gdk.Pixbuf.from_data (pixels,
+		                                       pixbuf.get_colorspace (),
+		                                       false,
+		                                       8,
+		                                       width,
+		                                       height,
+		                                       rowstride,
+		                                       null);
+       			}
+
+
+		}
 	}
 }
 

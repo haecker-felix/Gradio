@@ -36,6 +36,8 @@ vala_sources = [
 		'gradio-featured-tile.vala',
 		'gradio-featured-tile-stack.vala',
 		'gradio-image-cache.vala',
+		'gradio-collection.vala',
+		'gradio-collection-model.vala',
 		'gradio-search-popover.vala']
 
 vala_args = [

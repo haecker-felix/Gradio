@@ -14,36 +14,55 @@
  * along with Gradio.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-using Gtk;
+using Gdk;
 
 namespace Gradio{
+	public class Collection : GLib.Object, Gd.MainBoxItem{
+		private string _name;
+		private string _id;
+		private string _uri;
+		private bool _pulse;
+		private int64 _mtime;
+		private Cairo.Surface _icon;
 
-	public class MainBox : Gd.MainBox{
-
-		public MainBox(){
-			Object(box_type: Gd.MainBoxType.ICON);
-
-			this.set_show_primary_text(true);
-			this.set_show_secondary_text(true);
-			this.show_all();
-
-			//this.get_style_context().add_class("grid-item");
-
-			connect_signals();
+		public string id {
+			get{return _id;}
 		}
 
-		private void connect_signals(){
-			this.selection_mode_request.connect(() => {
-				this.set_selection_mode(true);
-			});
 
-			this.item_activated.connect((t,a) => {
-
-				if(App.player.current_station.id == (string)a.id)
-					Gradio.App.window.show_station_details((RadioStation)a);
-				else
-					App.player.set_radio_station((RadioStation)a);
-			});
+		public string uri {
+			get{return _uri;}
 		}
+
+		public string primary_text {
+			get{
+				return _name;
+			}
+		}
+
+		public string secondary_text {
+			get{return "";}
+		}
+
+		public bool pulse {
+			get{return _pulse;}
+		}
+
+		public int64 mtime {
+			get{return _mtime;}
+		}
+
+		// icon for the gd mainbox
+		public Cairo.Surface icon {
+			get{
+				return _icon;
+			}
+		}
+
+
+		public Collection(){
+
+		}
+
 	}
 }

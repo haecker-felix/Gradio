@@ -132,8 +132,24 @@ namespace Gradio{
 				}
 
 				Cairo.Surface surface = Gdk.cairo_surface_create_from_pixbuf(_pixbuf, 1, null);
-				_icon = surface;
 
+				Gtk.StyleContext context = new Gtk.StyleContext();
+				context.add_class("collection-icon");
+
+				Gtk.WidgetPath path = new Gtk.WidgetPath();
+				path.append_type(Type.BOXED);
+				context.set_path(path);
+
+				Cairo.Context cr = new Cairo.Context(surface);
+
+				// render the thumbnail itself
+				context.render_background(cr, 0, 0, 192, 192);
+				context.render_frame(cr, 0, 0, 192, 192);
+
+				context.remove_class("collection-icon");
+				context.add_class("collection-icon-tile");
+
+				_icon = surface;
 				return _icon;
 			}
 		}
@@ -143,6 +159,7 @@ namespace Gradio{
 
 		public signal void added_to_library();
 		public signal void removed_from_library();
+
 
 		public RadioStation(string title = "", string homepage = "", string language = "", string id = "", string icon = "", string country = "", string tags = "", string state = "", string votes = "", string codec = "", string bitrate = "", bool is_broken = false){
 			if(id != ""){
@@ -210,7 +227,7 @@ namespace Gradio{
                 	App.image_cache.get_image.begin(icon_address, (obj, res) => {
 		            	Gdk.Pixbuf pixbuf = App.image_cache.get_image.end(res);
 		            	if (pixbuf != null) {
-		                	_pixbuf = pixbuf.scale_simple(192, 192, Gdk.InterpType.BILINEAR);
+		                	_pixbuf = pixbuf.scale_simple(192, 192, Gdk.InterpType.HYPER);
 		                	notify_property("icon");
 		            	}
 			});

@@ -57,3 +57,13 @@
         border-width: 1px;
         text-shadow: none;
 }
+
+.collection-icon {
+    border: 2px solid #a7aba7;
+    border-radius: 2px;
+}
+
+.collection-icon-tile {
+    border: 2px solid #a7aba7;
+    border-radius: 1px;
+}
