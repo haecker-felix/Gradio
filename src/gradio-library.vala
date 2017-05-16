@@ -161,7 +161,11 @@ namespace Gradio{
 
 		private void read_database(){
 			message("Reading database data...");
+			read_stations();
+			read_collections();
+		}
 
+		private void read_stations(){
 			Statement stmt;
 			int rc = 0;
 			int cols;
@@ -181,6 +185,35 @@ namespace Gradio{
 					message("Found station: " + stmt.column_text(0));
 					station_provider.add_station_by_id(int.parse(stmt.column_text(0)));
 
+					break;
+				default:
+					printerr ("Error: %d, %s\n", rc, db.errmsg ());
+					break;
+				}
+			} while (rc == Sqlite.ROW);
+		}
+
+		private void read_collections(){
+			Statement stmt;
+			int rc = 0;
+			int cols;
+
+			if ((rc = db.prepare_v2 ("SELECT * FROM collections;", -1, out stmt, null)) == 1) {
+				critical ("SQL error: %d, %s\n", rc, db.errmsg ());
+				return;
+			}
+
+			cols = stmt.column_count();
+			do {
+				rc = stmt.step();
+				switch (rc) {
+				case Sqlite.DONE:
+					break;
+				case Sqlite.ROW:
+					message("Found collection: " + stmt.column_text(1));
+
+					Collection coll = new Collection(stmt.column_text(1), stmt.column_text(0));
+					collection_model.add_collection(coll);
 					break;
 				default:
 					printerr ("Error: %d, %s\n", rc, db.errmsg ());

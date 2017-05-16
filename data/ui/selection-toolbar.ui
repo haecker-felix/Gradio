@@ -39,12 +39,13 @@
       </packing>
     </child>
     <child>
-      <object class="GtkButton" id="AddToCollectionButton">
-        <property name="label" translatable="yes">Add to collection</property>
+      <object class="GtkButton" id="CollectionButton">
+        <property name="label" translatable="yes">Collection</property>
+        <property name="visible">True</property>
         <property name="can_focus">True</property>
         <property name="receives_default">True</property>
         <property name="no_show_all">True</property>
-        <signal name="clicked" handler="AddToCollectionButton_clicked" swapped="no"/>
+        <signal name="clicked" handler="CollectionButton_clicked" swapped="no"/>
       </object>
       <packing>
         <property name="expand">False</property>

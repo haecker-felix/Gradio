@@ -38,6 +38,7 @@ vala_sources = [
 		'gradio-image-cache.vala',
 		'gradio-collection.vala',
 		'gradio-collection-model.vala',
+		'gradio-organize-collection-dialog.vala',
 		'gradio-search-popover.vala']
 
 vala_args = [

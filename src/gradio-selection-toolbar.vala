@@ -42,8 +42,11 @@ namespace Gradio{
 		}
 
 		[GtkCallback]
-		public void AddToCollectionButton_clicked (Gtk.Button button) {
-
+		public void CollectionButton_clicked (Gtk.Button button) {
+			OrganizeCollectionDialog orgadiag = new OrganizeCollectionDialog();
+			orgadiag.set_transient_for(App.window);
+			orgadiag.set_modal(true);
+			orgadiag.show_all();
 		}
 
 		[GtkCallback]

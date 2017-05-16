@@ -63,8 +63,9 @@ namespace Gradio{
 		}
 
 
-		public Collection(){
-
+		public Collection(string n, string i){
+			_name = n;
+			_id = i;
 		}
 
 	}

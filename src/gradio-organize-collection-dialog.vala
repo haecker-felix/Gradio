@@ -1,0 +1,98 @@
+/* This file is part of Gradio.
+ *
+ * Gradio is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Gradio is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Gradio.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+using Gtk;
+using Gd;
+
+namespace Gradio{
+
+	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/organize-collection-dialog.ui")]
+	public class OrganizeCollectionDialog : Gtk.Window{
+
+		[GtkChild] private Stack WindowStack;
+		[GtkChild] private ListBox CollectionsListBox;
+
+		// second screen
+		[GtkChild] private Entry AddEntry;
+		[GtkChild] private Button AddButton;
+
+		// first screen
+		[GtkChild] private Entry NewEntry;
+		[GtkChild] private Button NewButton;
+
+		public OrganizeCollectionDialog(){
+			if(App.library.collection_model.get_n_items() == 0)
+				WindowStack.set_visible_child_name("empty");
+			else
+				WindowStack.set_visible_child_name("collections");
+
+			connect_signals();
+		}
+
+		private void connect_signals(){
+			NewEntry.notify["text"].connect(() => {
+				string text = NewEntry.get_text();
+
+				if(text.length > 2)
+					NewButton.set_sensitive(true);
+				else
+					NewButton.set_sensitive(false);
+			});
+
+			AddEntry.notify["text"].connect(() => {
+				string text = AddEntry.get_text();
+
+				if(text.length > 2)
+					AddButton.set_sensitive(true);
+				else
+					AddButton.set_sensitive(false);
+			});
+
+			CollectionsListBox.bind_model(App.library.collection_model, (item) => {
+				Collection coll = (Collection) item;
+				Label label = new Label (coll.name);
+				return label;
+
+			});
+		}
+
+		private void create_collection(string name){
+			Collection c = new Collection(name, Random.int_range(10000, 99999).to_string()); 	// TODO: this should not be the right way to generate a id
+			App.library.add_new_collection(c);
+		}
+
+		[GtkCallback]
+		private void NewButton_clicked(Button button){
+			WindowStack.set_visible_child_name("collections");
+			create_collection(NewEntry.get_text());
+		}
+
+		[GtkCallback]
+		private void AddButton_clicked(Button button){
+			create_collection(AddEntry.get_text());
+		}
+
+		[GtkCallback]
+		private void CancelButton_clicked(Button button){
+			this.destroy();
+		}
+
+		[GtkCallback]
+		private void DoneButton_clicked(Button button){
+			this.destroy();
+		}
+	}
+}
