@@ -24,6 +24,7 @@ namespace Gradio{
 
 		private StationProvider station_provider;
 		public static StationModel library_model;
+		public static CollectionModel collection_model;
 
 		private Sqlite.Database db;
 		private string db_error_message;
@@ -39,6 +40,7 @@ namespace Gradio{
 
 			library_model = new StationModel();
 			station_provider = new StationProvider(ref library_model);
+			collection_model = new CollectionModel();
 
 			open_database();
 		}
@@ -50,12 +52,55 @@ namespace Gradio{
 				return false;
 		}
 
+		public bool contains_collection(Collection collection){
+			if(collection_model.contains_collection(collection))
+				return true;
+			else
+				return false;
+		}
+
+		public bool add_station_to_collection(Collection collection, RadioStation station){
+			// station must be in the library
+			if((!contains_station(station)) || station == null)
+				return false;
+
+			string query = "UPDATE library SET collection_id = '"+collection.id+"' WHERE station_id = "+station.id+";";
+
+			int return_code = db.exec (query, null, out db_error_message);
+			if (return_code != Sqlite.OK) {
+				critical ("Could not add item to collection: %s\n", db_error_message);
+				return false;
+			}else{
+				return true;
+			}
+
+			// does this collection already exists? If not -> create it!
+			if(!contains_collection(collection)){
+				add_new_collection(collection);
+			}
+		}
+
+		public bool add_new_collection(Collection collection){
+			if(contains_collection(collection) || collection == null)
+				return true;
+
+			string query = "INSERT INTO collections (collection_id,collection_name) VALUES ('"+collection.id+"', '"+collection.name+"');";
+
+			int return_code = db.exec (query, null, out db_error_message);
+			if (return_code != Sqlite.OK) {
+				critical ("Could not add collection to database: %s\n", db_error_message);
+				return false;
+			}else{
+				collection_model.add_collection(collection);
+				return true;
+			}
+		}
 
 		public bool add_radio_station(RadioStation station){
 			if(contains_station(station) || station == null)
 				return true;
 
-			string query = "INSERT INTO library (station_id,folder_id) VALUES ("+station.id+", '0');";
+			string query = "INSERT INTO library (station_id,collection_id) VALUES ("+station.id+", '0');";
 
 			int return_code = db.exec (query, null, out db_error_message);
 			if (return_code != Sqlite.OK) {
@@ -63,7 +108,6 @@ namespace Gradio{
 				return false;
 			}else{
 				library_model.add_station(station);
-				added_radio_station(station);
 				return true;
 			}
 		}
@@ -174,8 +218,8 @@ namespace Gradio{
 			message("Initialize database...");
 
 			string query = """
-				CREATE TABLE "library" ('station_id' INTEGER, 'folder_id' INTEGER);
-				CREATE TABLE "library_folders" ('folder_id' INTEGER, 'folder_name' TEXT)
+				CREATE TABLE "library" ('station_id' INTEGER, 'collection_id' INTEGER);
+				CREATE TABLE "collections" ('collection_id' INTEGER, 'collection_name' TEXT)
 				""";
 
 			int return_code = db.exec (query, null, out db_error_message);

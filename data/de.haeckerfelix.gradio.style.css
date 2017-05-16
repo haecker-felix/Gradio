@@ -59,11 +59,9 @@
 }
 
 .collection-icon {
-    border: 2px solid #a7aba7;
-    border-radius: 2px;
+    border: 3px solid gray;
 }
 
 .collection-icon-tile {
-    border: 2px solid #a7aba7;
-    border-radius: 1px;
+    border: 3px solid gray;
 }

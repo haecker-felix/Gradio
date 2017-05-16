@@ -29,6 +29,9 @@ namespace Gradio{
 			get{return _id;}
 		}
 
+		public string name {
+			get{return _name;}
+		}
 
 		public string uri {
 			get{return _uri;}
