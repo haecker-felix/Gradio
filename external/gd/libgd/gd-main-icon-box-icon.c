@@ -99,10 +99,8 @@ gd_main_icon_box_icon_get_preferred_size (GdMainIconBoxIcon *self, gint *minimum
   gint size_scaled;
 
   surface = gd_main_box_item_get_icon (self->item);
-  if (surface == NULL){
-	goto out;
-  }
-
+  if (surface == NULL)
+    goto out;
 
   surface_type = cairo_surface_get_type (surface);
   g_return_if_fail (surface_type == CAIRO_SURFACE_TYPE_IMAGE);

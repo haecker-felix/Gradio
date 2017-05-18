@@ -34,6 +34,8 @@ namespace Gradio{
 		[GtkChild] private Button NewButton;
 
 		public OrganizeCollectionDialog(){
+			CollectionsListBox.set_header_func(header_func);
+
 			if(App.library.collection_model.get_n_items() == 0)
 				WindowStack.set_visible_child_name("empty");
 			else
@@ -64,14 +66,32 @@ namespace Gradio{
 			CollectionsListBox.bind_model(App.library.collection_model, (item) => {
 				Collection coll = (Collection) item;
 				Label label = new Label (coll.name);
+				label.halign = Align.START;
+				label.height_request = 44;
+				label.margin_start = 12;
 				return label;
 
 			});
 		}
 
 		private void create_collection(string name){
-			Collection c = new Collection(name, Random.int_range(10000, 99999).to_string()); 	// TODO: this should not be the right way to generate a id
+			Collection c = new Collection(name, Random.int_range(1000000, 9999999).to_string()); 	// TODO: this should not be the right way to generate a id
 			App.library.add_new_collection(c);
+		}
+
+		private void header_func(ListBoxRow row, ListBoxRow? row_before){
+			if(row_before == null){
+				row.set_header(null);
+				return;
+			}
+
+			Gtk.Widget current = row.get_header();
+
+			if(current == null){
+				current = new Gtk.Separator(Gtk.Orientation.HORIZONTAL);
+				current.show();
+				row.set_header(current);
+			}
 		}
 
 		[GtkCallback]
@@ -83,6 +103,7 @@ namespace Gradio{
 		[GtkCallback]
 		private void AddButton_clicked(Button button){
 			create_collection(AddEntry.get_text());
+			AddEntry.set_text("");
 		}
 
 		[GtkCallback]

@@ -197,6 +197,16 @@ namespace Gradio{
 
 
 		}
+
+		public static bool is_collection_item(int id){
+			if(id > 1000000){
+				message(id.to_string() + " is a collection item");
+				return true;
+			}
+
+			message(id.to_string() + " is a radio station item");
+			return false;
+		}
 	}
 }
 

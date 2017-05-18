@@ -2,7 +2,7 @@
     "app-id": "de.haeckerfelix.gradio",
     "version": "master",
     "runtime": "org.gnome.Sdk",
-    "runtime-version": "master",
+    "runtime-version": "3.24",
     "sdk": "org.gnome.Sdk",
     "command": "gradio",
     "tags": ["nightly"],

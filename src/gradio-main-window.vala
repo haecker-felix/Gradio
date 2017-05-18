@@ -223,7 +223,7 @@ namespace Gradio{
 			// deactivate selection mode
 			Page page = (Page)MainStack.get_visible_child();
 			page.set_selection_mode(false);
-			selection_toolbar.set_library_mode(false);
+			selection_toolbar.show_default_mode();
 			header.show_default_bar();
 
 			// disconnect old selection_changed signal
@@ -262,11 +262,12 @@ namespace Gradio{
 				};
 				case WindowMode.LIBRARY: {
 					header.AddButton.set_visible(true);
-					selection_toolbar.set_library_mode(true);
+					selection_toolbar.show_library_mode();
 					clean_back_entry_stack();
 					break;
 				};
 				case WindowMode.COLLECTIONS: {
+					selection_toolbar.show_collection_mode();
 					clean_back_entry_stack();
 					break;
 				};

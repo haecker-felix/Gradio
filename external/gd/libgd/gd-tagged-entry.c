@@ -23,7 +23,6 @@
 #include "gd-tagged-entry.h"
 
 #include <math.h>
-#include <libgd/gd-tagged-entry-resources.h>
 
 #define BUTTON_INTERNAL_SPACING 6
 
@@ -913,24 +912,6 @@ gd_tagged_entry_set_property (GObject      *object,
 }
 
 static void
-gd_tagged_entry_add_default_style (void)
-{
-  GtkCssProvider *provider;
-  GResource *do_not_optimize_away_get_resource G_GNUC_UNUSED;
-
-  provider = gtk_css_provider_new ();
-  do_not_optimize_away_get_resource = gd_tagged_entry_get_resource ();
-  gtk_css_provider_load_from_resource
-    (provider, "/org/gnome/libgd/tagged-entry/default.css");
-
-  gtk_style_context_add_provider_for_screen (gdk_screen_get_default (),
-                                             GTK_STYLE_PROVIDER (provider),
-                                             GTK_STYLE_PROVIDER_PRIORITY_THEME);
-
-  g_object_unref (provider);
-}
-
-static void
 gd_tagged_entry_class_init (GdTaggedEntryClass *klass)
 {
   GtkWidgetClass *wclass = GTK_WIDGET_CLASS (klass);
@@ -975,8 +956,6 @@ gd_tagged_entry_class_init (GdTaggedEntryClass *klass)
     g_param_spec_boolean ("tag-close-visible", "Tag close icon visibility",
                           "Whether the close button should be shown in tags.", TRUE,
                           G_PARAM_WRITABLE | G_PARAM_STATIC_STRINGS);
-
-  gd_tagged_entry_add_default_style ();
 
   g_type_class_add_private (klass, sizeof (GdTaggedEntryPrivate));
   g_object_class_install_properties (oclass, NUM_PROPERTIES, properties);
@@ -1077,7 +1056,7 @@ gd_tagged_entry_tag_class_init (GdTaggedEntryTagClass *klass)
                           G_PARAM_CONSTRUCT | G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
   tag_properties[PROP_TAG_STYLE] =
     g_param_spec_string ("style", "Style",
-                         "Style of the tag.", "documents-entry-tag",
+                         "Style of the tag.", "entry-tag",
                          G_PARAM_CONSTRUCT | G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
 
   g_type_class_add_private (klass, sizeof (GdTaggedEntryTagPrivate));

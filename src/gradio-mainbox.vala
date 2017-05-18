@@ -38,11 +38,14 @@ namespace Gradio{
 			});
 
 			this.item_activated.connect((t,a) => {
-
-				if(App.player.current_station.id == (string)a.id)
-					Gradio.App.window.show_station_details((RadioStation)a);
-				else
-					App.player.set_radio_station((RadioStation)a);
+				if(Util.is_collection_item(int.parse(a.id))){
+					message("clicked a collection item");
+				}else{
+					if(App.player.current_station.id == (string)a.id)
+						Gradio.App.window.show_station_details((RadioStation)a);
+					else
+						App.player.set_radio_station((RadioStation)a);
+				}
 			});
 		}
 	}

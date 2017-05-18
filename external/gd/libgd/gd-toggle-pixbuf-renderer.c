@@ -104,6 +104,7 @@ render_activity (GdTogglePixbufRenderer *self,
   x = cell_area->x + (cell_area->width / 2) - (width / 2) - xpad;
   y = cell_area->y + (cell_area->height / 2) - (height / 2) - ypad;
 
+  G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
   gtk_paint_spinner (gtk_widget_get_style (widget),
                      cr,
                      GTK_STATE_FLAG_ACTIVE,
@@ -112,6 +113,7 @@ render_activity (GdTogglePixbufRenderer *self,
                      (guint) self->priv->pulse - 1,
                      x, y,
                      width, height);
+  G_GNUC_END_IGNORE_DEPRECATIONS;
 }
 
 static void

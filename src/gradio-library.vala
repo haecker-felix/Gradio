@@ -96,6 +96,27 @@ namespace Gradio{
 			}
 		}
 
+		public bool remove_collection(Collection collection){
+			message("Removing collection %s from the library.", collection.name);
+			if(!contains_collection(collection) || collection == null)
+				return true;
+
+			string query = "DELETE FROM collections WHERE collection_id=" + collection.id;
+
+			int return_code = db.exec (query, null, out db_error_message);
+			if (return_code != Sqlite.OK) {
+				critical ("Could not remove collection from database: %s\n", db_error_message);
+				return false;
+			}else{
+				Idle.add(() => {
+					collection_model.remove_collection(collection);
+					return false;
+				});
+
+				return true;
+			}
+		}
+
 		public bool add_radio_station(RadioStation station){
 			if(contains_station(station) || station == null)
 				return true;
@@ -113,16 +134,15 @@ namespace Gradio{
 		}
 
 		public bool remove_radio_station(RadioStation station){
+			message("Removing station %s from the library.", station.title);
 			if(!contains_station(station) || station == null)
 				return true;
-
-			message("Removing %s from the library.", station.title);
 
 			string query = "DELETE FROM library WHERE station_id=" + station.id;
 
 			int return_code = db.exec (query, null, out db_error_message);
 			if (return_code != Sqlite.OK) {
-				critical ("Could not remove item from database: %s\n", db_error_message);
+				critical ("Could not remove station from database: %s\n", db_error_message);
 				return false;
 			}else{
 				Idle.add(() => {

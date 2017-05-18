@@ -20,20 +20,34 @@ namespace Gradio{
 	public class SelectionToolbar : Gtk.Box{
 
 		[GtkChild] private Gtk.Button AddToLibraryButton;
-		[GtkChild] private Gtk.Button RemoveFromLibraryButton;
+		[GtkChild] private Gtk.Button RemoveButton;
+		[GtkChild] private Gtk.Button EditCollectionButton;
+		[GtkChild] private Gtk.Button CollectionButton;
 
 		public SelectionToolbar(){
 
 		}
 
-		public void set_library_mode(bool b){
-			if(b){
-				RemoveFromLibraryButton.set_visible(true);
-				AddToLibraryButton.set_visible(false);
-			}else{
-				RemoveFromLibraryButton.set_visible(false);
-				AddToLibraryButton.set_visible(true);
-			}
+		public void show_collection_mode (){
+			RemoveButton.set_visible(true);
+			EditCollectionButton.set_visible(true);
+			AddToLibraryButton.set_visible(false);
+			CollectionButton.set_visible(false);
+		}
+
+		public void show_library_mode(){
+			RemoveButton.set_visible(true);
+			EditCollectionButton.set_visible(false);
+			AddToLibraryButton.set_visible(false);
+			CollectionButton.set_visible(true);
+		}
+
+		public void show_default_mode(){
+			RemoveButton.set_visible(false);
+			EditCollectionButton.set_visible(false);
+
+			AddToLibraryButton.set_visible(true);
+			CollectionButton.set_visible(false);
 		}
 
 		[GtkCallback]
@@ -50,13 +64,18 @@ namespace Gradio{
 		}
 
 		[GtkCallback]
-		public void RemoveFromLibraryButton_clicked (Gtk.Button button) {
+		public void RemoveButton_clicked (Gtk.Button button) {
 			List<Gd.MainBoxItem> list = App.window.current_selection.copy();
 
 			App.window.disable_selection_mode();
 
-			list.foreach ((station) => {
-				App.library.remove_radio_station((RadioStation)station);
+			list.foreach ((item) => {
+				message("selected "+item.id);
+				if(Util.is_collection_item(int.parse(item.id)))
+					Idle.add(() => {App.library.remove_collection((Collection)item); return false;});
+
+				else
+					Idle.add(() => {App.library.remove_radio_station((RadioStation)item); return false;});
 			});
 		}
 
