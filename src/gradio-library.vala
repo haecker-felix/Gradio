@@ -23,7 +23,7 @@ namespace Gradio{
 		public signal void removed_radio_station(RadioStation s);
 
 		private StationProvider station_provider;
-		public static StationModel library_model;
+		public static StationModel station_model;
 		public static CollectionModel collection_model;
 
 		private Sqlite.Database db;
@@ -38,30 +38,16 @@ namespace Gradio{
 			data_path = Path.build_filename (Environment.get_user_data_dir (), "gradio", "library.gradio");
 			dir_path = Path.build_filename (Environment.get_user_data_dir (), "gradio");
 
-			library_model = new StationModel();
-			station_provider = new StationProvider(ref library_model);
+			station_model = new StationModel();
+			station_provider = new StationProvider(ref station_model);
 			collection_model = new CollectionModel();
 
 			open_database();
 		}
 
-		public bool contains_station(RadioStation station){
-			if(library_model.contains_station(station))
-				return true;
-			else
-				return false;
-		}
-
-		public bool contains_collection(Collection collection){
-			if(collection_model.contains_collection(collection))
-				return true;
-			else
-				return false;
-		}
-
-		public bool add_station_to_collection(Collection collection, RadioStation station){
+		public bool add_station_to_collection(ref Collection collection, RadioStation station){
 			// station must be in the library
-			if((!contains_station(station)) || station == null)
+			if((!station_model.contains_station(station)) || station == null)
 				return false;
 
 			string query = "UPDATE library SET collection_id = '"+collection.id+"' WHERE station_id = "+station.id+";";
@@ -75,13 +61,13 @@ namespace Gradio{
 			}
 
 			// does this collection already exists? If not -> create it!
-			if(!contains_collection(collection)){
+			if(!collection_model.contains_collection(collection)){
 				add_new_collection(collection);
 			}
 		}
 
 		public bool add_new_collection(Collection collection){
-			if(contains_collection(collection) || collection == null)
+			if(collection_model.contains_collection(collection) || collection == null)
 				return true;
 
 			string query = "INSERT INTO collections (collection_id,collection_name) VALUES ('"+collection.id+"', '"+collection.name+"');";
@@ -98,7 +84,7 @@ namespace Gradio{
 
 		public bool remove_collection(Collection collection){
 			message("Removing collection %s from the library.", collection.name);
-			if(!contains_collection(collection) || collection == null)
+			if(!collection_model.contains_collection(collection) || collection == null)
 				return true;
 
 			string query = "DELETE FROM collections WHERE collection_id=" + collection.id;
@@ -118,7 +104,7 @@ namespace Gradio{
 		}
 
 		public bool add_radio_station(RadioStation station){
-			if(contains_station(station) || station == null)
+			if(station_model.contains_station(station) || station == null)
 				return true;
 
 			string query = "INSERT INTO library (station_id,collection_id) VALUES ("+station.id+", '0');";
@@ -128,14 +114,14 @@ namespace Gradio{
 				critical ("Could not add item to database: %s\n", db_error_message);
 				return false;
 			}else{
-				library_model.add_station(station);
+				station_model.add_station(station);
 				return true;
 			}
 		}
 
 		public bool remove_radio_station(RadioStation station){
 			message("Removing station %s from the library.", station.title);
-			if(!contains_station(station) || station == null)
+			if(!station_model.contains_station(station) || station == null)
 				return true;
 
 			string query = "DELETE FROM library WHERE station_id=" + station.id;
@@ -146,7 +132,7 @@ namespace Gradio{
 				return false;
 			}else{
 				Idle.add(() => {
-					library_model.remove_station(station);
+					station_model.remove_station(station);
 					removed_radio_station(station);
 					return false;
 				});

@@ -106,7 +106,7 @@ namespace Gradio{
 				show_play_icon();
 
 			// Add / Remove Button
-			if(App.library.contains_station(station))
+			if(App.library.station_model.contains_station(station))
 				show_remove_icon();
 			else
 				show_add_icon();
@@ -164,7 +164,7 @@ namespace Gradio{
 
 		[GtkCallback]
 		private void AddRemoveButton_clicked(Button button){
-			if(App.library.contains_station(station))
+			if(App.library.station_model.contains_station(station))
 				App.library.remove_radio_station(station);
 			else
 				App.library.add_radio_station(station);

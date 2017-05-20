@@ -57,7 +57,11 @@ namespace Gradio{
 			AddEntry.notify["text"].connect(() => {
 				string text = AddEntry.get_text();
 
-				if(text.length > 2)
+				// Don't add a collection with a same name, so we check it, before you can click the "+" button.
+				// The ID is not needful here, so just ""
+				Collection coll = new Collection(text, "");
+
+				if(text.length > 2 && !(App.library.collection_model.contains_collection(coll)))
 					AddButton.set_sensitive(true);
 				else
 					AddButton.set_sensitive(false);
@@ -113,6 +117,22 @@ namespace Gradio{
 
 		[GtkCallback]
 		private void DoneButton_clicked(Button button){
+			List<Gd.MainBoxItem> list = App.window.current_selection.copy();
+
+			ListBoxRow row = CollectionsListBox.get_selected_row();
+			Label label = (Label)row.get_child();
+
+			string n = label.get_text();
+
+			message("Adding station(s) to collection \""+n+"\"");
+			string id = App.library.collection_model.get_id_by_name(n);
+
+			Collection coll = (Collection)App.library.collection_model.get_item(int.parse(id));
+
+			list.foreach ((station) => {
+				App.library.add_station_to_collection(ref coll, (RadioStation)station);
+			});
+
 			this.destroy();
 		}
 	}

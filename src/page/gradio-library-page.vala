@@ -27,7 +27,7 @@ namespace Gradio{
 
 		public LibraryPage(){
 			mainbox = new MainBox();
-			mainbox.set_model(Library.library_model);
+			mainbox.set_model(Library.station_model);
 			mainbox.selection_changed.connect(() => {selection_changed();});
 			mainbox.selection_mode_request.connect(() => {selection_mode_enabled();});
 

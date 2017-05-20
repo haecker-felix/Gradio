@@ -38,6 +38,18 @@ namespace Gradio{
     			return collections.get ((int)index);
   		}
 
+  		public string get_id_by_name (string name){
+			int items = (int)get_n_items();
+
+			for(int i = 0; i < items; i++){
+				Collection coll = (Collection)get_item(i);
+				if(name == coll.name)
+					return coll.id;
+			}
+
+			return "";
+		}
+
   		public GLib.Type get_item_type () {
     			return typeof (Collection);
   		}
@@ -48,8 +60,8 @@ namespace Gradio{
 
   		public bool contains_collection (Collection collection) {
 			for (int i = 0; i < collections.length; i ++) {
-      				Collection fcollection = collections.get (i);
-      				if (collection.id == fcollection.id)
+      				Collection ncollection = collections.get (i);
+      				if (collection.id == ncollection.id || collection.name == ncollection.name)
         				return true;
 			}
 

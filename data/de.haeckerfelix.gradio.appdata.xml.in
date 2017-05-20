@@ -10,7 +10,7 @@
   </description>
   <screenshots>
     <screenshot type="default" height="563" width="748">
-      <image>https://raw.githubusercontent.com/haecker-felix/gradio/master/data/gradio01.png</image>
+      <image>https://raw.githubusercontent.com/haecker-felix/gradio/master/data/appdata/gradio01.png</image>
     </screenshot>
   </screenshots>
   <url type="homepage">https://github.com/haecker-felix/gradio</url>
@@ -21,6 +21,7 @@
     <kudo>AppMenu</kudo>
     <kudo>HiDpiIcon</kudo>
     <kudo>ModernToolkit</kudo>
+    <kudo>Notifications</kudo>
   </kudos>
   <translation type="gettext">gradio</translation>
   <_developer_name>Felix Häcker</_developer_name>
