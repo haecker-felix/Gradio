@@ -182,6 +182,7 @@ namespace Gradio{
 		}
 
 		public void enable_selection_mode(){
+			player_toolbar.set_visible(false);
 			Page page = (Page)MainStack.get_visible_child();
 			page.set_selection_mode(true);
 			SelectionToolbarRevealer.set_reveal_child(true);
@@ -189,6 +190,9 @@ namespace Gradio{
 		}
 
 		public void disable_selection_mode(){
+			if(App.player.current_station != null)
+				player_toolbar.set_visible(true);
+
 			Page page = (Page)MainStack.get_visible_child();
 			page.set_selection_mode(false);
 			SelectionToolbarRevealer.set_reveal_child(false);
