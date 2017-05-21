@@ -166,6 +166,30 @@ namespace Gradio{
 			if(!station_model.contains_station(station) || station == null)
 				return true;
 
+			// 1. Remove the station from the collection
+			Statement stmt; int rc = 0; int cols;
+			if ((rc = db.prepare_v2 ("SELECT collection_id from library WHERE station_id = '"+station.id+"';", -1, out stmt, null)) == 1) {
+				critical ("SQL error: %d, %s\n", rc, db.errmsg ());
+				return false;
+			}
+			cols = stmt.column_count();
+			do {
+				rc = stmt.step();
+				switch (rc) {
+				case Sqlite.DONE:
+					break;
+				case Sqlite.ROW:
+					Collection previous_coll = collection_model.get_collection_by_id(stmt.column_text(0));
+					previous_coll.remove_station(station);
+					break;
+				default:
+					printerr ("Error: %d, %s\n", rc, db.errmsg ());
+					break;
+				}
+			} while (rc == Sqlite.ROW);
+
+
+			// 2. Remove the station itself
 			string query = "DELETE FROM library WHERE station_id=" + station.id;
 
 			int return_code = db.exec (query, null, out db_error_message);
