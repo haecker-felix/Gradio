@@ -40,7 +40,7 @@ namespace Gradio{
 			this.item_activated.connect((t,a) => {
 				if(Util.is_collection_item(int.parse(a.id))){
 					Collection coll = (Collection)a;
-					App.window.show_stations_by_model(coll.station_model, coll.name);
+					App.window.show_collection_items(coll, coll.name);
 				}else{
 					if(App.player.current_station.id == (string)a.id)
 						App.window.show_station_details((RadioStation)a);

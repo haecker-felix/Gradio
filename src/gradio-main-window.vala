@@ -23,7 +23,7 @@ namespace Gradio{
 	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/main-window.ui")]
 	public class MainWindow : Gtk.ApplicationWindow {
 
-		public string[] page_name = { "library", "discover", "search", "details", "settings", "loading", "station_adress", "station_model", "add", "collections"};
+		public string[] page_name = { "library", "discover", "search", "details", "settings", "loading", "station_adress", "collection_items", "add", "collections"};
 
 		private Gradio.Headerbar header;
 		PlayerToolbar player_toolbar;
@@ -46,7 +46,7 @@ namespace Gradio{
 		public signal void tray_activate();
 
 		StationAddressPage station_address_page;
-		StationModelPage station_model_page;
+		CollectionItemsPage collection_items_page;
 		DiscoverPage discover_page;
 		SearchPage search_page;
 		LibraryPage library_page;
@@ -106,8 +106,8 @@ namespace Gradio{
 			station_address_page = new StationAddressPage();
 			MainStack.add_named(station_address_page, page_name[WindowMode.STATION_ADDRESS]);
 
-			station_model_page = new StationModelPage();
-			MainStack.add_named(station_model_page, page_name[WindowMode.STATION_MODEL]);
+			collection_items_page = new CollectionItemsPage();
+			MainStack.add_named(collection_items_page, page_name[WindowMode.COLLECTION_ITEMS]);
 
 			add_page = new AddPage();
 			MainStack.add_named(add_page, page_name[WindowMode.ADD]);
@@ -231,7 +231,7 @@ namespace Gradio{
 			// deactivate selection mode
 			Page page = (Page)MainStack.get_visible_child();
 			page.set_selection_mode(false);
-			selection_toolbar.show_default_mode();
+			selection_toolbar.set_mode(SelectionMode.DEFAULT);
 			header.show_default_bar();
 
 			// disconnect old selection_changed signal
@@ -270,12 +270,12 @@ namespace Gradio{
 				};
 				case WindowMode.LIBRARY: {
 					header.AddButton.set_visible(true);
-					selection_toolbar.show_library_mode();
+					selection_toolbar.set_mode(SelectionMode.LIBRARY);
 					clean_back_entry_stack();
 					break;
 				};
 				case WindowMode.COLLECTIONS: {
-					selection_toolbar.show_collection_mode();
+					selection_toolbar.set_mode(SelectionMode.COLLECTION_OVERVIEW);
 					clean_back_entry_stack();
 					break;
 				};
@@ -298,10 +298,11 @@ namespace Gradio{
 					header.show_title(station_address_page.get_title());
 					break;
 				};
-				case WindowMode.STATION_MODEL: {
-					station_model_page.set_model(data.model);
-					station_model_page.set_title(data.title);
-					header.show_title(station_model_page.get_title());
+				case WindowMode.COLLECTION_ITEMS: {
+					selection_toolbar.set_mode(SelectionMode.COLLECTION_ITEMS, data.collection.id);
+					collection_items_page.set_collection(data.collection);
+					collection_items_page.set_title(data.title);
+					header.show_title(collection_items_page.get_title());
 					break;
 				};
 				case WindowMode.ADD: {
@@ -421,16 +422,16 @@ namespace Gradio{
 			change_mode(WindowMode.STATION_ADDRESS, data);
 		}
 
-		public void show_stations_by_model(StationModel model, string title){
+		public void show_collection_items(Collection coll, string title){
 			if(in_mode_change)
 				return;
 
 			save_back_entry();
 
 			DataWrapper data = new DataWrapper();
-			data.model = model;
+			data.collection = coll;
 			data.title  = title;
-			change_mode(WindowMode.STATION_MODEL, data);
+			change_mode(WindowMode.COLLECTION_ITEMS, data);
 		}
 
 		public void show_add(){

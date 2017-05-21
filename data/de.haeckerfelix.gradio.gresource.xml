@@ -9,7 +9,7 @@
 	<file>ui/page/settings-page.ui</file>
 	<file>ui/page/station-detail-page.ui</file>
 	<file>ui/page/station-address-page.ui</file>
-	<file>ui/page/station-model-page.ui</file>
+	<file>ui/page/collection-items-page.ui</file>
 	<file>ui/page/add-page.ui</file>
 	<file>ui/page/collections-page.ui</file>
 	<file>ui/groupbox.ui</file>

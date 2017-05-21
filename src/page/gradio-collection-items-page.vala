@@ -18,8 +18,8 @@ using Gtk;
 
 namespace Gradio{
 
-	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/page/station-model-page.ui")]
-	public class StationModelPage : Gtk.Box, Page{
+	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/page/collection-items-page.ui")]
+	public class CollectionItemsPage : Gtk.Box, Page{
 
 		[GtkChild] Viewport ScrollViewport;
 
@@ -27,7 +27,9 @@ namespace Gradio{
 		private StationModel station_model;
 		private string title;
 
-		public StationModelPage(){
+		public string collection_id;
+
+		public CollectionItemsPage(){
 			station_model =  new StationModel();
 			mainbox = new MainBox();
 
@@ -36,8 +38,9 @@ namespace Gradio{
 			mainbox.selection_mode_request.connect(() => {selection_mode_enabled();});
 		}
 
-		public void set_model(StationModel model){
-			station_model = model;
+		public void set_collection(Collection coll){
+			collection_id = coll.id;
+			station_model = coll.station_model;
 			mainbox.set_model(station_model);
 		}
 

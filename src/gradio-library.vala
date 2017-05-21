@@ -96,6 +96,22 @@ namespace Gradio{
 			return false;
 		}
 
+		public bool remove_station_from_collection(string collection_id, RadioStation station){
+			// 1. Remove the collection_id from the station
+			string query = "UPDATE library SET collection_id = '0' WHERE station_id = "+station.id+";";
+
+			int return_code = db.exec (query, null, out db_error_message);
+			if (return_code != Sqlite.OK) {
+				critical ("Could not update collection id: %s\n", db_error_message);
+				return false;
+			}
+
+			// 2. Add the station to the new collection (if the collection exists)
+			Collection coll = collection_model.get_collection_by_id(collection_id);
+			coll.remove_station(station);
+			return true;
+		}
+
 		public bool add_new_collection(Collection collection){
 			if(collection_model.contains_collection(collection) || collection == null)
 				return true;
