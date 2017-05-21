@@ -51,6 +51,31 @@ namespace Gradio{
 				return false;
 
 			Collection coll = (Collection)collection_model.get_collection_by_id(collection_id);
+
+			// 1. Remove the station from the previous collection
+			Statement stmt; int rc = 0; int cols;
+			if ((rc = db.prepare_v2 ("SELECT collection_id from library WHERE station_id = '"+station.id+"';", -1, out stmt, null)) == 1) {
+				critical ("SQL error: %d, %s\n", rc, db.errmsg ());
+				return false;
+			}
+			cols = stmt.column_count();
+			do {
+				rc = stmt.step();
+				switch (rc) {
+				case Sqlite.DONE:
+					break;
+				case Sqlite.ROW:
+					Collection previous_coll = collection_model.get_collection_by_id(stmt.column_text(0));
+					previous_coll.remove_station(station);
+					break;
+				default:
+					printerr ("Error: %d, %s\n", rc, db.errmsg ());
+					break;
+				}
+			} while (rc == Sqlite.ROW);
+
+
+			// 2. Add the station to the new collection (if the collection exists)
 			if(coll != null){
 				coll.add_station(station);
 
@@ -65,7 +90,7 @@ namespace Gradio{
 					return true;
 				}
 			}else{
-				message("Adding station to collection %s: Collection not found.", collection_id);
+				warning("Adding station to collection %s: Collection not found.", collection_id);
 				return false;
 			}
 			return false;
@@ -92,6 +117,8 @@ namespace Gradio{
 			if(!collection_model.contains_collection(collection) || collection == null)
 				return true;
 
+
+			// 1. Delete the collection itself
 			string query = "DELETE FROM collections WHERE collection_id=" + collection.id;
 
 			int return_code = db.exec (query, null, out db_error_message);
@@ -103,9 +130,19 @@ namespace Gradio{
 					collection_model.remove_collection(collection);
 					return false;
 				});
+			}
 
+			// 2. Remove the collection_id from the stations
+			query = "UPDATE library SET collection_id = '0' WHERE collection_id = "+collection.id+";";
+
+			return_code = db.exec (query, null, out db_error_message);
+			if (return_code != Sqlite.OK) {
+				critical ("Could not update collection id: %s\n", db_error_message);
+				return false;
+			}else{
 				return true;
 			}
+
 		}
 
 		public bool add_radio_station(RadioStation station){

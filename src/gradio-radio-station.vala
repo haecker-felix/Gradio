@@ -23,6 +23,7 @@ namespace Gradio{
 		private string _homepage;
 		private string _language;
 		private string _id;
+		private string _collection_id;
 		private string _country;
 		private string _tags;
 		private string _state;
@@ -56,6 +57,11 @@ namespace Gradio{
 		public string id {
 			get{return _id;}
 		}
+
+		public string collection_id {
+			get{return _collection_id;}
+		}
+
 		public string country {
 			get{return _country;}
 			set{_country = value;}
