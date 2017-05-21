@@ -38,14 +38,14 @@ namespace Gradio{
 			if(languages_list.length() != 0 && countries_list.length() != 0 && codecs_list.length() != 0 && states_list.length() != 0 && tags_list.length() != 0){
 				is_ready = true;
 				loaded();
-				message("Successfully loaded category items!");
+				message("Loaded category items!");
 			}
 		}
 
 		private async void load_lists (){
         		SourceFunc callback = load_lists.callback;
 
-			message("Fetching category items...");
+			message("Load category items...");
 
 			ThreadFunc<void*> run = () => {
 				Json.Parser parser = new Json.Parser ();

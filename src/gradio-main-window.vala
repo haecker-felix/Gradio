@@ -317,11 +317,10 @@ namespace Gradio{
 
 			in_mode_change = false;
 
-			message("Changed mode to " + page_name[current_mode] + "page");
+			message("Changed page mode to \"%s\"", page_name[current_mode]);
 		}
 
 		private void clean_back_entry_stack(){
-			message("cleand back_entry_stack");
 			back_entry_stack.clear();
 		}
 

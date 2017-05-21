@@ -114,5 +114,10 @@ namespace Gradio{
 			});
 		}
 
+		[GtkCallback]
+		public void EditCollectionButton_clicked (Gtk.Button button) {
+
+		}
+
 	}
 }
