@@ -77,17 +77,17 @@ namespace Gradio{
 
 		[GtkCallback]
 		private void MorePopularStations_clicked(){
-			App.window.show_stations(RadioBrowser.most_votes(100), "Popular Stations");
+			App.window.show_stations_by_adress(RadioBrowser.most_votes(100), "Popular Stations");
 		}
 
 		[GtkCallback]
 		private void MoreRecentlyChanged_clicked(){
-			App.window.show_stations(RadioBrowser.recently_changed(100), "Recently Changed Stations");
+			App.window.show_stations_by_adress(RadioBrowser.recently_changed(100), "Recently Changed Stations");
 		}
 
 		[GtkCallback]
 		private void MoreRecentlyClicked_clicked(){
-			App.window.show_stations(RadioBrowser.recently_clicked(100), "Recently Clicked Stations");
+			App.window.show_stations_by_adress(RadioBrowser.recently_clicked(100), "Recently Clicked Stations");
 		}
 	}
 }

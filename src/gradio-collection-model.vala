@@ -30,12 +30,13 @@ namespace Gradio{
 			// Detect if array is empty
 			this.items_changed.connect(() => {
 				if(collections.length == 0)
+
 					empty();
 			});
 		}
 
   		public GLib.Object? get_item (uint index) {
-    			return collections.get ((int)index);
+    			return collections.get (index);
   		}
 
   		public string get_id_by_name (string name){
@@ -48,6 +49,18 @@ namespace Gradio{
 			}
 
 			return "";
+		}
+
+		public Collection get_collection_by_id(string id){
+			int items = (int)get_n_items();
+
+			for(int i = 0; i < items; i++){
+				Collection coll = (Collection)get_item(i);
+				if(id == coll.id)
+					return coll;
+			}
+
+			return null;
 		}
 
   		public GLib.Type get_item_type () {

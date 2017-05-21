@@ -25,7 +25,8 @@ namespace Gradio{
 		DETAILS,
 		SETTINGS,
 		LOADING,
-		STATION,
+		STATION_ADDRESS,
+		STATION_MODEL,
 		ADD,
 		COLLECTIONS
 	}
@@ -42,6 +43,7 @@ namespace Gradio{
 
 		public string title {get;set;}
 		public string address {get;set;}
+		public StationModel model {get;set;}
 	}
 
 

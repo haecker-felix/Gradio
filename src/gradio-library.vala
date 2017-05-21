@@ -45,25 +45,30 @@ namespace Gradio{
 			open_database();
 		}
 
-		public bool add_station_to_collection(ref Collection collection, RadioStation station){
+		public bool add_station_to_collection(string collection_id, RadioStation station){
 			// station must be in the library
 			if((!station_model.contains_station(station)) || station == null)
 				return false;
 
-			string query = "UPDATE library SET collection_id = '"+collection.id+"' WHERE station_id = "+station.id+";";
+			Collection coll = (Collection)collection_model.get_collection_by_id(collection_id);
+			if(coll != null){
+				coll.add_station(station);
 
-			int return_code = db.exec (query, null, out db_error_message);
-			if (return_code != Sqlite.OK) {
-				critical ("Could not add item to collection: %s\n", db_error_message);
-				return false;
+				string query = "UPDATE library SET collection_id = '"+collection_id+"' WHERE station_id = "+station.id+";";
+
+				int return_code = db.exec (query, null, out db_error_message);
+				if (return_code != Sqlite.OK) {
+					critical ("Could not add item to collection: %s\n", db_error_message);
+					return false;
+				}else{
+					message("Successfully added station to collection %s", collection_id);
+					return true;
+				}
 			}else{
-				return true;
+				message("Adding station to collection %s: Collection not found.", collection_id);
+				return false;
 			}
-
-			// does this collection already exists? If not -> create it!
-			if(!collection_model.contains_collection(collection)){
-				add_new_collection(collection);
-			}
+			return false;
 		}
 
 		public bool add_new_collection(Collection collection){
@@ -167,8 +172,8 @@ namespace Gradio{
 
 		private void read_database(){
 			message("Reading database data...");
-			read_stations();
 			read_collections();
+			read_stations();
 		}
 
 		private void read_stations(){
@@ -190,6 +195,11 @@ namespace Gradio{
 				case Sqlite.ROW:
 					message("Found station: " + stmt.column_text(0));
 					station_provider.add_station_by_id(int.parse(stmt.column_text(0)));
+
+					if(stmt.column_text(1) != "0"){
+						Collection coll = collection_model.get_collection_by_id(stmt.column_text(1));
+						coll.add_station_by_id(int.parse(stmt.column_text(0)));
+					}
 
 					break;
 				default:

@@ -18,39 +18,31 @@ using Gtk;
 
 namespace Gradio{
 
-	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/page/station-page.ui")]
-	public class StationPage : Gtk.Box, Page{
+	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/page/station-model-page.ui")]
+	public class StationModelPage : Gtk.Box, Page{
 
 		[GtkChild] Viewport ScrollViewport;
 
 		private MainBox mainbox;
 		private StationModel station_model;
-		private StationProvider station_provider;
-
-		private string address;
 		private string title;
 
-		public StationPage(){
+		public StationModelPage(){
 			station_model =  new StationModel();
-			station_provider = new StationProvider(ref station_model);
-
 			mainbox = new MainBox();
-			mainbox.set_model(station_model);
 
 			ScrollViewport.add(mainbox);
 			mainbox.selection_changed.connect(() => {selection_changed();});
 			mainbox.selection_mode_request.connect(() => {selection_mode_enabled();});
 		}
 
-		public void set_address(string txt){
-			address = txt;
-
-			message("Showing stations for \"%s\".", address);
-			station_provider.set_address(address);
+		public void set_model(StationModel model){
+			station_model = model;
+			mainbox.set_model(station_model);
 		}
 
-		public string get_address(){
-			return address;
+		public StationModel get_model(){
+			return station_model;
 		}
 
 		public void set_selection_mode(bool b){

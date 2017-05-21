@@ -23,7 +23,7 @@ namespace Gradio{
 	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/main-window.ui")]
 	public class MainWindow : Gtk.ApplicationWindow {
 
-		public string[] page_name = { "library", "discover", "search", "details", "settings", "loading", "stations", "add", "collections"};
+		public string[] page_name = { "library", "discover", "search", "details", "settings", "loading", "station_adress", "station_model", "add", "collections"};
 
 		private Gradio.Headerbar header;
 		PlayerToolbar player_toolbar;
@@ -45,7 +45,8 @@ namespace Gradio{
 		public signal void toggle_view();
 		public signal void tray_activate();
 
-		StationPage station_page;
+		StationAddressPage station_address_page;
+		StationModelPage station_model_page;
 		DiscoverPage discover_page;
 		SearchPage search_page;
 		LibraryPage library_page;
@@ -102,8 +103,11 @@ namespace Gradio{
 			settings_page = new SettingsPage();
 			MainStack.add_named(settings_page, page_name[WindowMode.SETTINGS]);
 
-			station_page = new StationPage();
-			MainStack.add_named(station_page, page_name[WindowMode.STATION]);
+			station_address_page = new StationAddressPage();
+			MainStack.add_named(station_address_page, page_name[WindowMode.STATION_ADDRESS]);
+
+			station_model_page = new StationModelPage();
+			MainStack.add_named(station_model_page, page_name[WindowMode.STATION_MODEL]);
 
 			add_page = new AddPage();
 			MainStack.add_named(add_page, page_name[WindowMode.ADD]);
@@ -288,10 +292,16 @@ namespace Gradio{
 					header.SearchButton.set_visible(false);
 					break;
 				};
-				case WindowMode.STATION: {
-					station_page.set_address(data.address);
-					station_page.set_title(data.title);
-					header.show_title(station_page.get_title());
+				case WindowMode.STATION_ADDRESS: {
+					station_address_page.set_address(data.address);
+					station_address_page.set_title(data.title);
+					header.show_title(station_address_page.get_title());
+					break;
+				};
+				case WindowMode.STATION_MODEL: {
+					station_model_page.set_model(data.model);
+					station_model_page.set_title(data.title);
+					header.show_title(station_model_page.get_title());
 					break;
 				};
 				case WindowMode.ADD: {
@@ -399,7 +409,7 @@ namespace Gradio{
 			change_mode(WindowMode.SETTINGS);
 		}
 
-		public void show_stations(string address, string title){
+		public void show_stations_by_adress(string address, string title){
 			if(in_mode_change)
 				return;
 
@@ -408,7 +418,19 @@ namespace Gradio{
 			DataWrapper data = new DataWrapper();
 			data.address = address;
 			data.title  = title;
-			change_mode(WindowMode.STATION, data);
+			change_mode(WindowMode.STATION_ADDRESS, data);
+		}
+
+		public void show_stations_by_model(StationModel model, string title){
+			if(in_mode_change)
+				return;
+
+			save_back_entry();
+
+			DataWrapper data = new DataWrapper();
+			data.model = model;
+			data.title  = title;
+			change_mode(WindowMode.STATION_MODEL, data);
 		}
 
 		public void show_add(){

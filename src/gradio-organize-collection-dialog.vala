@@ -24,6 +24,7 @@ namespace Gradio{
 
 		[GtkChild] private Stack WindowStack;
 		[GtkChild] private ListBox CollectionsListBox;
+		[GtkChild] private Button DoneButton;
 
 		// second screen
 		[GtkChild] private Entry AddEntry;
@@ -74,7 +75,10 @@ namespace Gradio{
 				label.height_request = 44;
 				label.margin_start = 12;
 				return label;
+			});
 
+			CollectionsListBox.row_activated.connect(() => {
+				DoneButton.set_sensitive(true);
 			});
 		}
 
@@ -127,10 +131,8 @@ namespace Gradio{
 			message("Adding station(s) to collection \""+n+"\"");
 			string id = App.library.collection_model.get_id_by_name(n);
 
-			Collection coll = (Collection)App.library.collection_model.get_item(int.parse(id));
-
 			list.foreach ((station) => {
-				App.library.add_station_to_collection(ref coll, (RadioStation)station);
+				App.library.add_station_to_collection(id, (RadioStation)station);
 			});
 
 			this.destroy();
