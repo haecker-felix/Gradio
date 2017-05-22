@@ -56,23 +56,23 @@ namespace Gradio {
 		uint url_hash = url.hash();
             	Gdk.Pixbuf pixbuf;
 
-            	if (!state.is_loaded) {
-            		state.load_complete.connect(() => { get_image.callback(); });
-                	yield;
-            	}
+             	if (!state.is_loaded) {
+             		state.load_complete.connect(() => { get_image.callback(); });
+                 	yield;
+             	}
 
-            	if (cache.contains(url_hash) && cache.@get(url_hash) != null) {
-                	pixbuf = yield cacher.get_cached_file(cache.@get(url_hash));
-                	if (pixbuf == null) {
-                    		warning("Could not load cached file");
-                	}
-            	} else {
-                	pixbuf = yield load_image_async(url);
-                	if (pixbuf != null) {
-                    		var cached_file = yield cacher.cache_file(url_hash, pixbuf);
-                    		cache.@set(url_hash, cached_file);
-                	}
-            	}
+             	if (cache.contains(url_hash) && cache.@get(url_hash) != null) {
+                 	pixbuf = yield cacher.get_cached_file(cache.@get(url_hash));
+                 	if (pixbuf == null) {
+                     		warning("Could not load cached file");
+                 	}
+             	} else {
+                 	pixbuf = yield load_image_async(url);
+                 	if (pixbuf != null) {
+                     		var cached_file = yield cacher.cache_file(url_hash, pixbuf);
+                     		cache.@set(url_hash, cached_file);
+                 	}
+             	}
 
 		Util.remove_transparency(ref pixbuf);
 
@@ -81,9 +81,15 @@ namespace Gradio {
 
         private async Gdk.Pixbuf load_image_async(string url) {
         	Gdk.Pixbuf pixbuf = null;
-            	Soup.Request req = soup_session.request(url);
-            	InputStream image_stream = yield req.send_async(null);
-	        pixbuf = yield new Gdk.Pixbuf.from_stream_async(image_stream, null);
+        	InputStream image_stream = null;
+            	Soup.Request req = null;
+
+		// That's not the best way to catch errors, but i think it is enough for this case ;)
+		try { req = soup_session.request(url); }catch(Error e){}
+            	try { image_stream = yield req.send_async(null); }catch(Error e){}
+            	try{ pixbuf = yield new Gdk.Pixbuf.from_stream_async(image_stream, null); }catch(Error e){}
+
+		if(pixbuf == null) pixbuf = new Gdk.Pixbuf.from_resource("/de/haecker-felix/gradio/icons/hicolor/48x48/apps/de.haeckerfelix.gradio.png");
 
             	return pixbuf;
         }
@@ -126,12 +132,17 @@ namespace Gradio {
                 	var file_loc = "%s/%ud.png".printf(this.location, hashed_name);
                 	var cfile = File.new_for_path(file_loc);
 
-                	FileIOStream fiostream;
+			try{
+			FileIOStream fiostream;
                 	if (cfile.query_exists()) {
                     		fiostream = yield cfile.replace_readwrite_async(null, false, FileCreateFlags.NONE);
                 	} else {
                     		fiostream = yield cfile.create_readwrite_async(FileCreateFlags.NONE);
                 	}
+			}catch (Error e){
+
+			}
+
 
                 	// switch to async version later, currently the bindings have a bug
                 	pixbuf.save_to_stream(fiostream.get_output_stream(), "png");

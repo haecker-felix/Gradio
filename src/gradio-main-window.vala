@@ -306,7 +306,7 @@ namespace Gradio{
 					break;
 				};
 				case WindowMode.ADD: {
-					header.show_title("Add new stations to your library");
+					header.show_title("");
 					header.SelectButton.set_visible(false);
 					break;
 				};

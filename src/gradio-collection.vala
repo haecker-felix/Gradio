@@ -73,12 +73,19 @@ namespace Gradio{
 			station_provider = new StationProvider(ref station_model);
 		}
 
+		private void update_icon(){
+                	notify_property("icon");
+
+		}
+
 		public void add_station(RadioStation station){
 			station_model.add_station(station);
+			update_icon();
 		}
 
 		public void add_station_by_id(int id){
 			station_provider.add_station_by_id(id);
+			update_icon();
 		}
 
 		public void remove_station(RadioStation station){

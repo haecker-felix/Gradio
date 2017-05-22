@@ -25,6 +25,7 @@ namespace Gradio{
 		[GtkChild] private Stack WindowStack;
 		[GtkChild] private ListBox CollectionsListBox;
 		[GtkChild] private Button DoneButton;
+		[GtkChild] private Popover AddPopover;
 
 		// second screen
 		[GtkChild] private Entry AddEntry;
@@ -112,6 +113,7 @@ namespace Gradio{
 		private void AddButton_clicked(Button button){
 			create_collection(AddEntry.get_text());
 			AddEntry.set_text("");
+			AddPopover.hide();
 		}
 
 		[GtkCallback]

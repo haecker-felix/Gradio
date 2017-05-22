@@ -90,11 +90,11 @@ namespace Gradio{
 		public void remove_collection (Collection collection) {
 			int pos = 0;
 			for (int i = 0; i < collections.length; i ++) {
-       				Collection fcollection = collections.get (i);
-       				if (fcollection.id == collection.id) {
-       					pos = i;
-       					break;
-       				}
+        				Collection fcollection = collections.get (i);
+        				if (fcollection.id == collection.id) {
+        					pos = i;
+        					break;
+        				}
 			}
 
 			collections.remove_index (pos);

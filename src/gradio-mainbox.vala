@@ -38,14 +38,16 @@ namespace Gradio{
 			});
 
 			this.item_activated.connect((t,a) => {
-				if(Util.is_collection_item(int.parse(a.id))){
-					Collection coll = (Collection)a;
+				Gd.MainBoxItem item = (Gd.MainBoxItem)a;
+
+				if(Util.is_collection_item(int.parse(item.id))){
+					Collection coll = (Collection)item;
 					App.window.show_collection_items(coll, coll.name);
 				}else{
-					if(App.player.current_station.id == (string)a.id)
-						App.window.show_station_details((RadioStation)a);
+					if(App.player.current_station == (RadioStation)item)
+						App.window.show_station_details((RadioStation)item);
 					else
-						App.player.set_radio_station((RadioStation)a);
+						App.player.set_radio_station((RadioStation)item);
 				}
 			});
 		}

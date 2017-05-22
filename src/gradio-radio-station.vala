@@ -320,7 +320,6 @@ namespace Gradio{
 				warning(e.message);
 			}
 
-			message("returning: " + url);
 			return url;
 		}
 

@@ -59,7 +59,7 @@ namespace Gradio{
 				case Gst.MessageType.ELEMENT:
 					message("Check if codec is missing...");
 				    	if(m.get_structure() != null && Gst.PbUtils.is_missing_plugin_message(m)) {
-				    		connection_error("Missing Codec!");
+				    		connection_error("A codec is missing.");
 				    		codec.install_missing_codec(m);
 				    	}
 				    	connection_error("A codec is missing!\n");
@@ -152,7 +152,7 @@ namespace Gradio{
 		private void connect_to_stream_address(string address){
 			stop();
 
-			message("Connecting to: " + address);
+			message("Connecting to stream: " + address);
 
 			stream.uri = address;
 

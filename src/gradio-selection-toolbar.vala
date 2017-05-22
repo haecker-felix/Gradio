@@ -91,7 +91,6 @@ namespace Gradio{
 			App.window.disable_selection_mode();
 
 			list.foreach ((item) => {
-
 				if(mode == SelectionMode.COLLECTION_ITEMS){
 					Idle.add(() => {App.library.remove_station_from_collection(collection_id, (RadioStation)item); return false;});
 				}else if(mode == SelectionMode.COLLECTION_OVERVIEW){

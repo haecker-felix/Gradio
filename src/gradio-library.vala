@@ -130,30 +130,30 @@ namespace Gradio{
 		}
 
 		public bool remove_collection(Collection collection){
-			// Delete the collection itself
-			string query = "DELETE FROM collections WHERE collection_id=" + collection.id;
+			// Remove the collection_id from the stations
+			string query = "UPDATE library SET collection_id = '0' WHERE collection_id = "+collection.id+";";
 
 			int return_code = db.exec (query, null, out db_error_message);
-			if (return_code != Sqlite.OK) {
-				critical ("Could not remove collection from database: %s\n", db_error_message);
-				return false;
-			}else{
-				Idle.add(() => {
-					collection_model.remove_collection(collection);
-					return false;
-				});
-			}
-
-			// Remove the collection_id from the stations
-			query = "UPDATE library SET collection_id = '0' WHERE collection_id = "+collection.id+";";
-
-			return_code = db.exec (query, null, out db_error_message);
 			if (return_code != Sqlite.OK) {
 				critical ("Could not update collection id: %s\n", db_error_message);
 				return false;
 			}
 
-			message("Removed collection \"%s\" (%s)", collection.name, collection.id);
+			// Delete the collection itself
+			query = "DELETE FROM collections WHERE collection_id=" + collection.id;
+
+			return_code = db.exec (query, null, out db_error_message);
+			if (return_code != Sqlite.OK) {
+			 	critical ("Could not remove collection from database: %s\n", db_error_message);
+			 	return false;
+			}else{
+			 	Idle.add(() => {
+			 		collection_model.remove_collection(collection);
+					return false;
+			 	});
+			}
+
+			// message("Removed collection \"%s\" (%s)", collection.name, collection.id);
 			return true;
 		}
 
