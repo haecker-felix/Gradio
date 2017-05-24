@@ -42,7 +42,6 @@ namespace Gradio{
 		private int width;
 
 		private StatusIcon trayicon;
-		public signal void toggle_view();
 		public signal void tray_activate();
 
 		StationAddressPage station_address_page;
@@ -62,7 +61,7 @@ namespace Gradio{
 		[GtkChild] private Revealer SelectionToolbarRevealer;
 		[GtkChild] private Box SelectionToolbarBox;
 		private SelectionToolbar selection_toolbar;
-		public GLib.List<Gd.MainBoxItem> current_selection;
+		private GLib.List<Gd.MainBoxItem> current_selection;
 
 		private App app;
 
@@ -217,7 +216,28 @@ namespace Gradio{
 			Page page = (Page)MainStack.get_visible_child();
 			current_selection = page.get_selection();
 
+			selection_toolbar.update_buttons((int)current_selection.length());
 			header.set_selected_items((int)current_selection.length());
+		}
+
+		public StationModel get_station_selection(){
+			StationModel model = new StationModel();
+
+			current_selection.foreach ((station) => {
+				model.add_station((RadioStation)station);
+			});
+
+			return model;
+		}
+
+		public CollectionModel get_collection_selection(){
+			CollectionModel model = new CollectionModel();
+
+			current_selection.foreach ((station) => {
+				model.add_collection((Collection)station);
+			});
+
+			return model;
 		}
 
 		public void show_notification(Gradio.Notification notification){

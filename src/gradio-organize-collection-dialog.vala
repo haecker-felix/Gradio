@@ -123,7 +123,8 @@ namespace Gradio{
 
 		[GtkCallback]
 		private void DoneButton_clicked(Button button){
-			List<Gd.MainBoxItem> list = App.window.current_selection.copy();
+			StationModel model = App.window.get_station_selection();
+			App.window.disable_selection_mode();
 
 			ListBoxRow row = CollectionsListBox.get_selected_row();
 			Label label = (Label)row.get_child();
@@ -133,9 +134,11 @@ namespace Gradio{
 			message("Adding station(s) to collection \""+n+"\"");
 			string id = App.library.collection_model.get_id_by_name(n);
 
-			list.foreach ((station) => {
-				App.library.add_station_to_collection(id, (RadioStation)station);
-			});
+			for(int i = 0; i < model.get_n_items(); i++){
+				RadioStation station = (RadioStation)model.get_item(i);
+				App.library.add_station_to_collection(id, station);
+
+			}
 
 			this.destroy();
 		}

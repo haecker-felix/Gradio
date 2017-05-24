@@ -63,7 +63,8 @@ namespace Gradio{
 				case Sqlite.DONE:
 					break;
 				case Sqlite.ROW:
-					remove_station_from_collection(stmt.column_text(0), station); break;
+					if(stmt.column_text(0) != "0") // if text == 0, there is no previous collection, so do nothing.
+						remove_station_from_collection(stmt.column_text(0), station); break;
 				default:
 					printerr ("Error: %d, %s\n", rc, db.errmsg ());
 					break;
@@ -153,7 +154,7 @@ namespace Gradio{
 			 	});
 			}
 
-			// message("Removed collection \"%s\" (%s)", collection.name, collection.id);
+			message("Removed collection \"%s\" (%s)", collection.name, collection.id);
 			return true;
 		}
 

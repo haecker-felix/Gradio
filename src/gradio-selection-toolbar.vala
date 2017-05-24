@@ -28,25 +28,53 @@ namespace Gradio{
 
 		[GtkChild] private Gtk.Button AddToLibraryButton;
 		[GtkChild] private Gtk.Button RemoveButton;
-		[GtkChild] private Gtk.Button EditCollectionButton;
+		[GtkChild] private Gtk.Button DetailsButton;
+		[GtkChild] private Gtk.Button PlayButton;
 		[GtkChild] private Gtk.Button CollectionButton;
 
 		private string collection_id = "";
-
+		private int selected_items = 0;
 		private SelectionMode mode;
 
 		public SelectionToolbar(){
+		}
 
+		public void update_buttons(int count){
+			selected_items = count;
+			set_mode(mode);
 		}
 
 		public void set_mode(SelectionMode m, string cid = ""){
 			mode = m;
-			collection_id = cid;
+
+			if(cid != "")
+				collection_id = cid;
 
 			RemoveButton.set_visible(false);
-			EditCollectionButton.set_visible(false);
+			DetailsButton.set_visible(false);
 			AddToLibraryButton.set_visible(false);
 			CollectionButton.set_visible(false);
+			PlayButton.set_visible(true);
+
+			bool single = false;
+			if(selected_items <= 1) single = true;
+			DetailsButton.set_visible(single);
+			PlayButton.set_visible(single);
+
+			// If no item is selected, disabled all actions.
+			if(selected_items == 0){
+				RemoveButton.set_sensitive(false);
+				DetailsButton.set_sensitive(false);
+				AddToLibraryButton.set_sensitive(false);
+				CollectionButton.set_sensitive(false);
+				PlayButton.set_sensitive(false);
+			}else{
+				RemoveButton.set_sensitive(true);
+				DetailsButton.set_sensitive(true);
+				AddToLibraryButton.set_sensitive(true);
+				CollectionButton.set_sensitive(true);
+				PlayButton.set_sensitive(true);
+			}
 
 			switch(mode){
 				case SelectionMode.DEFAULT: {
@@ -60,7 +88,8 @@ namespace Gradio{
 				}
 				case SelectionMode.COLLECTION_OVERVIEW: {
 					RemoveButton.set_visible(true);
-					EditCollectionButton.set_visible(true);
+					DetailsButton.set_visible(true);
+					PlayButton.set_visible(false);
 					break;
 				}
 				case SelectionMode.COLLECTION_ITEMS: {
@@ -86,36 +115,62 @@ namespace Gradio{
 
 		[GtkCallback]
 		public void RemoveButton_clicked (Gtk.Button button) {
-			List<Gd.MainBoxItem> list = App.window.current_selection.copy();
-
-			App.window.disable_selection_mode();
-
-			list.foreach ((item) => {
-				if(mode == SelectionMode.COLLECTION_ITEMS){
-					Idle.add(() => {App.library.remove_station_from_collection(collection_id, (RadioStation)item); return false;});
-				}else if(mode == SelectionMode.COLLECTION_OVERVIEW){
-					Idle.add(() => {App.library.remove_collection((Collection)item); return false;});
-				}else{
-					Idle.add(() => {App.library.remove_radio_station((RadioStation)item); return false;});
+			if(mode == SelectionMode.COLLECTION_OVERVIEW){
+				CollectionModel model = (CollectionModel)App.window.get_collection_selection();
+				for(int i = 0; i < model.get_n_items(); i++){
+					Collection collection = (Collection)model.get_item(i);
+					App.library.remove_collection(collection);
 				}
 
-			});
+			} else if(mode == SelectionMode.COLLECTION_ITEMS){
+				StationModel model = (StationModel)App.window.get_station_selection();
+				for(int i = 0; i < model.get_n_items(); i++){
+					RadioStation station = (RadioStation)model.get_item(i);
+					App.library.remove_station_from_collection(collection_id, station);
+				}
+
+			} else {
+				StationModel model = (StationModel)App.window.get_station_selection();
+				for(int i = 0; i < model.get_n_items(); i++){
+					RadioStation station = (RadioStation)model.get_item(i);
+					App.library.remove_radio_station(station);
+				}
+			}
+
+			App.window.disable_selection_mode();
 		}
 
 		[GtkCallback]
 		public void AddToLibraryButton_clicked (Gtk.Button button) {
-			List<Gd.MainBoxItem> list = App.window.current_selection.copy();
-
+			StationModel model = App.window.get_station_selection();
 			App.window.disable_selection_mode();
 
-			list.foreach ((station) => {
-				App.library.add_radio_station((RadioStation)station);
-			});
+			for(int i = 0; i < model.get_n_items(); i++){
+				RadioStation station = (RadioStation)model.get_item(i);
+				App.library.add_radio_station(station);
+			}
 		}
 
 		[GtkCallback]
-		public void EditCollectionButton_clicked (Gtk.Button button) {
+		public void DetailsButton_clicked (Gtk.Button button) {
+			StationModel model = App.window.get_station_selection();
+			App.window.disable_selection_mode();
 
+			for(int i = 0; i < model.get_n_items(); i++){
+				RadioStation station = (RadioStation)model.get_item(i);
+				App.window.show_station_details(station);
+			}
+		}
+
+		[GtkCallback]
+		public void PlayButton_clicked (Gtk.Button button) {
+			StationModel model = App.window.get_station_selection();
+			App.window.disable_selection_mode();
+
+			for(int i = 0; i < model.get_n_items(); i++){
+				RadioStation station = (RadioStation)model.get_item(i);
+				App.player.set_radio_station(station);
+			}
 		}
 
 	}

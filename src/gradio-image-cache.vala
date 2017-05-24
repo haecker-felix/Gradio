@@ -131,18 +131,15 @@ namespace Gradio {
             	public async File cache_file(uint hashed_name, Gdk.Pixbuf pixbuf) {
                 	var file_loc = "%s/%ud.png".printf(this.location, hashed_name);
                 	var cfile = File.new_for_path(file_loc);
+			FileIOStream fiostream = null;
 
 			try{
-			FileIOStream fiostream;
-                	if (cfile.query_exists()) {
-                    		fiostream = yield cfile.replace_readwrite_async(null, false, FileCreateFlags.NONE);
-                	} else {
-                    		fiostream = yield cfile.create_readwrite_async(FileCreateFlags.NONE);
-                	}
-			}catch (Error e){
-
-			}
-
+		        	if (cfile.query_exists()) {
+		            		fiostream = yield cfile.replace_readwrite_async(null, false, FileCreateFlags.NONE);
+		        	} else {
+		            		fiostream = yield cfile.create_readwrite_async(FileCreateFlags.NONE);
+		        	}
+			}catch (Error e){}
 
                 	// switch to async version later, currently the bindings have a bug
                 	pixbuf.save_to_stream(fiostream.get_output_stream(), "png");
