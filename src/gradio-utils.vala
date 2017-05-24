@@ -137,6 +137,7 @@ namespace Gradio{
 			GLib.Application.get_default ().send_notification ("de.haeckerfelix.gradio", notification);
 		}
 
+
 		public static Gdk.Pixbuf optiscale (Gdk.Pixbuf pixbuf, int size) {
 			double pixb_w = pixbuf.get_width();
 			double pixb_h = pixbuf.get_height();
@@ -161,51 +162,124 @@ namespace Gradio{
 			return pixbuf;
 		}
 
-		public static void remove_transparency(ref Gdk.Pixbuf pixbuf){
-			// Remove alpha channel
-        		if (pixbuf.get_has_alpha () && pixbuf.get_n_channels () == 4 && pixbuf.get_bits_per_sample () == 8) {
-		    		var width = pixbuf.get_width ();
-		    		var height = pixbuf.get_height ();
-		    		var rowstride = pixbuf.get_rowstride ();
-		    		unowned uint8[] orig_pixels = pixbuf.get_pixels ();
-		    		var pixels = new uint8[rowstride * height];
-
-		    		for (var i = 0; i < height; i++) {
-		        		for (var j = 0, k = 0; j < width * 4; j += 4, k += 3) {
-		            			var orig_index = rowstride * i + j;
-		            			var index = rowstride * i + k;
-
-					        if (orig_pixels[orig_index] == 0 && orig_pixels[orig_index + 1] == 0 && orig_pixels[orig_index + 2] == 0 && orig_pixels[orig_index + 3] == 0) {
-		                			pixels[index] = 0xFF;
-		                			pixels[index + 1] = 0xFF;
-		                			pixels[index + 2] = 0xFF;
-		            			} else {
-							pixels[index] = orig_pixels[orig_index];
-							pixels[index + 1] = orig_pixels[orig_index + 1];
-							pixels[index + 2] = orig_pixels[orig_index + 2];
-		            			}
-		        		}
-		    		}
-
-		    		pixbuf = new Gdk.Pixbuf.from_data (pixels,
-		                                       pixbuf.get_colorspace (),
-		                                       false,
-		                                       8,
-		                                       width,
-		                                       height,
-		                                       rowstride,
-		                                       null);
-       			}
-
-
-		}
-
 		public static bool is_collection_item(int id){
 			if(id > 1000000)
 				return true;
 			return false;
 		}
+
+		public static Cairo.Surface create_thumbnail (int base_size, List<Gdk.Pixbuf> pixbufs){
+			Cairo.Surface surface;
+			Cairo.Context cr;
+			Gtk.StyleContext context;
+			Gtk.WidgetPath path;
+			Gtk.Border tile_border;
+			int padding, tile_size;
+			int idx, cur_x, cur_y;
+			List<Gdk.Pixbuf> l;
+
+			context = new Gtk.StyleContext();
+			context.add_class("documents-collection-icon");
+
+			path = new Gtk.WidgetPath ();
+			Type type = typeof (Gtk.IconView);
+			path.append_type (type);
+		  	context.set_path (path);
+
+			surface = new Cairo.ImageSurface(Cairo.Format.ARGB32, base_size, base_size);
+			cr = new Cairo.Context (surface);
+
+			/* Render the thumbnail itself */
+			context.render_background (cr, 0, 0, base_size, base_size);
+			context.render_frame (cr, 0, 0, base_size, base_size);
+
+			/* Now, render the tiles inside */
+			context.remove_class ("documents-collection-icon");
+			context.add_class ("documents-collection-icon-tile");
+
+			/* TODO: do not hardcode 4, but scale to another layout if more
+			* pixbufs are provided.
+			*/
+			padding = int.max((int)Math.floor(base_size / 10), 4); 	// correct double to int?
+			tile_border = context.get_border (Gtk.StateFlags.NORMAL);
+			tile_size = (base_size - (3 * padding)) / 2 - int.max(tile_border.left + tile_border.right, tile_border.top + tile_border.bottom);
+
+			idx = 0;
+			cur_x = padding;
+			cur_y = padding;
+
+			if(pixbufs.length() == 1){
+				Gdk.Pixbuf pix = pixbufs.nth_data(0);
+				pix = optiscale(pix,base_size-4);
+
+				int pix_width, pix_height;
+				pix_width = pix.get_width ();
+				pix_height = pix.get_height ();
+
+				cr.save();
+
+				int x = base_size - pix_width - ((base_size-pix_width)/2);
+				int y = base_size - pix_height- ((base_size-pix_height)/2);
+
+				if(x < 0) x=0;
+				if(y < 0) y=0;
+
+				message("width: %i", pix_width);
+				message("heigth: %i", pix_height);
+				message("x: %i", x);
+				message("Y: %i", y);
+
+				cr.translate (x, y);
+				cr.rectangle (0, 0, pix_width, pix_height);
+				cr.clip ();
+
+				Gdk.cairo_set_source_pixbuf (cr, pix, 0, 0);
+				cr.paint ();
+
+				cr.restore ();
+			}else {
+				int length = 4;
+				if((int)pixbufs.length() < 4)
+					length = (int) pixbufs.length();
+
+				for(int i = 0; i < length; i++){
+					Gdk.Pixbuf pix = pixbufs.nth_data(i);
+
+					bool is_thumbnail;
+			      		int pix_width, pix_height, scale_size;
+
+					context.render_background (cr, cur_x, cur_y, tile_size + tile_border.left + tile_border.right, tile_size + tile_border.top + tile_border.bottom);
+					context.render_frame (cr, cur_x, cur_y, tile_size + tile_border.left + tile_border.right, tile_size + tile_border.top + tile_border.bottom);
+
+					pix_width = pix.get_width ();
+					pix_height = pix.get_height ();
+					scale_size = int.min (pix_width, pix_height);
+
+					cr.save ();
+
+					cr.translate (cur_x + tile_border.left, cur_y + tile_border.top);
+					cr.rectangle (0, 0, tile_size, tile_size);
+					cr.clip ();
+
+					cr.scale ((double) tile_size / (double) scale_size, (double) tile_size / (double) scale_size);
+					Gdk.cairo_set_source_pixbuf (cr, pix, 0, 0);
+					cr.paint ();
+
+					cr.restore ();
+
+					if ((idx % 2) == 0){
+						cur_x += tile_size + padding + tile_border.left + tile_border.right;
+					}else{
+						cur_x = padding;
+						cur_y += tile_size + padding + tile_border.top + tile_border.bottom;
+					}
+				}
+			}
+
+			return surface;
+		}
 	}
 }
+
 
 

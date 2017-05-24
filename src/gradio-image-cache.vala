@@ -74,8 +74,6 @@ namespace Gradio {
                  	}
              	}
 
-		Util.remove_transparency(ref pixbuf);
-
             	return pixbuf;
         }
 

@@ -37,7 +37,6 @@ namespace Gradio{
 		private bool _pulse;
 		private int64 _mtime;
 		private Cairo.Surface _icon;
-		private Pixbuf _pixbuf;
 
 		public string title {
 			get{return _title;}
@@ -93,7 +92,7 @@ namespace Gradio{
 		}
 
 		public string uri {
-			get{return _uri;}
+			get{return _id;}
 		}
 
 		public string primary_text {
@@ -132,30 +131,15 @@ namespace Gradio{
 		// icon for the gd mainbox
 		public Cairo.Surface icon {
 			get{
-				if(_pixbuf == null){
-					set_pixbuf();
-					return null;
+				if(_icon == null){
+					List<Gdk.Pixbuf> pixbufs = new List<Gdk.Pixbuf>();
+					Gdk.Pixbuf pix1 = new Gdk.Pixbuf.from_resource("/de/haecker-felix/gradio/icons/hicolor/48x48/apps/de.haeckerfelix.gradio.png");
+					pixbufs.append(pix1);
+					_icon = Util.create_thumbnail(192, pixbufs);
+
+					set_icon();
+					return _icon;
 				}
-
-				Cairo.Surface surface = Gdk.cairo_surface_create_from_pixbuf(_pixbuf, 1, null);
-
-				Gtk.StyleContext context = new Gtk.StyleContext();
-				context.add_class("collection-icon");
-
-				Gtk.WidgetPath path = new Gtk.WidgetPath();
-				path.append_type(Type.BOXED);
-				context.set_path(path);
-
-				Cairo.Context cr = new Cairo.Context(surface);
-
-				// render the thumbnail itself
-				context.render_background(cr, 0, 0, 192, 192);
-				context.render_frame(cr, 0, 0, 192, 192);
-
-				context.remove_class("collection-icon");
-				context.add_class("collection-icon-tile");
-
-				_icon = surface;
 				return _icon;
 			}
 		}
@@ -229,12 +213,15 @@ namespace Gradio{
 				_is_broken = false;
 		}
 
-		private void set_pixbuf(){
+		private void set_icon(){
                 	App.image_cache.get_image.begin(icon_address, (obj, res) => {
 		            	Gdk.Pixbuf pixbuf = App.image_cache.get_image.end(res);
 		            	if (pixbuf != null) {
-		                	_pixbuf = pixbuf.scale_simple(192, 192, Gdk.InterpType.HYPER);
-		                	notify_property("icon");
+		                	List<Gdk.Pixbuf> pixbufs = new List<Gdk.Pixbuf>();
+					pixbufs.append(pixbuf);
+					_icon = Util.create_thumbnail(192, pixbufs);
+
+					notify_property("icon");
 		            	}
 			});
 		}

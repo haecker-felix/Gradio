@@ -65,3 +65,18 @@
 .collection-icon-tile {
     border: 3px solid gray;
 }
+
+
+@define-color documents_collection_bg #ffffff;
+
+.documents-collection-icon {
+    background-color: @documents_collection_bg;
+    border: 2px solid @borders;
+    border-radius: 2px;
+}
+
+.documents-collection-icon-tile {
+    background-color: @documents_collection_bg;
+    border: 2px solid @borders;
+    border-radius: 1px;
+}

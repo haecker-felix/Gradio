@@ -50,6 +50,7 @@ namespace Gradio{
 			if(cid != "")
 				collection_id = cid;
 
+			// Set to standard
 			RemoveButton.set_visible(false);
 			DetailsButton.set_visible(false);
 			AddToLibraryButton.set_visible(false);

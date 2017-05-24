@@ -58,9 +58,22 @@ namespace Gradio{
 			get{return _mtime;}
 		}
 
-		// icon for the gd mainbox
 		public Cairo.Surface icon {
 			get{
+				List<Gdk.Pixbuf> pixbufs = new List<Gdk.Pixbuf>();
+
+				Gdk.Pixbuf pix1 = new Gdk.Pixbuf.from_resource("/de/haecker-felix/gradio/icons/hicolor/48x48/apps/de.haeckerfelix.gradio.png");
+				Gdk.Pixbuf pix2 = new Gdk.Pixbuf.from_resource("/de/haecker-felix/gradio/icons/hicolor/48x48/apps/de.haeckerfelix.gradio.png");
+				Gdk.Pixbuf pix3 = new Gdk.Pixbuf.from_resource("/de/haecker-felix/gradio/icons/hicolor/48x48/apps/de.haeckerfelix.gradio.png");
+				Gdk.Pixbuf pix4 = new Gdk.Pixbuf.from_resource("/de/haecker-felix/gradio/icons/hicolor/48x48/apps/de.haeckerfelix.gradio.png");
+
+				pixbufs.append(pix1);
+				pixbufs.append(pix2);
+				pixbufs.append(pix3);
+				pixbufs.append(pix4);
+
+				_icon = Util.create_thumbnail(192, pixbufs);
+
 				return _icon;
 			}
 		}
