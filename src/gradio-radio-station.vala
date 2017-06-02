@@ -23,7 +23,6 @@ namespace Gradio{
 		private string _homepage;
 		private string _language;
 		private string _id;
-		private string _collection_id;
 		private string _country;
 		private string _tags;
 		private string _state;
@@ -37,6 +36,7 @@ namespace Gradio{
 		private bool _pulse;
 		private int64 _mtime;
 		private Cairo.Surface _icon;
+		private Thumbnail _thumbnail;
 
 		public string title {
 			get{return _title;}
@@ -55,10 +55,6 @@ namespace Gradio{
 
 		public string id {
 			get{return _id;}
-		}
-
-		public string collection_id {
-			get{return _collection_id;}
 		}
 
 		public string country {
@@ -96,9 +92,7 @@ namespace Gradio{
 		}
 
 		public string primary_text {
-			get{
-				return _title;
-			}
+			get{return _title;}
 		}
 
 		public string secondary_text {
@@ -128,16 +122,15 @@ namespace Gradio{
 			get{return _mtime;}
 		}
 
-		// icon for the gd mainbox
 		public Cairo.Surface icon {
 			get{
-				if(_icon == null){
-					List<Gdk.Pixbuf> pixbufs = new List<Gdk.Pixbuf>();
-					Gdk.Pixbuf pix1 = new Gdk.Pixbuf.from_resource("/de/haecker-felix/gradio/icons/hicolor/48x48/apps/de.haeckerfelix.gradio.png");
-					pixbufs.append(pix1);
-					_icon = Util.create_thumbnail(192, pixbufs);
-
-					set_icon();
+				if(_thumbnail == null){
+					_thumbnail = new Thumbnail.for_station(192, this);
+					_thumbnail.updated.connect(() => {
+						_icon = _thumbnail.surface;
+						notify_property("icon");
+					});
+					_thumbnail.show_placeholder();
 					return _icon;
 				}
 				return _icon;
@@ -211,19 +204,6 @@ namespace Gradio{
 
 			if(radio_station_data.get_string_member("lastcheckok") == "1")
 				_is_broken = false;
-		}
-
-		private void set_icon(){
-                	App.image_cache.get_image.begin(icon_address, (obj, res) => {
-		            	Gdk.Pixbuf pixbuf = App.image_cache.get_image.end(res);
-		            	if (pixbuf != null) {
-		                	List<Gdk.Pixbuf> pixbufs = new List<Gdk.Pixbuf>();
-					pixbufs.append(pixbuf);
-					_icon = Util.create_thumbnail(192, pixbufs);
-
-					notify_property("icon");
-		            	}
-			});
 		}
 
 		private void stop_handler(){

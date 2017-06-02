@@ -23,7 +23,9 @@ namespace Gradio{
 		private string _uri;
 		private bool _pulse;
 		private int64 _mtime;
+
 		private Cairo.Surface _icon;
+		private Thumbnail _thumbnail;
 
 		public StationModel station_model;
 		private StationProvider station_provider;
@@ -60,20 +62,15 @@ namespace Gradio{
 
 		public Cairo.Surface icon {
 			get{
-				List<Gdk.Pixbuf> pixbufs = new List<Gdk.Pixbuf>();
-
-				Gdk.Pixbuf pix1 = new Gdk.Pixbuf.from_resource("/de/haecker-felix/gradio/icons/hicolor/48x48/apps/de.haeckerfelix.gradio.png");
-				Gdk.Pixbuf pix2 = new Gdk.Pixbuf.from_resource("/de/haecker-felix/gradio/icons/hicolor/48x48/apps/de.haeckerfelix.gradio.png");
-				Gdk.Pixbuf pix3 = new Gdk.Pixbuf.from_resource("/de/haecker-felix/gradio/icons/hicolor/48x48/apps/de.haeckerfelix.gradio.png");
-				Gdk.Pixbuf pix4 = new Gdk.Pixbuf.from_resource("/de/haecker-felix/gradio/icons/hicolor/48x48/apps/de.haeckerfelix.gradio.png");
-
-				pixbufs.append(pix1);
-				pixbufs.append(pix2);
-				pixbufs.append(pix3);
-				pixbufs.append(pix4);
-
-				_icon = Util.create_thumbnail(192, pixbufs);
-
+				if(_thumbnail == null){
+					_thumbnail = new Thumbnail.for_collection(192, this);
+					_thumbnail.updated.connect(() => {
+						_icon = _thumbnail.surface;
+						notify_property("icon");
+					});
+					_thumbnail.show_placeholder();
+					return _icon;
+				}
 				return _icon;
 			}
 		}
@@ -86,19 +83,12 @@ namespace Gradio{
 			station_provider = new StationProvider(ref station_model);
 		}
 
-		private void update_icon(){
-                	notify_property("icon");
-
-		}
-
 		public void add_station(RadioStation station){
 			station_model.add_station(station);
-			update_icon();
 		}
 
 		public void add_station_by_id(int id){
 			station_provider.add_station_by_id(id);
-			update_icon();
 		}
 
 		public void remove_station(RadioStation station){

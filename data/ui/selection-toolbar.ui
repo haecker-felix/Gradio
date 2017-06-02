@@ -31,6 +31,9 @@
         <property name="receives_default">True</property>
         <property name="no_show_all">True</property>
         <signal name="clicked" handler="AddToLibraryButton_clicked" swapped="no"/>
+        <style>
+          <class name="suggested-action"/>
+        </style>
       </object>
       <packing>
         <property name="expand">False</property>
@@ -40,17 +43,14 @@
     </child>
     <child>
       <object class="GtkButton" id="RemoveButton">
+        <property name="label" translatable="yes">Remove</property>
         <property name="can_focus">True</property>
         <property name="receives_default">True</property>
         <property name="no_show_all">True</property>
         <signal name="clicked" handler="RemoveButton_clicked" swapped="no"/>
-        <child>
-          <object class="GtkImage">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="icon_name">user-trash-symbolic</property>
-          </object>
-        </child>
+        <style>
+          <class name="destructive-action"/>
+        </style>
       </object>
       <packing>
         <property name="expand">False</property>
@@ -59,34 +59,14 @@
       </packing>
     </child>
     <child>
-      <object class="GtkButton" id="CollectionButton">
-        <property name="label" translatable="yes">Collections</property>
+      <object class="GtkSeparator">
         <property name="visible">True</property>
-        <property name="can_focus">True</property>
-        <property name="receives_default">True</property>
-        <property name="no_show_all">True</property>
-        <signal name="clicked" handler="CollectionButton_clicked" swapped="no"/>
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
       </object>
       <packing>
         <property name="expand">False</property>
         <property name="fill">True</property>
-        <property name="pack_type">end</property>
-        <property name="position">3</property>
-      </packing>
-    </child>
-    <child>
-      <object class="GtkButton" id="DetailsButton">
-        <property name="label" translatable="yes">Details</property>
-        <property name="visible">True</property>
-        <property name="can_focus">True</property>
-        <property name="receives_default">True</property>
-        <property name="no_show_all">True</property>
-        <signal name="clicked" handler="DetailsButton_clicked" swapped="no"/>
-      </object>
-      <packing>
-        <property name="expand">False</property>
-        <property name="fill">True</property>
-        <property name="pack_type">end</property>
         <property name="position">3</property>
       </packing>
     </child>
@@ -111,6 +91,7 @@
     </child>
     <child>
       <object class="GtkButton" id="ShareButton">
+        <property name="visible">True</property>
         <property name="can_focus">True</property>
         <property name="receives_default">True</property>
         <property name="no_show_all">True</property>
@@ -127,6 +108,38 @@
         <property name="expand">False</property>
         <property name="fill">True</property>
         <property name="position">5</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkButton" id="CollectionButton">
+        <property name="label" translatable="yes">Collections</property>
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <property name="receives_default">True</property>
+        <property name="no_show_all">True</property>
+        <signal name="clicked" handler="CollectionButton_clicked" swapped="no"/>
+      </object>
+      <packing>
+        <property name="expand">False</property>
+        <property name="fill">True</property>
+        <property name="pack_type">end</property>
+        <property name="position">6</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkButton" id="DetailsButton">
+        <property name="label" translatable="yes">Details</property>
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <property name="receives_default">True</property>
+        <property name="no_show_all">True</property>
+        <signal name="clicked" handler="DetailsButton_clicked" swapped="no"/>
+      </object>
+      <packing>
+        <property name="expand">False</property>
+        <property name="fill">True</property>
+        <property name="pack_type">end</property>
+        <property name="position">7</property>
       </packing>
     </child>
   </template>

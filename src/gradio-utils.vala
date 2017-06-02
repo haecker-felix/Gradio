@@ -168,15 +168,12 @@ namespace Gradio{
 			return false;
 		}
 
-		public static Cairo.Surface create_thumbnail (int base_size, List<Gdk.Pixbuf> pixbufs){
+		public static Cairo.Surface create_station_thumbnail (int base_size, Gdk.Pixbuf p){
 			Cairo.Surface surface;
 			Cairo.Context cr;
 			Gtk.StyleContext context;
 			Gtk.WidgetPath path;
-			Gtk.Border tile_border;
-			int padding, tile_size;
-			int idx, cur_x, cur_y;
-			List<Gdk.Pixbuf> l;
+			Gdk.Pixbuf pix = p;
 
 			context = new Gtk.StyleContext();
 			context.add_class("documents-collection-icon");
@@ -197,85 +194,168 @@ namespace Gradio{
 			context.remove_class ("documents-collection-icon");
 			context.add_class ("documents-collection-icon-tile");
 
-			/* TODO: do not hardcode 4, but scale to another layout if more
-			* pixbufs are provided.
-			*/
-			padding = int.max((int)Math.floor(base_size / 10), 4); 	// correct double to int?
-			tile_border = context.get_border (Gtk.StateFlags.NORMAL);
-			tile_size = (base_size - (3 * padding)) / 2 - int.max(tile_border.left + tile_border.right, tile_border.top + tile_border.bottom);
+			pix = optiscale(pix,base_size-4);
 
-			idx = 0;
+			int pix_width = pix.get_width ();
+			int pix_height = pix.get_height ();
+
+			cr.save();
+
+			int x = base_size - pix_width - ((base_size-pix_width)/2);
+			int y = base_size - pix_height- ((base_size-pix_height)/2);
+
+			if(x < 0) x=0;
+			if(y < 0) y=0;
+
+			cr.translate (x, y);
+			cr.rectangle (0, 0, pix_width, pix_height);
+			cr.clip ();
+
+			Gdk.cairo_set_source_pixbuf (cr, pix, 0, 0);
+			cr.paint ();
+			cr.restore ();
+
+			return surface;
+		}
+
+		public static Cairo.Surface create_collection_thumbnail (int base_size, List<Gdk.Pixbuf> pixbufs){
+			Cairo.Surface surface;
+			Cairo.Context cr;
+			Gtk.StyleContext context;
+			Gtk.WidgetPath path;
+			Gtk.Border tile_border;
+			int padding;
+			int cur_x, cur_y;
+
+			context = new Gtk.StyleContext();
+			context.add_class("documents-collection-icon");
+
+			path = new Gtk.WidgetPath ();
+			Type type = typeof (Gtk.IconView);
+			path.append_type (type);
+		  	context.set_path (path);
+
+			surface = new Cairo.ImageSurface(Cairo.Format.ARGB32, base_size, base_size);
+			cr = new Cairo.Context (surface);
+
+			/* Render the thumbnail itself */
+			context.render_background (cr, 0, 0, base_size, base_size);
+			context.render_frame (cr, 0, 0, base_size, base_size);
+
+			/* Now, render the tiles inside */
+			context.remove_class ("documents-collection-icon");
+			context.add_class ("documents-collection-icon-tile");
+
+			int length = 4;
+
+			if((int)pixbufs.length() < 4)
+				length = (int) pixbufs.length();
+
+			padding = int.max((int)Math.floor(base_size / 10), 4);
+			tile_border = context.get_border (Gtk.StateFlags.NORMAL);
+
 			cur_x = padding;
 			cur_y = padding;
 
-			if(pixbufs.length() == 1){
-				Gdk.Pixbuf pix = pixbufs.nth_data(0);
-				pix = optiscale(pix,base_size-4);
 
-				int pix_width, pix_height;
-				pix_width = pix.get_width ();
-				pix_height = pix.get_height ();
+			for(int i = 0; i < length; i++){
+				int small_base_size = (base_size - (padding*3))/2;
 
-				cr.save();
+				Gdk.Pixbuf pix = pixbufs.nth_data(i);
+				pix = optiscale(pix,small_base_size-4);
 
-				int x = base_size - pix_width - ((base_size-pix_width)/2);
-				int y = base_size - pix_height- ((base_size-pix_height)/2);
+				int pix_width = pix.get_width ();
+				int pix_height = pix.get_height ();
 
-				if(x < 0) x=0;
-				if(y < 0) y=0;
+				if(i == 0){
+					// draw border
+					context.render_background (cr, padding, padding, small_base_size, small_base_size);
+					context.render_frame (cr, padding, padding, small_base_size, small_base_size);
 
-				message("width: %i", pix_width);
-				message("heigth: %i", pix_height);
-				message("x: %i", x);
-				message("Y: %i", y);
+					cr.save();
 
-				cr.translate (x, y);
-				cr.rectangle (0, 0, pix_width, pix_height);
-				cr.clip ();
+					int x = padding + (small_base_size - pix_width - ((small_base_size-pix_width)/2));
+					int y = padding + (small_base_size - pix_height- ((small_base_size-pix_height)/2));
 
-				Gdk.cairo_set_source_pixbuf (cr, pix, 0, 0);
-				cr.paint ();
+					if(x < 0) x=0;
+					if(y < 0) y=0;
 
-				cr.restore ();
-			}else {
-				int length = 4;
-				if((int)pixbufs.length() < 4)
-					length = (int) pixbufs.length();
-
-				for(int i = 0; i < length; i++){
-					Gdk.Pixbuf pix = pixbufs.nth_data(i);
-
-					bool is_thumbnail;
-			      		int pix_width, pix_height, scale_size;
-
-					context.render_background (cr, cur_x, cur_y, tile_size + tile_border.left + tile_border.right, tile_size + tile_border.top + tile_border.bottom);
-					context.render_frame (cr, cur_x, cur_y, tile_size + tile_border.left + tile_border.right, tile_size + tile_border.top + tile_border.bottom);
-
-					pix_width = pix.get_width ();
-					pix_height = pix.get_height ();
-					scale_size = int.min (pix_width, pix_height);
-
-					cr.save ();
-
-					cr.translate (cur_x + tile_border.left, cur_y + tile_border.top);
-					cr.rectangle (0, 0, tile_size, tile_size);
+					cr.translate (x, y);
+					cr.rectangle (0, 0, pix_width, pix_height);
 					cr.clip ();
 
-					cr.scale ((double) tile_size / (double) scale_size, (double) tile_size / (double) scale_size);
 					Gdk.cairo_set_source_pixbuf (cr, pix, 0, 0);
 					cr.paint ();
-
 					cr.restore ();
-
-					if ((idx % 2) == 0){
-						cur_x += tile_size + padding + tile_border.left + tile_border.right;
-					}else{
-						cur_x = padding;
-						cur_y += tile_size + padding + tile_border.top + tile_border.bottom;
-					}
 				}
-			}
 
+				if(i == 1){
+					// draw border
+					context.render_background (cr, base_size - (padding+small_base_size), padding, small_base_size, small_base_size);
+					context.render_frame (cr, base_size - (padding+small_base_size), padding, small_base_size, small_base_size);
+
+					cr.save();
+
+					int x = (base_size - padding - small_base_size) + (small_base_size - pix_width - ((small_base_size-pix_width)/2));
+					int y = padding + (small_base_size - pix_height- ((small_base_size-pix_height)/2));
+
+					if(x < 0) x=0;
+					if(y < 0) y=0;
+
+					cr.translate (x, y);
+					cr.rectangle (0, 0, pix_width, pix_height);
+					cr.clip ();
+
+					Gdk.cairo_set_source_pixbuf (cr, pix, 0, 0);
+					cr.paint ();
+					cr.restore ();
+				}
+
+				if(i == 2){
+					// draw border
+					context.render_background (cr, padding, base_size - (padding+small_base_size), small_base_size, small_base_size);
+					context.render_frame (cr, padding, base_size - (padding+small_base_size), small_base_size, small_base_size);
+
+					cr.save();
+
+					int y = (base_size - padding - small_base_size) + (small_base_size - pix_width - ((small_base_size-pix_width)/2));
+					int x = padding + (small_base_size - pix_height- ((small_base_size-pix_height)/2));
+
+					if(x < 0) x=0;
+					if(y < 0) y=0;
+
+					cr.translate (x, y);
+					cr.rectangle (0, 0, pix_width, pix_height);
+					cr.clip ();
+
+					Gdk.cairo_set_source_pixbuf (cr, pix, 0, 0);
+					cr.paint ();
+					cr.restore ();
+				}
+
+				if(i == 3){
+					// draw border
+					context.render_background (cr, base_size - (padding+small_base_size), base_size - (padding+small_base_size), small_base_size, small_base_size);
+					context.render_frame (cr, base_size - (padding+small_base_size), base_size - (padding+small_base_size), small_base_size, small_base_size);
+
+					cr.save();
+
+					int y = (base_size - padding - small_base_size) + (small_base_size - pix_width - ((small_base_size-pix_width)/2));
+					int x = (base_size - padding - small_base_size) + (small_base_size - pix_width - ((small_base_size-pix_width)/2));
+
+					if(x < 0) x=0;
+					if(y < 0) y=0;
+
+					cr.translate (x, y);
+					cr.rectangle (0, 0, pix_width, pix_height);
+					cr.clip ();
+
+					Gdk.cairo_set_source_pixbuf (cr, pix, 0, 0);
+					cr.paint ();
+					cr.restore ();
+				}
+
+			}
 			return surface;
 		}
 	}

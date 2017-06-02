@@ -40,6 +40,7 @@ vala_sources = [
 		'gradio-collection.vala',
 		'gradio-collection-model.vala',
 		'gradio-organize-collection-dialog.vala',
+		'gradio-thumbnail.vala',
 		'gradio-search-popover.vala']
 
 vala_args = [

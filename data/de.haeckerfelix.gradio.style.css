@@ -1,7 +1,3 @@
-.grid-item grid{
-	background-color: @theme_bg_color;
-}
-
 .small-button {
 	font-size: smaller;
 	padding: 0px 15px;
@@ -58,25 +54,8 @@
         text-shadow: none;
 }
 
-.collection-icon {
-    border: 3px solid gray;
-}
-
-.collection-icon-tile {
-    border: 3px solid gray;
-}
-
-
-@define-color documents_collection_bg #ffffff;
-
-.documents-collection-icon {
-    background-color: @documents_collection_bg;
+.thumbnail {
+    background-color: #ffffff;
     border: 2px solid @borders;
-    border-radius: 2px;
-}
-
-.documents-collection-icon-tile {
-    background-color: @documents_collection_bg;
-    border: 2px solid @borders;
-    border-radius: 1px;
+    border-radius: 3px;
 }
