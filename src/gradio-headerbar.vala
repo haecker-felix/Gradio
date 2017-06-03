@@ -35,7 +35,6 @@ namespace Gradio{
 		[GtkChild] private Gtk.Stack TitleStack;
 		[GtkChild] private Gtk.Label PageTitle;
 		[GtkChild] public Gtk.Button SelectButton;
-		[GtkChild] private Gtk.VolumeButton VolumeButton;
 		[GtkChild] public Gtk.Button BackButton;
 		[GtkChild] public Gtk.ToggleButton SearchButton;
 
@@ -46,9 +45,6 @@ namespace Gradio{
 		[GtkChild] private Gtk.Label SelectionMenuButtonLabel;
 
 		public Headerbar(){
-			VolumeButton.set_relief(Gtk.ReliefStyle.NORMAL);
-			VolumeButton.set_value(Settings.volume_position);
-
 			var builder = new Gtk.Builder.from_resource ("/de/haecker-felix/gradio/ui/selection-menu.ui");
 			var selection_menu = builder.get_object ("selection-menu") as GLib.MenuModel;
 
@@ -94,12 +90,6 @@ namespace Gradio{
 		private void SelectButton_clicked(Gtk.Button button){
 			selection_started();
 			show_selection_bar();
-		}
-
-		[GtkCallback]
-        	private void VolumeButton_value_changed (double value) {
-			App.player.set_volume(value);
-			Settings.volume_position = value;
 		}
 
 		[GtkCallback]

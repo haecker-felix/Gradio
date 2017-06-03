@@ -27,6 +27,9 @@
           </object>
         </child>
         <child>
+          <placeholder/>
+        </child>
+        <child>
           <object class="GtkButton" id="BackButton">
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
@@ -117,39 +120,22 @@
           </object>
         </child>
         <child>
-          <object class="GtkVolumeButton" id="VolumeButton">
+          <object class="GtkButton" id="SelectButton">
             <property name="visible">True</property>
             <property name="can_focus">True</property>
-            <property name="focus_on_click">False</property>
             <property name="receives_default">True</property>
-            <property name="icons">audio-volume-muted-symbolic
-audio-volume-high-symbolic
-audio-volume-low-symbolic
-audio-volume-medium-symbolic</property>
-            <signal name="value-changed" handler="VolumeButton_value_changed" swapped="no"/>
-            <child internal-child="plus_button">
-              <object class="GtkButton">
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="halign">center</property>
-                <property name="valign">center</property>
+            <signal name="clicked" handler="SelectButton_clicked" swapped="no"/>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="icon_name">object-select-symbolic</property>
               </object>
             </child>
-            <child internal-child="minus_button">
-              <object class="GtkButton">
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="halign">center</property>
-                <property name="valign">center</property>
-              </object>
-            </child>
-            <style>
-              <class name="Volume"/>
-            </style>
           </object>
           <packing>
             <property name="pack_type">end</property>
-            <property name="position">1</property>
+            <property name="position">2</property>
           </packing>
         </child>
         <child>
@@ -163,25 +149,6 @@ audio-volume-medium-symbolic</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="icon_name">open-menu-symbolic</property>
-              </object>
-            </child>
-          </object>
-          <packing>
-            <property name="pack_type">end</property>
-            <property name="position">2</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkButton" id="SelectButton">
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">True</property>
-            <signal name="clicked" handler="SelectButton_clicked" swapped="no"/>
-            <child>
-              <object class="GtkImage">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="icon_name">object-select-symbolic</property>
               </object>
             </child>
           </object>

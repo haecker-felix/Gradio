@@ -21,27 +21,21 @@ namespace Gradio{
 	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/player-toolbar.ui")]
 	public class PlayerToolbar : Gtk.ActionBar{
 
-		[GtkChild]
-		private Label StationTitleLabel;
-		[GtkChild]
-		private Label StationMetadataLabel;
-		[GtkChild]
-		private Image StationLogo;
+		[GtkChild] private Label StationTitleLabel;
+		[GtkChild] private Label StationMetadataLabel;
+		[GtkChild] private Image StationLogo;
 
 
-		[GtkChild]
-		private Box StationLogoBox;
-		[GtkChild]
-		private Box MediaControlBox;
-		[GtkChild]
-		private Box InfoBox;
-		[GtkChild]
-		private Box StatusBox;
+		[GtkChild] private Box StationLogoBox;
+		[GtkChild] private Box MediaControlBox;
+		[GtkChild] private Box InfoBox;
+		[GtkChild] private Box StatusBox;
+		[GtkChild] private Box VolumeBox;
 
-		[GtkChild]
-		private Image PlayImage;
-		[GtkChild]
-		private Image StopImage;
+		[GtkChild] private VolumeButton VolumeButton;
+
+		[GtkChild] private Image PlayImage;
+		[GtkChild] private Image StopImage;
 
 		private StatusLabel sl;
 
@@ -63,10 +57,13 @@ namespace Gradio{
 			this.pack_start(MediaControlBox);
 			this.pack_start(StationLogoBox);
 			this.pack_start(InfoBox);
+			this.pack_end(VolumeBox);
 
 			sl = new StatusLabel();
 			StatusBox.pack_start(sl);
 			this.show_all();
+
+			VolumeButton.set_value(Settings.volume_position);
 		}
 
 		private void station_changed (){
@@ -121,6 +118,12 @@ namespace Gradio{
 		private void show_play_icon(){
 			StopImage.set_visible(false);
 			PlayImage.set_visible(true);
+		}
+
+		[GtkCallback]
+        	private void VolumeButton_value_changed (double value) {
+			App.player.set_volume(value);
+			Settings.volume_position = value;
 		}
 
 		[GtkCallback]

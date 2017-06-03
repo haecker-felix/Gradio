@@ -176,4 +176,47 @@
       <class name="round-border"/>
     </style>
   </object>
+  <object class="GtkBox" id="VolumeBox">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="orientation">vertical</property>
+    <child>
+      <object class="GtkVolumeButton" id="VolumeButton">
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <property name="focus_on_click">False</property>
+        <property name="receives_default">True</property>
+        <property name="valign">center</property>
+        <property name="icons">audio-volume-muted-symbolic
+audio-volume-high-symbolic
+audio-volume-low-symbolic
+audio-volume-medium-symbolic</property>
+        <signal name="value-changed" handler="VolumeButton_value_changed" swapped="no"/>
+        <child internal-child="plus_button">
+          <object class="GtkButton">
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="halign">center</property>
+            <property name="valign">center</property>
+          </object>
+        </child>
+        <child internal-child="minus_button">
+          <object class="GtkButton">
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="halign">center</property>
+            <property name="valign">center</property>
+          </object>
+        </child>
+        <style>
+          <class name="Volume"/>
+        </style>
+      </object>
+      <packing>
+        <property name="expand">True</property>
+        <property name="fill">True</property>
+        <property name="position">0</property>
+      </packing>
+    </child>
+  </object>
 </interface>
