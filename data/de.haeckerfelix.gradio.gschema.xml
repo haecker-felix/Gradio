@@ -1,5 +1,5 @@
 <schemalist>
-  <schema id="de.haeckerfelix.gradio" path="/de/haecker-felix/gradio/" gettext-domain="gradio">
+  <schema id="de.haeckerfelix.gradio" path="/de/haeckerfelix/gradio/" gettext-domain="gradio">
     <key name="hide-broken-stations" type="b">
       <default>true</default>
       <summary>Only show working radio stations</summary>

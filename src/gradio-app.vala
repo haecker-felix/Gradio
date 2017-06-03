@@ -62,7 +62,6 @@ namespace Gradio {
 				mpris.initialize();
 			}
 
-
 			window = new MainWindow(this);
 			this.add_window(window);
 			window.show_all();

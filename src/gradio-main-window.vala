@@ -424,11 +424,13 @@ namespace Gradio{
 			if(in_mode_change)
 				return;
 
-			save_back_entry();
-
-			DataWrapper data = new DataWrapper();
-			data.station = station;
-			change_mode(WindowMode.DETAILS, data);
+			// dont open the same details page twice times
+			if(station_detail_page.get_station() == null ||  current_mode != WindowMode.DETAILS){
+				save_back_entry();
+				DataWrapper data = new DataWrapper();
+				data.station = station;
+				change_mode(WindowMode.DETAILS, data);
+			}
 		}
 
 		public void show_settings(){

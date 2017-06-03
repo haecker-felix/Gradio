@@ -27,8 +27,6 @@ namespace Gradio{
 		private Label StationMetadataLabel;
 		[GtkChild]
 		private Image StationLogo;
-		[GtkChild]
-		private Label StationLikesLabel;
 
 
 		[GtkChild]
@@ -38,15 +36,7 @@ namespace Gradio{
 		[GtkChild]
 		private Box InfoBox;
 		[GtkChild]
-		private Box ActionBox;
-		[GtkChild]
 		private Box StatusBox;
-
-
-		[GtkChild]
-		private Image AddImage;
-		[GtkChild]
-		private Image RemoveImage;
 
 		[GtkChild]
 		private Image PlayImage;
@@ -73,7 +63,6 @@ namespace Gradio{
 			this.pack_start(MediaControlBox);
 			this.pack_start(StationLogoBox);
 			this.pack_start(InfoBox);
-			this.pack_end(ActionBox);
 
 			sl = new StatusLabel();
 			StatusBox.pack_start(sl);
@@ -85,8 +74,6 @@ namespace Gradio{
 			if(station != null){
 				station.played.disconnect(show_stop_icon);
 				station.stopped.disconnect(show_play_icon);
-				station.added_to_library.disconnect(show_remove_icon);
-				station.removed_from_library.disconnect(show_add_icon);
 			}
 
 			// set new station
@@ -96,8 +83,6 @@ namespace Gradio{
 			//connect new signals
 			station.played.connect(show_stop_icon);
 			station.stopped.connect(show_play_icon);
-			station.added_to_library.connect(show_remove_icon);
-			station.removed_from_library.connect(show_add_icon);
 
 			// Play / Stop Button
 			if(App.player.is_playing_station(station))
@@ -105,18 +90,9 @@ namespace Gradio{
 			else
 				show_play_icon();
 
-			// Add / Remove Button
-			if(App.library.station_model.contains_station(station))
-				show_remove_icon();
-			else
-				show_add_icon();
-
 
 			// Title
 			StationTitleLabel.set_text(station.title);
-
-			// Likes
-			StationLikesLabel.set_text(station.votes.to_string());
 
 			// Logo
                 	App.image_cache.get_image.begin(station.icon_address, (obj, res) => {
@@ -147,38 +123,15 @@ namespace Gradio{
 			PlayImage.set_visible(true);
 		}
 
-		private void show_add_icon(){
-			AddImage.set_visible(true);
-			RemoveImage.set_visible(false);
-		}
-
-		private void show_remove_icon(){
-			AddImage.set_visible(false);
-			RemoveImage.set_visible(true);
-		}
-
 		[GtkCallback]
         	private void PlayStopButton_clicked (Button button) {
 			App.player.toggle_play_stop();
 		}
 
 		[GtkCallback]
-		private void AddRemoveButton_clicked(Button button){
-			if(App.library.station_model.contains_station(station))
-				App.library.remove_radio_station(station);
-			else
-				App.library.add_radio_station(station);
-		}
-
-		[GtkCallback]
-		private void LikeButton_clicked(Button button){
-			station.vote();
-			StationLikesLabel.set_text(station.votes.to_string());
-		}
-
-		[GtkCallback]
-		private void ShowDetailsButton_clicked(Button button){
+		private bool StationLogo_clicked(){
 			Gradio.App.window.show_station_details(station);
+			return false;
 		}
 	}
 }
