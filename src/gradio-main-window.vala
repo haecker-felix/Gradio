@@ -14,7 +14,6 @@
  * along with Gradio.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-using Gd;
 using Gtk;
 using Gst;
 
@@ -32,7 +31,7 @@ namespace Gradio{
 		[GtkChild] SearchBar SearchBar;
 		[GtkChild] private MenuButton SearchMenuButton;
 		private SearchPopover search_popover;
-		private TaggedEntry SearchEntry;
+		private Gd.TaggedEntry SearchEntry;
 
 		[GtkChild] private Stack MainStack;
 		[GtkChild] private Overlay NotificationOverlay;
@@ -63,6 +62,11 @@ namespace Gradio{
 		private SelectionToolbar selection_toolbar;
 		private GLib.List<Gd.MainBoxItem> current_selection;
 
+		[GtkChild] private Button NotificationCloseButton;
+		[GtkChild] private Label NotificationLabel;
+		[GtkChild] private Button NotificationButton;
+		[GtkChild] private Revealer NotificationRevealer;
+
 		private App app;
 
 		public MainWindow (App appl) {
@@ -82,7 +86,7 @@ namespace Gradio{
 			selection_toolbar = new SelectionToolbar();
 			SelectionToolbarBox.add(selection_toolbar);
 
-			SearchEntry = new TaggedEntry();
+			SearchEntry = new Gd.TaggedEntry();
 			SearchEntry.set_size_request(550, -1);
 			search_page = new SearchPage();
 			MainStack.add_named(search_page, page_name[WindowMode.SEARCH]);
@@ -115,7 +119,7 @@ namespace Gradio{
 			change_mode(WindowMode.LIBRARY);
 
 			var gtk_settings = Gtk.Settings.get_default ();
-			if (Settings.enable_dark_design) {
+			if (Settings.enable_dark_theme) {
 				gtk_settings.gtk_application_prefer_dark_theme = true;
 			} else {
 				gtk_settings.gtk_application_prefer_dark_theme = false;
@@ -154,6 +158,8 @@ namespace Gradio{
 
 			SearchBar.notify["search-mode-enabled"].connect(() => header.SearchButton.set_active(SearchBar.get_search_mode()));
 			SearchEntry.search_changed.connect(SearchEntry_search_changed);
+
+			NotificationCloseButton.clicked.connect(hide_notification);
 		}
 
 		private void setup_tray_icon(){
@@ -240,9 +246,13 @@ namespace Gradio{
 			return model;
 		}
 
-		public void show_notification(Gradio.Notification notification){
-			NotificationOverlay.add_overlay(notification);
-			this.show_all();
+		public void show_notification(Notification notification){
+			NotificationLabel.set_text(notification.message);
+			NotificationRevealer.set_reveal_child(true);
+		}
+
+		public void hide_notification(){
+			NotificationRevealer.set_reveal_child(false);
 		}
 
 		private void change_mode(WindowMode mode, DataWrapper data = new DataWrapper()){

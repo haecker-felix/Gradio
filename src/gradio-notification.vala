@@ -17,44 +17,14 @@ using Gtk;
 
 namespace Gradio {
 
-	public class Notification : Gd.Notification {
+	public class Notification {
 
-		private Gtk.Box m_box;
-		private Gtk.Button m_Button;
-		public signal void action();
+		public string message = "";
+		public int timeout = 5;
 
-		public Notification(string message_text, int timeout = 5){
-			this.set_timeout(timeout);
-			this.set_show_close_button(true);
-			this.add(new Label(message_text));
-
-			connect_signals();
+		public Notification(string m, int t = 5){
+			message = m;
+			timeout = t;
 		}
-
-		public Notification.with_button(string message_text, string button_text, int timeout = 5){
-			this.set_timeout(timeout);
-
-			m_Button = new Gtk.Button.with_label(button_text);
-
-			m_box = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 10);
-			m_box.pack_start(new Gtk.Label(message_text));
-			m_box.pack_start(m_Button);
-			this.add(m_box);
-
-			connect_signals();
-		}
-
-
-		private void connect_signals()
-		{
-			this.unrealize.connect(() => {
-				dismissed();
-			});
-
-			m_Button.clicked.connect(() => {
-				action();
-			});
-		}
-
 	}
 }

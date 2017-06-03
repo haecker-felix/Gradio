@@ -21,28 +21,27 @@ namespace Gradio{
 		private static GLib.Settings settings;
 
 		public Settings(){
-			message("Loaded settings module");
-			settings = new GLib.Settings ("de.haecker-felix.gradio");
+			settings = new GLib.Settings ("de.haeckerfelix.gradio");
 		}
 
 
-		public static bool show_notifications{
+		public static bool enable_notifications{
 			get{
-				return settings.get_boolean ("show-notifications");
+				return settings.get_boolean ("enable-notifications");
 			}
 			set{
-				settings.set_boolean ("show-notifications", value);
+				settings.set_boolean ("enable-notifications", value);
 			}
 		}
 
-		public static bool enable_dark_design{
+		public static bool enable_dark_theme{
 			get{
-				return settings.get_boolean ("use-dark-design");
+				return settings.get_boolean ("enable-dark-theme");
 			}
 			set{
 				var gtk_settings = Gtk.Settings.get_default ();
 				gtk_settings.gtk_application_prefer_dark_theme = value;
-				settings.set_boolean ("use-dark-design", value);
+				settings.set_boolean ("enable-dark-theme", value);
 			}
 		}
 
@@ -64,75 +63,21 @@ namespace Gradio{
 			}
 		}
 
-		public static bool enable_close_to_tray{
+		public static bool enable_tray_icon{
 			get{
-				return settings.get_boolean ("close-to-tray");
+				return settings.get_boolean ("enable-tray-icon");
 			}
 			set{
-				settings.set_boolean ("close-to-tray", value);
+				settings.set_boolean ("enable-tray-icon", value);
 			}
 		}
 
-		public static bool show_languages_c{
+		public static bool enable_caching{
 			get{
-				return settings.get_boolean ("show-languages-category");
+				return settings.get_boolean ("enable-caching");
 			}
 			set{
-				settings.set_boolean ("show-languages-category", value);
-			}
-		}
-
-		public static bool show_codecs_c{
-			get{
-				return settings.get_boolean ("show-codecs-category");
-			}
-			set{
-				settings.set_boolean ("show-codecs-category", value);
-			}
-		}
-
-		public static bool show_countries_c{
-			get{
-				return settings.get_boolean ("show-countries-category");
-			}
-			set{
-				settings.set_boolean ("show-countries-category", value);
-			}
-		}
-
-		public static bool show_tags_c{
-			get{
-				return settings.get_boolean ("show-tags-category");
-			}
-			set{
-				settings.set_boolean ("show-tags-category", value);
-			}
-		}
-
-		public static bool show_states_c{
-			get{
-				return settings.get_boolean ("show-states-category");
-			}
-			set{
-				settings.set_boolean ("show-states-category", value);
-			}
-		}
-
-		public static bool show_station_icons{
-			get{
-				return settings.get_boolean ("load-pictures");
-			}
-			set{
-				settings.set_boolean ("load-pictures", value);
-			}
-		}
-
-		public static bool hide_broken_stations{
-			get{
-				return settings.get_boolean ("only-show-working-stations");
-			}
-			set{
-				settings.set_boolean ("only-show-working-stations", value);
+				settings.set_boolean ("enable-caching", value);
 			}
 		}
 
@@ -145,30 +90,21 @@ namespace Gradio{
 			}
 		}
 
+		public static bool hide_broken_stations{
+			get{
+				return settings.get_boolean ("hide-broken-stations");
+			}
+			set{
+				settings.set_boolean ("hide-broken-stations", value);
+			}
+		}
+
 		public static int previous_station{
 			get{
 				return settings.get_int ("previous-station");
 			}
 			set{
 				settings.set_int ("previous-station", value);
-			}
-		}
-
-		public static bool load_pictures{
-			get{
-				return settings.get_boolean ("load-pictures");
-			}
-			set{
-				settings.set_boolean ("load-pictures", value);
-			}
-		}
-
-		public static bool use_grid_view{
-			get{
-				return settings.get_boolean ("use-grid-view");
-			}
-			set{
-				settings.set_boolean ("use-grid-view", value);
 			}
 		}
 

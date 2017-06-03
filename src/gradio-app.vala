@@ -44,10 +44,10 @@ namespace Gradio {
 		}
 
 		private void start_new_session(){
-			image_cache = new ImageCache();
-
 			// ignore the vala warning!
 			Settings settings = new Settings();
+
+			image_cache = new ImageCache();
 
 			ciprovider = new CategoryItemProvider();
 
@@ -90,12 +90,7 @@ namespace Gradio {
 				window.save_geometry ();
 
 				window.hide_on_delete ();
-				if(Settings.enable_close_to_tray){
-					window.show_tray_icon();
-
-				    	return true;
-				} else
-					return false;
+				return Settings.enable_background_playback;
 		    	});
 
 		    	window.tray_activate.connect(() => {

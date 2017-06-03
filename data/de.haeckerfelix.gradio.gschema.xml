@@ -1,23 +1,13 @@
 <schemalist>
-  <schema id="de.haecker-felix.gradio" path="/de/haecker-felix/gradio/" gettext-domain="gradio">
-    <key name="use-grid-view" type="b">
-      <default>true</default>
-      <summary>Show the stations as a grid view</summary>
-    </key>
-
-    <key name="only-show-working-stations" type="b">
+  <schema id="de.haeckerfelix.gradio" path="/de/haecker-felix/gradio/" gettext-domain="gradio">
+    <key name="hide-broken-stations" type="b">
       <default>true</default>
       <summary>Only show working radio stations</summary>
     </key>
 
-    <key name="use-dark-design" type="b">
+    <key name="enable-dark-theme" type="b">
       <default>false</default>
-      <summary>Dark design of the user interface</summary>
-    </key>
-
-    <key name="load-pictures" type="b">
-      <default>true</default>
-      <summary>Show stations icons or not.</summary>
+      <summary>Prefer dark theme of the user interface</summary>
     </key>
 
     <key name="enable-mpris" type="b">
@@ -27,22 +17,37 @@
 
     <key name="enable-background-playback" type="b">
       <default>true</default>
-      <summary>Close window to tray</summary>
+      <summary>Continue the playback if window is closed.</summary>
     </key>
 
-    <key name="close-to-tray" type="b">
+    <key name="enable-tray-icon" type="b">
       <default>false</default>
-      <summary>Close window to tray</summary>
+      <summary>Show tray icon in the taskbar.</summary>
     </key>
 
-    <key name="show-notifications" type="b">
-      <default>false</default>
+    <key name="enable-caching" type="b">
+      <default>true</default>
+      <summary>Cache station icons</summary>
+    </key>
+
+    <key name="enable-notifications" type="b">
+      <default>true</default>
       <summary>Show notifications</summary>
     </key>
 
     <key name="volume-position" type="d">
       <default>0.99</default>
       <summary>Volume position</summary>
+    </key>
+
+    <key name="window-position-x" type="i">
+      <default>0</default>
+      <summary>X Position of the window</summary>
+    </key>
+
+    <key name="window-position-y" type="i">
+      <default>0</default>
+      <summary>Y Position of the window</summary>
     </key>
 
     <key name="window-height" type="i">
@@ -53,31 +58,6 @@
     <key name="window-width" type="i">
       <default>870</default>
       <summary>Width of the window</summary>
-    </key>
-
-    <key name="show-languages-category" type="b">
-      <default>true</default>
-      <summary>Show languages in discover tab</summary>
-    </key>
-
-    <key name="show-codecs-category" type="b">
-      <default>false</default>
-      <summary>Show codecs in discover tab</summary>
-    </key>
-
-    <key name="show-countries-category" type="b">
-      <default>true</default>
-      <summary>Show countries in discover tab</summary>
-    </key>
-
-    <key name="show-tags-category" type="b">
-      <default>true</default>
-      <summary>Show tags in discover tab</summary>
-    </key>
-
-    <key name="show-states-category" type="b">
-      <default>true</default>
-      <summary>Show states in discover tab</summary>
     </key>
 
     <key name="resume-playback-on-startup" type="b">

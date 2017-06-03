@@ -25,13 +25,12 @@ namespace Gradio{
 		private GroupBox appearance_group;
 		private GroupBox notifications_group;
 		private GroupBox playback_group;
-		private GroupBox behavior_group;
 		private GroupBox features_group;
+		private GroupBox cache_group;
 
 
 		public SettingsPage () {
 			setup_view();
-			load_settings();
 		}
 
 		private void setup_view(){
@@ -40,9 +39,6 @@ namespace Gradio{
 		}
 
 		private void setup_groups(){
-			behavior_group = new GroupBox("Behaviour");
-			SettingsBox.add(behavior_group);
-
 			features_group = new GroupBox("Features");
 			SettingsBox.add(features_group);
 
@@ -52,39 +48,24 @@ namespace Gradio{
 			appearance_group = new GroupBox("Appearance");
 			SettingsBox.add(appearance_group);
 
-			notifications_group = new GroupBox("Notifications");
-			SettingsBox.add(notifications_group);
+			cache_group = new GroupBox("Cache");
+			SettingsBox.add(cache_group);
 		}
 
 		private void setup_items(){
 			// APPEARANCE
 
 			// Dark design
-			SwitchItem use_dark_design_switch = new SwitchItem("Dark Theme", "Whether Gradio should use a dark theme");
-			use_dark_design_switch.set_state(Settings.enable_dark_design);
-			use_dark_design_switch.toggled.connect(() => {Settings.enable_dark_design = use_dark_design_switch.get_state();});
+			SwitchItem use_dark_design_switch = new SwitchItem("Prefer dark theme", "Use a dark theme, if possible");
+			use_dark_design_switch.set_state(Settings.enable_dark_theme);
+			use_dark_design_switch.toggled.connect(() => {Settings.enable_dark_theme = use_dark_design_switch.get_state();});
 			appearance_group.add_listbox_row(use_dark_design_switch);
-
-			// Show station icons
-			SwitchItem show_station_icons_switch = new SwitchItem("Show station icons", "Load the station icon from the internet");
-			show_station_icons_switch.set_state(Settings.show_station_icons);
-			show_station_icons_switch.toggled.connect(() => {Settings.show_station_icons = show_station_icons_switch.get_state();});
-			appearance_group.add_listbox_row(show_station_icons_switch);
 
 			// hide broken stations
 			SwitchItem hide_broken_stations_switch = new SwitchItem("Hide broken stations", "Don't show stations, which are not working");
 			hide_broken_stations_switch.set_state(Settings.hide_broken_stations);
 			hide_broken_stations_switch.toggled.connect(() => {Settings.hide_broken_stations = hide_broken_stations_switch.get_state();});
 			appearance_group.add_listbox_row(hide_broken_stations_switch);
-
-
-			// NOTIFICATIONS
-
-			// enable notifications
-			SwitchItem show_notifications_switch = new SwitchItem("Notifications", "Show desktop notifications");
-			show_notifications_switch.set_state(Settings.show_notifications);
-			show_notifications_switch.toggled.connect(() => {Settings.show_notifications = show_notifications_switch.get_state();});
-			notifications_group.add_listbox_row(show_notifications_switch);
 
 
 			// PLAYBACK
@@ -102,15 +83,6 @@ namespace Gradio{
 			playback_group.add_listbox_row(resume_playback_on_startup_switch);
 
 
-			// BEHAVIOUR
-
-			// close to tray icon
-			SwitchItem enable_close_to_tray_switch = new SwitchItem("Close to tray icon", "Close the Gradio window, and a tray icon will appear");
-			enable_close_to_tray_switch.set_state(Settings.enable_close_to_tray);
-			enable_close_to_tray_switch.toggled.connect(() => {Settings.enable_close_to_tray = enable_close_to_tray_switch.get_state();});
-			behavior_group.add_listbox_row(enable_close_to_tray_switch);
-
-
 			// FEATURES
 
 			// mpris
@@ -119,10 +91,31 @@ namespace Gradio{
 			enable_mpris_switch.toggled.connect(() => {Settings.enable_mpris = enable_mpris_switch.get_state();});
 			features_group.add_listbox_row(enable_mpris_switch);
 
-		}
+			// show tray icon
+			SwitchItem enable_tray_icon_switch = new SwitchItem("Show a tray icon", "Shows a icon in your system taskbar.");
+			enable_tray_icon_switch.set_state(Settings.enable_tray_icon);
+			enable_tray_icon_switch.toggled.connect(() => {Settings.enable_tray_icon = enable_tray_icon_switch.get_state();});
+			features_group.add_listbox_row(enable_tray_icon_switch);
 
-		private void load_settings(){
-			// ResumePlaybackOnStartup.set_active(Settings.resume_playback_on_startup);
+			// enable notifications
+			SwitchItem enable_notifications_switch = new SwitchItem("Notifications", "Show desktop notifications");
+			enable_notifications_switch.set_state(Settings.enable_notifications);
+			enable_notifications_switch.toggled.connect(() => {Settings.enable_notifications = enable_notifications_switch.get_state();});
+			features_group.add_listbox_row(enable_notifications_switch);
+
+
+			// CACHE
+
+			// cache station images
+			SwitchItem cache_stations_switch = new SwitchItem("Cache station icons", "Saves the images locally.");
+			cache_stations_switch.set_state(Settings.enable_caching);
+			cache_stations_switch.toggled.connect(() => {Settings.enable_caching = cache_stations_switch.get_state();});
+			cache_group.add_listbox_row(cache_stations_switch);
+
+			ButtonItem clear_cache_button = new ButtonItem("Clear Cache", "Clear all cached station icons");
+			clear_cache_button.btn_clicked.connect(() => {App.image_cache.clear_cache();});
+			cache_group.add_listbox_row(clear_cache_button);
+
 		}
 
 	}

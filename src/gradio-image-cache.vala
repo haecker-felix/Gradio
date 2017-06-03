@@ -36,10 +36,30 @@ namespace Gradio {
 			 	pixbuf = get_cached_image(url_hash);
 			}else{
 			 	pixbuf = yield get_image_from_url(url);
-			 	cache_image(pixbuf, url_hash);
+
+			 	if(Gradio.Settings.enable_caching)
+			 		cache_image.begin(pixbuf, url_hash);
 			}
 
 		    	return pixbuf;
+		}
+
+		public async void clear_cache(){
+			File cache_location = File.new_for_path(GLib.Environment.get_user_cache_dir()+"/gradio/");
+
+			FileEnumerator enumerator = yield
+                        cache_location.enumerate_children_async("standard::*", FileQueryInfoFlags.NONE, Priority.DEFAULT, null);
+                    	List<FileInfo> infos;
+                    	while((infos = yield enumerator.next_files_async(10)) != null) {
+                        	foreach(var info in infos) {
+                        		var name = info.get_name();
+                        		var file = File.new_for_path("%s/%s".printf(GLib.Environment.get_user_cache_dir()+"/gradio", name));
+                        		file.delete();
+                        	}
+			}
+
+			Notification n = new Notification("Successfully cleared icon cache!", 5);
+			App.window.show_notification(n);
 		}
 
 		private bool is_image_cached(uint hash){
