@@ -74,8 +74,6 @@ namespace Gradio{
 		public MainWindow (App appl) {
 	       		GLib.Object(application: appl);
 			app = appl;
-
-
 		}
 
 		public void setup(){
@@ -94,6 +92,7 @@ namespace Gradio{
 
 			SearchEntry = new Gd.TaggedEntry();
 			SearchEntry.set_size_request(550, -1);
+			SearchEntry.set_visible(true);
 			search_page = new SearchPage();
 			MainStack.add_named(search_page, page_name[WindowMode.SEARCH]);
 			search_popover = new SearchPopover(ref SearchEntry);
