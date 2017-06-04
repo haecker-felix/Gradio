@@ -85,7 +85,6 @@ namespace Gradio{
 			render_border(0, 0, base_size, base_size);
 
 			if(is_collection_thumbnail){
-				message("update collection thumbnail zoom");
 				render_collection_thumbnail();
 			}else{
 			 	render_icon(0, 0, base_size, 0);

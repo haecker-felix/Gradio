@@ -23,6 +23,11 @@ namespace Gradio{
 
 		[GtkChild] Viewport ScrollViewport;
 
+		[GtkChild] private Box ResultsBox;
+		[GtkChild] private SearchEntry SearchEntry;
+		[GtkChild] private ToggleButton FilterToggleButton;
+		[GtkChild] private Revealer FilterRevealer;
+
 		private MainBox mainbox;
 		private StationModel station_model;
 		private StationProvider station_provider;
@@ -40,18 +45,22 @@ namespace Gradio{
 			mainbox = new MainBox();
 			mainbox.set_model(station_model);
 
-			ScrollViewport.add(mainbox);
+			ResultsBox.add(mainbox);
 			mainbox.selection_changed.connect(() => {selection_changed();});
 			mainbox.selection_mode_request.connect(() => {selection_mode_enabled();});
+
+			connect_signals();
 		}
 
-		public void set_search(string txt){
-			search_text = txt;
-			reset_timeout();
-		}
+		private void connect_signals(){
+			SearchEntry.search_changed.connect(() => {
+				string search_term = SearchEntry.get_text();
 
-		public string get_search(){
-			return search_text;
+				if(search_term != "" && search_term.length >= 3){
+					search_text = search_term;
+					reset_timeout();
+				}
+			});
 		}
 
 		private void reset_timeout(){
@@ -67,7 +76,6 @@ namespace Gradio{
 			station_provider.set_address(address);
 
 			delayed_changed_id = 0;
-
 			return false;
 		}
 
@@ -77,6 +85,11 @@ namespace Gradio{
 
 		public void select_all(){
 			mainbox.select_all();
+		}
+
+		[GtkCallback]
+		private void FilterToggleButton_toggled(){
+			FilterRevealer.set_reveal_child(FilterToggleButton.get_active());
 		}
 
 		public void select_none(){

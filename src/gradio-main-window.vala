@@ -27,12 +27,6 @@ namespace Gradio{
 		private Gradio.Headerbar header;
 		PlayerToolbar player_toolbar;
 
-		[GtkChild] private Box SearchBox;
-		[GtkChild] SearchBar SearchBar;
-		[GtkChild] private MenuButton SearchMenuButton;
-		private SearchPopover search_popover;
-		private Gd.TaggedEntry SearchEntry;
-
 		[GtkChild] private Stack MainStack;
 		[GtkChild] private Overlay NotificationOverlay;
 		[GtkChild] private Box Bottom;
@@ -92,13 +86,8 @@ namespace Gradio{
 			selection_toolbar = new SelectionToolbar();
 			SelectionToolbarBox.add(selection_toolbar);
 
-			SearchEntry = new Gd.TaggedEntry();
-			SearchEntry.set_size_request(550, -1);
 			search_page = new SearchPage();
 			MainStack.add_named(search_page, page_name[WindowMode.SEARCH]);
-			search_popover = new SearchPopover(ref SearchEntry);
-			SearchMenuButton.set_popover(search_popover);
-			SearchBox.pack_start(SearchEntry);
 
 			station_detail_page = new StationDetailPage();
 			MainStack.add_named(station_detail_page, page_name[WindowMode.DETAILS]);
@@ -147,23 +136,11 @@ namespace Gradio{
 
 			header.LibraryToggleButton.clicked.connect(show_library);
 			header.CollectionsToggleButton.clicked.connect(show_collections);
+			header.SearchToggleButton.clicked.connect(show_search);
 			header.AddButton.clicked.connect(show_add);
 			header.BackButton.clicked.connect(go_back);
 			header.selection_canceled.connect(disable_selection_mode);
 			header.selection_started.connect(enable_selection_mode);
-			header.search_toggled.connect(() => {
-			 	SearchBar.set_search_mode(header.SearchButton.get_active());
-
-			 	if(in_mode_change)
-			 		return;
-
-			 	if(current_mode == WindowMode.SEARCH && !(header.SearchButton.get_active()))
-			 		go_back();
-			});
-
-			SearchBar.notify["search-mode-enabled"].connect(() => header.SearchButton.set_active(SearchBar.get_search_mode()));
-			SearchEntry.search_changed.connect(SearchEntry_search_changed);
-
 			NotificationCloseButton.clicked.connect(hide_notification);
 		}
 
@@ -279,9 +256,7 @@ namespace Gradio{
 			// update main buttons according to mode
 			header.LibraryToggleButton.set_active(mode == WindowMode.LIBRARY);
 			header.CollectionsToggleButton.set_active(mode == WindowMode.COLLECTIONS);
-
-			// hide unless we're going to search
-			SearchBar.set_search_mode (mode == WindowMode.SEARCH);
+			header.SearchToggleButton.set_active(mode == WindowMode.SEARCH);
 
 			// setting new mode
 			current_mode = mode;
@@ -296,12 +271,8 @@ namespace Gradio{
 
 			// do action for mode
 			switch(current_mode){
-				case WindowMode.SEARCH:{
-					SearchEntry.set_text(data.search); break;
-				};
 				case WindowMode.DISCOVER: {
-					header.show_title("Discover Stations");
-					break;
+					header.show_title("Discover Stations"); break;
 				};
 				case WindowMode.LIBRARY: {
 					header.AddButton.set_visible(true);
@@ -318,14 +289,14 @@ namespace Gradio{
 					station_detail_page.set_station((RadioStation)data.station);
 					header.show_title(station_detail_page.get_title());
 					header.SelectButton.set_visible(false);
-					header.SearchButton.set_visible(false);
+					header.SearchToggleButton.set_visible(false);
 					header.ViewButton.set_visible(false);
 					break;
 				};
 				case WindowMode.SETTINGS: {
 					header.show_title("Settings");
 					header.SelectButton.set_visible(false);
-					header.SearchButton.set_visible(false);
+					header.SearchToggleButton.set_visible(false);
 					header.ViewButton.set_visible(false);
 					break;
 				};
@@ -382,7 +353,6 @@ namespace Gradio{
 
 			switch(entry.mode){
 				case WindowMode.DETAILS: data.station = station_detail_page.get_station(); break;
-				case WindowMode.SEARCH: data.search = search_page.get_search(); break;
 				default: break;
 			}
 
@@ -481,22 +451,6 @@ namespace Gradio{
 			change_mode(WindowMode.ADD);
 		}
 
-		private void SearchEntry_search_changed(){
-			string search_term = SearchEntry.get_text();
-
-			if(search_term != "" && search_term.length >= 3){
-				if(current_mode != WindowMode.SEARCH){
-					save_back_entry();
-
-					DataWrapper data = new DataWrapper();
-					data.search = search_term;
-					change_mode(WindowMode.SEARCH, data);
-				}else{
-					search_page.set_search(search_term);
-				}
-			}
-		}
-
 		[GtkCallback]
 		public bool on_key_pressed (Gdk.EventKey event) {
 			var default_modifiers = Gtk.accelerator_get_default_mod_mask ();
@@ -514,18 +468,6 @@ namespace Gradio{
 
 				return true;
 			}
-
-			// Toggle Search
-			if ((event.keyval == Gdk.Key.f) && (event.state & default_modifiers) == Gdk.ModifierType.CONTROL_MASK) {
-				if(SearchBar.get_search_mode()){
-					SearchBar.set_search_mode(false);
-					header.SearchButton.set_active(false);
-				}else{
-					SearchBar.set_search_mode(true);
-					header.SearchButton.set_active(true);
-				}
-			}
-
 
 			return false;
 		}

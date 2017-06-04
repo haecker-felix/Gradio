@@ -39,8 +39,6 @@ namespace Gradio{
 	// one class, but can contain different types. Used in MainWindow class for change_mode
 	public class DataWrapper{
 		public RadioStation station {get;set;}
-		public string search {get;set;}
-
 		public string title {get;set;}
 		public string address {get;set;}
 		public Collection collection {get;set;}

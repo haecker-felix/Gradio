@@ -21,7 +21,6 @@ namespace Gradio{
 
 		public signal void selection_canceled();
 		public signal void selection_started();
-		public signal void search_toggled();
 
 		public signal void select_all();
 		public signal void select_none();
@@ -36,7 +35,7 @@ namespace Gradio{
 		[GtkChild] private Gtk.Label PageTitle;
 		[GtkChild] public Gtk.Button SelectButton;
 		[GtkChild] public Gtk.Button BackButton;
-		[GtkChild] public Gtk.ToggleButton SearchButton;
+		[GtkChild] public Gtk.ToggleButton SearchToggleButton;
 		[GtkChild] public Gtk.Button ViewButton;
 
 		//
@@ -87,7 +86,7 @@ namespace Gradio{
 		public void show_default_buttons(){
 			TitleStack.set_visible_child_name("stackswitcher");
 			SelectButton.set_visible(true);
-			SearchButton.set_visible(true);
+			SearchToggleButton.set_visible(true);
 			ViewButton.set_visible(true);
 			AddButton.set_visible(false);
 		}
@@ -110,11 +109,6 @@ namespace Gradio{
 		private void SelectButton_clicked(Gtk.Button button){
 			selection_started();
 			show_selection_bar();
-		}
-
-		[GtkCallback]
-		private void SearchButton_toggled (){
-			search_toggled();
 		}
 
 		[GtkCallback]
