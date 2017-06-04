@@ -27,8 +27,6 @@ namespace Gradio{
 			this.set_show_secondary_text(true);
 			this.show_all();
 
-			//this.get_style_context().add_class("grid-item");
-
 			connect_signals();
 		}
 

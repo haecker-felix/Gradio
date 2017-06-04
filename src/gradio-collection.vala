@@ -68,7 +68,7 @@ namespace Gradio{
 						_icon = _thumbnail.surface;
 						notify_property("icon");
 					});
-					_thumbnail.show_placeholder();
+					_thumbnail.show_empty_box();
 					return _icon;
 				}
 				return _icon;
@@ -81,6 +81,14 @@ namespace Gradio{
 
 			station_model = new StationModel();
 			station_provider = new StationProvider(ref station_model);
+
+			App.window.update_icons.connect(update_thumbnail);
+		}
+
+		private void update_thumbnail(){
+			if(_thumbnail != null && this != null){
+				_thumbnail.set_zoom(Settings.icon_zoom);
+			}
 		}
 
 		public void add_station(RadioStation station){

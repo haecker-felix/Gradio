@@ -67,6 +67,8 @@ namespace Gradio{
 		[GtkChild] private Button NotificationButton;
 		[GtkChild] private Revealer NotificationRevealer;
 
+		public signal void update_icons();
+
 		private App app;
 
 		public MainWindow (App appl) {
@@ -314,12 +316,14 @@ namespace Gradio{
 					header.show_title(station_detail_page.get_title());
 					header.SelectButton.set_visible(false);
 					header.SearchButton.set_visible(false);
+					header.ViewButton.set_visible(false);
 					break;
 				};
 				case WindowMode.SETTINGS: {
 					header.show_title("Settings");
 					header.SelectButton.set_visible(false);
 					header.SearchButton.set_visible(false);
+					header.ViewButton.set_visible(false);
 					break;
 				};
 				case WindowMode.STATION_ADDRESS: {
@@ -338,6 +342,7 @@ namespace Gradio{
 				case WindowMode.ADD: {
 					header.show_title("");
 					header.SelectButton.set_visible(false);
+					header.ViewButton.set_visible(false);
 					break;
 				};
 			}

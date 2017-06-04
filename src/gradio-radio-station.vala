@@ -125,12 +125,12 @@ namespace Gradio{
 		public Cairo.Surface icon {
 			get{
 				if(_thumbnail == null){
-					_thumbnail = new Thumbnail.for_station(192, this);
+					_thumbnail = new Thumbnail.for_station(Settings.icon_zoom, this);
 					_thumbnail.updated.connect(() => {
 						_icon = _thumbnail.surface;
 						notify_property("icon");
 					});
-					_thumbnail.show_placeholder();
+					_thumbnail.show_empty_box();
 					return _icon;
 				}
 				return _icon;
@@ -174,19 +174,19 @@ namespace Gradio{
 			connect_signals();
 		}
 
-		~RadioStation(){
-			App.player.station_played.disconnect( play_handler );
-			App.player.station_stopped.disconnect( stop_handler );
-			App.library.added_radio_station.disconnect( added_to_library_handler );
-			App.library.removed_radio_station.disconnect( removed_from_library_handler );
-		}
-
 		private void connect_signals(){
 			App.player.station_played.connect(play_handler);
 			App.player.station_stopped.connect(stop_handler);
 
 			App.library.added_radio_station.connect(added_to_library_handler);
 			App.library.removed_radio_station.connect(removed_from_library_handler);
+			App.window.update_icons.connect(update_thumbnail);
+		}
+
+		private void update_thumbnail(){
+			if(_thumbnail != null && this != null){
+				_thumbnail.set_zoom(Settings.icon_zoom);
+			}
 		}
 
 		private void load_data_from_json(Json.Object radio_station_data){

@@ -69,5 +69,10 @@
       <default>0</default>
       <summary>The last played station</summary>
     </key>
+
+    <key name="icon-zoom" type="i">
+      <default>100</default>
+      <summary>The size of the station icons</summary>
+    </key>
   </schema>
 </schemalist>

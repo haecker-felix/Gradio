@@ -20,7 +20,6 @@ namespace Gradio{
 	public class Thumbnail{
 
 		private List<Gdk.Pixbuf> _pixbufs;
-
 		private Cairo.Surface _surface;
 		private Cairo.Context cr;
 		private Gtk.StyleContext context;
@@ -36,6 +35,8 @@ namespace Gradio{
 			get{return _surface;}
 		}
 
+		private bool is_collection_thumbnail = false;
+
 		public Thumbnail.for_station (int bs, RadioStation s){
 			base_size = bs;
 			station = s;
@@ -44,13 +45,15 @@ namespace Gradio{
 			App.image_cache.get_image.begin(station.icon_address, (obj, res) => {
 			     	Gdk.Pixbuf pixbuf = App.image_cache.get_image.end(res);
 		             	if (pixbuf != null) {
-		             		_pixbufs.append(pixbuf);
-			 		render_icon(0, 0, 192, 0);
+		             		_pixbufs.insert(pixbuf, 0);
+			 		render_icon(0, 0, base_size, 0);
 		             	}
 			});
 		}
 
 		public Thumbnail.for_collection (int bs, Collection c){
+			is_collection_thumbnail = true;
+
 			base_size = bs;
 			collection = c;
 			setup();
@@ -71,6 +74,31 @@ namespace Gradio{
 					render_collection_thumbnail();
 				}
 			});
+
+		}
+
+		public void set_zoom(int zoom){
+			message("Zoom: " + zoom.to_string());
+
+			base_size = zoom;
+
+			_surface = new Cairo.ImageSurface(Cairo.Format.ARGB32, base_size, base_size);
+			cr = new Cairo.Context (_surface);
+			render_border(0, 0, base_size, base_size);
+
+			if(is_collection_thumbnail){
+				render_collection_thumbnail();
+			}else{
+			 	render_icon(0, 0, base_size, 0);
+			}
+		}
+
+		public void show_empty_box(){
+			cr.set_source_rgba(0,0,0,0);
+			cr.paint();
+			render_border(0, 0, base_size, base_size);
+
+			updated();
 		}
 
 		// do basic work, which is the same for the station and collection thumbnail
@@ -89,17 +117,8 @@ namespace Gradio{
 			cr = new Cairo.Context (_surface);
 		}
 
-		public void show_placeholder(){
-			Gdk.Pixbuf pixbuf = new Gdk.Pixbuf(Gdk.Colorspace.RGB, true, 8, base_size, base_size);
-			_pixbufs.append(pixbuf);
-			render_icon(0,0, base_size, _pixbufs.index(pixbuf));
-			_pixbufs.remove(pixbuf);
-		}
-
 		private void render_collection_thumbnail(){
-			cr.set_source_rgba(0,0,0,0);
-			cr.paint();
-			render_border(0, 0, base_size, base_size);
+			show_empty_box();
 
 			int padding = int.max((int)Math.floor(base_size / 10), 4);
 			int icon_size = base_size/3;
@@ -125,30 +144,33 @@ namespace Gradio{
 		private void render_icon (int box_x, int box_y, int box_size, int pix_id){
 			render_border(box_x, box_y, box_size, box_size);
 
+			show_empty_box();
+
 			Gdk.Pixbuf pixbuf = _pixbufs.nth_data(pix_id);
-			pixbuf = optiscale(pixbuf,box_size-4);
+			if(pixbuf != null){
+				pixbuf = optiscale(pixbuf,box_size-4);
 
-			int width = pixbuf.get_width ();
-			int height = pixbuf.get_height ();
-			int x = box_x + (box_size - width - ((box_size-width)/2));
-			int y = box_y + (box_size - height - ((box_size-height)/2));
+				int width = pixbuf.get_width ();
+				int height = pixbuf.get_height ();
+				int x = box_x + (box_size - width - ((box_size-width)/2));
+				int y = box_y + (box_size - height - ((box_size-height)/2));
 
-			if(x < 0) x=0;
-			if(y < 0) y=0;
+				if(x < 0) x=0;
+				if(y < 0) y=0;
 
-			cr.save();
+				cr.save();
 
-			cr.translate (x, y);
-			cr.rectangle (0, 0, width, height);
-			cr.clip ();
+				cr.translate (x, y);
+				cr.rectangle (0, 0, width, height);
+				cr.clip ();
 
-			Gdk.cairo_set_source_pixbuf (cr, pixbuf, 0, 0);
-			cr.paint ();
-			cr.restore ();
+				Gdk.cairo_set_source_pixbuf (cr, pixbuf, 0, 0);
+				cr.paint ();
+				cr.restore ();
 
-			updated();
+				updated();
+			}
 		}
-
 
 		private Gdk.Pixbuf optiscale (Gdk.Pixbuf pixbuf, int size) {
 			double pixb_w = pixbuf.get_width();

@@ -20,6 +20,8 @@ namespace Gradio{
 
 		private static GLib.Settings settings;
 
+		private static int _icon_zoom = -1;
+
 		public Settings(){
 			settings = new GLib.Settings ("de.haeckerfelix.gradio");
 		}
@@ -150,6 +152,18 @@ namespace Gradio{
 			}
 			set{
 				settings.set_int ("window-position-y", value);
+			}
+		}
+
+		public static int icon_zoom{
+			get{
+				if(_icon_zoom == -1)
+					_icon_zoom = settings.get_int ("icon-zoom");
+				return _icon_zoom;
+			}
+			set{
+				_icon_zoom = value;
+				settings.set_int ("icon-zoom", value);
 			}
 		}
 
