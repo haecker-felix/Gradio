@@ -50,7 +50,6 @@ namespace Gradio{
 		//
 		[GtkChild] private Gtk.Button ZoomInButton;
 		[GtkChild] private Gtk.Button ZoomOutButton;
-		[GtkChild] private Gtk.Button ResetZoomButton;
 
 		public int actual_zoom = 100;
 		private const int min_zoom = 50;
@@ -66,7 +65,10 @@ namespace Gradio{
 			SelectionMenuButton.set_menu_model(selection_menu);
 
 			actual_zoom = Gradio.Settings.icon_zoom;
-			ResetZoomButton.set_label(actual_zoom.to_string() + " %");
+			if(actual_zoom == max_zoom)
+				ZoomInButton.set_sensitive(false);
+			if(actual_zoom == min_zoom)
+				ZoomOutButton.set_sensitive(false);
 		}
 
 		public void set_selected_items(int i){
@@ -120,7 +122,6 @@ namespace Gradio{
 			ZoomOutButton.set_sensitive(true);
 			if((actual_zoom + zoom_steps) <= max_zoom){
 				actual_zoom = actual_zoom  + zoom_steps;
-				ResetZoomButton.set_label(actual_zoom.to_string() + " %");
 				Gradio.Settings.icon_zoom = actual_zoom;
 				App.window.update_icons();
 
@@ -134,7 +135,6 @@ namespace Gradio{
 			ZoomInButton.set_sensitive(true);
 			if((actual_zoom - zoom_steps) >= min_zoom){
 				actual_zoom = actual_zoom  - zoom_steps;
-				ResetZoomButton.set_label(actual_zoom.to_string() + " %");
 				Gradio.Settings.icon_zoom = actual_zoom;
 				App.window.update_icons();
 
@@ -142,16 +142,5 @@ namespace Gradio{
 					ZoomOutButton.set_sensitive(false);
 			}
 		}
-
-		[GtkCallback]
-		private void ResetZoomButton_clicked(Gtk.Button button){
-			actual_zoom = 100;
-			ResetZoomButton.set_label(actual_zoom.to_string() + " %");
-			ZoomInButton.set_sensitive(true);
-			ZoomOutButton.set_sensitive(true);
-			Gradio.Settings.icon_zoom = actual_zoom;
-			App.window.update_icons();
-		}
-
 	}
 }

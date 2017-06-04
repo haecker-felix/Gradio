@@ -71,7 +71,7 @@
     </key>
 
     <key name="icon-zoom" type="i">
-      <default>100</default>
+      <default>200</default>
       <summary>The size of the station icons</summary>
     </key>
   </schema>

@@ -6,7 +6,7 @@
     <property name="can_focus">False</property>
     <child>
       <object class="GtkBox" id="PopoverBox">
-        <property name="width_request">250</property>
+        <property name="width_request">150</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="margin_left">9</property>
@@ -37,20 +37,6 @@
                 <property name="expand">True</property>
                 <property name="fill">True</property>
                 <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkButton" id="ResetZoomButton">
-                <property name="label" translatable="yes">100%</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <signal name="clicked" handler="ResetZoomButton_clicked" swapped="no"/>
-              </object>
-              <packing>
-                <property name="expand">True</property>
-                <property name="fill">True</property>
-                <property name="position">1</property>
               </packing>
             </child>
             <child>
