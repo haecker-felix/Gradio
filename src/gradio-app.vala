@@ -47,6 +47,10 @@ namespace Gradio {
 			// ignore the vala warning!
 			Settings settings = new Settings();
 
+			window = new MainWindow(this);
+			this.add_window(window);
+			window.show_all();
+
 			image_cache = new ImageCache();
 
 			ciprovider = new CategoryItemProvider();
@@ -62,10 +66,6 @@ namespace Gradio {
 				mpris.initialize();
 			}
 
-			window = new MainWindow(this);
-			this.add_window(window);
-			window.show_all();
-
 			connect_signals();
 			if(!Util.check_database_connection()){
 				Notification n = new Notification("No connection to the database could be established.\nMake sure you can connect to \"radio-browser.info\"!", 1000);
@@ -79,6 +79,8 @@ namespace Gradio {
 				//RadioStation s = new RadioStation.from_id(Settings.previous_station);
 				//player.set_radio_station(s);
 			}
+
+			window.setup();
 		}
 
 		private void connect_signals(){

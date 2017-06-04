@@ -78,8 +78,6 @@ namespace Gradio{
 		}
 
 		public void set_zoom(int zoom){
-			message("Zoom: " + zoom.to_string());
-
 			base_size = zoom;
 
 			_surface = new Cairo.ImageSurface(Cairo.Format.ARGB32, base_size, base_size);
@@ -87,6 +85,7 @@ namespace Gradio{
 			render_border(0, 0, base_size, base_size);
 
 			if(is_collection_thumbnail){
+				message("update collection thumbnail zoom");
 				render_collection_thumbnail();
 			}else{
 			 	render_icon(0, 0, base_size, 0);

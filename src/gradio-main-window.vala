@@ -75,6 +75,10 @@ namespace Gradio{
 	       		GLib.Object(application: appl);
 			app = appl;
 
+
+		}
+
+		public void setup(){
 			setup_tray_icon();
 			setup_view();
 			restore_geometry();
