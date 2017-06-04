@@ -144,8 +144,6 @@ namespace Gradio{
 		private void render_icon (int box_x, int box_y, int box_size, int pix_id){
 			render_border(box_x, box_y, box_size, box_size);
 
-			show_empty_box();
-
 			Gdk.Pixbuf pixbuf = _pixbufs.nth_data(pix_id);
 			if(pixbuf != null){
 				pixbuf = optiscale(pixbuf,box_size-4);
