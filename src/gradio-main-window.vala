@@ -81,6 +81,8 @@ namespace Gradio{
 			setup_view();
 			restore_geometry();
 			connect_signals();
+
+			this.show_all();
 		}
 
 		private void setup_view(){
@@ -92,7 +94,6 @@ namespace Gradio{
 
 			SearchEntry = new Gd.TaggedEntry();
 			SearchEntry.set_size_request(550, -1);
-			SearchEntry.set_visible(true);
 			search_page = new SearchPage();
 			MainStack.add_named(search_page, page_name[WindowMode.SEARCH]);
 			search_popover = new SearchPopover(ref SearchEntry);
@@ -135,7 +136,6 @@ namespace Gradio{
 
 			//Load css
 			Util.add_stylesheet();
-
 	       		Bottom.pack_end(player_toolbar);
 		}
 
