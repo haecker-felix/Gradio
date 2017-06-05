@@ -24,27 +24,11 @@ sources = [
 	'libgd/gd-main-icon-box.h',
 	'libgd/gd-main-icon-box-icon.c',
 	'libgd/gd-main-icon-box-icon.h',
-#	'libgd/gd-main-icon-view.c',
-#	'libgd/gd-main-icon-view.h',
-#	'libgd/gd-main-list-view.c',
-#	'libgd/gd-main-list-view.h',
-#	'libgd/gd-main-view.c',
-#	'libgd/gd-main-view-generic.c',
-#	'libgd/gd-main-view-generic.h',
-#	'libgd/gd-main-view.h',
-#	'libgd/gd-margin-container.c',
-#	'libgd/gd-margin-container.h',
 	'libgd/gd-notification.c',
 	'libgd/gd-notification.h',
-#	'libgd/gd-styled-text-renderer.c',
-#	'libgd/gd-styled-text-renderer.h',
 	gdres,
 	'libgd/gd-tagged-entry.c',
-	'libgd/gd-tagged-entry.h',
-#	'libgd/gd-toggle-pixbuf-renderer.c',
-#	'libgd/gd-toggle-pixbuf-renderer.h',
-#	'libgd/gd-two-lines-renderer.c',
-#	'libgd/gd-two-lines-renderer.h'
+	'libgd/gd-tagged-entry.h'
 ]
 
 

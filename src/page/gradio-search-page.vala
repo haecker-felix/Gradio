@@ -24,6 +24,7 @@ namespace Gradio{
 		[GtkChild] Viewport ScrollViewport;
 
 		[GtkChild] private Box ResultsBox;
+		[GtkChild] private Box FilterBox;
 		[GtkChild] private SearchEntry SearchEntry;
 		[GtkChild] private ToggleButton FilterToggleButton;
 		[GtkChild] private Revealer FilterRevealer;
@@ -48,6 +49,10 @@ namespace Gradio{
 			ResultsBox.add(mainbox);
 			mainbox.selection_changed.connect(() => {selection_changed();});
 			mainbox.selection_mode_request.connect(() => {selection_mode_enabled();});
+
+			Dzl.StackList test = new Dzl.StackList();
+			FilterBox.pack_start(test);
+
 
 			connect_signals();
 		}

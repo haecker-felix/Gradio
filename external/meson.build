@@ -1,1 +1,2 @@
 subdir('gd')
+subdir('dazzle')
