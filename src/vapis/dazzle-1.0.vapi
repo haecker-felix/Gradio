@@ -966,6 +966,9 @@ namespace Dzl {
 		public void set_position (Dzl.SliderPosition position);
 		public Dzl.SliderPosition position { get; set; }
 	}
+	[CCode (cheader_filename = "libdazzle/dazzle.h")]
+	public delegate Gtk.Widget StackListCreateWidgetFunc (GLib.Object item);
+
 	[CCode (cheader_filename = "libdazzle/dazzle.h", type_id = "dzl_stack_list_get_type ()")]
 	public class StackList : Gtk.Bin, Atk.Implementor, Gtk.Buildable {
 		[CCode (has_construct_function = false, type = "GtkWidget*")]
@@ -973,6 +976,7 @@ namespace Dzl {
 		public void clear ();
 		public uint get_depth ();
 		public unowned GLib.ListModel get_model ();
+		public void push (Gtk.Widget? header, GLib.ListModel? model, owned StackListCreateWidgetFunc? create_widget_func);
 		public void pop ();
 		public GLib.ListModel model { get; }
 		public virtual signal void header_activated (Gtk.ListBoxRow row);

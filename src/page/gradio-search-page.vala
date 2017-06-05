@@ -29,6 +29,8 @@ namespace Gradio{
 		[GtkChild] private ToggleButton FilterToggleButton;
 		[GtkChild] private Revealer FilterRevealer;
 
+		private FilterBox filterbox;
+
 		private MainBox mainbox;
 		private StationModel station_model;
 		private StationProvider station_provider;
@@ -38,6 +40,8 @@ namespace Gradio{
 		// wait 1,3 seconds before spawning a new search thread
 		private int search_delay = 1000;
 		private uint delayed_changed_id;
+
+		private Dzl.StackList filter_stacklist;
 
 		public SearchPage(){
 			station_model =  new StationModel();
@@ -50,9 +54,8 @@ namespace Gradio{
 			mainbox.selection_changed.connect(() => {selection_changed();});
 			mainbox.selection_mode_request.connect(() => {selection_mode_enabled();});
 
-			Dzl.StackList test = new Dzl.StackList();
-			FilterBox.pack_start(test);
-
+			filterbox = new Gradio.FilterBox();
+			FilterBox.pack_start(filterbox);
 
 			connect_signals();
 		}

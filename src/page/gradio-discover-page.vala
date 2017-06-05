@@ -66,13 +66,13 @@ namespace Gradio{
 		}
 
 		private void fill_lists(){
-			CategoryItemProvider.languages_list.foreach ((s) => {
-				Label l = new Label (s);
-				l.height_request = 30;
-				l.set_halign(Align.START);
-				l.set_visible(true);
-				LanguagesFlowBox.add(l);
-			});
+			//CategoryItemProvider.languages_list.foreach ((s) => {
+			//	Label l = new Label (s);
+			//	l.height_request = 30;
+			//	l.set_halign(Align.START);
+			//	l.set_visible(true);
+			//	LanguagesFlowBox.add(l);
+			//});
 		}
 
 		[GtkCallback]

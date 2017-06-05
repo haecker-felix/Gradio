@@ -24,6 +24,7 @@
 	<file>ui/featured-tile.ui</file>
 	<file>ui/featured-tile-stack.ui</file>
 	<file>ui/organize-collection-dialog.ui</file>
+	<file>ui/filter-box.ui</file>
 	<file>icons/hicolor/48x48/apps/de.haeckerfelix.gradio.png</file>
   </gresource>
 </gresources>

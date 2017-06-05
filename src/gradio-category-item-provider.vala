@@ -16,26 +16,98 @@
 
 namespace Gradio{
 
+	public class GenericItem : GLib.Object {
+
+		public string text;
+
+		public GenericItem (string t) {
+			text = t;
+		}
+	}
+
+	public class GenericModel : GLib.Object, GLib.ListModel {
+
+		private GLib.GenericArray<GenericItem> items = new GLib.GenericArray<GenericItem> ();
+
+		public GenericModel(){}
+
+  		public GLib.Object? get_item (uint index) {
+    			return items.get (index);
+  		}
+
+  		public GLib.Type get_item_type () {
+    			return typeof (GenericItem);
+  		}
+
+ 		public uint get_n_items () {
+    			return items.length;
+  		}
+
+	  	public void add_item(GenericItem item) {
+			items.add (item);
+			this.items_changed (items.length-1, 0, 1);
+	  	}
+
+		public void remove_item (GenericItem item) {
+			int pos = 0;
+			for (int i = 0; i < items.length; i ++) {
+        				GenericItem fitem = items.get (i);
+        				if (fitem.text == item.text) {
+        					pos = i;
+        					break;
+        				}
+			}
+
+			items.remove_index (pos);
+			items_changed (pos, 1, 0);
+	  	}
+	}
+
 	public class CategoryItemProvider{
 
-		public static GLib.List<string> languages_list;
-		public static GLib.List<string> countries_list;
-		public static GLib.List<string> codecs_list;
-		public static GLib.List<string> states_list;
-		public static GLib.List<string> tags_list;
+		public static GenericModel categories_model;
+
+		public static GenericModel languages_model;
+		public static GenericModel countries_model;
+		public static GenericModel codecs_model;
+		public static GenericModel states_model;
+		public static GenericModel tags_model;
 
 		public signal void loaded();
 		private signal void partial();
 		public bool is_ready = false;
 
 		public CategoryItemProvider(){
+			categories_model = new GenericModel();
+			GenericItem languagues_item = new GenericItem("Languages");
+			categories_model.add_item(languagues_item);
+			GenericItem countries_item = new GenericItem("Countries");
+			categories_model.add_item(countries_item);
+			GenericItem codecs_item = new GenericItem("Codecs");
+			categories_model.add_item(codecs_item);
+			GenericItem states_item = new GenericItem("States");
+			categories_model.add_item(states_item);
+			GenericItem tags_item = new GenericItem("Tags");
+			categories_model.add_item(tags_item);
+
+			languages_model = new GenericModel();
+			countries_model = new GenericModel();
+			codecs_model = new GenericModel();
+			states_model = new GenericModel();
+			tags_model = new GenericModel();
+
 			partial.connect(partial_loaded);
 
 			load_lists.begin();
 		}
 
 		private void partial_loaded(){
-			if(languages_list.length() != 0 && countries_list.length() != 0 && codecs_list.length() != 0 && states_list.length() != 0 && tags_list.length() != 0){
+			if(languages_model.get_n_items() != 0 &&
+				countries_model.get_n_items() != 0 &&
+				codecs_model.get_n_items() != 0 &&
+				states_model.get_n_items() != 0 &&
+				tags_model.get_n_items() != 0){
+
 				is_ready = true;
 				loaded();
 				message("Loaded category items!");
@@ -63,7 +135,9 @@ namespace Gradio{
 						for(int a = 0; a < max_items; a++){
 							var language = languages.get_element(a);
 							var language_data = language.get_object ();
-							languages_list.append(language_data.get_string_member("value"));
+
+							GenericItem item = new GenericItem(language_data.get_string_member("value"));
+							languages_model.add_item(item);
 						}
 					}
 					partial();
@@ -81,7 +155,9 @@ namespace Gradio{
 						for(int a = 0; a < max_items; a++){
 							var codec = codecs.get_element(a);
 							var codec_data = codec.get_object ();
-							codecs_list.append(codec_data.get_string_member("value"));
+
+							GenericItem item = new GenericItem(codec_data.get_string_member("value"));
+							codecs_model.add_item(item);
 						}
 					}
 					partial();
@@ -99,7 +175,9 @@ namespace Gradio{
 						for(int a = 0; a < max_items; a++){
 							var country = countries.get_element(a);
 							var country_data = country.get_object ();
-							countries_list.append(country_data.get_string_member("value"));
+
+							GenericItem item = new GenericItem(country_data.get_string_member("value"));
+							countries_model.add_item(item);
 						}
 					}
 					partial();
@@ -117,7 +195,9 @@ namespace Gradio{
 						for(int a = 0; a < max_items; a++){
 							var state = states.get_element(a);
 							var state_data = state.get_object ();
-							states_list.append(state_data.get_string_member("value"));
+
+							GenericItem item = new GenericItem(state_data.get_string_member("value"));
+							states_model.add_item(item);
 						}
 					}
 					partial();
@@ -135,7 +215,9 @@ namespace Gradio{
 						for(int a = 0; a < max_items; a++){
 							var tag = tags.get_element(a);
 							var tag_data = tag.get_object ();
-							tags_list.append(tag_data.get_string_member("value"));
+
+							GenericItem item = new GenericItem(tag_data.get_string_member("value"));
+							tags_model.add_item(item);
 						}
 					}
 					partial();
