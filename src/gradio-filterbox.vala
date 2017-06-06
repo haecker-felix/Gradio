@@ -89,10 +89,12 @@ namespace Gradio{
 
 			if(header){
 				image = new Image.from_icon_name("view-list-symbolic", Gtk.IconSize.MENU);
+				image.margin = 5;
 				label.set_markup("<b>"+text+"</b>");
 				rowbox.pack_end(sep);
 			}else{
 				image = new Image.from_icon_name("text-x-generic-symbolic", Gtk.IconSize.MENU);
+				image.margin = 5;
 			}
 
 			row.add(rowbox);
