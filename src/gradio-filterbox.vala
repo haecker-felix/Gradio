@@ -24,19 +24,14 @@ namespace Gradio{
 
 		private StackList filter_stacklist;
 
-		private int depth = 0;
-		// 0: Set filter...
-		// 1: Languages, Countries...
-		// 2: Germany, England, Russia...
-
 		public FilterBox(){
 			filter_stacklist = new StackList();
 			filter_stacklist.width_request = 250;
 			this.add(filter_stacklist);
 
-			filter_stacklist.push(get_label("Categories", true), CategoryItemProvider.categories_model, (item) => {
+			filter_stacklist.push(get_row("Categories", true), CategoryItemProvider.categories_model, (item) => {
 				GenericItem generic_item = (GenericItem)item;
-				return get_label(generic_item.text);
+				return get_row(generic_item.text);
 			});
 
 			this.show_all();
@@ -48,55 +43,70 @@ namespace Gradio{
 		}
 
 		private void row_activated(ListBoxRow row){
-			Gtk.Label row_label = (Gtk.Label)row.get_child();
-			string selected = row_label.get_text();
+			string selected = row.get_data("ITEM");
 
 			switch(selected){
 				case "Languages": {
-					filter_stacklist.push(get_label("Languages", true), CategoryItemProvider.languages_model, (item) => {
+					filter_stacklist.push(get_row("Languages", true), CategoryItemProvider.languages_model, (item) => {
 						GenericItem generic_item = (GenericItem)item;
-						return get_label(generic_item.text);
+						return get_row(generic_item.text);
 					}); break;
 				}
 				case "Countries": {
-					filter_stacklist.push(get_label("Countries", true), CategoryItemProvider.countries_model, (item) => {
+					filter_stacklist.push(get_row("Countries", true), CategoryItemProvider.countries_model, (item) => {
 						GenericItem generic_item = (GenericItem)item;
-						return get_label(generic_item.text);
+						return get_row(generic_item.text);
 					}); break;
 				}
 				case "Codecs": {
-					filter_stacklist.push(get_label("Codecs", true), CategoryItemProvider.codecs_model, (item) => {
+					filter_stacklist.push(get_row("Codecs", true), CategoryItemProvider.codecs_model, (item) => {
 						GenericItem generic_item = (GenericItem)item;
-						return get_label(generic_item.text);
+						return get_row(generic_item.text);
 					}); break;
 				}
 				case "States": {
-					filter_stacklist.push(get_label("States", true), CategoryItemProvider.states_model, (item) => {
+					filter_stacklist.push(get_row("States", true), CategoryItemProvider.states_model, (item) => {
 						GenericItem generic_item = (GenericItem)item;
-						return get_label(generic_item.text);
-					}); break;
-				}
-				case "Tags": {
-					filter_stacklist.push(get_label("Tags", true), CategoryItemProvider.tags_model, (item) => {
-						GenericItem generic_item = (GenericItem)item;
-						return get_label(generic_item.text);
+						return get_row(generic_item.text);
 					}); break;
 				}
 			}
 		}
 
-		private Gtk.Label get_label(string text, bool header = false){
-			Label l = new Label (text);
+		private ListBoxRow get_row(string text, bool header = false){
+			ListBoxRow row = new ListBoxRow();
+
+			Gtk.Box box = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 0);
+			box.vexpand = true;
+
+			Gtk.Box rowbox = new Gtk.Box(Gtk.Orientation.VERTICAL, 0);
+			rowbox.add(box);
+
+			Label label = new Label (text);
+			Image image;
+
+			Separator sep = new Separator(Gtk.Orientation.HORIZONTAL);
 
 			if(header){
-				l.set_markup("<b>"+text+"</b>");
+				image = new Image.from_icon_name("view-list-symbolic", Gtk.IconSize.MENU);
+				label.set_markup("<b>"+text+"</b>");
+				rowbox.pack_end(sep);
+			}else{
+				image = new Image.from_icon_name("text-x-generic-symbolic", Gtk.IconSize.MENU);
 			}
 
-			l.height_request = 30;
-			l.set_halign(Align.START);
-			l.set_visible(true);
+			row.add(rowbox);
+			box.add(image);
+			box.add(label);
 
-			return l;
+			row.height_request = 40;
+			row.set_data("ITEM", text);
+			row.show_all();
+
+			sep.set_halign(Align.FILL);
+			sep.set_valign(Align.END);
+
+			return row;
 		}
 	}
 }

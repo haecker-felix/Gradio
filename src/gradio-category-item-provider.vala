@@ -87,8 +87,8 @@ namespace Gradio{
 			categories_model.add_item(codecs_item);
 			GenericItem states_item = new GenericItem("States");
 			categories_model.add_item(states_item);
-			GenericItem tags_item = new GenericItem("Tags");
-			categories_model.add_item(tags_item);
+			//GenericItem tags_item = new GenericItem("Tags");
+			//categories_model.add_item(tags_item);
 
 			languages_model = new GenericModel();
 			countries_model = new GenericModel();
