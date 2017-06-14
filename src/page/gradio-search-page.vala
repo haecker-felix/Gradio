@@ -18,6 +18,90 @@ using Gtk;
 
 namespace Gradio{
 
+	public class SearchProvider{
+
+		private const string address = "http://www.radio-browser.info/webservice/json/stations/search";
+		private string search_term = "";
+
+		Soup.Session soup_session;
+		Json.Parser parser = new Json.Parser();
+
+		StationModel model = null;
+		FilterBox filterbox = null;
+
+		// the maximum of stations to parse
+		private int maximum = 100;
+
+		public SearchProvider(ref StationModel m, ref FilterBox fb) {
+			model = m;
+			filterbox = fb;
+
+			filterbox.information_changed.connect(set_search_request);
+
+			soup_session = new Soup.Session();
+            		soup_session.user_agent = "gradio/"+ Config.VERSION;
+
+            		set_search_request();
+		}
+
+		public void set_search_term(string a){
+			search_term = a;
+			set_search_request();
+		}
+
+		private void set_search_request (){
+			HashTable<string, string> table = new HashTable<string, string> (str_hash, str_equal);
+
+			if(filterbox.selected_language != "")
+				table.insert("language", filterbox.selected_language);
+
+			if(filterbox.selected_country != "")
+				table.insert("country", filterbox.selected_country);
+
+			if(filterbox.selected_state != "")
+				table.insert("state", filterbox.selected_state);
+
+			table.insert("limit", "100");
+			table.insert("name", search_term);
+			Soup.Message msg = Soup.Form.request_new_from_hash("POST", address, table);
+
+			soup_session.queue_message (msg, (sess, mess) => {
+				stdout.printf ("Data: \n%s\n", (string) mess.response_body.data);
+				model.clear();
+				progress_request.begin((string) mess.response_body.data);
+			});
+		}
+
+		private async void progress_request(string data){
+			try{
+				parser.load_from_data(data);
+
+				var root = parser.get_root ();
+				var radio_stations = root.get_array ();
+
+
+				int items = (int)radio_stations.get_length();
+				message("Items found: %i", items);
+
+				if(items > maximum) items = maximum;
+
+				for(int i = 0; i < items; i++){
+
+					var radio_station = radio_stations.get_element(i);
+					var radio_station_data = radio_station.get_object ();
+
+					var station = new RadioStation.from_json_data(radio_station_data);
+					model.add_station(station);
+				}
+
+			}catch(GLib.Error e){
+				warning ("Aborted parsing! " + e.message);
+			}
+        	}
+	}
+
+
+
 	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/page/search-page.ui")]
 	public class SearchPage : Gtk.Box, Page{
 
@@ -30,7 +114,7 @@ namespace Gradio{
 
 		private MainBox mainbox;
 		private StationModel station_model;
-		private StationProvider station_provider;
+		private SearchProvider search_provider;
 
 		private string search_text;
 
@@ -41,8 +125,13 @@ namespace Gradio{
 		private Dzl.StackList filter_stacklist;
 
 		public SearchPage(){
+			filterbox = new Gradio.FilterBox();
+			FilterBox.add(filterbox);
+
 			station_model =  new StationModel();
-			station_provider = new StationProvider(ref station_model);
+			station_model =  new StationModel();
+			station_model =  new StationModel();
+			search_provider = new SearchProvider(ref station_model, ref filterbox);
 
 			mainbox = new MainBox();
 			mainbox.set_model(station_model);
@@ -50,9 +139,6 @@ namespace Gradio{
 			ResultsBox.add(mainbox);
 			mainbox.selection_changed.connect(() => {selection_changed();});
 			mainbox.selection_mode_request.connect(() => {selection_mode_enabled();});
-
-			filterbox = new Gradio.FilterBox();
-			FilterBox.pack_start(filterbox);
 
 			connect_signals();
 		}
@@ -75,10 +161,8 @@ namespace Gradio{
 		}
 
 		private bool timeout(){
-			string address = RadioBrowser.radio_stations_by_name + search_text;
-
-			message("Searching for \"%s\".", search_text);
-			station_provider.set_address(address);
+			message("New search request for \"%s\".", search_text);
+			search_provider.set_search_term(search_text);
 
 			delayed_changed_id = 0;
 			return false;

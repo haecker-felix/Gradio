@@ -21,7 +21,6 @@ namespace Gradio{
 	public class StationProvider{
 
 		string address = "";
-		string data = "";
 
 		Soup.Session soup_session;
 		Json.Parser parser = new Json.Parser();
@@ -102,7 +101,6 @@ namespace Gradio{
 				warning ("Aborted parsing! " + e.message);
 			}
         	}
-
 	}
 
 }
