@@ -31,6 +31,12 @@ namespace Gradio{
 
 		public GenericModel(){}
 
+		public void clear(){
+			uint s = items.length;
+			items.remove_range(0, items.length);
+	    		this.items_changed (0, s, 0);
+		}
+
   		public GLib.Object? get_item (uint index) {
     			return items.get (index);
   		}
@@ -63,6 +69,7 @@ namespace Gradio{
 	  	}
 	}
 
+
 	public class CategoryItemProvider{
 
 		public static GenericModel categories_model;
@@ -87,8 +94,6 @@ namespace Gradio{
 			categories_model.add_item(codecs_item);
 			GenericItem states_item = new GenericItem("States");
 			categories_model.add_item(states_item);
-			//GenericItem tags_item = new GenericItem("Tags");
-			//categories_model.add_item(tags_item);
 
 			languages_model = new GenericModel();
 			countries_model = new GenericModel();

@@ -25,6 +25,7 @@ namespace Gradio{
 
 			this.set_show_primary_text(true);
 			this.set_show_secondary_text(true);
+			this.set_vexpand(true);
 			this.show_all();
 
 			connect_signals();

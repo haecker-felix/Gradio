@@ -26,9 +26,6 @@ namespace Gradio{
 		[GtkChild] private Box ResultsBox;
 		[GtkChild] private Box FilterBox;
 		[GtkChild] private SearchEntry SearchEntry;
-		[GtkChild] private ToggleButton FilterToggleButton;
-		[GtkChild] private Revealer FilterRevealer;
-
 		private FilterBox filterbox;
 
 		private MainBox mainbox;
@@ -93,11 +90,6 @@ namespace Gradio{
 
 		public void select_all(){
 			mainbox.select_all();
-		}
-
-		[GtkCallback]
-		private void FilterToggleButton_toggled(){
-			FilterRevealer.set_reveal_child(FilterToggleButton.get_active());
 		}
 
 		public void select_none(){
