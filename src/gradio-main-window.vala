@@ -40,7 +40,7 @@ namespace Gradio{
 		StationAddressPage station_address_page;
 		CollectionItemsPage collection_items_page;
 		DiscoverPage discover_page;
-		SearchPage search_page;
+		public SearchPage search_page;
 		LibraryPage library_page;
 		CollectionsPage collections_page;
 		SettingsPage settings_page;

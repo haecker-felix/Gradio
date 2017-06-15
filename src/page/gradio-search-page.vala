@@ -145,6 +145,18 @@ namespace Gradio{
 			mainbox.selection_mode_request.connect(() => {selection_mode_enabled();});
 		}
 
+		public void show_recently_clicked(){
+			filterbox.show_recently_clicked();
+		}
+
+		public void show_most_voted(){
+			filterbox.show_most_voted();
+		}
+
+		public void show_most_clicked(){
+			filterbox.show_most_clicked();
+		}
+
 		public void set_selection_mode(bool b){
 			mainbox.set_selection_mode(b);
 		}

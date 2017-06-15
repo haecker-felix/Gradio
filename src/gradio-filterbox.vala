@@ -32,6 +32,7 @@ namespace Gradio{
 		[GtkChild] private RadioButton StateRButton;
 		[GtkChild] private RadioButton BitrateRButton;
 		[GtkChild] private RadioButton ClicksRButton;
+		[GtkChild] private RadioButton ClickTimestampRButton;
 		public string sort_by = "votes";
 
 		[GtkChild] private ToggleButton SortDescendingButton;
@@ -213,6 +214,7 @@ namespace Gradio{
 				if(button == StateRButton) sort_by = "state";
 				if(button == BitrateRButton) sort_by = "bitrate";
 				if(button == ClicksRButton) sort_by = "clickcount";
+				if(button == ClickTimestampRButton) sort_by = "clicktimestamp";
 
 				information_changed();
 			}
@@ -240,8 +242,8 @@ namespace Gradio{
 		private void SearchEntry_search_changed () {
 			if(SearchEntry.get_text() != "" && SearchEntry.get_text().length >= 3){
 				search_term = SearchEntry.get_text();
-				information_changed();
 			}
+			information_changed();
 		}
 
 		[GtkCallback]
@@ -249,41 +251,33 @@ namespace Gradio{
 			reset_filters();
 		}
 
-		public void reset_filters(){
+		private void reset_filters(){
 			ClearCountryButton_clicked();
 			ClearLanguageButton_clicked();
 			ClearStateButton_clicked();
 
 			VotesRButton.set_active(true);
-			sort_by = "votes";
-
 			SortAscendingButton.set_active(true);
-			SortAscendingButton_toggled();
 
 			BitrateSpinButton.set_value(0.0);
 			min_bitrate = 0;
 		}
 
-		public void show_most_popular_station (){
-			reset_filters();
-			sort_descending = true;
-		}
-
 		public void show_most_voted (){
 			reset_filters();
-			sort_descending = true;
+			SortDescendingButton.set_active(true);
 		}
 
-		public void show_most_clicks (){
+		public void show_most_clicked (){
 			reset_filters();
-			sort_descending = true;
-			sort_by = "clickcount";
+			SortDescendingButton.set_active(true);
+			ClicksRButton.set_active(true);
 		}
 
 		public void show_recently_clicked (){
 			reset_filters();
-			sort_descending = true;
-			sort_by = "clicktimestamp";
+			SortDescendingButton.set_active(true);
+			ClickTimestampRButton.set_active(true);
 		}
 
 		private ListBoxRow get_row(string text){

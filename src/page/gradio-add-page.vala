@@ -30,6 +30,18 @@ namespace Gradio{
 			discover_button.btn_clicked.connect(() => {App.window.show_discover();});
 			add_group.add_listbox_row(discover_button);
 
+			ButtonItem most_votes_button = new ButtonItem("Show most voted stations", ".");
+			most_votes_button.btn_clicked.connect(() => {App.window.show_search(); App.window.search_page.show_most_voted();});
+			add_group.add_listbox_row(most_votes_button);
+
+			ButtonItem most_clicked_button = new ButtonItem("Show most clicked stations", ".");
+			most_clicked_button.btn_clicked.connect(() => {App.window.show_search(); App.window.search_page.show_most_clicked();});
+			add_group.add_listbox_row(most_clicked_button);
+
+			ButtonItem recently_clicked_button = new ButtonItem("Recently clicked stations", ".");
+			recently_clicked_button.btn_clicked.connect(() => {App.window.show_search(); App.window.search_page.show_recently_clicked();});
+			add_group.add_listbox_row(recently_clicked_button);
+
 			ButtonItem search_button = new ButtonItem("Search for stations", "Search for specific stations.");
 			search_button.btn_clicked.connect(() => {App.window.show_search();});
 			add_group.add_listbox_row(search_button);
