@@ -21,6 +21,10 @@ namespace Gradio{
 	// TODO: Move this in a new file
 	public class SearchProvider{
 
+		// wait 1,3 seconds before spawning a new search thread
+		private int search_delay = 1000;
+		private uint delayed_changed_id;
+
 		private const string address = "http://www.radio-browser.info/webservice/json/stations/search";
 		private string search_term = "";
 
@@ -37,17 +41,31 @@ namespace Gradio{
 			model = m;
 			filterbox = fb;
 
-			filterbox.information_changed.connect(set_search_request);
+			filterbox.information_changed.connect(reset_timeout);
 
 			soup_session = new Soup.Session();
             		soup_session.user_agent = "gradio/"+ Config.VERSION;
 
-            		set_search_request();
+			reset_timeout();
+		}
+
+		private void reset_timeout(){
+			if(delayed_changed_id > 0)
+				Source.remove(delayed_changed_id);
+			delayed_changed_id = Timeout.add(search_delay, timeout);
+		}
+
+		private bool timeout(){
+			message("Sending new search request to radio-browser.info");
+			set_search_request();
+
+			delayed_changed_id = 0;
+			return false;
 		}
 
 		public void set_search_term(string a){
 			search_term = a;
-			set_search_request();
+			reset_timeout();
 		}
 
 		private void set_search_request (){
@@ -118,12 +136,6 @@ namespace Gradio{
 		private StationModel station_model;
 		private SearchProvider search_provider;
 
-		private string search_text;
-
-		// wait 1,3 seconds before spawning a new search thread
-		private int search_delay = 1000;
-		private uint delayed_changed_id;
-
 		private Dzl.StackList filter_stacklist;
 
 		public SearchPage(){
@@ -150,24 +162,9 @@ namespace Gradio{
 				string search_term = SearchEntry.get_text();
 
 				if(search_term != "" && search_term.length >= 3){
-					search_text = search_term;
-					reset_timeout();
+					search_provider.set_search_term(search_term);
 				}
 			});
-		}
-
-		private void reset_timeout(){
-			if(delayed_changed_id > 0)
-				Source.remove(delayed_changed_id);
-			delayed_changed_id = Timeout.add(search_delay, timeout);
-		}
-
-		private bool timeout(){
-			message("New search request for \"%s\".", search_text);
-			search_provider.set_search_term(search_text);
-
-			delayed_changed_id = 0;
-			return false;
 		}
 
 		public void set_selection_mode(bool b){
