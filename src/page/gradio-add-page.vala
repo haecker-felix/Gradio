@@ -24,28 +24,30 @@ namespace Gradio{
 		[GtkChild] private Box AddBox;
 
 		public AddPage(){
-			GroupBox add_group = new GroupBox("Options");
+			GroupBox discover_group = new GroupBox("Discover radio stations");
+			GroupBox other_group = new GroupBox("Other options");
 
 			ButtonItem most_votes_button = new ButtonItem("Show famous radio stations", "Show radio stations which have the most votes.");
 			most_votes_button.btn_clicked.connect(() => {App.window.show_search(); App.window.search_page.show_most_voted();});
-			add_group.add_listbox_row(most_votes_button);
+			discover_group.add_listbox_row(most_votes_button);
 
 			ButtonItem most_clicked_button = new ButtonItem("Show popular radio stations", "Show radio stations which have the most clicks.");
 			most_clicked_button.btn_clicked.connect(() => {App.window.show_search(); App.window.search_page.show_most_clicked();});
-			add_group.add_listbox_row(most_clicked_button);
+			discover_group.add_listbox_row(most_clicked_button);
 
 			ButtonItem recently_clicked_button = new ButtonItem("Show recent radio stations", "Show radio stations which have recently been clicked.");
 			recently_clicked_button.btn_clicked.connect(() => {App.window.show_search(); App.window.search_page.show_recently_clicked();});
-			add_group.add_listbox_row(recently_clicked_button);
+			discover_group.add_listbox_row(recently_clicked_button);
 
 			ButtonItem search_button = new ButtonItem("Search for stations", "Search for specific stations.");
 			search_button.btn_clicked.connect(() => {App.window.show_search();});
-			add_group.add_listbox_row(search_button);
+			other_group.add_listbox_row(search_button);
 
 			//ButtonItem create_button = new ButtonItem("Create a new station", "Create a completely new station.");
-			//add_group.add_listbox_row(create_button);
+			//discover_group.add_listbox_row(create_button);
 
-			AddBox.pack_end(add_group);
+			AddBox.pack_end(other_group);
+			AddBox.pack_end(discover_group);
 		}
 	}
 
