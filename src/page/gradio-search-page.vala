@@ -18,6 +18,7 @@ using Gtk;
 
 namespace Gradio{
 
+	// TODO: Move this in a new file
 	public class SearchProvider{
 
 		private const string address = "http://www.radio-browser.info/webservice/json/stations/search";
@@ -61,6 +62,7 @@ namespace Gradio{
 			if(filterbox.selected_state != "")
 				table.insert("state", filterbox.selected_state);
 
+			table.insert("bitrateMin", filterbox.min_bitrate.to_string());
 			table.insert("limit", "100");
 			table.insert("name", search_term);
 			Soup.Message msg = Soup.Form.request_new_from_hash("POST", address, table);
