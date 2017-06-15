@@ -83,6 +83,7 @@ namespace Gradio{
 
 				CountryRevealer.set_reveal_child(false);
 				ClearCountryButton.set_visible(true);
+				SelectStateButton.set_sensitive(false);
 
 				information_changed();
 			});
@@ -94,6 +95,7 @@ namespace Gradio{
 				selected_state = selected_item;
 
 				StateRevealer.set_reveal_child(false);
+				SelectCountryButton.set_sensitive(false);
 				ClearStateButton.set_visible(true);
 
 				information_changed();
@@ -139,6 +141,7 @@ namespace Gradio{
 			selected_country = "";
 			SelectCountryButton.set_label("Select Country ...");
 			ClearCountryButton.set_visible(false);
+			SelectStateButton.set_sensitive(true);
 
 			information_changed();
 		}
@@ -158,6 +161,7 @@ namespace Gradio{
 			selected_state = "";
 			SelectStateButton.set_label("Select State ...");
 			ClearStateButton.set_visible(false);
+			SelectCountryButton.set_sensitive(true);
 
 			information_changed();
 		}
