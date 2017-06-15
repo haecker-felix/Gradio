@@ -22,6 +22,9 @@ namespace Gradio{
 	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/filter-box.ui")]
 	public class FilterBox : Gtk.Box{
 
+		[GtkChild] private SearchEntry SearchEntry;
+		public string search_term;
+
 		[GtkChild] private RadioButton VotesRButton;
 		[GtkChild] private RadioButton NameRButton;
 		[GtkChild] private RadioButton LanguageRButton;
@@ -227,6 +230,14 @@ namespace Gradio{
 				sort_descending = false;
 			}
 			information_changed();
+		}
+
+		[GtkCallback]
+		private void SearchEntry_search_changed () {
+			if(SearchEntry.get_text() != "" && SearchEntry.get_text().length >= 3){
+				search_term = SearchEntry.get_text();
+				information_changed();
+			}
 		}
 
 		private ListBoxRow get_row(string text){

@@ -26,7 +26,6 @@ namespace Gradio{
 		private uint delayed_changed_id;
 
 		private const string address = "http://www.radio-browser.info/webservice/json/stations/search";
-		private string search_term = "";
 
 		Soup.Session soup_session;
 		Json.Parser parser = new Json.Parser();
@@ -62,12 +61,6 @@ namespace Gradio{
 			delayed_changed_id = 0;
 			return false;
 		}
-
-		public void set_search_term(string a){
-			search_term = a;
-			reset_timeout();
-		}
-
 		private void set_search_request (){
 			HashTable<string, string> table = new HashTable<string, string> (str_hash, str_equal);
 
@@ -86,7 +79,7 @@ namespace Gradio{
 			table.insert("reverse", filterbox.sort_descending.to_string());
 			table.insert("bitrateMin", filterbox.min_bitrate.to_string());
 			table.insert("limit", "100");
-			table.insert("name", search_term);
+			table.insert("name", filterbox.search_term);
 			Soup.Message msg = Soup.Form.request_new_from_hash("POST", address, table);
 
 			soup_session.queue_message (msg, (sess, mess) => {
@@ -128,19 +121,13 @@ namespace Gradio{
 
 	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/page/search-page.ui")]
 	public class SearchPage : Gtk.Box, Page{
-
-		[GtkChild] Viewport ScrollViewport;
-
 		[GtkChild] private Box ResultsBox;
 		[GtkChild] private Box FilterBox;
-		[GtkChild] private SearchEntry SearchEntry;
 		private FilterBox filterbox;
 
 		private MainBox mainbox;
 		private StationModel station_model;
 		private SearchProvider search_provider;
-
-		private Dzl.StackList filter_stacklist;
 
 		public SearchPage(){
 			filterbox = new Gradio.FilterBox();
@@ -157,18 +144,6 @@ namespace Gradio{
 			ResultsBox.add(mainbox);
 			mainbox.selection_changed.connect(() => {selection_changed();});
 			mainbox.selection_mode_request.connect(() => {selection_mode_enabled();});
-
-			connect_signals();
-		}
-
-		private void connect_signals(){
-			SearchEntry.search_changed.connect(() => {
-				string search_term = SearchEntry.get_text();
-
-				if(search_term != "" && search_term.length >= 3){
-					search_provider.set_search_term(search_term);
-				}
-			});
 		}
 
 		public void set_selection_mode(bool b){
