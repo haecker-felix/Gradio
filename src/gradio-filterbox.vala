@@ -147,13 +147,13 @@ namespace Gradio{
 		}
 
 		[GtkCallback]
-		private void SelectCountryButton_clicked(Button button){
+		private void SelectCountryButton_clicked(){
 			unreveal_all();
 			CountryRevealer.set_reveal_child(!CountryRevealer.get_child_revealed());
 		}
 
 		[GtkCallback]
-		private void ClearCountryButton_clicked(Button button){
+		private void ClearCountryButton_clicked(){
 			clear_selected_country();
 		}
 
@@ -167,13 +167,13 @@ namespace Gradio{
 		}
 
 		[GtkCallback]
-		private void SelectStateButton_clicked(Button button){
+		private void SelectStateButton_clicked(){
 			unreveal_all();
 			StateRevealer.set_reveal_child(!StateRevealer.get_child_revealed());
 		}
 
 		[GtkCallback]
-		private void ClearStateButton_clicked(Button button){
+		private void ClearStateButton_clicked(){
 			clear_selected_state();
 		}
 
@@ -186,13 +186,13 @@ namespace Gradio{
 		}
 
 		[GtkCallback]
-		private void SelectLanguageButton_clicked(Button button){
+		private void SelectLanguageButton_clicked(){
 			unreveal_all();
 			LanguageRevealer.set_reveal_child(!LanguageRevealer.get_child_revealed());
 		}
 
 		[GtkCallback]
-		private void ClearLanguageButton_clicked(Button button){
+		private void ClearLanguageButton_clicked(){
 			clear_selected_language();
 		}
 
@@ -242,6 +242,48 @@ namespace Gradio{
 				search_term = SearchEntry.get_text();
 				information_changed();
 			}
+		}
+
+		[GtkCallback]
+		private void ResetButton_clicked () {
+			reset_filters();
+		}
+
+		public void reset_filters(){
+			ClearCountryButton_clicked();
+			ClearLanguageButton_clicked();
+			ClearStateButton_clicked();
+
+			VotesRButton.set_active(true);
+			sort_by = "votes";
+
+			SortAscendingButton.set_active(true);
+			SortAscendingButton_toggled();
+
+			BitrateSpinButton.set_value(0.0);
+			min_bitrate = 0;
+		}
+
+		public void show_most_popular_station (){
+			reset_filters();
+			sort_descending = true;
+		}
+
+		public void show_most_voted (){
+			reset_filters();
+			sort_descending = true;
+		}
+
+		public void show_most_clicks (){
+			reset_filters();
+			sort_descending = true;
+			sort_by = "clickcount";
+		}
+
+		public void show_recently_clicked (){
+			reset_filters();
+			sort_descending = true;
+			sort_by = "clicktimestamp";
 		}
 
 		private ListBoxRow get_row(string text){

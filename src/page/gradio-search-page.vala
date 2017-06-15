@@ -83,7 +83,6 @@ namespace Gradio{
 			Soup.Message msg = Soup.Form.request_new_from_hash("POST", address, table);
 
 			soup_session.queue_message (msg, (sess, mess) => {
-				stdout.printf ("Data: \n%s\n", (string) mess.response_body.data);
 				model.clear();
 				progress_request.begin((string) mess.response_body.data);
 			});
