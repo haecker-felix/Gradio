@@ -80,6 +80,10 @@ namespace Gradio{
 			if(filterbox.selected_state != "")
 				table.insert("state", filterbox.selected_state);
 
+			if(filterbox.sort_by != "")
+				table.insert("order", filterbox.sort_by);
+
+			table.insert("reverse", filterbox.sort_descending.to_string());
 			table.insert("bitrateMin", filterbox.min_bitrate.to_string());
 			table.insert("limit", "100");
 			table.insert("name", search_term);
