@@ -26,19 +26,15 @@ namespace Gradio{
 		public AddPage(){
 			GroupBox add_group = new GroupBox("Options");
 
-			ButtonItem discover_button = new ButtonItem("Discover new stations", "Show stations for different categories.");
-			discover_button.btn_clicked.connect(() => {App.window.show_discover();});
-			add_group.add_listbox_row(discover_button);
-
-			ButtonItem most_votes_button = new ButtonItem("Show most voted stations", ".");
+			ButtonItem most_votes_button = new ButtonItem("Show famous radio stations", "Show radio stations which have the most votes.");
 			most_votes_button.btn_clicked.connect(() => {App.window.show_search(); App.window.search_page.show_most_voted();});
 			add_group.add_listbox_row(most_votes_button);
 
-			ButtonItem most_clicked_button = new ButtonItem("Show most clicked stations", ".");
+			ButtonItem most_clicked_button = new ButtonItem("Show popular radio stations", "Show radio stations which have the most clicks.");
 			most_clicked_button.btn_clicked.connect(() => {App.window.show_search(); App.window.search_page.show_most_clicked();});
 			add_group.add_listbox_row(most_clicked_button);
 
-			ButtonItem recently_clicked_button = new ButtonItem("Recently clicked stations", ".");
+			ButtonItem recently_clicked_button = new ButtonItem("Show recent radio stations", "Show radio stations which have recently been clicked.");
 			recently_clicked_button.btn_clicked.connect(() => {App.window.show_search(); App.window.search_page.show_recently_clicked();});
 			add_group.add_listbox_row(recently_clicked_button);
 

@@ -3,7 +3,6 @@
 	<file>de.haeckerfelix.gradio.style.css</file>
 	<file>ui/item/switch-item.ui</file>
 	<file>ui/item/button-item.ui</file>
-	<file>ui/page/discover-page.ui</file>
 	<file>ui/page/library-page.ui</file>
 	<file>ui/page/search-page.ui</file>
 	<file>ui/page/settings-page.ui</file>
@@ -21,8 +20,6 @@
 	<file>ui/headerbar.ui</file>
 	<file>ui/selection-menu.ui</file>
 	<file>ui/selection-toolbar.ui</file>
-	<file>ui/featured-tile.ui</file>
-	<file>ui/featured-tile-stack.ui</file>
 	<file>ui/organize-collection-dialog.ui</file>
 	<file>ui/filter-box.ui</file>
 	<file>icons/hicolor/48x48/apps/de.haeckerfelix.gradio.png</file>

@@ -20,7 +20,6 @@ using Gtk;
 namespace Gradio{
 	public enum WindowMode {
 		LIBRARY,
-		DISCOVER,
 		SEARCH,
 		DETAILS,
 		SETTINGS,

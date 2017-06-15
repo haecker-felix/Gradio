@@ -22,7 +22,7 @@ namespace Gradio{
 	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/main-window.ui")]
 	public class MainWindow : Gtk.ApplicationWindow {
 
-		public string[] page_name = { "library", "discover", "search", "details", "settings", "loading", "station_adress", "collection_items", "add", "collections"};
+		public string[] page_name = { "library", "search", "details", "settings", "loading", "station_adress", "collection_items", "add", "collections"};
 
 		private Gradio.Headerbar header;
 		PlayerToolbar player_toolbar;
@@ -39,7 +39,6 @@ namespace Gradio{
 
 		StationAddressPage station_address_page;
 		CollectionItemsPage collection_items_page;
-		DiscoverPage discover_page;
 		public SearchPage search_page;
 		LibraryPage library_page;
 		CollectionsPage collections_page;
@@ -271,9 +270,6 @@ namespace Gradio{
 
 			// do action for mode
 			switch(current_mode){
-				case WindowMode.DISCOVER: {
-					header.show_title("Discover Stations"); break;
-				};
 				case WindowMode.LIBRARY: {
 					header.AddButton.set_visible(true);
 					selection_toolbar.set_mode(SelectionMode.LIBRARY);
@@ -374,20 +370,6 @@ namespace Gradio{
 
 			save_back_entry();
 			change_mode(WindowMode.COLLECTIONS);
-		}
-
-		public void show_discover(){
-			if(in_mode_change)
-				return;
-
-			if(discover_page == null){
-				discover_page = new DiscoverPage();
-				MainStack.add_named(discover_page, page_name[WindowMode.DISCOVER]);
-			}
-
-
-			save_back_entry();
-			change_mode(WindowMode.DISCOVER);
 		}
 
 		public void show_search(){

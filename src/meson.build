@@ -1,6 +1,5 @@
 vala_sources = [
 		'gradio-app.vala',
-		'page/gradio-discover-page.vala',
 		'page/gradio-library-page.vala',
 		'page/gradio-search-page.vala',
 		'page/gradio-station-detail-page.vala',
@@ -34,8 +33,6 @@ vala_sources = [
 		'gradio-notification.vala',
 		'gradio-headerbar.vala',
 		'gradio-selection-toolbar.vala',
-		'gradio-featured-tile.vala',
-		'gradio-featured-tile-stack.vala',
 		'gradio-image-cache.vala',
 		'gradio-collection.vala',
 		'gradio-collection-model.vala',
