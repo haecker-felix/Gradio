@@ -91,12 +91,6 @@ namespace Gradio{
 			enable_mpris_switch.toggled.connect(() => {Settings.enable_mpris = enable_mpris_switch.get_state();});
 			features_group.add_listbox_row(enable_mpris_switch);
 
-			// show tray icon
-			SwitchItem enable_tray_icon_switch = new SwitchItem("Show a tray icon", "Shows a icon in your system taskbar.");
-			enable_tray_icon_switch.set_state(Settings.enable_tray_icon);
-			enable_tray_icon_switch.toggled.connect(() => {Settings.enable_tray_icon = enable_tray_icon_switch.get_state();});
-			features_group.add_listbox_row(enable_tray_icon_switch);
-
 			// enable notifications
 			SwitchItem enable_notifications_switch = new SwitchItem("Notifications", "Show desktop notifications");
 			enable_notifications_switch.set_state(Settings.enable_notifications);

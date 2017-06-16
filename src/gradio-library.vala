@@ -29,18 +29,17 @@ namespace Gradio{
 		private string db_error_message;
 
 		string database_path;
-		string data_path;
 		string dir_path;
 
 		public Library(){
 			database_path = Path.build_filename (Environment.get_user_data_dir (), "gradio", "gradio.db");
-			data_path = Path.build_filename (Environment.get_user_data_dir (), "gradio", "library.gradio");
 			dir_path = Path.build_filename (Environment.get_user_data_dir (), "gradio");
 
 			station_model = new StationModel();
 			collection_model = new CollectionModel();
 
 			open_database();
+			read_database();
 		}
 
 		public bool add_station_to_collection(string collection_id, RadioStation station){
@@ -227,9 +226,13 @@ namespace Gradio{
 			message("Open database...");
 
 			File file = File.new_for_path (database_path);
+			File olddb = File.new_for_path (Path.build_filename (Environment.get_user_data_dir (), "gradio", "library.gradio"));
+			if(olddb.query_exists() && !file.query_exists()){
+				migrate_old_db();
+				return;
+			}
 
 			if(!file.query_exists()){
-				message("No database found.");
 				create_database();
 				return;
 			}
@@ -240,8 +243,6 @@ namespace Gradio{
 				critical ("Can't open database: %d: %s\n", db.errcode (), db.errmsg ());
 				return;
 			}
-
-			read_database();
 
 			message("Successfully opened database!");
 		}
@@ -325,14 +326,13 @@ namespace Gradio{
 			message("Create new database...");
 
 			File file = File.new_for_path (database_path);
+			File dir = File.new_for_path (dir_path);
 
 			try{
 				if(!file.query_exists()){
-					// create dir
-					File dir = File.new_for_path (Path.build_filename (Environment.get_user_data_dir (), "gradio"));
-					dir.make_directory_with_parents();
-
-					// create file
+					if(!dir.query_exists()){
+						dir.make_directory_with_parents();
+					}
 					file.create (FileCreateFlags.NONE);
 
 					open_database();
@@ -361,7 +361,32 @@ namespace Gradio{
 			}
 
 			message("Successfully initialized database!");
-			open_database();
+		}
+
+		private async void migrate_old_db(){
+			File file = File.new_for_path (Path.build_filename (Environment.get_user_data_dir (), "gradio", "library.gradio"));
+
+			if(file.query_exists()){
+				message("Old database found, which is going to be converted into the new sqlite3 format, to use gradio properly.");
+			}else{
+				return;
+			}
+
+			create_database();
+
+			if(file.query_exists ()){
+				var dis = new DataInputStream (file.read ());
+				string line;
+
+				while ((line = dis.read_line (null)) != null) {
+					RadioStation station = yield Util.get_station_by_id(int.parse(line));
+
+					if(station != null){
+						add_radio_station(station);
+					}
+				}
+				yield file.delete_async();
+			}
 		}
 
 	}

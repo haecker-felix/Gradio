@@ -73,10 +73,7 @@ namespace Gradio {
 			}
 
 			if(Settings.resume_playback_on_startup && Settings.previous_station != 0){
-				critical("Continue playback");
-
 				RadioStation s = yield Util.get_station_by_id(Settings.previous_station);
-				message(Settings.previous_station.to_string());
 				player.set_radio_station(s);
 			}
 
