@@ -25,14 +25,12 @@ namespace Gradio{
 
 		private MainBox mainbox;
 		private StationModel station_model;
-		private StationProvider station_provider;
 
 		private string address;
 		private string title;
 
 		public StationAddressPage(){
 			station_model =  new StationModel();
-			station_provider = new StationProvider(ref station_model);
 
 			mainbox = new MainBox();
 			mainbox.set_model(station_model);
@@ -46,7 +44,6 @@ namespace Gradio{
 			address = txt;
 
 			message("Showing stations for \"%s\".", address);
-			station_provider.set_address(address);
 		}
 
 		public string get_address(){

@@ -22,7 +22,6 @@ namespace Gradio{
 		public signal void added_radio_station(RadioStation s);
 		public signal void removed_radio_station(RadioStation s);
 
-		private StationProvider station_provider;
 		public static StationModel station_model;
 		public static CollectionModel collection_model;
 
@@ -39,7 +38,6 @@ namespace Gradio{
 			dir_path = Path.build_filename (Environment.get_user_data_dir (), "gradio");
 
 			station_model = new StationModel();
-			station_provider = new StationProvider(ref station_model);
 			collection_model = new CollectionModel();
 
 			open_database();
@@ -254,7 +252,7 @@ namespace Gradio{
 			read_stations();
 		}
 
-		private void read_stations(){
+		private async void read_stations(){
 			message("Importing stations...");
 			Statement stmt;
 			int rc = 0;
@@ -272,12 +270,15 @@ namespace Gradio{
 				case Sqlite.DONE:
 					break;
 				case Sqlite.ROW:
-					station_provider.add_station_by_id(int.parse(stmt.column_text(0)));
-					message("Found station: %s", stmt.column_text(0));
+					RadioStation station = yield get_station_by_id(int.parse(stmt.column_text(0)));
+
+					message("Found station: %s", station.title);
+					station_model.add_station(station);
 
 					if(stmt.column_text(1) != "0"){
 						Collection coll = collection_model.get_collection_by_id(stmt.column_text(1));
-						coll.add_station_by_id(int.parse(stmt.column_text(0)));
+						coll.add_station(station);
+
 						message("Added %s to collection \"%s\"", stmt.column_text(0), coll.name);
 					}
 
@@ -361,6 +362,30 @@ namespace Gradio{
 
 			message("Successfully initialized database!");
 			open_database();
+		}
+
+		public async RadioStation get_station_by_id(int id){
+			Json.Parser parser = new Json.Parser ();
+			RadioStation new_station = null;
+
+			string data = yield Util.get_string_from_uri(RadioBrowser.radio_stations_by_id + id.to_string());
+
+			if(data != ""){
+				parser.load_from_data (data);
+				var root = parser.get_root ();
+				var radio_stations = root.get_array ();
+
+				if(radio_stations.get_length() != 0){
+					var radio_station = radio_stations.get_element(0);
+					var radio_station_data = radio_station.get_object ();
+
+					new_station = new RadioStation.from_json_data(radio_station_data);
+					return new_station;
+				}else{
+					warning("Empty station data");
+				}
+			}
+			return null;
 		}
 
 	}

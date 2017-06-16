@@ -25,7 +25,7 @@ vala_sources = [
 		'gradio-player-toolbar.vala',
 		'gradio-radio-browser.vala',
 		'gradio-radio-station.vala',
-		'gradio-radio-station-provider.vala',
+		'gradio-search-provider.vala',
 		'gradio-settings.vala',
 		'gradio-station-model.vala',
 		'gradio-status-label.vala',

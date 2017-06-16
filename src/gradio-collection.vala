@@ -28,7 +28,6 @@ namespace Gradio{
 		private Thumbnail _thumbnail;
 
 		public StationModel station_model;
-		private StationProvider station_provider;
 
 		public string id {
 			get{return _id;}
@@ -80,7 +79,6 @@ namespace Gradio{
 			_id = i;
 
 			station_model = new StationModel();
-			station_provider = new StationProvider(ref station_model);
 
 			App.window.update_icons.connect(() => {
 				update_thumbnail();
@@ -95,10 +93,6 @@ namespace Gradio{
 
 		public void add_station(RadioStation station){
 			station_model.add_station(station);
-		}
-
-		public void add_station_by_id(int id){
-			station_provider.add_station_by_id(id);
 		}
 
 		public void remove_station(RadioStation station){
