@@ -270,7 +270,7 @@ namespace Gradio{
 				case Sqlite.DONE:
 					break;
 				case Sqlite.ROW:
-					RadioStation station = yield get_station_by_id(int.parse(stmt.column_text(0)));
+					RadioStation station = yield Util.get_station_by_id(int.parse(stmt.column_text(0)));
 
 					message("Found station: %s", station.title);
 					station_model.add_station(station);
@@ -362,30 +362,6 @@ namespace Gradio{
 
 			message("Successfully initialized database!");
 			open_database();
-		}
-
-		public async RadioStation get_station_by_id(int id){
-			Json.Parser parser = new Json.Parser ();
-			RadioStation new_station = null;
-
-			string data = yield Util.get_string_from_uri(RadioBrowser.radio_stations_by_id + id.to_string());
-
-			if(data != ""){
-				parser.load_from_data (data);
-				var root = parser.get_root ();
-				var radio_stations = root.get_array ();
-
-				if(radio_stations.get_length() != 0){
-					var radio_station = radio_stations.get_element(0);
-					var radio_station_data = radio_station.get_object ();
-
-					new_station = new RadioStation.from_json_data(radio_station_data);
-					return new_station;
-				}else{
-					warning("Empty station data");
-				}
-			}
-			return null;
 		}
 
 	}

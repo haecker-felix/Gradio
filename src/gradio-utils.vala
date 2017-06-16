@@ -163,195 +163,28 @@ namespace Gradio{
 			return false;
 		}
 
-		public static Cairo.Surface create_station_thumbnail (int base_size, Gdk.Pixbuf p){
-			Cairo.Surface surface;
-			Cairo.Context cr;
-			Gtk.StyleContext context;
-			Gtk.WidgetPath path;
-			Gdk.Pixbuf pix = p;
+		public static async RadioStation get_station_by_id(int id){
+			Json.Parser parser = new Json.Parser ();
+			RadioStation new_station = null;
 
-			context = new Gtk.StyleContext();
-			context.add_class("documents-collection-icon");
+			string data = yield Util.get_string_from_uri(RadioBrowser.radio_stations_by_id + id.to_string());
 
-			path = new Gtk.WidgetPath ();
-			Type type = typeof (Gtk.IconView);
-			path.append_type (type);
-		  	context.set_path (path);
+			if(data != ""){
+				parser.load_from_data (data);
+				var root = parser.get_root ();
+				var radio_stations = root.get_array ();
 
-			surface = new Cairo.ImageSurface(Cairo.Format.ARGB32, base_size, base_size);
-			cr = new Cairo.Context (surface);
+				if(radio_stations.get_length() != 0){
+					var radio_station = radio_stations.get_element(0);
+					var radio_station_data = radio_station.get_object ();
 
-			/* Render the thumbnail itself */
-			context.render_background (cr, 0, 0, base_size, base_size);
-			context.render_frame (cr, 0, 0, base_size, base_size);
-
-			/* Now, render the tiles inside */
-			context.remove_class ("documents-collection-icon");
-			context.add_class ("documents-collection-icon-tile");
-
-			pix = optiscale(pix,base_size-4);
-
-			int pix_width = pix.get_width ();
-			int pix_height = pix.get_height ();
-
-			cr.save();
-
-			int x = base_size - pix_width - ((base_size-pix_width)/2);
-			int y = base_size - pix_height- ((base_size-pix_height)/2);
-
-			if(x < 0) x=0;
-			if(y < 0) y=0;
-
-			cr.translate (x, y);
-			cr.rectangle (0, 0, pix_width, pix_height);
-			cr.clip ();
-
-			Gdk.cairo_set_source_pixbuf (cr, pix, 0, 0);
-			cr.paint ();
-			cr.restore ();
-
-			return surface;
-		}
-
-		public static Cairo.Surface create_collection_thumbnail (int base_size, List<Gdk.Pixbuf> pixbufs){
-			Cairo.Surface surface;
-			Cairo.Context cr;
-			Gtk.StyleContext context;
-			Gtk.WidgetPath path;
-			Gtk.Border tile_border;
-			int padding;
-			int cur_x, cur_y;
-
-			context = new Gtk.StyleContext();
-			context.add_class("documents-collection-icon");
-
-			path = new Gtk.WidgetPath ();
-			Type type = typeof (Gtk.IconView);
-			path.append_type (type);
-		  	context.set_path (path);
-
-			surface = new Cairo.ImageSurface(Cairo.Format.ARGB32, base_size, base_size);
-			cr = new Cairo.Context (surface);
-
-			/* Render the thumbnail itself */
-			context.render_background (cr, 0, 0, base_size, base_size);
-			context.render_frame (cr, 0, 0, base_size, base_size);
-
-			/* Now, render the tiles inside */
-			context.remove_class ("documents-collection-icon");
-			context.add_class ("documents-collection-icon-tile");
-
-			int length = 4;
-
-			if((int)pixbufs.length() < 4)
-				length = (int) pixbufs.length();
-
-			padding = int.max((int)Math.floor(base_size / 10), 4);
-			tile_border = context.get_border (Gtk.StateFlags.NORMAL);
-
-			cur_x = padding;
-			cur_y = padding;
-
-
-			for(int i = 0; i < length; i++){
-				int small_base_size = (base_size - (padding*3))/2;
-
-				Gdk.Pixbuf pix = pixbufs.nth_data(i);
-				pix = optiscale(pix,small_base_size-4);
-
-				int pix_width = pix.get_width ();
-				int pix_height = pix.get_height ();
-
-				if(i == 0){
-					// draw border
-					context.render_background (cr, padding, padding, small_base_size, small_base_size);
-					context.render_frame (cr, padding, padding, small_base_size, small_base_size);
-
-					cr.save();
-
-					int x = padding + (small_base_size - pix_width - ((small_base_size-pix_width)/2));
-					int y = padding + (small_base_size - pix_height- ((small_base_size-pix_height)/2));
-
-					if(x < 0) x=0;
-					if(y < 0) y=0;
-
-					cr.translate (x, y);
-					cr.rectangle (0, 0, pix_width, pix_height);
-					cr.clip ();
-
-					Gdk.cairo_set_source_pixbuf (cr, pix, 0, 0);
-					cr.paint ();
-					cr.restore ();
+					new_station = new RadioStation.from_json_data(radio_station_data);
+					return new_station;
+				}else{
+					warning("Empty station data");
 				}
-
-				if(i == 1){
-					// draw border
-					context.render_background (cr, base_size - (padding+small_base_size), padding, small_base_size, small_base_size);
-					context.render_frame (cr, base_size - (padding+small_base_size), padding, small_base_size, small_base_size);
-
-					cr.save();
-
-					int x = (base_size - padding - small_base_size) + (small_base_size - pix_width - ((small_base_size-pix_width)/2));
-					int y = padding + (small_base_size - pix_height- ((small_base_size-pix_height)/2));
-
-					if(x < 0) x=0;
-					if(y < 0) y=0;
-
-					cr.translate (x, y);
-					cr.rectangle (0, 0, pix_width, pix_height);
-					cr.clip ();
-
-					Gdk.cairo_set_source_pixbuf (cr, pix, 0, 0);
-					cr.paint ();
-					cr.restore ();
-				}
-
-				if(i == 2){
-					// draw border
-					context.render_background (cr, padding, base_size - (padding+small_base_size), small_base_size, small_base_size);
-					context.render_frame (cr, padding, base_size - (padding+small_base_size), small_base_size, small_base_size);
-
-					cr.save();
-
-					int y = (base_size - padding - small_base_size) + (small_base_size - pix_width - ((small_base_size-pix_width)/2));
-					int x = padding + (small_base_size - pix_height- ((small_base_size-pix_height)/2));
-
-					if(x < 0) x=0;
-					if(y < 0) y=0;
-
-					cr.translate (x, y);
-					cr.rectangle (0, 0, pix_width, pix_height);
-					cr.clip ();
-
-					Gdk.cairo_set_source_pixbuf (cr, pix, 0, 0);
-					cr.paint ();
-					cr.restore ();
-				}
-
-				if(i == 3){
-					// draw border
-					context.render_background (cr, base_size - (padding+small_base_size), base_size - (padding+small_base_size), small_base_size, small_base_size);
-					context.render_frame (cr, base_size - (padding+small_base_size), base_size - (padding+small_base_size), small_base_size, small_base_size);
-
-					cr.save();
-
-					int y = (base_size - padding - small_base_size) + (small_base_size - pix_width - ((small_base_size-pix_width)/2));
-					int x = (base_size - padding - small_base_size) + (small_base_size - pix_width - ((small_base_size-pix_width)/2));
-
-					if(x < 0) x=0;
-					if(y < 0) y=0;
-
-					cr.translate (x, y);
-					cr.rectangle (0, 0, pix_width, pix_height);
-					cr.clip ();
-
-					Gdk.cairo_set_source_pixbuf (cr, pix, 0, 0);
-					cr.paint ();
-					cr.restore ();
-				}
-
 			}
-			return surface;
+			return null;
 		}
 	}
 }

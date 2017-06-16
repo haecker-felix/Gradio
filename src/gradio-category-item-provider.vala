@@ -16,7 +16,6 @@
 
 namespace Gradio{
 
-	// TODO: move this in a seperate file
 	public class GenericItem : GLib.Object {
 
 		public string text;

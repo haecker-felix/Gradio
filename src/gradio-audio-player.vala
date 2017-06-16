@@ -142,7 +142,7 @@ namespace Gradio{
 					if(current_station != null)
 						tag_changed();
 
-		        		Settings.previous_station = (int)station.id;
+		        		Settings.previous_station = int.parse(station.id);
 					connect_to_stream_address(address);
 					radio_station_changed();
 		        	}

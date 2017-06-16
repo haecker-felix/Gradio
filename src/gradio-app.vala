@@ -43,9 +43,11 @@ namespace Gradio {
 			}
 		}
 
-		private void start_new_session(){
+		private async void start_new_session(){
 			// ignore the vala warning!
 			Settings settings = new Settings();
+
+			setup_actions();
 
 			window = new MainWindow(this);
 			this.add_window(window);
@@ -59,8 +61,6 @@ namespace Gradio {
 
 			player = new AudioPlayer();
 
-			setup_actions();
-
 			if(Settings.enable_mpris == true){
 				mpris = new MPRIS();
 				mpris.initialize();
@@ -73,11 +73,11 @@ namespace Gradio {
 			}
 
 			if(Settings.resume_playback_on_startup && Settings.previous_station != 0){
-				message("Continue playback");
+				critical("Continue playback");
 
-				//TODO: re-add continue on startup feature
-				//RadioStation s = new RadioStation.from_id(Settings.previous_station);
-				//player.set_radio_station(s);
+				RadioStation s = yield Util.get_station_by_id(Settings.previous_station);
+				message(Settings.previous_station.to_string());
+				player.set_radio_station(s);
 			}
 
 			window.setup();
