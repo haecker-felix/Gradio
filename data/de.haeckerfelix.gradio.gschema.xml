@@ -20,11 +20,6 @@
       <summary>Continue the playback if window is closed.</summary>
     </key>
 
-    <key name="enable-tray-icon" type="b">
-      <default>false</default>
-      <summary>Show tray icon in the taskbar.</summary>
-    </key>
-
     <key name="enable-caching" type="b">
       <default>true</default>
       <summary>Cache station icons</summary>

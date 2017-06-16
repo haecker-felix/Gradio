@@ -93,11 +93,6 @@ namespace Gradio {
 				window.hide_on_delete ();
 				return Settings.enable_background_playback;
 		    	});
-
-		    	window.tray_activate.connect(() => {
-		    		restore_window();
-		    		window.hide_tray_icon();
-		    	});
 		}
 
 		private void setup_actions () {

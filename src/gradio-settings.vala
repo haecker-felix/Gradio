@@ -24,7 +24,6 @@ namespace Gradio{
 		private static bool _enable_dark_theme;
 		private static bool _enable_mpris;
 		private static bool _enable_background_playback;
-		private static bool _enable_tray_icon;
 		private static bool _enable_caching;
 		private static bool _resume_playback_on_startup;
 		private static bool _hide_broken_stations;
@@ -43,7 +42,6 @@ namespace Gradio{
 			_enable_dark_theme = settings.get_boolean("enable-dark-theme");
 			_enable_mpris = settings.get_boolean("enable-mpris");
 			_enable_background_playback = settings.get_boolean("enable-background-playback");
-			_enable_tray_icon = settings.get_boolean("enable-tray-icon");
 			_enable_caching = settings.get_boolean("enable-caching");
 			_resume_playback_on_startup = settings.get_boolean("resume-playback-on-startup");
 			_hide_broken_stations = settings.get_boolean("hide-broken-stations");
@@ -96,16 +94,6 @@ namespace Gradio{
 			set{
 				_enable_background_playback = value;
 				settings.set_boolean ("enable-background-playback", value);
-			}
-		}
-
-		public static bool enable_tray_icon{
-			get{
-				return _enable_tray_icon;
-			}
-			set{
-				_enable_tray_icon = value;
-				settings.set_boolean ("enable-tray-icon", value);
 			}
 		}
 

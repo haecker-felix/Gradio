@@ -34,9 +34,6 @@ namespace Gradio{
 		private int height;
 		private int width;
 
-		private StatusIcon trayicon;
-		public signal void tray_activate();
-
 		CollectionItemsPage collection_items_page;
 		public SearchPage search_page;
 		LibraryPage library_page;
@@ -69,7 +66,6 @@ namespace Gradio{
 		}
 
 		public void setup(){
-			setup_tray_icon();
 			setup_view();
 			restore_geometry();
 			connect_signals();
@@ -137,22 +133,6 @@ namespace Gradio{
 			header.selection_canceled.connect(disable_selection_mode);
 			header.selection_started.connect(enable_selection_mode);
 			NotificationCloseButton.clicked.connect(hide_notification);
-		}
-
-		private void setup_tray_icon(){
-			trayicon = new StatusIcon.from_icon_name("de.haeckerfelix.gradio-symbolic");
-      			trayicon.set_tooltip_text ("Click to restore...");
-      			trayicon.set_visible(false);
-
-      			trayicon.activate.connect(() => tray_activate());
-		}
-
-		public void show_tray_icon(){
-			trayicon.set_visible(true);
-		}
-
-		public void hide_tray_icon(){
-			trayicon.set_visible(false);
 		}
 
 		public void save_geometry (){
