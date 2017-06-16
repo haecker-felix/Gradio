@@ -4,7 +4,7 @@ A GTK3 app for finding and listening to internet radio stations.
 ![alt text](https://raw.githubusercontent.com/haecker-felix/gradio/master/data/icons/hicolor/256x256/apps/de.haeckerfelix.gradio.png "Logo")
 
 * **Installation**  
-[Open installation guide](https://github.com/haecker-felix/gradio/wiki/Install)
+[Open installation guide](https://github.com/haecker-felix/gradio/wiki/Install-Gradio)
 
 * **License**  
 GNU General Public License, Version 3
