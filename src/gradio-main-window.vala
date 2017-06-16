@@ -22,7 +22,7 @@ namespace Gradio{
 	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/main-window.ui")]
 	public class MainWindow : Gtk.ApplicationWindow {
 
-		public string[] page_name = { "library", "search", "details", "settings", "loading", "station_adress", "collection_items", "add", "collections"};
+		public string[] page_name = { "library", "search", "details", "settings", "collection_items", "add", "collections"};
 
 		private Gradio.Headerbar header;
 		PlayerToolbar player_toolbar;
@@ -37,7 +37,6 @@ namespace Gradio{
 		private StatusIcon trayicon;
 		public signal void tray_activate();
 
-		StationAddressPage station_address_page;
 		CollectionItemsPage collection_items_page;
 		public SearchPage search_page;
 		LibraryPage library_page;
@@ -99,9 +98,6 @@ namespace Gradio{
 
 			settings_page = new SettingsPage();
 			MainStack.add_named(settings_page, page_name[WindowMode.SETTINGS]);
-
-			station_address_page = new StationAddressPage();
-			MainStack.add_named(station_address_page, page_name[WindowMode.STATION_ADDRESS]);
 
 			collection_items_page = new CollectionItemsPage();
 			MainStack.add_named(collection_items_page, page_name[WindowMode.COLLECTION_ITEMS]);
@@ -296,12 +292,6 @@ namespace Gradio{
 					header.ViewButton.set_visible(false);
 					break;
 				};
-				case WindowMode.STATION_ADDRESS: {
-					station_address_page.set_address(data.address);
-					station_address_page.set_title(data.title);
-					header.show_title(station_address_page.get_title());
-					break;
-				};
 				case WindowMode.COLLECTION_ITEMS: {
 					selection_toolbar.set_mode(SelectionMode.COLLECTION_ITEMS, data.collection.id);
 					collection_items_page.set_collection(data.collection);
@@ -399,18 +389,6 @@ namespace Gradio{
 
 			save_back_entry();
 			change_mode(WindowMode.SETTINGS);
-		}
-
-		public void show_stations_by_adress(string address, string title){
-			if(in_mode_change)
-				return;
-
-			save_back_entry();
-
-			DataWrapper data = new DataWrapper();
-			data.address = address;
-			data.title  = title;
-			change_mode(WindowMode.STATION_ADDRESS, data);
 		}
 
 		public void show_collection_items(Collection coll, string title){
