@@ -25,7 +25,6 @@ namespace Gradio {
 		public static AudioPlayer player;
 		public static Library library;
 		public static MPRIS mpris;
-		public static CategoryItemProvider ciprovider;
 		public static ImageCache image_cache;
 
 		public App () {
@@ -54,8 +53,6 @@ namespace Gradio {
 			window.show_all();
 
 			image_cache = new ImageCache();
-
-			ciprovider = new CategoryItemProvider();
 
 			library = new Library();
 

@@ -29,20 +29,17 @@ namespace Gradio{
 		private SearchProvider search_provider;
 
 		public SearchPage(){
+			mainbox = new MainBox();
+			mainbox.set_model(station_model);
+			mainbox.selection_changed.connect(() => {selection_changed();});
+			mainbox.selection_mode_request.connect(() => {selection_mode_enabled();});
+			ResultsBox.add(mainbox);
+
 			filterbox = new Gradio.FilterBox();
 			FilterBox.add(filterbox);
 
 			station_model =  new StationModel();
-			station_model =  new StationModel();
-			station_model =  new StationModel();
 			search_provider = new SearchProvider(ref station_model, ref filterbox);
-
-			mainbox = new MainBox();
-			mainbox.set_model(station_model);
-
-			ResultsBox.add(mainbox);
-			mainbox.selection_changed.connect(() => {selection_changed();});
-			mainbox.selection_mode_request.connect(() => {selection_mode_enabled();});
 		}
 
 		public void show_recently_clicked(){

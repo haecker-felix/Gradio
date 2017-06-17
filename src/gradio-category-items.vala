@@ -16,74 +16,19 @@
 
 namespace Gradio{
 
-	public class GenericItem : GLib.Object {
+	public class CategoryItems{
+		public GenericModel languages_model;
+		public GenericModel countries_model;
+		public GenericModel states_model;
 
-		public string text;
-
-		public GenericItem (string t) {
-			text = t;
-		}
-	}
-
-	public class GenericModel : GLib.Object, GLib.ListModel {
-
-		private GLib.GenericArray<GenericItem> items = new GLib.GenericArray<GenericItem> ();
-
-		public GenericModel(){}
-
-		public void clear(){
-			uint s = items.length;
-			items.remove_range(0, items.length);
-	    		this.items_changed (0, s, 0);
-		}
-
-  		public GLib.Object? get_item (uint index) {
-    			return items.get (index);
-  		}
-
-  		public GLib.Type get_item_type () {
-    			return typeof (GenericItem);
-  		}
-
- 		public uint get_n_items () {
-    			return items.length;
-  		}
-
-	  	public void add_item(GenericItem item) {
-			items.add (item);
-			this.items_changed (items.length-1, 0, 1);
-	  	}
-
-		public void remove_item (GenericItem item) {
-			int pos = 0;
-			for (int i = 0; i < items.length; i ++) {
-        				GenericItem fitem = items.get (i);
-        				if (fitem.text == item.text) {
-        					pos = i;
-        					break;
-        				}
-			}
-
-			items.remove_index (pos);
-			items_changed (pos, 1, 0);
-	  	}
-	}
-
-
-	public class CategoryItemProvider{
-
-		public static GenericModel languages_model;
-		public static GenericModel countries_model;
-		public static GenericModel states_model;
-
-		static construct {
+		public CategoryItems(){
 			languages_model = new GenericModel();
 			countries_model = new GenericModel();
 			states_model = new GenericModel();
 			load_lists.begin();
 		}
 
-		private static async void load_lists (){
+		private async void load_lists (){
 			Json.Parser parser = new Json.Parser ();
 			Json.Node root = null;
 			Json.Array items;
@@ -129,6 +74,8 @@ namespace Gradio{
 					GenericItem genericitem = new GenericItem(item_data.get_string_member("value"));
 					states_model.add_item(genericitem);
 				}
+
+				message("Loaded all category items.");
 			}catch (Error e){
 				critical("Could not load category items: %s", e.message);
 			}

@@ -61,22 +61,25 @@ namespace Gradio{
 		[GtkChild] private SpinButton BitrateSpinButton;
 		public int min_bitrate = 0;
 
+		private CategoryItems category_items;
+
 		public signal void information_changed();
 
 		public FilterBox(){
+			category_items = new CategoryItems();
 			connect_signals();
 
-			LanguageListBox.bind_model(CategoryItemProvider.languages_model, (i) => {
+			LanguageListBox.bind_model(category_items.languages_model, (i) => {
 				GenericItem item = (GenericItem)i;
 				return get_row(item.text);
 			});
 
-			CountryListBox.bind_model(CategoryItemProvider.countries_model, (i) => {
+			CountryListBox.bind_model(category_items.countries_model, (i) => {
 				GenericItem item = (GenericItem)i;
 				return get_row(item.text);
 			});
 
-			StateListBox.bind_model(CategoryItemProvider.states_model, (i) => {
+			StateListBox.bind_model(category_items.states_model, (i) => {
 				GenericItem item = (GenericItem)i;
 				return get_row(item.text);
 			});
