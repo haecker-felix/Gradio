@@ -86,6 +86,12 @@ namespace Gradio {
                 	var cfile = File.new_for_path(file_location);
 			FileIOStream fiostream = null;
 
+			File dir = File.new_for_path (GLib.Environment.get_user_cache_dir()+"/gradio/");
+			if(!dir.query_exists()){
+				dir.make_directory_with_parents();
+				message("Created a cache folder.");
+			}
+
 			try{
 		        	if (cfile.query_exists()) {
 		            		fiostream = yield cfile.replace_readwrite_async(null, false, FileCreateFlags.NONE);
