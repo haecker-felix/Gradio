@@ -37,7 +37,7 @@ namespace Gradio{
 
 		[GtkChild] private ToggleButton SortDescendingButton;
 		[GtkChild] private ToggleButton SortAscendingButton;
-		public bool sort_descending = false;
+		public bool sort_descending = true;
 
 
 		[GtkChild] private Revealer CountryRevealer;
@@ -233,9 +233,7 @@ namespace Gradio{
 
 		[GtkCallback]
 		private void SearchEntry_search_changed () {
-			if(SearchEntry.get_text() != "" && SearchEntry.get_text().length >= 3){
-				search_term = SearchEntry.get_text();
-			}
+			search_term = SearchEntry.get_text();
 			information_changed();
 		}
 

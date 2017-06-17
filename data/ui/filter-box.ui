@@ -104,18 +104,18 @@
                         <property name="can_focus">False</property>
                         <property name="margin_top">5</property>
                         <child>
-                          <object class="GtkToggleButton" id="SortAscendingButton">
+                          <object class="GtkToggleButton" id="SortDescendingButton">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
-                            <property name="tooltip_text" translatable="yes">Sort Ascending</property>
+                            <property name="tooltip_text" translatable="yes">Sort Descending</property>
                             <property name="active">True</property>
-                            <signal name="toggled" handler="SortAscendingButton_toggled" swapped="no"/>
+                            <signal name="toggled" handler="SortDescendingButton_toggled" swapped="no"/>
                             <child>
                               <object class="GtkImage">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="icon_name">view-sort-ascending-symbolic</property>
+                                <property name="icon_name">view-sort-descending-symbolic</property>
                               </object>
                             </child>
                           </object>
@@ -126,17 +126,17 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkToggleButton" id="SortDescendingButton">
+                          <object class="GtkToggleButton" id="SortAscendingButton">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
-                            <property name="tooltip_text" translatable="yes">Sort Descending</property>
-                            <signal name="toggled" handler="SortDescendingButton_toggled" swapped="no"/>
+                            <property name="tooltip_text" translatable="yes">Sort Ascending</property>
+                            <signal name="toggled" handler="SortAscendingButton_toggled" swapped="no"/>
                             <child>
                               <object class="GtkImage">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="icon_name">view-sort-descending-symbolic</property>
+                                <property name="icon_name">view-sort-ascending-symbolic</property>
                               </object>
                             </child>
                           </object>

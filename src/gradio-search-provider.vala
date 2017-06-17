@@ -20,20 +20,23 @@ namespace Gradio{
 
 	public class SearchProvider{
 
-		// wait 1,3 seconds before spawning a new search thread
+		private const string address = "http://www.radio-browser.info/webservice/json/stations/search";
+
+		// wait 1,3 seconds before spawning a new search
 		private int search_delay = 1000;
 		private uint delayed_changed_id;
 
-		private const string address = "http://www.radio-browser.info/webservice/json/stations/search";
+		private Soup.Session soup_session;
+		private Json.Parser parser = new Json.Parser();
 
-		Soup.Session soup_session;
-		Json.Parser parser = new Json.Parser();
-
-		StationModel model = null;
-		FilterBox filterbox = null;
+		private StationModel model = null;
+		private FilterBox filterbox = null;
 
 		// the maximum of stations to parse
 		private int maximum = 100;
+
+		public signal void working();
+		public signal void ready();
 
 		public SearchProvider(ref StationModel m, ref FilterBox fb) {
 			model = m;
@@ -48,19 +51,23 @@ namespace Gradio{
 		}
 
 		private void reset_timeout(){
+			working();
 			if(delayed_changed_id > 0)
 				Source.remove(delayed_changed_id);
 			delayed_changed_id = Timeout.add(search_delay, timeout);
 		}
 
 		private bool timeout(){
-			message("Sending new search request to radio-browser.info");
+			message("Sending new search request to server");
 			set_search_request();
 
 			delayed_changed_id = 0;
 			return false;
 		}
 		private void set_search_request (){
+			// clear old search model
+			model.clear();
+
 			HashTable<string, string> table = new HashTable<string, string> (str_hash, str_equal);
 
 			if(filterbox.selected_language != "" && filterbox.selected_language != null)
@@ -85,7 +92,6 @@ namespace Gradio{
 			Soup.Message msg = Soup.Form.request_new_from_hash("POST", address, table);
 
 			soup_session.queue_message (msg, (sess, mess) => {
-				model.clear();
 				progress_request.begin((string) mess.response_body.data);
 			});
 		}
@@ -97,14 +103,14 @@ namespace Gradio{
 				var root = parser.get_root ();
 				var radio_stations = root.get_array ();
 
-
 				int items = (int)radio_stations.get_length();
-				message("Items found: %i", items);
+				message("Search results found: %i", items);
 
 				if(items > maximum) items = maximum;
 
-				for(int i = 0; i < items; i++){
+				ready();
 
+				for(int i = 0; i < items; i++){
 					var radio_station = radio_stations.get_element(i);
 					var radio_station_data = radio_station.get_object ();
 
@@ -113,7 +119,7 @@ namespace Gradio{
 				}
 
 			}catch(GLib.Error e){
-				warning ("Aborted parsing! " + e.message);
+				warning ("Aborted parsing search results! " + e.message);
 			}
         	}
 	}

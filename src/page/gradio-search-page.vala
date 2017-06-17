@@ -22,6 +22,7 @@ namespace Gradio{
 	public class SearchPage : Gtk.Box, Page{
 		[GtkChild] private Box ResultsBox;
 		[GtkChild] private Box FilterBox;
+		[GtkChild] private Stack SearchStack;
 		private FilterBox filterbox;
 
 		private MainBox mainbox;
@@ -40,6 +41,9 @@ namespace Gradio{
 			mainbox.selection_changed.connect(() => {selection_changed();});
 			mainbox.selection_mode_request.connect(() => {selection_mode_enabled();});
 			ResultsBox.add(mainbox);
+
+			search_provider.ready.connect(() => {SearchStack.set_visible_child_name("results");});
+			search_provider.working.connect(() => {SearchStack.set_visible_child_name("loading");});
 		}
 
 		public void show_recently_clicked(){
