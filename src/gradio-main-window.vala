@@ -22,7 +22,7 @@ namespace Gradio{
 	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/main-window.ui")]
 	public class MainWindow : Gtk.ApplicationWindow {
 
-		public string[] page_name = { "library", "search", "details", "settings", "collection_items", "add", "collections"};
+		public string[] page_name = { "library", "search", "settings", "collection_items", "add", "collections"};
 
 		private Gradio.Headerbar header;
 		PlayerToolbar player_toolbar;
@@ -38,7 +38,6 @@ namespace Gradio{
 		LibraryPage library_page;
 		CollectionsPage collections_page;
 		SettingsPage settings_page;
-		StationDetailPage station_detail_page;
 		AddPage add_page;
 
 		GLib.Queue<BackEntry> back_entry_stack = new GLib.Queue<BackEntry>();
@@ -78,9 +77,6 @@ namespace Gradio{
 
 			selection_toolbar = new SelectionToolbar();
 			SelectionToolbarBox.add(selection_toolbar);
-
-			station_detail_page = new StationDetailPage();
-			MainStack.add_named(station_detail_page, page_name[WindowMode.DETAILS]);
 
 			library_page = new LibraryPage();
 			MainStack.add_named(library_page, page_name[WindowMode.LIBRARY]);
@@ -253,14 +249,6 @@ namespace Gradio{
 					clean_back_entry_stack();
 					break;
 				};
-				case WindowMode.DETAILS: {
-					station_detail_page.set_station((RadioStation)data.station);
-					header.show_title(station_detail_page.get_title());
-					header.SelectButton.set_visible(false);
-					header.SearchToggleButton.set_visible(false);
-					header.ViewButton.set_visible(false);
-					break;
-				};
 				case WindowMode.SETTINGS: {
 					header.show_title("Settings");
 					header.SelectButton.set_visible(false);
@@ -297,14 +285,7 @@ namespace Gradio{
 
 		private void go_back(){
 			BackEntry entry = back_entry_stack.pop_head();
-
-			if(entry != null){
-				switch(entry.mode){
-					case WindowMode.DETAILS: change_mode(entry.mode, entry.data); break;
-					case WindowMode.SEARCH: change_mode(entry.mode, entry.data); break;
-					default: change_mode (entry.mode); break;
-				}
-			}
+			change_mode (entry.mode);
 		}
 
 		private void save_back_entry(){
@@ -312,11 +293,6 @@ namespace Gradio{
 			DataWrapper data = new DataWrapper();
 
 			entry.mode = current_mode;
-
-			switch(entry.mode){
-				case WindowMode.DETAILS: data.station = station_detail_page.get_station(); break;
-				default: break;
-			}
 
 			entry.data = data;
 			back_entry_stack.push_head(entry);
@@ -352,16 +328,19 @@ namespace Gradio{
 		}
 
 		public void show_station_details(RadioStation station){
-			if(in_mode_change)
-				return;
+			DetailsDialog details_dialog = new DetailsDialog();
+			details_dialog.set_station(station);
+			details_dialog.set_transient_for(this);
+			details_dialog.set_modal(true);
+			details_dialog.set_visible(true);
+		}
 
-			// dont open the same details page twice times
-			if(station_detail_page.get_station() == null ||  current_mode != WindowMode.DETAILS){
-				save_back_entry();
-				DataWrapper data = new DataWrapper();
-				data.station = station;
-				change_mode(WindowMode.DETAILS, data);
-			}
+		public void show_collection_details(Collection collection){
+			DetailsDialog details_dialog = new DetailsDialog();
+			details_dialog.set_collection(collection);
+			details_dialog.set_transient_for(this);
+			details_dialog.set_modal(true);
+			details_dialog.set_visible(true);
 		}
 
 		public void show_settings(){

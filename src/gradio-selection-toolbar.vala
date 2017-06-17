@@ -154,12 +154,20 @@ namespace Gradio{
 
 		[GtkCallback]
 		public void DetailsButton_clicked (Gtk.Button button) {
-			StationModel model = App.window.get_station_selection();
-			App.window.disable_selection_mode();
 
-			for(int i = 0; i < model.get_n_items(); i++){
-				RadioStation station = (RadioStation)model.get_item(i);
-				App.window.show_station_details(station);
+			if(mode == SelectionMode.COLLECTION_OVERVIEW){
+				CollectionModel model = (CollectionModel)App.window.get_collection_selection();
+				for(int i = 0; i < model.get_n_items(); i++){
+					Collection collection = (Collection)model.get_item(i);
+					App.window.show_collection_details(collection);
+				}
+
+			} else {
+				StationModel model = (StationModel)App.window.get_station_selection();
+				for(int i = 0; i < model.get_n_items(); i++){
+					RadioStation station = (RadioStation)model.get_item(i);
+					App.window.show_station_details(station);
+				}
 			}
 		}
 

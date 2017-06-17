@@ -21,7 +21,6 @@ namespace Gradio{
 	public enum WindowMode {
 		LIBRARY,
 		SEARCH,
-		DETAILS,
 		SETTINGS,
 		COLLECTION_ITEMS,
 		ADD,

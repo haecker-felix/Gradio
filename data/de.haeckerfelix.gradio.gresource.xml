@@ -6,11 +6,11 @@
 	<file>ui/page/library-page.ui</file>
 	<file>ui/page/search-page.ui</file>
 	<file>ui/page/settings-page.ui</file>
-	<file>ui/page/station-detail-page.ui</file>
 	<file>ui/page/station-address-page.ui</file>
 	<file>ui/page/collection-items-page.ui</file>
 	<file>ui/page/add-page.ui</file>
 	<file>ui/page/collections-page.ui</file>
+	<file>ui/details-dialog.ui</file>
 	<file>ui/groupbox.ui</file>
 	<file>ui/app-menu.ui</file>
 	<file>ui/main-window.ui</file>
