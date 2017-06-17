@@ -20,7 +20,6 @@ vala_sources = [
 		'gradio-radio-station.vala',
 		'gradio-collection.vala',
 		'gradio-category-items.vala',
-		'gradio-tag-box.vala',
 		'gradio-mainbox.vala',
 		'gradio-audio-player.vala',
 		'gradio-codec-installer.vala',
