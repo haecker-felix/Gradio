@@ -72,170 +72,66 @@ namespace Gradio{
 
 	public class CategoryItemProvider{
 
-		public static GenericModel categories_model;
-
 		public static GenericModel languages_model;
 		public static GenericModel countries_model;
-		public static GenericModel codecs_model;
 		public static GenericModel states_model;
-		public static GenericModel tags_model;
 
-		public signal void loaded();
-		private signal void partial();
-		public bool is_ready = false;
-
-		public CategoryItemProvider(){
-			categories_model = new GenericModel();
-			GenericItem languagues_item = new GenericItem("Languages");
-			categories_model.add_item(languagues_item);
-			GenericItem countries_item = new GenericItem("Countries");
-			categories_model.add_item(countries_item);
-			GenericItem codecs_item = new GenericItem("Codecs");
-			categories_model.add_item(codecs_item);
-			GenericItem states_item = new GenericItem("States");
-			categories_model.add_item(states_item);
-
+		static construct {
 			languages_model = new GenericModel();
 			countries_model = new GenericModel();
-			codecs_model = new GenericModel();
 			states_model = new GenericModel();
-			tags_model = new GenericModel();
-
-			partial.connect(partial_loaded);
-
 			load_lists.begin();
 		}
 
-		private void partial_loaded(){
-			if(languages_model.get_n_items() != 0 &&
-				countries_model.get_n_items() != 0 &&
-				codecs_model.get_n_items() != 0 &&
-				states_model.get_n_items() != 0 &&
-				tags_model.get_n_items() != 0){
+		private static async void load_lists (){
+			Json.Parser parser = new Json.Parser ();
+			Json.Node root = null;
+			Json.Array items;
+			string data = "";
+			int max_items = 0;
 
-				is_ready = true;
-				loaded();
-				message("Loaded category items!");
-			}
-		}
-
-		private async void load_lists (){
-        		SourceFunc callback = load_lists.callback;
-
-			message("Load category items...");
-
-			ThreadFunc<void*> run = () => {
-				Json.Parser parser = new Json.Parser ();
-				string data = "";
-
+			try{
 				// Languages
-				Util.get_string_from_uri.begin(RadioBrowser.radio_station_languages, (obj, res) => {
-					data = Util.get_string_from_uri.end(res);
-
-					if(data != ""){
-						parser.load_from_data (data);
-						var root = parser.get_root ();
-						var languages = root.get_array ();
-						int max_items = (int)languages.get_length();
-						for(int a = 0; a < max_items; a++){
-							var language = languages.get_element(a);
-							var language_data = language.get_object ();
-
-							GenericItem item = new GenericItem(language_data.get_string_member("value"));
-							languages_model.add_item(item);
-						}
-					}
-					partial();
-				});
-
-				// Codecs
-				Util.get_string_from_uri.begin(RadioBrowser.radio_station_codecs, (obj, res) => {
-					data = Util.get_string_from_uri.end(res);
-
-					if(data != ""){
-						parser.load_from_data (data);
-						var root = parser.get_root ();
-						var codecs = root.get_array ();
-						int max_items = (int)codecs.get_length();
-						for(int a = 0; a < max_items; a++){
-							var codec = codecs.get_element(a);
-							var codec_data = codec.get_object ();
-
-							GenericItem item = new GenericItem(codec_data.get_string_member("value"));
-							codecs_model.add_item(item);
-						}
-					}
-					partial();
-				});
+				data = yield Util.get_string_from_uri(RadioBrowser.radio_station_languages);
+				parser.load_from_data (data);
+				root = parser.get_root ();
+				items = root.get_array ();
+				max_items = (int)items.get_length();
+				for(int a = 0; a < max_items; a++){
+					var item = items.get_element(a);
+					var item_data = item.get_object ();
+					GenericItem genericitem = new GenericItem(item_data.get_string_member("value"));
+					languages_model.add_item(genericitem);
+				}
 
 				// Countries
-				Util.get_string_from_uri.begin(RadioBrowser.radio_station_countries, (obj, res) => {
-					data = Util.get_string_from_uri.end(res);
-
-					if(data != ""){
-						parser.load_from_data (data);
-						var root = parser.get_root ();
-						var countries = root.get_array ();
-						int max_items = (int)countries.get_length();
-						for(int a = 0; a < max_items; a++){
-							var country = countries.get_element(a);
-							var country_data = country.get_object ();
-
-							GenericItem item = new GenericItem(country_data.get_string_member("value"));
-							countries_model.add_item(item);
-						}
-					}
-					partial();
-				});
+				data = yield Util.get_string_from_uri(RadioBrowser.radio_station_countries);
+				parser.load_from_data (data);
+				root = parser.get_root ();
+				items = root.get_array ();
+				max_items = (int)items.get_length();
+				for(int a = 0; a < max_items; a++){
+					var item = items.get_element(a);
+					var item_data = item.get_object ();
+					GenericItem genericitem = new GenericItem(item_data.get_string_member("value"));
+					countries_model.add_item(genericitem);
+				}
 
 				// States
-				Util.get_string_from_uri.begin(RadioBrowser.radio_station_states, (obj, res) => {
-					data = Util.get_string_from_uri.end(res);
-
-						if(data != ""){
-						parser.load_from_data (data);
-						var root = parser.get_root ();
-						var states = root.get_array ();
-						int max_items = (int)states.get_length();
-						for(int a = 0; a < max_items; a++){
-							var state = states.get_element(a);
-							var state_data = state.get_object ();
-
-							GenericItem item = new GenericItem(state_data.get_string_member("value"));
-							states_model.add_item(item);
-						}
-					}
-					partial();
-				});
-
-				// Tags
-				Util.get_string_from_uri.begin(RadioBrowser.radio_station_tags, (obj, res) => {
-					data = Util.get_string_from_uri.end(res);
-
-					if(data != ""){
-						parser.load_from_data (data);
-						var root = parser.get_root ();
-						var tags = root.get_array ();
-						int max_items = (int)tags.get_length();
-						for(int a = 0; a < max_items; a++){
-							var tag = tags.get_element(a);
-							var tag_data = tag.get_object ();
-
-							GenericItem item = new GenericItem(tag_data.get_string_member("value"));
-							tags_model.add_item(item);
-						}
-					}
-					partial();
-				});
-
-				Idle.add((owned) callback);
-				Thread.exit (1.to_pointer ());
-				return null;
-			};
-
-			new Thread<void*> ("load_list_thread", run);
-			yield;
-        	}
-
+				data = yield Util.get_string_from_uri(RadioBrowser.radio_station_states);
+				parser.load_from_data (data);
+				root = parser.get_root ();
+				items = root.get_array ();
+				max_items = (int)items.get_length();
+				for(int a = 0; a < max_items; a++){
+					var item = items.get_element(a);
+					var item_data = item.get_object ();
+					GenericItem genericitem = new GenericItem(item_data.get_string_member("value"));
+					states_model.add_item(genericitem);
+				}
+			}catch (Error e){
+				critical("Could not load category items: %s", e.message);
+			}
+		 }
 	}
 }

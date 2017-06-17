@@ -65,15 +65,24 @@ namespace Gradio{
 
 		public FilterBox(){
 			connect_signals();
+
+			LanguageListBox.bind_model(CategoryItemProvider.languages_model, (i) => {
+				GenericItem item = (GenericItem)i;
+				return get_row(item.text);
+			});
+
+			CountryListBox.bind_model(CategoryItemProvider.countries_model, (i) => {
+				GenericItem item = (GenericItem)i;
+				return get_row(item.text);
+			});
+
+			StateListBox.bind_model(CategoryItemProvider.states_model, (i) => {
+				GenericItem item = (GenericItem)i;
+				return get_row(item.text);
+			});
 		}
 
 		private void connect_signals(){
-			if(!App.ciprovider.is_ready){
-				App.ciprovider.loaded.connect(fill_lists);
-			}else{
-				fill_lists();
-			}
-
 			CountryListBox.row_activated.connect((t,a) => {
 				string selected_item = a.get_data("ITEM");
 				SelectCountryButton.set_label(selected_item);
@@ -110,23 +119,6 @@ namespace Gradio{
 				ClearLanguageButton.set_visible(true);
 
 				information_changed();
-			});
-		}
-
-		private void fill_lists(){
-			LanguageListBox.bind_model(CategoryItemProvider.languages_model, (i) => {
-				GenericItem item = (GenericItem)i;
-				return get_row(item.text);
-			});
-
-			CountryListBox.bind_model(CategoryItemProvider.countries_model, (i) => {
-				GenericItem item = (GenericItem)i;
-				return get_row(item.text);
-			});
-
-			StateListBox.bind_model(CategoryItemProvider.states_model, (i) => {
-				GenericItem item = (GenericItem)i;
-				return get_row(item.text);
 			});
 		}
 
