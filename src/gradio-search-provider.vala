@@ -63,22 +63,25 @@ namespace Gradio{
 		private void set_search_request (){
 			HashTable<string, string> table = new HashTable<string, string> (str_hash, str_equal);
 
-			if(filterbox.selected_language != "")
+			if(filterbox.selected_language != "" && filterbox.selected_language != null)
 				table.insert("language", filterbox.selected_language);
 
-			if(filterbox.selected_country != "")
+			if(filterbox.selected_country != "" && filterbox.selected_country != null)
 				table.insert("country", filterbox.selected_country);
 
-			if(filterbox.selected_state != "")
+			if(filterbox.selected_state != "" && filterbox.selected_state != null)
 				table.insert("state", filterbox.selected_state);
 
-			if(filterbox.sort_by != "")
+			if(filterbox.search_term != "" && filterbox.search_term != null)
+				table.insert("name", filterbox.search_term);
+
+			if(filterbox.sort_by != "" && filterbox.sort_by != null)
 				table.insert("order", filterbox.sort_by);
 
 			table.insert("reverse", filterbox.sort_descending.to_string());
 			table.insert("bitrateMin", filterbox.min_bitrate.to_string());
 			table.insert("limit", "100");
-			table.insert("name", filterbox.search_term);
+
 			Soup.Message msg = Soup.Form.request_new_from_hash("POST", address, table);
 
 			soup_session.queue_message (msg, (sess, mess) => {
