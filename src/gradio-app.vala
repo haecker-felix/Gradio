@@ -35,7 +35,7 @@ namespace Gradio {
 		protected override void activate () {
 			if (get_windows () == null) {
 				message("No existing window, starting new session.");
-				start_new_session();
+				start_new_session.begin();
 
             		} else {
             			message("Found existing window!");
@@ -174,7 +174,6 @@ namespace Gradio {
 
 		// Init app
 		var app = new App ();
-
 
 		// Run app
 		app.run (args);

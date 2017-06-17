@@ -28,7 +28,9 @@
         /* screensaver plugin */
         "--talk-name=org.gnome.ScreenSaver",
         /* media-player-keys plugin */
-        "--talk-name=org.gnome.SettingsDaemon"
+        "--talk-name=org.gnome.SettingsDaemon",
+        "--talk-name=org.mpris.MediaPlayer2",
+        "--talk-name=org.mpris.MediaPlayer2.Player"
     ],
     "build-options" : {
         "cflags": "-O0 -g",

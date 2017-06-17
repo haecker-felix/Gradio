@@ -61,8 +61,6 @@ namespace Gradio{
 		[GtkChild] private SpinButton BitrateSpinButton;
 		public int min_bitrate = 0;
 
-		private TaggedEntry searchbar;
-
 		public signal void information_changed();
 
 		public FilterBox(){

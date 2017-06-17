@@ -28,7 +28,6 @@ namespace Gradio{
 		PlayerToolbar player_toolbar;
 
 		[GtkChild] private Stack MainStack;
-		[GtkChild] private Overlay NotificationOverlay;
 		[GtkChild] private Box Bottom;
 
 		private int height;

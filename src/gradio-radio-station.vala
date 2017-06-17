@@ -29,7 +29,6 @@ namespace Gradio{
 		private string _votes;
 		private string _codec;
 		private string _bitrate;
-		private string _uri;
 		private string _icon_address;
 		private bool _is_broken;
 		private bool _is_playing;
@@ -161,9 +160,6 @@ namespace Gradio{
 
 				if(App.player.is_playing_station(this))
 					is_playing = true;
-
-				if(_is_broken)
-					_title = "[BROKEN] " + _title;
 
 				connect_signals();
 			}

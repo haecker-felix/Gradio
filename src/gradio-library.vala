@@ -89,7 +89,6 @@ namespace Gradio{
 				warning("Adding station to collection %s: Collection not found.", collection_id);
 				return false;
 			}
-			return false;
 		}
 
 		public bool remove_station_from_collection(string collection_id, RadioStation station){
@@ -228,7 +227,7 @@ namespace Gradio{
 			File file = File.new_for_path (database_path);
 			File olddb = File.new_for_path (Path.build_filename (Environment.get_user_data_dir (), "gradio", "library.gradio"));
 			if(olddb.query_exists() && !file.query_exists()){
-				migrate_old_db();
+				migrate_old_db.begin();
 				return;
 			}
 
@@ -250,7 +249,7 @@ namespace Gradio{
 		private void read_database(){
 			message("Reading database data...");
 			read_collections();
-			read_stations();
+			read_stations.begin();
 		}
 
 		private async void read_stations(){
@@ -374,19 +373,26 @@ namespace Gradio{
 
 			create_database();
 
-			if(file.query_exists ()){
-				var dis = new DataInputStream (file.read ());
-				string line;
+			try{
+				if(file.query_exists ()){
+					DataInputStream dis = null;
+					try{dis = new DataInputStream (file.read());}catch(Error e){critical("Could not migrate old database: %s", e.message);}
+					string line;
 
-				while ((line = dis.read_line (null)) != null) {
-					RadioStation station = yield Util.get_station_by_id(int.parse(line));
+					while ((line = dis.read_line (null)) != null) {
+						RadioStation station = yield Util.get_station_by_id(int.parse(line));
 
-					if(station != null){
-						add_radio_station(station);
+						if(station != null){
+							add_radio_station(station);
+						}
 					}
+					yield file.delete_async();
 				}
-				yield file.delete_async();
+			}catch(GLib.IOError error){
+				critical("Could not migrate old database: %s", error.message);
 			}
+
+
 		}
 
 	}

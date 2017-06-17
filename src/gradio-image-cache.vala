@@ -45,21 +45,25 @@ namespace Gradio {
 		}
 
 		public async void clear_cache(){
-			File cache_location = File.new_for_path(GLib.Environment.get_user_cache_dir()+"/gradio/");
+			try{
+				File cache_location = File.new_for_path(GLib.Environment.get_user_cache_dir()+"/gradio/");
+				FileEnumerator enumerator = yield
+		                cache_location.enumerate_children_async("standard::*", FileQueryInfoFlags.NONE, Priority.DEFAULT, null);
+		            	List<FileInfo> infos;
+		            	while((infos = yield enumerator.next_files_async(10)) != null) {
+		                	foreach(var info in infos) {
+		                		var name = info.get_name();
+		                		var file = File.new_for_path("%s/%s".printf(GLib.Environment.get_user_cache_dir()+"/gradio", name));
+		                		file.delete();
+		                	}
+				}
 
-			FileEnumerator enumerator = yield
-                        cache_location.enumerate_children_async("standard::*", FileQueryInfoFlags.NONE, Priority.DEFAULT, null);
-                    	List<FileInfo> infos;
-                    	while((infos = yield enumerator.next_files_async(10)) != null) {
-                        	foreach(var info in infos) {
-                        		var name = info.get_name();
-                        		var file = File.new_for_path("%s/%s".printf(GLib.Environment.get_user_cache_dir()+"/gradio", name));
-                        		file.delete();
-                        	}
+				Notification n = new Notification("Successfully cleared icon cache!", 5);
+				App.window.show_notification(n);
+			}catch (Error e){
+				critical("Could not clear icon cache: %s", e.message);
 			}
 
-			Notification n = new Notification("Successfully cleared icon cache!", 5);
-			App.window.show_notification(n);
 		}
 
 		private bool is_image_cached(uint hash){
@@ -67,7 +71,13 @@ namespace Gradio {
 		}
 
 		private Gdk.Pixbuf get_cached_image(uint hash){
-			Gdk.Pixbuf pixbuf = new Gdk.Pixbuf.from_file(GLib.Environment.get_user_cache_dir()+"/gradio/"+hash.to_string()+".png");
+			Gdk.Pixbuf pixbuf = null;
+			try{
+				pixbuf = new Gdk.Pixbuf.from_file(GLib.Environment.get_user_cache_dir()+"/gradio/"+hash.to_string()+".png");
+			}catch (GLib.Error e){
+				warning("Could not get cached image: %s", e.message);
+			}
+
 			return pixbuf;
 		}
 
@@ -82,9 +92,10 @@ namespace Gradio {
 		        	} else {
 		            		fiostream = yield cfile.create_readwrite_async(FileCreateFlags.NONE);
 		        	}
-			}catch (Error e){}
-
-                	yield pixbuf.save_to_stream_async(fiostream.get_output_stream(), "png");
+			   	yield pixbuf.save_to_stream_async(fiostream.get_output_stream(), "png");
+			}catch (Error e){
+				warning("Could not cache image: %s", e.message);
+			}
 		}
 
 		private async Gdk.Pixbuf get_image_from_url(string url){
@@ -92,9 +103,13 @@ namespace Gradio {
         		InputStream image_stream = null;
             		Soup.Request req = null;
 
-			req = session.request(url);
-            		image_stream = yield req.send_async(null);
-            		pixbuf = yield new Gdk.Pixbuf.from_stream_async(image_stream, null);
+			try{
+				req = session.request(url);
+		    		image_stream = yield req.send_async(null);
+		    		pixbuf = yield new Gdk.Pixbuf.from_stream_async(image_stream, null);
+			}catch (Error e){
+				warning("Could not download image from \"%s\": %s", url, e.message);
+			}
 
 			return pixbuf;
 		}

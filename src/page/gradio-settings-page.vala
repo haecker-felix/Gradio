@@ -23,7 +23,6 @@ namespace Gradio{
 		[GtkChild] private Box SettingsBox;
 
 		private GroupBox appearance_group;
-		private GroupBox notifications_group;
 		private GroupBox playback_group;
 		private GroupBox features_group;
 		private GroupBox cache_group;
@@ -107,7 +106,7 @@ namespace Gradio{
 			cache_group.add_listbox_row(cache_stations_switch);
 
 			ButtonItem clear_cache_button = new ButtonItem("Clear Cache", "Clear all cached station icons");
-			clear_cache_button.btn_clicked.connect(() => {App.image_cache.clear_cache();});
+			clear_cache_button.btn_clicked.connect(() => {App.image_cache.clear_cache.begin();});
 			cache_group.add_listbox_row(clear_cache_button);
 
 		}
