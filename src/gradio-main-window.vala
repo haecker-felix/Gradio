@@ -79,9 +79,6 @@ namespace Gradio{
 			selection_toolbar = new SelectionToolbar();
 			SelectionToolbarBox.add(selection_toolbar);
 
-			search_page = new SearchPage();
-			MainStack.add_named(search_page, page_name[WindowMode.SEARCH]);
-
 			station_detail_page = new StationDetailPage();
 			MainStack.add_named(station_detail_page, page_name[WindowMode.DETAILS]);
 
@@ -342,6 +339,11 @@ namespace Gradio{
 		}
 
 		public void show_search(){
+			if(search_page == null){
+				search_page = new SearchPage();
+				MainStack.add_named(search_page, page_name[WindowMode.SEARCH]);
+			}
+
 			if(in_mode_change)
 				return;
 
