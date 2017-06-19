@@ -51,7 +51,7 @@ namespace Gradio{
 
 		[GtkChild] private Button NotificationCloseButton;
 		[GtkChild] private Label NotificationLabel;
-		[GtkChild] private Button NotificationButton;
+		//[GtkChild] private Button NotificationButton;
 		[GtkChild] private Revealer NotificationRevealer;
 
 		public signal void update_icons();

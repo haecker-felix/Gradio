@@ -19,7 +19,6 @@ using Gdk;
 namespace Gradio{
 	public class RadioStation : GLib.Object, Gd.MainBoxItem{
 		private string _title;
-		private string _primary_text;
 		private string _homepage;
 		private string _language;
 		private string _id;

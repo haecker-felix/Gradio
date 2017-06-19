@@ -169,7 +169,12 @@ namespace Gradio{
 			string data = yield Util.get_string_from_uri(RadioBrowser.radio_stations_by_id + id.to_string());
 
 			if(data != ""){
-				parser.load_from_data (data);
+				try{
+					parser.load_from_data (data);
+				}catch (Error e){
+					critical("Could create new station: " + e.message);
+				}
+
 				var root = parser.get_root ();
 				var radio_stations = root.get_array ();
 

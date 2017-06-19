@@ -386,7 +386,12 @@ namespace Gradio{
 							add_radio_station(station);
 						}
 					}
-					yield file.delete_async();
+
+					try{
+						yield file.delete_async();
+					}catch (Error e){
+						critical("Could not delete old database: " + e.message);
+					}
 				}
 			}catch(GLib.IOError error){
 				critical("Could not migrate old database: %s", error.message);

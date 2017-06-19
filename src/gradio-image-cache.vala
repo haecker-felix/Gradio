@@ -88,7 +88,12 @@ namespace Gradio {
 
 			File dir = File.new_for_path (GLib.Environment.get_user_cache_dir()+"/gradio/");
 			if(!dir.query_exists()){
-				dir.make_directory_with_parents();
+				try{
+					dir.make_directory_with_parents();
+				}catch (Error e){
+					critical("Could not create new cache directory: " + e.message);
+				}
+
 				message("Created a cache folder.");
 			}
 

@@ -43,6 +43,9 @@ namespace Gradio {
 		}
 
 		private async void start_new_session(){
+			// load and set the settings
+			new Settings();
+
 			setup_actions();
 
 			window = new MainWindow(this);
