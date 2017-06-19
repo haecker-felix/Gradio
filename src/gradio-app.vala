@@ -35,7 +35,6 @@ namespace Gradio {
 			if (get_windows () == null) {
 				message("No existing window, starting new session.");
 				start_new_session.begin();
-
             		} else {
             			message("Found existing window!");
                 		restore_window();
@@ -48,33 +47,35 @@ namespace Gradio {
 
 			setup_actions();
 
-			window = new MainWindow(this);
-			this.add_window(window);
-			window.show_all();
-
-			image_cache = new ImageCache();
-
-			library = new Library();
-
-			player = new AudioPlayer();
-
-			if(Settings.enable_mpris == true){
-				mpris = new MPRIS();
-				mpris.initialize();
-			}
-
-			connect_signals();
 			if(!Util.check_database_connection()){
-				Notification n = new Notification("No connection to the database could be established.\nMake sure you can connect to \"radio-browser.info\"!", 1000);
-				window.show_notification(n);
-			}
+				warning("Could not conenct to radio-browser.info.");
+				Util.send_notification("No internet connection", "Gradio needs a internet connection");
 
-			if(Settings.resume_playback_on_startup && Settings.previous_station != 0){
-				RadioStation s = yield Util.get_station_by_id(Settings.previous_station);
-				player.set_radio_station(s);
-			}
+			}else{
+				window = new MainWindow(this);
+				this.add_window(window);
+				window.show_all();
 
-			window.setup();
+				image_cache = new ImageCache();
+
+				library = new Library();
+
+				player = new AudioPlayer();
+
+				if(Settings.enable_mpris == true){
+					mpris = new MPRIS();
+					mpris.initialize();
+				}
+
+				connect_signals();
+
+				if(Settings.resume_playback_on_startup && Settings.previous_station != 0){
+					RadioStation s = yield Util.get_station_by_id(Settings.previous_station);
+					player.set_radio_station(s);
+				}
+
+				window.setup();
+			}
 		}
 
 		private void connect_signals(){
