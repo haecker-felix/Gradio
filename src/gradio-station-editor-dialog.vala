@@ -71,7 +71,7 @@ namespace Gradio{
 			table.insert("name", NameEntry.get_text());
 			table.insert("url", StreamEntry.get_text());
 			table.insert("homepage", HomepageEntry.get_text());
-			//table.insert("favicon", NameEntry.get_text());
+			table.insert("favicon", FaviconEntry.get_text());
 			table.insert("country", CountryEntry.get_text());
 			table.insert("state", StateEntry.get_text());
 			table.insert("language", LanguageEntry.get_text());
