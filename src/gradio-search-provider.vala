@@ -92,11 +92,11 @@ namespace Gradio{
 			Soup.Message msg = Soup.Form.request_new_from_hash("POST", address, table);
 
 			soup_session.queue_message (msg, (sess, mess) => {
-				progress_request.begin((string) mess.response_body.data);
+				parse_result.begin((string) mess.response_body.data);
 			});
 		}
 
-		private async void progress_request(string data){
+		private async void parse_result(string data){
 			try{
 				parser.load_from_data(data);
 

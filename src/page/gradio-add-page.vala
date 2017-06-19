@@ -24,6 +24,7 @@ namespace Gradio{
 		[GtkChild] private Box AddBox;
 
 		public AddPage(){
+			GroupBox add_group = new GroupBox("");
 			GroupBox discover_group = new GroupBox("Discover radio stations");
 			GroupBox other_group = new GroupBox("Other options");
 
@@ -39,15 +40,17 @@ namespace Gradio{
 			recently_clicked_button.btn_clicked.connect(() => {App.window.show_search(); App.window.search_page.show_recently_clicked();});
 			discover_group.add_listbox_row(recently_clicked_button);
 
-			ButtonItem search_button = new ButtonItem("Search for stations", "Search for specific stations.");
+			ButtonItem search_button = new ButtonItem("Search for radio stations", "Search for specific radio stations.");
 			search_button.btn_clicked.connect(() => {App.window.show_search();});
 			other_group.add_listbox_row(search_button);
 
-			//ButtonItem create_button = new ButtonItem("Create a new station", "Create a completely new station.");
-			//discover_group.add_listbox_row(create_button);
+			ButtonItem create_button = new ButtonItem("New radio station", "Create a new radio station.");
+			create_button.btn_clicked.connect(() => {App.window.show_create_station_dialog();});
+			add_group.add_listbox_row(create_button);
 
 			AddBox.pack_end(other_group);
 			AddBox.pack_end(discover_group);
+			AddBox.pack_end(add_group);
 		}
 	}
 

@@ -343,6 +343,20 @@ namespace Gradio{
 			details_dialog.set_visible(true);
 		}
 
+		public void show_create_station_dialog(){
+			StationEditorDialog editor_dialog = new StationEditorDialog.create();
+			editor_dialog.set_transient_for(this);
+			editor_dialog.set_modal(true);
+			editor_dialog.set_visible(true);
+		}
+
+		public void show_edit_station_dialog(ref RadioStation station){
+			StationEditorDialog editor_dialog = new StationEditorDialog.edit(ref station);
+			editor_dialog.set_transient_for(this);
+			editor_dialog.set_modal(true);
+			editor_dialog.set_visible(true);
+		}
+
 		public void show_settings(){
 			if(in_mode_change)
 				return;

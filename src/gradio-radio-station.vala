@@ -296,7 +296,6 @@ namespace Gradio{
 
 				try{
 					parser.load_from_data (data);
-
 					var root = parser.get_root ();
 
 					if(root != null){

@@ -35,7 +35,7 @@ namespace Gradio{
 		private static int _window_position_y;
 		private static int _icon_zoom;
 
-		public Settings(){
+		static construct{
 			settings = new GLib.Settings ("de.haeckerfelix.gradio");
 
 			_enable_notifications = settings.get_boolean("enable-notifications");

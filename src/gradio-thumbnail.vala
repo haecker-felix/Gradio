@@ -26,6 +26,7 @@ namespace Gradio{
 		private Gtk.WidgetPath path;
 
 		private int base_size;
+		private string address;
 		private RadioStation station;
 		private Collection collection;
 
@@ -36,6 +37,20 @@ namespace Gradio{
 		}
 
 		private bool is_collection_thumbnail = false;
+
+		public Thumbnail.for_address(int bs, string a){
+			base_size = bs;
+			address = a;
+			setup();
+
+			App.image_cache.get_image.begin(address, (obj, res) => {
+			     	Gdk.Pixbuf pixbuf = App.image_cache.get_image.end(res);
+		             	if (pixbuf != null) {
+		             		_pixbufs.insert(pixbuf, 0);
+			 		render_icon(0, 0, base_size, 0);
+		             	}
+			});
+		}
 
 		public Thumbnail.for_station (int bs, RadioStation s){
 			base_size = bs;

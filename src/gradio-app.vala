@@ -43,9 +43,6 @@ namespace Gradio {
 		}
 
 		private async void start_new_session(){
-			// ignore the vala warning!
-			Settings settings = new Settings();
-
 			setup_actions();
 
 			window = new MainWindow(this);
