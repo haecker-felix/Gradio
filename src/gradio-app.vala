@@ -113,7 +113,6 @@ namespace Gradio {
 
 			set_app_menu (app_menu);
 
-
 			action = new GLib.SimpleAction ("select-all", null);
 			action.activate.connect (() => { window.select_all(); });
 			this.add_action (action);

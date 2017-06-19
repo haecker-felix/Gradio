@@ -1,4 +1,4 @@
-project('gradio', ['vala', 'C'], version : '0.6.0')
+project('gradio', ['vala', 'C'], version : '0.5.9')
 
 cc = meson.get_compiler('c')
 
