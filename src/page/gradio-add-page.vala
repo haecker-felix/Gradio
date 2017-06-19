@@ -24,9 +24,9 @@ namespace Gradio{
 		[GtkChild] private Box AddBox;
 
 		public AddPage(){
-			GroupBox add_group = new GroupBox("");
+			GroupBox add_group = new GroupBox("Create a new radio station");
 			GroupBox discover_group = new GroupBox("Discover radio stations");
-			GroupBox other_group = new GroupBox("Other options");
+			GroupBox other_group = new GroupBox("");
 
 			ButtonItem most_votes_button = new ButtonItem("Show famous radio stations", "Show radio stations which have the most votes.");
 			most_votes_button.btn_clicked.connect(() => {App.window.show_search(); App.window.search_page.show_most_voted();});
@@ -44,13 +44,18 @@ namespace Gradio{
 			search_button.btn_clicked.connect(() => {App.window.show_search();});
 			other_group.add_listbox_row(search_button);
 
-			ButtonItem create_button = new ButtonItem("New radio station", "Create a new radio station.");
-			create_button.btn_clicked.connect(() => {App.window.show_create_station_dialog();});
-			add_group.add_listbox_row(create_button);
+			ButtonItem create_public_button = new ButtonItem("New public radio station", "Create a new radio station, which is visible for all users.");
+			create_public_button.btn_clicked.connect(() => {App.window.show_create_station_dialog();});
+			add_group.add_listbox_row(create_public_button);
 
-			AddBox.pack_end(other_group);
-			AddBox.pack_end(discover_group);
+			//ButtonItem create_private_button = new ButtonItem("New private radio station", "Create a new radio station, which is only visible in your library.");
+			//create_private_button.btn_clicked.connect(() => {App.window.show_create_station_dialog();});
+			//add_group.add_listbox_row(create_private_button);
+
 			AddBox.pack_end(add_group);
+			AddBox.pack_end(discover_group);
+			AddBox.pack_end(other_group);
+
 		}
 	}
 
