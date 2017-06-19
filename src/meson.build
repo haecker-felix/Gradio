@@ -45,7 +45,6 @@ vala_args = [
 	'--target-glib=2.38',
 	'--pkg=config',
 	'--pkg=gd-1.0',
-	'--pkg=dazzle-1.0',
 	'--pkg=posix',
 	'--vapidir=' + meson.current_source_dir() + '/vapis']
 
@@ -55,4 +54,4 @@ executable('gradio',
  		c_args : [ '-DVERSION="' + meson.project_version() + '"', '-DGETTEXT_PACKAGE="gradio"', '-DGNOMELOCALEDIR="' + get_option('prefix') + '/' + get_option('localedir') + '"' ],
 		vala_args: vala_args,
 		install : true,
-		dependencies : [glib, gobject, gio, gtk, gd, dazzle, libsoup, json_glib, gstreamer, gstreamer_pbutils, sqlite3])
+		dependencies : [glib, gobject, gio, gtk, gd, libsoup, json_glib, gstreamer, gstreamer_pbutils, sqlite3])

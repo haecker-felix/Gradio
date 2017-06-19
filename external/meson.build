@@ -1,2 +1,1 @@
 subdir('gd')
-subdir('dazzle')

@@ -183,12 +183,11 @@ namespace Gradio{
 					var radio_station_data = radio_station.get_object ();
 
 					new_station = new RadioStation.from_json_data(radio_station_data);
-					return new_station;
 				}else{
 					warning("Empty station data");
 				}
 			}
-			return null;
+			return new_station;
 		}
 	}
 }

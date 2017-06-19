@@ -53,14 +53,15 @@ namespace Gradio{
 
 		public Collection get_collection_by_id(string id){
 			int items = (int)get_n_items();
+			Collection collection = null;
 
 			for(int i = 0; i < items; i++){
 				Collection coll = (Collection)get_item(i);
 				if(id == coll.id)
-					return coll;
+					collection = coll;
 			}
 
-			return null;
+			return collection;
 		}
 
   		public GLib.Type get_item_type () {
