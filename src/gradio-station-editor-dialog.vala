@@ -43,13 +43,33 @@ namespace Gradio{
 		private Soup.Session soup_session;
 		private Json.Parser parser = new Json.Parser();
 
+		private CategoryItems category_items;
+
 		public StationEditorDialog.create(){
 			soup_session = new Soup.Session();
             		soup_session.user_agent = "gradio/"+ Config.VERSION;
+
+            		Thumbnail _thumbnail = new Thumbnail.for_address(100, FaviconEntry.get_text());
+			_thumbnail.updated.connect(() => {
+				FaviconImage.set_from_surface(_thumbnail.surface);
+			});
+			_thumbnail.show_empty_box();
+
+			prepare_entry_completion();
 		}
 
 		public StationEditorDialog.edit(ref RadioStation station){
+			soup_session = new Soup.Session();
+            		soup_session.user_agent = "gradio/"+ Config.VERSION;
 
+            		Thumbnail _thumbnail = new Thumbnail.for_address(100, FaviconEntry.get_text());
+			_thumbnail.updated.connect(() => {
+				FaviconImage.set_from_surface(_thumbnail.surface);
+			});
+			_thumbnail.show_empty_box();
+		}
+
+		private void prepare_entry_completion(){
 		}
 
 		[GtkCallback]
@@ -86,7 +106,6 @@ namespace Gradio{
 
 		[GtkCallback]
 		private void FaviconEntry_changed(){
-			critical("test fav button clicked");
 			Thumbnail _thumbnail = new Thumbnail.for_address(100, FaviconEntry.get_text());
 			_thumbnail.updated.connect(() => {
 				FaviconImage.set_from_surface(_thumbnail.surface);
