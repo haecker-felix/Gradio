@@ -27,8 +27,8 @@ namespace Gradio{
 
 		private int base_size;
 		private string address;
-		private RadioStation station;
-		private Collection collection;
+		private weak RadioStation station;
+		private weak Collection collection;
 
 		public signal void updated();
 

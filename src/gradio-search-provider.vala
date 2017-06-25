@@ -87,7 +87,7 @@ namespace Gradio{
 
 			table.insert("reverse", filterbox.sort_descending.to_string());
 			table.insert("bitrateMin", filterbox.min_bitrate.to_string());
-			table.insert("limit", "100");
+			table.insert("limit", maximum.to_string());
 
 			Soup.Message msg = Soup.Form.request_new_from_hash("POST", address, table);
 
@@ -105,8 +105,6 @@ namespace Gradio{
 
 				int items = (int)radio_stations.get_length();
 				message("Search results found: %i", items);
-
-				if(items > maximum) items = maximum;
 
 				ready();
 
