@@ -70,6 +70,64 @@ namespace Gradio{
 		}
 
 		private void prepare_entry_completion(){
+			category_items = new CategoryItems();
+
+			Gtk.EntryCompletion language_completion = new Gtk.EntryCompletion ();
+			LanguageEntry.set_completion (language_completion);
+
+			Gtk.EntryCompletion country_completion = new Gtk.EntryCompletion ();
+			CountryEntry.set_completion (country_completion);
+
+			Gtk.EntryCompletion state_completion = new Gtk.EntryCompletion ();
+			StateEntry.set_completion (state_completion);
+
+			// Language
+			Gtk.ListStore language_store = new Gtk.ListStore (1, typeof (string));
+			language_completion.set_model (language_store);
+			language_completion.set_text_column (0);
+			Gtk.TreeIter language_iter;
+			language_store.append (out language_iter);
+			language_store.set (language_iter, 0, "");
+			category_items.languages_model.items_changed.connect((position, removed, added) => {
+				if(added == 1){
+					language_store.append (out language_iter);
+					GenericItem item = (GenericItem)category_items.languages_model.get_item(position);
+					language_store.set (language_iter, 0, item.text);
+				}
+			});
+
+			// Country
+			Gtk.ListStore country_store = new Gtk.ListStore (1, typeof (string));
+			country_completion.set_model (country_store);
+			country_completion.set_text_column (0);
+			Gtk.TreeIter country_iter;
+			country_store.append (out country_iter);
+			country_store.set (country_iter, 0, "");
+			category_items.countries_model.items_changed.connect((position, removed, added) => {
+				if(added == 1){
+					country_store.append (out country_iter);
+					GenericItem item = (GenericItem)category_items.countries_model.get_item(position);
+					country_store.set (country_iter, 0, item.text);
+				}
+			});
+
+
+			// State
+			Gtk.ListStore state_store = new Gtk.ListStore (1, typeof (string));
+			state_completion.set_model (state_store);
+			state_completion.set_text_column (0);
+			Gtk.TreeIter state_iter;
+			state_store.append (out state_iter);
+			state_store.set (state_iter, 0, "");
+			category_items.states_model.items_changed.connect((position, removed, added) => {
+				if(added == 1){
+					state_store.append (out state_iter);
+					GenericItem item = (GenericItem)category_items.states_model.get_item(position);
+					state_store.set (state_iter, 0, item.text);
+				}
+			});
+
+
 		}
 
 		[GtkCallback]
