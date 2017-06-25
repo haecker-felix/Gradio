@@ -322,13 +322,13 @@ public class Gradio.MprisPlayer : GLib.Object {
 
 	public bool CanGoNext {
 		get {
-			return App.player.is_playing();
+			return true;
 		}
 	}
 
 	public bool CanGoPrevious {
 		get {
-			return App.player.is_playing();
+			return true;
 		}
 	}
 
@@ -359,13 +359,14 @@ public class Gradio.MprisPlayer : GLib.Object {
 	public signal void Seeked(int64 Position);
 
 	public void Next() {
-		//TODO: do this!
-		//App.middleware.next ();
+		RadioStation current = App.player.current_station;
+		App.player.set_radio_station(App.library.station_model.get_next_station(current));
+
 	}
 
 	public void Previous() {
-		//TODO: do this
-		//App.middleware.previous ();
+		RadioStation current = App.player.current_station;
+		App.player.set_radio_station(App.library.station_model.get_previous_station(current));
 	}
 
 	public void Pause() {

@@ -76,6 +76,48 @@ namespace Gradio{
 			items_changed (pos, 1, 0);
 	  	}
 
+		public RadioStation get_next_station(RadioStation current){
+			RadioStation next = null;
+			int current_index = 0;
+
+			// find out the index of the current station
+			for (int i = 0; i < stations.length; i ++) {
+      				RadioStation found_station = stations.get (i);
+      				if (current.id == found_station.id){
+      					current_index = i;
+      					break;
+      				}
+			}
+
+			if(current_index+1 < stations.length)
+				next =  stations.get(current_index+1);
+			else
+				next = stations.get(0);
+
+			return next;
+		}
+
+		public RadioStation get_previous_station(RadioStation current){
+			RadioStation previous = null;
+			int current_index = 0;
+
+			// find out the index of the current station
+			for (int i = 0; i < stations.length; i ++) {
+      				RadioStation found_station = stations.get (i);
+      				if (current.id == found_station.id){
+      					current_index = i;
+      					break;
+      				}
+			}
+
+			if(current_index-1 != -1)
+				previous =  stations.get(current_index-1);
+			else
+				previous = stations.get(stations.length-1);
+
+			return previous;
+		}
+
 	  	public void clear () {
 	  		uint s = stations.length;
 			stations.remove_range(0, stations.length);

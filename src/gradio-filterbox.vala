@@ -248,7 +248,7 @@ namespace Gradio{
 			ClearStateButton_clicked();
 
 			VotesRButton.set_active(true);
-			SortAscendingButton.set_active(true);
+			SortDescendingButton.set_active(true);
 
 			BitrateSpinButton.set_value(0.0);
 			min_bitrate = 0;
