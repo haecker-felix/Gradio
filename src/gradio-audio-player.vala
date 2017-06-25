@@ -52,6 +52,13 @@ namespace Gradio{
 
 			stream = ElementFactory.make ("playbin", "play");
 			set_volume(Settings.volume_position);
+
+			if(Settings.previous_station != 0){
+				Util.get_station_by_id(Settings.previous_station, (obj, res) => {
+					RadioStation station = Util.get_station_by_id.end(res);
+					set_radio_station(station,Settings.resume_playback_on_startup);
+				});
+			}
 		}
 
 		private bool bus_callback (Gst.Bus bus, Gst.Message m) {
@@ -117,7 +124,9 @@ namespace Gradio{
 			return true;
 		}
 
-		public void set_radio_station(RadioStation station){
+		public void set_radio_station(RadioStation station, bool start_playback = true){
+			message("set station: %s", station.title);
+
 			station.get_stream_address.begin(station.id, (obj, res) => {
 		        	string address = station.get_stream_address.end(res);
 
@@ -144,6 +153,9 @@ namespace Gradio{
 		        		Settings.previous_station = int.parse(station.id);
 					connect_to_stream_address(address);
 					radio_station_changed();
+
+					if(start_playback)
+						play();
 		        	}
         		});
 		}
@@ -157,11 +169,6 @@ namespace Gradio{
 
 			Gst.Bus bus = stream.get_bus ();
 			bus.add_watch (1, bus_callback);
-
-			Idle.add(() => {
-				play();
-				return false;
-			});
 		}
 
 		public void play () {
@@ -180,14 +187,6 @@ namespace Gradio{
 			}else{
 				stop();
 			}
-		}
-
-		//check if a specific station is being played
-		public bool is_playing_station(RadioStation station){
-			if(current_station != null && station != null && station.id == current_station.id)
-				return true;
-			else
-				return false;
 		}
 
 		//check if any station is being played

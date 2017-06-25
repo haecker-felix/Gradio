@@ -30,7 +30,6 @@ namespace Gradio{
 		private string _bitrate;
 		private string _icon_address;
 		private bool _is_broken;
-		private bool _is_playing;
 		private bool _pulse;
 		private int64 _mtime;
 		private Cairo.Surface _icon;
@@ -107,11 +106,6 @@ namespace Gradio{
 			set{_is_broken = value;}
 		}
 
-		public bool is_playing {
-			get{return _is_playing;}
-			set{_is_playing = value;}
-		}
-
 		public bool pulse {
 			get{return _pulse;}
 		}
@@ -158,9 +152,6 @@ namespace Gradio{
 				_bitrate = bitrate;
 				_is_broken = is_broken;
 
-				if(App.player.is_playing_station(this))
-					is_playing = true;
-
 				connect_signals();
 			}
 		}
@@ -205,7 +196,6 @@ namespace Gradio{
 		private void stop_handler(){
 			if(_title != null){
 				if(App.player.current_station.id == _id){
-					_is_playing = false;
 					stopped();
 				}
 			}else{
@@ -217,11 +207,7 @@ namespace Gradio{
 		private void play_handler(){
 			if(_title != null){
 				if(App.player.current_station.id == _id){
-					_is_playing = true;
 					played();
-				}else{
-					_is_playing = false;
-					stopped();
 				}
 			}else{
 				warning("Catched crash of Gradio.");

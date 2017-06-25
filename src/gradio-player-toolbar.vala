@@ -51,6 +51,9 @@ namespace Gradio{
 					return false;
 				});
 			});
+
+			if(App.player.current_station != null)
+			station_changed();
 		}
 
 		private void setup_view(){
@@ -82,7 +85,7 @@ namespace Gradio{
 			station.stopped.connect(show_play_icon);
 
 			// Play / Stop Button
-			if(App.player.is_playing_station(station))
+			if(App.player.is_playing())
 				show_stop_icon();
 			else
 				show_play_icon();
@@ -96,7 +99,6 @@ namespace Gradio{
 				StationLogo.set_from_surface(_thumbnail.surface);
 			});
 			_thumbnail.show_empty_box();
-
 
 			this.set_visible(true);
 		}

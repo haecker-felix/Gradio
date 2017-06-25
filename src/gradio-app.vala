@@ -60,19 +60,14 @@ namespace Gradio {
 
 				library = new Library();
 
-				player = new AudioPlayer();
-
 				if(Settings.enable_mpris == true){
 					mpris = new MPRIS();
 					mpris.initialize();
 				}
 
-				connect_signals();
+				player = new AudioPlayer();
 
-				if(Settings.resume_playback_on_startup && Settings.previous_station != 0){
-					RadioStation s = yield Util.get_station_by_id(Settings.previous_station);
-					player.set_radio_station(s);
-				}
+				connect_signals();
 
 				window.setup();
 			}
