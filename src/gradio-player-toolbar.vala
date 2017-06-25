@@ -91,15 +91,11 @@ namespace Gradio{
 			// Title
 			StationTitleLabel.set_text(station.title);
 
-			// Logo
-                	App.image_cache.get_image.begin(station.icon_address, (obj, res) => {
-		            	Gdk.Pixbuf pixbuf = App.image_cache.get_image.end(res);
-		            	if (pixbuf != null) {
-		                	StationLogo.clear();
-		                	pixbuf = pixbuf.scale_simple(48, 48, Gdk.InterpType.BILINEAR);
-		                	StationLogo.set_from_pixbuf(pixbuf);
-		            	}
+			Thumbnail _thumbnail = new Thumbnail.for_address(42, station.icon_address);
+			_thumbnail.updated.connect(() => {
+				StationLogo.set_from_surface(_thumbnail.surface);
 			});
+			_thumbnail.show_empty_box();
 
 
 			this.set_visible(true);
