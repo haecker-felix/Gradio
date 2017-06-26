@@ -54,7 +54,7 @@ namespace Gradio{
 			set_volume(Settings.volume_position);
 
 			if(Settings.previous_station != 0){
-				Util.get_station_by_id(Settings.previous_station, (obj, res) => {
+				Util.get_station_by_id.begin(Settings.previous_station, (obj, res) => {
 					RadioStation station = Util.get_station_by_id.end(res);
 					set_radio_station(station,Settings.resume_playback_on_startup);
 				});
