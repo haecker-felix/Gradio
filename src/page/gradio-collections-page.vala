@@ -25,6 +25,8 @@ namespace Gradio{
 
 		private MainBox mainbox;
 
+		public Collection selected_collection;
+
 		public CollectionsPage(){
 			mainbox = new MainBox();
 			mainbox.set_model(Library.collection_model);
@@ -32,6 +34,16 @@ namespace Gradio{
 			mainbox.selection_mode_request.connect(() => {selection_mode_enabled();});
 
 			ScrollViewport.add(mainbox);
+
+			mainbox.item_activated.connect((t,a) => {
+				Gd.MainBoxItem item = (Gd.MainBoxItem)a;
+
+				if(Util.is_collection_item(int.parse(item.id))){
+					Collection coll = (Collection)item;
+					selected_collection = coll;
+					App.window.set_mode(WindowMode.COLLECTION_ITEMS);
+				}
+			});
 		}
 
 		public void set_selection_mode(bool b){

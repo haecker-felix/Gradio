@@ -39,14 +39,8 @@ namespace Gradio{
 			this.item_activated.connect((t,a) => {
 				Gd.MainBoxItem item = (Gd.MainBoxItem)a;
 
-				if(Util.is_collection_item(int.parse(item.id))){
-					Collection coll = (Collection)item;
-					App.window.show_collection_items(coll, coll.name);
-				}else{
-					if(App.player.current_station == (RadioStation)item)
-						App.window.show_station_details((RadioStation)item);
-					else
-						App.player.set_radio_station((RadioStation)item);
+				if(!Util.is_collection_item(int.parse(item.id))){
+					App.player.set_radio_station((RadioStation)item);
 				}
 			});
 		}

@@ -159,14 +159,14 @@ namespace Gradio{
 				CollectionModel model = (CollectionModel)App.window.get_collection_selection();
 				for(int i = 0; i < model.get_n_items(); i++){
 					Collection collection = (Collection)model.get_item(i);
-					App.window.show_collection_details(collection);
+					collection.show_details_dialog();
 				}
 
 			} else {
 				StationModel model = (StationModel)App.window.get_station_selection();
 				for(int i = 0; i < model.get_n_items(); i++){
 					RadioStation station = (RadioStation)model.get_item(i);
-					App.window.show_station_details(station);
+					station.show_details_dialog();
 				}
 			}
 		}

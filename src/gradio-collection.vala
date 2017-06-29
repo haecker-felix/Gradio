@@ -98,5 +98,13 @@ namespace Gradio{
 		public void remove_station(RadioStation station){
 			station_model.remove_station(station);
 		}
+
+		public void show_details_dialog(){
+			DetailsDialog details_dialog = new DetailsDialog();
+			details_dialog.set_collection(this);
+			details_dialog.set_transient_for(App.window);
+			details_dialog.set_modal(true);
+			details_dialog.set_visible(true);
+		}
 	}
 }

@@ -29,23 +29,23 @@ namespace Gradio{
 			GroupBox other_group = new GroupBox("");
 
 			ButtonItem most_votes_button = new ButtonItem("Show famous radio stations", "Show radio stations which have the most votes.");
-			most_votes_button.btn_clicked.connect(() => {App.window.show_search(); App.window.search_page.show_most_voted();});
+			most_votes_button.btn_clicked.connect(() => {App.window.set_mode(WindowMode.SEARCH); App.window.search_page.show_most_voted();});
 			discover_group.add_listbox_row(most_votes_button);
 
 			ButtonItem most_clicked_button = new ButtonItem("Show popular radio stations", "Show radio stations which have the most clicks.");
-			most_clicked_button.btn_clicked.connect(() => {App.window.show_search(); App.window.search_page.show_most_clicked();});
+			most_clicked_button.btn_clicked.connect(() => {App.window.set_mode(WindowMode.SEARCH); App.window.search_page.show_most_clicked();});
 			discover_group.add_listbox_row(most_clicked_button);
 
 			ButtonItem recently_clicked_button = new ButtonItem("Show recent radio stations", "Show radio stations which have recently been clicked.");
-			recently_clicked_button.btn_clicked.connect(() => {App.window.show_search(); App.window.search_page.show_recently_clicked();});
+			recently_clicked_button.btn_clicked.connect(() => {App.window.set_mode(WindowMode.SEARCH); App.window.search_page.show_recently_clicked();});
 			discover_group.add_listbox_row(recently_clicked_button);
 
 			ButtonItem search_button = new ButtonItem("Search for radio stations", "Search for specific radio stations.");
-			search_button.btn_clicked.connect(() => {App.window.show_search();});
+			search_button.btn_clicked.connect(() => {App.window.set_mode(WindowMode.SEARCH);});
 			other_group.add_listbox_row(search_button);
 
 			ButtonItem create_public_button = new ButtonItem("New public radio station", "Create a new radio station, which is visible for all users.");
-			create_public_button.btn_clicked.connect(() => {App.window.show_create_station_dialog();});
+			create_public_button.btn_clicked.connect(() => {show_create_station_dialog();});
 			add_group.add_listbox_row(create_public_button);
 
 			//ButtonItem create_private_button = new ButtonItem("New private radio station", "Create a new radio station, which is only visible in your library.");
@@ -56,6 +56,13 @@ namespace Gradio{
 			AddBox.pack_end(discover_group);
 			AddBox.pack_end(other_group);
 
+		}
+
+		private void show_create_station_dialog(){
+			StationEditorDialog editor_dialog = new StationEditorDialog.create();
+			editor_dialog.set_transient_for(App.window);
+			editor_dialog.set_modal(true);
+			editor_dialog.set_visible(true);
 		}
 	}
 

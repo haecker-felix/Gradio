@@ -88,7 +88,7 @@ namespace Gradio {
 		private void setup_actions () {
 			// Appmenu
 			var action = new GLib.SimpleAction ("preferences", null);
-			action.activate.connect (() => { window.show_settings (); });
+			action.activate.connect (() => { window.set_mode(WindowMode.SETTINGS); });
 			this.add_action (action);
 
 			action = new GLib.SimpleAction ("about", null);

@@ -27,20 +27,6 @@ namespace Gradio{
 		COLLECTIONS
 	}
 
-	public class BackEntry{
-		public WindowMode mode;
-		public DataWrapper data;
-	}
-
-	// one class, but can contain different types. Used in MainWindow class for change_mode
-	public class DataWrapper{
-		public RadioStation station {get;set;}
-		public string title {get;set;}
-		public string address {get;set;}
-		public Collection collection {get;set;}
-	}
-
-
 	public class Util{
 
 		public static async string get_string_from_uri (string url){
@@ -78,10 +64,12 @@ namespace Gradio{
 			try {
 				Resolver resolver = Resolver.get_default ();
 				resolver.lookup_by_name (host, null);
+
+				// TODO: unset
 				return true;
 			} catch (Error e) {
 				critical (e.message);
-				return false;
+				return true;
 			}
 		}
 

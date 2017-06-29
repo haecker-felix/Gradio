@@ -40,9 +40,10 @@ namespace Gradio{
 		SettingsPage settings_page;
 		AddPage add_page;
 
-		GLib.Queue<BackEntry> back_entry_stack = new GLib.Queue<BackEntry>();
+		// History of the pages
+		GLib.Queue<WindowMode> mode_queue = new GLib.Queue<WindowMode>();
 		WindowMode current_mode;
-		bool in_mode_change;
+		private bool in_mode_change = false;
 
 		[GtkChild] private Revealer SelectionToolbarRevealer;
 		[GtkChild] private Box SelectionToolbarBox;
@@ -94,7 +95,7 @@ namespace Gradio{
 			MainStack.add_named(add_page, page_name[WindowMode.ADD]);
 
 			// showing library on startup
-			change_mode(WindowMode.LIBRARY);
+			set_mode(WindowMode.LIBRARY);
 
 			var gtk_settings = Gtk.Settings.get_default ();
 			if (Settings.enable_dark_theme) {
@@ -117,11 +118,11 @@ namespace Gradio{
 			 	height = a.height;
 			});
 
-			header.LibraryToggleButton.clicked.connect(show_library);
-			header.CollectionsToggleButton.clicked.connect(show_collections);
-			header.SearchToggleButton.clicked.connect(show_search);
-			header.AddButton.clicked.connect(show_add);
-			header.BackButton.clicked.connect(go_back);
+			header.LibraryToggleButton.clicked.connect(() => { set_mode(WindowMode.LIBRARY); });
+			header.CollectionsToggleButton.clicked.connect(() => { set_mode(WindowMode.COLLECTIONS); });
+			header.SearchToggleButton.clicked.connect(() => { set_mode(WindowMode.SEARCH); });
+			header.AddButton.clicked.connect(() => { set_mode(WindowMode.ADD); });
+			header.BackButton.clicked.connect(() => {set_mode (mode_queue.pop_head());}); //go one page back in history
 			header.selection_canceled.connect(disable_selection_mode);
 			header.selection_started.connect(enable_selection_mode);
 			NotificationCloseButton.clicked.connect(hide_notification);
@@ -204,49 +205,55 @@ namespace Gradio{
 			NotificationRevealer.set_reveal_child(false);
 		}
 
-		private void change_mode(WindowMode mode, DataWrapper data = new DataWrapper()){
+		public void set_mode(WindowMode mode){
+			if(in_mode_change == true)
+				return;
+
+			// insert actual mode in the "back" history
+			mode_queue.push_head(current_mode);
 			in_mode_change = true;
 
-			// deactivate selection mode
+			// set new mode
+			current_mode = mode;
+
+			// Disconnect old signals and deactivate selection mode
 			Page page = (Page)MainStack.get_visible_child();
 			page.set_selection_mode(false);
 			selection_toolbar.set_mode(SelectionMode.DEFAULT);
-			header.show_default_bar();
-
-			// disconnect old selection_changed signal
 			page.selection_changed.disconnect(selection_changed);
 			page.selection_mode_enabled.disconnect(enable_selection_mode);
-
-			// show defaults in the headerbar
-			header.show_default_buttons();
-
-			// update main buttons according to mode
-			header.LibraryToggleButton.set_active(mode == WindowMode.LIBRARY);
-			header.CollectionsToggleButton.set_active(mode == WindowMode.COLLECTIONS);
-			header.SearchToggleButton.set_active(mode == WindowMode.SEARCH);
-
-			// setting new mode
-			current_mode = mode;
-
-			// switch page
-			MainStack.set_visible_child_name(page_name[current_mode]);
 
 			// connect new signals
 			Page new_page = (Page)MainStack.get_visible_child();
 			new_page.selection_changed.connect(selection_changed);
 			new_page.selection_mode_enabled.connect(enable_selection_mode);
 
+			// set headerbar to default (disable selection mode, show default buttons), and show toggle the correct button
+			header.show_default_bar();
+			header.show_default_buttons();
+			header.LibraryToggleButton.set_active(mode == WindowMode.LIBRARY);
+			header.CollectionsToggleButton.set_active(mode == WindowMode.COLLECTIONS);
+			header.SearchToggleButton.set_active(mode == WindowMode.SEARCH);
+
 			// do action for mode
 			switch(current_mode){
 				case WindowMode.LIBRARY: {
 					header.AddButton.set_visible(true);
 					selection_toolbar.set_mode(SelectionMode.LIBRARY);
-					clean_back_entry_stack();
+					mode_queue.clear();
 					break;
 				};
 				case WindowMode.COLLECTIONS: {
 					selection_toolbar.set_mode(SelectionMode.COLLECTION_OVERVIEW);
-					clean_back_entry_stack();
+					mode_queue.clear();
+					break;
+				};
+				case WindowMode.SEARCH: {
+					if(search_page == null){
+						search_page = new SearchPage();
+						MainStack.add_named(search_page, page_name[WindowMode.SEARCH]);
+					}
+					mode_queue.clear();
 					break;
 				};
 				case WindowMode.SETTINGS: {
@@ -257,9 +264,10 @@ namespace Gradio{
 					break;
 				};
 				case WindowMode.COLLECTION_ITEMS: {
-					selection_toolbar.set_mode(SelectionMode.COLLECTION_ITEMS, data.collection.id);
-					collection_items_page.set_collection(data.collection);
-					collection_items_page.set_title(data.title);
+					Collection collection = collections_page.selected_collection;
+					selection_toolbar.set_mode(SelectionMode.COLLECTION_ITEMS, collection.id);
+					collection_items_page.set_collection(collection);
+					collection_items_page.set_title(collection.name);
 					header.show_title(collection_items_page.get_title());
 					break;
 				};
@@ -272,117 +280,13 @@ namespace Gradio{
 			}
 
 			// show back button if needed
-			header.BackButton.set_visible(current_mode != WindowMode.SEARCH && !(back_entry_stack.is_empty()));
+			header.BackButton.set_visible(!(mode_queue.is_empty()));
+
+			// switch page
+			MainStack.set_visible_child_name(page_name[current_mode]);
 
 			in_mode_change = false;
-
 			message("Changed page mode to \"%s\"", page_name[current_mode]);
-		}
-
-		private void clean_back_entry_stack(){
-			back_entry_stack.clear();
-		}
-
-		private void go_back(){
-			BackEntry entry = back_entry_stack.pop_head();
-			change_mode (entry.mode);
-		}
-
-		private void save_back_entry(){
-			BackEntry entry = new BackEntry();
-			DataWrapper data = new DataWrapper();
-
-			entry.mode = current_mode;
-
-			entry.data = data;
-			back_entry_stack.push_head(entry);
-		}
-
-		public void show_library(){
-			if(in_mode_change)
-				return;
-
-			save_back_entry();
-			change_mode(WindowMode.LIBRARY);
-		}
-
-		public void show_collections(){
-			if(in_mode_change)
-				return;
-
-			save_back_entry();
-			change_mode(WindowMode.COLLECTIONS);
-		}
-
-		public void show_search(){
-			if(search_page == null){
-				search_page = new SearchPage();
-				MainStack.add_named(search_page, page_name[WindowMode.SEARCH]);
-			}
-
-			if(in_mode_change)
-				return;
-
-			save_back_entry();
-			change_mode(WindowMode.SEARCH);
-		}
-
-		public void show_station_details(RadioStation station){
-			DetailsDialog details_dialog = new DetailsDialog();
-			details_dialog.set_station(station);
-			details_dialog.set_transient_for(this);
-			details_dialog.set_modal(true);
-			details_dialog.set_visible(true);
-		}
-
-		public void show_collection_details(Collection collection){
-			DetailsDialog details_dialog = new DetailsDialog();
-			details_dialog.set_collection(collection);
-			details_dialog.set_transient_for(this);
-			details_dialog.set_modal(true);
-			details_dialog.set_visible(true);
-		}
-
-		public void show_create_station_dialog(){
-			StationEditorDialog editor_dialog = new StationEditorDialog.create();
-			editor_dialog.set_transient_for(this);
-			editor_dialog.set_modal(true);
-			editor_dialog.set_visible(true);
-		}
-
-		public void show_edit_station_dialog(ref RadioStation station){
-			StationEditorDialog editor_dialog = new StationEditorDialog.edit(ref station);
-			editor_dialog.set_transient_for(this);
-			editor_dialog.set_modal(true);
-			editor_dialog.set_visible(true);
-		}
-
-		public void show_settings(){
-			if(in_mode_change)
-				return;
-
-			save_back_entry();
-			change_mode(WindowMode.SETTINGS);
-		}
-
-		public void show_collection_items(Collection coll, string title){
-			if(in_mode_change)
-				return;
-
-			save_back_entry();
-
-			DataWrapper data = new DataWrapper();
-			data.collection = coll;
-			data.title  = title;
-			change_mode(WindowMode.COLLECTION_ITEMS, data);
-		}
-
-		public void show_add(){
-			if(in_mode_change)
-				return;
-
-			save_back_entry();
-			change_mode(WindowMode.ADD);
 		}
 
 		[GtkCallback]

@@ -131,7 +131,7 @@ namespace Gradio{
 
 		[GtkCallback]
 		private bool StationLogo_clicked(){
-			Gradio.App.window.show_station_details(station);
+			station.show_details_dialog();
 			return false;
 		}
 	}

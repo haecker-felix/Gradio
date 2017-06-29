@@ -301,6 +301,14 @@ namespace Gradio{
 			return vote;
 		}
 
+		public void show_details_dialog(){
+			DetailsDialog details_dialog = new DetailsDialog();
+			details_dialog.set_station(this);
+			details_dialog.set_transient_for(App.window);
+			details_dialog.set_modal(true);
+			details_dialog.set_visible(true);
+		}
+
 		// Returns the html description metadata
 		// Much mess here. Feel free to improve this crap :)
 		public async string get_description(){
