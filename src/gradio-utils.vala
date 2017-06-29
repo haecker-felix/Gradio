@@ -18,15 +18,6 @@
 using Gtk;
 
 namespace Gradio{
-	public enum WindowMode {
-		LIBRARY,
-		SEARCH,
-		SETTINGS,
-		COLLECTION_ITEMS,
-		ADD,
-		COLLECTIONS
-	}
-
 	public class Util{
 
 		public static async string get_string_from_uri (string url){

@@ -19,10 +19,20 @@ using Gst;
 
 namespace Gradio{
 
+	public enum WindowMode {
+		LIBRARY,
+		COLLECTIONS,
+		COLLECTION_ITEMS,
+		SEARCH,
+		ADD
+	}
+
+
+
 	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/main-window.ui")]
 	public class MainWindow : Gtk.ApplicationWindow {
 
-		public string[] page_name = { "library", "search", "settings", "collection_items", "add", "collections"};
+		public string[] page_name = { "library", "collections", "collection_items", "search", "add"};
 
 		private Gradio.Headerbar header;
 		PlayerToolbar player_toolbar;
@@ -37,7 +47,6 @@ namespace Gradio{
 		public SearchPage search_page;
 		LibraryPage library_page;
 		CollectionsPage collections_page;
-		SettingsPage settings_page;
 		AddPage add_page;
 
 		// History of the pages
@@ -84,9 +93,6 @@ namespace Gradio{
 
 			collections_page = new CollectionsPage();
 			MainStack.add_named(collections_page, page_name[WindowMode.COLLECTIONS]);
-
-			settings_page = new SettingsPage();
-			MainStack.add_named(settings_page, page_name[WindowMode.SETTINGS]);
 
 			collection_items_page = new CollectionItemsPage();
 			MainStack.add_named(collection_items_page, page_name[WindowMode.COLLECTION_ITEMS]);
@@ -254,13 +260,6 @@ namespace Gradio{
 						MainStack.add_named(search_page, page_name[WindowMode.SEARCH]);
 					}
 					mode_queue.clear();
-					break;
-				};
-				case WindowMode.SETTINGS: {
-					header.show_title("Settings");
-					header.SelectButton.set_visible(false);
-					header.SearchToggleButton.set_visible(false);
-					header.ViewButton.set_visible(false);
 					break;
 				};
 				case WindowMode.COLLECTION_ITEMS: {
