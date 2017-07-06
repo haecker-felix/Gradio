@@ -80,7 +80,7 @@ namespace Gradio{
 
 			station_model = new StationModel();
 
-			App.window.update_icons.connect(() => {
+			App.window.icon_zoom_changed.connect(() => {
 				update_thumbnail();
 			});
 		}

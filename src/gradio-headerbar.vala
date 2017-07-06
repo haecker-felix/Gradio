@@ -49,6 +49,15 @@ namespace Gradio{
 		//
 		[GtkChild] private Gtk.Button ZoomInButton;
 		[GtkChild] private Gtk.Button ZoomOutButton;
+		[GtkChild] private Gtk.RadioButton VotesRButton;
+		[GtkChild] private Gtk.RadioButton NameRButton;
+		[GtkChild] private Gtk.RadioButton LanguageRButton;
+		[GtkChild] private Gtk.RadioButton CountryRButton;
+		[GtkChild] private Gtk.RadioButton StateRButton;
+		[GtkChild] private Gtk.RadioButton BitrateRButton;
+		[GtkChild] private Gtk.RadioButton ClicksRButton;
+		[GtkChild] private Gtk.RadioButton ClickTimestampRButton;
+
 
 		public int actual_zoom = 100;
 		private const int min_zoom = 50;
@@ -68,6 +77,17 @@ namespace Gradio{
 				ZoomInButton.set_sensitive(false);
 			if(actual_zoom == min_zoom)
 				ZoomOutButton.set_sensitive(false);
+
+			switch(Settings.station_sorting){
+				case Compare.VOTES: VotesRButton.set_active(true); break;
+				case Compare.NAME: NameRButton.set_active(true); break;
+				case Compare.LANGUAGE: LanguageRButton.set_active(true); break;
+				case Compare.COUNTRY: CountryRButton.set_active(true); break;
+				case Compare.BITRATE: BitrateRButton.set_active(true); break;
+				case Compare.CLICKS: ClicksRButton.set_active(true); break;
+				case Compare.STATE: StateRButton.set_active(true); break;
+				case Compare.DATE: ClickTimestampRButton.set_active(true); break;
+			}
 		}
 
 		public void set_selected_items(int i){
@@ -117,7 +137,7 @@ namespace Gradio{
 			if((actual_zoom + zoom_steps) <= max_zoom){
 				actual_zoom = actual_zoom  + zoom_steps;
 				Gradio.Settings.icon_zoom = actual_zoom;
-				App.window.update_icons();
+				App.window.icon_zoom_changed();
 
 				if(actual_zoom == max_zoom)
 					ZoomInButton.set_sensitive(false);
@@ -130,11 +150,27 @@ namespace Gradio{
 			if((actual_zoom - zoom_steps) >= min_zoom){
 				actual_zoom = actual_zoom  - zoom_steps;
 				Gradio.Settings.icon_zoom = actual_zoom;
-				App.window.update_icons();
+				App.window.icon_zoom_changed();
 
 				if(actual_zoom == min_zoom)
 					ZoomOutButton.set_sensitive(false);
 			}
+		}
+
+		[GtkCallback]
+		private void SortRadioButton_toggled(Gtk.ToggleButton button){
+			if(button.active){
+				if(button == VotesRButton) Settings.station_sorting = Compare.VOTES;
+				if(button == NameRButton) Settings.station_sorting = Compare.NAME;
+				if(button == LanguageRButton) Settings.station_sorting = Compare.LANGUAGE;
+				if(button == CountryRButton) Settings.station_sorting = Compare.COUNTRY;
+				if(button == StateRButton) Settings.station_sorting = Compare.STATE;
+				if(button == BitrateRButton) Settings.station_sorting = Compare.BITRATE;
+				if(button == ClicksRButton) Settings.station_sorting = Compare.CLICKS;
+				if(button == ClickTimestampRButton) Settings.station_sorting = Compare.DATE;
+			}
+
+			App.window.station_sorting_changed();
 		}
 	}
 }

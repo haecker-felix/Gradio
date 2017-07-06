@@ -28,6 +28,8 @@ namespace Gradio{
 		private string _votes;
 		private string _codec;
 		private string _bitrate;
+		private string _clickcount;
+		private string _clicktimestamp;
 		private string _icon_address;
 		private bool _is_broken;
 		private bool _pulse;
@@ -84,6 +86,16 @@ namespace Gradio{
 			set{_bitrate = value;}
 		}
 
+		public string clickcount {
+			get{return _clickcount;}
+			set{_clickcount = value;}
+		}
+
+		public string clicktimestamp {
+			get{return _clicktimestamp;}
+			set{_clicktimestamp = value;}
+		}
+
 		public string uri {
 			get{return _id;}
 		}
@@ -93,7 +105,7 @@ namespace Gradio{
 		}
 
 		public string secondary_text {
-			get{return _country;}
+			get{return _votes;}
 		}
 
 		public string icon_address {
@@ -136,26 +148,6 @@ namespace Gradio{
 		public signal void added_to_library();
 		public signal void removed_from_library();
 
-
-		public RadioStation(string title = "", string homepage = "", string language = "", string id = "", string icon = "", string country = "", string tags = "", string state = "", string votes = "", string codec = "", string bitrate = "", bool is_broken = false){
-			if(id != ""){
-				_title = title;
-				_homepage = homepage;
-				_language = language;
-				_id = id;
-				_icon_address = icon;
-				_country = country;
-				_tags = tags;
-				_state = state;
-				_votes = votes;
-				_codec = codec;
-				_bitrate = bitrate;
-				_is_broken = is_broken;
-
-				connect_signals();
-			}
-		}
-
 		public RadioStation.from_json_data(Json.Object radio_station_data){
 			load_data_from_json(radio_station_data);
 			connect_signals();
@@ -167,7 +159,8 @@ namespace Gradio{
 
 			App.library.added_radio_station.connect(added_to_library_handler);
 			App.library.removed_radio_station.connect(removed_from_library_handler);
-			App.window.update_icons.connect(update_thumbnail);
+
+			App.window.icon_zoom_changed.connect(update_thumbnail);
 		}
 
 		private void update_thumbnail(){
@@ -188,6 +181,8 @@ namespace Gradio{
 			_votes = radio_station_data.get_string_member("votes");
 			_codec = radio_station_data.get_string_member("codec");
 			_bitrate = radio_station_data.get_string_member("bitrate");
+			_clickcount = radio_station_data.get_string_member("clickcount");
+			_clicktimestamp = radio_station_data.get_string_member("clicktimestamp");
 
 			if(radio_station_data.get_string_member("lastcheckok") == "1")
 				_is_broken = false;

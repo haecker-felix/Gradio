@@ -64,7 +64,8 @@ namespace Gradio{
 		//[GtkChild] private Button NotificationButton;
 		[GtkChild] private Revealer NotificationRevealer;
 
-		public signal void update_icons();
+		public signal void icon_zoom_changed();
+		public signal void station_sorting_changed();
 
 		private App app;
 
@@ -229,11 +230,6 @@ namespace Gradio{
 			page.selection_changed.disconnect(selection_changed);
 			page.selection_mode_enabled.disconnect(enable_selection_mode);
 
-			// connect new signals
-			Page new_page = (Page)MainStack.get_visible_child();
-			new_page.selection_changed.connect(selection_changed);
-			new_page.selection_mode_enabled.connect(enable_selection_mode);
-
 			// set headerbar to default (disable selection mode, show default buttons), and show toggle the correct button
 			header.show_default_bar();
 			header.show_default_buttons();
@@ -283,6 +279,11 @@ namespace Gradio{
 
 			// switch page
 			MainStack.set_visible_child_name(page_name[current_mode]);
+
+			// connect new signals
+			Page new_page = (Page)MainStack.get_visible_child();
+			new_page.selection_changed.connect(selection_changed);
+			new_page.selection_mode_enabled.connect(enable_selection_mode);
 
 			in_mode_change = false;
 			message("Changed page mode to \"%s\"", page_name[current_mode]);

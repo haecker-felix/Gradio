@@ -27,6 +27,8 @@ namespace Gradio{
 		public signal void cleared();
 
 		public StationModel(){
+			App.window.station_sorting_changed.connect(() => {sort();});
+
 			// Detect if array is empty
 			this.items_changed.connect(() => {
 				if(stations.length == 0)
@@ -57,9 +59,22 @@ namespace Gradio{
 	  	}
 
 	  	public void add_station(RadioStation station) {
-			stations.add (station);
+			// add the new station, and sort the array
+			stations.add(station);
+			StationCompare scompare = new StationCompare();
+	  		stations.sort(scompare.compare);
 
-			this.items_changed (stations.length-1, 0, 1);
+			// determine whats the position of the new station
+			int pos = 0;
+			for (int i = 0; i < stations.length; i ++) {
+       				RadioStation fstation = stations.get (i);
+       				if (fstation.id == station.id) {
+       					pos = i;
+       					break;
+       				}
+			}
+
+			this.items_changed (pos, 0, 1);
 	  	}
 
 		public void remove_station (RadioStation station) {
@@ -124,6 +139,16 @@ namespace Gradio{
 
 			cleared();
 	    		this.items_changed (0, s, 0);
+	  	}
+
+	  	private void sort(){
+	  		uint s = stations.length;
+	    		this.items_changed (0, s, 0);
+
+			StationCompare scompare = new StationCompare();
+	  		stations.sort(scompare.compare);
+
+	    		this.items_changed (0, 0, s);
 	  	}
 	}
 }
