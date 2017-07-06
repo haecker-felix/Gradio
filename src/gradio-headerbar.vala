@@ -60,6 +60,8 @@ namespace Gradio{
 		[GtkChild] private Gtk.ToggleButton SortDescendingButton;
 		[GtkChild] private Gtk.ToggleButton SortAscendingButton;
 
+		[GtkChild] public Gtk.Box SortBox;
+
 		public int actual_zoom = 100;
 		private const int min_zoom = 50;
 		private const int max_zoom = 250;
@@ -118,6 +120,7 @@ namespace Gradio{
 			SearchToggleButton.set_visible(true);
 			ViewButton.set_visible(true);
 			AddButton.set_visible(false);
+			SortBox.set_visible(true);
 		}
 
 		public void show_selection_bar(){

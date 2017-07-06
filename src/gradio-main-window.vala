@@ -247,6 +247,7 @@ namespace Gradio{
 				};
 				case WindowMode.COLLECTIONS: {
 					selection_toolbar.set_mode(SelectionMode.COLLECTION_OVERVIEW);
+					header.SortBox.set_visible(false);
 					mode_queue.clear();
 					break;
 				};
@@ -312,3 +313,4 @@ namespace Gradio{
 
 	}
 }
+
