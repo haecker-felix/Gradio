@@ -97,7 +97,6 @@ namespace Gradio{
 			table.insert("order", sort_by);
 
 			table.insert("reverse", (!Settings.sort_ascending).to_string());
-			table.insert("bitrateMin", filterbox.min_bitrate.to_string());
 			table.insert("limit", maximum.to_string());
 
 			Soup.Message msg = Soup.Form.request_new_from_hash("POST", address, table);

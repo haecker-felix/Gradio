@@ -43,9 +43,6 @@ namespace Gradio{
 		[GtkChild] private ListBox LanguageListBox;
 		public string selected_language = "";
 
-		[GtkChild] private SpinButton BitrateSpinButton;
-		public int min_bitrate = 0;
-
 		private CategoryItems category_items;
 
 		public signal void information_changed();
@@ -175,31 +172,16 @@ namespace Gradio{
 			clear_selected_language();
 		}
 
-
-		[GtkCallback]
-		private void BitrateSpinButton_value_changed(){
-			min_bitrate = (int)BitrateSpinButton.get_value();
-			information_changed();
-		}
-
 		[GtkCallback]
 		private void SearchEntry_search_changed () {
 			search_term = SearchEntry.get_text();
 			information_changed();
 		}
 
-		[GtkCallback]
-		private void ResetButton_clicked () {
-			reset_filters();
-		}
-
 		public void reset_filters(){
 			ClearCountryButton_clicked();
 			ClearLanguageButton_clicked();
 			ClearStateButton_clicked();
-
-			BitrateSpinButton.set_value(0.0);
-			min_bitrate = 0;
 		}
 
 		private ListBoxRow get_row(string text){
