@@ -43,6 +43,7 @@ namespace Gradio{
 			filterbox = fb;
 
 			filterbox.information_changed.connect(reset_timeout);
+			App.window.station_sorting_changed.connect(reset_timeout);
 
 			soup_session = new Soup.Session();
             		soup_session.user_agent = "gradio/"+ Config.VERSION;
@@ -82,10 +83,20 @@ namespace Gradio{
 			if(filterbox.search_term != "" && filterbox.search_term != null)
 				table.insert("name", filterbox.search_term);
 
-			if(filterbox.sort_by != "" && filterbox.sort_by != null)
-				table.insert("order", filterbox.sort_by);
+			string sort_by = "";
+			switch(Settings.station_sorting){
+				case Compare.VOTES: sort_by = "votes"; break;
+				case Compare.NAME: sort_by = "name"; break;
+				case Compare.LANGUAGE: sort_by = "language"; break;
+				case Compare.COUNTRY: sort_by = "country"; break;
+				case Compare.STATE: sort_by = "state"; break;
+				case Compare.BITRATE: sort_by = "bitrate"; break;
+				case Compare.CLICKS: sort_by = "clickcount"; break;
+				case Compare.DATE: sort_by = "clicktimestamp"; break;
+			}
+			table.insert("order", sort_by);
 
-			table.insert("reverse", filterbox.sort_descending.to_string());
+			table.insert("reverse", (!Settings.sort_ascending).to_string());
 			table.insert("bitrateMin", filterbox.min_bitrate.to_string());
 			table.insert("limit", maximum.to_string());
 

@@ -87,6 +87,7 @@
                     <property name="receives_default">True</property>
                     <property name="tooltip_text" translatable="yes">Sort Descending</property>
                     <property name="active">True</property>
+                    <signal name="toggled" handler="SortDescendingButton_toggled" swapped="no"/>
                     <child>
                       <object class="GtkImage">
                         <property name="visible">True</property>
@@ -107,6 +108,7 @@
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
                     <property name="tooltip_text" translatable="yes">Sort Ascending</property>
+                    <signal name="toggled" handler="SortAscendingButton_toggled" swapped="no"/>
                     <child>
                       <object class="GtkImage">
                         <property name="visible">True</property>
@@ -210,8 +212,8 @@
               </packing>
             </child>
             <child>
-              <object class="GtkRadioButton" id="StateRButton">
-                <property name="label" translatable="yes">State</property>
+              <object class="GtkRadioButton" id="BitrateRButton">
+                <property name="label" translatable="yes">Bitrate</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">False</property>
@@ -226,8 +228,8 @@
               </packing>
             </child>
             <child>
-              <object class="GtkRadioButton" id="BitrateRButton">
-                <property name="label" translatable="yes">Bitrate</property>
+              <object class="GtkRadioButton" id="StateRButton">
+                <property name="label" translatable="yes">State</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">False</property>
@@ -398,25 +400,6 @@
           </object>
         </child>
         <child>
-          <object class="GtkButton" id="SelectButton">
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">True</property>
-            <signal name="clicked" handler="SelectButton_clicked" swapped="no"/>
-            <child>
-              <object class="GtkImage">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="icon_name">object-select-symbolic</property>
-              </object>
-            </child>
-          </object>
-          <packing>
-            <property name="pack_type">end</property>
-            <property name="position">2</property>
-          </packing>
-        </child>
-        <child>
           <object class="GtkMenuButton" id="MenuButton">
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
@@ -436,21 +419,22 @@
           </packing>
         </child>
         <child>
-          <object class="GtkToggleButton" id="SearchToggleButton">
+          <object class="GtkButton" id="SelectButton">
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
+            <signal name="clicked" handler="SelectButton_clicked" swapped="no"/>
             <child>
               <object class="GtkImage">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="icon_name">system-search-symbolic</property>
+                <property name="icon_name">object-select-symbolic</property>
               </object>
             </child>
           </object>
           <packing>
             <property name="pack_type">end</property>
-            <property name="position">4</property>
+            <property name="position">2</property>
           </packing>
         </child>
         <child>
@@ -464,6 +448,24 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="icon_name">view-grid-symbolic</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="pack_type">end</property>
+            <property name="position">4</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkToggleButton" id="SearchToggleButton">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="icon_name">system-search-symbolic</property>
               </object>
             </child>
           </object>

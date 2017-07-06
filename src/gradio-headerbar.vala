@@ -57,7 +57,8 @@ namespace Gradio{
 		[GtkChild] private Gtk.RadioButton BitrateRButton;
 		[GtkChild] private Gtk.RadioButton ClicksRButton;
 		[GtkChild] private Gtk.RadioButton ClickTimestampRButton;
-
+		[GtkChild] private Gtk.ToggleButton SortDescendingButton;
+		[GtkChild] private Gtk.ToggleButton SortAscendingButton;
 
 		public int actual_zoom = 100;
 		private const int min_zoom = 50;
@@ -87,6 +88,14 @@ namespace Gradio{
 				case Compare.CLICKS: ClicksRButton.set_active(true); break;
 				case Compare.STATE: StateRButton.set_active(true); break;
 				case Compare.DATE: ClickTimestampRButton.set_active(true); break;
+			}
+
+			if(Settings.sort_ascending){
+				SortAscendingButton.set_active(true);
+				SortDescendingButton.set_active(false);
+			}else{
+				SortAscendingButton.set_active(false);
+				SortDescendingButton.set_active(true);
 			}
 		}
 
@@ -171,6 +180,26 @@ namespace Gradio{
 			}
 
 			App.window.station_sorting_changed();
+		}
+
+		[GtkCallback]
+		private void SortDescendingButton_toggled(){
+			if(SortDescendingButton.active){
+				Settings.sort_ascending = false;
+				SortAscendingButton.set_active(false);
+				SortDescendingButton.set_active(true);
+				App.window.station_sorting_changed();
+			}
+		}
+
+		[GtkCallback]
+		private void SortAscendingButton_toggled(){
+			if(SortAscendingButton.active){
+				Settings.sort_ascending = true;
+				SortDescendingButton.set_active(false);
+				SortAscendingButton.set_active(true);
+				App.window.station_sorting_changed();
+			}
 		}
 	}
 }

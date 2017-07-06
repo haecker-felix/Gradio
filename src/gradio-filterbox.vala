@@ -25,21 +25,6 @@ namespace Gradio{
 		[GtkChild] private SearchEntry SearchEntry;
 		public string search_term;
 
-		[GtkChild] private RadioButton VotesRButton;
-		[GtkChild] private RadioButton NameRButton;
-		[GtkChild] private RadioButton LanguageRButton;
-		[GtkChild] private RadioButton CountryRButton;
-		[GtkChild] private RadioButton StateRButton;
-		[GtkChild] private RadioButton BitrateRButton;
-		[GtkChild] private RadioButton ClicksRButton;
-		[GtkChild] private RadioButton ClickTimestampRButton;
-		public string sort_by = "votes";
-
-		[GtkChild] private ToggleButton SortDescendingButton;
-		[GtkChild] private ToggleButton SortAscendingButton;
-		public bool sort_descending = true;
-
-
 		[GtkChild] private Revealer CountryRevealer;
 		[GtkChild] private Button SelectCountryButton;
 		[GtkChild] private Button ClearCountryButton;
@@ -198,40 +183,6 @@ namespace Gradio{
 		}
 
 		[GtkCallback]
-		private void SortRadioButton_toggled(ToggleButton button){
-			if(button.active){
-				if(button == VotesRButton) sort_by = "votes";
-				if(button == NameRButton) sort_by = "name";
-				if(button == LanguageRButton) sort_by = "language";
-				if(button == CountryRButton) sort_by = "country";
-				if(button == StateRButton) sort_by = "state";
-				if(button == BitrateRButton) sort_by = "bitrate";
-				if(button == ClicksRButton) sort_by = "clickcount";
-				if(button == ClickTimestampRButton) sort_by = "clicktimestamp";
-
-				information_changed();
-			}
-		}
-
-		[GtkCallback]
-		private void SortDescendingButton_toggled(){
-			if(SortDescendingButton.active){
-				SortAscendingButton.set_active(false);
-				sort_descending = true;
-			}
-			information_changed();
-		}
-
-		[GtkCallback]
-		private void SortAscendingButton_toggled(){
-			if(SortAscendingButton.active){
-				SortDescendingButton.set_active(false);
-				sort_descending = false;
-			}
-			information_changed();
-		}
-
-		[GtkCallback]
 		private void SearchEntry_search_changed () {
 			search_term = SearchEntry.get_text();
 			information_changed();
@@ -247,28 +198,23 @@ namespace Gradio{
 			ClearLanguageButton_clicked();
 			ClearStateButton_clicked();
 
-			VotesRButton.set_active(true);
-			SortDescendingButton.set_active(true);
-
 			BitrateSpinButton.set_value(0.0);
 			min_bitrate = 0;
 		}
 
 		public void show_most_voted (){
 			reset_filters();
-			SortDescendingButton.set_active(true);
+			Settings.sort_ascending = false;
 		}
 
 		public void show_most_clicked (){
 			reset_filters();
-			SortDescendingButton.set_active(true);
-			ClicksRButton.set_active(true);
+			Settings.sort_ascending = false;
 		}
 
 		public void show_recently_clicked (){
 			reset_filters();
-			SortDescendingButton.set_active(true);
-			ClickTimestampRButton.set_active(true);
+			Settings.sort_ascending = false;
 		}
 
 		private ListBoxRow get_row(string text){

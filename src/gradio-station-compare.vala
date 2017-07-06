@@ -36,50 +36,55 @@ namespace Gradio{
 					int avotes = int.parse(a.votes);
 					int bvotes = int.parse(b.votes);
 
-					if(avotes > bvotes) return 1;
-					if(avotes == bvotes) return 0;
-					if(avotes < bvotes) return -1;
+					if(avotes > bvotes) result = 1;
+					if(avotes == bvotes) result = 0;
+					if(avotes < bvotes) result = -1;
 					break;
 				}
 				case Compare.NAME: {
-					result = strcmp(a.title, b.title);
+					result = (strcmp(a.title, b.title)*-1);
 					break;
 				}
 				case Compare.LANGUAGE: {
-					result = strcmp(a.language, b.language);
+					result = (strcmp(a.language, b.language) * -1);
 					break;
 				}
 				case Compare.COUNTRY: {
-					result = strcmp(a.country, b.country);
+					result = (strcmp(a.country, b.country) * -1);
 					break;
 				}
 				case Compare.BITRATE: {
 					int abitrate = int.parse(a.bitrate);
 					int bbitrate = int.parse(b.bitrate);
 
-					if(abitrate > bbitrate) return 1;
-					if(abitrate == bbitrate) return 0;
-					if(abitrate < bbitrate) return -1;
+					if(abitrate > bbitrate) result = 1;
+					if(abitrate == bbitrate) result = 0;
+					if(abitrate < bbitrate) result = -1;
 					break;
 				}
 				case Compare.CLICKS: {
 					int aclicks = int.parse(a.clickcount);
 					int bclicks = int.parse(b.clickcount);
 
-					if(aclicks > bclicks) return 1;
-					if(aclicks == bclicks) return 0;
-					if(aclicks < bclicks) return -1;
+					if(aclicks > bclicks) result = 1;
+					if(aclicks == bclicks) result = 0;
+					if(aclicks < bclicks) result = -1;
 					break;
 				}
 				case Compare.STATE: {
-					result = strcmp(a.state, b.state);
+					result = (strcmp(a.state, b.state) * -1);
 					break;
 				}
 				case Compare.DATE: {
-					result = strcmp(a.clicktimestamp, b.clicktimestamp);
+					result = (strcmp(a.clicktimestamp, b.clicktimestamp)* -1);
 					break;
 				}
 			}
+
+			if(!Settings.sort_ascending){
+				result = result * -1;
+			}
+
 			return result;
 		};
 	}

@@ -74,5 +74,10 @@
       <default>1</default>
       <summary></summary>
     </key>
+
+    <key name="sort-ascending" type="b">
+      <default>false</default>
+      <summary></summary>
+    </key>
   </schema>
 </schemalist>

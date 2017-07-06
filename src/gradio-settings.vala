@@ -35,6 +35,7 @@ namespace Gradio{
 		private static int _window_position_y;
 		private static int _icon_zoom;
 		private static Compare _station_sorting;
+		private static bool _sort_ascending;
 
 		static construct{
 			settings = new GLib.Settings ("de.haeckerfelix.gradio");
@@ -54,6 +55,7 @@ namespace Gradio{
 			_window_position_y = settings.get_int("window-position-y");
 			_icon_zoom = settings.get_int("icon-zoom");
 			_station_sorting = (Compare) settings.get_int("station-sorting");
+			_sort_ascending = settings.get_boolean("sort-ascending");
 		}
 
 
@@ -204,9 +206,18 @@ namespace Gradio{
 				return _station_sorting;
 			}
 			set{
-				message("setted " + value.to_string());
 				_station_sorting = value;
 				settings.set_int ("station-sorting", _station_sorting);
+			}
+		}
+
+		public static bool sort_ascending{
+			get{
+				return _sort_ascending;
+			}
+			set{
+				_sort_ascending = value;
+				settings.set_boolean ("sort-ascending", _sort_ascending);
 			}
 		}
 
