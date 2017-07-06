@@ -307,26 +307,9 @@
         <property name="can_focus">False</property>
         <property name="search_mode_enabled">True</property>
         <child>
-          <object class="GtkBox">
+          <object class="GtkBox" id="SearchBox">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <child>
-              <object class="GtkSearchEntry" id="SearchEntry">
-                <property name="width_request">400</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="primary_icon_name">edit-find-symbolic</property>
-                <property name="primary_icon_activatable">False</property>
-                <property name="primary_icon_sensitive">False</property>
-                <property name="placeholder_text" translatable="yes">Enter specific name...</property>
-                <signal name="search-changed" handler="SearchEntry_search_changed" swapped="no"/>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
             <child>
               <object class="GtkMenuButton">
                 <property name="visible">True</property>
@@ -344,8 +327,12 @@
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
-                <property name="position">1</property>
+                <property name="pack_type">end</property>
+                <property name="position">-1</property>
               </packing>
+            </child>
+            <child>
+              <placeholder/>
             </child>
             <style>
               <class name="linked"/>

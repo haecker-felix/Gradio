@@ -22,34 +22,46 @@ namespace Gradio{
 	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/filter-box.ui")]
 	public class FilterBox : Gtk.Box{
 
-		[GtkChild] private SearchEntry SearchEntry;
+		private TaggedEntry SearchEntry;
 		public string search_term;
+		[GtkChild] Box SearchBox;
 
 		[GtkChild] private Revealer CountryRevealer;
 		[GtkChild] private Button SelectCountryButton;
 		[GtkChild] private Button ClearCountryButton;
 		[GtkChild] private ListBox CountryListBox;
 		public string selected_country = "";
+		private TaggedEntryTag country_tag;
 
 		[GtkChild] private Revealer StateRevealer;
 		[GtkChild] private Button SelectStateButton;
 		[GtkChild] private Button ClearStateButton;
 		[GtkChild] private ListBox StateListBox;
 		public string selected_state = "";
+		private TaggedEntryTag state_tag;
 
 		[GtkChild] private Revealer LanguageRevealer;
 		[GtkChild] private Button SelectLanguageButton;
 		[GtkChild] private Button ClearLanguageButton;
 		[GtkChild] private ListBox LanguageListBox;
 		public string selected_language = "";
+		private TaggedEntryTag language_tag;
 
 		private CategoryItems category_items;
 
 		public signal void information_changed();
 
 		public FilterBox(){
+			SearchEntry = new TaggedEntry();
+			SearchEntry.width_request = 400;
+			SearchEntry.set_visible(true);
+			SearchBox.pack_start(SearchEntry);
+
+			country_tag = new TaggedEntryTag("");
+			state_tag = new TaggedEntryTag("");
+			language_tag = new TaggedEntryTag("");
+
 			category_items = new CategoryItems();
-			connect_signals();
 
 			LanguageListBox.bind_model(category_items.languages_model, (i) => {
 				GenericItem item = (GenericItem)i;
@@ -65,14 +77,35 @@ namespace Gradio{
 				GenericItem item = (GenericItem)i;
 				return get_row(item.text);
 			});
+
+			connect_signals();
 		}
 
 		private void connect_signals(){
+			SearchEntry.tag_button_clicked.connect((t,a) => {
+				if(a == language_tag){
+					clear_selected_language();
+				}
+				if(a == country_tag){
+					clear_selected_country();
+				}
+				if(a == state_tag){
+					clear_selected_state();
+				}
+			});
+
+			SearchEntry.search_changed.connect(() => {
+				search_term = SearchEntry.get_text();
+				information_changed();
+			});
+
 			CountryListBox.row_activated.connect((t,a) => {
 				string selected_item = a.get_data("ITEM");
 				SelectCountryButton.set_label(selected_item);
 
 				selected_country = selected_item;
+				country_tag.set_label(selected_item);
+				SearchEntry.add_tag(country_tag);
 
 				CountryRevealer.set_reveal_child(false);
 				ClearCountryButton.set_visible(true);
@@ -86,6 +119,8 @@ namespace Gradio{
 				SelectStateButton.set_label(selected_item);
 
 				selected_state = selected_item;
+				state_tag.set_label(selected_item);
+				SearchEntry.add_tag(state_tag);
 
 				StateRevealer.set_reveal_child(false);
 				SelectCountryButton.set_sensitive(false);
@@ -99,6 +134,8 @@ namespace Gradio{
 				SelectLanguageButton.set_label(selected_item);
 
 				selected_language = selected_item;
+				language_tag.set_label(selected_item);
+				SearchEntry.add_tag(language_tag);
 
 				LanguageRevealer.set_reveal_child(false);
 				ClearLanguageButton.set_visible(true);
@@ -115,6 +152,8 @@ namespace Gradio{
 
 		private void clear_selected_country(){
 			selected_country = "";
+			country_tag.set_label("");
+			SearchEntry.remove_tag(country_tag);
 			SelectCountryButton.set_label("Select Country ...");
 			ClearCountryButton.set_visible(false);
 			SelectStateButton.set_sensitive(true);
@@ -135,6 +174,8 @@ namespace Gradio{
 
 		private void clear_selected_state(){
 			selected_state = "";
+			state_tag.set_label("");
+			SearchEntry.remove_tag(state_tag);
 			SelectStateButton.set_label("Select State ...");
 			ClearStateButton.set_visible(false);
 			SelectCountryButton.set_sensitive(true);
@@ -155,6 +196,8 @@ namespace Gradio{
 
 		private void clear_selected_language(){
 			selected_language = "";
+			language_tag.set_label("");
+			SearchEntry.remove_tag(language_tag);
 			SelectLanguageButton.set_label("Select Language ...");
 			ClearLanguageButton.set_visible(false);
 
@@ -170,12 +213,6 @@ namespace Gradio{
 		[GtkCallback]
 		private void ClearLanguageButton_clicked(){
 			clear_selected_language();
-		}
-
-		[GtkCallback]
-		private void SearchEntry_search_changed () {
-			search_term = SearchEntry.get_text();
-			information_changed();
 		}
 
 		public void reset_filters(){
