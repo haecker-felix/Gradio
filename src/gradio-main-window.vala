@@ -34,7 +34,7 @@ namespace Gradio{
 
 		public string[] page_name = { "library", "collections", "collection_items", "search", "add"};
 
-		private Gradio.Headerbar header;
+		public Gradio.Headerbar header;
 		PlayerToolbar player_toolbar;
 
 		[GtkChild] private Stack MainStack;

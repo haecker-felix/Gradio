@@ -193,28 +193,13 @@ namespace Gradio{
 			reset_filters();
 		}
 
-		private void reset_filters(){
+		public void reset_filters(){
 			ClearCountryButton_clicked();
 			ClearLanguageButton_clicked();
 			ClearStateButton_clicked();
 
 			BitrateSpinButton.set_value(0.0);
 			min_bitrate = 0;
-		}
-
-		public void show_most_voted (){
-			reset_filters();
-			Settings.sort_ascending = false;
-		}
-
-		public void show_most_clicked (){
-			reset_filters();
-			Settings.sort_ascending = false;
-		}
-
-		public void show_recently_clicked (){
-			reset_filters();
-			Settings.sort_ascending = false;
 		}
 
 		private ListBoxRow get_row(string text){

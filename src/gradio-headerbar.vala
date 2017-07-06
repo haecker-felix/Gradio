@@ -47,18 +47,18 @@ namespace Gradio{
 		//
 		// View Popover
 		//
-		[GtkChild] private Gtk.Button ZoomInButton;
-		[GtkChild] private Gtk.Button ZoomOutButton;
-		[GtkChild] private Gtk.RadioButton VotesRButton;
-		[GtkChild] private Gtk.RadioButton NameRButton;
-		[GtkChild] private Gtk.RadioButton LanguageRButton;
-		[GtkChild] private Gtk.RadioButton CountryRButton;
-		[GtkChild] private Gtk.RadioButton StateRButton;
-		[GtkChild] private Gtk.RadioButton BitrateRButton;
-		[GtkChild] private Gtk.RadioButton ClicksRButton;
-		[GtkChild] private Gtk.RadioButton ClickTimestampRButton;
-		[GtkChild] private Gtk.ToggleButton SortDescendingButton;
-		[GtkChild] private Gtk.ToggleButton SortAscendingButton;
+		[GtkChild] public Gtk.Button ZoomInButton;
+		[GtkChild] public Gtk.Button ZoomOutButton;
+		[GtkChild] public Gtk.RadioButton VotesRButton;
+		[GtkChild] public Gtk.RadioButton NameRButton;
+		[GtkChild] public Gtk.RadioButton LanguageRButton;
+		[GtkChild] public Gtk.RadioButton CountryRButton;
+		[GtkChild] public Gtk.RadioButton StateRButton;
+		[GtkChild] public Gtk.RadioButton BitrateRButton;
+		[GtkChild] public Gtk.RadioButton ClicksRButton;
+		[GtkChild] public Gtk.RadioButton ClickTimestampRButton;
+		[GtkChild] public Gtk.ToggleButton SortDescendingButton;
+		[GtkChild] public Gtk.ToggleButton SortAscendingButton;
 
 		[GtkChild] public Gtk.Box SortBox;
 
