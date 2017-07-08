@@ -27,8 +27,6 @@ namespace Gradio{
 		ADD
 	}
 
-
-
 	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/main-window.ui")]
 	public class MainWindow : Gtk.ApplicationWindow {
 
@@ -63,6 +61,9 @@ namespace Gradio{
 		[GtkChild] private Label NotificationLabel;
 		//[GtkChild] private Button NotificationButton;
 		[GtkChild] private Revealer NotificationRevealer;
+
+		[GtkChild] private Box DetailsBox;
+		public DetailsBox details_box;
 
 		public signal void icon_zoom_changed();
 		public signal void station_sorting_changed();
@@ -100,6 +101,9 @@ namespace Gradio{
 
 			add_page = new AddPage();
 			MainStack.add_named(add_page, page_name[WindowMode.ADD]);
+
+			details_box = new Gradio.DetailsBox();
+			DetailsBox.add(details_box);
 
 			// showing library on startup
 			set_mode(WindowMode.LIBRARY);

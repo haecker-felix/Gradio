@@ -16,7 +16,7 @@ vala_sources = [
 		'model/gradio-collection-model.vala',
 		'model/gradio-generic-model.vala',
 		'gradio-settings-window.vala',
-		'gradio-details-dialog.vala',
+		'gradio-details-box.vala',
 		'gradio-station-editor-dialog.vala',
 		'gradio-radio-station.vala',
 		'gradio-collection.vala',

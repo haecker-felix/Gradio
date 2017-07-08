@@ -8,7 +8,6 @@
     <property name="baseline_position">top</property>
     <child>
       <object class="GtkScrolledWindow">
-        <property name="width_request">800</property>
         <property name="visible">True</property>
         <property name="can_focus">True</property>
         <child>

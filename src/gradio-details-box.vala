@@ -18,11 +18,11 @@ using Gtk;
 
 namespace Gradio{
 
-	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/details-dialog.ui")]
-	public class DetailsDialog : Gtk.Window {
+	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/details-box.ui")]
+	public class DetailsBox : Box {
 
-		[GtkChild] private Grid StationGrid;
-		[GtkChild] private Grid CollectionGrid;
+		[GtkChild] private Box StationBox;
+		[GtkChild] private Box CollectionBox;
 
 		[GtkChild] private Label NameLabel;
 		[GtkChild] private Label TypeLabel;
@@ -44,6 +44,8 @@ namespace Gradio{
 
 		public void set_station(RadioStation s){
 			station = s;
+			CollectionBox.set_visible(false);
+			StationBox.set_visible(true);
 
 			NameLabel.set_text(station.title);
 			TypeLabel.set_text("Radio station");
@@ -61,29 +63,37 @@ namespace Gradio{
 			OpenHomepageButton.set_visible(true);
 			EditButton.set_visible(true);
 
-			StationGrid.set_visible(true);
+			StationBox.set_visible(true);
 
 			Thumbnail _thumbnail = new Thumbnail.for_station(100, station);
 			_thumbnail.updated.connect(() => {
 				DetailImage.set_from_surface(_thumbnail.surface);
 			});
 			_thumbnail.show_empty_box();
+
+			message("visible");
+			this.set_visible(true);
 		}
 
 		public void set_collection(Collection c){
 			collection = c;
+			StationBox.set_visible(false);
+			CollectionBox.set_visible(true);
 
 			NameLabel.set_text(collection.name);
 			TypeLabel.set_text("Collection");
 			ItemsLabel.set_text(collection.station_model.get_n_items().to_string());
 
-			CollectionGrid.set_visible(true);
+			CollectionBox.set_visible(true);
 
 			Thumbnail _thumbnail = new Thumbnail.for_collection(100, collection);
 			_thumbnail.updated.connect(() => {
 				DetailImage.set_from_surface(_thumbnail.surface);
 			});
 			_thumbnail.show_empty_box();
+
+			message("visible");
+			this.set_visible(true);
 		}
 
 		[GtkCallback]
@@ -94,6 +104,16 @@ namespace Gradio{
 		[GtkCallback]
 		private void EditButton_clicked(Button button){
 			Util.open_website("http://www.radio-browser.info/gui/#/edit/" + station.id);
+		}
+
+		[GtkCallback]
+		private void CloseButton_clicked(Button button){
+			this.set_visible(false);
+		}
+
+		[GtkCallback]
+		private void PlayButton_clicked(Button button){
+			App.player.set_radio_station(station);
 		}
 	}
 }		

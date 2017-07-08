@@ -10,7 +10,7 @@
 	<file>ui/page/add-page.ui</file>
 	<file>ui/page/collections-page.ui</file>
 	<file>ui/settings-window.ui</file>
-	<file>ui/details-dialog.ui</file>
+	<file>ui/details-box.ui</file>
 	<file>ui/station-editor.ui</file>
 	<file>ui/groupbox.ui</file>
 	<file>ui/app-menu.ui</file>
