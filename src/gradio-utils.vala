@@ -56,11 +56,10 @@ namespace Gradio{
 				Resolver resolver = Resolver.get_default ();
 				resolver.lookup_by_name (host, null);
 
-				// TODO: unset
 				return true;
 			} catch (Error e) {
 				critical (e.message);
-				return true;
+				return false;
 			}
 		}
 

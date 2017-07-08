@@ -3,16 +3,16 @@
  * Copyright (c) 2013 Ignacio Casal Quinteiro
  *
  * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by 
+ * it under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or (at your
  * option) any later version.
  *
  * This program is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
- * or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public 
+ * or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public
  * License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License 
+ * You should have received a copy of the GNU Lesser General Public License
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
@@ -121,8 +121,6 @@ gd_tagged_entry_tag_ensure_close_surface (GdTaggedEntryTag *tag,
                                                "window-close-symbolic",
                                                icon_size, scale_factor,
                                                GTK_ICON_LOOKUP_GENERIC_FALLBACK);
-
-  /* FIXME: we need a fallback icon in case the icon is not found */
   pixbuf = gtk_icon_info_load_symbolic_for_context (info, context, NULL, NULL);
   tag->priv->close_surface = gdk_cairo_surface_create_from_pixbuf (pixbuf, scale_factor, tag->priv->window);
 
@@ -153,7 +151,7 @@ gd_tagged_entry_tag_panel_get_height (GdTaggedEntryTag *tag,
 
 static void
 gd_tagged_entry_tag_panel_get_position (GdTaggedEntry *self,
-                                        gint *x_out, 
+                                        gint *x_out,
                                         gint *y_out)
 {
   GtkWidget *widget = GTK_WIDGET (self);
@@ -416,7 +414,7 @@ gd_tagged_entry_tag_event_is_button (GdTaggedEntryTag *tag,
   gtk_style_context_restore (context);
 
   /* see if the event falls into the button allocation */
-  if ((event_x >= button_allocation.x && 
+  if ((event_x >= button_allocation.x &&
        event_x <= button_allocation.x + button_allocation.width) &&
       (event_y >= button_allocation.y &&
        event_y <= button_allocation.y + button_allocation.height))
@@ -477,10 +475,10 @@ gd_tagged_entry_tag_draw (GdTaggedEntryTag *tag,
   gtk_style_context_set_state (context, state);
   gtk_render_background (context, cr,
                          background_allocation.x, background_allocation.y,
-                         background_allocation.width, background_allocation.height); 
+                         background_allocation.width, background_allocation.height);
   gtk_render_frame (context, cr,
                     background_allocation.x, background_allocation.y,
-                    background_allocation.width, background_allocation.height); 
+                    background_allocation.width, background_allocation.height);
 
   gtk_render_layout (context, cr,
                      layout_allocation.x, layout_allocation.y,

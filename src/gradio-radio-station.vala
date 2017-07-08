@@ -128,7 +128,6 @@ namespace Gradio{
 
 		public Cairo.Surface icon {
 			get{
-				// TODO: fix thumbnail mem leak
 				if(_thumbnail == null){
 					_thumbnail = new Thumbnail.for_station(Settings.icon_zoom, this);
 					_thumbnail.updated.connect(() => {

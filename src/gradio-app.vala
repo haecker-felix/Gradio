@@ -54,7 +54,6 @@ namespace Gradio {
 			}else{
 				window = new MainWindow(this);
 				this.add_window(window);
-				window.show_all();
 
 				image_cache = new ImageCache();
 
@@ -79,9 +78,12 @@ namespace Gradio {
 
 			window.delete_event.connect (() => {
 				window.save_geometry ();
-
 				window.hide_on_delete ();
-				return Settings.enable_background_playback;
+
+				if(player.is_playing() && Settings.enable_background_playback)
+					return true;
+				else
+					return false;
 		    	});
 		}
 
@@ -90,9 +92,9 @@ namespace Gradio {
 			var action = new GLib.SimpleAction ("preferences", null);
 			action.activate.connect (() => {
 			 	SettingsWindow swindow = new SettingsWindow();
-			 	swindow.show_all();
 			 	swindow.set_transient_for(window);
 				swindow.set_modal(true);
+				swindow.show_all();
 			});
 			this.add_action (action);
 
