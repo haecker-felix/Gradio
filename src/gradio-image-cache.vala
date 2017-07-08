@@ -103,7 +103,7 @@ namespace Gradio {
 		        	} else {
 		            		fiostream = yield cfile.create_readwrite_async(FileCreateFlags.NONE);
 		        	}
-			   	yield pixbuf.save_to_stream_async(fiostream.get_output_stream(), "png");
+			   	pixbuf.save_to_stream(fiostream.get_output_stream(), "png");
 			}catch (Error e){
 				warning("Could not cache image: %s", e.message);
 			}
