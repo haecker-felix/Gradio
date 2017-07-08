@@ -29,10 +29,6 @@ namespace Gradio{
 
 
 		public SettingsWindow () {
-			setup_view();
-		}
-
-		private void setup_view(){
 			setup_groups();
 			setup_items();
 		}
