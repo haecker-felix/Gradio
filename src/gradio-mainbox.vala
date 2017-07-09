@@ -28,6 +28,9 @@ namespace Gradio{
 			this.set_vexpand(true);
 			this.show_all();
 
+			Frame frame = (Frame)this.get_child();
+			frame.set_shadow_type(ShadowType.NONE);
+
 			connect_signals();
 		}
 

@@ -144,6 +144,7 @@ namespace Gradio{
 			});
 		}
 
+
 		private void unreveal_all(){
 			CountryRevealer.set_reveal_child(false);
 			StateRevealer.set_reveal_child(false);
