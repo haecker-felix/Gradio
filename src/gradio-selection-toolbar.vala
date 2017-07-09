@@ -31,6 +31,7 @@ namespace Gradio{
 		[GtkChild] private Gtk.Button DetailsButton;
 		[GtkChild] private Gtk.Button PlayButton;
 		[GtkChild] private Gtk.Button CollectionButton;
+		[GtkChild] private Gtk.Button VoteButton;
 
 		private string collection_id = "";
 		private int selected_items = 0;
@@ -56,11 +57,14 @@ namespace Gradio{
 			AddToLibraryButton.set_visible(false);
 			CollectionButton.set_visible(false);
 			PlayButton.set_visible(true);
+			VoteButton.set_visible(false);
 
+			// if ONE item is selected
 			bool single = false;
 			if(selected_items <= 1) single = true;
 			DetailsButton.set_visible(single);
 			PlayButton.set_visible(single);
+			VoteButton.set_visible(single);
 
 			// If no item is selected, disabled all actions.
 			if(selected_items == 0){
@@ -69,12 +73,14 @@ namespace Gradio{
 				AddToLibraryButton.set_sensitive(false);
 				CollectionButton.set_sensitive(false);
 				PlayButton.set_sensitive(false);
+				VoteButton.set_sensitive(false);
 			}else{
 				RemoveButton.set_sensitive(true);
 				DetailsButton.set_sensitive(true);
 				AddToLibraryButton.set_sensitive(true);
 				CollectionButton.set_sensitive(true);
 				PlayButton.set_sensitive(true);
+				VoteButton.set_sensitive(true);
 			}
 
 			switch(mode){
@@ -91,6 +97,7 @@ namespace Gradio{
 					RemoveButton.set_visible(true);
 					DetailsButton.set_visible(true);
 					PlayButton.set_visible(false);
+					VoteButton.set_visible(false);
 					break;
 				}
 				case SelectionMode.COLLECTION_ITEMS: {
@@ -180,6 +187,17 @@ namespace Gradio{
 			for(int i = 0; i < model.get_n_items(); i++){
 				RadioStation station = (RadioStation)model.get_item(i);
 				App.player.set_radio_station(station);
+			}
+		}
+
+		[GtkCallback]
+		public void VoteButton_clicked (Gtk.Button button) {
+			StationModel model = App.window.get_station_selection();
+			App.window.disable_selection_mode();
+
+			for(int i = 0; i < model.get_n_items(); i++){
+				RadioStation station = (RadioStation)model.get_item(i);
+				station.vote();
 			}
 		}
 
