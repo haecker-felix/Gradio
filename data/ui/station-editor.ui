@@ -352,7 +352,7 @@
                 <property name="halign">start</property>
                 <property name="margin_top">25</property>
                 <property name="margin_bottom">4</property>
-                <property name="label" translatable="yes">Server Answer</property>
+                <property name="label" translatable="yes">Server Response</property>
                 <style>
                   <class name="dim-label"/>
                 </style>

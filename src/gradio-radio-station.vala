@@ -185,6 +185,8 @@ namespace Gradio{
 
 			if(radio_station_data.get_string_member("lastcheckok") == "1")
 				_is_broken = false;
+			else
+				_is_broken = true;
 		}
 
 		private void stop_handler(){

@@ -103,7 +103,7 @@ namespace Gradio{
 
 		[GtkCallback]
 		private void EditButton_clicked(Button button){
-			Util.open_website("http://www.radio-browser.info/gui/#/edit/" + station.id);
+			station.show_editor();
 		}
 
 		[GtkCallback]

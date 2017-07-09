@@ -71,8 +71,13 @@ namespace Gradio{
 				string address = station.get_stream_address.end(res);
 				StreamEntry.set_text(address);
 
+				message(station.is_broken.to_string());
+
 				if(!station.is_broken)
 					StreamEntry.set_sensitive(false);
+				else
+					StreamEntry.set_sensitive(true);
+
 			});
 		}
 
