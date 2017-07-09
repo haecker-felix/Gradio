@@ -32,13 +32,15 @@ namespace Gradio{
 		[GtkChild] private Stack EditorStack;
 		[GtkChild] private Box AnswerBox;
 		[GtkChild] private Label AnswerLabel;
-		[GtkChild] private Label FinishLabel;
+		[GtkChild] private TextView FinishTextView;
 
 		[GtkChild] private Button CancelButton;
 		[GtkChild] private Button DoneButton;
 		[GtkChild] private Image FaviconImage;
 
-		private const string address = "http://www.radio-browser.info/webservice/json/add ";
+		[GtkChild] private HeaderBar header;
+
+		private string address;
 
 		private Soup.Session soup_session;
 		private Json.Parser parser = new Json.Parser();
@@ -46,6 +48,35 @@ namespace Gradio{
 		private CategoryItems category_items;
 
 		public StationEditorDialog.create(){
+			setup();
+			header.set_title("Create radio station");
+
+			address = "http://www.radio-browser.info/webservice/json/add";
+		}
+
+		public StationEditorDialog.edit(RadioStation station){
+			setup();
+			header.set_title("Edit radio station");
+
+			address = " http://www.radio-browser.info/webservice/json/edit/" + station.id;
+			NameEntry.set_text(station.title);
+			HomepageEntry.set_text(station.homepage);
+			CountryEntry.set_text(station.country);
+			StateEntry.set_text(station.state);
+			LanguageEntry.set_text(station.language);
+			FaviconEntry.set_text(station.icon_address);
+			StreamEntry.set_text("...");
+
+			station.get_stream_address.begin((obj,res) => {
+				string address = station.get_stream_address.end(res);
+				StreamEntry.set_text(address);
+
+				if(!station.is_broken)
+					StreamEntry.set_sensitive(false);
+			});
+		}
+
+		private void setup(){
 			soup_session = new Soup.Session();
             		soup_session.user_agent = "gradio/"+ Config.VERSION;
 
@@ -56,17 +87,6 @@ namespace Gradio{
 			_thumbnail.show_empty_box();
 
 			prepare_entry_completion();
-		}
-
-		public StationEditorDialog.edit(ref RadioStation station){
-			soup_session = new Soup.Session();
-            		soup_session.user_agent = "gradio/"+ Config.VERSION;
-
-            		Thumbnail _thumbnail = new Thumbnail.for_address(100, FaviconEntry.get_text());
-			_thumbnail.updated.connect(() => {
-				FaviconImage.set_from_surface(_thumbnail.surface);
-			});
-			_thumbnail.show_empty_box();
 		}
 
 		private void prepare_entry_completion(){
@@ -172,18 +192,15 @@ namespace Gradio{
 		}
 
 		private async void parse_result(string data){
+			message("Result: " + data);
+
 			try{
 				parser.load_from_data (data);
 				var root = parser.get_root ();
 
 				if(root != null){
 					var root_object = root.get_object ();
-					if(root_object.get_string_member("ok") ==  "true"){
-						finish("Added new radio station");
-					}else{
-						AnswerLabel.set_text(root_object.get_string_member("message"));
-						AnswerBox.set_visible(true);
-					}
+					finish(root_object.get_string_member("message"));
 				}
 
 			}catch(GLib.Error e){
@@ -192,7 +209,7 @@ namespace Gradio{
         	}
 
         	private void finish(string text){
-        		FinishLabel.set_text(text);
+        		FinishTextView.buffer.text = text;
         		EditorStack.set_visible_child_name("finish");
         		CancelButton.set_visible(false);
         		DoneButton.set_visible(false);

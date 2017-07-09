@@ -127,7 +127,7 @@ namespace Gradio{
 		public void set_radio_station(RadioStation station, bool start_playback = true){
 			message("set station: %s", station.title);
 
-			station.get_stream_address.begin(station.id, (obj, res) => {
+			station.get_stream_address.begin((obj, res) => {
 		        	string address = station.get_stream_address.end(res);
 
 		        	//check if new == old

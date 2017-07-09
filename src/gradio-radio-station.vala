@@ -230,13 +230,13 @@ namespace Gradio{
 		}
 
 		// Returns the playable url for the station
-		public async string get_stream_address (string ID){
+		public async string get_stream_address (){
 			SourceFunc callback = get_stream_address.callback;
 			string url = "";
 
 			string data = "";
 
-			Util.get_string_from_uri.begin(RadioBrowser.radio_station_stream_url + ID, (obj, res) => {
+			Util.get_string_from_uri.begin(RadioBrowser.radio_station_stream_url + _id, (obj, res) => {
 				string result = Util.get_string_from_uri.end(res);
 
 				if(result != null)
@@ -295,8 +295,15 @@ namespace Gradio{
 			return vote;
 		}
 
-		public void show_details_dialog(){
+		public void show_details(){
 			App.window.details_box.set_station(this);
+		}
+
+		public void show_editor(){
+			StationEditorDialog editor_dialog = new StationEditorDialog.edit(this);
+			editor_dialog.set_transient_for(App.window);
+			editor_dialog.set_modal(true);
+			editor_dialog.set_visible(true);
 		}
 
 		// Returns the html description metadata

@@ -99,7 +99,7 @@ namespace Gradio{
 			station_model.remove_station(station);
 		}
 
-		public void show_details_dialog(){
+		public void show_details(){
 			App.window.details_box.set_collection(this);
 		}
 	}
