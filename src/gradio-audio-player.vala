@@ -19,104 +19,109 @@ using Gst;
 namespace Gradio{
 	public class AudioPlayer : GLib.Object {
 
-		private dynamic Element stream;
+		public uint current_bitrate_tag { get; set;}
+		public string current_title_tag { get; set;}
+		public RadioStation station { get; set;}
+		public string status_message { get; set;}
 
-		public signal void connection_error(string text);
-		public signal void connection_established();
-		public signal void no_connection();
+		public double volume {
+			get{return playbin.volume;}
+			set{playbin.volume = value;}
+		}
 
-		public signal void tag_changed();
-		public signal void radio_station_changed();
+		public Gst.State state{
+			get{return playbin.current_state; }
+			set{playbin.set_state(value);}
+		}
 
-		public signal void station_stopped();
-		public signal void station_played();
-
+		private dynamic Element playbin;
 		private CodecInstaller codec;
-
-		public string tag_title;
-		public string tag_homepage;
-		public bool tag_has_crc;
-		public string tag_audio_codec;
-		public uint tag_nominal_bitrate;
-		public uint tag_minimum_bitrate;
-		public uint tag_maximum_bitrate;
-		public uint tag_bitrate;
-		public string tag_channel_mode;
-
-		public RadioStation current_station;
 
 		public AudioPlayer(){
 			Gst.PbUtils.init();
 
+			playbin = ElementFactory.make ("playbin", "playbin");
 			codec = new CodecInstaller();
+			volume = Settings.volume_position;
 
-			stream = ElementFactory.make ("playbin", "play");
-			set_volume(Settings.volume_position);
-
-			if(Settings.previous_station != 0){
+			if(Settings.previous_station != 0 && Settings.resume_playback_on_startup){
 				Util.get_station_by_id.begin(Settings.previous_station, (obj, res) => {
-					RadioStation station = Util.get_station_by_id.end(res);
-					set_radio_station(station,Settings.resume_playback_on_startup);
+					station = Util.get_station_by_id.end(res);
 				});
 			}
+
+			notify["state"].connect(() => {
+				switch(state){
+					case Gst.State.PLAYING: status_message = "Connected to radio station."; break;
+					default: current_bitrate_tag = 0; current_title_tag = ""; status_message = "Not connected.";break;
+				}
+			});
+
+			notify["station"].connect(new_station);
+		}
+
+		private async void new_station(){
+			Settings.previous_station = int.parse(station.id);
+
+			string address = yield station.get_stream_address();
+
+		        // reset tag data
+			current_bitrate_tag = 0;
+			current_title_tag = "";
+
+			state = Gst.State.NULL;
+
+			playbin.uri = address;
+			Gst.Bus bus = playbin.get_bus ();
+			bus.add_watch (1, bus_callback);
+
+			state = Gst.State.PLAYING;
 		}
 
 		private bool bus_callback (Gst.Bus bus, Gst.Message m) {
 			switch (m.type) {
 				case Gst.MessageType.ELEMENT:
-					message("Check if codec is missing...");
+					state = Gst.State.NULL;
+
+					// TODO: Improve the handling of missing codecs.
 				    	if(m.get_structure() != null && Gst.PbUtils.is_missing_plugin_message(m)) {
-				    		connection_error("A codec is missing.");
+				    		status_message = "A required codec is missing.";
 				    		codec.install_missing_codec(m);
 				    	}
-				    	connection_error("A codec is missing!\n");
+
             				break;
 				case MessageType.ERROR:
-					GLib.Error err;
-					string debug;
-
+					GLib.Error err; string debug;
 					m.parse_error (out err, out debug);
-					message (err.message);
 
-					stream.set_state (State.NULL);
-					connection_error(err.message);
-					station_stopped();
+					warning(err.message);
+					warning(debug);
+
+					state = Gst.State.NULL;
+					status_message = err.message;
 					break;
 				case MessageType.EOS:
-					stream.set_state (State.NULL);
-					connection_error("End of stream!");
-					station_stopped();
+					state = Gst.State.NULL;
+					status_message = "End of stream";
 					break;
-				case MessageType.STATE_CHANGED:
-					Gst.State oldstate;
-					Gst.State newstate;
-					Gst.State pending;
-					m.parse_state_changed (out oldstate, out newstate, out pending);
-
-					if(newstate.to_string() == "GST_STATE_READY" || newstate.to_string() == "GST_STATE_NULL" || newstate.to_string() == "GST_STATE_PAUSED")
-						no_connection();
-					else
-						connection_established();
-					break;
+				case MessageType.STATE_CHANGED: notify_property("state"); break;
 				case MessageType.TAG:
 					Gst.TagList tag_list = null;
 					m.parse_tag(out tag_list);
 
-					tag_list.get_string("title", out tag_title);
-					tag_list.get_string("homepage", out tag_homepage);
-					tag_list.get_boolean("has-crc", out tag_has_crc);
-					tag_list.get_string("audio-codec", out tag_audio_codec);
-					tag_list.get_uint("nominal-bitrate", out tag_nominal_bitrate);
-					tag_nominal_bitrate = tag_nominal_bitrate/1000;
-					tag_list.get_uint("minimum-bitrate", out tag_minimum_bitrate);
-					tag_minimum_bitrate = tag_minimum_bitrate/1000;
-					tag_list.get_uint("maximum-bitrate", out tag_maximum_bitrate);
-					tag_maximum_bitrate = tag_maximum_bitrate/1000;
-					tag_list.get_uint("bitrate", out tag_bitrate);
-					tag_bitrate = tag_bitrate/1000;
-					tag_list.get_string("channel-mode", out tag_channel_mode);
+					string current_title;
+					uint current_bitrate;
 
-					tag_changed();
+					string test;
+
+					tag_list.get_string("title", out current_title);
+					current_title_tag = current_title;
+
+					tag_list.get_uint("bitrate", out current_bitrate);
+					current_bitrate_tag = current_bitrate/1000;
+
+					tag_list.get_string("genre", out test);
+
 					break;
 				default:
 					break;
@@ -124,93 +129,12 @@ namespace Gradio{
 			return true;
 		}
 
-		public void set_radio_station(RadioStation station, bool start_playback = true){
-			message("set station: %s", station.title);
-
-			station.get_stream_address.begin((obj, res) => {
-		        	string address = station.get_stream_address.end(res);
-
-		        	//check if new == old
-		        	if(current_station != null && current_station.id == station.id){
-					toggle_play_stop();
-		        	}else{
-		        		current_station = station;
-
-		        		// reset tag data
-					tag_title = "";
-					tag_homepage = "";
-					tag_has_crc = false;
-					tag_audio_codec = "";
-					tag_nominal_bitrate = 0;
-					tag_minimum_bitrate = 0;
-					tag_maximum_bitrate = 0;
-					tag_bitrate = 0;
-					tag_channel_mode = "";
-
-					if(current_station != null)
-						tag_changed();
-
-		        		Settings.previous_station = int.parse(station.id);
-					connect_to_stream_address(address);
-					radio_station_changed();
-
-					if(start_playback)
-						play();
-		        	}
-        		});
-		}
-
-		private void connect_to_stream_address(string address){
-			stop();
-
-			message("Connecting to stream: " + address);
-
-			stream.uri = address;
-
-			Gst.Bus bus = stream.get_bus ();
-			bus.add_watch (1, bus_callback);
-		}
-
-		public void play () {
-			stream.set_state (State.PLAYING);
-			station_played();
-		}
-
-		public void stop(){
-			stream.set_state (State.NULL);
-			station_stopped();
-		}
-
 		public void toggle_play_stop(){
-			if(stream.current_state == Gst.State.NULL){
-				play();
-			}else{
-				stop();
-			}
-		}
-
-		//check if any station is being played
-		public bool is_playing(){
-			if(stream.current_state == Gst.State.NULL)
-				return false;
+			if(playbin.current_state == Gst.State.NULL)
+				state = State.PLAYING;
 			else
-				return true;
+				state = State.NULL;
 		}
 
-		public void mute_audio (){
-			stream.mute = true;
-		}
-
-		public void unmute_audio(){
-			stream.mute = false;
-		}
-
-		public void set_volume (double v){
-			stream.volume = v;
-		}
-
-		public double get_volume (){
-			return stream.volume;
-		}
 	}
 }

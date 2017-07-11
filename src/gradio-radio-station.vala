@@ -141,9 +141,6 @@ namespace Gradio{
 			}
 		}
 
-		public signal void stopped();
-		public signal void played();
-
 		public signal void added_to_library();
 		public signal void removed_from_library();
 
@@ -153,9 +150,6 @@ namespace Gradio{
 		}
 
 		private void connect_signals(){
-			App.player.station_played.connect(play_handler);
-			App.player.station_stopped.connect(stop_handler);
-
 			App.library.added_radio_station.connect(added_to_library_handler);
 			App.library.removed_radio_station.connect(removed_from_library_handler);
 
@@ -187,27 +181,6 @@ namespace Gradio{
 				_is_broken = false;
 			else
 				_is_broken = true;
-		}
-
-		private void stop_handler(){
-			if(_title != null){
-				if(App.player.current_station.id == _id){
-					stopped();
-				}
-			}else{
-				warning("Catched crash of Gradio.");
-			}
-
-		}
-
-		private void play_handler(){
-			if(_title != null){
-				if(App.player.current_station.id == _id){
-					played();
-				}
-			}else{
-				warning("Catched crash of Gradio.");
-			}
 		}
 
 		private void added_to_library_handler(RadioStation s){

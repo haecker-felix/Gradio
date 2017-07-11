@@ -192,7 +192,7 @@ namespace Gradio{
 
 			for(int i = 0; i < model.get_n_items(); i++){
 				RadioStation station = (RadioStation)model.get_item(i);
-				App.player.set_radio_station(station);
+				App.player.station = station;
 			}
 		}
 

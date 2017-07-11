@@ -31,7 +31,7 @@ vala_sources = [
 		'gradio-radio-browser.vala',
 		'gradio-search-provider.vala',
 		'gradio-settings.vala',
-		'gradio-status-label.vala',
+		'gradio-status-icon.vala',
 		'gradio-utils.vala',
 		'gradio-notification.vala',
 		'gradio-headerbar.vala',

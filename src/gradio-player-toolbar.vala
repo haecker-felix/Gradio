@@ -37,23 +37,32 @@ namespace Gradio{
 		[GtkChild] private Image PlayImage;
 		[GtkChild] private Image StopImage;
 
-		private StatusLabel sl;
+		private StatusIcon status_icon;
 
 		RadioStation station = null;
 
 		public PlayerToolbar(){
 			setup_view();
 
-			App.player.tag_changed.connect (() => set_tag());
-			App.player.radio_station_changed.connect(() => {
+			App.player.notify["state"].connect(station_state_changed);
+			App.player.notify["current-title-tag"].connect (() => {
+				if(!(App.player.current_title_tag == "" || App.player.current_title_tag == null))
+					StationMetadataLabel.set_text(App.player.current_title_tag);
+
+			});
+			App.player.notify["status-message"].connect (() => {
+				if(App.player.current_title_tag == "" || App.player.current_title_tag == null)
+					StationMetadataLabel.set_markup("<i>"+App.player.status_message+"</i>");
+			});
+			App.player.notify["station"].connect(() => {
 				Idle.add(() => {
 					station_changed();
 					return false;
 				});
 			});
 
-			if(App.player.current_station != null)
-			station_changed();
+			if(App.player.station != null)
+				station_changed();
 		}
 
 		private void setup_view(){
@@ -62,34 +71,17 @@ namespace Gradio{
 			this.pack_start(InfoBox);
 			this.pack_end(VolumeBox);
 
-			sl = new StatusLabel();
-			StatusBox.pack_start(sl);
+			status_icon = new StatusIcon();
+			StatusBox.pack_start(status_icon);
 			this.show_all();
 
 			VolumeButton.set_value(Settings.volume_position);
 		}
 
 		private void station_changed (){
-			//disconnect old signals
-			if(station != null){
-				station.played.disconnect(show_stop_icon);
-				station.stopped.disconnect(show_play_icon);
-			}
-
 			// set new station
-			if(App.player.current_station != null)
-				station = App.player.current_station;
-
-			//connect new signals
-			station.played.connect(show_stop_icon);
-			station.stopped.connect(show_play_icon);
-
-			// Play / Stop Button
-			if(App.player.is_playing())
-				show_stop_icon();
-			else
-				show_play_icon();
-
+			if(App.player.station != null)
+				station = App.player.station;
 
 			// Title
 			StationTitleLabel.set_text(station.title);
@@ -103,24 +95,19 @@ namespace Gradio{
 			this.set_visible(true);
 		}
 
-		private void set_tag(){
-			if(App.player.tag_title != null)
-				StationMetadataLabel.set_text(App.player.tag_title);
-		}
-
-		private void show_stop_icon(){
-			StopImage.set_visible(true);
-			PlayImage.set_visible(false);
-		}
-
-		private void show_play_icon(){
-			StopImage.set_visible(false);
-			PlayImage.set_visible(true);
+		private void station_state_changed(){
+			if(App.player.state != Gst.State.NULL){
+				StopImage.set_visible(true);
+				PlayImage.set_visible(false);
+			}else{
+				StopImage.set_visible(false);
+				PlayImage.set_visible(true);
+			}
 		}
 
 		[GtkCallback]
         	private void VolumeButton_value_changed (double value) {
-			App.player.set_volume(value);
+			App.player.volume = value;
 			Settings.volume_position = value;
 		}
 

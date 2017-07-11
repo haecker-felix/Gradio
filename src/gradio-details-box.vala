@@ -113,7 +113,7 @@ namespace Gradio{
 
 		[GtkCallback]
 		private void PlayButton_clicked(Button button){
-			App.player.set_radio_station(station);
+			App.player.station = station;
 		}
 	}
 }		

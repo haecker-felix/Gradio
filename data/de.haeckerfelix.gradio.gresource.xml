@@ -16,7 +16,7 @@
 	<file>ui/app-menu.ui</file>
 	<file>ui/main-window.ui</file>
 	<file>ui/player-toolbar.ui</file>
-	<file>ui/status-label.ui</file>
+	<file>ui/status-icon.ui</file>
 	<file>ui/tag-box.ui</file>
 	<file>ui/headerbar.ui</file>
 	<file>ui/selection-menu.ui</file>

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.20.0 -->
+<interface>
+  <requires lib="gtk+" version="3.14"/>
+  <template class="GradioStatusIcon" parent="GtkBox">
+    <property name="width_request">20</property>
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="tooltip_text" translatable="yes">Connection information</property>
+    <property name="valign">center</property>
+    <child>
+      <object class="GtkEventBox">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <signal name="button-press-event" handler="status_clicked" swapped="no"/>
+        <child>
+          <object class="GtkStack" id="StatusStack">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="margin_left">1</property>
+            <property name="margin_right">1</property>
+            <property name="margin_top">1</property>
+            <property name="margin_bottom">1</property>
+            <property name="transition_duration">300</property>
+            <property name="transition_type">crossfade</property>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="icon_name">network-offline-symbolic</property>
+              </object>
+              <packing>
+                <property name="name">no-connection</property>
+                <property name="title" translatable="yes">page0</property>
+              </packing>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="icon_name">network-transmit-receive-symbolic</property>
+              </object>
+              <packing>
+                <property name="name">connected</property>
+                <property name="title" translatable="yes">page2</property>
+                <property name="position">2</property>
+              </packing>
+            </child>
+          </object>
+        </child>
+      </object>
+      <packing>
+        <property name="expand">False</property>
+        <property name="fill">True</property>
+        <property name="position">0</property>
+      </packing>
+    </child>
+    <style>
+      <class name="border-right"/>
+    </style>
+  </template>
+  <object class="GtkPopover" id="InfoPopover">
+    <property name="width_request">300</property>
+    <property name="height_request">200</property>
+    <property name="can_focus">False</property>
+    <child>
+      <object class="GtkBox">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="halign">center</property>
+        <property name="valign">center</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">6</property>
+        <child>
+          <object class="GtkStack" id="PopoverStack">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="transition_duration">300</property>
+            <property name="transition_type">crossfade</property>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="pixel_size">64</property>
+                <property name="icon_name">network-transmit-receive-symbolic</property>
+              </object>
+              <packing>
+                <property name="name">connected</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="pixel_size">64</property>
+                <property name="icon_name">network-offline-symbolic</property>
+              </object>
+              <packing>
+                <property name="name">no-connection</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="MessageLabel">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">label</property>
+            <property name="justify">center</property>
+            <property name="wrap">True</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="BitrateLabel">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">label</property>
+            <attributes>
+              <attribute name="style" value="italic"/>
+            </attributes>
+            <style>
+              <class name="dim-label"/>
+            </style>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>

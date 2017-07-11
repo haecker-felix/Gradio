@@ -52,6 +52,8 @@ namespace Gradio {
 				Util.send_notification("No internet connection", "Gradio needs a internet connection");
 
 			}else{
+				player = new AudioPlayer();
+
 				window = new MainWindow(this);
 				this.add_window(window);
 
@@ -63,8 +65,6 @@ namespace Gradio {
 					mpris = new MPRIS();
 					mpris.initialize();
 				}
-
-				player = new AudioPlayer();
 
 				connect_signals();
 
@@ -80,7 +80,7 @@ namespace Gradio {
 				window.save_geometry ();
 				window.hide_on_delete ();
 
-				if(player.is_playing() && Settings.enable_background_playback)
+				if(player.state == Gst.State.PLAYING && Settings.enable_background_playback)
 					return true;
 				else
 					return false;

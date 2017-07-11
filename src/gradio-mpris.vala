@@ -180,19 +180,18 @@ public class Gradio.MprisPlayer : GLib.Object {
 		this.conn = conn;
 		_metadata = new HashTable<string,Variant>(str_hash, str_equal);
 
-		App.player.tag_changed.connect (song_changed);
-		App.player.station_stopped.connect (playing_changed);
-		App.player.station_played.connect (playing_changed);
+		App.player.notify["current-title-tag"].connect (song_changed);
+		App.player.notify["state"].connect (playing_changed);
 	}
 
 	private void fill_metadata() {
-		if(App.player.current_station != null){
-			string[] artists = {App.player.current_station.title};
+		if(App.player.station != null){
+			string[] artists = {App.player.station.title};
 
-			if(App.player.tag_title != null)
-				_metadata.insert("xesam:title", App.player.tag_title);
+			if(App.player.current_title_tag != null)
+				_metadata.insert("xesam:title", App.player.current_title_tag);
 
-			_metadata.insert("mpris:artUrl", App.player.current_station.icon_address);
+			_metadata.insert("mpris:artUrl", App.player.station.icon_address);
 			_metadata.insert("xesam:artist", artists);
 		}
 	}
@@ -266,7 +265,7 @@ public class Gradio.MprisPlayer : GLib.Object {
 
 	public string PlaybackStatus {
 		owned get {
-			if (App.player.is_playing())
+			if (App.player.state == Gst.State.PLAYING)
 				return "Playing";
 			else
 				return "Paused";
@@ -301,10 +300,10 @@ public class Gradio.MprisPlayer : GLib.Object {
 
 	public double Volume {
 		get{
-			return App.player.get_volume();
+			return App.player.volume;
 		}
 		set {
-			App.player.set_volume(value);
+			App.player.volume = value;
 		}
 	}
 
@@ -334,13 +333,13 @@ public class Gradio.MprisPlayer : GLib.Object {
 
 	public bool CanPlay {
 		get {
-			return !App.player.is_playing();
+			return !(App.player.state == Gst.State.PLAYING);
 		}
 	}
 
 	public bool CanPause {
 		get {
-			return App.player.is_playing();
+			return (App.player.state == Gst.State.PLAYING);
 		}
 	}
 
@@ -359,18 +358,18 @@ public class Gradio.MprisPlayer : GLib.Object {
 	public signal void Seeked(int64 Position);
 
 	public void Next() {
-		RadioStation current = App.player.current_station;
-		App.player.set_radio_station(Library.station_model.get_next_station(current));
+		RadioStation current = App.player.station;
+		App.player.station = Library.station_model.get_next_station(current);
 
 	}
 
 	public void Previous() {
-		RadioStation current = App.player.current_station;
-		App.player.set_radio_station(Library.station_model.get_previous_station(current));
+		RadioStation current = App.player.station;
+		App.player.station = Library.station_model.get_previous_station(current);
 	}
 
 	public void Pause() {
-		App.player.stop ();
+		App.player.state = Gst.State.NULL;
 	}
 
 	public void PlayPause() {
@@ -378,11 +377,11 @@ public class Gradio.MprisPlayer : GLib.Object {
 	}
 
 	public void Stop() {
-		App.player.stop ();
+		App.player.state = Gst.State.NULL;
 	}
 
 	public void Play() {
-		App.player.play ();
+		App.player.state = Gst.State.PLAYING;
 	}
 
 	public void OpenUri(string Uri) {

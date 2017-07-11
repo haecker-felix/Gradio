@@ -160,7 +160,7 @@ namespace Gradio{
 		}
 
 		public void disable_selection_mode(){
-			if(App.player.current_station != null)
+			if(App.player.station != null)
 				player_toolbar.set_visible(true);
 
 			Page page = (Page)MainStack.get_visible_child();

@@ -63,9 +63,9 @@
         <property name="halign">start</property>
         <property name="selectable">True</property>
         <property name="ellipsize">end</property>
-        <attributes>
-          <attribute name="gravity-hint" value="line"/>
-        </attributes>
+        <style>
+          <class name="dim-label"/>
+        </style>
       </object>
       <packing>
         <property name="expand">False</property>
