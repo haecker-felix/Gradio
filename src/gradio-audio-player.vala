@@ -61,15 +61,21 @@ namespace Gradio{
 		}
 
 		private async void new_station(){
-			Settings.previous_station = int.parse(station.id);
-
-			string address = yield station.get_stream_address();
-
-		        // reset tag data
+			// reset tag data
 			current_bitrate_tag = 0;
 			current_title_tag = "";
 
 			state = Gst.State.NULL;
+
+			Settings.previous_station = int.parse(station.id);
+			string address = yield station.get_stream_address();
+
+			if(station.is_broken){
+				status_message = "This station is broken.";
+				address = "";
+				playbin.uri = address;
+				return;
+			}
 
 			playbin.uri = address;
 			Gst.Bus bus = playbin.get_bus ();
