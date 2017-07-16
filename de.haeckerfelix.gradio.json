@@ -142,7 +142,8 @@
       	{
 
             "name": "gradio",
-            "subdir": "data/packages/flatpak",
+            "buildsystem": "meson",
+            "builddir": true,
 	    "sources": [
                 {
                     "type": "git",
