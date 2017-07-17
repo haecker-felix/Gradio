@@ -6,11 +6,14 @@
   <_name>Gradio</_name>
   <_summary>Find and listen to internet radio stations</_summary>
   <description>
-    Gradio is a application for findiing and listening to internet radio stations
+    Gradio lets you find and play public radio stations.
   </description>
   <screenshots>
-    <screenshot type="default" height="563" width="748">
-      <image>https://raw.githubusercontent.com/haecker-felix/gradio/master/data/appdata/gradio01.png</image>
+    <screenshot type="default" height="568" width="818">
+      <image>https://raw.githubusercontent.com/haecker-felix/gradio-appdata/master/screenshot_1.png</image>
+      <image>https://raw.githubusercontent.com/haecker-felix/gradio-appdata/master/screenshot_2.png</image>
+      <image>https://raw.githubusercontent.com/haecker-felix/gradio-appdata/master/screenshot_3.png</image>
+      <image>https://raw.githubusercontent.com/haecker-felix/gradio-appdata/master/screenshot_4.png</image>
     </screenshot>
   </screenshots>
   <url type="homepage">https://github.com/haecker-felix/gradio</url>

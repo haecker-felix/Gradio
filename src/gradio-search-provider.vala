@@ -23,7 +23,7 @@ namespace Gradio{
 		private const string address = "http://www.radio-browser.info/webservice/json/stations/search";
 
 		// wait 1,3 seconds before spawning a new search
-		private int search_delay = 1000;
+		private const int search_delay = 1000;
 		private uint delayed_changed_id;
 
 		private Soup.Session soup_session;
@@ -65,6 +65,7 @@ namespace Gradio{
 			delayed_changed_id = 0;
 			return false;
 		}
+
 		private void set_search_request (){
 			// clear old search model
 			model.clear();

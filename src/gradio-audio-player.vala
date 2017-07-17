@@ -24,6 +24,9 @@ namespace Gradio{
 		public RadioStation station { get; set;}
 		public string status_message { get; set;}
 
+		private const int reconnect_delay = 10000;
+		private uint delayed_changed_id;
+
 		public double volume {
 			get{return playbin.volume;}
 			set{playbin.volume = value;}
@@ -77,6 +80,8 @@ namespace Gradio{
 				return;
 			}
 
+			message("Connecting to: %s", address);
+
 			playbin.uri = address;
 			Gst.Bus bus = playbin.get_bus ();
 			bus.add_watch (1, bus_callback);
@@ -100,15 +105,17 @@ namespace Gradio{
 					GLib.Error err; string debug;
 					m.parse_error (out err, out debug);
 
-					warning(err.message);
-					warning(debug);
+					message(err.message);
+					message(debug);
 
 					state = Gst.State.NULL;
 					status_message = err.message;
+					reset_reconnect_timeout();
 					break;
 				case MessageType.EOS:
 					state = Gst.State.NULL;
 					status_message = "End of stream";
+					reset_reconnect_timeout();
 					break;
 				case MessageType.STATE_CHANGED: notify_property("state"); break;
 				case MessageType.TAG:
@@ -140,6 +147,19 @@ namespace Gradio{
 				state = State.PLAYING;
 			else
 				state = State.NULL;
+		}
+
+		private void reset_reconnect_timeout(){
+			if(delayed_changed_id > 0)
+				Source.remove(delayed_changed_id);
+			delayed_changed_id = Timeout.add(reconnect_delay, reconnect);
+		}
+
+		private bool reconnect(){
+			new_station.begin();
+
+			delayed_changed_id = 0;
+			return false;
 		}
 
 	}
