@@ -11,8 +11,14 @@
   <screenshots>
     <screenshot type="default" height="568" width="818">
       <image>https://raw.githubusercontent.com/haecker-felix/gradio-appdata/master/screenshot_1.png</image>
+    </screenshot>
+    <screenshot height="568" width="818">
       <image>https://raw.githubusercontent.com/haecker-felix/gradio-appdata/master/screenshot_2.png</image>
+    </screenshot>
+    <screenshot height="568" width="818">
       <image>https://raw.githubusercontent.com/haecker-felix/gradio-appdata/master/screenshot_3.png</image>
+    </screenshot>
+    <screenshot height="568" width="818">
       <image>https://raw.githubusercontent.com/haecker-felix/gradio-appdata/master/screenshot_4.png</image>
     </screenshot>
   </screenshots>
@@ -50,4 +56,36 @@
     <content_attribute id="money-purchasing">none</content_attribute>
     <content_attribute id="money-gambling">none</content_attribute>
   </content_rating>
+  <releases>
+    <release version="5.0.0" date="2016-12-24">
+​      <description>
+​        <p>New grid/list view, new right click menu, background playback, redesigned discover page</p>
+​      </description>
+​    </release>
+    <release version="4.0.1" date="2016-07-29">
+​      <description>
+​        <p>New optional dark mode</p>
+​      </description>
+​    </release>
+    <release version="4.0.0" date="2016-07-28">
+​      <description>
+​        <p>New volume control, show connection information, new sort options</p>
+​      </description>
+​    </release>
+    <release version="3.0.1" date="2016-06-30">
+​      <description>
+​        <p>Fixed crash on Ubuntu based systems.</p>
+​      </description>
+​    </release>
+    <release version="3.0.1" date="2016-06-29">
+​      <description>
+​        <p>Fixed crash on Ubuntu based systems.</p>
+​      </description>
+​    </release>
+​    <release version="3.0.0" date="2016-06-28">
+​      <description>
+​        <p>MPRIS Support, vote for stations, search for stations</p>
+​      </description>
+​    </release>
+​  </releases>
 </component>
