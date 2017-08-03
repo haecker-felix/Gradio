@@ -1,0 +1,15 @@
+# List of source files containing translatable strings.
+data/ui/app-menu.ui
+data/ui/main-window.ui
+data/ui/status-icon.ui
+data/ui/player-toolbar.ui
+data/ui/station-editor.ui
+data/ui/selection-toolbar.ui
+data/ui/details-box.ui
+data/ui/settings-window.ui
+data/ui/organize-collection-dialog.ui
+data/ui/filter-box.ui
+data/ui/selection-menu.ui
+data/ui/page/add-page.ui
+data/de.haeckerfelix.gradio.desktop.in
+data/de.haeckerfelix.gradio.appdata.xml.in
