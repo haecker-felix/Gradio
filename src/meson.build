@@ -32,7 +32,6 @@ vala_sources = [
 		'gradio-settings.vala',
 		'gradio-status-icon.vala',
 		'gradio-utils.vala',
-		'gradio-notification.vala',
 		'gradio-headerbar.vala',
 		'gradio-selection-toolbar.vala',
 		'gradio-image-cache.vala',

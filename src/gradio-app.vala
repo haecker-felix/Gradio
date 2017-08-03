@@ -106,10 +106,6 @@ namespace Gradio {
 			action.activate.connect (() => { this.quit_application (); });
 			this.add_action (action);
 
-			action = new GLib.SimpleAction ("report_an_error", null);
-			action.activate.connect (() => { this.report_an_error (); });
-			this.add_action (action);
-
 			var builder = new Gtk.Builder.from_resource ("/de/haecker-felix/gradio/ui/app-menu.ui");
 			var app_menu = builder.get_object ("app-menu") as GLib.MenuModel;
 
@@ -122,10 +118,6 @@ namespace Gradio {
 			action = new GLib.SimpleAction ("select-none", null);
 			action.activate.connect (() => { window.select_none (); });
 			this.add_action (action);
-		}
-
-		public void report_an_error(){
-			Util.open_website("https://github.com/haecker-felix/gradio/issues/new");
 		}
 
 		private void show_about_dialog(){

@@ -39,16 +39,6 @@ namespace Gradio{
 			return "";
 		}
 
-
-		public static void show_info_dialog(string text, Gtk.Window parent){
-			Gtk.MessageDialog msg = new Gtk.MessageDialog (parent, Gtk.DialogFlags.MODAL, Gtk.MessageType.WARNING, Gtk.ButtonsType.OK, text);
-				msg.response.connect ((response_id) => {
-				msg.destroy();
-			});
-			msg.show ();
-		}
-
-
 		public static bool check_database_connection(){
 			var host = "www.radio-browser.info";
 
@@ -61,15 +51,6 @@ namespace Gradio{
 				critical (e.message);
 				return false;
 			}
-		}
-
-		public static void open_website(string address){
-			try{
-				Gtk.show_uri(null, address, 0);
-			}catch(Error e){
-				error("Cannot open website. " + e.message);
-			}
-
 		}
 
 		public static void add_stylesheet () {

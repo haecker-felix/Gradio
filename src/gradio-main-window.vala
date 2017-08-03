@@ -207,8 +207,8 @@ namespace Gradio{
 			return model;
 		}
 
-		public void show_notification(Notification notification){
-			NotificationLabel.set_text(notification.message);
+		public void show_notification(string text){
+			NotificationLabel.set_text(text);
 			NotificationRevealer.set_reveal_child(true);
 		}
 

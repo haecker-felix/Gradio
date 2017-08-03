@@ -36,7 +36,7 @@ namespace Gradio{
 				Gst.PbUtils.install_plugins_async(installer_detail, context, install_callback);
 			}else{
 				warning("Installation failed. Codec installation is not supported by your distribution. Please install the missin codec by yourself.");
-				Util.show_info_dialog("Automatic codec installation isn't supported by your distribution.\nPlease install " + description + " manually.", Gradio.App.window);
+				App.window.show_notification("Automatic codec installation isn't supported by your distribution.\nPlease install " + description + " manually.");
 			}
 		}
 
@@ -45,7 +45,7 @@ namespace Gradio{
 			switch(result){
 				case Gst.PbUtils.InstallPluginsReturn.SUCCESS: close(); break;
 				case Gst.PbUtils.InstallPluginsReturn.PARTIAL_SUCCESS: close(); break;
-				default: Util.show_info_dialog("Could not install new codec.", Gradio.App.window); break;
+				default: App.window.show_notification("Could not install new codec."); break;
 			}
 		}
 

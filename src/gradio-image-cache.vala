@@ -58,8 +58,7 @@ namespace Gradio {
 		                	}
 				}
 
-				Notification n = new Notification("Successfully cleared icon cache!", 5);
-				App.window.show_notification(n);
+				App.window.show_notification("Successfully cleared cache.");
 			}catch (Error e){
 				critical("Could not clear icon cache: %s", e.message);
 			}
