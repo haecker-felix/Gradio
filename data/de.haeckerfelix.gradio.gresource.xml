@@ -5,7 +5,6 @@
 	<file>ui/item/button-item.ui</file>
 	<file>ui/page/library-page.ui</file>
 	<file>ui/page/search-page.ui</file>
-	<file>ui/page/station-address-page.ui</file>
 	<file>ui/page/collection-items-page.ui</file>
 	<file>ui/page/add-page.ui</file>
 	<file>ui/page/collections-page.ui</file>
@@ -17,7 +16,6 @@
 	<file>ui/main-window.ui</file>
 	<file>ui/player-toolbar.ui</file>
 	<file>ui/status-icon.ui</file>
-	<file>ui/tag-box.ui</file>
 	<file>ui/headerbar.ui</file>
 	<file>ui/selection-menu.ui</file>
 	<file>ui/selection-toolbar.ui</file>

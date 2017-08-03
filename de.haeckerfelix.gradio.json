@@ -1,7 +1,7 @@
 {
     "app-id": "de.haeckerfelix.gradio",
     "version": "master",
-    "runtime": "org.gnome.Sdk",
+    "runtime": "org.gnome.Platform",
     "runtime-version": "3.24",
     "sdk": "org.gnome.Sdk",
     "command": "gradio",
