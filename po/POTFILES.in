@@ -1,6 +1,5 @@
 # List of source files containing translatable strings.
 data/ui/app-menu.ui
-data/ui/main-window.ui
 data/ui/status-icon.ui
 data/ui/player-toolbar.ui
 data/ui/station-editor.ui
