@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-08 13:03+0200\n"
+"POT-Creation-Date: 2017-08-08 20:25+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,4 +27,79 @@ msgstr ""
 
 #: data/ui/app-menu.ui:18
 msgid "Quit"
+msgstr ""
+
+#. APPEARANCE
+#. Dark design
+#: src/gradio-settings-window.vala:54
+msgid "Prefer dark theme"
+msgstr ""
+
+#: src/gradio-settings-window.vala:54
+msgid "Use a dark theme, if possible"
+msgstr ""
+
+#. hide broken stations
+#: src/gradio-settings-window.vala:60
+msgid "Hide broken stations"
+msgstr ""
+
+#: src/gradio-settings-window.vala:60
+msgid "Don't show stations, which are not working"
+msgstr ""
+
+#. PLAYBACK
+#. enable background playback
+#: src/gradio-settings-window.vala:69
+msgid "Background Playback"
+msgstr ""
+
+#: src/gradio-settings-window.vala:69
+msgid "Continue the playback if you close the Gradio window"
+msgstr ""
+
+#. resume playback on startup
+#: src/gradio-settings-window.vala:75
+msgid "Resume playback on startup"
+msgstr ""
+
+#: src/gradio-settings-window.vala:75
+msgid "Play the latest station if you start Gradio"
+msgstr ""
+
+#. FEATURES
+#. mpris
+#: src/gradio-settings-window.vala:84
+msgid "MPRIS"
+msgstr ""
+
+#: src/gradio-settings-window.vala:84
+msgid "Integrate Gradio as media player in your desktop environment"
+msgstr ""
+
+#. enable notifications
+#: src/gradio-settings-window.vala:90
+msgid "Notifications"
+msgstr ""
+
+#: src/gradio-settings-window.vala:90
+msgid "Show desktop notifications"
+msgstr ""
+
+#. CACHE
+#. cache station images
+#: src/gradio-settings-window.vala:99
+msgid "Cache station icons"
+msgstr ""
+
+#: src/gradio-settings-window.vala:99
+msgid "Saves the images locally."
+msgstr ""
+
+#: src/gradio-settings-window.vala:104
+msgid "Clear Cache"
+msgstr ""
+
+#: src/gradio-settings-window.vala:104
+msgid "Clear all cached station icons"
 msgstr ""

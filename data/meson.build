@@ -8,7 +8,7 @@ resources = gnome_module.compile_resources('gradio-resources', 'de.haeckerfelix.
 # Translate and install appdata and desktop file #
 i18n.merge_file(
 	input:  'de.haeckerfelix.gradio.desktop.in',
-	output: 'de.haeckerfelix.gradio.desktop.in',
+	output: 'de.haeckerfelix.gradio.desktop',
 	po_dir: '../po/',
 	type:   'desktop',
 	install: true,
@@ -17,7 +17,7 @@ i18n.merge_file(
 
 i18n.merge_file(
   input:  'de.haeckerfelix.gradio.appdata.xml.in',
-  output: 'de.haeckerfelix.gradio.appdata.xml.in',
+  output: 'de.haeckerfelix.gradio.appdata.xml',
   po_dir: '../po/',
   type:   'xml',
   install: true,

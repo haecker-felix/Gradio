@@ -1,2 +1,3 @@
 # List of source files containing translatable strings.
 data/ui/app-menu.ui
+src/gradio-settings-window.vala
