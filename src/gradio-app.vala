@@ -157,6 +157,15 @@ namespace Gradio {
 	int main (string[] args){
 		message("Gradio %s ", Config.VERSION);
 
+		message(Config.GETTEXT_PACKAGE);
+		message(Config.DATADIR);
+
+		// Setup gettext
+    		Intl.setlocale (GLib.LocaleCategory.ALL, Config.DATADIR + "/locale");
+    		Intl.bindtextdomain (Config.GETTEXT_PACKAGE, null);
+    		Intl.bind_textdomain_codeset (Config.GETTEXT_PACKAGE, "UTF-8");
+		Intl.textdomain (Config.GETTEXT_PACKAGE);
+
 		// Init gstreamer
 		Gst.init (ref args);
 
