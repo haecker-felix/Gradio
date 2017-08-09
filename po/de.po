@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: Gradio\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-08 13:03+0200\n"
+"POT-Creation-Date: 2017-08-08 20:25+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Häcker Felix <haecker.felix1207@gmail.com>, 2017\n"
 "Language-Team: German (https://www.transifex.com/gradio/teams/77313/de/)\n"
@@ -29,3 +29,78 @@ msgstr "Info"
 #: data/ui/app-menu.ui:18
 msgid "Quit"
 msgstr "Beenden"
+
+#. APPEARANCE
+#. Dark design
+#: src/gradio-settings-window.vala:54
+msgid "Prefer dark theme"
+msgstr "Dunkles Thema"
+
+#: src/gradio-settings-window.vala:54
+msgid "Use a dark theme, if possible"
+msgstr "Falls möglich, ein dunkles Thema bevorzugen"
+
+#. hide broken stations
+#: src/gradio-settings-window.vala:60
+msgid "Hide broken stations"
+msgstr "Nicht funktionierende Sender ausblenden"
+
+#: src/gradio-settings-window.vala:60
+msgid "Don't show stations, which are not working"
+msgstr "Sender die nicht abgespielt werden können, automatisch ausblenden."
+
+#. PLAYBACK
+#. enable background playback
+#: src/gradio-settings-window.vala:69
+msgid "Background Playback"
+msgstr "Hintergrund Wiedergabe"
+
+#: src/gradio-settings-window.vala:69
+msgid "Continue the playback if you close the Gradio window"
+msgstr "Wiedergabe fortsetzen, wenn das Fenster geschlossen wird"
+
+#. resume playback on startup
+#: src/gradio-settings-window.vala:75
+msgid "Resume playback on startup"
+msgstr "Letzte Wiedergabe beim Starten fortsetzen"
+
+#: src/gradio-settings-window.vala:75
+msgid "Play the latest station if you start Gradio"
+msgstr "Den zuletzt verwendeteten Sender automatisch abspielen"
+
+#. FEATURES
+#. mpris
+#: src/gradio-settings-window.vala:84
+msgid "MPRIS"
+msgstr "MPRIS"
+
+#: src/gradio-settings-window.vala:84
+msgid "Integrate Gradio as media player in your desktop environment"
+msgstr "Gradio als Wiedergabeprogramm in die Desktopumgebung einbinden"
+
+#. enable notifications
+#: src/gradio-settings-window.vala:90
+msgid "Notifications"
+msgstr "Benachrichtigungen"
+
+#: src/gradio-settings-window.vala:90
+msgid "Show desktop notifications"
+msgstr "Desktopbenachrichtigungen anzeigen"
+
+#. CACHE
+#. cache station images
+#: src/gradio-settings-window.vala:99
+msgid "Cache station icons"
+msgstr "Senderlogos zwischenspeichern"
+
+#: src/gradio-settings-window.vala:99
+msgid "Saves the images locally."
+msgstr "Logos lokal speichern"
+
+#: src/gradio-settings-window.vala:104
+msgid "Clear Cache"
+msgstr "Zwischenspeicher leeren"
+
+#: src/gradio-settings-window.vala:104
+msgid "Clear all cached station icons"
+msgstr "Alle Bilder löschen, die zwischengespeichert wurden."
