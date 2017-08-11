@@ -4,7 +4,10 @@ A GTK3 app for finding and listening to internet radio stations.
 ![alt text](https://raw.githubusercontent.com/haecker-felix/gradio/master/data/icons/hicolor/256x256/apps/de.haeckerfelix.gradio.png "Logo")
 
 <a href="https://hosted.weblate.org/engage/gradio/?utm_source=widget">
-<img src="https://hosted.weblate.org/widgets/gradio/-/svg-badge.svg" alt="Übersetzungsstatus" />
+<img src="https://hosted.weblate.org/widgets/gradio/-/svg-badge.svg" alt="Translation Status" />
+</a>
+<a href="https://travis-ci.org/haecker-felix/gradio">
+<img src="https://travis-ci.org/haecker-felix/gradio.svg?branch=master" alt="Build Status" />
 </a>
 
 ## News
