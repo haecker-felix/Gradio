@@ -8,6 +8,7 @@ description: |
   
   Gradio uses the community-based ‘Radio Browser‘ website for its database 
   backend. 
+icon: data/icons/de.haeckerfelix.gradio.svg
 
 grade: devel
 confinement: strict
