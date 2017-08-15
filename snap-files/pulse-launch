@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# The environment: block in snapcraft.yaml appears to have no effect
+# on generated command wrapper, so we're overriding here instead.
+
+if [ "$SNAP_ARCH" == "amd64" ]; then
+  ARCH="x86_64-linux-gnu"
+elif [ "$SNAP_ARCH" == "armhf" ]; then
+  ARCH="arm-linux-gnueabihf"
+elif [ "$SNAP_ARCH" == "arm64" ]; then
+  ARCH="aarch64-linux-gnu"
+else
+  ARCH="$SNAP_ARCH-linux-gnu"
+fi
+
+# for explanation of pulseaudio `LD_LIBRARY_PATH` override, see:
+#     https://github.com/ubuntu/snapcraft-desktop-helpers/issues/69
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$SNAP/usr/lib/$ARCH/pulseaudio"
+
+# chainload the actual executable
+exec "$@"
