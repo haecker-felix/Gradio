@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Gradio
+Comment=Find and listen to internet radio stations
+Exec=gradio
+Icon=${SNAP}/usr/share/icons/hicolor/512x512/apps/de.haeckerfelix.gradio.png
+Terminal=false
+Type=Application
+Categories=AudioVideo;Audio;Player;GNOME;
+Keywords=gradio;internet;radio;
+StartupNotify=true
