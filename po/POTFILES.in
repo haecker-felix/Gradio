@@ -1,3 +1,12 @@
 # List of source files containing translatable strings.
 data/ui/app-menu.ui
+data/ui/filter-box.ui
+data/ui/page/add-page.ui
+data/ui/details-box.ui
+data/ui/organize-collection-dialog.ui
+data/ui/selection-menu.ui
+data/ui/selection-toolbar.ui
+data/ui/station-editor.ui
 src/gradio-settings-window.vala
+src/page/gradio-add-page.vala
+src/gradio-headerbar.vala
