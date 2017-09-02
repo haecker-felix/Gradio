@@ -1,20 +1,20 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the gradio package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-08 20:25+0200\n"
+"POT-Creation-Date: 2017-09-02 19:04+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: data/ui/app-menu.ui:6
@@ -27,6 +27,157 @@ msgstr ""
 
 #: data/ui/app-menu.ui:18
 msgid "Quit"
+msgstr ""
+
+#: data/ui/filter-box.ui:27
+msgid "Where"
+msgstr ""
+
+#: data/ui/filter-box.ui:44
+msgid "Select Country ..."
+msgstr ""
+
+#: data/ui/filter-box.ui:125
+msgid "Select State  ..."
+msgstr ""
+
+#: data/ui/filter-box.ui:205 data/ui/station-editor.ui:132
+msgid "Language"
+msgstr ""
+
+#: data/ui/filter-box.ui:222
+msgid "Select Language  ..."
+msgstr ""
+
+#: data/ui/page/add-page.ui:45
+msgid "Fill your library with something new"
+msgstr ""
+
+#: data/ui/page/add-page.ui:64
+msgid "There are several options available to add something new."
+msgstr ""
+
+#: data/ui/details-box.ui:23 data/ui/selection-toolbar.ui:151
+msgid "Details"
+msgstr ""
+
+#: data/ui/details-box.ui:137 data/ui/station-editor.ui:46
+msgid "Name"
+msgstr ""
+
+#: data/ui/details-box.ui:172
+msgid "Type"
+msgstr ""
+
+#: data/ui/details-box.ui:209
+msgid "Items"
+msgstr ""
+
+#: data/ui/details-box.ui:253
+msgid "Votes"
+msgstr ""
+
+#: data/ui/details-box.ui:285
+msgid "Location"
+msgstr ""
+
+#: data/ui/details-box.ui:317
+msgid "Description"
+msgstr ""
+
+#: data/ui/details-box.ui:349
+msgid "Tags"
+msgstr ""
+
+#: data/ui/details-box.ui:436 data/ui/selection-toolbar.ui:15
+msgid "Play"
+msgstr ""
+
+#: data/ui/details-box.ui:481
+msgid "Open homepage"
+msgstr ""
+
+#: data/ui/details-box.ui:526
+msgid "Edit"
+msgstr ""
+
+#: data/ui/organize-collection-dialog.ui:21
+#: data/ui/organize-collection-dialog.ui:108
+msgid "New Collection…"
+msgstr ""
+
+#: data/ui/organize-collection-dialog.ui:31
+#: data/ui/organize-collection-dialog.ui:129
+#: data/ui/organize-collection-dialog.ui:202
+msgid "Add"
+msgstr ""
+
+#: data/ui/organize-collection-dialog.ui:93
+msgid "Enter a name for your first collection"
+msgstr ""
+
+#: data/ui/organize-collection-dialog.ui:193 data/ui/station-editor.ui:423
+msgid "Cancel"
+msgstr ""
+
+#: data/ui/selection-menu.ui:7
+msgid "Select All"
+msgstr ""
+
+#: data/ui/selection-menu.ui:11
+msgid "Select None"
+msgstr ""
+
+#: data/ui/selection-toolbar.ui:29
+msgid "Add to library"
+msgstr ""
+
+#: data/ui/selection-toolbar.ui:46
+msgid "Remove"
+msgstr ""
+
+#: data/ui/selection-toolbar.ui:135
+msgid "Collections"
+msgstr ""
+
+#: data/ui/station-editor.ui:72
+msgid "Stream Address"
+msgstr ""
+
+#: data/ui/station-editor.ui:87
+msgid "Homepage"
+msgstr ""
+
+#: data/ui/station-editor.ui:102
+msgid "Country"
+msgstr ""
+
+#: data/ui/station-editor.ui:117
+msgid "State"
+msgstr ""
+
+#: data/ui/station-editor.ui:212
+msgid "Favicon Address"
+msgstr ""
+
+#: data/ui/station-editor.ui:279
+msgid "label"
+msgstr ""
+
+#: data/ui/station-editor.ui:355
+msgid "Server Response"
+msgstr ""
+
+#: data/ui/station-editor.ui:391
+msgid "Close"
+msgstr ""
+
+#: data/ui/station-editor.ui:409
+msgid "page1"
+msgstr ""
+
+#: data/ui/station-editor.ui:432
+msgid "Done"
 msgstr ""
 
 #. APPEARANCE
