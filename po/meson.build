@@ -1,3 +1,1 @@
-i18n = import('i18n')
-
-i18n.gettext('gradio')
+i18n.gettext('gradio', preset: 'glib')

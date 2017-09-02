@@ -157,8 +157,8 @@ namespace Gradio {
 	int main (string[] args){
 		message("Gradio %s ", Config.VERSION);
 
-		message(Config.GETTEXT_PACKAGE);
-		message(Config.DATADIR);
+		message("gettext package: " + Config.GETTEXT_PACKAGE);
+		message("data dir: " + Config.DATADIR);
 
 		// Setup gettext
     		Intl.setlocale (GLib.LocaleCategory.ALL, Config.DATADIR + "/locale");

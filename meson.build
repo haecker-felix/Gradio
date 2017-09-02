@@ -3,7 +3,6 @@ project('gradio', ['vala', 'C'], version : '5.9.0')
 i18n = import('i18n')
 
 cc = meson.get_compiler('c')
-
 libm = cc.find_library('m', required: false)
 glib = dependency('glib-2.0')
 gobject = dependency('gobject-2.0')
@@ -18,6 +17,7 @@ sqlite3 = dependency('sqlite3')
 add_project_arguments('-DGETTEXT_PACKAGE="gradio"', language: 'c')
 add_project_arguments('-DDATADIR="' + get_option('datadir') + '"', language: 'c')
 add_project_arguments('-DG_LOG_DOMAIN="gradio"', language: 'c')
+
 
 subdir('data')
 subdir('po')

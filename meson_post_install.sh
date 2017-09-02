@@ -1,16 +1,21 @@
-#!/bin/sh
+#!/usr/bin/env python3
 
-# Packagers set DESTDIR so we don't want to try writing to root
-if [ -z $DESTDIR ]; then
+from os import environ, path
+from subprocess import call
 
-	PREFIX=${MESON_INSTALL_PREFIX:-/usr}
+prefix = environ.get('MESON_INSTALL_PREFIX', '/usr/local')
+datadir = path.join(prefix, 'share')
+destdir = environ.get('DESTDIR', '')
 
-	echo 'Compiling GSchema'
-	glib-compile-schemas "$PREFIX/share/glib-2.0/schemas"
-	echo 'Updating desktop database'
-	update-desktop-database -q
-	echo 'Updating icon cache'
-	gtk-update-icon-cache -q -t -f "$PREFIX/share/icons/hicolor"
+# Package managers set this so we don't need to run
+if not destdir:
+    print('Updating icon cache...')
+    call(['gtk-update-icon-cache', '-qtf', path.join(datadir, 'icons', 'hicolor')])
 
-fi
+    print('Updating desktop database...')
+    call(['update-desktop-database', '-q', path.join(datadir, 'applications')])
+
+    print('Compiling GSettings schemas...')
+    call(['glib-compile-schemas', path.join(datadir, 'glib-2.0', 'schemas')])
+
 
