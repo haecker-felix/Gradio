@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-02 19:04+0200\n"
+"POT-Creation-Date: 2017-09-03 16:35+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -180,77 +180,124 @@ msgstr ""
 msgid "Done"
 msgstr ""
 
+#: src/gradio-settings-window.vala:38
+msgid "Features"
+msgstr ""
+
+#: src/gradio-settings-window.vala:41
+msgid "Playback"
+msgstr ""
+
+#: src/gradio-settings-window.vala:44
+msgid "Library"
+msgstr ""
+
+#: src/gradio-settings-window.vala:47
+msgid "Appearance"
+msgstr ""
+
+#: src/gradio-settings-window.vala:50
+msgid "Cache"
+msgstr ""
+
 #. APPEARANCE
 #. Dark design
-#: src/gradio-settings-window.vala:54
+#: src/gradio-settings-window.vala:58
 msgid "Prefer dark theme"
 msgstr ""
 
-#: src/gradio-settings-window.vala:54
+#: src/gradio-settings-window.vala:58
 msgid "Use a dark theme, if possible"
 msgstr ""
 
 #. hide broken stations
-#: src/gradio-settings-window.vala:60
+#: src/gradio-settings-window.vala:64
 msgid "Hide broken stations"
 msgstr ""
 
-#: src/gradio-settings-window.vala:60
+#: src/gradio-settings-window.vala:64
 msgid "Don't show stations, which are not working"
 msgstr ""
 
 #. PLAYBACK
 #. enable background playback
-#: src/gradio-settings-window.vala:69
+#: src/gradio-settings-window.vala:73
 msgid "Background Playback"
 msgstr ""
 
-#: src/gradio-settings-window.vala:69
+#: src/gradio-settings-window.vala:73
 msgid "Continue the playback if you close the Gradio window"
 msgstr ""
 
 #. resume playback on startup
-#: src/gradio-settings-window.vala:75
+#: src/gradio-settings-window.vala:79
 msgid "Resume playback on startup"
 msgstr ""
 
-#: src/gradio-settings-window.vala:75
+#: src/gradio-settings-window.vala:79
 msgid "Play the latest station if you start Gradio"
+msgstr ""
+
+#. LIBRARY
+#. import library
+#: src/gradio-settings-window.vala:88 src/gradio-settings-window.vala:90
+msgid "Import"
+msgstr ""
+
+#: src/gradio-settings-window.vala:88
+msgid "Replace the current library with a another one"
+msgstr ""
+
+#: src/gradio-settings-window.vala:90
+msgid "Select database to import"
+msgstr ""
+
+#: src/gradio-settings-window.vala:92
+msgid "Do you want to replace the current library with this one?"
+msgstr ""
+
+#. export library
+#: src/gradio-settings-window.vala:98 src/gradio-settings-window.vala:100
+msgid "Export"
+msgstr ""
+
+#: src/gradio-settings-window.vala:98 src/gradio-settings-window.vala:100
+msgid "Export the current library"
 msgstr ""
 
 #. FEATURES
 #. mpris
-#: src/gradio-settings-window.vala:84
+#: src/gradio-settings-window.vala:110
 msgid "MPRIS"
 msgstr ""
 
-#: src/gradio-settings-window.vala:84
+#: src/gradio-settings-window.vala:110
 msgid "Integrate Gradio as media player in your desktop environment"
 msgstr ""
 
 #. enable notifications
-#: src/gradio-settings-window.vala:90
+#: src/gradio-settings-window.vala:116
 msgid "Notifications"
 msgstr ""
 
-#: src/gradio-settings-window.vala:90
+#: src/gradio-settings-window.vala:116
 msgid "Show desktop notifications"
 msgstr ""
 
 #. CACHE
 #. cache station images
-#: src/gradio-settings-window.vala:99
+#: src/gradio-settings-window.vala:125
 msgid "Cache station icons"
 msgstr ""
 
-#: src/gradio-settings-window.vala:99
+#: src/gradio-settings-window.vala:125
 msgid "Saves the images locally."
 msgstr ""
 
-#: src/gradio-settings-window.vala:104
+#: src/gradio-settings-window.vala:130
 msgid "Clear Cache"
 msgstr ""
 
-#: src/gradio-settings-window.vala:104
+#: src/gradio-settings-window.vala:130
 msgid "Clear all cached station icons"
 msgstr ""
