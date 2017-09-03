@@ -28,18 +28,152 @@ namespace Gradio{
 		private Sqlite.Database db;
 		private string db_error_message;
 
-		string database_path;
-		string dir_path;
+		File newdb = File.new_for_path (Path.build_filename (Environment.get_user_data_dir (), "gradio", "gradio.db")); // New DB
+		File olddb = File.new_for_path (Path.build_filename (Environment.get_user_data_dir (), "gradio", "library.gradio")); // Old DB
+
 
 		public Library(){
-			database_path = Path.build_filename (Environment.get_user_data_dir (), "gradio", "gradio.db");
-			dir_path = Path.build_filename (Environment.get_user_data_dir (), "gradio");
-
 			station_model = new StationModel();
 			collection_model = new CollectionModel();
 
 			open_database();
-			read_database();
+		}
+
+		private void open_database(){
+			message("Open database...");
+
+			// check for old database (gradio 5 or older)
+			if(is_old_database()){
+				migrate_old_db.begin();
+				return;
+			}
+
+			// check for new database
+			if(!database_exists()){
+				create_database();
+				return;
+			}
+
+			// open the database itself
+			int return_code = Sqlite.Database.open (newdb.get_path(), out db);
+			if (return_code!= Sqlite.OK) {
+				critical ("Can't open database: %d: %s\n", db.errcode (), db.errmsg ());
+				return;
+			}
+
+			// read database data
+			message("Successfully opened database! Reading database data...");
+			read_collections.begin();
+			read_stations.begin();
+		}
+
+		private void create_database(){
+			message("Create new database...");
+
+			File dir = File.new_for_path (Path.build_filename (Environment.get_user_data_dir (), "gradio"));
+
+			try{
+				if(!newdb.query_exists()){
+					if(!dir.query_exists()){
+						dir.make_directory_with_parents();
+					}
+					newdb.create (FileCreateFlags.NONE);
+
+					open_database();
+					init_database();
+				}else{
+					warning("Database already exists.");
+					open_database();
+				}
+			}catch(Error e){
+				critical("Cannot create new database: " + e.message);
+			}
+		}
+
+		private void init_database(){
+			message("Initialize database...");
+
+			string query = """
+				CREATE TABLE "library" ('station_id' INTEGER, 'collection_id' INTEGER);
+				CREATE TABLE "collections" ('collection_id' INTEGER, 'collection_name' TEXT)
+				""";
+
+			int return_code = db.exec (query, null, out db_error_message);
+			if (return_code != Sqlite.OK) {
+				critical ("Could not initialize database: %s\n", db_error_message);
+				return ;
+			}
+
+			message("Successfully initialized database!");
+		}
+
+		private async void read_collections(){
+			message("Importing collections...");
+			Statement stmt;
+			int rc = 0;
+			int cols;
+
+			if ((rc = db.prepare_v2 ("SELECT * FROM collections;", -1, out stmt, null)) == 1) {
+				critical ("SQL error: %d, %s\n", rc, db.errmsg ());
+				return;
+			}
+
+			cols = stmt.column_count();
+			do {
+				rc = stmt.step();
+				switch (rc) {
+				case Sqlite.DONE:
+					break;
+				case Sqlite.ROW:
+					message("Found collection: %s %s", stmt.column_text(0), stmt.column_text(1));
+					Collection coll = new Collection(stmt.column_text(1), stmt.column_text(0));
+					collection_model.add_collection(coll);
+					break;
+				default:
+					printerr ("Error: %d, %s\n", rc, db.errmsg ());
+					break;
+				}
+			} while (rc == Sqlite.ROW);
+			message("Imported all collections!");
+		}
+
+		private async void read_stations(){
+			message("Importing stations...");
+			Statement stmt;
+			int rc = 0;
+			int cols;
+
+			if ((rc = db.prepare_v2 ("SELECT * FROM library;", -1, out stmt, null)) == 1) {
+				critical ("SQL error: %d, %s\n", rc, db.errmsg ());
+				return;
+			}
+
+			cols = stmt.column_count();
+			do {
+				rc = stmt.step();
+				switch (rc) {
+				case Sqlite.DONE:
+					break;
+				case Sqlite.ROW:
+					RadioStation station = yield Util.get_station_by_id(int.parse(stmt.column_text(0)));
+
+					message("Found station: %s", station.title);
+					station_model.add_station(station);
+
+					if(stmt.column_text(1) != "0"){
+						Collection coll = collection_model.get_collection_by_id(stmt.column_text(1));
+						coll.add_station(station);
+
+						message("Added %s to collection \"%s\"", stmt.column_text(0), coll.name);
+					}
+
+					break;
+				default:
+					printerr ("Error: %d, %s\n", rc, db.errmsg ());
+					break;
+				}
+			} while (rc == Sqlite.ROW);
+			message("Imported all stations!");
 		}
 
 		public bool add_station_to_collection(string collection_id, RadioStation station){
@@ -220,148 +354,6 @@ namespace Gradio{
 			}
 		}
 
-
-		private void open_database(){
-			message("Open database...");
-
-			File file = File.new_for_path (database_path);
-			File olddb = File.new_for_path (Path.build_filename (Environment.get_user_data_dir (), "gradio", "library.gradio"));
-			if(olddb.query_exists() && !file.query_exists()){
-				migrate_old_db.begin();
-				return;
-			}
-
-			if(!file.query_exists()){
-				create_database();
-				return;
-			}
-
-			int return_code = Sqlite.Database.open (database_path.to_string(), out db);
-
-			if (return_code!= Sqlite.OK) {
-				critical ("Can't open database: %d: %s\n", db.errcode (), db.errmsg ());
-				return;
-			}
-
-			message("Successfully opened database!");
-		}
-
-		private void read_database(){
-			message("Reading database data...");
-			read_collections();
-			read_stations.begin();
-		}
-
-		private async void read_stations(){
-			message("Importing stations...");
-			Statement stmt;
-			int rc = 0;
-			int cols;
-
-			if ((rc = db.prepare_v2 ("SELECT * FROM library;", -1, out stmt, null)) == 1) {
-				critical ("SQL error: %d, %s\n", rc, db.errmsg ());
-				return;
-			}
-
-			cols = stmt.column_count();
-			do {
-				rc = stmt.step();
-				switch (rc) {
-				case Sqlite.DONE:
-					break;
-				case Sqlite.ROW:
-					RadioStation station = yield Util.get_station_by_id(int.parse(stmt.column_text(0)));
-
-					message("Found station: %s", station.title);
-					station_model.add_station(station);
-
-					if(stmt.column_text(1) != "0"){
-						Collection coll = collection_model.get_collection_by_id(stmt.column_text(1));
-						coll.add_station(station);
-
-						message("Added %s to collection \"%s\"", stmt.column_text(0), coll.name);
-					}
-
-					break;
-				default:
-					printerr ("Error: %d, %s\n", rc, db.errmsg ());
-					break;
-				}
-			} while (rc == Sqlite.ROW);
-			message("Imported all stations!");
-		}
-
-		private void read_collections(){
-			message("Importing collections...");
-			Statement stmt;
-			int rc = 0;
-			int cols;
-
-			if ((rc = db.prepare_v2 ("SELECT * FROM collections;", -1, out stmt, null)) == 1) {
-				critical ("SQL error: %d, %s\n", rc, db.errmsg ());
-				return;
-			}
-
-			cols = stmt.column_count();
-			do {
-				rc = stmt.step();
-				switch (rc) {
-				case Sqlite.DONE:
-					break;
-				case Sqlite.ROW:
-					message("Found collection: %s %s", stmt.column_text(0), stmt.column_text(1));
-					Collection coll = new Collection(stmt.column_text(1), stmt.column_text(0));
-					collection_model.add_collection(coll);
-					break;
-				default:
-					printerr ("Error: %d, %s\n", rc, db.errmsg ());
-					break;
-				}
-			} while (rc == Sqlite.ROW);
-			message("Imported all collections!");
-		}
-
-		private void create_database(){
-			message("Create new database...");
-
-			File file = File.new_for_path (database_path);
-			File dir = File.new_for_path (dir_path);
-
-			try{
-				if(!file.query_exists()){
-					if(!dir.query_exists()){
-						dir.make_directory_with_parents();
-					}
-					file.create (FileCreateFlags.NONE);
-
-					open_database();
-					init_database();
-				}else{
-					warning("Database already exists.");
-					open_database();
-				}
-			}catch(Error e){
-				critical("Cannot create new database: " + e.message);
-			}
-		}
-
-		private void init_database(){
-			message("Initialize database...");
-
-			string query = """
-				CREATE TABLE "library" ('station_id' INTEGER, 'collection_id' INTEGER);
-				CREATE TABLE "collections" ('collection_id' INTEGER, 'collection_name' TEXT)
-				""";
-
-			int return_code = db.exec (query, null, out db_error_message);
-			if (return_code != Sqlite.OK) {
-				critical ("Could not initialize database: %s\n", db_error_message);
-				return ;
-			}
-
-			message("Successfully initialized database!");
-		}
-
 		private async void migrate_old_db(){
 			File file = File.new_for_path (Path.build_filename (Environment.get_user_data_dir (), "gradio", "library.gradio"));
 
@@ -399,6 +391,21 @@ namespace Gradio{
 
 
 		}
+
+		private bool is_old_database (){
+			if(olddb.query_exists() && !newdb.query_exists()){
+				return true;
+			}
+			return false;
+		}
+
+		private bool database_exists (){
+			if(newdb.query_exists()){
+				return true;
+			}
+			return false;
+		}
+
 
 	}
 }
