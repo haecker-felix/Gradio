@@ -116,12 +116,33 @@ namespace Gradio{
 
 		}
 
-		public static string open_file (string description, Gtk.Window parent){
+		public static string save_file (string description, string btntext, Gtk.Window parent){
+			Gtk.FileChooserDialog chooser = new Gtk.FileChooserDialog (
+				description, parent, Gtk.FileChooserAction.SAVE,
+				_("_Cancel"),
+				Gtk.ResponseType.CANCEL,
+				btntext,
+				Gtk.ResponseType.ACCEPT);
+
+
+			chooser.set_current_name("gradio.db");
+
+
+			string path = "";
+			if (chooser.run () == Gtk.ResponseType.ACCEPT) {
+				path = chooser.get_file().get_path();
+			}
+			chooser.close();
+			chooser.destroy();
+			return path;
+		}
+
+		public static string open_file (string description, string btntext, Gtk.Window parent){
 			Gtk.FileChooserDialog chooser = new Gtk.FileChooserDialog (
 				description, parent, Gtk.FileChooserAction.OPEN,
-				"_Cancel",
+				_("_Cancel"),
 				Gtk.ResponseType.CANCEL,
-				"_Open",
+				btntext,
 				Gtk.ResponseType.ACCEPT);
 
 			Gtk.FileFilter filter = new Gtk.FileFilter ();

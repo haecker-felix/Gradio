@@ -355,7 +355,16 @@ namespace Gradio{
 		}
 
 		public void export_database(string path){
+			message("Exporting database to: %s", path);
+			File dest = File.new_for_path(path);
 
+			try{
+				newdb.copy(dest, FileCopyFlags.NONE, null, null);
+			}catch(GLib.Error e){
+				critical("Could not export database: %s", e.message);
+			}
+
+			message("Successfully exported database!");
 		}
 
 		public void import_database(string path){

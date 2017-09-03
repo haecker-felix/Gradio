@@ -87,7 +87,7 @@ namespace Gradio{
 			// import library
 			ButtonItem import_library_button = new ButtonItem(_("Import"), "");
 			import_library_button.btn_clicked.connect(() => {
-				string path = Util.open_file(_("Select database to import"), this);
+				string path = Util.open_file(_("Select database to import"), _("Import"), this);
 				if(path == "") return;
 				if(!Util.show_yes_no_dialog(_("Do you want to replace the current library with this one?"), this))return;
 				App.library.import_database(path);
@@ -97,7 +97,8 @@ namespace Gradio{
 			// export library
 			ButtonItem export_library_button = new ButtonItem(_("Export"), "");
 			export_library_button.btn_clicked.connect(() => {
-				string path = "";
+				string path = Util.save_file(_("Export library"), _("Export"), this);
+				if(path == "") return;
 				App.library.export_database(path);
 			});
 			library_group.add_listbox_row(export_library_button);
