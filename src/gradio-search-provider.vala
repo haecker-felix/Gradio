@@ -123,7 +123,7 @@ namespace Gradio{
 					var radio_station = radio_stations.get_element(i);
 					var radio_station_data = radio_station.get_object ();
 
-					var station = new RadioStation.from_json_data(radio_station_data);
+ 					var station = new RadioStation.from_json_data(radio_station_data);
 					model.add_station(station);
 				}
 

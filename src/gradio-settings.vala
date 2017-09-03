@@ -64,7 +64,7 @@ namespace Gradio{
 				return _enable_notifications;
 			}
 			set{
-				enable_notifications = value;
+				_enable_notifications = value;
 				settings.set_boolean ("enable-notifications", value);
 			}
 		}
