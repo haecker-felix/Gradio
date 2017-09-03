@@ -1,22 +1,22 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the gradio package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Gradio\n"
+"Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-08 20:25+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Häcker Felix <haecker.felix1207@gmail.com>, 2017\n"
-"Language-Team: German (https://www.transifex.com/gradio/teams/77313/de/)\n"
+"POT-Creation-Date: 2017-09-03 16:35+0200\n"
+"PO-Revision-Date: 2017-09-03 17:20+0200\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: de\n"
+"X-Generator: Poedit 2.0.3\n"
+"Last-Translator: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: de\n"
 
 #: data/ui/app-menu.ui:6
 msgid "Settings"
@@ -30,77 +30,275 @@ msgstr "Info"
 msgid "Quit"
 msgstr "Beenden"
 
+#: data/ui/filter-box.ui:27
+msgid "Where"
+msgstr "Wo"
+
+#: data/ui/filter-box.ui:44
+msgid "Select Country ..."
+msgstr "Land auswählen ..."
+
+#: data/ui/filter-box.ui:125
+msgid "Select State  ..."
+msgstr "Provinz auswählen ..."
+
+#: data/ui/filter-box.ui:205 data/ui/station-editor.ui:132
+msgid "Language"
+msgstr "Sprache"
+
+#: data/ui/filter-box.ui:222
+msgid "Select Language  ..."
+msgstr "Sprache auswählen ..."
+
+#: data/ui/page/add-page.ui:45
+msgid "Fill your library with something new"
+msgstr "Füge etwas neues deiner Bibliothek hinzu"
+
+#: data/ui/page/add-page.ui:64
+msgid "There are several options available to add something new."
+msgstr "Es gibt mehrere Optionen um etwas neues hinzuzufügen"
+
+#: data/ui/details-box.ui:23 data/ui/selection-toolbar.ui:151
+msgid "Details"
+msgstr "Details"
+
+#: data/ui/details-box.ui:137 data/ui/station-editor.ui:46
+msgid "Name"
+msgstr "Name"
+
+#: data/ui/details-box.ui:172
+msgid "Type"
+msgstr "Typ"
+
+#: data/ui/details-box.ui:209
+msgid "Items"
+msgstr "Objekte"
+
+#: data/ui/details-box.ui:253
+msgid "Votes"
+msgstr ""
+
+#: data/ui/details-box.ui:285
+msgid "Location"
+msgstr "Standort"
+
+#: data/ui/details-box.ui:317
+msgid "Description"
+msgstr "Beschreibung"
+
+#: data/ui/details-box.ui:349
+msgid "Tags"
+msgstr ""
+
+#: data/ui/details-box.ui:436 data/ui/selection-toolbar.ui:15
+msgid "Play"
+msgstr "Abspielen"
+
+#: data/ui/details-box.ui:481
+msgid "Open homepage"
+msgstr "Homepage öffnen"
+
+#: data/ui/details-box.ui:526
+msgid "Edit"
+msgstr "Bearbeiten"
+
+#: data/ui/organize-collection-dialog.ui:21
+#: data/ui/organize-collection-dialog.ui:108
+msgid "New Collection…"
+msgstr "Neue Sammlung..."
+
+#: data/ui/organize-collection-dialog.ui:31
+#: data/ui/organize-collection-dialog.ui:129
+#: data/ui/organize-collection-dialog.ui:202
+msgid "Add"
+msgstr "Hinzufügen"
+
+#: data/ui/organize-collection-dialog.ui:93
+msgid "Enter a name for your first collection"
+msgstr "Gebe einen Namen ein für deine erste Sammlung"
+
+#: data/ui/organize-collection-dialog.ui:193 data/ui/station-editor.ui:423
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#: data/ui/selection-menu.ui:7
+msgid "Select All"
+msgstr "Alle auswählen"
+
+#: data/ui/selection-menu.ui:11
+msgid "Select None"
+msgstr "Nichts auswählen"
+
+#: data/ui/selection-toolbar.ui:29
+msgid "Add to library"
+msgstr "Zur Bibliothek hinzufügen"
+
+#: data/ui/selection-toolbar.ui:46
+msgid "Remove"
+msgstr "Entfernen"
+
+#: data/ui/selection-toolbar.ui:135
+msgid "Collections"
+msgstr "Sammlungen"
+
+#: data/ui/station-editor.ui:72
+msgid "Stream Address"
+msgstr "Stream Adresse"
+
+#: data/ui/station-editor.ui:87
+msgid "Homepage"
+msgstr "Homepage"
+
+#: data/ui/station-editor.ui:102
+msgid "Country"
+msgstr "Land"
+
+#: data/ui/station-editor.ui:117
+msgid "State"
+msgstr "Provinz"
+
+#: data/ui/station-editor.ui:212
+msgid "Favicon Address"
+msgstr "Symbol Adresse"
+
+#: data/ui/station-editor.ui:279
+msgid "label"
+msgstr ""
+
+#: data/ui/station-editor.ui:355
+msgid "Server Response"
+msgstr "Server Antwort"
+
+#: data/ui/station-editor.ui:391
+msgid "Close"
+msgstr "Schließen"
+
+#: data/ui/station-editor.ui:409
+msgid "page1"
+msgstr ""
+
+#: data/ui/station-editor.ui:432
+msgid "Done"
+msgstr "Fertig"
+
+#: src/gradio-settings-window.vala:38
+msgid "Features"
+msgstr "Funktionen"
+
+#: src/gradio-settings-window.vala:41
+msgid "Playback"
+msgstr "Wiedergabe"
+
+#: src/gradio-settings-window.vala:44
+msgid "Library"
+msgstr "Bibliothek"
+
+#: src/gradio-settings-window.vala:47
+msgid "Appearance"
+msgstr "Aussehen"
+
+#: src/gradio-settings-window.vala:50
+msgid "Cache"
+msgstr "Zwischenspeicher"
+
 #. APPEARANCE
 #. Dark design
-#: src/gradio-settings-window.vala:54
+#: src/gradio-settings-window.vala:58
 msgid "Prefer dark theme"
-msgstr "Dunkles Thema"
+msgstr "Dunkles Thema bevorzugen"
 
-#: src/gradio-settings-window.vala:54
+#: src/gradio-settings-window.vala:58
 msgid "Use a dark theme, if possible"
-msgstr "Falls möglich, ein dunkles Thema bevorzugen"
+msgstr "Verwendet ein dunkles Thema, falls möglich"
 
 #. hide broken stations
-#: src/gradio-settings-window.vala:60
+#: src/gradio-settings-window.vala:64
 msgid "Hide broken stations"
-msgstr "Nicht funktionierende Sender ausblenden"
+msgstr "Defekte Sender ausblenden"
 
-#: src/gradio-settings-window.vala:60
+#: src/gradio-settings-window.vala:64
 msgid "Don't show stations, which are not working"
-msgstr "Sender die nicht abgespielt werden können, automatisch ausblenden."
+msgstr "Nicht abspielbare Sender ausblenden"
 
 #. PLAYBACK
 #. enable background playback
-#: src/gradio-settings-window.vala:69
+#: src/gradio-settings-window.vala:73
 msgid "Background Playback"
-msgstr "Hintergrund Wiedergabe"
+msgstr "Hintergrundwiedergabe"
 
-#: src/gradio-settings-window.vala:69
+#: src/gradio-settings-window.vala:73
 msgid "Continue the playback if you close the Gradio window"
-msgstr "Wiedergabe fortsetzen, wenn das Fenster geschlossen wird"
+msgstr "Die Wiedergabe fortsetzen, wenn Gradio geschlossen wird"
 
 #. resume playback on startup
-#: src/gradio-settings-window.vala:75
+#: src/gradio-settings-window.vala:79
 msgid "Resume playback on startup"
-msgstr "Letzte Wiedergabe beim Starten fortsetzen"
+msgstr "Wiedergabe beim Programmstart fortsetzen"
 
-#: src/gradio-settings-window.vala:75
+#: src/gradio-settings-window.vala:79
 msgid "Play the latest station if you start Gradio"
-msgstr "Den zuletzt verwendeteten Sender automatisch abspielen"
+msgstr "Spielt den zuletzt benutzten Sender automatisch erneut ab"
+
+#. LIBRARY
+#. import library
+#: src/gradio-settings-window.vala:88 src/gradio-settings-window.vala:90
+msgid "Import"
+msgstr "Importieren"
+
+#: src/gradio-settings-window.vala:88
+msgid "Replace the current library with a another one"
+msgstr "Die aktuelle Bibliothek durch eine andere ersetzen"
+
+#: src/gradio-settings-window.vala:90
+msgid "Select database to import"
+msgstr "Eine Datenbank zum importieren auswählen"
+
+#: src/gradio-settings-window.vala:92
+msgid "Do you want to replace the current library with this one?"
+msgstr "Möchtest du die aktuelle Bibliothek mit dieser ersetzen?"
+
+#. export library
+#: src/gradio-settings-window.vala:98 src/gradio-settings-window.vala:100
+msgid "Export"
+msgstr "Exportieren"
+
+#: src/gradio-settings-window.vala:98 src/gradio-settings-window.vala:100
+msgid "Export the current library"
+msgstr "Exportiert die aktuelle Bibliothek"
 
 #. FEATURES
 #. mpris
-#: src/gradio-settings-window.vala:84
+#: src/gradio-settings-window.vala:110
 msgid "MPRIS"
 msgstr "MPRIS"
 
-#: src/gradio-settings-window.vala:84
+#: src/gradio-settings-window.vala:110
 msgid "Integrate Gradio as media player in your desktop environment"
-msgstr "Gradio als Wiedergabeprogramm in die Desktopumgebung einbinden"
+msgstr "Integriert Gradio als Wiedergabeprogramm in die Desktopumgebung"
 
 #. enable notifications
-#: src/gradio-settings-window.vala:90
+#: src/gradio-settings-window.vala:116
 msgid "Notifications"
 msgstr "Benachrichtigungen"
 
-#: src/gradio-settings-window.vala:90
+#: src/gradio-settings-window.vala:116
 msgid "Show desktop notifications"
-msgstr "Desktopbenachrichtigungen anzeigen"
+msgstr "Zeige Desktop Benachrichtigungen"
 
 #. CACHE
 #. cache station images
-#: src/gradio-settings-window.vala:99
+#: src/gradio-settings-window.vala:125
 msgid "Cache station icons"
-msgstr "Senderlogos zwischenspeichern"
+msgstr "Symbole zwischenspeichern"
 
-#: src/gradio-settings-window.vala:99
+#: src/gradio-settings-window.vala:125
 msgid "Saves the images locally."
-msgstr "Logos lokal speichern"
+msgstr "Die Symbole lokal zwischenspeichern"
 
-#: src/gradio-settings-window.vala:104
+#: src/gradio-settings-window.vala:130
 msgid "Clear Cache"
-msgstr "Zwischenspeicher leeren"
+msgstr "Zwischenspeicher leeeren"
 
-#: src/gradio-settings-window.vala:104
+#: src/gradio-settings-window.vala:130
 msgid "Clear all cached station icons"
-msgstr "Alle Bilder löschen, die zwischengespeichert wurden."
+msgstr "Löscht alle zwischengespeicherte Symbole"

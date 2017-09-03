@@ -73,10 +73,6 @@ msgstr ""
 msgid "Items"
 msgstr ""
 
-#: data/ui/details-box.ui:253
-msgid "Votes"
-msgstr ""
-
 #: data/ui/details-box.ui:285
 msgid "Location"
 msgstr ""
@@ -160,20 +156,12 @@ msgstr ""
 msgid "Favicon Address"
 msgstr ""
 
-#: data/ui/station-editor.ui:279
-msgid "label"
-msgstr ""
-
 #: data/ui/station-editor.ui:355
 msgid "Server Response"
 msgstr ""
 
 #: data/ui/station-editor.ui:391
 msgid "Close"
-msgstr ""
-
-#: data/ui/station-editor.ui:409
-msgid "page1"
 msgstr ""
 
 #: data/ui/station-editor.ui:432
