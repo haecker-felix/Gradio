@@ -92,9 +92,9 @@ namespace Gradio {
 			var action = new GLib.SimpleAction ("preferences", null);
 			action.activate.connect (() => {
 			 	SettingsWindow swindow = new SettingsWindow();
-			 	swindow.set_transient_for(window);
+			 	swindow.set_transient_for(App.window);
 				swindow.set_modal(true);
-				swindow.show_all();
+				swindow.set_visible(true);
 			});
 			this.add_action (action);
 

@@ -64,7 +64,7 @@ namespace Gradio{
 
 		public int actual_zoom = 100;
 		private const int min_zoom = 50;
-		private const int max_zoom = 250;
+		private const int max_zoom = 175;
 		private const int zoom_steps = 25;
 
 

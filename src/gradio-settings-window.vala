@@ -32,6 +32,7 @@ namespace Gradio{
 		public SettingsWindow () {
 			setup_groups();
 			setup_items();
+			this.show_all();
 		}
 
 		private void setup_groups(){

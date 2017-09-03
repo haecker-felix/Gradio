@@ -6,13 +6,10 @@
     <property name="can_focus">False</property>
     <child>
       <object class="GtkBox" id="PopoverBox">
-        <property name="width_request">150</property>
+        <property name="width_request">225</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="margin_left">9</property>
-        <property name="margin_right">9</property>
-        <property name="margin_top">9</property>
-        <property name="margin_bottom">9</property>
+        <property name="border_width">12</property>
         <property name="orientation">vertical</property>
         <property name="spacing">10</property>
         <child>
@@ -139,7 +136,10 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="halign">start</property>
-                <property name="label" translatable="yes">Sort stations by</property>
+                <property name="label" translatable="yes">Sort</property>
+                <style>
+                  <class name="dim-label"/>
+                </style>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -212,8 +212,8 @@
               </packing>
             </child>
             <child>
-              <object class="GtkRadioButton" id="BitrateRButton">
-                <property name="label" translatable="yes">Bitrate</property>
+              <object class="GtkRadioButton" id="StateRButton">
+                <property name="label" translatable="yes">State</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">False</property>
@@ -228,8 +228,8 @@
               </packing>
             </child>
             <child>
-              <object class="GtkRadioButton" id="StateRButton">
-                <property name="label" translatable="yes">State</property>
+              <object class="GtkRadioButton" id="BitrateRButton">
+                <property name="label" translatable="yes">Bitrate</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">False</property>
@@ -273,6 +273,17 @@
                 <property name="expand">False</property>
                 <property name="fill">True</property>
                 <property name="position">8</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkSeparator">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">10</property>
               </packing>
             </child>
           </object>
