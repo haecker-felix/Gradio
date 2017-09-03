@@ -99,6 +99,44 @@ namespace Gradio{
 			}
 			return new_station;
 		}
+
+		public static bool show_yes_no_dialog(string text, Gtk.Window parent){
+			bool result = false;
+
+			Gtk.MessageDialog msg = new Gtk.MessageDialog (parent, Gtk.DialogFlags.MODAL, Gtk.MessageType.QUESTION, Gtk.ButtonsType.YES_NO, text);
+			if (msg.run () == Gtk.ResponseType.YES) {
+				result = true;
+			}
+			msg.close();
+			msg.destroy();
+			return result;
+		}
+
+		public static void show_info_dialog(string text, Gtk.Window parent){
+
+		}
+
+		public static string open_file (string description, Gtk.Window parent){
+			Gtk.FileChooserDialog chooser = new Gtk.FileChooserDialog (
+				description, parent, Gtk.FileChooserAction.OPEN,
+				"_Cancel",
+				Gtk.ResponseType.CANCEL,
+				"_Open",
+				Gtk.ResponseType.ACCEPT);
+
+			Gtk.FileFilter filter = new Gtk.FileFilter ();
+			chooser.set_filter (filter);
+			filter.add_mime_type ("application/x-sqlite3");
+
+
+			string path = "";
+			if (chooser.run () == Gtk.ResponseType.ACCEPT) {
+				path = chooser.get_file().get_path();
+			}
+			chooser.close();
+			chooser.destroy();
+			return path;
+		}
 	}
 }
 

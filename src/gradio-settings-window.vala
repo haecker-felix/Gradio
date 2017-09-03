@@ -24,6 +24,7 @@ namespace Gradio{
 
 		private GroupBox appearance_group;
 		private GroupBox playback_group;
+		private GroupBox library_group;
 		private GroupBox features_group;
 		private GroupBox cache_group;
 
@@ -34,16 +35,19 @@ namespace Gradio{
 		}
 
 		private void setup_groups(){
-			features_group = new GroupBox("Features");
+			features_group = new GroupBox(_("Features"));
 			SettingsBox.add(features_group);
 
-			playback_group = new GroupBox("Playback");
+			playback_group = new GroupBox(_("Playback"));
 			SettingsBox.add(playback_group);
 
-			appearance_group = new GroupBox("Appearance");
+			library_group = new GroupBox(_("Library"));
+			SettingsBox.add(library_group);
+
+			appearance_group = new GroupBox(_("Appearance"));
 			SettingsBox.add(appearance_group);
 
-			cache_group = new GroupBox("Cache");
+			cache_group = new GroupBox(_("Cache"));
 			SettingsBox.add(cache_group);
 		}
 
@@ -76,6 +80,27 @@ namespace Gradio{
 			resume_playback_on_startup_switch.set_state(Settings.resume_playback_on_startup);
 			resume_playback_on_startup_switch.toggled.connect(() => {Settings.resume_playback_on_startup = resume_playback_on_startup_switch.get_state();});
 			playback_group.add_listbox_row(resume_playback_on_startup_switch);
+
+
+			// LIBRARY
+
+			// import library
+			ButtonItem import_library_button = new ButtonItem(_("Import"), "");
+			import_library_button.btn_clicked.connect(() => {
+				string path = Util.open_file(_("Select database to import"), this);
+				if(path == "") return;
+				if(!Util.show_yes_no_dialog(_("Do you want to replace the current library with this one?"), this))return;
+				App.library.import_database(path);
+			});
+			library_group.add_listbox_row(import_library_button);
+
+			// export library
+			ButtonItem export_library_button = new ButtonItem(_("Export"), "");
+			export_library_button.btn_clicked.connect(() => {
+				string path = "";
+				App.library.export_database(path);
+			});
+			library_group.add_listbox_row(export_library_button);
 
 
 			// FEATURES

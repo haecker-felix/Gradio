@@ -10,3 +10,4 @@ data/ui/station-editor.ui
 src/gradio-settings-window.vala
 src/page/gradio-add-page.vala
 src/gradio-headerbar.vala
+src/gradio-library.vala

@@ -354,6 +354,28 @@ namespace Gradio{
 			}
 		}
 
+		public void export_database(string path){
+
+		}
+
+		public void import_database(string path){
+			message("Importing database from path: %s", path);
+			File external_db = File.new_for_path(path);
+
+			try{
+				station_model.clear();
+				collection_model.clear();
+
+				newdb.delete();
+				external_db.copy(newdb, FileCopyFlags.NONE, null, null);
+			}catch(GLib.Error e){
+				critical("Could not import database: %s", e.message);
+			}
+
+			message("Successfully imported database!");
+			open_database();
+		}
+
 		private async void migrate_old_db(){
 			File file = File.new_for_path (Path.build_filename (Environment.get_user_data_dir (), "gradio", "library.gradio"));
 
