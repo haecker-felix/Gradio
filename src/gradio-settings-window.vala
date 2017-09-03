@@ -97,7 +97,7 @@ namespace Gradio{
 			// export library
 			ButtonItem export_library_button = new ButtonItem(_("Export"), _("Export the current library"));
 			export_library_button.btn_clicked.connect(() => {
-				string path = Util.save_file(_("Export library"), _("Export"), this);
+				string path = Util.save_file(_("Export the current library"), _("Export"), this);
 				if(path == "") return;
 				App.library.export_database(path);
 			});
