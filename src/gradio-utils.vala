@@ -113,7 +113,13 @@ namespace Gradio{
 		}
 
 		public static void show_info_dialog(string text, Gtk.Window parent){
+			Gtk.MessageDialog msg = new Gtk.MessageDialog (parent, Gtk.DialogFlags.MODAL, Gtk.MessageType.INFO, Gtk.ButtonsType.OK, text);
+			if (msg.run () == Gtk.ResponseType.OK) {
+				msg.close();
+				msg.destroy();
+			}
 
+			return;
 		}
 
 		public static string save_file (string description, string btntext, Gtk.Window parent){

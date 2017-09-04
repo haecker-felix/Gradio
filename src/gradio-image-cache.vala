@@ -44,7 +44,7 @@ namespace Gradio {
 		    	return pixbuf;
 		}
 
-		public async void clear_cache(){
+		public async bool clear_cache(){
 			try{
 				File cache_location = File.new_for_path(GLib.Environment.get_user_cache_dir()+"/gradio/");
 				FileEnumerator enumerator = yield
@@ -58,9 +58,10 @@ namespace Gradio {
 		                	}
 				}
 
-				App.window.show_notification("Successfully cleared cache.");
+				return true;
 			}catch (Error e){
 				critical("Could not clear icon cache: %s", e.message);
+				return false;
 			}
 
 		}

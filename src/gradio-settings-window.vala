@@ -129,7 +129,11 @@ namespace Gradio{
 			cache_group.add_listbox_row(cache_stations_switch);
 
 			ButtonItem clear_cache_button = new ButtonItem(_("Clear Cache"), _("Clear all cached station icons"));
-			clear_cache_button.btn_clicked.connect(() => {App.image_cache.clear_cache.begin();});
+			clear_cache_button.btn_clicked.connect(() => {
+				App.image_cache.clear_cache.begin((obj,res) => {
+					Util.show_info_dialog("Successfully cleared cache data", App.window);
+				});
+			});
 			cache_group.add_listbox_row(clear_cache_button);
 
 		}
