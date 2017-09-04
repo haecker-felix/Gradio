@@ -38,9 +38,6 @@ namespace Gradio{
 		[GtkChild] private Stack MainStack;
 		[GtkChild] private Box Bottom;
 
-		private int height;
-		private int width;
-
 		CollectionItemsPage collection_items_page;
 		public SearchPage search_page;
 		LibraryPage library_page;
@@ -77,7 +74,6 @@ namespace Gradio{
 
 		public void setup(){
 			setup_view();
-			restore_geometry();
 			connect_signals();
 
 			this.show_all();
@@ -118,15 +114,22 @@ namespace Gradio{
 	        	player_toolbar = new PlayerToolbar();
 	       		player_toolbar.set_visible(false);
 
-			//Load css
-			Util.add_stylesheet();
 	       		Bottom.pack_end(player_toolbar);
+
+	       		// Load css
+			Util.add_stylesheet();
+
+			// restore window size
+	       		this.set_default_size(Settings.window_width, Settings.window_height);
 		}
 
 		private void connect_signals(){
 			this.size_allocate.connect((a) => {
-			 	width = a.width;
-			 	height = a.height;
+				int width, height;
+				this.get_size (out width, out height);
+
+			 	Settings.window_width = width;
+			 	Settings.window_height = height;
 			});
 
 			header.LibraryToggleButton.clicked.connect(() => { set_mode(WindowMode.LIBRARY); });
@@ -137,18 +140,6 @@ namespace Gradio{
 			header.selection_canceled.connect(disable_selection_mode);
 			header.selection_started.connect(enable_selection_mode);
 			NotificationCloseButton.clicked.connect(hide_notification);
-		}
-
-		public void save_geometry (){
-			this.get_size (out width, out height);
-
-			Settings.window_height = height;
-			Settings.window_width = width;
-		}
-
-		public void restore_geometry(){
-			width = Settings.window_width;
-			height = Settings.window_height;
 		}
 
 		public void enable_selection_mode(){

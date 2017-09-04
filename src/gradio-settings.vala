@@ -31,8 +31,6 @@ namespace Gradio{
 		private static double _volume_position;
 		private static int _window_height;
 		private static int _window_width;
-		private static int _window_position_x;
-		private static int _window_position_y;
 		private static int _icon_zoom;
 		private static Compare _station_sorting;
 		private static bool _sort_ascending;
@@ -51,8 +49,6 @@ namespace Gradio{
 			_volume_position = settings.get_double("volume-position");
 			_window_height = settings.get_int("window-height");
 			_window_width = settings.get_int("window-width");
-			_window_position_x = settings.get_int("window-position-x");
-			_window_position_y = settings.get_int("window-position-y");
 			_icon_zoom = settings.get_int("icon-zoom");
 			_station_sorting = (Compare) settings.get_int("station-sorting");
 			_sort_ascending = settings.get_boolean("sort-ascending");
@@ -168,26 +164,6 @@ namespace Gradio{
 			set{
 				_window_width = value;
 				settings.set_int ("window-width", value);
-			}
-		}
-
-		public static int window_position_x{
-			get{
-				return _window_position_x;
-			}
-			set{
-				_window_position_x = value;
-				settings.set_int ("window-position-x", value);
-			}
-		}
-
-		public static int window_position_y{
-			get{
-				return _window_position_y;
-			}
-			set{
-				_window_position_y = value;
-				settings.set_int ("window-position-y", value);
 			}
 		}
 

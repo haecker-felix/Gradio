@@ -35,16 +35,6 @@
       <summary>Volume position</summary>
     </key>
 
-    <key name="window-position-x" type="i">
-      <default>0</default>
-      <summary>X Position of the window</summary>
-    </key>
-
-    <key name="window-position-y" type="i">
-      <default>0</default>
-      <summary>Y Position of the window</summary>
-    </key>
-
     <key name="window-height" type="i">
       <default>500</default>
       <summary>Height of the window</summary>

@@ -77,7 +77,6 @@ namespace Gradio {
 			mpris.requested_raise.connect(() => restore_window());
 
 			window.delete_event.connect (() => {
-				window.save_geometry ();
 				window.hide_on_delete ();
 
 				if(player.state == Gst.State.PLAYING && Settings.enable_background_playback)
@@ -149,7 +148,6 @@ namespace Gradio {
 
 		public void quit_application(){
 			restore_window ();
-			window.save_geometry ();
 			base.quit ();
 		}
 	}
