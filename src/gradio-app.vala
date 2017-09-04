@@ -47,29 +47,28 @@ namespace Gradio {
 
 			setup_actions();
 
+			player = new AudioPlayer();
+
+			window = new MainWindow(this);
+			this.add_window(window);
+
 			if(!Util.check_database_connection()){
 				warning("Could not conenct to radio-browser.info.");
-				Util.send_notification("No internet connection", "Gradio needs a internet connection");
-
-			}else{
-				player = new AudioPlayer();
-
-				window = new MainWindow(this);
-				this.add_window(window);
-
-				image_cache = new ImageCache();
-
-				library = new Library();
-
-				if(Settings.enable_mpris == true){
-					mpris = new MPRIS();
-					mpris.initialize();
-				}
-
-				connect_signals();
-
-				window.setup();
+				Util.show_info_dialog("Gradio cannot connect radio-browser.info. Please check you internet connection.", window);
+				quit_application();
 			}
+
+			image_cache = new ImageCache();
+
+			library = new Library();
+
+			if(Settings.enable_mpris == true){
+				mpris = new MPRIS();
+				mpris.initialize();
+			}
+
+			connect_signals();
+			window.setup();
 		}
 
 		private void connect_signals(){
@@ -147,7 +146,6 @@ namespace Gradio {
 		}
 
 		public void quit_application(){
-			restore_window ();
 			base.quit ();
 		}
 	}
