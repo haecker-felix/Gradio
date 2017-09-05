@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-05 19:38+0200\n"
+"POT-Creation-Date: 2017-09-05 19:55+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -41,7 +41,7 @@ msgstr ""
 msgid "Select State  ..."
 msgstr ""
 
-#: data/ui/filter-box.ui:205 data/ui/station-editor.ui:132
+#: data/ui/filter-box.ui:205 data/ui/station-editor.ui:211
 msgid "Language"
 msgstr ""
 
@@ -61,7 +61,7 @@ msgstr ""
 msgid "Details"
 msgstr ""
 
-#: data/ui/details-box.ui:137 data/ui/station-editor.ui:46
+#: data/ui/details-box.ui:137 data/ui/station-editor.ui:125
 msgid "Name"
 msgstr ""
 
@@ -112,7 +112,7 @@ msgstr ""
 msgid "Enter a name for your first collection"
 msgstr ""
 
-#: data/ui/organize-collection-dialog.ui:192 data/ui/station-editor.ui:497
+#: data/ui/organize-collection-dialog.ui:192 data/ui/station-editor.ui:501
 msgid "Cancel"
 msgstr ""
 
@@ -136,50 +136,50 @@ msgstr ""
 msgid "Collections"
 msgstr ""
 
-#: data/ui/station-editor.ui:72
-msgid "Stream Address"
-msgstr ""
-
-#: data/ui/station-editor.ui:87
-msgid "Homepage"
-msgstr ""
-
-#: data/ui/station-editor.ui:102
-msgid "Country"
-msgstr ""
-
-#: data/ui/station-editor.ui:117
-msgid "State"
-msgstr ""
-
-#: data/ui/station-editor.ui:212
-msgid "Favicon Address"
-msgstr ""
-
-#: data/ui/station-editor.ui:355
-msgid "Server Response"
-msgstr ""
-
-#: data/ui/station-editor.ui:391
-msgid "Close"
-msgstr ""
-
-#: data/ui/station-editor.ui:437
+#: data/ui/station-editor.ui:39
 msgid "Global database"
 msgstr ""
 
-#: data/ui/station-editor.ui:452
+#: data/ui/station-editor.ui:54
 msgid ""
 "Gradio is using a internet database. All changes you will do here, is going "
 "to be visible for all users. Please be careful, and double check your "
 "changes!"
 msgstr ""
 
-#: data/ui/station-editor.ui:464
-msgid "I'm going to be careful"
+#: data/ui/station-editor.ui:68
+msgid "Continue"
 msgstr ""
 
-#: data/ui/station-editor.ui:506
+#: data/ui/station-editor.ui:151
+msgid "Stream Address"
+msgstr ""
+
+#: data/ui/station-editor.ui:166
+msgid "Homepage"
+msgstr ""
+
+#: data/ui/station-editor.ui:181
+msgid "Country"
+msgstr ""
+
+#: data/ui/station-editor.ui:196
+msgid "State"
+msgstr ""
+
+#: data/ui/station-editor.ui:291
+msgid "Favicon Address"
+msgstr ""
+
+#: data/ui/station-editor.ui:435
+msgid "Server Response"
+msgstr ""
+
+#: data/ui/station-editor.ui:471
+msgid "Close"
+msgstr ""
+
+#: data/ui/station-editor.ui:510
 msgid "Done"
 msgstr ""
 
