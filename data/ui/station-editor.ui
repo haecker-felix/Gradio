@@ -10,6 +10,85 @@
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="border_width">6</property>
+        <property name="transition_type">crossfade</property>
+        <child>
+          <object class="GtkBox">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="orientation">vertical</property>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="margin_top">24</property>
+                <property name="pixel_size">192</property>
+                <property name="icon_name">dialog-warning-symbolic</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="margin_top">24</property>
+                <property name="margin_bottom">12</property>
+                <property name="label" translatable="yes">Global database</property>
+                <attributes>
+                  <attribute name="font-desc" value="Cantarell Bold 24"/>
+                </attributes>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Gradio is using a internet database. All changes you will do here, is going to be visible for all users. Please be careful, and double check your changes!</property>
+                <property name="justify">center</property>
+                <property name="wrap">True</property>
+                <property name="width_chars">50</property>
+                <property name="max_width_chars">50</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="ContinueButton">
+                <property name="label" translatable="yes">Continue</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <property name="margin_top">12</property>
+                <property name="margin_bottom">12</property>
+                <signal name="clicked" handler="ContinueButton_clicked" swapped="no"/>
+                <style>
+                  <class name="suggested-action"/>
+                </style>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">3</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="name">introduction</property>
+          </packing>
+        </child>
         <child>
           <object class="GtkBox">
             <property name="visible">True</property>
@@ -297,6 +376,7 @@
           </object>
           <packing>
             <property name="name">edit</property>
+            <property name="position">1</property>
           </packing>
         </child>
         <child>
@@ -321,7 +401,7 @@
           </object>
           <packing>
             <property name="name">loading</property>
-            <property name="position">1</property>
+            <property name="position">2</property>
           </packing>
         </child>
         <child>
@@ -406,7 +486,7 @@
           </object>
           <packing>
             <property name="name">finish</property>
-            <property name="position">2</property>
+            <property name="position">3</property>
           </packing>
         </child>
       </object>
@@ -416,7 +496,6 @@
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="title">Station Editor</property>
-        <property name="subtitle">Changes are globally visible to all users!</property>
         <child>
           <object class="GtkButton" id="CancelButton">
             <property name="label" translatable="yes">Cancel</property>

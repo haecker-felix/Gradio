@@ -54,7 +54,7 @@ namespace Gradio {
 
 			if(!Util.check_database_connection()){
 				warning("Could not conenct to radio-browser.info.");
-				Util.show_info_dialog("Gradio cannot connect radio-browser.info. Please check you internet connection.", window);
+				Util.show_info_dialog("Gradio cannot connect radio-browser.info. Please check your internet connection.", window);
 				quit_application();
 			}
 

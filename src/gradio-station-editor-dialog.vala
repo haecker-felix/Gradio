@@ -49,14 +49,14 @@ namespace Gradio{
 
 		public StationEditorDialog.create(){
 			setup();
-			header.set_title("Create radio station");
 
+			header.set_title(_("Create radio station"));
 			address = "http://www.radio-browser.info/webservice/json/add";
 		}
 
 		public StationEditorDialog.edit(RadioStation station){
 			setup();
-			header.set_title("Edit radio station");
+			header.set_title(_("Edit radio station"));
 
 			address = " http://www.radio-browser.info/webservice/json/edit/" + station.id;
 			NameEntry.set_text(station.title);
@@ -70,8 +70,6 @@ namespace Gradio{
 			station.get_stream_address.begin((obj,res) => {
 				string address = station.get_stream_address.end(res);
 				StreamEntry.set_text(address);
-
-				message(station.is_broken.to_string());
 
 				if(!station.is_broken)
 					StreamEntry.set_sensitive(false);
@@ -161,9 +159,14 @@ namespace Gradio{
 		}
 
 		[GtkCallback]
+		private void ContinueButton_clicked(){
+			EditorStack.set_visible_child_name("edit");
+		}
+
+		[GtkCallback]
 		private void DoneButton_clicked(){
 			if(NameEntry.get_text() == "" || StreamEntry.get_text() == ""){
-				AnswerLabel.set_text("\"Name\" and \"Stream\" information is required.");
+				AnswerLabel.set_text(_("\"Name\" and \"Stream\" information is required."));
 				EditorStack.set_visible_child_name("edit");
 				AnswerBox.set_visible(true);
 				return;
