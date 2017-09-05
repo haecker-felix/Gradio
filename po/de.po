@@ -2,13 +2,12 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the gradio package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-03 16:35+0200\n"
-"PO-Revision-Date: 2017-09-05 18:04+0000\n"
+"PO-Revision-Date: 2017-09-05 18:29+0000\n"
 "Last-Translator: Häcker Felix <haecker.felix1207@gmail.com>\n"
 "Language-Team: German "
 "<https://hosted.weblate.org/projects/gradio/translations/de/>\n"
@@ -57,7 +56,7 @@ msgstr "Füge etwas neues deiner Bibliothek hinzu"
 
 #: data/ui/page/add-page.ui:64
 msgid "There are several options available to add something new."
-msgstr "Es gibt mehrere Optionen um etwas neues hinzuzufügen."
+msgstr "Es gibt mehrere Optionen um etwas neues hinzuzufügen"
 
 #: data/ui/details-box.ui:23 data/ui/selection-toolbar.ui:151
 msgid "Details"
@@ -106,7 +105,7 @@ msgstr "Bearbeiten"
 #: data/ui/organize-collection-dialog.ui:21
 #: data/ui/organize-collection-dialog.ui:108
 msgid "New Collection…"
-msgstr "Neue Sammlung…"
+msgstr "Neue Sammlung..."
 
 #: data/ui/organize-collection-dialog.ui:31
 #: data/ui/organize-collection-dialog.ui:129
