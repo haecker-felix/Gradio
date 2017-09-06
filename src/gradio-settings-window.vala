@@ -88,7 +88,7 @@ namespace Gradio{
 			// import library
 			ButtonItem import_library_button = new ButtonItem(_("Import"), _("Replace the current library with a another one"));
 			import_library_button.btn_clicked.connect(() => {
-				string path = Util.open_file(_("Select database to import"), _("Import"), this);
+				string path = import_library_dialog();
 				if(path == "") return;
 				if(!Util.show_yes_no_dialog(_("Do you want to replace the current library with this one?"), this))return;
 				App.library.import_database(path);
@@ -98,7 +98,7 @@ namespace Gradio{
 			// export library
 			ButtonItem export_library_button = new ButtonItem(_("Export"), _("Export the current library"));
 			export_library_button.btn_clicked.connect(() => {
-				string path = Util.save_file(_("Export the current library"), _("Export"), this);
+				string path = export_library_dialog();
 				if(path == "") return;
 				App.library.export_database(path);
 			});
@@ -136,6 +136,49 @@ namespace Gradio{
 			});
 			cache_group.add_listbox_row(clear_cache_button);
 
+		}
+
+		private string export_library_dialog (){
+			Gtk.FileChooserDialog chooser = new Gtk.FileChooserDialog (
+				_("Export the current library"), this, Gtk.FileChooserAction.SAVE,
+				_("_Cancel"),
+				Gtk.ResponseType.CANCEL,
+				 _("Export"),
+				Gtk.ResponseType.ACCEPT);
+
+
+			chooser.set_current_name("gradio.db");
+
+
+			string path = "";
+			if (chooser.run () == Gtk.ResponseType.ACCEPT) {
+				path = chooser.get_file().get_path();
+			}
+			chooser.close();
+			chooser.destroy();
+			return path;
+		}
+
+		private string import_library_dialog (){
+			Gtk.FileChooserDialog chooser = new Gtk.FileChooserDialog (
+				_("Select database to import"), this, Gtk.FileChooserAction.OPEN,
+				_("_Cancel"),
+				Gtk.ResponseType.CANCEL,
+				 _("Import"),
+				Gtk.ResponseType.ACCEPT);
+
+			Gtk.FileFilter filter = new Gtk.FileFilter ();
+			chooser.set_filter (filter);
+			filter.add_mime_type ("application/x-sqlite3");
+
+
+			string path = "";
+			if (chooser.run () == Gtk.ResponseType.ACCEPT) {
+				path = chooser.get_file().get_path();
+			}
+			chooser.close();
+			chooser.destroy();
+			return path;
 		}
 
 	}
