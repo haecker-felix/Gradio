@@ -223,7 +223,7 @@ public class Gradio.MprisPlayer : GLib.Object {
 		if(changed_properties == null)
 			return false;
 
-		var builder						 = new VariantBuilder(VariantType.ARRAY);
+		var builder = new VariantBuilder(VariantType.ARRAY);
 		var invalidated_builder = new VariantBuilder(new VariantType("as"));
 
 		foreach(string name in changed_properties.get_keys()) {
