@@ -39,15 +39,15 @@ namespace Gradio{
 
 		private StatusIcon status_icon;
 
-		RadioStation station = null;
-
 		public PlayerToolbar(){
 			setup_view();
 
 			App.player.notify["state"].connect(station_state_changed);
 			App.player.notify["current-title-tag"].connect (() => {
-				if(!(App.player.current_title_tag == "" || App.player.current_title_tag == null))
+				if(!(App.player.current_title_tag == "" || App.player.current_title_tag == null)){
 					StationMetadataLabel.set_text(App.player.current_title_tag);
+					Util.send_notification(App.player.station.title, App.player.current_title_tag);
+				}
 
 			});
 			App.player.notify["status-message"].connect (() => {
@@ -79,14 +79,10 @@ namespace Gradio{
 		}
 
 		private void station_changed (){
-			// set new station
-			if(App.player.station != null)
-				station = App.player.station;
-
 			// Title
-			StationTitleLabel.set_text(station.title);
+			StationTitleLabel.set_text(App.player.station.title);
 
-			Thumbnail _thumbnail = new Thumbnail.for_address(42, station.icon_address);
+			Thumbnail _thumbnail = new Thumbnail.for_address(42, App.player.station.icon_address);
 			_thumbnail.updated.connect(() => {
 				StationLogo.set_from_surface(_thumbnail.surface);
 			});
@@ -118,7 +114,7 @@ namespace Gradio{
 
 		[GtkCallback]
 		private bool StationLogo_clicked(){
-			station.show_details();
+			App.player.station.show_details();
 			return false;
 		}
 	}

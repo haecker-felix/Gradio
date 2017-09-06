@@ -61,9 +61,11 @@ namespace Gradio{
 		}
 
 		public static void send_notification(string summary, string body, Gdk.Pixbuf? icon = null){
-			var notification = new GLib.Notification (summary);
-			notification.set_body (body);
-			GLib.Application.get_default ().send_notification ("de.haeckerfelix.gradio", notification);
+			if(Settings.enable_notifications){
+				var notification = new GLib.Notification (summary);
+				notification.set_body (body);
+				GLib.Application.get_default ().send_notification ("de.haeckerfelix.gradio", notification);
+			}
 		}
 
 		public static bool is_collection_item(int id){
@@ -121,51 +123,5 @@ namespace Gradio{
 
 			return;
 		}
-
-		public static string save_file (string description, string btntext, Gtk.Window parent){
-			Gtk.FileChooserDialog chooser = new Gtk.FileChooserDialog (
-				description, parent, Gtk.FileChooserAction.SAVE,
-				_("_Cancel"),
-				Gtk.ResponseType.CANCEL,
-				btntext,
-				Gtk.ResponseType.ACCEPT);
-
-
-			chooser.set_current_name("gradio.db");
-
-
-			string path = "";
-			if (chooser.run () == Gtk.ResponseType.ACCEPT) {
-				path = chooser.get_file().get_path();
-			}
-			chooser.close();
-			chooser.destroy();
-			return path;
-		}
-
-		public static string open_file (string description, string btntext, Gtk.Window parent){
-			Gtk.FileChooserDialog chooser = new Gtk.FileChooserDialog (
-				description, parent, Gtk.FileChooserAction.OPEN,
-				_("_Cancel"),
-				Gtk.ResponseType.CANCEL,
-				btntext,
-				Gtk.ResponseType.ACCEPT);
-
-			Gtk.FileFilter filter = new Gtk.FileFilter ();
-			chooser.set_filter (filter);
-			filter.add_mime_type ("application/x-sqlite3");
-
-
-			string path = "";
-			if (chooser.run () == Gtk.ResponseType.ACCEPT) {
-				path = chooser.get_file().get_path();
-			}
-			chooser.close();
-			chooser.destroy();
-			return path;
-		}
 	}
 }
-
-
-
