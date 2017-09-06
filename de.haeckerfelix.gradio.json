@@ -1,6 +1,5 @@
 {
     "app-id": "de.haeckerfelix.gradio",
-    "version": "master",
     "runtime": "org.gnome.Platform",
     "runtime-version": "3.24",
     "sdk": "org.gnome.Sdk",
@@ -8,29 +7,24 @@
     "tags": ["nightly"],
     "desktop-file-name-prefix": "(Development) ",
     "finish-args": [
-        /* X11 + XShm access */
         "--share=ipc", "--socket=x11",
-        /* Wayland access */
         "--socket=wayland",
-        /* Needs to talk to the network: */
         "--share=network",
-        /* Needed for dconf to work */
         "--filesystem=xdg-run/dconf", "--filesystem=~/.config/dconf:ro",
         "--talk-name=ca.desrt.dconf", "--env=DCONF_USER_CONFIG_DIR=.config/dconf",
-        /* OpenGL access */
         "--device=dri",
-        /* Tracker */
         "--talk-name=org.freedesktop.Tracker1",
-        /* Play sounds */
         "--socket=pulseaudio",
-        /* Browse gvfs */
         "--talk-name=org.gtk.vfs", "--talk-name=org.gtk.vfs.*",
-        /* screensaver plugin */
         "--talk-name=org.gnome.ScreenSaver",
-        /* media-player-keys plugin */
         "--talk-name=org.gnome.SettingsDaemon",
         "--talk-name=org.mpris.MediaPlayer2",
-        "--talk-name=org.mpris.MediaPlayer2.Player"
+        "--talk-name=org.mpris.MediaPlayer2.Player",
+        "--own-name=org.mpris.MediaPlayer2.gradio",
+        "--talk-name=org.gnome.SettingsDaemon",
+        "--talk-name=org.freedesktop.Notifications",
+        "--talk-name=org.gnome.SessionManager",
+	"--filesystem=xdg-music:ro"
     ],
     "build-options" : {
         "cflags": "-O0 -g",
