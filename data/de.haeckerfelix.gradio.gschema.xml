@@ -69,5 +69,10 @@
       <default>false</default>
       <summary></summary>
     </key>
+
+    <key name="enable-tray-icon" type="b">
+      <default>false</default>
+      <summary>Show a tray icon to restore gradio</summary>
+    </key>
   </schema>
 </schemalist>

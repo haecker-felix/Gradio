@@ -119,6 +119,12 @@ namespace Gradio{
 			enable_notifications_switch.toggled.connect(() => {Settings.enable_notifications = enable_notifications_switch.get_state();});
 			features_group.add_listbox_row(enable_notifications_switch);
 
+			// enable tray icon
+			SwitchItem enable_tray_icon_switch = new SwitchItem(_("Tray icon"), _("Show a tray icon, to restore the main window"));
+			enable_tray_icon_switch.set_state(Settings.enable_tray_icon);
+			enable_tray_icon_switch.toggled.connect(() => {Settings.enable_tray_icon = enable_tray_icon_switch.get_state();});
+			features_group.add_listbox_row(enable_tray_icon_switch);
+
 
 			// CACHE
 

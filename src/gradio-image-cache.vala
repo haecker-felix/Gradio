@@ -119,7 +119,8 @@ namespace Gradio {
 		    		image_stream = yield req.send_async(null);
 		    		pixbuf = yield new Gdk.Pixbuf.from_stream_async(image_stream, null);
 			}catch (Error e){
-				warning("Could not download image from \"%s\": %s", url, e.message);
+				warning("Could not load image for \"%s\" (%s)", url, e.message);
+				pixbuf = new Gdk.Pixbuf.from_resource("/de/haecker-felix/gradio/icons/hicolor/48x48/apps/de.haeckerfelix.gradio.png");
 			}
 
 			return pixbuf;
