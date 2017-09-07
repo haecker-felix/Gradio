@@ -83,6 +83,10 @@ namespace Gradio {
 				else
 					return false;
 		    	});
+
+			window.tray_activate.connect(() => {
+		    		restore_window();
+			});
 		}
 
 		private void setup_actions () {

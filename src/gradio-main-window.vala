@@ -64,6 +64,9 @@ namespace Gradio{
 
 		public signal void icon_zoom_changed();
 		public signal void station_sorting_changed();
+		public signal void tray_activate();
+
+		private Gtk.StatusIcon trayicon;
 
 		private App app;
 
@@ -74,6 +77,7 @@ namespace Gradio{
 
 		public void setup(){
 			setup_view();
+			setup_tray_icon();
 			connect_signals();
 
 			this.show_all();
@@ -105,11 +109,7 @@ namespace Gradio{
 			set_mode(WindowMode.LIBRARY);
 
 			var gtk_settings = Gtk.Settings.get_default ();
-			if (Settings.enable_dark_theme) {
-				gtk_settings.gtk_application_prefer_dark_theme = true;
-			} else {
-				gtk_settings.gtk_application_prefer_dark_theme = false;
-			}
+			gtk_settings.gtk_application_prefer_dark_theme = Settings.enable_dark_theme;
 
 	        	player_toolbar = new PlayerToolbar();
 	       		player_toolbar.set_visible(false);
@@ -140,6 +140,18 @@ namespace Gradio{
 			header.selection_canceled.connect(disable_selection_mode);
 			header.selection_started.connect(enable_selection_mode);
 			NotificationCloseButton.clicked.connect(hide_notification);
+		}
+
+		private void setup_tray_icon(){
+			trayicon = new Gtk.StatusIcon.from_icon_name("de.haeckerfelix.gradio-symbolic");
+      			trayicon.set_tooltip_text ("Click to restore...");
+      			trayicon.activate.connect(() => tray_activate());
+
+      			show_tray_icon(Settings.enable_tray_icon);
+		}
+
+		public void show_tray_icon(bool b){
+			trayicon.set_visible(b);
 		}
 
 		public void enable_selection_mode(){

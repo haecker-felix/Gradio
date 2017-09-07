@@ -21,6 +21,7 @@ namespace Gradio{
 		private static GLib.Settings settings;
 
 		private static bool _enable_notifications;
+		private static bool _enable_tray_icon;
 		private static bool _enable_dark_theme;
 		private static bool _enable_mpris;
 		private static bool _enable_background_playback;
@@ -39,6 +40,7 @@ namespace Gradio{
 			settings = new GLib.Settings ("de.haeckerfelix.gradio");
 
 			_enable_notifications = settings.get_boolean("enable-notifications");
+			_enable_tray_icon = settings.get_boolean("enable-tray-icon");
 			_enable_dark_theme = settings.get_boolean("enable-dark-theme");
 			_enable_mpris = settings.get_boolean("enable-mpris");
 			_enable_background_playback = settings.get_boolean("enable-background-playback");
@@ -62,6 +64,17 @@ namespace Gradio{
 			set{
 				_enable_notifications = value;
 				settings.set_boolean ("enable-notifications", value);
+			}
+		}
+
+		public static bool enable_tray_icon{
+			get{
+				return _enable_tray_icon;
+			}
+			set{
+				_enable_tray_icon = value;
+				App.window.show_tray_icon(value);
+				settings.set_boolean ("enable-tray-icon", value);
 			}
 		}
 
