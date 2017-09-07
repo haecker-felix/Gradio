@@ -144,25 +144,27 @@ namespace Gradio{
 
 		public RadioStation.from_json_data(Json.Object radio_station_data){
 			load_data_from_json(radio_station_data);
+			update_secondary_text();
 			connect_signals();
 		}
 
 		private void connect_signals(){
-			App.window.station_sorting_changed.connect(() => {
-				switch(Settings.station_sorting){
-					case Compare.NAME: _secondary_text = ""; break;
-					case Compare.DATE: _secondary_text = clicktimestamp; break;
-					case Compare.STATE: _secondary_text = state; break;
-					case Compare.VOTES: _secondary_text = votes + " Likes"; break;
-					case Compare.CLICKS: _secondary_text = clickcount + _(" Clicks"); break;
-					case Compare.COUNTRY: _secondary_text = country; break;
-					case Compare.BITRATE: _secondary_text = bitrate + " kBit/s"; break;
-					case Compare.LANGUAGE: _secondary_text = language; break;
-				}
-				notify_property("secondary-text");
-			});
-
+			App.window.station_sorting_changed.connect(update_secondary_text);
 			App.window.icon_zoom_changed.connect(update_thumbnail);
+		}
+
+		private void update_secondary_text(){
+			switch(Settings.station_sorting){
+				case Compare.NAME: _secondary_text = ""; break;
+				case Compare.DATE: _secondary_text = clicktimestamp; break;
+				case Compare.STATE: _secondary_text = state; break;
+				case Compare.VOTES: _secondary_text = votes + " Likes"; break;
+				case Compare.CLICKS: _secondary_text = clickcount + _(" Clicks"); break;
+				case Compare.COUNTRY: _secondary_text = country; break;
+				case Compare.BITRATE: _secondary_text = bitrate + " kBit/s"; break;
+				case Compare.LANGUAGE: _secondary_text = language; break;
+			}
+			notify_property("secondary-text");
 		}
 
 		private void update_thumbnail(){
