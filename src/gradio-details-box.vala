@@ -98,7 +98,11 @@ namespace Gradio{
 
 		[GtkCallback]
 		private void OpenHomepageButton_clicked(Button button){
-			Gtk.show_uri(null, station.homepage, 0);
+			try{
+				Gtk.show_uri(null, station.homepage, 0);
+			}catch(Error e){
+				warning(e.message);
+			}
 		}
 
 		[GtkCallback]

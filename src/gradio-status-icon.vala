@@ -54,17 +54,5 @@ namespace Gradio{
 			return false;
 		}
 
-		private void set_information(){
-			PopoverStack.set_visible_child_name("info");
-		}
-
-		private void show_connected(){
-			StatusStack.set_visible_child_name("connected");
-		}
-
-		private void show_error(){
-			StatusStack.set_visible_child_name("error");
-		}
-
 	}
 }
