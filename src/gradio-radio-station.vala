@@ -142,18 +142,12 @@ namespace Gradio{
 			}
 		}
 
-		public signal void added_to_library();
-		public signal void removed_from_library();
-
 		public RadioStation.from_json_data(Json.Object radio_station_data){
 			load_data_from_json(radio_station_data);
 			connect_signals();
 		}
 
 		private void connect_signals(){
-			App.library.added_radio_station.connect(added_to_library_handler);
-			App.library.removed_radio_station.connect(removed_from_library_handler);
-
 			App.window.station_sorting_changed.connect(() => {
 				switch(Settings.station_sorting){
 					case Compare.NAME: _secondary_text = ""; break;
@@ -196,27 +190,6 @@ namespace Gradio{
 				_is_broken = false;
 			else
 				_is_broken = true;
-		}
-
-		private void added_to_library_handler(RadioStation s){
-			if(_title != null){
-				if(s.id == _id){
-					added_to_library();
-
-				}
-			}else{
-				warning("Catched crash of Gradio.");
-			}
-		}
-
-		private void removed_from_library_handler(RadioStation s){
-			if(_title != null){
-				if(s.id == _id){
-					removed_from_library();
-				}
-			}else{
-				warning("Catched crash of Gradio.");
-			}
 		}
 
 		// Returns the playable url for the station
