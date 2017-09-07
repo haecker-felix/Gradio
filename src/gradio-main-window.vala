@@ -292,14 +292,12 @@ namespace Gradio{
 			// Quit
 			if ((event.keyval == Gdk.Key.q || event.keyval == Gdk.Key.Q) && (event.state & default_modifiers) == Gdk.ModifierType.CONTROL_MASK) {
 				app.quit_application();
-
 				return true;
 			}
 
 			// Play / Pause
 			if ((event.keyval == Gdk.Key.space) && (event.state & default_modifiers) == Gdk.ModifierType.CONTROL_MASK) {
 				App.player.toggle_play_stop();
-
 				return true;
 			}
 

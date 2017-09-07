@@ -142,8 +142,6 @@ namespace Gradio{
 	  	}
 
 	  	private void sort(){
-	  		message("sortieren");
-
 	  		uint s = stations.length;
 	    		this.items_changed (0, s, 0);
 
