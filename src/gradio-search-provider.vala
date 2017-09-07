@@ -32,9 +32,6 @@ namespace Gradio{
 		private StationModel model = null;
 		private FilterBox filterbox = null;
 
-		// the maximum of stations to parse
-		private int maximum = 100;
-
 		public signal void working();
 		public signal void ready();
 
@@ -98,7 +95,7 @@ namespace Gradio{
 			table.insert("order", sort_by);
 
 			table.insert("reverse", (!Settings.sort_ascending).to_string());
-			table.insert("limit", maximum.to_string());
+			table.insert("limit", Settings.max_search_results.to_string());
 
 			Soup.Message msg = Soup.Form.request_new_from_hash("POST", address, table);
 

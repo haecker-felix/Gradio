@@ -35,6 +35,7 @@ namespace Gradio{
 		private static int _icon_zoom;
 		private static Compare _station_sorting;
 		private static bool _sort_ascending;
+		private static int _max_search_results;
 
 		static construct{
 			settings = new GLib.Settings ("de.haeckerfelix.gradio");
@@ -54,6 +55,7 @@ namespace Gradio{
 			_icon_zoom = settings.get_int("icon-zoom");
 			_station_sorting = (Compare) settings.get_int("station-sorting");
 			_sort_ascending = settings.get_boolean("sort-ascending");
+			_max_search_results = settings.get_int("max-search-results");
 		}
 
 
@@ -210,5 +212,14 @@ namespace Gradio{
 			}
 		}
 
+		public static int max_search_results{
+			get{
+				return _max_search_results;
+			}
+			set{
+				_max_search_results = value;
+				settings.set_int ("max-search-results", _max_search_results);
+			}
+		}
 	}
 }

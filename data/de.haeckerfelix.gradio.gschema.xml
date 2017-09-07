@@ -74,5 +74,10 @@
       <default>false</default>
       <summary>Show a tray icon to restore gradio</summary>
     </key>
+
+    <key name="max-search-results" type="i">
+      <default>100</default>
+      <summary>Maximum of stations to show in search</summary>
+    </key>
   </schema>
 </schemalist>
