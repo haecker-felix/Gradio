@@ -114,7 +114,8 @@ namespace Gradio{
 
 		[GtkCallback]
 		private bool StationLogo_clicked(){
-			App.player.station.show_details();
+			App.window.details_box.set_station(App.player.station);
+			App.window.details_box.set_visible(true);
 			return false;
 		}
 	}

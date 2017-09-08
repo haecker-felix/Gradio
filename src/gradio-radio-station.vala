@@ -259,10 +259,6 @@ namespace Gradio{
 			return vote;
 		}
 
-		public void show_details(){
-			App.window.details_box.set_station(this);
-		}
-
 		public void show_editor(){
 			StationEditorDialog editor_dialog = new StationEditorDialog.edit(this);
 			editor_dialog.set_transient_for(App.window);

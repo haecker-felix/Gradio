@@ -43,6 +43,7 @@ namespace Gradio{
 				Gd.MainBoxItem item = (Gd.MainBoxItem)a;
 
 				if(!Util.is_collection_item(int.parse(item.id))){
+					App.window.details_box.set_station((RadioStation)item);
 					if(App.player.station == (RadioStation)item)
 						App.player.toggle_play_stop();
 					else

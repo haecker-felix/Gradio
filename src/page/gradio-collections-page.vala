@@ -42,6 +42,8 @@ namespace Gradio{
 					Collection coll = (Collection)item;
 					selected_collection = coll;
 					App.window.set_mode(WindowMode.COLLECTION_ITEMS);
+
+					App.window.details_box.set_collection(coll);
 				}
 			});
 		}
