@@ -223,7 +223,6 @@ namespace Gradio{
 					}
 				}
 
-
 			}catch(GLib.Error e){
 				warning(e.message);
 			}

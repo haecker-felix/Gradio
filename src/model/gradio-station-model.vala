@@ -17,8 +17,7 @@
 namespace Gradio{
 
 	public class StationModel : GLib.Object, GLib.ListModel {
-
-		private GLib.GenericArray<RadioStation> stations = new GLib.GenericArray<RadioStation> ();
+		private ListStore stations;
 
 		// no items are available
 		public signal void empty();
@@ -27,17 +26,17 @@ namespace Gradio{
 		public signal void cleared();
 
 		public StationModel(){
+			stations = new ListStore (typeof (RadioStation));
 			App.window.station_sorting_changed.connect(() => {sort();});
 
-			// Detect if array is empty
-			this.items_changed.connect(() => {
-				if(stations.length == 0)
-					empty();
+			stations.items_changed.connect((position, removed, added) => {
+				if(stations.get_n_items() == 0) empty();
+				items_changed (position, removed, added);
 			});
 		}
 
   		public GLib.Object? get_item (uint index) {
-    			return stations.get ((int)index);
+    			return stations.get_item (index);
   		}
 
   		public GLib.Type get_item_type () {
@@ -45,110 +44,78 @@ namespace Gradio{
   		}
 
  		public uint get_n_items () {
-    			return stations.length;
+    			return stations.get_n_items();
   		}
 
   		public bool contains_station (RadioStation station) {
-			for (int i = 0; i < stations.length; i ++) {
-      				RadioStation fstation = stations.get (i);
-      				if (station.id == fstation.id)
-        				return true;
+			for (int i = 0; i < stations.get_n_items(); i ++) {
+      				RadioStation fstation = (RadioStation)stations.get_item (i);
+      				if (station.id == fstation.id) return true;
 			}
-
 	    		return false;
 	  	}
 
 	  	public void add_station(RadioStation station) {
-			// add the new station, and sort the array
-			stations.add(station);
 			StationCompare scompare = new StationCompare();
-	  		stations.sort(scompare.compare);
-
-			// determine whats the position of the new station
-			int pos = 0;
-			for (int i = 0; i < stations.length; i ++) {
-       				RadioStation fstation = stations.get (i);
-       				if (fstation.id == station.id) {
-       					pos = i;
-       					break;
-       				}
-			}
-
-			this.items_changed (pos, 0, 1);
+	  		stations.insert_sorted(station, scompare.compare);
 	  	}
 
 		public void remove_station (RadioStation station) {
-			int pos = 0;
-			for (int i = 0; i < stations.length; i ++) {
-       				RadioStation fstation = stations.get (i);
+			for (int i = 0; i < stations.get_n_items(); i ++) {
+       				RadioStation fstation = (RadioStation)stations.get_item (i);
        				if (fstation.id == station.id) {
-       					pos = i;
+       					stations.remove (i);
        					break;
        				}
 			}
-
-			stations.remove_index (pos);
-			items_changed (pos, 1, 0);
 	  	}
 
 		public RadioStation get_next_station(RadioStation current){
-			RadioStation next = null;
-			int current_index = 0;
+			RadioStation next = null; int current_index = 0;
 
 			// find out the index of the current station
-			for (int i = 0; i < stations.length; i ++) {
-      				RadioStation found_station = stations.get (i);
+			for (int i = 0; i < stations.get_n_items(); i ++) {
+      				RadioStation found_station = (RadioStation)stations.get_item (i);
       				if (current.id == found_station.id){
-      					current_index = i;
-      					break;
+      					current_index = i; break;
       				}
 			}
 
-			if(current_index+1 < stations.length)
-				next =  stations.get(current_index+1);
+			if(current_index+1 < stations.get_n_items())
+				next =  (RadioStation)stations.get_item (current_index+1);
 			else
-				next = stations.get(0);
+				next = (RadioStation)stations.get_item (0);
 
 			return next;
 		}
 
 		public RadioStation get_previous_station(RadioStation current){
-			RadioStation previous = null;
-			int current_index = 0;
+			RadioStation previous = null; int current_index = 0;
 
 			// find out the index of the current station
-			for (int i = 0; i < stations.length; i ++) {
-      				RadioStation found_station = stations.get (i);
+			for (int i = 0; i < stations.get_n_items(); i ++) {
+      				RadioStation found_station = (RadioStation) stations.get_item (i);
       				if (current.id == found_station.id){
-      					current_index = i;
-      					break;
+      					current_index = i; break;
       				}
 			}
 
 			if(current_index-1 != -1)
-				previous =  stations.get(current_index-1);
+				previous =  (RadioStation) stations.get_item(current_index-1);
 			else
-				previous = stations.get(stations.length-1);
+				previous = (RadioStation) stations.get_item(stations.get_n_items()-1);
 
 			return previous;
 		}
 
 	  	public void clear () {
-	  		uint s = stations.length;
-			stations.remove_range(0, stations.length);
-
+			stations.remove_all();
 			cleared();
-	    		this.items_changed (0, s, 0);
 	  	}
 
 	  	private void sort(){
-	  		uint s = stations.length;
-	    		this.items_changed (0, s, 0);
-
 			StationCompare scompare = new StationCompare();
 	  		stations.sort(scompare.compare);
-
-	    		this.items_changed (0, 0, s);
 	  	}
 	}
 }

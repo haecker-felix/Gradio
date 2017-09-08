@@ -28,7 +28,7 @@ namespace Gradio{
 	}
 
 	public class StationCompare{
-		public CompareFunc<RadioStation> compare = (a, b) => {
+		public CompareDataFunc<RadioStation> compare = (a, b) => {
 			int result = 0;
 
 			switch(Settings.station_sorting){
