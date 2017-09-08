@@ -23,6 +23,7 @@ namespace Gradio{
 
 		[GtkChild] private Box StationBox;
 		[GtkChild] private Box CollectionBox;
+		[GtkChild] private Box ActionBox;
 
 		[GtkChild] private Label NameLabel;
 		[GtkChild] private Label TypeLabel;
@@ -71,7 +72,7 @@ namespace Gradio{
 			});
 			_thumbnail.show_empty_box();
 
-			message("visible");
+			ActionBox.set_visible(true);
 			this.set_visible(true);
 		}
 
@@ -92,7 +93,7 @@ namespace Gradio{
 			});
 			_thumbnail.show_empty_box();
 
-			message("visible");
+			ActionBox.set_visible(false);
 			this.set_visible(true);
 		}
 
