@@ -179,6 +179,7 @@ namespace Gradio{
 				if(button == StateRButton) Settings.station_sorting = Compare.STATE;
 				if(button == BitrateRButton) Settings.station_sorting = Compare.BITRATE;
 				if(button == ClicksRButton) Settings.station_sorting = Compare.CLICKS;
+				if(button == ClickTimestampRButton) Settings.station_sorting = Compare.DATE;
 				App.window.station_sorting_changed();
 			}
 		}
