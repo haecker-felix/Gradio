@@ -73,7 +73,6 @@ namespace Gradio{
 			_thumbnail.show_empty_box();
 
 			ActionBox.set_visible(true);
-			this.set_visible(true);
 		}
 
 		public void set_collection(Collection c){
@@ -94,7 +93,6 @@ namespace Gradio{
 			_thumbnail.show_empty_box();
 
 			ActionBox.set_visible(false);
-			this.set_visible(true);
 		}
 
 		[GtkCallback]

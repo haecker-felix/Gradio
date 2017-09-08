@@ -98,9 +98,5 @@ namespace Gradio{
 		public void remove_station(RadioStation station){
 			station_model.remove_station(station);
 		}
-
-		public void show_details(){
-			App.window.details_box.set_collection(this);
-		}
 	}
 }

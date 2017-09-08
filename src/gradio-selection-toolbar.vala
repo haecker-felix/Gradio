@@ -171,14 +171,16 @@ namespace Gradio{
 				CollectionModel model = (CollectionModel)App.window.get_collection_selection();
 				for(int i = 0; i < model.get_n_items(); i++){
 					Collection collection = (Collection)model.get_item(i);
-					collection.show_details();
+					App.window.details_box.set_collection(collection);
+					App.window.details_box.set_visible(true);
 				}
 
 			} else {
 				StationModel model = (StationModel)App.window.get_station_selection();
 				for(int i = 0; i < model.get_n_items(); i++){
 					RadioStation station = (RadioStation)model.get_item(i);
-					station.show_details();
+					App.window.details_box.set_station(station);
+					App.window.details_box.set_visible(true);
 				}
 			}
 
