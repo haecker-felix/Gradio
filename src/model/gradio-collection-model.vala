@@ -18,7 +18,7 @@ namespace Gradio{
 
 	public class CollectionModel : GLib.Object, GLib.ListModel {
 
-		private GLib.GenericArray<Collection> collections = new GLib.GenericArray<Collection> ();
+		private ListStore collections;
 
 		// no items are available
 		public signal void empty();
@@ -27,16 +27,17 @@ namespace Gradio{
 		public signal void cleared();
 
 		public CollectionModel(){
-			// Detect if array is empty
-			this.items_changed.connect(() => {
-				if(collections.length == 0)
+			collections = new ListStore (typeof (Collection));
 
-					empty();
+			// Detect if array is empty
+			collections.items_changed.connect((position, removed, added) => {
+				if(collections.get_n_items() == 0) empty();
+				items_changed (position, removed, added);
 			});
 		}
 
   		public GLib.Object? get_item (uint index) {
-    			return collections.get (index);
+    			return collections.get_item (index);
   		}
 
   		public string get_id_by_name (string name){
@@ -69,12 +70,12 @@ namespace Gradio{
   		}
 
  		public uint get_n_items () {
-    			return collections.length;
+    			return collections.get_n_items();
   		}
 
   		public bool contains_collection (Collection collection) {
-			for (int i = 0; i < collections.length; i ++) {
-      				Collection ncollection = collections.get (i);
+			for (int i = 0; i < collections.get_n_items(); i ++) {
+      				Collection ncollection = (Collection)collections.get_item (i);
       				if (collection.id == ncollection.id || collection.name == ncollection.name)
         				return true;
 			}
@@ -83,31 +84,21 @@ namespace Gradio{
 	  	}
 
 	  	public void add_collection(Collection collection) {
-			collections.add (collection);
-
-			this.items_changed (collections.length-1, 0, 1);
+			collections.append (collection);
 	  	}
 
 		public void remove_collection (Collection collection) {
-			int pos = 0;
-			for (int i = 0; i < collections.length; i ++) {
-        				Collection fcollection = collections.get (i);
-        				if (fcollection.id == collection.id) {
-        					pos = i;
-        					break;
-        				}
+			for (int i = 0; i < collections.get_n_items(); i ++) {
+        			Collection fcollection = (Collection)collections.get_item (i);
+        			if (fcollection.id == collection.id) {
+        				collections.remove (i);
+        				break;
+        			}
 			}
-
-			collections.remove_index (pos);
-			items_changed (pos, 1, 0);
 	  	}
 
 	  	public void clear () {
-	  		uint s = collections.length;
-			collections.remove_range(0, collections.length);
-
-			cleared();
-	    		this.items_changed (0, s, 0);
+	  		collections.remove_all();
 	  	}
 	}
 }

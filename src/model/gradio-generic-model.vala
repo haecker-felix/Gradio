@@ -25,19 +25,18 @@ namespace Gradio{
 	}
 
 	public class GenericModel : GLib.Object, GLib.ListModel {
+		private ListStore items;
 
-		private GLib.GenericArray<GenericItem> items = new GLib.GenericArray<GenericItem> ();
+		public GenericModel(){
+			items = new ListStore (typeof (GenericItem));
 
-		public GenericModel(){}
-
-		public void clear(){
-			uint s = items.length;
-			items.remove_range(0, items.length);
-	    		this.items_changed (0, s, 0);
+			items.items_changed.connect((position, removed, added) => {
+				items_changed (position, removed, added);
+			});
 		}
 
   		public GLib.Object? get_item (uint index) {
-    			return items.get (index);
+    			return items.get_item (index);
   		}
 
   		public GLib.Type get_item_type () {
@@ -45,26 +44,21 @@ namespace Gradio{
   		}
 
  		public uint get_n_items () {
-    			return items.length;
+    			return items.get_n_items();
   		}
 
 	  	public void add_item(GenericItem item) {
-			items.add (item);
-			this.items_changed (items.length-1, 0, 1);
+			items.append (item);
 	  	}
 
 		public void remove_item (GenericItem item) {
-			int pos = 0;
-			for (int i = 0; i < items.length; i ++) {
-        				GenericItem fitem = items.get (i);
-        				if (fitem.text == item.text) {
-        					pos = i;
-        					break;
-        				}
+			for (int i = 0; i < items.get_n_items(); i ++) {
+        			GenericItem fitem = (GenericItem)items.get_item (i);
+        			if (fitem.text == item.text) {
+        				items.remove (i);
+        				break;
+        			}
 			}
-
-			items.remove_index (pos);
-			items_changed (pos, 1, 0);
 	  	}
 	}
 }
