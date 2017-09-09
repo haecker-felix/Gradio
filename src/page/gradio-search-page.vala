@@ -42,7 +42,12 @@ namespace Gradio{
 			mainbox.selection_mode_request.connect(() => {selection_mode_enabled();});
 			ResultsBox.add(mainbox);
 
-			search_provider.ready.connect(() => {SearchStack.set_visible_child_name("results");});
+			search_provider.ready.connect(() => {
+				if(station_model.get_n_items() == 0)
+					SearchStack.set_visible_child_name("no-results");
+				else
+					SearchStack.set_visible_child_name("results");
+			});
 			search_provider.working.connect(() => {SearchStack.set_visible_child_name("loading");});
 		}
 

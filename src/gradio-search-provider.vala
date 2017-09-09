@@ -114,8 +114,6 @@ namespace Gradio{
 				int items = (int)radio_stations.get_length();
 				message("Search results found: %i", items);
 
-				ready();
-
 				for(int i = 0; i < items; i++){
 					var radio_station = radio_stations.get_element(i);
 					var radio_station_data = radio_station.get_object ();
@@ -123,6 +121,8 @@ namespace Gradio{
  					var station = new RadioStation.from_json_data(radio_station_data);
 					model.add_station(station);
 				}
+
+				ready();
 
 			}catch(GLib.Error e){
 				warning ("Aborted parsing search results! " + e.message);
