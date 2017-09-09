@@ -106,7 +106,10 @@ namespace Gradio{
 
 		[GtkCallback]
 		private void EditButton_clicked(Button button){
-			station.show_editor();
+			StationEditorDialog editor_dialog = new StationEditorDialog.edit(station);
+			editor_dialog.set_transient_for(App.window);
+			editor_dialog.set_modal(true);
+			editor_dialog.set_visible(true);
 		}
 
 		[GtkCallback]

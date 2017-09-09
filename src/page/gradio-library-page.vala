@@ -22,6 +22,7 @@ namespace Gradio{
 	public class LibraryPage : Gtk.Box, Page{
 
 		[GtkChild] Viewport ScrollViewport;
+		[GtkChild] Stack LibraryStack;
 
 		private MainBox mainbox;
 
@@ -32,6 +33,13 @@ namespace Gradio{
 			mainbox.selection_mode_request.connect(() => {selection_mode_enabled();});
 
 			ScrollViewport.add(mainbox);
+
+			Library.station_model.items_changed.connect(() => {
+				if(Library.station_model.get_n_items() == 0)
+					LibraryStack.set_visible_child_name("empty");
+				else
+					LibraryStack.set_visible_child_name("items");
+			});
 		}
 
 		public void set_selection_mode(bool b){

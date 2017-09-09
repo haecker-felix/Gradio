@@ -259,13 +259,6 @@ namespace Gradio{
 			return vote;
 		}
 
-		public void show_editor(){
-			StationEditorDialog editor_dialog = new StationEditorDialog.edit(this);
-			editor_dialog.set_transient_for(App.window);
-			editor_dialog.set_modal(true);
-			editor_dialog.set_visible(true);
-		}
-
 		// Returns the html description metadata
 		// Much mess here. Feel free to improve this crap :)
 		public async string get_description(){

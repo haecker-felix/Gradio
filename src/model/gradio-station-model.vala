@@ -19,9 +19,6 @@ namespace Gradio{
 	public class StationModel : GLib.Object, GLib.ListModel {
 		private ListStore stations;
 
-		// no items are available
-		public signal void empty();
-
 		// items got cleared (ALL ITEMS)
 		public signal void cleared();
 
@@ -30,7 +27,6 @@ namespace Gradio{
 			App.window.station_sorting_changed.connect(() => {sort();});
 
 			stations.items_changed.connect((position, removed, added) => {
-				if(stations.get_n_items() == 0) empty();
 				items_changed (position, removed, added);
 			});
 		}
