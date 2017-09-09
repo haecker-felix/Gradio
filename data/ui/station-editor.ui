@@ -22,7 +22,7 @@
                 <property name="can_focus">False</property>
                 <property name="margin_top">24</property>
                 <property name="pixel_size">192</property>
-                <property name="icon_name">dialog-warning-symbolic</property>
+                <property name="icon_name">document-edit-symbolic</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -51,7 +51,7 @@
               <object class="GtkLabel">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Gradio is using a internet database. All changes you will do here, is going to be visible for all users. Please be careful, and double check your changes!</property>
+                <property name="label" translatable="yes">Gradio is using a internet database. Everything what you enter here, is going to be visible for all users. Please be careful, and double check your input!</property>
                 <property name="justify">center</property>
                 <property name="wrap">True</property>
                 <property name="width_chars">50</property>
