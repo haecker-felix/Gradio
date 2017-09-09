@@ -22,6 +22,7 @@ namespace Gradio{
 	public class CollectionsPage : Gtk.Box, Page{
 
 		[GtkChild] Viewport ScrollViewport;
+		[GtkChild] Stack CollectionsStack;
 
 		private MainBox mainbox;
 
@@ -45,6 +46,13 @@ namespace Gradio{
 
 					App.window.details_box.set_collection(coll);
 				}
+			});
+
+			Library.collection_model.items_changed.connect(() => {
+				if(Library.collection_model.get_n_items() == 0)
+					CollectionsStack.set_visible_child_name("empty");
+				else
+					CollectionsStack.set_visible_child_name("items");
 			});
 		}
 
