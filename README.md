@@ -25,6 +25,5 @@ GNU General Public License, Version 3
 To report bugs, please use the GitHub [bugtracker](https://github.com/haecker-felix/gradio/issues)
 
 * **Translations**  
-Gradio can be translated soon. [More information can be found here](https://hosted.weblate.org/engage/gradio/).
-The translation support is *work in progress*, many strings aren't translatable yet.
+To translate Gradio, please use [Weblate](https://hosted.weblate.org/engage/gradio/).
 
