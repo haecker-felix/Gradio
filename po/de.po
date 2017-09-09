@@ -74,10 +74,6 @@ msgstr "Typ"
 msgid "Items"
 msgstr "Objekte"
 
-#: data/ui/details-box.ui:253
-msgid "Votes"
-msgstr ""
-
 #: data/ui/details-box.ui:285
 msgid "Location"
 msgstr "Standort"
@@ -85,10 +81,6 @@ msgstr "Standort"
 #: data/ui/details-box.ui:317
 msgid "Description"
 msgstr "Beschreibung"
-
-#: data/ui/details-box.ui:349
-msgid "Tags"
-msgstr ""
 
 #: data/ui/details-box.ui:436 data/ui/selection-toolbar.ui:15
 msgid "Play"
@@ -161,10 +153,6 @@ msgstr "Provinz"
 msgid "Favicon Address"
 msgstr "Symbol Adresse"
 
-#: data/ui/station-editor.ui:279
-msgid "label"
-msgstr ""
-
 #: data/ui/station-editor.ui:355
 msgid "Server Response"
 msgstr "Server Antwort"
@@ -172,10 +160,6 @@ msgstr "Server Antwort"
 #: data/ui/station-editor.ui:391
 msgid "Close"
 msgstr "Schließen"
-
-#: data/ui/station-editor.ui:409
-msgid "page1"
-msgstr ""
 
 #: data/ui/station-editor.ui:432
 msgid "Done"
