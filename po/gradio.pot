@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-05 19:55+0200\n"
+"POT-Creation-Date: 2017-09-09 14:48+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -55,6 +55,22 @@ msgstr ""
 
 #: data/ui/page/add-page.ui:64
 msgid "There are several options available to add something new."
+msgstr ""
+
+#: data/ui/page/library-page.ui:44
+msgid "Your library is empty"
+msgstr ""
+
+#: data/ui/page/library-page.ui:62
+msgid "If you add stations to the library, you will find them here."
+msgstr ""
+
+#: data/ui/page/collections-page.ui:43
+msgid "You don't have any collection"
+msgstr ""
+
+#: data/ui/page/collections-page.ui:61
+msgid "You can group stations into collections."
 msgstr ""
 
 #: data/ui/details-box.ui:23 data/ui/selection-toolbar.ui:151
@@ -243,7 +259,7 @@ msgstr ""
 
 #. LIBRARY
 #. import library
-#: src/gradio-settings-window.vala:89 src/gradio-settings-window.vala:91
+#: src/gradio-settings-window.vala:89 src/gradio-settings-window.vala:173
 msgid "Import"
 msgstr ""
 
@@ -251,20 +267,16 @@ msgstr ""
 msgid "Replace the current library with a another one"
 msgstr ""
 
-#: src/gradio-settings-window.vala:91
-msgid "Select database to import"
-msgstr ""
-
 #: src/gradio-settings-window.vala:93
 msgid "Do you want to replace the current library with this one?"
 msgstr ""
 
 #. export library
-#: src/gradio-settings-window.vala:99 src/gradio-settings-window.vala:101
+#: src/gradio-settings-window.vala:99 src/gradio-settings-window.vala:152
 msgid "Export"
 msgstr ""
 
-#: src/gradio-settings-window.vala:99 src/gradio-settings-window.vala:101
+#: src/gradio-settings-window.vala:99 src/gradio-settings-window.vala:149
 msgid "Export the current library"
 msgstr ""
 
@@ -287,20 +299,85 @@ msgstr ""
 msgid "Show desktop notifications"
 msgstr ""
 
+#. enable tray icon
+#: src/gradio-settings-window.vala:123
+msgid "Tray icon"
+msgstr ""
+
+#: src/gradio-settings-window.vala:123
+msgid "Show a tray icon, to restore the main window"
+msgstr ""
+
 #. CACHE
 #. cache station images
-#: src/gradio-settings-window.vala:126
+#: src/gradio-settings-window.vala:132
 msgid "Cache station icons"
 msgstr ""
 
-#: src/gradio-settings-window.vala:126
+#: src/gradio-settings-window.vala:132
 msgid "Saves the images locally."
 msgstr ""
 
-#: src/gradio-settings-window.vala:131
+#: src/gradio-settings-window.vala:137
 msgid "Clear Cache"
 msgstr ""
 
-#: src/gradio-settings-window.vala:131
+#: src/gradio-settings-window.vala:137
 msgid "Clear all cached station icons"
+msgstr ""
+
+#: src/gradio-settings-window.vala:150 src/gradio-settings-window.vala:171
+msgid "_Cancel"
+msgstr ""
+
+#: src/gradio-settings-window.vala:170
+msgid "Select database to import"
+msgstr ""
+
+#: src/page/gradio-add-page.vala:27
+msgid "Create a new radio station"
+msgstr ""
+
+#: src/page/gradio-add-page.vala:28
+msgid "Discover radio stations"
+msgstr ""
+
+#: src/page/gradio-add-page.vala:31
+msgid "Show famous radio stations"
+msgstr ""
+
+#: src/page/gradio-add-page.vala:31
+msgid "Show radio stations which have the most votes."
+msgstr ""
+
+#: src/page/gradio-add-page.vala:35
+msgid "Show popular radio stations"
+msgstr ""
+
+#: src/page/gradio-add-page.vala:35
+msgid "Show radio stations which have the most clicks."
+msgstr ""
+
+#: src/page/gradio-add-page.vala:39
+msgid "Show recent radio stations"
+msgstr ""
+
+#: src/page/gradio-add-page.vala:39
+msgid "Show radio stations which have recently been clicked."
+msgstr ""
+
+#: src/page/gradio-add-page.vala:43
+msgid "Search for radio stations"
+msgstr ""
+
+#: src/page/gradio-add-page.vala:43
+msgid "Search for specific radio stations."
+msgstr ""
+
+#: src/page/gradio-add-page.vala:47
+msgid "New public radio station"
+msgstr ""
+
+#: src/page/gradio-add-page.vala:47
+msgid "Create a new radio station, which is visible for all users."
 msgstr ""
