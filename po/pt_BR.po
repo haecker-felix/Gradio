@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-10 14:34+0200\n"
 "PO-Revision-Date: 2017-09-10 23:38+0000\n"
-"Last-Translator: Luciano de O. Santos <luc14n0@linuxmail.org>\n"
+"Last-Translator: Fábio Nogueira <fnogueira@gnome.org>\n"
 "Language-Team: Portuguese (Brazil) "
 "<https://hosted.weblate.org/projects/gradio/translations/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -199,7 +199,7 @@ msgstr "Resposta do Servidor"
 
 #: data/ui/station-editor.ui:471
 msgid "Close"
-msgstr ""
+msgstr "Fechar"
 
 #: data/ui/station-editor.ui:510
 msgid "Done"
