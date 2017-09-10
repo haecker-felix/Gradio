@@ -8,152 +8,156 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-10 14:34+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2017-09-10 21:39+0000\n"
+"Last-Translator: George Grigalashvili <c0mrad@java.net>\n"
+"Language-Team: Georgian "
+"<https://hosted.weblate.org/projects/gradio/translations/ka/>\n"
 "Language: ka\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 2.17-dev\n"
 
 #: data/ui/app-menu.ui:6
 msgid "Settings"
-msgstr ""
+msgstr "პარამეტრები"
 
 #: data/ui/app-menu.ui:12
 msgid "About"
-msgstr ""
+msgstr "პროგრამის შესახებ"
 
 #: data/ui/app-menu.ui:18
 msgid "Quit"
-msgstr ""
+msgstr "პროგრამის დატოვება"
 
 #: data/ui/filter-box.ui:27
 msgid "Where"
-msgstr ""
+msgstr "სად"
 
 #: data/ui/filter-box.ui:44
 msgid "Select Country ..."
-msgstr ""
+msgstr "აირჩიეთ ქვეყანა..."
 
 #: data/ui/filter-box.ui:125
 msgid "Select State  ..."
-msgstr ""
+msgstr "აირჩიეთ რეგიონი..."
 
 #: data/ui/filter-box.ui:205 data/ui/station-editor.ui:211
 msgid "Language"
-msgstr ""
+msgstr "ენა"
 
 #: data/ui/filter-box.ui:222
 msgid "Select Language  ..."
-msgstr ""
+msgstr "აირჩიეთ ენა..."
 
 #: data/ui/page/add-page.ui:45
 msgid "Fill your library with something new"
-msgstr ""
+msgstr "შეავსეთ თქვენი ბიბლიოთეკა რაიმე ახლით"
 
 #: data/ui/page/add-page.ui:64
 msgid "There are several options available to add something new."
-msgstr ""
+msgstr "რაიმე ახალის დასამატებლად რამდენმე ალტერნტივაა ხელმისაწვდომი."
 
 #: data/ui/page/library-page.ui:44
 msgid "Your library is empty"
-msgstr ""
+msgstr "თქვენი ბიბლიოთეკა ცარიელია"
 
 #: data/ui/page/library-page.ui:62
 msgid "If you add stations to the library, you will find them here."
 msgstr ""
+"თუ თქვენ დაამატებთ არხებს თქვენს ბიბლიოთეკაში, მათი პოვნა შესაძლებელია აქ."
 
 #: data/ui/page/collections-page.ui:43
 msgid "You don't have any collection"
-msgstr ""
+msgstr "თქვენ არ გაქვთ კოლექციები"
 
 #: data/ui/page/collections-page.ui:61
 msgid "You can group stations into collections."
-msgstr ""
+msgstr "თქვენ შეგიძლიათ დააჯგუფოთ არხები კოლექციებად."
 
 #: data/ui/details-box.ui:23 data/ui/selection-toolbar.ui:151
 msgid "Details"
-msgstr ""
+msgstr "დეტალები"
 
 #: data/ui/details-box.ui:137 data/ui/station-editor.ui:125
 msgid "Name"
-msgstr ""
+msgstr "სახელი"
 
 #: data/ui/details-box.ui:172
 msgid "Type"
-msgstr ""
+msgstr "ტიპი"
 
 #: data/ui/details-box.ui:209
 msgid "Items"
-msgstr ""
+msgstr "პუნქტები"
 
 #: data/ui/details-box.ui:285
 msgid "Location"
-msgstr ""
+msgstr "ადგილმდებარეობა"
 
 #: data/ui/details-box.ui:317
 msgid "Description"
-msgstr ""
+msgstr "აღწერა"
 
 #: data/ui/details-box.ui:349
 msgid "Tags"
-msgstr ""
+msgstr "ტეგები"
 
 #: data/ui/details-box.ui:436 data/ui/selection-toolbar.ui:15
 msgid "Play"
-msgstr ""
+msgstr "ჩართვა"
 
 #: data/ui/details-box.ui:481
 msgid "Open homepage"
-msgstr ""
+msgstr "გახსენით საწყისი გვერდი"
 
 #: data/ui/details-box.ui:526
 msgid "Edit"
-msgstr ""
+msgstr "კორექტირება"
 
 #: data/ui/organize-collection-dialog.ui:21
 #: data/ui/organize-collection-dialog.ui:107
 msgid "New Collection…"
-msgstr ""
+msgstr "ახალი კოლექცია…"
 
 #: data/ui/organize-collection-dialog.ui:31
 #: data/ui/organize-collection-dialog.ui:128
 #: data/ui/organize-collection-dialog.ui:201
 msgid "Add"
-msgstr ""
+msgstr "დამატება"
 
 #: data/ui/organize-collection-dialog.ui:92
 msgid "Enter a name for your first collection"
-msgstr ""
+msgstr "შეიყვანეთ სახელი თქვენი პირველი კოლექციისთვის"
 
 #: data/ui/organize-collection-dialog.ui:192 data/ui/station-editor.ui:501
 msgid "Cancel"
-msgstr ""
+msgstr "უარყოფა"
 
 #: data/ui/selection-menu.ui:7
 msgid "Select All"
-msgstr ""
+msgstr "ყველას მონიშნვა"
 
 #: data/ui/selection-menu.ui:11
 msgid "Select None"
-msgstr ""
+msgstr "არც-ერთის მონიშნვა"
 
 #: data/ui/selection-toolbar.ui:29
 msgid "Add to library"
-msgstr ""
+msgstr "დაამატეთ ბიბლიოთეკაში"
 
 #: data/ui/selection-toolbar.ui:46
 msgid "Remove"
-msgstr ""
+msgstr "წაშლა"
 
 #: data/ui/selection-toolbar.ui:135
 msgid "Collections"
-msgstr ""
+msgstr "კოლექციები"
 
 #: data/ui/station-editor.ui:39
 msgid "Global database"
-msgstr ""
+msgstr "გლობალური მონაცემთა ბაზა"
 
 #: data/ui/station-editor.ui:54
 msgid ""
@@ -161,231 +165,235 @@ msgid ""
 "going to be visible for all users. Please be careful, and double check your "
 "input!"
 msgstr ""
+"Gradio იყენებს ინტერნეტ მონაცემთა ბაზას. ყველაფერი რასაც თქვენ აქ შეიყვანთ, "
+"ხელმისაწვდომი იქნება ყველა მომხმარებლისთვის. გთხოვთ იყავით ფრთხილად და "
+"შეამოწმეთ თქვენს მიერ შეყვანილი ინფორმაცია!"
 
 #: data/ui/station-editor.ui:68
 msgid "Continue"
-msgstr ""
+msgstr "გააგრძელე"
 
 #: data/ui/station-editor.ui:151
 msgid "Stream Address"
-msgstr ""
+msgstr "სტრიმის მისამართი"
 
 #: data/ui/station-editor.ui:166
 msgid "Homepage"
-msgstr ""
+msgstr "საწყისი გვერდი"
 
 #: data/ui/station-editor.ui:181
 msgid "Country"
-msgstr ""
+msgstr "ქვეყანა"
 
 #: data/ui/station-editor.ui:196
 msgid "State"
-msgstr ""
+msgstr "რეგიონი"
 
 #: data/ui/station-editor.ui:291
 msgid "Favicon Address"
-msgstr ""
+msgstr "Favicon მისამართი"
 
 #: data/ui/station-editor.ui:435
 msgid "Server Response"
-msgstr ""
+msgstr "სერვერის გამოხმაურება"
 
 #: data/ui/station-editor.ui:471
 msgid "Close"
-msgstr ""
+msgstr "დახურვა"
 
 #: data/ui/station-editor.ui:510
 msgid "Done"
-msgstr ""
+msgstr "დასრულება"
 
 #: data/ui/page/search-page.ui:127
 msgid "No results found"
-msgstr ""
+msgstr "რეზულტატები ვერ მოიძებნა"
 
 #: data/ui/page/search-page.ui:145
 msgid ""
 "Either the station does not exist, or you have to search with other keywords."
-msgstr ""
+msgstr "სადგური არ არსებობს, ან სხვა სიტყვებით უნდა მოძებნოთ."
 
 #: src/gradio-settings-window.vala:39
 msgid "Features"
-msgstr ""
+msgstr "შესაძლებლობები"
 
 #: src/gradio-settings-window.vala:42
 msgid "Playback"
-msgstr ""
+msgstr "დაკვრა"
 
 #: src/gradio-settings-window.vala:45
 msgid "Library"
-msgstr ""
+msgstr "ბიბლიოთეკა"
 
 #: src/gradio-settings-window.vala:48
 msgid "Appearance"
-msgstr ""
+msgstr "გარეგნობა"
 
 #: src/gradio-settings-window.vala:51
 msgid "Cache"
-msgstr ""
+msgstr "ქეში"
 
 #. APPEARANCE
 #. Dark design
 #: src/gradio-settings-window.vala:59
 msgid "Prefer dark theme"
-msgstr ""
+msgstr "უპირატესობა მიანიჭე შავ თემას"
 
 #: src/gradio-settings-window.vala:59
 msgid "Use a dark theme, if possible"
-msgstr ""
+msgstr "გამოიყენე შავი თემა, თუ შესაძლებელია"
 
 #. hide broken stations
 #: src/gradio-settings-window.vala:65
 msgid "Hide broken stations"
-msgstr ""
+msgstr "დამალე გაწყვეტილი სადგურები"
 
 #: src/gradio-settings-window.vala:65
 msgid "Don't show stations, which are not working"
-msgstr ""
+msgstr "ნუ გამოაჩენ სადგურებს, რომლებიც არ მუშაობენ"
 
 #. PLAYBACK
 #. enable background playback
 #: src/gradio-settings-window.vala:74
 msgid "Background Playback"
-msgstr ""
+msgstr "ფონურ რეჟიმში დაკვრა"
 
 #: src/gradio-settings-window.vala:74
 msgid "Continue the playback if you close the Gradio window"
-msgstr ""
+msgstr "გააგრძელე დაკვრა თუ დახურავ Gradio ფანჯარას"
 
 #. resume playback on startup
 #: src/gradio-settings-window.vala:80
 msgid "Resume playback on startup"
-msgstr ""
+msgstr "გააგრძელე დაკვრა ჩართვისას"
 
 #: src/gradio-settings-window.vala:80
 msgid "Play the latest station if you start Gradio"
-msgstr ""
+msgstr "ჩართე უკანასკნელი სადგური Gradio-ს ჩართვისას"
 
 #. LIBRARY
 #. import library
 #: src/gradio-settings-window.vala:89 src/gradio-settings-window.vala:173
 msgid "Import"
-msgstr ""
+msgstr "იმპორტი"
 
 #: src/gradio-settings-window.vala:89
 msgid "Replace the current library with a another one"
-msgstr ""
+msgstr "ჩაანაცვლე ამჟამინდელი ბიბლიოთეკა სხვით"
 
 #: src/gradio-settings-window.vala:93
 msgid "Do you want to replace the current library with this one?"
-msgstr ""
+msgstr "გსურთ რომ ჩაანაცვლოთ ამჟამინდელი ბიბლიოთეკა ამით?"
 
 #. export library
 #: src/gradio-settings-window.vala:99 src/gradio-settings-window.vala:152
 msgid "Export"
-msgstr ""
+msgstr "ექსპორტი"
 
 #: src/gradio-settings-window.vala:99 src/gradio-settings-window.vala:149
 msgid "Export the current library"
-msgstr ""
+msgstr "დააექსპორტე ამჟამინდელი ბიბლიოთეკა"
 
 #. FEATURES
 #. mpris
 #: src/gradio-settings-window.vala:111
 msgid "MPRIS"
-msgstr ""
+msgstr "MPRIS"
 
 #: src/gradio-settings-window.vala:111
 msgid "Integrate Gradio as media player in your desktop environment"
-msgstr ""
+msgstr "მოახდინე Gradio-ს ინტეგრირება როგორც დესკტოპ გარემოს მედია დამკვრელი"
 
 #. enable notifications
 #: src/gradio-settings-window.vala:117
 msgid "Notifications"
-msgstr ""
+msgstr "შეტყობინებები"
 
 #: src/gradio-settings-window.vala:117
 msgid "Show desktop notifications"
-msgstr ""
+msgstr "გამოაჩინე დესკტოპის შეტყობინებები"
 
 #. enable tray icon
 #: src/gradio-settings-window.vala:123
 msgid "Tray icon"
-msgstr ""
+msgstr "პანელის იარლიყი"
 
 #: src/gradio-settings-window.vala:123
 msgid "Show a tray icon, to restore the main window"
-msgstr ""
+msgstr "გამოაჩინე პანელის იარლიყი რომ აღდგეს მთავარი ფანჯარა"
 
 #. CACHE
 #. cache station images
 #: src/gradio-settings-window.vala:132
 msgid "Cache station icons"
-msgstr ""
+msgstr "სადგურების იარლიყების ქეშირება"
 
 #: src/gradio-settings-window.vala:132
 msgid "Saves the images locally."
-msgstr ""
+msgstr "ინახავს სურათებს ლოკალურად."
 
 #: src/gradio-settings-window.vala:137
 msgid "Clear Cache"
-msgstr ""
+msgstr "ქეშის გაწმენდა"
 
 #: src/gradio-settings-window.vala:137
 msgid "Clear all cached station icons"
-msgstr ""
+msgstr "გაწმინდე ყველა ქეშირებული სადგურის იარლიყები"
 
 #: src/gradio-settings-window.vala:150 src/gradio-settings-window.vala:171
 msgid "_Cancel"
-msgstr ""
+msgstr "უარყოფა"
 
 #: src/gradio-settings-window.vala:170
 msgid "Select database to import"
-msgstr ""
+msgstr "აირჩიე მონაცემთა ბაზა იმპორტისთვის"
 
 #: src/page/gradio-add-page.vala:27
 msgid "Create a new radio station"
-msgstr ""
+msgstr "შექმენი ახალი რადიო სადგური"
 
 #: src/page/gradio-add-page.vala:28
 msgid "Discover radio stations"
-msgstr ""
+msgstr "აღმოაჩინე რადიო სადგურები"
 
 #: src/page/gradio-add-page.vala:31
 msgid "Show famous radio stations"
-msgstr ""
+msgstr "გამოაჩინე პოპულარული რადიო სადგურები"
 
 #: src/page/gradio-add-page.vala:31
 msgid "Show radio stations which have the most votes."
-msgstr ""
+msgstr "გამოაჩინე რადიო სადგურები რომლებსაც მეტი ხმები აქვთ."
 
 #: src/page/gradio-add-page.vala:35
 msgid "Show popular radio stations"
-msgstr ""
+msgstr "გამოაჩინე პოპულარული რადიო სადგურები"
 
 #: src/page/gradio-add-page.vala:35
 msgid "Show radio stations which have the most clicks."
-msgstr ""
+msgstr "გამოაჩინე რადიო სადგურები რომლებსაც ყველაზე მეტი კლიკი აქვთ."
 
 #: src/page/gradio-add-page.vala:39
 msgid "Show recent radio stations"
-msgstr ""
+msgstr "გამოაჩინე უკანასკნელი რადიო სადგურები"
 
 #: src/page/gradio-add-page.vala:39
 msgid "Show radio stations which have recently been clicked."
-msgstr ""
+msgstr "გამოაჩინე რადიო სადგურები რომლებიც ცოტა ხნის წინ იქნა დაკლიკებული."
 
 #: src/page/gradio-add-page.vala:43
 msgid "Search for radio stations"
-msgstr ""
+msgstr "რადიო სადგურების ძებნა"
 
 #: src/page/gradio-add-page.vala:43
 msgid "Search for specific radio stations."
-msgstr ""
+msgstr "სპეციფიკური რადიო სადგურების ძებნა."
 
 #: src/page/gradio-add-page.vala:47
 msgid "New public radio station"
-msgstr ""
+msgstr "ახალი საჯარო რადიო სადგური"
 
 #: src/page/gradio-add-page.vala:47
 msgid "Create a new radio station, which is visible for all users."
 msgstr ""
+"შექმენით ახალი რადიო სადგური, რომელიც ხელმისაწვდომია ყველა მომხმარებლისთვის."
