@@ -36,40 +36,39 @@ namespace Gradio{
 			station_model = new StationModel();
 			collection_model = new CollectionModel();
 
-			open_database();
-		}
-
-		private void open_database(){
-			message("Open database...");
-
-			// check for old database (gradio 5 or older)
-			if(is_old_database()){
-				migrate_old_db.begin();
-				return;
-			}
-
 			// check for new database
 			if(!database_exists()){
 				create_database();
-				return;
-			}
-
-			// open the database itself
-			int return_code = Sqlite.Database.open (newdb.get_path(), out db);
-			if (return_code!= Sqlite.OK) {
-				critical ("Can't open database: %d: %s\n", db.errcode (), db.errmsg ());
-				return;
+				open_database();
+				init_database();
+			}else{
+				open_database();
 			}
 
 			// read database data
 			message("Successfully opened database! Reading database data...");
 			read_collections.begin();
 			read_stations.begin();
+
+			// check for old database (gradio 5 or older)
+			if(is_old_database()){
+				migrate_old_db.begin();
+				return;
+			}
+		}
+
+		private void open_database(){
+			message("Open database...");
+
+			int return_code = Sqlite.Database.open (newdb.get_path(), out db);
+			if (return_code!= Sqlite.OK) {
+				critical ("Can't open database: %d: %s\n", db.errcode (), db.errmsg ());
+				return;
+			}
 		}
 
 		private void create_database(){
 			message("Create new database...");
-
 			File dir = File.new_for_path (Path.build_filename (Environment.get_user_data_dir (), "gradio"));
 
 			try{
@@ -79,11 +78,8 @@ namespace Gradio{
 					}
 					newdb.create (FileCreateFlags.NONE);
 
-					open_database();
-					init_database();
 				}else{
 					warning("Database already exists.");
-					open_database();
 				}
 			}catch(Error e){
 				critical("Cannot create new database: " + e.message);
@@ -382,7 +378,6 @@ namespace Gradio{
 			}
 
 			message("Successfully imported database!");
-			open_database();
 		}
 
 		private async void migrate_old_db(){
@@ -393,8 +388,6 @@ namespace Gradio{
 			}else{
 				return;
 			}
-
-			create_database();
 
 			try{
 				if(file.query_exists ()){
@@ -424,7 +417,7 @@ namespace Gradio{
 		}
 
 		private bool is_old_database (){
-			if(olddb.query_exists() && !newdb.query_exists()){
+			if(olddb.query_exists()){
 				return true;
 			}
 			return false;
