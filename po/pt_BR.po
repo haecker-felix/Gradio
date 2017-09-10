@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-10 14:34+0200\n"
-"PO-Revision-Date: 2017-09-10 23:46+0000\n"
-"Last-Translator: Luciano de O. Santos <luc14n0@linuxmail.org>\n"
+"PO-Revision-Date: 2017-09-10 23:48+0000\n"
+"Last-Translator: Fábio Nogueira <fnogueira@gnome.org>\n"
 "Language-Team: Portuguese (Brazil) "
 "<https://hosted.weblate.org/projects/gradio/translations/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -229,11 +229,11 @@ msgstr "Biblioteca"
 
 #: src/gradio-settings-window.vala:48
 msgid "Appearance"
-msgstr ""
+msgstr "Aparência"
 
 #: src/gradio-settings-window.vala:51
 msgid "Cache"
-msgstr ""
+msgstr "Cache"
 
 #. APPEARANCE
 #. Dark design
