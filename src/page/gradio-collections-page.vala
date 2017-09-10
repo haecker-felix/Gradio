@@ -33,7 +33,6 @@ namespace Gradio{
 			mainbox.set_model(Library.collection_model);
 			mainbox.selection_changed.connect(() => {selection_changed();});
 			mainbox.selection_mode_request.connect(() => {selection_mode_enabled();});
-
 			ScrollViewport.add(mainbox);
 
 			mainbox.item_activated.connect((t,a) => {
@@ -48,12 +47,15 @@ namespace Gradio{
 				}
 			});
 
-			Library.collection_model.items_changed.connect(() => {
-				if(Library.collection_model.get_n_items() == 0)
+			Library.collection_model.items_changed.connect(update_page);
+			update_page();
+		}
+
+		private void update_page(){
+			if(Library.collection_model.get_n_items() == 0)
 					CollectionsStack.set_visible_child_name("empty");
 				else
 					CollectionsStack.set_visible_child_name("items");
-			});
 		}
 
 		public void set_selection_mode(bool b){

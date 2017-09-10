@@ -58,6 +58,12 @@
   </content_rating>
   <releases>
 
+    <release version="6.0" date="2017-09-10">
+      <description>
+        <p>Group your stations into collections, Everything is now sortable, Extended search page, Stations can be created and edited, New details sidebar, New selection system</p>
+      </description>
+    </release>
+
     <release version="5.0.0" date="2016-12-24">
       <description>
         <p>New grid/list view, new right click menu, background playback, redesigned discover page</p>

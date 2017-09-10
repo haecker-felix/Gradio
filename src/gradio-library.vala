@@ -59,6 +59,7 @@ namespace Gradio{
 
 		private void open_database(){
 			message("Open database...");
+			message(newdb.get_path());
 
 			int return_code = Sqlite.Database.open (newdb.get_path(), out db);
 			if (return_code!= Sqlite.OK) {
@@ -412,8 +413,6 @@ namespace Gradio{
 			}catch(GLib.IOError error){
 				critical("Could not migrate old database: %s", error.message);
 			}
-
-
 		}
 
 		private bool is_old_database (){

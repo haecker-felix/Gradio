@@ -1,11 +1,9 @@
 {
     "app-id": "de.haeckerfelix.gradio",
     "runtime": "org.gnome.Platform",
-    "runtime-version": "3.20",
+    "runtime-version": "3.24",
     "sdk": "org.gnome.Sdk",
     "command": "gradio",
-    "tags": ["nightly"],
-    "desktop-file-name-prefix": "(Development) ",
     "finish-args": [
         "--share=ipc", "--socket=x11",
         "--socket=wayland",

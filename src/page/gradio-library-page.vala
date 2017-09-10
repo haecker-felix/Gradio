@@ -34,12 +34,15 @@ namespace Gradio{
 
 			ScrollViewport.add(mainbox);
 
-			Library.station_model.items_changed.connect(() => {
-				if(Library.station_model.get_n_items() == 0)
-					LibraryStack.set_visible_child_name("empty");
-				else
-					LibraryStack.set_visible_child_name("items");
-			});
+			Library.station_model.items_changed.connect(update_page);
+			update_page();
+		}
+
+		private void update_page(){
+			if(Library.station_model.get_n_items() == 0)
+				LibraryStack.set_visible_child_name("empty");
+			else
+				LibraryStack.set_visible_child_name("items");
 		}
 
 		public void set_selection_mode(bool b){
