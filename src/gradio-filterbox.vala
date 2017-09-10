@@ -220,6 +220,7 @@ namespace Gradio{
 			ClearCountryButton_clicked();
 			ClearLanguageButton_clicked();
 			ClearStateButton_clicked();
+			SearchEntry.set_text("");
 		}
 
 		private ListBoxRow get_row(string text){
