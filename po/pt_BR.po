@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-10 14:34+0200\n"
-"PO-Revision-Date: 2017-09-10 23:41+0000\n"
-"Last-Translator: Fábio Nogueira <fnogueira@gnome.org>\n"
+"PO-Revision-Date: 2017-09-10 23:46+0000\n"
+"Last-Translator: Luciano de O. Santos <luc14n0@linuxmail.org>\n"
 "Language-Team: Portuguese (Brazil) "
 "<https://hosted.weblate.org/projects/gradio/translations/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -213,18 +213,19 @@ msgstr "Nenhum resultado encontrado"
 msgid ""
 "Either the station does not exist, or you have to search with other keywords."
 msgstr ""
+"Ou a estação não existe, ou você deve usar outras palavras-chave na busca."
 
 #: src/gradio-settings-window.vala:39
 msgid "Features"
-msgstr ""
+msgstr "Funcionalidades"
 
 #: src/gradio-settings-window.vala:42
 msgid "Playback"
-msgstr ""
+msgstr "Reproduzir"
 
 #: src/gradio-settings-window.vala:45
 msgid "Library"
-msgstr ""
+msgstr "Biblioteca"
 
 #: src/gradio-settings-window.vala:48
 msgid "Appearance"
