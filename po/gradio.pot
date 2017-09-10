@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-09 14:48+0200\n"
+"POT-Creation-Date: 2017-09-10 14:34+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -158,9 +158,9 @@ msgstr ""
 
 #: data/ui/station-editor.ui:54
 msgid ""
-"Gradio is using a internet database. All changes you will do here, is going "
-"to be visible for all users. Please be careful, and double check your "
-"changes!"
+"Gradio is using a internet database. Everything what you enter here, is "
+"going to be visible for all users. Please be careful, and double check your "
+"input!"
 msgstr ""
 
 #: data/ui/station-editor.ui:68
@@ -197,6 +197,15 @@ msgstr ""
 
 #: data/ui/station-editor.ui:510
 msgid "Done"
+msgstr ""
+
+#: data/ui/page/search-page.ui:127
+msgid "No results found"
+msgstr ""
+
+#: data/ui/page/search-page.ui:145
+msgid ""
+"Either the station does not exist, or you have to search with other keywords."
 msgstr ""
 
 #: src/gradio-settings-window.vala:39

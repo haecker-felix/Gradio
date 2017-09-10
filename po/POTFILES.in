@@ -9,7 +9,7 @@ data/ui/organize-collection-dialog.ui
 data/ui/selection-menu.ui
 data/ui/selection-toolbar.ui
 data/ui/station-editor.ui
-data/ui/search-page.ui
+data/ui/page/search-page.ui
 src/gradio-settings-window.vala
 src/page/gradio-add-page.vala
 src/gradio-headerbar.vala
