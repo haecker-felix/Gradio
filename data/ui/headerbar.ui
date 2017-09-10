@@ -156,6 +156,9 @@
                 <property name="active">True</property>
                 <property name="draw_indicator">True</property>
                 <signal name="toggled" handler="SortRadioButton_toggled" swapped="no"/>
+                <style>
+                  <class name="right"/>
+                </style>
               </object>
               <packing>
                 <property name="expand">False</property>
