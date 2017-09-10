@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-10 14:34+0200\n"
 "PO-Revision-Date: 2017-09-10 21:25+0000\n"
-"Last-Translator: Luciano de O. Santos <luc14n0@linuxmail.org>\n"
+"Last-Translator: Fábio Nogueira <fnogueira@gnome.org>\n"
 "Language-Team: Portuguese (Brazil) "
 "<https://hosted.weblate.org/projects/gradio/translations/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -102,7 +102,7 @@ msgstr "Descrição"
 
 #: data/ui/details-box.ui:349
 msgid "Tags"
-msgstr ""
+msgstr "Etiquetas"
 
 #: data/ui/details-box.ui:436 data/ui/selection-toolbar.ui:15
 msgid "Play"
