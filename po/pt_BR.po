@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-10 14:34+0200\n"
-"PO-Revision-Date: 2017-09-10 23:48+0000\n"
-"Last-Translator: Fábio Nogueira <fnogueira@gnome.org>\n"
+"PO-Revision-Date: 2017-09-11 00:23+0000\n"
+"Last-Translator: Luciano de O. Santos <luc14n0@linuxmail.org>\n"
 "Language-Team: Portuguese (Brazil) "
 "<https://hosted.weblate.org/projects/gradio/translations/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -239,35 +239,35 @@ msgstr "Cache"
 #. Dark design
 #: src/gradio-settings-window.vala:59
 msgid "Prefer dark theme"
-msgstr ""
+msgstr "Optar por tema escuro"
 
 #: src/gradio-settings-window.vala:59
 msgid "Use a dark theme, if possible"
-msgstr ""
+msgstr "Usar tema escuro, se possível"
 
 #. hide broken stations
 #: src/gradio-settings-window.vala:65
 msgid "Hide broken stations"
-msgstr ""
+msgstr "Esconder estações ociosas"
 
 #: src/gradio-settings-window.vala:65
 msgid "Don't show stations, which are not working"
-msgstr ""
+msgstr "Não mostrar estações que não estejam funcionando"
 
 #. PLAYBACK
 #. enable background playback
 #: src/gradio-settings-window.vala:74
 msgid "Background Playback"
-msgstr ""
+msgstr "Reprodução em segundo plano"
 
 #: src/gradio-settings-window.vala:74
 msgid "Continue the playback if you close the Gradio window"
-msgstr ""
+msgstr "Continuar a reprodução se a janela do Gradio for fechada"
 
 #. resume playback on startup
 #: src/gradio-settings-window.vala:80
 msgid "Resume playback on startup"
-msgstr ""
+msgstr "Retomar reprodução ao inicializar"
 
 #: src/gradio-settings-window.vala:80
 msgid "Play the latest station if you start Gradio"
