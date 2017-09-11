@@ -1,7 +1,6 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# Copyright (C) 2017 
 # This file is distributed under the same license as the gradio package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# George Grigalashvili <grigalaa@gmail.com>, 2017.
 #
 msgid ""
 msgstr ""
@@ -9,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-10 14:34+0200\n"
 "PO-Revision-Date: 2017-09-10 21:39+0000\n"
-"Last-Translator: George Grigalashvili <c0mrad@java.net>\n"
+"Last-Translator: George Grigalashvili <grigalaa@gmail.com>\n"
 "Language-Team: Georgian "
 "<https://hosted.weblate.org/projects/gradio/translations/ka/>\n"
 "Language: ka\n"
