@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-10 14:34+0200\n"
-"PO-Revision-Date: 2017-09-11 16:15+0000\n"
+"PO-Revision-Date: 2017-09-12 16:56+0000\n"
 "Last-Translator: DaSnoopy <a.antolini@tin.it>\n"
 "Language-Team: Italian "
 "<https://hosted.weblate.org/projects/gradio/translations/it/>\n"
@@ -33,7 +33,7 @@ msgstr "Esci"
 
 #: data/ui/filter-box.ui:27
 msgid "Where"
-msgstr "Paese e/o regione"
+msgstr "Dove"
 
 #: data/ui/filter-box.ui:44
 msgid "Select Country ..."
@@ -182,7 +182,7 @@ msgstr "Homepage"
 
 #: data/ui/station-editor.ui:181
 msgid "Country"
-msgstr "Stato"
+msgstr "Paese"
 
 #: data/ui/station-editor.ui:196
 msgid "State"
