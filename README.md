@@ -12,7 +12,7 @@ A GTK3 app for finding and listening to internet radio stations.
 ```
 sudo snap install gradio
 sudo snap install gnome-3-24
-sudo connect gradio:gnome-3-24-platform gnome-3-24:gnome-3-24-platform
+sudo snap connect gradio:gnome-3-24-platform gnome-3-24:gnome-3-24-platform
 snap run gradio
 ```
 
