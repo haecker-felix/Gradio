@@ -8,152 +8,155 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-10 14:34+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2017-09-13 19:33+0000\n"
+"Last-Translator: Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
+"Language-Team: Swedish "
+"<https://hosted.weblate.org/projects/gradio/translations/sv/>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 2.17-dev\n"
 
 #: data/ui/app-menu.ui:6
 msgid "Settings"
-msgstr ""
+msgstr "Inställningar"
 
 #: data/ui/app-menu.ui:12
 msgid "About"
-msgstr ""
+msgstr "Om"
 
 #: data/ui/app-menu.ui:18
 msgid "Quit"
-msgstr ""
+msgstr "Avsluta"
 
 #: data/ui/filter-box.ui:27
 msgid "Where"
-msgstr ""
+msgstr "Var"
 
 #: data/ui/filter-box.ui:44
 msgid "Select Country ..."
-msgstr ""
+msgstr "Välj land…"
 
 #: data/ui/filter-box.ui:125
 msgid "Select State  ..."
-msgstr ""
+msgstr "Välj delstat…"
 
 #: data/ui/filter-box.ui:205 data/ui/station-editor.ui:211
 msgid "Language"
-msgstr ""
+msgstr "Språk"
 
 #: data/ui/filter-box.ui:222
 msgid "Select Language  ..."
-msgstr ""
+msgstr "Välj språk…"
 
 #: data/ui/page/add-page.ui:45
 msgid "Fill your library with something new"
-msgstr ""
+msgstr "Fyll ditt bibliotek med något nytt"
 
 #: data/ui/page/add-page.ui:64
 msgid "There are several options available to add something new."
-msgstr ""
+msgstr "Det finns flera alternativ tillgängliga för att lägga till något nytt."
 
 #: data/ui/page/library-page.ui:44
 msgid "Your library is empty"
-msgstr ""
+msgstr "Ditt bibliotek är tomt"
 
 #: data/ui/page/library-page.ui:62
 msgid "If you add stations to the library, you will find them here."
-msgstr ""
+msgstr "Om du lägger till stationer till biblioteket så hittar du dem här."
 
 #: data/ui/page/collections-page.ui:43
 msgid "You don't have any collection"
-msgstr ""
+msgstr "Du har ingen samling"
 
 #: data/ui/page/collections-page.ui:61
 msgid "You can group stations into collections."
-msgstr ""
+msgstr "Du kan gruppera stationer i samlingar."
 
 #: data/ui/details-box.ui:23 data/ui/selection-toolbar.ui:151
 msgid "Details"
-msgstr ""
+msgstr "Detaljer"
 
 #: data/ui/details-box.ui:137 data/ui/station-editor.ui:125
 msgid "Name"
-msgstr ""
+msgstr "Namn"
 
 #: data/ui/details-box.ui:172
 msgid "Type"
-msgstr ""
+msgstr "Typ"
 
 #: data/ui/details-box.ui:209
 msgid "Items"
-msgstr ""
+msgstr "Objekt"
 
 #: data/ui/details-box.ui:285
 msgid "Location"
-msgstr ""
+msgstr "Plats"
 
 #: data/ui/details-box.ui:317
 msgid "Description"
-msgstr ""
+msgstr "Beskrivning"
 
 #: data/ui/details-box.ui:349
 msgid "Tags"
-msgstr ""
+msgstr "Taggar"
 
 #: data/ui/details-box.ui:436 data/ui/selection-toolbar.ui:15
 msgid "Play"
-msgstr ""
+msgstr "Spela"
 
 #: data/ui/details-box.ui:481
 msgid "Open homepage"
-msgstr ""
+msgstr "Öppna webbsida"
 
 #: data/ui/details-box.ui:526
 msgid "Edit"
-msgstr ""
+msgstr "Redigera"
 
 #: data/ui/organize-collection-dialog.ui:21
 #: data/ui/organize-collection-dialog.ui:107
 msgid "New Collection…"
-msgstr ""
+msgstr "Ny samling…"
 
 #: data/ui/organize-collection-dialog.ui:31
 #: data/ui/organize-collection-dialog.ui:128
 #: data/ui/organize-collection-dialog.ui:201
 msgid "Add"
-msgstr ""
+msgstr "Lägg till"
 
 #: data/ui/organize-collection-dialog.ui:92
 msgid "Enter a name for your first collection"
-msgstr ""
+msgstr "Ange ett namn för din första samling"
 
 #: data/ui/organize-collection-dialog.ui:192 data/ui/station-editor.ui:501
 msgid "Cancel"
-msgstr ""
+msgstr "Avbryt"
 
 #: data/ui/selection-menu.ui:7
 msgid "Select All"
-msgstr ""
+msgstr "Markera alla"
 
 #: data/ui/selection-menu.ui:11
 msgid "Select None"
-msgstr ""
+msgstr "Markera ingen"
 
 #: data/ui/selection-toolbar.ui:29
 msgid "Add to library"
-msgstr ""
+msgstr "Lägg till i bibliotek"
 
 #: data/ui/selection-toolbar.ui:46
 msgid "Remove"
-msgstr ""
+msgstr "Ta bort"
 
 #: data/ui/selection-toolbar.ui:135
 msgid "Collections"
-msgstr ""
+msgstr "Samlingar"
 
 #: data/ui/station-editor.ui:39
 msgid "Global database"
-msgstr ""
+msgstr "Global databas"
 
 #: data/ui/station-editor.ui:54
 msgid ""
@@ -161,231 +164,235 @@ msgid ""
 "going to be visible for all users. Please be careful, and double check your "
 "input!"
 msgstr ""
+"Gradio använder en internetdatabas. Allt som du matar in här kommer vara "
+"synligt för alla användare. Var försiktig, och kontrollera vad du matar in!"
 
 #: data/ui/station-editor.ui:68
 msgid "Continue"
-msgstr ""
+msgstr "Fortsätt"
 
 #: data/ui/station-editor.ui:151
 msgid "Stream Address"
-msgstr ""
+msgstr "Strömadress"
 
 #: data/ui/station-editor.ui:166
 msgid "Homepage"
-msgstr ""
+msgstr "Webbsida"
 
 #: data/ui/station-editor.ui:181
 msgid "Country"
-msgstr ""
+msgstr "Land"
 
 #: data/ui/station-editor.ui:196
 msgid "State"
-msgstr ""
+msgstr "Delstat"
 
 #: data/ui/station-editor.ui:291
 msgid "Favicon Address"
-msgstr ""
+msgstr "Ikonadress"
 
 #: data/ui/station-editor.ui:435
 msgid "Server Response"
-msgstr ""
+msgstr "Serversvar"
 
 #: data/ui/station-editor.ui:471
 msgid "Close"
-msgstr ""
+msgstr "Stäng"
 
 #: data/ui/station-editor.ui:510
 msgid "Done"
-msgstr ""
+msgstr "Klar"
 
 #: data/ui/page/search-page.ui:127
 msgid "No results found"
-msgstr ""
+msgstr "Inga resultat hittades"
 
 #: data/ui/page/search-page.ui:145
 msgid ""
 "Either the station does not exist, or you have to search with other keywords."
 msgstr ""
+"Antingen existerar inte stationen, eller så behöver du söka med andra "
+"nyckelord."
 
 #: src/gradio-settings-window.vala:39
 msgid "Features"
-msgstr ""
+msgstr "Funktioner"
 
 #: src/gradio-settings-window.vala:42
 msgid "Playback"
-msgstr ""
+msgstr "Uppspelning"
 
 #: src/gradio-settings-window.vala:45
 msgid "Library"
-msgstr ""
+msgstr "Bibliotek"
 
 #: src/gradio-settings-window.vala:48
 msgid "Appearance"
-msgstr ""
+msgstr "Utseende"
 
 #: src/gradio-settings-window.vala:51
 msgid "Cache"
-msgstr ""
+msgstr "Cache"
 
 #. APPEARANCE
 #. Dark design
 #: src/gradio-settings-window.vala:59
 msgid "Prefer dark theme"
-msgstr ""
+msgstr "Föredra mörkt tema"
 
 #: src/gradio-settings-window.vala:59
 msgid "Use a dark theme, if possible"
-msgstr ""
+msgstr "Använd ett mörkt tema om möjligt"
 
 #. hide broken stations
 #: src/gradio-settings-window.vala:65
 msgid "Hide broken stations"
-msgstr ""
+msgstr "Dölj trasiga stationer"
 
 #: src/gradio-settings-window.vala:65
 msgid "Don't show stations, which are not working"
-msgstr ""
+msgstr "Visa inte stationer som inte fungerar"
 
 #. PLAYBACK
 #. enable background playback
 #: src/gradio-settings-window.vala:74
 msgid "Background Playback"
-msgstr ""
+msgstr "Uppspelning i bakgrunden"
 
 #: src/gradio-settings-window.vala:74
 msgid "Continue the playback if you close the Gradio window"
-msgstr ""
+msgstr "Fortsätt uppspelningen om du stänger Gradio-fönstret"
 
 #. resume playback on startup
 #: src/gradio-settings-window.vala:80
 msgid "Resume playback on startup"
-msgstr ""
+msgstr "Fortsätt uppspelning vid uppstart"
 
 #: src/gradio-settings-window.vala:80
 msgid "Play the latest station if you start Gradio"
-msgstr ""
+msgstr "Spela den senaste stationen om du startar Gradio"
 
 #. LIBRARY
 #. import library
 #: src/gradio-settings-window.vala:89 src/gradio-settings-window.vala:173
 msgid "Import"
-msgstr ""
+msgstr "Importera"
 
 #: src/gradio-settings-window.vala:89
 msgid "Replace the current library with a another one"
-msgstr ""
+msgstr "Ersätt aktuellt bibliotek med ett annat"
 
 #: src/gradio-settings-window.vala:93
 msgid "Do you want to replace the current library with this one?"
-msgstr ""
+msgstr "Vill du ersätta aktuellt bibliotek med detta?"
 
 #. export library
 #: src/gradio-settings-window.vala:99 src/gradio-settings-window.vala:152
 msgid "Export"
-msgstr ""
+msgstr "Exportera"
 
 #: src/gradio-settings-window.vala:99 src/gradio-settings-window.vala:149
 msgid "Export the current library"
-msgstr ""
+msgstr "Exportera aktuellt bibliotek"
 
 #. FEATURES
 #. mpris
 #: src/gradio-settings-window.vala:111
 msgid "MPRIS"
-msgstr ""
+msgstr "MPRIS"
 
 #: src/gradio-settings-window.vala:111
 msgid "Integrate Gradio as media player in your desktop environment"
-msgstr ""
+msgstr "Integrera Gradio som en mediaspelare i din skrivbordsmiljö"
 
 #. enable notifications
 #: src/gradio-settings-window.vala:117
 msgid "Notifications"
-msgstr ""
+msgstr "Aviseringar"
 
 #: src/gradio-settings-window.vala:117
 msgid "Show desktop notifications"
-msgstr ""
+msgstr "Viska skrivbordsaviseringar"
 
 #. enable tray icon
 #: src/gradio-settings-window.vala:123
 msgid "Tray icon"
-msgstr ""
+msgstr "Aktivitetsfältsikon"
 
 #: src/gradio-settings-window.vala:123
 msgid "Show a tray icon, to restore the main window"
-msgstr ""
+msgstr "Visa en aktivitetsfältsikon för att återställa huvudfönstret"
 
 #. CACHE
 #. cache station images
 #: src/gradio-settings-window.vala:132
 msgid "Cache station icons"
-msgstr ""
+msgstr "Cacha stationsikoner"
 
 #: src/gradio-settings-window.vala:132
 msgid "Saves the images locally."
-msgstr ""
+msgstr "Sparar bilderna lokalt."
 
 #: src/gradio-settings-window.vala:137
 msgid "Clear Cache"
-msgstr ""
+msgstr "Töm cache"
 
 #: src/gradio-settings-window.vala:137
 msgid "Clear all cached station icons"
-msgstr ""
+msgstr "Töm alla cachade stationsikoner"
 
 #: src/gradio-settings-window.vala:150 src/gradio-settings-window.vala:171
 msgid "_Cancel"
-msgstr ""
+msgstr "A_vbryt"
 
 #: src/gradio-settings-window.vala:170
 msgid "Select database to import"
-msgstr ""
+msgstr "Välj databas att importera"
 
 #: src/page/gradio-add-page.vala:27
 msgid "Create a new radio station"
-msgstr ""
+msgstr "Skapa en ny radiostation"
 
 #: src/page/gradio-add-page.vala:28
 msgid "Discover radio stations"
-msgstr ""
+msgstr "Upptäck radiostationer"
 
 #: src/page/gradio-add-page.vala:31
 msgid "Show famous radio stations"
-msgstr ""
+msgstr "Visa berömda radiostationer"
 
 #: src/page/gradio-add-page.vala:31
 msgid "Show radio stations which have the most votes."
-msgstr ""
+msgstr "Visa radiostationerna som har flest röster."
 
 #: src/page/gradio-add-page.vala:35
 msgid "Show popular radio stations"
-msgstr ""
+msgstr "Visa populära radiostationer"
 
 #: src/page/gradio-add-page.vala:35
 msgid "Show radio stations which have the most clicks."
-msgstr ""
+msgstr "Visa radiostationerna som har flest klick."
 
 #: src/page/gradio-add-page.vala:39
 msgid "Show recent radio stations"
-msgstr ""
+msgstr "Visa senaste radiostationerna"
 
 #: src/page/gradio-add-page.vala:39
 msgid "Show radio stations which have recently been clicked."
-msgstr ""
+msgstr "Visa radiostationer som nyligen har klickats."
 
 #: src/page/gradio-add-page.vala:43
 msgid "Search for radio stations"
-msgstr ""
+msgstr "Sök efter radiostationer"
 
 #: src/page/gradio-add-page.vala:43
 msgid "Search for specific radio stations."
-msgstr ""
+msgstr "Sök efter specifika radiostationer."
 
 #: src/page/gradio-add-page.vala:47
 msgid "New public radio station"
-msgstr ""
+msgstr "Ny offentlig radiostation"
 
 #: src/page/gradio-add-page.vala:47
 msgid "Create a new radio station, which is visible for all users."
-msgstr ""
+msgstr "Skapa en ny radiostation som är synlig för alla användare."
