@@ -2,13 +2,12 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the gradio package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-10 14:34+0200\n"
-"PO-Revision-Date: 2017-09-13 13:37+0000\n"
+"PO-Revision-Date: 2017-09-13 13:57+0000\n"
 "Last-Translator: Slobodan Terzić <githzerai06@gmail.com>\n"
 "Language-Team: Serbian "
 "<https://hosted.weblate.org/projects/gradio/translations/sr/>\n"
@@ -22,7 +21,7 @@ msgstr ""
 
 #: data/ui/app-menu.ui:6
 msgid "Settings"
-msgstr "Подешавања"
+msgstr "Поставке"
 
 #: data/ui/app-menu.ui:12
 msgid "About"
@@ -54,7 +53,7 @@ msgstr "Изаберите језик ..."
 
 #: data/ui/page/add-page.ui:45
 msgid "Fill your library with something new"
-msgstr "Попуните вашу библиотеку нечим новим"
+msgstr "Попуните библиотеку нечим новим"
 
 #: data/ui/page/add-page.ui:64
 msgid "There are several options available to add something new."
@@ -237,7 +236,7 @@ msgstr "Кеш"
 #. Dark design
 #: src/gradio-settings-window.vala:59
 msgid "Prefer dark theme"
-msgstr "Дај предност тамној теми"
+msgstr "Предност тамној теми"
 
 #: src/gradio-settings-window.vala:59
 msgid "Use a dark theme, if possible"
@@ -275,11 +274,11 @@ msgstr "Пушта последњу станицу по покретању Гр�
 #. import library
 #: src/gradio-settings-window.vala:89 src/gradio-settings-window.vala:173
 msgid "Import"
-msgstr "Увези"
+msgstr "Увоз"
 
 #: src/gradio-settings-window.vala:89
 msgid "Replace the current library with a another one"
-msgstr "Замени тренутну библиотеку другом"
+msgstr "Мења тренутну библиотеку другом"
 
 #: src/gradio-settings-window.vala:93
 msgid "Do you want to replace the current library with this one?"
@@ -288,11 +287,11 @@ msgstr "Заменити тренутну библиотеку са овом?"
 #. export library
 #: src/gradio-settings-window.vala:99 src/gradio-settings-window.vala:152
 msgid "Export"
-msgstr "Извези"
+msgstr "Извоз"
 
 #: src/gradio-settings-window.vala:99 src/gradio-settings-window.vala:149
 msgid "Export the current library"
-msgstr "Извези тренутну библиотеку"
+msgstr "Извоз тренутне библиотеке"
 
 #. FEATURES
 #. mpris
@@ -302,7 +301,7 @@ msgstr "МПРИС"
 
 #: src/gradio-settings-window.vala:111
 msgid "Integrate Gradio as media player in your desktop environment"
-msgstr "Уградите Градио у ваше окружење површи"
+msgstr "Уграђује Градио у окружење површи"
 
 #. enable notifications
 #: src/gradio-settings-window.vala:117
@@ -311,7 +310,7 @@ msgstr "Обавештења"
 
 #: src/gradio-settings-window.vala:117
 msgid "Show desktop notifications"
-msgstr "Прикажи обавештења радне површи"
+msgstr "Приказује обавештења радне површи"
 
 #. enable tray icon
 #: src/gradio-settings-window.vala:123
@@ -320,21 +319,21 @@ msgstr "Икона системске касете"
 
 #: src/gradio-settings-window.vala:123
 msgid "Show a tray icon, to restore the main window"
-msgstr "Приказуј икону системске касете за обнову главног прозора"
+msgstr "Приказује икону системске касете за обнову главног прозора"
 
 #. CACHE
 #. cache station images
 #: src/gradio-settings-window.vala:132
 msgid "Cache station icons"
-msgstr "Кеширај слике станица"
+msgstr "Кеширање слика станица"
 
 #: src/gradio-settings-window.vala:132
 msgid "Saves the images locally."
-msgstr "Чува слике локално."
+msgstr "Чува слике станица локално."
 
 #: src/gradio-settings-window.vala:137
 msgid "Clear Cache"
-msgstr "Очисти кеш"
+msgstr "Чишћење кеша"
 
 #: src/gradio-settings-window.vala:137
 msgid "Clear all cached station icons"
