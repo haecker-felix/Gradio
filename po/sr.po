@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-10 14:34+0200\n"
-"PO-Revision-Date: 2017-09-13 13:57+0000\n"
+"PO-Revision-Date: 2017-09-13 14:06+0000\n"
 "Last-Translator: Slobodan Terzić <githzerai06@gmail.com>\n"
 "Language-Team: Serbian "
 "<https://hosted.weblate.org/projects/gradio/translations/sr/>\n"
@@ -357,39 +357,39 @@ msgstr "Откријте радио станице"
 
 #: src/page/gradio-add-page.vala:31
 msgid "Show famous radio stations"
-msgstr "Прикажи познате радио станице"
+msgstr "Познате радио станице"
 
 #: src/page/gradio-add-page.vala:31
 msgid "Show radio stations which have the most votes."
-msgstr "Прикажи станице са највише гласова."
+msgstr "Приказ станица са највише гласова."
 
 #: src/page/gradio-add-page.vala:35
 msgid "Show popular radio stations"
-msgstr "Прикажи популарне радио станице"
+msgstr "Популарне радио станице"
 
 #: src/page/gradio-add-page.vala:35
 msgid "Show radio stations which have the most clicks."
-msgstr "Прикажи станице са највише кликова."
+msgstr "Приказ станице са највише кликова."
 
 #: src/page/gradio-add-page.vala:39
 msgid "Show recent radio stations"
-msgstr "Прикажи недавне радио станице"
+msgstr "Недавне радио станице"
 
 #: src/page/gradio-add-page.vala:39
 msgid "Show radio stations which have recently been clicked."
-msgstr "Прикажи радио станице које су недавно кликнуте."
+msgstr "Приказ недавно изабраних радио станица."
 
 #: src/page/gradio-add-page.vala:43
 msgid "Search for radio stations"
-msgstr "Тражи радио станице"
+msgstr "Претрага радио станица"
 
 #: src/page/gradio-add-page.vala:43
 msgid "Search for specific radio stations."
-msgstr "Тражи одређену радио станицу."
+msgstr "Тражење одређене радио станице."
 
 #: src/page/gradio-add-page.vala:47
 msgid "New public radio station"
-msgstr "Нова јавна радио станице"
+msgstr "Нова јавна радио станица"
 
 #: src/page/gradio-add-page.vala:47
 msgid "Create a new radio station, which is visible for all users."
