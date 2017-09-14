@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-10 14:34+0200\n"
-"PO-Revision-Date: 2017-09-12 16:56+0000\n"
+"PO-Revision-Date: 2017-09-14 17:18+0000\n"
 "Last-Translator: DaSnoopy <a.antolini@tin.it>\n"
 "Language-Team: Italian "
 "<https://hosted.weblate.org/projects/gradio/translations/it/>\n"
@@ -206,7 +206,7 @@ msgstr "Completato"
 
 #: data/ui/page/search-page.ui:127
 msgid "No results found"
-msgstr "Nessun stazione trovata"
+msgstr "Nessuna stazione trovata"
 
 #: data/ui/page/search-page.ui:145
 msgid ""
@@ -270,7 +270,7 @@ msgstr "Avvia riproduzione all'avvio"
 
 #: src/gradio-settings-window.vala:80
 msgid "Play the latest station if you start Gradio"
-msgstr "Riproduci l'ultima stazione all'avvio di Gradio"
+msgstr "Riproduci l'ultima stazione ascoltata all'avvio di Gradio"
 
 #. LIBRARY
 #. import library
@@ -280,7 +280,7 @@ msgstr "Importa"
 
 #: src/gradio-settings-window.vala:89
 msgid "Replace the current library with a another one"
-msgstr "Sostitusci la libreria attuale con una nuova"
+msgstr "Sostitusci la raccolta attuale con una nuova"
 
 #: src/gradio-settings-window.vala:93
 msgid "Do you want to replace the current library with this one?"
