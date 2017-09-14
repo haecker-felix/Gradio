@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-10 14:34+0200\n"
-"PO-Revision-Date: 2017-09-14 19:19+0000\n"
-"Last-Translator: Florian <floflr@zaclys.net>\n"
+"PO-Revision-Date: 2017-09-14 19:21+0000\n"
+"Last-Translator: LL <lu.lecocq@free.fr>\n"
 "Language-Team: French "
 "<https://hosted.weblate.org/projects/gradio/translations/fr/>\n"
 "Language: fr\n"
@@ -54,7 +54,7 @@ msgstr "Sélectionner la langue..."
 
 #: data/ui/page/add-page.ui:45
 msgid "Fill your library with something new"
-msgstr ""
+msgstr "Ajouter des nouveautés à votre bibliothèque"
 
 #: data/ui/page/add-page.ui:64
 msgid "There are several options available to add something new."
@@ -157,7 +157,7 @@ msgstr "Collections"
 
 #: data/ui/station-editor.ui:39
 msgid "Global database"
-msgstr ""
+msgstr "Base de données générale"
 
 #: data/ui/station-editor.ui:54
 msgid ""
