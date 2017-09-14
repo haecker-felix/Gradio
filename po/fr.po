@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-10 14:34+0200\n"
-"PO-Revision-Date: 2017-09-14 18:34+0000\n"
-"Last-Translator: Florian <floflr@zaclys.net>\n"
+"PO-Revision-Date: 2017-09-14 18:37+0000\n"
+"Last-Translator: LL <lu.lecocq@free.fr>\n"
 "Language-Team: French "
 "<https://hosted.weblate.org/projects/gradio/translations/fr/>\n"
 "Language: fr\n"
@@ -195,7 +195,7 @@ msgstr "Adresse icône"
 
 #: data/ui/station-editor.ui:435
 msgid "Server Response"
-msgstr ""
+msgstr "Réponse du serveur"
 
 #: data/ui/station-editor.ui:471
 msgid "Close"
