@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-10 14:34+0200\n"
 "PO-Revision-Date: 2017-09-14 18:37+0000\n"
-"Last-Translator: LL <lu.lecocq@free.fr>\n"
+"Last-Translator: Florian <floflr@zaclys.net>\n"
 "Language-Team: French "
 "<https://hosted.weblate.org/projects/gradio/translations/fr/>\n"
 "Language: fr\n"
@@ -222,7 +222,7 @@ msgstr "Fonctionalités"
 
 #: src/gradio-settings-window.vala:42
 msgid "Playback"
-msgstr ""
+msgstr "Lecture"
 
 #: src/gradio-settings-window.vala:45
 msgid "Library"
