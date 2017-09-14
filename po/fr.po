@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-10 14:34+0200\n"
-"PO-Revision-Date: 2017-09-14 18:51+0000\n"
-"Last-Translator: Florian <floflr@zaclys.net>\n"
+"PO-Revision-Date: 2017-09-14 18:52+0000\n"
+"Last-Translator: LL <lu.lecocq@free.fr>\n"
 "Language-Team: French "
 "<https://hosted.weblate.org/projects/gradio/translations/fr/>\n"
 "Language: fr\n"
@@ -301,11 +301,12 @@ msgstr "Exporter la bibliothèque actuelle"
 #. mpris
 #: src/gradio-settings-window.vala:111
 msgid "MPRIS"
-msgstr ""
+msgstr "MPRIS"
 
 #: src/gradio-settings-window.vala:111
 msgid "Integrate Gradio as media player in your desktop environment"
 msgstr ""
+"Intégrer Gradio comme lecteur multimédia dans votre environnement de bureau"
 
 #. enable notifications
 #: src/gradio-settings-window.vala:117
