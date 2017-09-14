@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-10 14:34+0200\n"
-"PO-Revision-Date: 2017-09-14 17:23+0000\n"
+"PO-Revision-Date: 2017-09-14 17:26+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish "
 "<https://hosted.weblate.org/projects/gradio/translations/pl/>\n"
@@ -153,11 +153,11 @@ msgstr "Usuń"
 
 #: data/ui/selection-toolbar.ui:135
 msgid "Collections"
-msgstr ""
+msgstr "Kolekcje"
 
 #: data/ui/station-editor.ui:39
 msgid "Global database"
-msgstr ""
+msgstr "Globalna baza danych"
 
 #: data/ui/station-editor.ui:54
 msgid ""
@@ -165,63 +165,66 @@ msgid ""
 "going to be visible for all users. Please be careful, and double check your "
 "input!"
 msgstr ""
+"Gradio używa internetowej bazy danych. Wprowadzone tu informacje będą "
+"widoczne dla wszystkich użytkowników. Prosimy o ostrożność i poprawność "
+"dodawanych informacji."
 
 #: data/ui/station-editor.ui:68
 msgid "Continue"
-msgstr ""
+msgstr "Kontynuuj"
 
 #: data/ui/station-editor.ui:151
 msgid "Stream Address"
-msgstr ""
+msgstr "Adres"
 
 #: data/ui/station-editor.ui:166
 msgid "Homepage"
-msgstr ""
+msgstr "Strona domowa"
 
 #: data/ui/station-editor.ui:181
 msgid "Country"
-msgstr ""
+msgstr "Kraj"
 
 #: data/ui/station-editor.ui:196
 msgid "State"
-msgstr ""
+msgstr "Stan"
 
 #: data/ui/station-editor.ui:291
 msgid "Favicon Address"
-msgstr ""
+msgstr "Adres ikony"
 
 #: data/ui/station-editor.ui:435
 msgid "Server Response"
-msgstr ""
+msgstr "Odpowiedź serwera"
 
 #: data/ui/station-editor.ui:471
 msgid "Close"
-msgstr ""
+msgstr "Zamknij"
 
 #: data/ui/station-editor.ui:510
 msgid "Done"
-msgstr ""
+msgstr "Gotowe"
 
 #: data/ui/page/search-page.ui:127
 msgid "No results found"
-msgstr ""
+msgstr "Brak wyników"
 
 #: data/ui/page/search-page.ui:145
 msgid ""
 "Either the station does not exist, or you have to search with other keywords."
-msgstr ""
+msgstr "Stacja nie istnieje lub należy użyć innych słów."
 
 #: src/gradio-settings-window.vala:39
 msgid "Features"
-msgstr ""
+msgstr "Funkcje"
 
 #: src/gradio-settings-window.vala:42
 msgid "Playback"
-msgstr ""
+msgstr "Odtwarzanie"
 
 #: src/gradio-settings-window.vala:45
 msgid "Library"
-msgstr ""
+msgstr "Kolekcja"
 
 #: src/gradio-settings-window.vala:48
 msgid "Appearance"
