@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-10 14:34+0200\n"
-"PO-Revision-Date: 2017-09-14 19:10+0000\n"
-"Last-Translator: LL <lu.lecocq@free.fr>\n"
+"PO-Revision-Date: 2017-09-14 19:16+0000\n"
+"Last-Translator: Florian <floflr@zaclys.net>\n"
 "Language-Team: French "
 "<https://hosted.weblate.org/projects/gradio/translations/fr/>\n"
 "Language: fr\n"
@@ -363,27 +363,27 @@ msgstr "Découvrir des stations de radio"
 
 #: src/page/gradio-add-page.vala:31
 msgid "Show famous radio stations"
-msgstr "Montrer les stations radio populaires"
+msgstr "Afficher les stations radio célèbres"
 
 #: src/page/gradio-add-page.vala:31
 msgid "Show radio stations which have the most votes."
-msgstr ""
+msgstr "Afficher les stations radio qui ont le plus de votes."
 
 #: src/page/gradio-add-page.vala:35
 msgid "Show popular radio stations"
-msgstr "Afficher les stations de radio populaires"
+msgstr "Afficher les stations radio populaires"
 
 #: src/page/gradio-add-page.vala:35
 msgid "Show radio stations which have the most clicks."
-msgstr ""
+msgstr "Afficher les stations radio qui ont le plus de vues."
 
 #: src/page/gradio-add-page.vala:39
 msgid "Show recent radio stations"
-msgstr "Afficher les stations de radio récentes"
+msgstr "Afficher les stations radio récentes"
 
 #: src/page/gradio-add-page.vala:39
 msgid "Show radio stations which have recently been clicked."
-msgstr ""
+msgstr "Afficher les stations radio vues récemment."
 
 #: src/page/gradio-add-page.vala:43
 msgid "Search for radio stations"
@@ -391,7 +391,7 @@ msgstr "Rechercher des stations de radio"
 
 #: src/page/gradio-add-page.vala:43
 msgid "Search for specific radio stations."
-msgstr ""
+msgstr "Rechercher des stations radio spécifiques."
 
 #: src/page/gradio-add-page.vala:47
 msgid "New public radio station"
