@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-10 14:34+0200\n"
-"PO-Revision-Date: 2017-09-14 18:37+0000\n"
-"Last-Translator: Florian <floflr@zaclys.net>\n"
+"PO-Revision-Date: 2017-09-14 18:39+0000\n"
+"Last-Translator: LL <lu.lecocq@free.fr>\n"
 "Language-Team: French "
 "<https://hosted.weblate.org/projects/gradio/translations/fr/>\n"
 "Language: fr\n"
@@ -240,7 +240,7 @@ msgstr "Cache"
 #. Dark design
 #: src/gradio-settings-window.vala:59
 msgid "Prefer dark theme"
-msgstr ""
+msgstr "Préférer le thème sombre"
 
 #: src/gradio-settings-window.vala:59
 msgid "Use a dark theme, if possible"
@@ -249,7 +249,7 @@ msgstr "Utiliser un thème sombre, si possible"
 #. hide broken stations
 #: src/gradio-settings-window.vala:65
 msgid "Hide broken stations"
-msgstr ""
+msgstr "Cacher les stations sans lien valide"
 
 #: src/gradio-settings-window.vala:65
 msgid "Don't show stations, which are not working"
