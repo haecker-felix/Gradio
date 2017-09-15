@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-10 14:34+0200\n"
-"PO-Revision-Date: 2017-09-06 21:09+0000\n"
+"PO-Revision-Date: 2017-09-15 16:48+0000\n"
 "Last-Translator: gogogogi <trebelnik2@gmail.com>\n"
-"Language-Team: Croatian <https://hosted.weblate.org/projects/gradio/"
-"translations/hr/>\n"
+"Language-Team: Croatian "
+"<https://hosted.weblate.org/projects/gradio/translations/hr/>\n"
 "Language: hr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<="
+"4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 2.17-dev\n"
 
 #: data/ui/app-menu.ui:6
@@ -62,19 +62,19 @@ msgstr "Dostupno je nekoliko mogućnosti za dodavanje nečeg novog."
 
 #: data/ui/page/library-page.ui:44
 msgid "Your library is empty"
-msgstr ""
+msgstr "Vaša fonoteka je prazna"
 
 #: data/ui/page/library-page.ui:62
 msgid "If you add stations to the library, you will find them here."
-msgstr ""
+msgstr "Ako dodate stanicu u fonoteku, pronaći ćete ju ovdje."
 
 #: data/ui/page/collections-page.ui:43
 msgid "You don't have any collection"
-msgstr ""
+msgstr "Još nemate kolekcija"
 
 #: data/ui/page/collections-page.ui:61
 msgid "You can group stations into collections."
-msgstr ""
+msgstr "Možete grupirati stanice u kolekcije."
 
 #: data/ui/details-box.ui:23 data/ui/selection-toolbar.ui:151
 msgid "Details"
@@ -160,7 +160,6 @@ msgid "Global database"
 msgstr "Globalna baza podataka"
 
 #: data/ui/station-editor.ui:54
-#, fuzzy
 msgid ""
 "Gradio is using a internet database. Everything what you enter here, is "
 "going to be visible for all users. Please be careful, and double check your "
@@ -208,12 +207,12 @@ msgstr "Učinjeno"
 
 #: data/ui/page/search-page.ui:127
 msgid "No results found"
-msgstr ""
+msgstr "Nema pronađenih rezultata"
 
 #: data/ui/page/search-page.ui:145
 msgid ""
 "Either the station does not exist, or you have to search with other keywords."
-msgstr ""
+msgstr "Ili stanica ne postoji, ili ju potražite s drugim izrazom pretrage."
 
 #: src/gradio-settings-window.vala:39
 msgid "Features"
@@ -326,11 +325,11 @@ msgstr "Prikaži obavijesti radne površine"
 #. enable tray icon
 #: src/gradio-settings-window.vala:123
 msgid "Tray icon"
-msgstr ""
+msgstr "Obavijesna ikona"
 
 #: src/gradio-settings-window.vala:123
 msgid "Show a tray icon, to restore the main window"
-msgstr ""
+msgstr "Prikaži obavijesnu ikonu, kako bi mogli vratiti glavni prozor"
 
 #. CACHE
 #. cache station images
@@ -353,9 +352,8 @@ msgid "Clear all cached station icons"
 msgstr "Obriši sve ikone u predmemoriji"
 
 #: src/gradio-settings-window.vala:150 src/gradio-settings-window.vala:171
-#, fuzzy
 msgid "_Cancel"
-msgstr "Odustani"
+msgstr "_Odustani"
 
 #: src/gradio-settings-window.vala:170
 msgid "Select database to import"
@@ -363,51 +361,48 @@ msgstr "Odaberi bazu podataka za uvoz"
 
 #: src/page/gradio-add-page.vala:27
 msgid "Create a new radio station"
-msgstr ""
+msgstr "Stvori novu radio stanicu"
 
 #: src/page/gradio-add-page.vala:28
-#, fuzzy
 msgid "Discover radio stations"
-msgstr "sakrij nedostupne stanice"
+msgstr "Otkrij radio stanice"
 
 #: src/page/gradio-add-page.vala:31
 msgid "Show famous radio stations"
-msgstr ""
+msgstr "Prikaži popularne stanice"
 
 #: src/page/gradio-add-page.vala:31
 msgid "Show radio stations which have the most votes."
-msgstr ""
+msgstr "Prikaži radio stanice koje imaju najviše glasova."
 
 #: src/page/gradio-add-page.vala:35
-#, fuzzy
 msgid "Show popular radio stations"
-msgstr "Prikaži obavijesti radne površine"
+msgstr "Prikaži popularne radio stanice"
 
 #: src/page/gradio-add-page.vala:35
 msgid "Show radio stations which have the most clicks."
-msgstr ""
+msgstr "Prikaži radio stanice koje imaju najviše klikova."
 
 #: src/page/gradio-add-page.vala:39
-#, fuzzy
 msgid "Show recent radio stations"
-msgstr "Prikaži obavijesti radne površine"
+msgstr "Prikaži nedavne radio stanice"
 
 #: src/page/gradio-add-page.vala:39
 msgid "Show radio stations which have recently been clicked."
-msgstr ""
+msgstr "Prikaži radio stanice koje su nedavno kliknute."
 
 #: src/page/gradio-add-page.vala:43
 msgid "Search for radio stations"
-msgstr ""
+msgstr "Pretraga radio stanica"
 
 #: src/page/gradio-add-page.vala:43
 msgid "Search for specific radio stations."
-msgstr ""
+msgstr "Pretraga određenih radio stanica."
 
 #: src/page/gradio-add-page.vala:47
 msgid "New public radio station"
-msgstr ""
+msgstr "Nova javna radio stanica"
 
 #: src/page/gradio-add-page.vala:47
 msgid "Create a new radio station, which is visible for all users."
-msgstr ""
+msgstr "Stvori novu radio stanicu, koja je dostupna svim korisnicima."
