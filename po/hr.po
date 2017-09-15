@@ -2,13 +2,12 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the gradio package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-10 14:34+0200\n"
-"PO-Revision-Date: 2017-09-15 16:48+0000\n"
+"PO-Revision-Date: 2017-09-15 16:58+0000\n"
 "Last-Translator: gogogogi <trebelnik2@gmail.com>\n"
 "Language-Team: Croatian "
 "<https://hosted.weblate.org/projects/gradio/translations/hr/>\n"
@@ -238,9 +237,7 @@ msgstr "Međuspremnik"
 #. Dark design
 #: src/gradio-settings-window.vala:59
 msgid "Prefer dark theme"
-msgstr ""
-"IZGLED\n"
-"Tamni dizajn"
+msgstr "Preferiraj tamnu temu"
 
 #: src/gradio-settings-window.vala:59
 msgid "Use a dark theme, if possible"
@@ -249,7 +246,7 @@ msgstr "Koristi tamnu temu, ako je moguće"
 #. hide broken stations
 #: src/gradio-settings-window.vala:65
 msgid "Hide broken stations"
-msgstr "sakrij nedostupne stanice"
+msgstr "Sakrij nedostupne stanice"
 
 #: src/gradio-settings-window.vala:65
 msgid "Don't show stations, which are not working"
@@ -259,9 +256,7 @@ msgstr "Ne prikazuj stanice koje ne rade"
 #. enable background playback
 #: src/gradio-settings-window.vala:74
 msgid "Background Playback"
-msgstr ""
-"REPRODUKCIJA\n"
-"omogući reprodukciju u pozadini"
+msgstr "Reprodukciju u pozadini"
 
 #: src/gradio-settings-window.vala:74
 msgid "Continue the playback if you close the Gradio window"
@@ -280,9 +275,7 @@ msgstr "Reproduciraj posljednju stanicu kada se pokrene Gradio"
 #. import library
 #: src/gradio-settings-window.vala:89 src/gradio-settings-window.vala:173
 msgid "Import"
-msgstr ""
-"FONOTEKA\n"
-"uvezi fonoteku"
+msgstr "Uvezi"
 
 #: src/gradio-settings-window.vala:89
 msgid "Replace the current library with a another one"
@@ -295,7 +288,7 @@ msgstr "Želite li zamijeniti trenutnu fonoteku s ovom?"
 #. export library
 #: src/gradio-settings-window.vala:99 src/gradio-settings-window.vala:152
 msgid "Export"
-msgstr "izvezi fonoteku"
+msgstr "Izvezi"
 
 #: src/gradio-settings-window.vala:99 src/gradio-settings-window.vala:149
 msgid "Export the current library"
@@ -305,9 +298,7 @@ msgstr "Izvezi trenutnu fonoteku"
 #. mpris
 #: src/gradio-settings-window.vala:111
 msgid "MPRIS"
-msgstr ""
-"ZNAČAJKE\n"
-"mpris"
+msgstr "MPRIS"
 
 #: src/gradio-settings-window.vala:111
 msgid "Integrate Gradio as media player in your desktop environment"
@@ -335,9 +326,7 @@ msgstr "Prikaži obavijesnu ikonu, kako bi mogli vratiti glavni prozor"
 #. cache station images
 #: src/gradio-settings-window.vala:132
 msgid "Cache station icons"
-msgstr ""
-"MEĐUSPREMNIK\n"
-"predmemorija ikone stanica"
+msgstr "Predmemorija ikone stanica"
 
 #: src/gradio-settings-window.vala:132
 msgid "Saves the images locally."
