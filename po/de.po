@@ -7,10 +7,10 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-10 14:34+0200\n"
-"PO-Revision-Date: 2017-09-05 18:29+0000\n"
+"PO-Revision-Date: 2017-09-15 19:48+0000\n"
 "Last-Translator: Häcker Felix <haecker.felix1207@gmail.com>\n"
-"Language-Team: German <https://hosted.weblate.org/projects/gradio/"
-"translations/de/>\n"
+"Language-Team: German "
+"<https://hosted.weblate.org/projects/gradio/translations/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -60,19 +60,19 @@ msgstr "Es gibt mehrere Optionen um etwas neues hinzuzufügen"
 
 #: data/ui/page/library-page.ui:44
 msgid "Your library is empty"
-msgstr ""
+msgstr "Deine Bibliothek ist leer"
 
 #: data/ui/page/library-page.ui:62
 msgid "If you add stations to the library, you will find them here."
-msgstr ""
+msgstr "Wenn du Sender zur Bibliothek hinzufügst, wirst du sie hier finden."
 
 #: data/ui/page/collections-page.ui:43
 msgid "You don't have any collection"
-msgstr ""
+msgstr "Du hast keine Sammlung"
 
 #: data/ui/page/collections-page.ui:61
 msgid "You can group stations into collections."
-msgstr ""
+msgstr "Du kannst Sender in Sammlungen gruppieren."
 
 #: data/ui/details-box.ui:23 data/ui/selection-toolbar.ui:151
 msgid "Details"
@@ -100,7 +100,7 @@ msgstr "Beschreibung"
 
 #: data/ui/details-box.ui:349
 msgid "Tags"
-msgstr ""
+msgstr "Tags"
 
 #: data/ui/details-box.ui:436 data/ui/selection-toolbar.ui:15
 msgid "Play"
@@ -155,7 +155,7 @@ msgstr "Sammlungen"
 
 #: data/ui/station-editor.ui:39
 msgid "Global database"
-msgstr ""
+msgstr "Globale Datenbank"
 
 #: data/ui/station-editor.ui:54
 msgid ""
@@ -163,10 +163,13 @@ msgid ""
 "going to be visible for all users. Please be careful, and double check your "
 "input!"
 msgstr ""
+"Gradio benutzt eine Internetdatenbank. Alles was du hier eingibst, wird für "
+"jeden Benutzer sichtbar sein. Bitte sei vorsichtig, und überprüfe deine "
+"Eingaben!"
 
 #: data/ui/station-editor.ui:68
 msgid "Continue"
-msgstr ""
+msgstr "Fortfahren"
 
 #: data/ui/station-editor.ui:151
 msgid "Stream Address"
@@ -202,12 +205,14 @@ msgstr "Fertig"
 
 #: data/ui/page/search-page.ui:127
 msgid "No results found"
-msgstr ""
+msgstr "Keine Ergebnisse gefunden"
 
 #: data/ui/page/search-page.ui:145
 msgid ""
 "Either the station does not exist, or you have to search with other keywords."
 msgstr ""
+"Entweder der Sender existiert nicht, oder du musst mit einem anderen Begriff "
+"suchen."
 
 #: src/gradio-settings-window.vala:39
 msgid "Features"
@@ -312,11 +317,11 @@ msgstr "Zeige Desktop Benachrichtigungen"
 #. enable tray icon
 #: src/gradio-settings-window.vala:123
 msgid "Tray icon"
-msgstr ""
+msgstr "Tray Symbol"
 
 #: src/gradio-settings-window.vala:123
 msgid "Show a tray icon, to restore the main window"
-msgstr ""
+msgstr "Ein Tray-Symbol anzeigen, um das Hauptfenster wiederherzustellen"
 
 #. CACHE
 #. cache station images
@@ -337,9 +342,8 @@ msgid "Clear all cached station icons"
 msgstr "Löscht alle zwischengespeicherte Symbole"
 
 #: src/gradio-settings-window.vala:150 src/gradio-settings-window.vala:171
-#, fuzzy
 msgid "_Cancel"
-msgstr "Abbrechen"
+msgstr "_Abbrechen"
 
 #: src/gradio-settings-window.vala:170
 msgid "Select database to import"
@@ -347,42 +351,39 @@ msgstr "Eine Datenbank zum importieren auswählen"
 
 #: src/page/gradio-add-page.vala:27
 msgid "Create a new radio station"
-msgstr ""
+msgstr "Neuen Radiosender erstellen"
 
 #: src/page/gradio-add-page.vala:28
-#, fuzzy
 msgid "Discover radio stations"
-msgstr "Defekte Sender ausblenden"
+msgstr "Radiosender entdecken"
 
 #: src/page/gradio-add-page.vala:31
 msgid "Show famous radio stations"
-msgstr ""
+msgstr "Berühmte Radiosender anzeigen"
 
 #: src/page/gradio-add-page.vala:31
 msgid "Show radio stations which have the most votes."
-msgstr ""
+msgstr "Sender mit den meisten Votes anzeigen."
 
 #: src/page/gradio-add-page.vala:35
-#, fuzzy
 msgid "Show popular radio stations"
-msgstr "Zeige Desktop Benachrichtigungen"
+msgstr "Populäre Radiosender anzeigen"
 
 #: src/page/gradio-add-page.vala:35
 msgid "Show radio stations which have the most clicks."
-msgstr ""
+msgstr "Radiosender mit den meisten Klicks anzeigen."
 
 #: src/page/gradio-add-page.vala:39
-#, fuzzy
 msgid "Show recent radio stations"
-msgstr "Zeige Desktop Benachrichtigungen"
+msgstr "Aktuelle Radiosender anzeigen"
 
 #: src/page/gradio-add-page.vala:39
 msgid "Show radio stations which have recently been clicked."
-msgstr ""
+msgstr "Radiosender anzeigen, die kürzlich angeklickt wurden."
 
 #: src/page/gradio-add-page.vala:43
 msgid "Search for radio stations"
-msgstr ""
+msgstr "Nach Radiosender suchen"
 
 #: src/page/gradio-add-page.vala:43
 msgid "Search for specific radio stations."
@@ -394,4 +395,4 @@ msgstr ""
 
 #: src/page/gradio-add-page.vala:47
 msgid "Create a new radio station, which is visible for all users."
-msgstr ""
+msgstr "Einen neuen Radiosender erstellen, der für alle Benutzer sichtbar ist."
