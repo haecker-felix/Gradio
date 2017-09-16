@@ -26,17 +26,17 @@ namespace Gradio{
 
 		public void install_missing_codec(Gst.Message m){
 			string description = Gst.PbUtils.missing_plugin_message_get_description (m);
+			string missingcodec = Gst.PbUtils.missing_plugin_message_get_installer_detail(m);
 			string[] installer_detail = {Gst.PbUtils.missing_plugin_message_get_installer_detail (m)};
 
 			message("Try to install %s", description);
 
 			if(Gst.PbUtils.install_plugins_supported()){
 				var context = new Gst.PbUtils.InstallPluginsContext();
-
 				Gst.PbUtils.install_plugins_async(installer_detail, context, install_callback);
 			}else{
 				warning("Installation failed. Codec installation is not supported by your distribution. Please install the missin codec by yourself.");
-				App.window.show_notification("Automatic codec installation isn't supported by your distribution.\nPlease install " + description + " manually.");
+				App.window.show_notification("Automatic codec installation isn't supported by your distribution.\nPlease install \""+missingcodec+"\" manually.");
 			}
 		}
 
