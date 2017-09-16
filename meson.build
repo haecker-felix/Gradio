@@ -14,11 +14,6 @@ gstreamer = dependency('gstreamer-1.0')
 gstreamer_pbutils = dependency('gstreamer-pbutils-1.0')
 sqlite3 = dependency('sqlite3')
 
-add_project_arguments('-DGETTEXT_PACKAGE="gradio"', language: 'c')
-add_project_arguments('-DDATADIR="' + get_option('datadir') + '"', language: 'c')
-add_project_arguments('-DG_LOG_DOMAIN="gradio"', language: 'c')
-
-
 subdir('data')
 subdir('po')
 subdir('external')
