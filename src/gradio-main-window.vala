@@ -327,6 +327,24 @@ namespace Gradio{
 				set_mode(WindowMode.SEARCH);
 				return true;
 			}
+
+			// show library
+			if ((event.keyval == Gdk.Key.l) && (event.state & default_modifiers) == Gdk.ModifierType.CONTROL_MASK) {
+				set_mode(WindowMode.LIBRARY);
+				return true;
+			}
+
+			// show collections
+			if ((event.keyval == Gdk.Key.c) && (event.state & default_modifiers) == Gdk.ModifierType.CONTROL_MASK) {
+				set_mode(WindowMode.COLLECTIONS);
+				return true;
+			}
+
+			// show add page
+			if ((event.keyval == Gdk.Key.a) && (event.state & default_modifiers) == Gdk.ModifierType.CONTROL_MASK) {
+				set_mode(WindowMode.ADD);
+				return true;
+			}
 			return false;
 		}
 
