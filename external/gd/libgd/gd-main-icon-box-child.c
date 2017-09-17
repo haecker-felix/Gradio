@@ -207,6 +207,7 @@ gd_main_icon_box_child_update_layout (GdMainIconBoxChild *self)
 
       primary_label = gtk_label_new (NULL);
       gtk_label_set_ellipsize (GTK_LABEL (primary_label), PANGO_ELLIPSIZE_MIDDLE);
+      gtk_label_set_use_markup (GTK_LABEL (primary_label), TRUE);
       g_object_bind_property (priv->item, "primary-text", primary_label, "label", G_BINDING_SYNC_CREATE);
       gtk_container_add (GTK_CONTAINER (grid), primary_label);
     }
