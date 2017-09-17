@@ -71,7 +71,7 @@ namespace Gradio{
 		private App app;
 
 		public MainWindow (App appl) {
-	       		GLib.Object(application: appl);
+	       		GLib.Object(application: appl, show_menubar: false);
 			app = appl;
 		}
 

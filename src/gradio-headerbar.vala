@@ -14,6 +14,8 @@
  * along with Gradio.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+using Gtk;
+
 namespace Gradio{
 
 	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/headerbar.ui")]
@@ -37,6 +39,7 @@ namespace Gradio{
 		[GtkChild] public Gtk.Button BackButton;
 		[GtkChild] public Gtk.ToggleButton SearchToggleButton;
 		[GtkChild] public Gtk.Button ViewButton;
+		[GtkChild] public Gtk.MenuButton MenuButton;
 
 		//
 		// Selection
@@ -98,6 +101,17 @@ namespace Gradio{
 			}else{
 				SortAscendingButton.set_active(false);
 				SortDescendingButton.set_active(true);
+			}
+
+			// Show Menubutton on non GNOME desktops
+			message("Desktop session is: " + GLib.Environment.get_variable("DESKTOP_SESSION"));
+			if(GLib.Environment.get_variable("DESKTOP_SESSION") != "gnome") {
+				var appmenu_builder = new Gtk.Builder.from_resource ("/de/haecker-felix/gradio/ui/app-menu.ui");
+				var app_menu = appmenu_builder.get_object ("app-menu") as GLib.MenuModel;
+				MenuButton.set_menu_model(app_menu);
+				MenuButton.set_visible (true);
+			}else{
+				MenuButton.set_visible (false);
 			}
 		}
 
