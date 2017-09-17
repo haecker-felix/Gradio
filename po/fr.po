@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-10 14:34+0200\n"
-"PO-Revision-Date: 2017-09-15 19:46+0000\n"
+"PO-Revision-Date: 2017-09-16 21:08+0000\n"
 "Last-Translator: Florian <floflr@zaclys.net>\n"
 "Language-Team: French "
 "<https://hosted.weblate.org/projects/gradio/translations/fr/>\n"
@@ -32,7 +32,6 @@ msgid "Quit"
 msgstr "Quitter"
 
 #: data/ui/filter-box.ui:27
-#, fuzzy
 msgid "Where"
 msgstr "Lieu"
 
