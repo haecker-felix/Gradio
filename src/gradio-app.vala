@@ -164,7 +164,7 @@ namespace Gradio {
 		Intl.textdomain(Config.GETTEXT_PACKAGE);
 		Intl.bind_textdomain_codeset(Config.GETTEXT_PACKAGE, "utf-8");
 
-		message(Config.GNOMELOCALEDIR);
+		message("Locale dir: " + Config.GNOMELOCALEDIR);
 
 		// Init gstreamer
 		Gst.init (ref args);
