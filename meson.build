@@ -1,4 +1,4 @@
-project('gradio', ['vala', 'C'], version : '6.0')
+project('gradio', ['vala', 'C'], version : '6.0.1')
 
 i18n = import('i18n')
 

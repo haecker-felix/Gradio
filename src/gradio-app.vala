@@ -111,7 +111,8 @@ namespace Gradio {
 			var builder = new Gtk.Builder.from_resource ("/de/haecker-felix/gradio/ui/app-menu.ui");
 			var app_menu = builder.get_object ("app-menu") as GLib.MenuModel;
 
-			set_app_menu (app_menu);
+			if(GLib.Environment.get_variable("DESKTOP_SESSION") == "gnome")
+				set_app_menu (app_menu);
 
 			action = new GLib.SimpleAction ("select-all", null);
 			action.activate.connect (() => { window.select_all(); });
@@ -163,7 +164,7 @@ namespace Gradio {
 		Intl.textdomain(Config.GETTEXT_PACKAGE);
 		Intl.bind_textdomain_codeset(Config.GETTEXT_PACKAGE, "utf-8");
 
-		message(Config.GNOMELOCALEDIR);
+		message("Locale dir: " + Config.GNOMELOCALEDIR);
 
 		// Init gstreamer
 		Gst.init (ref args);

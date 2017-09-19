@@ -71,7 +71,7 @@ namespace Gradio{
 		private App app;
 
 		public MainWindow (App appl) {
-	       		GLib.Object(application: appl);
+	       		GLib.Object(application: appl, show_menubar: false);
 			app = appl;
 		}
 
@@ -313,6 +313,38 @@ namespace Gradio{
 				return true;
 			}
 
+			// details sidebar for actual station
+			if ((event.keyval == Gdk.Key.i) && (event.state & default_modifiers) == Gdk.ModifierType.CONTROL_MASK) {
+				if(App.player.station != null){
+					details_box.set_station(App.player.station);
+					details_box.set_visible(true);
+				}
+				return true;
+			}
+
+			// show search
+			if ((event.keyval == Gdk.Key.f) && (event.state & default_modifiers) == Gdk.ModifierType.CONTROL_MASK) {
+				set_mode(WindowMode.SEARCH);
+				return true;
+			}
+
+			// show library
+			if ((event.keyval == Gdk.Key.l) && (event.state & default_modifiers) == Gdk.ModifierType.CONTROL_MASK) {
+				set_mode(WindowMode.LIBRARY);
+				return true;
+			}
+
+			// show collections
+			if ((event.keyval == Gdk.Key.c) && (event.state & default_modifiers) == Gdk.ModifierType.CONTROL_MASK) {
+				set_mode(WindowMode.COLLECTIONS);
+				return true;
+			}
+
+			// show add page
+			if ((event.keyval == Gdk.Key.a) && (event.state & default_modifiers) == Gdk.ModifierType.CONTROL_MASK) {
+				set_mode(WindowMode.ADD);
+				return true;
+			}
 			return false;
 		}
 
