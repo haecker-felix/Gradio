@@ -8,152 +8,155 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-10 14:34+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2017-09-19 21:08+0000\n"
+"Last-Translator: Erwin van Eijk <erwin.vaneijk@gmail.com>\n"
+"Language-Team: Dutch "
+"<https://hosted.weblate.org/projects/gradio/translations/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 2.17-dev\n"
 
 #: data/ui/app-menu.ui:6
 msgid "Settings"
-msgstr ""
+msgstr "Instellingen"
 
 #: data/ui/app-menu.ui:12
 msgid "About"
-msgstr ""
+msgstr "Informatie"
 
 #: data/ui/app-menu.ui:18
 msgid "Quit"
-msgstr ""
+msgstr "Beeindigen"
 
 #: data/ui/filter-box.ui:27
 msgid "Where"
-msgstr ""
+msgstr "Waar"
 
 #: data/ui/filter-box.ui:44
 msgid "Select Country ..."
-msgstr ""
+msgstr "Selecteer een land ..."
 
 #: data/ui/filter-box.ui:125
 msgid "Select State  ..."
-msgstr ""
+msgstr "Selecteer een provincie ..."
 
 #: data/ui/filter-box.ui:205 data/ui/station-editor.ui:211
 msgid "Language"
-msgstr ""
+msgstr "Taal"
 
 #: data/ui/filter-box.ui:222
 msgid "Select Language  ..."
-msgstr ""
+msgstr "Selecteer de taal ..."
 
 #: data/ui/page/add-page.ui:45
 msgid "Fill your library with something new"
-msgstr ""
+msgstr "Vult uw bibliotheek met iets nieuws"
 
 #: data/ui/page/add-page.ui:64
 msgid "There are several options available to add something new."
-msgstr ""
+msgstr "Er zijn meerdere opties beschikbaar om iets nieuws toe te voegen."
 
 #: data/ui/page/library-page.ui:44
 msgid "Your library is empty"
-msgstr ""
+msgstr "Uw bibliotheek is leeg"
 
 #: data/ui/page/library-page.ui:62
 msgid "If you add stations to the library, you will find them here."
-msgstr ""
+msgstr "Als u zenders aan de bibliotheek toevoegt, zult u ze hier vinden."
 
 #: data/ui/page/collections-page.ui:43
 msgid "You don't have any collection"
-msgstr ""
+msgstr "U heeft nog geen verzameling"
 
 #: data/ui/page/collections-page.ui:61
 msgid "You can group stations into collections."
-msgstr ""
+msgstr "U kunt zenders groeperen in verzamelingen."
 
 #: data/ui/details-box.ui:23 data/ui/selection-toolbar.ui:151
 msgid "Details"
-msgstr ""
+msgstr "Details"
 
 #: data/ui/details-box.ui:137 data/ui/station-editor.ui:125
 msgid "Name"
-msgstr ""
+msgstr "Naam"
 
 #: data/ui/details-box.ui:172
 msgid "Type"
-msgstr ""
+msgstr "Genre"
 
 #: data/ui/details-box.ui:209
 msgid "Items"
-msgstr ""
+msgstr "Objecten"
 
 #: data/ui/details-box.ui:285
 msgid "Location"
-msgstr ""
+msgstr "Locatie"
 
 #: data/ui/details-box.ui:317
 msgid "Description"
-msgstr ""
+msgstr "Beschrijving"
 
 #: data/ui/details-box.ui:349
 msgid "Tags"
-msgstr ""
+msgstr "Tags"
 
 #: data/ui/details-box.ui:436 data/ui/selection-toolbar.ui:15
 msgid "Play"
-msgstr ""
+msgstr "Afspelen"
 
 #: data/ui/details-box.ui:481
 msgid "Open homepage"
-msgstr ""
+msgstr "Open de homepage"
 
 #: data/ui/details-box.ui:526
 msgid "Edit"
-msgstr ""
+msgstr "Bewerken"
 
 #: data/ui/organize-collection-dialog.ui:21
 #: data/ui/organize-collection-dialog.ui:107
 msgid "New Collection…"
-msgstr ""
+msgstr "Nieuwe verzameling…"
 
 #: data/ui/organize-collection-dialog.ui:31
 #: data/ui/organize-collection-dialog.ui:128
 #: data/ui/organize-collection-dialog.ui:201
 msgid "Add"
-msgstr ""
+msgstr "Toevoegen"
 
 #: data/ui/organize-collection-dialog.ui:92
 msgid "Enter a name for your first collection"
-msgstr ""
+msgstr "Voer een naam in voor uw eerste verzameling"
 
 #: data/ui/organize-collection-dialog.ui:192 data/ui/station-editor.ui:501
 msgid "Cancel"
-msgstr ""
+msgstr "Afbreken"
 
 #: data/ui/selection-menu.ui:7
 msgid "Select All"
-msgstr ""
+msgstr "Alles selecteren"
 
 #: data/ui/selection-menu.ui:11
 msgid "Select None"
-msgstr ""
+msgstr "Niets kiezen"
 
 #: data/ui/selection-toolbar.ui:29
 msgid "Add to library"
-msgstr ""
+msgstr "Aan de bibliotheek toevoegen"
 
 #: data/ui/selection-toolbar.ui:46
 msgid "Remove"
-msgstr ""
+msgstr "Verwijderen"
 
 #: data/ui/selection-toolbar.ui:135
 msgid "Collections"
-msgstr ""
+msgstr "Verzamelingen"
 
 #: data/ui/station-editor.ui:39
 msgid "Global database"
-msgstr ""
+msgstr "Algemene database"
 
 #: data/ui/station-editor.ui:54
 msgid ""
@@ -161,231 +164,234 @@ msgid ""
 "going to be visible for all users. Please be careful, and double check your "
 "input!"
 msgstr ""
+"Gradio gebruikt een internet database. Alles wat u hier invoert, zal "
+"zichtbaar zijn voor alle gebruikers. Weest voorzichtig, en controleert uw "
+"invoer!"
 
 #: data/ui/station-editor.ui:68
 msgid "Continue"
-msgstr ""
+msgstr "Doorgaan"
 
 #: data/ui/station-editor.ui:151
 msgid "Stream Address"
-msgstr ""
+msgstr "Stream Adres"
 
 #: data/ui/station-editor.ui:166
 msgid "Homepage"
-msgstr ""
+msgstr "Homepage"
 
 #: data/ui/station-editor.ui:181
 msgid "Country"
-msgstr ""
+msgstr "Land"
 
 #: data/ui/station-editor.ui:196
 msgid "State"
-msgstr ""
+msgstr "Provincie"
 
 #: data/ui/station-editor.ui:291
 msgid "Favicon Address"
-msgstr ""
+msgstr "Favicon Adres"
 
 #: data/ui/station-editor.ui:435
 msgid "Server Response"
-msgstr ""
+msgstr "Server antwoord"
 
 #: data/ui/station-editor.ui:471
 msgid "Close"
-msgstr ""
+msgstr "Sluiten"
 
 #: data/ui/station-editor.ui:510
 msgid "Done"
-msgstr ""
+msgstr "Klaar"
 
 #: data/ui/page/search-page.ui:127
 msgid "No results found"
-msgstr ""
+msgstr "Geen resultaten gevonden"
 
 #: data/ui/page/search-page.ui:145
 msgid ""
 "Either the station does not exist, or you have to search with other keywords."
-msgstr ""
+msgstr "Of de zender bestaat niet, of u moet met andere zoekwoorden zoeken."
 
 #: src/gradio-settings-window.vala:39
 msgid "Features"
-msgstr ""
+msgstr "Functies"
 
 #: src/gradio-settings-window.vala:42
 msgid "Playback"
-msgstr ""
+msgstr "Weergave"
 
 #: src/gradio-settings-window.vala:45
 msgid "Library"
-msgstr ""
+msgstr "Bibliotheek"
 
 #: src/gradio-settings-window.vala:48
 msgid "Appearance"
-msgstr ""
+msgstr "Uiterlijk"
 
 #: src/gradio-settings-window.vala:51
 msgid "Cache"
-msgstr ""
+msgstr "Tijdelijke opslag"
 
 #. APPEARANCE
 #. Dark design
 #: src/gradio-settings-window.vala:59
 msgid "Prefer dark theme"
-msgstr ""
+msgstr "Donker uiterlijk gebruiken"
 
 #: src/gradio-settings-window.vala:59
 msgid "Use a dark theme, if possible"
-msgstr ""
+msgstr "Gebruik een donker uiterlijk, indien mogelijk"
 
 #. hide broken stations
 #: src/gradio-settings-window.vala:65
 msgid "Hide broken stations"
-msgstr ""
+msgstr "Verberg defecte zenders"
 
 #: src/gradio-settings-window.vala:65
 msgid "Don't show stations, which are not working"
-msgstr ""
+msgstr "Laat alleen werkende zenders zien"
 
 #. PLAYBACK
 #. enable background playback
 #: src/gradio-settings-window.vala:74
 msgid "Background Playback"
-msgstr ""
+msgstr "Afspelen in de achtergrond"
 
 #: src/gradio-settings-window.vala:74
 msgid "Continue the playback if you close the Gradio window"
-msgstr ""
+msgstr "Doorgaan met afspelen, als u het Gradio venster sluit"
 
 #. resume playback on startup
 #: src/gradio-settings-window.vala:80
 msgid "Resume playback on startup"
-msgstr ""
+msgstr "Verder gaan met afspelen bij het starten"
 
 #: src/gradio-settings-window.vala:80
 msgid "Play the latest station if you start Gradio"
-msgstr ""
+msgstr "Start automatisch de laatste zender, als u Gradio start"
 
 #. LIBRARY
 #. import library
 #: src/gradio-settings-window.vala:89 src/gradio-settings-window.vala:173
 msgid "Import"
-msgstr ""
+msgstr "Importeren"
 
 #: src/gradio-settings-window.vala:89
 msgid "Replace the current library with a another one"
-msgstr ""
+msgstr "Vervang de huidige bibliotheek met een andere"
 
 #: src/gradio-settings-window.vala:93
 msgid "Do you want to replace the current library with this one?"
-msgstr ""
+msgstr "Wilt u de huidige bibliotheek vervangen voor deze?"
 
 #. export library
 #: src/gradio-settings-window.vala:99 src/gradio-settings-window.vala:152
 msgid "Export"
-msgstr ""
+msgstr "Exporteren"
 
 #: src/gradio-settings-window.vala:99 src/gradio-settings-window.vala:149
 msgid "Export the current library"
-msgstr ""
+msgstr "Exporteer de huidige bibliotheek"
 
 #. FEATURES
 #. mpris
 #: src/gradio-settings-window.vala:111
 msgid "MPRIS"
-msgstr ""
+msgstr "MPRIS"
 
 #: src/gradio-settings-window.vala:111
 msgid "Integrate Gradio as media player in your desktop environment"
-msgstr ""
+msgstr "Integreer Gradio als media speler in uw desktop omgeving"
 
 #. enable notifications
 #: src/gradio-settings-window.vala:117
 msgid "Notifications"
-msgstr ""
+msgstr "Berichten"
 
 #: src/gradio-settings-window.vala:117
 msgid "Show desktop notifications"
-msgstr ""
+msgstr "Laat desktop berichten zien"
 
 #. enable tray icon
 #: src/gradio-settings-window.vala:123
 msgid "Tray icon"
-msgstr ""
+msgstr "Tray Icon"
 
 #: src/gradio-settings-window.vala:123
 msgid "Show a tray icon, to restore the main window"
-msgstr ""
+msgstr "Laat de tray icon zien, om het hoofdvenster te heropenen"
 
 #. CACHE
 #. cache station images
 #: src/gradio-settings-window.vala:132
 msgid "Cache station icons"
-msgstr ""
+msgstr "Sla zender logo's tijdelijk op"
 
 #: src/gradio-settings-window.vala:132
 msgid "Saves the images locally."
-msgstr ""
+msgstr "Sla de afbeeldingen lokaal op."
 
 #: src/gradio-settings-window.vala:137
 msgid "Clear Cache"
-msgstr ""
+msgstr "Tijdelijk opslag opschonen"
 
 #: src/gradio-settings-window.vala:137
 msgid "Clear all cached station icons"
-msgstr ""
+msgstr "Schoon alle tijdelijk opgeslagen zender logos op"
 
 #: src/gradio-settings-window.vala:150 src/gradio-settings-window.vala:171
 msgid "_Cancel"
-msgstr ""
+msgstr "_Annuleren"
 
 #: src/gradio-settings-window.vala:170
 msgid "Select database to import"
-msgstr ""
+msgstr "Selecteer een database om te importeren"
 
 #: src/page/gradio-add-page.vala:27
 msgid "Create a new radio station"
-msgstr ""
+msgstr "Maak een nieuw radio zender"
 
 #: src/page/gradio-add-page.vala:28
 msgid "Discover radio stations"
-msgstr ""
+msgstr "Ontdek nieuwe radio zenders"
 
 #: src/page/gradio-add-page.vala:31
 msgid "Show famous radio stations"
-msgstr ""
+msgstr "Laat beroemde radio zenders zien"
 
 #: src/page/gradio-add-page.vala:31
 msgid "Show radio stations which have the most votes."
-msgstr ""
+msgstr "Laat de radio zenders zien met de meeste stemmen."
 
 #: src/page/gradio-add-page.vala:35
 msgid "Show popular radio stations"
-msgstr ""
+msgstr "Populaire radio zenders laten zien"
 
 #: src/page/gradio-add-page.vala:35
 msgid "Show radio stations which have the most clicks."
-msgstr ""
+msgstr "Radio zenders met de meeste clicks laten zien."
 
 #: src/page/gradio-add-page.vala:39
 msgid "Show recent radio stations"
-msgstr ""
+msgstr "Toon de recente zenders"
 
 #: src/page/gradio-add-page.vala:39
 msgid "Show radio stations which have recently been clicked."
-msgstr ""
+msgstr "Toon de radio zenders die recent aangeklikt zijn."
 
 #: src/page/gradio-add-page.vala:43
 msgid "Search for radio stations"
-msgstr ""
+msgstr "Zoek naar radio zenders"
 
 #: src/page/gradio-add-page.vala:43
 msgid "Search for specific radio stations."
-msgstr ""
+msgstr "Zoek naar een specifieke radio zender."
 
 #: src/page/gradio-add-page.vala:47
 msgid "New public radio station"
-msgstr ""
+msgstr "Nieuw publieke radio zender"
 
 #: src/page/gradio-add-page.vala:47
 msgid "Create a new radio station, which is visible for all users."
-msgstr ""
+msgstr "Maak een nieuwe radio zender, die zichtbaar is voor alle gebruikers."
