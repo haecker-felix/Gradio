@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-10 14:34+0200\n"
-"PO-Revision-Date: 2017-09-15 19:48+0000\n"
-"Last-Translator: Häcker Felix <haecker.felix1207@gmail.com>\n"
+"PO-Revision-Date: 2017-09-19 21:23+0000\n"
+"Last-Translator: Erwin van Eijk <erwin.vaneijk@gmail.com>\n"
 "Language-Team: German "
 "<https://hosted.weblate.org/projects/gradio/translations/de/>\n"
 "Language: de\n"
@@ -387,11 +387,11 @@ msgstr "Nach Radiosender suchen"
 
 #: src/page/gradio-add-page.vala:43
 msgid "Search for specific radio stations."
-msgstr ""
+msgstr "Spezifische Radiosender suchen."
 
 #: src/page/gradio-add-page.vala:47
 msgid "New public radio station"
-msgstr ""
+msgstr "Neuer öffentlicher Radiosender"
 
 #: src/page/gradio-add-page.vala:47
 msgid "Create a new radio station, which is visible for all users."
