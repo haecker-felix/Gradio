@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-10 14:34+0200\n"
-"PO-Revision-Date: 2017-09-19 21:23+0000\n"
+"PO-Revision-Date: 2017-09-20 22:47+0000\n"
 "Last-Translator: Erwin van Eijk <erwin.vaneijk@gmail.com>\n"
 "Language-Team: German "
 "<https://hosted.weblate.org/projects/gradio/translations/de/>\n"
@@ -56,7 +56,7 @@ msgstr "Füge etwas neues deiner Bibliothek hinzu"
 
 #: data/ui/page/add-page.ui:64
 msgid "There are several options available to add something new."
-msgstr "Es gibt mehrere Optionen um etwas neues hinzuzufügen"
+msgstr "Es gibt mehrere Optionen um etwas neues hinzuzufügen."
 
 #: data/ui/page/library-page.ui:44
 msgid "Your library is empty"
@@ -117,7 +117,7 @@ msgstr "Bearbeiten"
 #: data/ui/organize-collection-dialog.ui:21
 #: data/ui/organize-collection-dialog.ui:107
 msgid "New Collection…"
-msgstr "Neue Sammlung..."
+msgstr "Neue Sammlung…"
 
 #: data/ui/organize-collection-dialog.ui:31
 #: data/ui/organize-collection-dialog.ui:128
@@ -331,7 +331,7 @@ msgstr "Symbole zwischenspeichern"
 
 #: src/gradio-settings-window.vala:132
 msgid "Saves the images locally."
-msgstr "Die Symbole lokal zwischenspeichern"
+msgstr "Die Symbole lokal zwischenspeichern."
 
 #: src/gradio-settings-window.vala:137
 msgid "Clear Cache"
