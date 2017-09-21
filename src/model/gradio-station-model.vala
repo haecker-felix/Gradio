@@ -24,7 +24,8 @@ namespace Gradio{
 
 		public StationModel(){
 			stations = new ListStore (typeof (RadioStation));
-			App.window.station_sorting_changed.connect(() => {sort();});
+			App.settings.notify["station-sorting"].connect(sort);
+			App.settings.notify["sort-ascending"].connect(sort);
 
 			stations.items_changed.connect((position, removed, added) => {
 				items_changed (position, removed, added);

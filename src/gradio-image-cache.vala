@@ -37,7 +37,7 @@ namespace Gradio {
 			}else{
 			 	pixbuf = yield get_image_from_url(url);
 
-			 	if(Gradio.Settings.enable_caching)
+			 	if(App.settings.enable_caching)
 			 		cache_image.begin(pixbuf, url_hash);
 			}
 

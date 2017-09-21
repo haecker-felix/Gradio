@@ -17,9 +17,8 @@
 
 
 namespace Gradio{
-
+	[DBus (name = "org.gnome.Shell.SearchProvider2")]
 	public class SearchProvider{
-
 		private const string address = "http://www.radio-browser.info/webservice/json/stations/search";
 
 		// wait 1,3 seconds before spawning a new search
@@ -34,13 +33,14 @@ namespace Gradio{
 
 		public signal void working();
 		public signal void ready();
+		public signal void activate (uint32 timestamp);
 
 		public SearchProvider(ref StationModel m, ref FilterBox fb) {
 			model = m;
 			filterbox = fb;
 
 			filterbox.information_changed.connect(reset_timeout);
-			App.window.station_sorting_changed.connect(reset_timeout);
+			App.settings.notify["station-sorting"].connect(reset_timeout);
 
 			soup_session = new Soup.Session();
             		soup_session.user_agent = "gradio/"+ Config.VERSION;
@@ -82,7 +82,7 @@ namespace Gradio{
 				table.insert("name", filterbox.search_term);
 
 			string sort_by = "";
-			switch(Settings.station_sorting){
+			switch(App.settings.station_sorting){
 				case Compare.VOTES: sort_by = "votes"; break;
 				case Compare.NAME: sort_by = "name"; break;
 				case Compare.LANGUAGE: sort_by = "language"; break;
@@ -94,8 +94,8 @@ namespace Gradio{
 			}
 			table.insert("order", sort_by);
 
-			table.insert("reverse", (!Settings.sort_ascending).to_string());
-			table.insert("limit", Settings.max_search_results.to_string());
+			table.insert("reverse", (!App.settings.sort_ascending).to_string());
+			table.insert("limit", App.settings.max_search_results.to_string());
 
 			Soup.Message msg = Soup.Form.request_new_from_hash("POST", address, table);
 

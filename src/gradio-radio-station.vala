@@ -130,7 +130,7 @@ namespace Gradio{
 		public Cairo.Surface icon {
 			get{
 				if(_thumbnail == null){
-					_thumbnail = new Thumbnail.for_station(Settings.icon_zoom, this);
+					_thumbnail = new Thumbnail.for_station(App.settings.icon_zoom, this);
 					_thumbnail.updated.connect(() => {
 						_icon = _thumbnail.surface;
 						notify_property("icon");
@@ -149,12 +149,12 @@ namespace Gradio{
 		}
 
 		private void connect_signals(){
-			App.window.station_sorting_changed.connect(update_secondary_text);
-			App.window.icon_zoom_changed.connect(update_thumbnail);
+			App.settings.notify["station-sorting"].connect(update_secondary_text);
+			App.settings.notify["icon-zoom"].connect(update_thumbnail);
 		}
 
 		private void update_secondary_text(){
-			switch(Settings.station_sorting){
+			switch(App.settings.station_sorting){
 				case Compare.NAME: _secondary_text = ""; break;
 				case Compare.DATE: _secondary_text = clicktimestamp; break;
 				case Compare.STATE: _secondary_text = state; break;
@@ -169,7 +169,7 @@ namespace Gradio{
 
 		private void update_thumbnail(){
 			if(_thumbnail != null && this != null){
-				_thumbnail.set_zoom(Settings.icon_zoom);
+				_thumbnail.set_zoom(App.settings.icon_zoom);
 			}
 		}
 

@@ -21,76 +21,66 @@ namespace Gradio {
 
 	public class App : Gtk.Application {
 
+		public static Settings settings;
 		public static MainWindow window;
 		public static AudioPlayer player;
 		public static Library library;
 		public static MPRIS mpris;
 		public static ImageCache image_cache;
 
-		public App () {
+		private SearchProvider search_provider;
+		private uint search_provider_id = 0;
+
+		public App() {
 			Object(application_id: "de.haeckerfelix.gradio", flags: ApplicationFlags.FLAGS_NONE);
-		}
 
-		protected override void activate () {
-			if (get_windows () == null) {
-				message("No existing window, starting new session.");
-				start_new_session.begin();
-            		} else {
-            			message("Found existing window!");
-                		restore_window();
+			// Check for for internet access TODO: Improve internet check. This just should be a workaround.
+			if(!Util.check_database_connection()){
+				warning("Gradio cannot connect radio-browser.info. Please check your internet connection.");
+				this.quit();
 			}
-		}
 
-		private async void start_new_session(){
-			// load and set the settings
-			new Settings();
+			// Load application settings
+			settings = new Settings();
 
+			// Setup application actions
 			setup_actions();
 
+			// Setup audio backend
 			player = new AudioPlayer();
-
-			window = new MainWindow(this);
-			this.add_window(window);
-
-			if(!Util.check_database_connection()){
-				warning("Could not conenct to radio-browser.info.");
-				Util.show_info_dialog("Gradio cannot connect radio-browser.info. Please check your internet connection.", window);
-				quit_application();
-			}
 
 			image_cache = new ImageCache();
 
 			library = new Library();
 
-			if(Settings.enable_mpris == true){
+			if(settings.enable_mpris == true){
 				mpris = new MPRIS();
 				mpris.initialize();
 			}
 
 			connect_signals();
-			window.setup();
 		}
 
 		private void connect_signals(){
-			mpris.requested_quit.connect(() => quit_application());
-			mpris.requested_raise.connect(() => restore_window());
+			mpris.requested_quit.connect(this.quit);
+			mpris.requested_raise.connect(window.present);
 
-			window.delete_event.connect (() => {
-				window.hide_on_delete ();
+			//search_provider = new SearchProvider.dbus_service ();
+			//search_provider.activate.connect ((timestamp) => {
+			//	ensure_window ();
+			//	window.set_mode(WindowMode.SEARCH);
+			//	window.present_with_time (timestamp);
+			//});
+		}
 
-				if(player.state == Gst.State.PLAYING && Settings.enable_background_playback)
-					return true;
-				else
-					return false;
-		    	});
-
-			window.tray_activate.connect(() => {
-		    		restore_window();
-			});
+		protected override void activate () {
+			base.activate();
+			ensure_window();
+			window.present();
 		}
 
 		private void setup_actions () {
-			// Appmenu
+			// setup actions itself
 			var action = new GLib.SimpleAction ("preferences", null);
 			action.activate.connect (() => {
 			 	SettingsWindow swindow = new SettingsWindow();
@@ -105,14 +95,8 @@ namespace Gradio {
 			this.add_action (action);
 
 			action = new GLib.SimpleAction ("quit", null);
-			action.activate.connect (() => { this.quit_application (); });
+			action.activate.connect (this.quit);
 			this.add_action (action);
-
-			var builder = new Gtk.Builder.from_resource ("/de/haecker-felix/gradio/ui/app-menu.ui");
-			var app_menu = builder.get_object ("app-menu") as GLib.MenuModel;
-
-			if(GLib.Environment.get_variable("DESKTOP_SESSION") == "gnome")
-				set_app_menu (app_menu);
 
 			action = new GLib.SimpleAction ("select-all", null);
 			action.activate.connect (() => { window.select_all(); });
@@ -121,6 +105,13 @@ namespace Gradio {
 			action = new GLib.SimpleAction ("select-none", null);
 			action.activate.connect (() => { window.select_none (); });
 			this.add_action (action);
+
+			// setup appmenu
+			var builder = new Gtk.Builder.from_resource ("/de/haecker-felix/gradio/ui/app-menu.ui");
+			var app_menu = builder.get_object ("app-menu") as GLib.MenuModel;
+
+			this.register();
+			if(GLib.Environment.get_variable("DESKTOP_SESSION") == "gnome") set_app_menu (app_menu);
 		}
 
 		private void show_about_dialog(){
@@ -144,14 +135,21 @@ namespace Gradio {
 				"wrap-license", true);
 		}
 
+		// make sure that window != null, but don't present it
+		private void ensure_window(){
+			if (get_windows () != null) return;
 
-		public void restore_window () {
-			if(window != null)
-				window.present();
-		}
+			window = new MainWindow(this);
+			window.delete_event.connect (() => {
+				window.hide_on_delete ();
 
-		public void quit_application(){
-			base.quit ();
+				if(player.state == Gst.State.PLAYING && settings.enable_background_playback)
+					return true;
+				else
+					return false;
+		    	});
+			window.tray_activate.connect(window.present);
+			this.add_window(window);
 		}
 	}
 

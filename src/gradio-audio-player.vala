@@ -45,10 +45,10 @@ namespace Gradio{
 
 			playbin = ElementFactory.make ("playbin", "playbin");
 			codec = new CodecInstaller();
-			volume = Settings.volume_position;
+			volume = App.settings.volume_position;
 
-			if(Settings.previous_station != 0 && Settings.resume_playback_on_startup){
-				Util.get_station_by_id.begin(Settings.previous_station, (obj, res) => {
+			if(App.settings.previous_station != 0 && App.settings.resume_playback_on_startup){
+				Util.get_station_by_id.begin(App.settings.previous_station, (obj, res) => {
 					station = Util.get_station_by_id.end(res);
 				});
 			}
@@ -70,7 +70,7 @@ namespace Gradio{
 
 			state = Gst.State.NULL;
 
-			Settings.previous_station = int.parse(station.id);
+			App.settings.previous_station = int.parse(station.id);
 			string address = yield station.get_stream_address();
 
 			if(station.is_broken){

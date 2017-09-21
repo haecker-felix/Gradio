@@ -62,7 +62,7 @@ namespace Gradio{
 		public Cairo.Surface icon {
 			get{
 				if(_thumbnail == null){
-					_thumbnail = new Thumbnail.for_collection(Settings.icon_zoom, this);
+					_thumbnail = new Thumbnail.for_collection(App.settings.icon_zoom, this);
 					_thumbnail.updated.connect(() => {
 						_icon = _thumbnail.surface;
 						notify_property("icon");
@@ -80,14 +80,14 @@ namespace Gradio{
 
 			station_model = new StationModel();
 
-			App.window.icon_zoom_changed.connect(() => {
+			App.settings.notify["icon-zoom"].connect(() => {
 				update_thumbnail();
 			});
 		}
 
 		private void update_thumbnail(){
 			if(_thumbnail != null && this != null){
-				_thumbnail.set_zoom(Settings.icon_zoom);
+				_thumbnail.set_zoom(App.settings.icon_zoom);
 			}
 		}
 

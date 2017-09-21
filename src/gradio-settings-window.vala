@@ -57,14 +57,14 @@ namespace Gradio{
 
 			// Dark design
 			SwitchItem use_dark_design_switch = new SwitchItem(_("Prefer dark theme"), _("Use a dark theme, if possible"));
-			use_dark_design_switch.set_state(Settings.enable_dark_theme);
-			use_dark_design_switch.toggled.connect(() => {Settings.enable_dark_theme = use_dark_design_switch.get_state();});
+			use_dark_design_switch.set_state(App.settings.enable_dark_theme);
+			use_dark_design_switch.toggled.connect(() => {App.settings.enable_dark_theme = use_dark_design_switch.get_state();});
 			appearance_group.add_listbox_row(use_dark_design_switch);
 
 			// hide broken stations
 			SwitchItem hide_broken_stations_switch = new SwitchItem(_("Hide broken stations"), _("Don't show stations, which are not working"));
-			hide_broken_stations_switch.set_state(Settings.hide_broken_stations);
-			hide_broken_stations_switch.toggled.connect(() => {Settings.hide_broken_stations = hide_broken_stations_switch.get_state();});
+			hide_broken_stations_switch.set_state(App.settings.hide_broken_stations);
+			hide_broken_stations_switch.toggled.connect(() => {App.settings.hide_broken_stations = hide_broken_stations_switch.get_state();});
 			appearance_group.add_listbox_row(hide_broken_stations_switch);
 
 
@@ -72,14 +72,14 @@ namespace Gradio{
 
 			// enable background playback
 			SwitchItem enable_background_playback_switch = new SwitchItem(_("Background Playback"), _("Continue the playback if you close the Gradio window"));
-			enable_background_playback_switch.set_state(Settings.enable_background_playback);
-			enable_background_playback_switch.toggled.connect(() => {Settings.enable_background_playback = enable_background_playback_switch.get_state();});
+			enable_background_playback_switch.set_state(App.settings.enable_background_playback);
+			enable_background_playback_switch.toggled.connect(() => {App.settings.enable_background_playback = enable_background_playback_switch.get_state();});
 			playback_group.add_listbox_row(enable_background_playback_switch);
 
 			// resume playback on startup
 			SwitchItem resume_playback_on_startup_switch = new SwitchItem(_("Resume playback on startup"), _("Play the latest station if you start Gradio"));
-			resume_playback_on_startup_switch.set_state(Settings.resume_playback_on_startup);
-			resume_playback_on_startup_switch.toggled.connect(() => {Settings.resume_playback_on_startup = resume_playback_on_startup_switch.get_state();});
+			resume_playback_on_startup_switch.set_state(App.settings.resume_playback_on_startup);
+			resume_playback_on_startup_switch.toggled.connect(() => {App.settings.resume_playback_on_startup = resume_playback_on_startup_switch.get_state();});
 			playback_group.add_listbox_row(resume_playback_on_startup_switch);
 
 
@@ -109,20 +109,20 @@ namespace Gradio{
 
 			// mpris
 			SwitchItem enable_mpris_switch = new SwitchItem(_("MPRIS"), _("Integrate Gradio as media player in your desktop environment"));
-			enable_mpris_switch.set_state(Settings.enable_mpris);
-			enable_mpris_switch.toggled.connect(() => {Settings.enable_mpris = enable_mpris_switch.get_state();});
+			enable_mpris_switch.set_state(App.settings.enable_mpris);
+			enable_mpris_switch.toggled.connect(() => {App.settings.enable_mpris = enable_mpris_switch.get_state();});
 			features_group.add_listbox_row(enable_mpris_switch);
 
 			// enable notifications
 			SwitchItem enable_notifications_switch = new SwitchItem(_("Notifications"), _("Show desktop notifications"));
-			enable_notifications_switch.set_state(Settings.enable_notifications);
-			enable_notifications_switch.toggled.connect(() => {Settings.enable_notifications = enable_notifications_switch.get_state();});
+			enable_notifications_switch.set_state(App.settings.enable_notifications);
+			enable_notifications_switch.toggled.connect(() => {App.settings.enable_notifications = enable_notifications_switch.get_state();});
 			features_group.add_listbox_row(enable_notifications_switch);
 
 			// enable tray icon
 			SwitchItem enable_tray_icon_switch = new SwitchItem(_("Tray icon"), _("Show a tray icon, to restore the main window"));
-			enable_tray_icon_switch.set_state(Settings.enable_tray_icon);
-			enable_tray_icon_switch.toggled.connect(() => {Settings.enable_tray_icon = enable_tray_icon_switch.get_state();});
+			enable_tray_icon_switch.set_state(App.settings.enable_tray_icon);
+			enable_tray_icon_switch.toggled.connect(() => {App.settings.enable_tray_icon = enable_tray_icon_switch.get_state();});
 			features_group.add_listbox_row(enable_tray_icon_switch);
 
 
@@ -130,8 +130,8 @@ namespace Gradio{
 
 			// cache station images
 			SwitchItem cache_stations_switch = new SwitchItem(_("Cache station icons"), _("Saves the images locally."));
-			cache_stations_switch.set_state(Settings.enable_caching);
-			cache_stations_switch.toggled.connect(() => {Settings.enable_caching = cache_stations_switch.get_state();});
+			cache_stations_switch.set_state(App.settings.enable_caching);
+			cache_stations_switch.toggled.connect(() => {App.settings.enable_caching = cache_stations_switch.get_state();});
 			cache_group.add_listbox_row(cache_stations_switch);
 
 			ButtonItem clear_cache_button = new ButtonItem(_("Clear Cache"), _("Clear all cached station icons"));

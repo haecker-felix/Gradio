@@ -24,6 +24,20 @@ i18n.merge_file(
   install_dir: join_paths(get_option('datadir'), 'appdata')
 )
 
+# dbus service / search provider
+dbusconf = configuration_data()
+dbusconf.set('bindir', join_paths(get_option('prefix'), get_option('bindir')))
+configure_file(
+  input: 'de.haeckerfelix.gradio.service.in',
+  output: 'de.haeckerfelix.gradio.service',
+  configuration: dbusconf,
+  install: true,
+  install_dir: join_paths(get_option('datadir'), 'dbus-1', 'services'),
+)
+
+install_data('de.haeckerfelix.gradio.search-provider.ini',
+  install_dir: join_paths(get_option('datadir'), 'gnome-shell', 'search-providers'),
+)
 
 # Icons #
 icondir = join_paths(get_option('datadir'), 'icons', 'hicolor')

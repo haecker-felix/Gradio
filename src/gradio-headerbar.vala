@@ -78,13 +78,13 @@ namespace Gradio{
 			SelectionMenuButtonLabel.set_text("Click on items to select them");
 			SelectionMenuButton.set_menu_model(selection_menu);
 
-			actual_zoom = Gradio.Settings.icon_zoom;
+			actual_zoom = Gradio.App.settings.icon_zoom;
 			if(actual_zoom == max_zoom)
 				ZoomInButton.set_sensitive(false);
 			if(actual_zoom == min_zoom)
 				ZoomOutButton.set_sensitive(false);
 
-			switch(Settings.station_sorting){
+			switch(App.settings.station_sorting){
 				case Compare.VOTES: VotesRButton.set_active(true); break;
 				case Compare.NAME: NameRButton.set_active(true); break;
 				case Compare.LANGUAGE: LanguageRButton.set_active(true); break;
@@ -95,7 +95,7 @@ namespace Gradio{
 				case Compare.DATE: ClickTimestampRButton.set_active(true); break;
 			}
 
-			if(Settings.sort_ascending){
+			if(App.settings.sort_ascending){
 				SortAscendingButton.set_active(true);
 				SortDescendingButton.set_active(false);
 			}else{
@@ -162,8 +162,7 @@ namespace Gradio{
 			ZoomOutButton.set_sensitive(true);
 			if((actual_zoom + zoom_steps) <= max_zoom){
 				actual_zoom = actual_zoom  + zoom_steps;
-				Gradio.Settings.icon_zoom = actual_zoom;
-				App.window.icon_zoom_changed();
+				Gradio.App.settings.icon_zoom = actual_zoom;
 
 				if(actual_zoom == max_zoom)
 					ZoomInButton.set_sensitive(false);
@@ -175,8 +174,7 @@ namespace Gradio{
 			ZoomInButton.set_sensitive(true);
 			if((actual_zoom - zoom_steps) >= min_zoom){
 				actual_zoom = actual_zoom  - zoom_steps;
-				Gradio.Settings.icon_zoom = actual_zoom;
-				App.window.icon_zoom_changed();
+				Gradio.App.settings.icon_zoom = actual_zoom;
 
 				if(actual_zoom == min_zoom)
 					ZoomOutButton.set_sensitive(false);
@@ -186,35 +184,32 @@ namespace Gradio{
 		[GtkCallback]
 		private void SortRadioButton_toggled(Gtk.ToggleButton button){
 			if(button.active){
-				if(button == VotesRButton) Settings.station_sorting = Compare.VOTES;
-				if(button == NameRButton) Settings.station_sorting = Compare.NAME;
-				if(button == LanguageRButton) Settings.station_sorting = Compare.LANGUAGE;
-				if(button == CountryRButton) Settings.station_sorting = Compare.COUNTRY;
-				if(button == StateRButton) Settings.station_sorting = Compare.STATE;
-				if(button == BitrateRButton) Settings.station_sorting = Compare.BITRATE;
-				if(button == ClicksRButton) Settings.station_sorting = Compare.CLICKS;
-				if(button == ClickTimestampRButton) Settings.station_sorting = Compare.DATE;
-				App.window.station_sorting_changed();
+				if(button == VotesRButton) App.settings.station_sorting = Compare.VOTES;
+				if(button == NameRButton) App.settings.station_sorting = Compare.NAME;
+				if(button == LanguageRButton) App.settings.station_sorting = Compare.LANGUAGE;
+				if(button == CountryRButton) App.settings.station_sorting = Compare.COUNTRY;
+				if(button == StateRButton) App.settings.station_sorting = Compare.STATE;
+				if(button == BitrateRButton) App.settings.station_sorting = Compare.BITRATE;
+				if(button == ClicksRButton) App.settings.station_sorting = Compare.CLICKS;
+				if(button == ClickTimestampRButton) App.settings.station_sorting = Compare.DATE;
 			}
 		}
 
 		[GtkCallback]
 		private void SortDescendingButton_toggled(){
 			if(SortDescendingButton.active){
-				Settings.sort_ascending = false;
+				App.settings.sort_ascending = false;
 				SortAscendingButton.set_active(false);
 				SortDescendingButton.set_active(true);
-				App.window.station_sorting_changed();
 			}
 		}
 
 		[GtkCallback]
 		private void SortAscendingButton_toggled(){
 			if(SortAscendingButton.active){
-				Settings.sort_ascending = true;
+				App.settings.sort_ascending = true;
 				SortDescendingButton.set_active(false);
 				SortAscendingButton.set_active(true);
-				App.window.station_sorting_changed();
 			}
 		}
 	}

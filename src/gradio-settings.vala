@@ -16,28 +16,28 @@
 
 namespace Gradio{
 
-	public class Settings : Object{
+	public class Settings : GLib.Object{
 
-		private static GLib.Settings settings;
+		private GLib.Settings settings;
 
-		private static bool _enable_notifications;
-		private static bool _enable_tray_icon;
-		private static bool _enable_dark_theme;
-		private static bool _enable_mpris;
-		private static bool _enable_background_playback;
-		private static bool _enable_caching;
-		private static bool _resume_playback_on_startup;
-		private static bool _hide_broken_stations;
-		private static int _previous_station;
-		private static double _volume_position;
-		private static int _window_height;
-		private static int _window_width;
-		private static int _icon_zoom;
-		private static Compare _station_sorting;
-		private static bool _sort_ascending;
-		private static int _max_search_results;
+		private bool _enable_notifications;
+		private bool _enable_tray_icon;
+		private bool _enable_dark_theme;
+		private bool _enable_mpris;
+		private bool _enable_background_playback;
+		private bool _enable_caching;
+		private bool _resume_playback_on_startup;
+		private bool _hide_broken_stations;
+		private int _previous_station;
+		private double _volume_position;
+		private int _window_height;
+		private int _window_width;
+		private int _icon_zoom;
+		private Compare _station_sorting;
+		private bool _sort_ascending;
+		private int _max_search_results;
 
-		static construct{
+		public Settings(){
 			settings = new GLib.Settings ("de.haeckerfelix.gradio");
 
 			_enable_notifications = settings.get_boolean("enable-notifications");
@@ -59,7 +59,7 @@ namespace Gradio{
 		}
 
 
-		public static bool enable_notifications{
+		public bool enable_notifications{
 			get{
 				return _enable_notifications;
 			}
@@ -69,7 +69,7 @@ namespace Gradio{
 			}
 		}
 
-		public static bool enable_tray_icon{
+		public bool enable_tray_icon{
 			get{
 				return _enable_tray_icon;
 			}
@@ -80,7 +80,7 @@ namespace Gradio{
 			}
 		}
 
-		public static bool enable_dark_theme{
+		public bool enable_dark_theme{
 			get{
 				return _enable_dark_theme;
 			}
@@ -92,7 +92,7 @@ namespace Gradio{
 			}
 		}
 
-		public static bool enable_mpris{
+		public bool enable_mpris{
 			get{
 				return _enable_mpris;
 			}
@@ -102,7 +102,7 @@ namespace Gradio{
 			}
 		}
 
-		public static bool enable_background_playback{
+		public bool enable_background_playback{
 			get{
 				return _enable_background_playback;
 			}
@@ -112,7 +112,7 @@ namespace Gradio{
 			}
 		}
 
-		public static bool enable_caching{
+		public bool enable_caching{
 			get{
 				return _enable_caching;
 			}
@@ -122,7 +122,7 @@ namespace Gradio{
 			}
 		}
 
-		public static bool resume_playback_on_startup{
+		public bool resume_playback_on_startup{
 			get{
 				return _resume_playback_on_startup;
 			}
@@ -132,7 +132,7 @@ namespace Gradio{
 			}
 		}
 
-		public static bool hide_broken_stations{
+		public bool hide_broken_stations{
 			get{
 				return _hide_broken_stations;
 			}
@@ -142,7 +142,7 @@ namespace Gradio{
 			}
 		}
 
-		public static int previous_station{
+		public int previous_station{
 			get{
 				return _previous_station;
 			}
@@ -152,7 +152,7 @@ namespace Gradio{
 			}
 		}
 
-		public static double volume_position{
+		public double volume_position{
 			get{
 				return _volume_position;
 			}
@@ -162,7 +162,7 @@ namespace Gradio{
 			}
 		}
 
-		public static int window_height{
+		public int window_height{
 			get{
 				return _window_height;
 			}
@@ -172,7 +172,7 @@ namespace Gradio{
 			}
 		}
 
-		public static int window_width{
+		public int window_width{
 			get{
 				return _window_width;
 			}
@@ -182,7 +182,7 @@ namespace Gradio{
 			}
 		}
 
-		public static int icon_zoom{
+		public int icon_zoom{
 			get{
 				return _icon_zoom;
 			}
@@ -192,7 +192,7 @@ namespace Gradio{
 			}
 		}
 
-		public static Compare station_sorting{
+		public Compare station_sorting{
 			get{
 				return _station_sorting;
 			}
@@ -202,7 +202,7 @@ namespace Gradio{
 			}
 		}
 
-		public static bool sort_ascending{
+		public bool sort_ascending{
 			get{
 				return _sort_ascending;
 			}
@@ -212,7 +212,7 @@ namespace Gradio{
 			}
 		}
 
-		public static int max_search_results{
+		public int max_search_results{
 			get{
 				return _max_search_results;
 			}

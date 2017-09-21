@@ -31,7 +31,7 @@ namespace Gradio{
 		public CompareDataFunc<RadioStation> compare = (a, b) => {
 			int result = 0;
 
-			switch(Settings.station_sorting){
+			switch(App.settings.station_sorting){
 				case Compare.VOTES: {
 					int avotes = int.parse(a.votes);
 					int bvotes = int.parse(b.votes);
@@ -81,7 +81,7 @@ namespace Gradio{
 				}
 			}
 
-			if(!Settings.sort_ascending){
+			if(!App.settings.sort_ascending){
 				result = result * -1;
 			}
 

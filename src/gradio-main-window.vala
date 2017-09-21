@@ -62,8 +62,6 @@ namespace Gradio{
 		[GtkChild] private Box DetailsBox;
 		public DetailsBox details_box;
 
-		public signal void icon_zoom_changed();
-		public signal void station_sorting_changed();
 		public signal void tray_activate();
 
 		private Gtk.StatusIcon trayicon;
@@ -73,9 +71,7 @@ namespace Gradio{
 		public MainWindow (App appl) {
 	       		GLib.Object(application: appl, show_menubar: false);
 			app = appl;
-		}
 
-		public void setup(){
 			setup_view();
 			setup_tray_icon();
 			connect_signals();
@@ -109,7 +105,7 @@ namespace Gradio{
 			set_mode(WindowMode.LIBRARY);
 
 			var gtk_settings = Gtk.Settings.get_default ();
-			gtk_settings.gtk_application_prefer_dark_theme = Settings.enable_dark_theme;
+			gtk_settings.gtk_application_prefer_dark_theme = App.settings.enable_dark_theme;
 
 	        	player_toolbar = new PlayerToolbar();
 	       		player_toolbar.set_visible(false);
@@ -120,7 +116,7 @@ namespace Gradio{
 			Util.add_stylesheet();
 
 			// restore window size
-	       		this.set_default_size(Settings.window_width, Settings.window_height);
+	       		this.set_default_size(App.settings.window_width, App.settings.window_height);
 		}
 
 		private void connect_signals(){
@@ -128,8 +124,8 @@ namespace Gradio{
 				int width, height;
 				this.get_size (out width, out height);
 
-			 	Settings.window_width = width;
-			 	Settings.window_height = height;
+			 	App.settings.window_width = width;
+			 	App.settings.window_height = height;
 			});
 
 			header.LibraryToggleButton.clicked.connect(() => { set_mode(WindowMode.LIBRARY); });
@@ -147,7 +143,7 @@ namespace Gradio{
       			trayicon.set_tooltip_text ("Click to restore...");
       			trayicon.activate.connect(() => tray_activate());
 
-      			show_tray_icon(Settings.enable_tray_icon);
+      			show_tray_icon(App.settings.enable_tray_icon);
 		}
 
 		public void show_tray_icon(bool b){
@@ -303,7 +299,7 @@ namespace Gradio{
 
 			// Quit
 			if ((event.keyval == Gdk.Key.q || event.keyval == Gdk.Key.Q) && (event.state & default_modifiers) == Gdk.ModifierType.CONTROL_MASK) {
-				app.quit_application();
+				app.quit();
 				return true;
 			}
 

@@ -61,7 +61,7 @@ namespace Gradio{
 		}
 
 		public static void send_notification(string summary, string body, Gdk.Pixbuf? icon = null){
-			if(Settings.enable_notifications){
+			if(App.settings.enable_notifications){
 				var notification = new GLib.Notification (summary);
 				notification.set_body (body);
 				GLib.Application.get_default ().send_notification ("de.haeckerfelix.gradio", notification);

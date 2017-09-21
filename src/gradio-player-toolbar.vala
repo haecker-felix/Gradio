@@ -75,7 +75,7 @@ namespace Gradio{
 			StatusBox.pack_start(status_icon);
 			this.show_all();
 
-			VolumeButton.set_value(Settings.volume_position);
+			VolumeButton.set_value(App.settings.volume_position);
 		}
 
 		private void station_changed (){
@@ -104,7 +104,7 @@ namespace Gradio{
 		[GtkCallback]
         	private void VolumeButton_value_changed (double value) {
 			App.player.volume = value;
-			Settings.volume_position = value;
+			App.settings.volume_position = value;
 		}
 
 		[GtkCallback]
