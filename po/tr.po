@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-10 14:34+0200\n"
-"PO-Revision-Date: 2017-09-23 10:16+0000\n"
+"PO-Revision-Date: 2017-09-25 14:25+0000\n"
 "Last-Translator: sispus <eylem.akcay@gmail.com>\n"
 "Language-Team: Turkish "
 "<https://hosted.weblate.org/projects/gradio/translations/tr/>\n"
@@ -319,9 +319,8 @@ msgstr "Masaüstü bildirimlerini göster"
 
 #. enable tray icon
 #: src/gradio-settings-window.vala:123
-#, fuzzy
 msgid "Tray icon"
-msgstr "Masaüstü tepsisinde ikon"
+msgstr "Masaüstü tepsisine ikon ekle"
 
 #: src/gradio-settings-window.vala:123
 msgid "Show a tray icon, to restore the main window"
@@ -343,7 +342,6 @@ msgid "Clear Cache"
 msgstr "Önbelleği temizle"
 
 #: src/gradio-settings-window.vala:137
-#, fuzzy
 msgid "Clear all cached station icons"
 msgstr "Önbelleğe alınmış tüm istasyon ikonlarını silin"
 
@@ -386,7 +384,7 @@ msgstr "En fazla tıklanan radyo istasyonlarını görün."
 #: src/page/gradio-add-page.vala:39
 #, fuzzy
 msgid "Show recent radio stations"
-msgstr "Son dinlenen radyo istasyonlarını göster"
+msgstr "Son eklenen radyo istasyonlarını göster"
 
 #: src/page/gradio-add-page.vala:39
 #, fuzzy
@@ -408,6 +406,5 @@ msgid "New public radio station"
 msgstr "Erişilebilir yeni bir istasyon ekle"
 
 #: src/page/gradio-add-page.vala:47
-#, fuzzy
 msgid "Create a new radio station, which is visible for all users."
 msgstr "Tüm kullanıcıların erişebileceği yeni bir radyo istasyonu oluşturun."
