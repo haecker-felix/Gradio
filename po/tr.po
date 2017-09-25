@@ -1,0 +1,410 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the gradio package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gradio\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-09-10 14:34+0200\n"
+"PO-Revision-Date: 2017-09-25 14:25+0000\n"
+"Last-Translator: sispus <eylem.akcay@gmail.com>\n"
+"Language-Team: Turkish "
+"<https://hosted.weblate.org/projects/gradio/translations/tr/>\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 2.17-dev\n"
+
+#: data/ui/app-menu.ui:6
+msgid "Settings"
+msgstr "Ayarlar"
+
+#: data/ui/app-menu.ui:12
+msgid "About"
+msgstr "Hakkında"
+
+#: data/ui/app-menu.ui:18
+msgid "Quit"
+msgstr "Çık"
+
+#: data/ui/filter-box.ui:27
+msgid "Where"
+msgstr "Konum"
+
+#: data/ui/filter-box.ui:44
+msgid "Select Country ..."
+msgstr "Ülke Seçin ..."
+
+#: data/ui/filter-box.ui:125
+msgid "Select State  ..."
+msgstr "Bölge Seçin ..."
+
+#: data/ui/filter-box.ui:205 data/ui/station-editor.ui:211
+msgid "Language"
+msgstr "Dil"
+
+#: data/ui/filter-box.ui:222
+msgid "Select Language  ..."
+msgstr "Dil Seçin ..."
+
+#: data/ui/page/add-page.ui:45
+msgid "Fill your library with something new"
+msgstr "Kütüphanenize yeni bir şeyler ekleyin"
+
+#: data/ui/page/add-page.ui:64
+msgid "There are several options available to add something new."
+msgstr "Yeni şeyler eklemek için kullanabileceğiniz bir kaç seçenek var."
+
+#: data/ui/page/library-page.ui:44
+msgid "Your library is empty"
+msgstr "Kütüphaneniz boş"
+
+#: data/ui/page/library-page.ui:62
+msgid "If you add stations to the library, you will find them here."
+msgstr "Kütüphanenize eklediğiniz istasyonları burada görürsünüz."
+
+#: data/ui/page/collections-page.ui:43
+#, fuzzy
+msgid "You don't have any collection"
+msgstr "Koleksiyon oluşturmamışsınız."
+
+#: data/ui/page/collections-page.ui:61
+msgid "You can group stations into collections."
+msgstr "İstasyonları koleksiyonlar içinde gruplayabilirsiniz."
+
+#: data/ui/details-box.ui:23 data/ui/selection-toolbar.ui:151
+msgid "Details"
+msgstr "İstasyon bilgisi"
+
+#: data/ui/details-box.ui:137 data/ui/station-editor.ui:125
+msgid "Name"
+msgstr "İstasyon adı"
+
+#: data/ui/details-box.ui:172
+msgid "Type"
+msgstr "İstasyon tipi"
+
+#: data/ui/details-box.ui:209
+#, fuzzy
+msgid "Items"
+msgstr "Nesneler"
+
+#: data/ui/details-box.ui:285
+msgid "Location"
+msgstr "İstasyonun konumu"
+
+#: data/ui/details-box.ui:317
+msgid "Description"
+msgstr "İstasyon tanımı"
+
+#: data/ui/details-box.ui:349
+msgid "Tags"
+msgstr "Etiketler"
+
+#: data/ui/details-box.ui:436 data/ui/selection-toolbar.ui:15
+msgid "Play"
+msgstr "Çal"
+
+#: data/ui/details-box.ui:481
+msgid "Open homepage"
+msgstr "İstasyon anasayfasına git"
+
+#: data/ui/details-box.ui:526
+msgid "Edit"
+msgstr "Düzenle"
+
+#: data/ui/organize-collection-dialog.ui:21
+#: data/ui/organize-collection-dialog.ui:107
+msgid "New Collection…"
+msgstr "Yeni Koleksiyon…"
+
+#: data/ui/organize-collection-dialog.ui:31
+#: data/ui/organize-collection-dialog.ui:128
+#: data/ui/organize-collection-dialog.ui:201
+msgid "Add"
+msgstr "Ekle"
+
+#: data/ui/organize-collection-dialog.ui:92
+msgid "Enter a name for your first collection"
+msgstr "İlk koleksiyonunuza bir isim verin"
+
+#: data/ui/organize-collection-dialog.ui:192 data/ui/station-editor.ui:501
+msgid "Cancel"
+msgstr "Vazgeç"
+
+#: data/ui/selection-menu.ui:7
+msgid "Select All"
+msgstr "Tümünü Seç"
+
+#: data/ui/selection-menu.ui:11
+msgid "Select None"
+msgstr "Hiçbirini Seçme"
+
+#: data/ui/selection-toolbar.ui:29
+msgid "Add to library"
+msgstr "Kütüphaneye ekle"
+
+#: data/ui/selection-toolbar.ui:46
+msgid "Remove"
+msgstr "Kaldır"
+
+#: data/ui/selection-toolbar.ui:135
+msgid "Collections"
+msgstr "Koleksiyonlar"
+
+#: data/ui/station-editor.ui:39
+msgid "Global database"
+msgstr "Global veritabanı"
+
+#: data/ui/station-editor.ui:54
+msgid ""
+"Gradio is using a internet database. Everything what you enter here, is "
+"going to be visible for all users. Please be careful, and double check your "
+"input!"
+msgstr ""
+"Gradio bir internet veritabanı kullanmaktadır. Buraya girdiğiniz her bilgi, "
+"tüm kullanıcılar için erişilebilir olacaktır. Lütfen dikkatli olun! "
+"Girdiğiniz bilgileri iki defa kontrol edin!"
+
+#: data/ui/station-editor.ui:68
+msgid "Continue"
+msgstr "Devam"
+
+#: data/ui/station-editor.ui:151
+msgid "Stream Address"
+msgstr "Yayın Adresi"
+
+#: data/ui/station-editor.ui:166
+msgid "Homepage"
+msgstr "Anasayfa"
+
+#: data/ui/station-editor.ui:181
+msgid "Country"
+msgstr "Ülke"
+
+#: data/ui/station-editor.ui:196
+msgid "State"
+msgstr "Bölge/Eyalet"
+
+#: data/ui/station-editor.ui:291
+msgid "Favicon Address"
+msgstr "Simge (Favicon) Adresi"
+
+#: data/ui/station-editor.ui:435
+msgid "Server Response"
+msgstr "Sunucu Yanıtı"
+
+#: data/ui/station-editor.ui:471
+msgid "Close"
+msgstr "Kapat"
+
+#: data/ui/station-editor.ui:510
+msgid "Done"
+msgstr "Tamam"
+
+#: data/ui/page/search-page.ui:127
+msgid "No results found"
+msgstr "Sonuç bulunamadı"
+
+#: data/ui/page/search-page.ui:145
+msgid ""
+"Either the station does not exist, or you have to search with other keywords."
+msgstr "İstasyon mevcut değil, veya başka anahtar kelimelerle arayın."
+
+#: src/gradio-settings-window.vala:39
+msgid "Features"
+msgstr "Özellikler"
+
+#: src/gradio-settings-window.vala:42
+#, fuzzy
+msgid "Playback"
+msgstr "Dinle"
+
+#: src/gradio-settings-window.vala:45
+msgid "Library"
+msgstr "Kütüphane"
+
+#: src/gradio-settings-window.vala:48
+msgid "Appearance"
+msgstr "Görünüm"
+
+#: src/gradio-settings-window.vala:51
+msgid "Cache"
+msgstr "Önbellek"
+
+#. APPEARANCE
+#. Dark design
+#: src/gradio-settings-window.vala:59
+msgid "Prefer dark theme"
+msgstr "Koyu temayı seç"
+
+#: src/gradio-settings-window.vala:59
+msgid "Use a dark theme, if possible"
+msgstr "Mümkünse koyu tema kullan"
+
+#. hide broken stations
+#: src/gradio-settings-window.vala:65
+msgid "Hide broken stations"
+msgstr "Arızalı istasyonlar gösterme"
+
+#: src/gradio-settings-window.vala:65
+msgid "Don't show stations, which are not working"
+msgstr "Çalışmayan istasyonları gizle"
+
+#. PLAYBACK
+#. enable background playback
+#: src/gradio-settings-window.vala:74
+msgid "Background Playback"
+msgstr "Arka Planda Çal"
+
+#: src/gradio-settings-window.vala:74
+msgid "Continue the playback if you close the Gradio window"
+msgstr "Gradio penceresi kapandığında çalmaya devam et"
+
+#. resume playback on startup
+#: src/gradio-settings-window.vala:80
+msgid "Resume playback on startup"
+msgstr "Başlangıçta çalma"
+
+#: src/gradio-settings-window.vala:80
+#, fuzzy
+msgid "Play the latest station if you start Gradio"
+msgstr "Gradio başlatıldığında son dinlenen istasyonu çal"
+
+#. LIBRARY
+#. import library
+#: src/gradio-settings-window.vala:89 src/gradio-settings-window.vala:173
+msgid "Import"
+msgstr "İçe aktar"
+
+#: src/gradio-settings-window.vala:89
+msgid "Replace the current library with a another one"
+msgstr "Mevcut kütüphaneyi kaldırarak bir başkasıyla değiştir"
+
+#: src/gradio-settings-window.vala:93
+msgid "Do you want to replace the current library with this one?"
+msgstr "Eski kütühanenizin yerine bu kütüphaneyi mi yüklemek istiyorsunuz?"
+
+#. export library
+#: src/gradio-settings-window.vala:99 src/gradio-settings-window.vala:152
+msgid "Export"
+msgstr "Dışa Aktar"
+
+#: src/gradio-settings-window.vala:99 src/gradio-settings-window.vala:149
+msgid "Export the current library"
+msgstr "Kullanımdaki kütüphaneyi dışarı aktar"
+
+#. FEATURES
+#. mpris
+#: src/gradio-settings-window.vala:111
+msgid "MPRIS"
+msgstr "MPRIS"
+
+#: src/gradio-settings-window.vala:111
+msgid "Integrate Gradio as media player in your desktop environment"
+msgstr "Gradio'yu masüstü ortamınıza entegre edin"
+
+#. enable notifications
+#: src/gradio-settings-window.vala:117
+msgid "Notifications"
+msgstr "Bildirimler"
+
+#: src/gradio-settings-window.vala:117
+msgid "Show desktop notifications"
+msgstr "Masaüstü bildirimlerini göster"
+
+#. enable tray icon
+#: src/gradio-settings-window.vala:123
+msgid "Tray icon"
+msgstr "Masaüstü tepsisine ikon ekle"
+
+#: src/gradio-settings-window.vala:123
+msgid "Show a tray icon, to restore the main window"
+msgstr "Ana pencereyi geri yüklemek için sistem tepsisine ikon yerleştirin"
+
+#. CACHE
+#. cache station images
+#: src/gradio-settings-window.vala:132
+#, fuzzy
+msgid "Cache station icons"
+msgstr "İstasyon ikonlarını önbelleğe al"
+
+#: src/gradio-settings-window.vala:132
+msgid "Saves the images locally."
+msgstr "Görüntüleri bilgisayarınıza kaydeder."
+
+#: src/gradio-settings-window.vala:137
+msgid "Clear Cache"
+msgstr "Önbelleği temizle"
+
+#: src/gradio-settings-window.vala:137
+msgid "Clear all cached station icons"
+msgstr "Önbelleğe alınmış tüm istasyon ikonlarını silin"
+
+#: src/gradio-settings-window.vala:150 src/gradio-settings-window.vala:171
+#, fuzzy
+msgid "_Cancel"
+msgstr "_Vazgeç"
+
+#: src/gradio-settings-window.vala:170
+msgid "Select database to import"
+msgstr "İçe aktarılacak veritabanını şeç"
+
+#: src/page/gradio-add-page.vala:27
+msgid "Create a new radio station"
+msgstr "Yeni istasyon oluştur"
+
+#: src/page/gradio-add-page.vala:28
+msgid "Discover radio stations"
+msgstr "Radyo istasyonlarını bul"
+
+#: src/page/gradio-add-page.vala:31
+msgid "Show famous radio stations"
+msgstr "Beğenilen radyo istasyonlarını göster"
+
+#: src/page/gradio-add-page.vala:31
+#, fuzzy
+msgid "Show radio stations which have the most votes."
+msgstr "En çok oy alan radyo istasyonlarını görün."
+
+#: src/page/gradio-add-page.vala:35
+#, fuzzy
+msgid "Show popular radio stations"
+msgstr "Popüler radyo istasyonlarını göster"
+
+#: src/page/gradio-add-page.vala:35
+#, fuzzy
+msgid "Show radio stations which have the most clicks."
+msgstr "En fazla tıklanan radyo istasyonlarını görün."
+
+#: src/page/gradio-add-page.vala:39
+#, fuzzy
+msgid "Show recent radio stations"
+msgstr "Son eklenen radyo istasyonlarını göster"
+
+#: src/page/gradio-add-page.vala:39
+#, fuzzy
+msgid "Show radio stations which have recently been clicked."
+msgstr "Yakın zamanda tıklanan radyo istasyonlarını görün."
+
+#: src/page/gradio-add-page.vala:43
+msgid "Search for radio stations"
+msgstr "İstasyon ara"
+
+#: src/page/gradio-add-page.vala:43
+#, fuzzy
+msgid "Search for specific radio stations."
+msgstr "Belirli bir radyo istasyonunu arayın."
+
+#: src/page/gradio-add-page.vala:47
+#, fuzzy
+msgid "New public radio station"
+msgstr "Erişilebilir yeni bir istasyon ekle"
+
+#: src/page/gradio-add-page.vala:47
+msgid "Create a new radio station, which is visible for all users."
+msgstr "Tüm kullanıcıların erişebileceği yeni bir radyo istasyonu oluşturun."

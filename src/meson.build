@@ -51,7 +51,7 @@ vala_args = [
 executable('gradio',
 		vala_sources,
 		resources,
-		c_args : [ '-DVERSION="' + meson.project_version() + '"', '-DGETTEXT_PACKAGE="gnome-usage"', '-DGNOMELOCALEDIR="' + get_option('prefix') + '/' + get_option('localedir') + '"' ],
+		c_args : [ '-DVERSION="' + meson.project_version() + '"', '-DGETTEXT_PACKAGE="gradio"', '-DGNOMELOCALEDIR="' + get_option('prefix') + '/' + get_option('localedir') + '"' ],
 		vala_args: vala_args,
 		install : true,
 		dependencies : [glib, gobject, gio, gtk, gd, libsoup, json_glib, gstreamer, gstreamer_pbutils, sqlite3])
