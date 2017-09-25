@@ -21,21 +21,20 @@ namespace Gradio{
 	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/page/search-page.ui")]
 	public class SearchPage : Gtk.Box, Page{
 		[GtkChild] private Box ResultsBox;
-		[GtkChild] private Box FilterBox;
+		[GtkChild] private Box SearchBox;
 		[GtkChild] private Stack SearchStack;
-		private FilterBox filterbox;
+		private SearchBar searchbar;
 
 		private MainBox mainbox;
 		private StationModel station_model;
-		private SearchProvider search_provider;
+		private StationProvider station_provider;
 
 		public SearchPage(){
-			filterbox = new Gradio.FilterBox();
-			FilterBox.add(filterbox);
-
 			station_model =  new StationModel();
+			station_provider = new StationProvider(ref station_model);
 
-			search_provider = new SearchProvider(ref station_model, ref filterbox);
+			searchbar = new Gradio.SearchBar(ref station_provider);
+			SearchBox.add(searchbar);
 
 			mainbox = new MainBox();
 			mainbox.set_model(station_model);
@@ -43,29 +42,34 @@ namespace Gradio{
 			mainbox.selection_mode_request.connect(() => {selection_mode_enabled();});
 			ResultsBox.add(mainbox);
 
-			search_provider.ready.connect(() => {
+			station_provider.ready.connect(() => {
 				if(station_model.get_n_items() == 0)
 					SearchStack.set_visible_child_name("no-results");
 				else
 					SearchStack.set_visible_child_name("results");
 			});
-			search_provider.working.connect(() => {SearchStack.set_visible_child_name("loading");});
+			station_provider.working.connect(() => {SearchStack.set_visible_child_name("loading");});
+			searchbar.timeout_reset.connect(() => {SearchStack.set_visible_child_name("loading");});
+		}
+
+		public void set_search(string term){
+			searchbar.set_search(term);
 		}
 
 		public void show_recently_clicked(){
-			filterbox.reset_filters();
+			searchbar.reset_filters();
 			App.settings.sort_ascending = false;
 			App.window.header.ClickTimestampRButton.set_active(true);
 		}
 
 		public void show_most_voted(){
-			filterbox.reset_filters();
+			searchbar.reset_filters();
 			App.settings.sort_ascending = false;
 			App.window.header.VotesRButton.set_active(true);
 		}
 
 		public void show_most_clicked(){
-			filterbox.reset_filters();
+			searchbar.reset_filters();
 			App.settings.sort_ascending = false;
 			App.window.header.ClicksRButton.set_active(true);
 		}

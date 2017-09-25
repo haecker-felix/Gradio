@@ -297,7 +297,7 @@
       </object>
     </child>
   </object>
-  <template class="GradioFilterBox" parent="GtkBox">
+  <template class="GradioSearchBar" parent="GtkBox">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="orientation">vertical</property>

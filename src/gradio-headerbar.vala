@@ -104,8 +104,7 @@ namespace Gradio{
 			}
 
 			// Show Menubutton on non GNOME desktops
-			message("Desktop session is: " + GLib.Environment.get_variable("DESKTOP_SESSION"));
-			if(GLib.Environment.get_variable("DESKTOP_SESSION") != "gnome") {
+			if(!(GLib.Environment.get_variable("DESKTOP_SESSION")).contains("gnome")) {
 				var appmenu_builder = new Gtk.Builder.from_resource ("/de/haecker-felix/gradio/ui/app-menu.ui");
 				var app_menu = appmenu_builder.get_object ("app-menu") as GLib.MenuModel;
 				MenuButton.set_menu_model(app_menu);

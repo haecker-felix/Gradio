@@ -34,14 +34,37 @@ namespace Gradio {
 		public App() {
 			Object(application_id: "de.haeckerfelix.gradio", flags: ApplicationFlags.FLAGS_NONE);
 
+			// Load application settings
+			settings = new Settings();
+
+			// GNOME shell search
+			search_provider = new SearchProvider ();
+			search_provider.activate.connect ((timestamp, station_id) => {
+				ensure_window ();
+				window.present_with_time (timestamp);
+
+				Util.get_station_by_id.begin(int.parse(station_id), (obj,res) => {
+					RadioStation station = Util.get_station_by_id.end(res);
+					player.station = station;
+				});
+			});
+
+			search_provider.start_search.connect ((timestamp, searchterm) => {
+				ensure_window ();
+				window.present_with_time (timestamp);
+				window.set_mode(WindowMode.SEARCH);
+				window.search_page.set_search(searchterm);
+			});
+		}
+
+		protected override void startup () {
+			base.startup ();
+
 			// Check for for internet access TODO: Improve internet check. This just should be a workaround.
 			if(!Util.check_database_connection()){
 				warning("Gradio cannot connect radio-browser.info. Please check your internet connection.");
 				this.quit();
 			}
-
-			// Load application settings
-			settings = new Settings();
 
 			// Setup application actions
 			setup_actions();
@@ -49,28 +72,19 @@ namespace Gradio {
 			// Setup audio backend
 			player = new AudioPlayer();
 
+			// Setup image cache
 			image_cache = new ImageCache();
 
+			// Load station and collection library
 			library = new Library();
 
+			// Enable MPRIS, if it is enabled in the settings
 			if(settings.enable_mpris == true){
 				mpris = new MPRIS();
 				mpris.initialize();
+				mpris.requested_quit.connect(this.quit);
+				mpris.requested_raise.connect(window.present);
 			}
-
-			connect_signals();
-		}
-
-		private void connect_signals(){
-			mpris.requested_quit.connect(this.quit);
-			mpris.requested_raise.connect(window.present);
-
-			//search_provider = new SearchProvider.dbus_service ();
-			//search_provider.activate.connect ((timestamp) => {
-			//	ensure_window ();
-			//	window.set_mode(WindowMode.SEARCH);
-			//	window.present_with_time (timestamp);
-			//});
 		}
 
 		protected override void activate () {
@@ -109,9 +123,26 @@ namespace Gradio {
 			// setup appmenu
 			var builder = new Gtk.Builder.from_resource ("/de/haecker-felix/gradio/ui/app-menu.ui");
 			var app_menu = builder.get_object ("app-menu") as GLib.MenuModel;
+			message("Desktop session is: " + GLib.Environment.get_variable("DESKTOP_SESSION"));
+			if((GLib.Environment.get_variable("DESKTOP_SESSION")).contains("gnome")) set_app_menu (app_menu);
+		}
 
-			this.register();
-			if(GLib.Environment.get_variable("DESKTOP_SESSION") == "gnome") set_app_menu (app_menu);
+		public override bool dbus_register (DBusConnection connection, string object_path) {
+			try {
+				search_provider_id = connection.register_object (object_path + "/SearchProvider", search_provider);
+				message("Registered search provider service.");
+			} catch (IOError error) {
+				warning ("Could not register search provider service: %s\n", error.message);
+			}
+			return true;
+		}
+
+		public override void dbus_unregister (DBusConnection connection, string object_path) {
+			if (search_provider_id != 0) {
+				connection.unregister_object (search_provider_id);
+				search_provider_id = 0;
+				message("Unregistered search provider service.");
+			}
 		}
 
 		private void show_about_dialog(){

@@ -14,121 +14,99 @@
  * along with Gradio.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
-
 namespace Gradio{
+
 	[DBus (name = "org.gnome.Shell.SearchProvider2")]
-	public class SearchProvider{
-		private const string address = "http://www.radio-browser.info/webservice/json/stations/search";
+	public class SearchProvider : Object {
 
-		// wait 1,3 seconds before spawning a new search
-		private const int search_delay = 1000;
-		private uint delayed_changed_id;
+		[DBus (visible = false)] public signal void activate (uint32 timestamp, string station_id);
+		[DBus (visible = false)] public signal void start_search (uint32 timestamp, string searchterm);
 
-		private Soup.Session soup_session;
-		private Json.Parser parser = new Json.Parser();
+		private StationProvider station_provider;
+		private StationModel station_model;
 
-		private StationModel model = null;
-		private FilterBox filterbox = null;
-
-		public signal void working();
-		public signal void ready();
-		public signal void activate (uint32 timestamp);
-
-		public SearchProvider(ref StationModel m, ref FilterBox fb) {
-			model = m;
-			filterbox = fb;
-
-			filterbox.information_changed.connect(reset_timeout);
-			App.settings.notify["station-sorting"].connect(reset_timeout);
-
-			soup_session = new Soup.Session();
-            		soup_session.user_agent = "gradio/"+ Config.VERSION;
-
-			reset_timeout();
+		public SearchProvider(){
+			station_model = new StationModel();
+			station_provider = new StationProvider(ref station_model);
 		}
 
-		private void reset_timeout(){
-			working();
-			if(delayed_changed_id > 0)
-				Source.remove(delayed_changed_id);
-			delayed_changed_id = Timeout.add(search_delay, timeout);
-		}
+		private string array_to_string (string[] array){
+			string result = "";
 
-		private bool timeout(){
-			message("Sending new search request to server");
-			set_search_request();
-
-			delayed_changed_id = 0;
-			return false;
-		}
-
-		private void set_search_request (){
-			// clear old search model
-			model.clear();
-
-			HashTable<string, string> table = new HashTable<string, string> (str_hash, str_equal);
-
-			if(filterbox.selected_language != "" && filterbox.selected_language != null)
-				table.insert("language", filterbox.selected_language);
-
-			if(filterbox.selected_country != "" && filterbox.selected_country != null)
-				table.insert("country", filterbox.selected_country);
-
-			if(filterbox.selected_state != "" && filterbox.selected_state != null)
-				table.insert("state", filterbox.selected_state);
-
-			if(filterbox.search_term != "" && filterbox.search_term != null)
-				table.insert("name", filterbox.search_term);
-
-			string sort_by = "";
-			switch(App.settings.station_sorting){
-				case Compare.VOTES: sort_by = "votes"; break;
-				case Compare.NAME: sort_by = "name"; break;
-				case Compare.LANGUAGE: sort_by = "language"; break;
-				case Compare.COUNTRY: sort_by = "country"; break;
-				case Compare.STATE: sort_by = "state"; break;
-				case Compare.BITRATE: sort_by = "bitrate"; break;
-				case Compare.CLICKS: sort_by = "clickcount"; break;
-				case Compare.DATE: sort_by = "clicktimestamp"; break;
+			foreach (string term in array) {
+				string tmp = term + " ";
+				result = result + tmp;
 			}
-			table.insert("order", sort_by);
 
-			table.insert("reverse", (!App.settings.sort_ascending).to_string());
-			table.insert("limit", App.settings.max_search_results.to_string());
+			if(result.substring(result.length - 1) == " "){
+				result = result.substring(0, result.length - 1);
+			}
 
-			Soup.Message msg = Soup.Form.request_new_from_hash("POST", address, table);
-
-			soup_session.queue_message (msg, (sess, mess) => {
-				parse_result.begin((string) mess.response_body.data);
-			});
+			return result;
 		}
 
-		private async void parse_result(string data){
-			try{
-				parser.load_from_data(data);
+		private async string[] search_for_stations(string[] terms){
+			station_model.clear();
+			string searchterm = array_to_string(terms);
+			message("Searching for \"%s\"", searchterm);
 
-				var root = parser.get_root ();
-				var radio_stations = root.get_array ();
+			HashTable<string, string> filter_table = new HashTable<string, string> (str_hash, str_equal);
+			filter_table.insert("limit", App.settings.max_search_results.to_string());
+			filter_table.insert("name", searchterm);
+			filter_table.insert("order", "votes");
+			filter_table.insert("reverse", "true");
+			yield station_provider.get_stations("http://www.radio-browser.info/webservice/json/stations/search", filter_table);
 
-				int items = (int)radio_stations.get_length();
-				message("Search results found: %i", items);
+			string[] results = {};
+			for(int i = 0; i < station_model.get_n_items(); i++){
+				RadioStation station = (RadioStation)station_model.get_item(i);
+				results += station.id;
+			}
 
-				for(int i = 0; i < items; i++){
-					var radio_station = radio_stations.get_element(i);
-					var radio_station_data = radio_station.get_object ();
+			return results;
+		}
 
- 					var station = new RadioStation.from_json_data(radio_station_data);
-					model.add_station(station);
+		public async string[] get_initial_result_set (string[] terms) {
+			return yield search_for_stations(terms);
+		}
+
+		public async string[] get_subsearch_result_set (string[] previous_results, string[] terms) {
+			return yield search_for_stations(terms);
+		}
+
+		public HashTable<string, Variant>[] get_result_metas (string[] results) {
+			var result = new GenericArray<HashTable<string, Variant>> ();
+
+			foreach (var str in results) {
+				RadioStation station = null;
+				for(int i = 0; i < station_model.get_n_items(); i++){
+					RadioStation tmp = (RadioStation)station_model.get_item(i);
+					if(tmp.id == str){
+						station = tmp;
+						break;
+					}
 				}
 
-				ready();
+				if(station == null) continue;
 
-			}catch(GLib.Error e){
-				warning ("Aborted parsing search results! " + e.message);
+				var meta = new HashTable<string, Variant> (str_hash, str_equal);
+				meta.insert ("id", str);
+				meta.insert ("name", station.title);
+				meta.insert ("icon", station.icon_address);
+				meta.insert ("description", (station.country + " " + station.state));
+				result.add (meta);
 			}
-        	}
+			return result.data;
+		}
+
+		public void activate_result (string identifier, string[] terms, uint32 timestamp) {
+			activate (timestamp, identifier);
+		}
+
+		public void launch_search (string[] terms, uint32 timestamp) {
+			message("Launch search...");
+			start_search(timestamp, array_to_string(terms));
+		}
 	}
 
 }
-

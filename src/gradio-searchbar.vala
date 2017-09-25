@@ -19,39 +19,45 @@ using Gd;
 
 namespace Gradio{
 
-	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/filter-box.ui")]
-	public class FilterBox : Gtk.Box{
+	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/searchbar.ui")]
+	public class SearchBar : Gtk.Box{
+
+		private const int search_delay = 2;
+		private uint delayed_changed_id;
 
 		private TaggedEntry SearchEntry;
-		public string search_term;
+		private string search_term = "";
 		[GtkChild] Box SearchBox;
 
 		[GtkChild] private Revealer CountryRevealer;
 		[GtkChild] private Button SelectCountryButton;
 		[GtkChild] private Button ClearCountryButton;
 		[GtkChild] private ListBox CountryListBox;
-		public string selected_country = "";
+		private string selected_country = "";
 		private TaggedEntryTag country_tag;
 
 		[GtkChild] private Revealer StateRevealer;
 		[GtkChild] private Button SelectStateButton;
 		[GtkChild] private Button ClearStateButton;
 		[GtkChild] private ListBox StateListBox;
-		public string selected_state = "";
+		private string selected_state = "";
 		private TaggedEntryTag state_tag;
 
 		[GtkChild] private Revealer LanguageRevealer;
 		[GtkChild] private Button SelectLanguageButton;
 		[GtkChild] private Button ClearLanguageButton;
 		[GtkChild] private ListBox LanguageListBox;
-		public string selected_language = "";
+		private string selected_language = "";
 		private TaggedEntryTag language_tag;
 
 		private CategoryItems category_items;
+		private StationProvider station_provider;
 
-		public signal void information_changed();
+		public signal void timeout_reset();
 
-		public FilterBox(){
+		public SearchBar(ref StationProvider sp){
+			station_provider = sp;
+
 			SearchEntry = new TaggedEntry();
 			SearchEntry.width_request = 400;
 			SearchEntry.set_visible(true);
@@ -78,6 +84,7 @@ namespace Gradio{
 				return get_row(item.text);
 			});
 
+			reset_timeout();
 			connect_signals();
 		}
 
@@ -96,7 +103,7 @@ namespace Gradio{
 
 			SearchEntry.search_changed.connect(() => {
 				search_term = SearchEntry.get_text();
-				information_changed();
+				reset_timeout();
 			});
 
 			CountryListBox.row_activated.connect((t,a) => {
@@ -111,7 +118,7 @@ namespace Gradio{
 				ClearCountryButton.set_visible(true);
 				SelectStateButton.set_sensitive(false);
 
-				information_changed();
+				reset_timeout();
 			});
 
 			StateListBox.row_activated.connect((t,a) => {
@@ -126,7 +133,7 @@ namespace Gradio{
 				SelectCountryButton.set_sensitive(false);
 				ClearStateButton.set_visible(true);
 
-				information_changed();
+				reset_timeout();
 			});
 
 			LanguageListBox.row_activated.connect((t,a) => {
@@ -140,10 +147,62 @@ namespace Gradio{
 				LanguageRevealer.set_reveal_child(false);
 				ClearLanguageButton.set_visible(true);
 
-				information_changed();
+				reset_timeout();
 			});
+
+			App.settings.notify["station-sorting"].connect(reset_timeout);
+			App.settings.notify["sort-ascending"].connect(reset_timeout);
 		}
 
+		private void reset_timeout(){
+			timeout_reset();
+
+			if(delayed_changed_id > 0)
+				Source.remove(delayed_changed_id);
+			delayed_changed_id = Timeout.add_seconds(search_delay, timeout);
+		}
+
+		private bool timeout(){
+			message("Sending new search request to server");
+			apply_new_filter();
+
+			delayed_changed_id = 0;
+			return false;
+		}
+
+
+		private void apply_new_filter(){
+			message("Apply new search filter...");
+			HashTable<string, string> filter_table = new HashTable<string, string> (str_hash, str_equal);
+
+			if(selected_language != null) filter_table.insert("language", selected_language);
+			if(selected_language != null) filter_table.insert("country", selected_country);
+			if(selected_language != null) filter_table.insert("state", selected_state);
+			if(selected_language != null) filter_table.insert("name", search_term);
+
+			string sort_by = "";
+			switch(App.settings.station_sorting){
+				case Compare.VOTES: sort_by = "votes"; break;
+				case Compare.NAME: sort_by = "name"; break;
+				case Compare.LANGUAGE: sort_by = "language"; break;
+				case Compare.COUNTRY: sort_by = "country"; break;
+				case Compare.STATE: sort_by = "state"; break;
+				case Compare.BITRATE: sort_by = "bitrate"; break;
+				case Compare.CLICKS: sort_by = "clickcount"; break;
+				case Compare.DATE: sort_by = "clicktimestamp"; break;
+			}
+
+			filter_table.insert("order", sort_by);
+			filter_table.insert("reverse", (!App.settings.sort_ascending).to_string());
+			filter_table.insert("limit", App.settings.max_search_results.to_string());
+
+			station_provider.get_stations.begin("http://www.radio-browser.info/webservice/json/stations/search", filter_table);
+		}
+
+		public void set_search(string term){
+			search_term = term;
+			SearchEntry.set_text(term);
+		}
 
 		private void unreveal_all(){
 			CountryRevealer.set_reveal_child(false);
@@ -159,7 +218,7 @@ namespace Gradio{
 			ClearCountryButton.set_visible(false);
 			SelectStateButton.set_sensitive(true);
 
-			information_changed();
+			reset_timeout();
 		}
 
 		[GtkCallback]
@@ -181,7 +240,7 @@ namespace Gradio{
 			ClearStateButton.set_visible(false);
 			SelectCountryButton.set_sensitive(true);
 
-			information_changed();
+			reset_timeout();
 		}
 
 		[GtkCallback]
@@ -202,7 +261,7 @@ namespace Gradio{
 			SelectLanguageButton.set_label("Select Language ...");
 			ClearLanguageButton.set_visible(false);
 
-			information_changed();
+			reset_timeout();
 		}
 
 		[GtkCallback]

@@ -28,6 +28,7 @@ vala_sources = [
 		'gradio-mpris.vala',
 		'gradio-player-toolbar.vala',
 		'gradio-radio-browser.vala',
+		'gradio-station-provider.vala',
 		'gradio-search-provider.vala',
 		'gradio-settings.vala',
 		'gradio-status-icon.vala',
@@ -36,7 +37,7 @@ vala_sources = [
 		'gradio-selection-toolbar.vala',
 		'gradio-image-cache.vala',
 		'gradio-organize-collection-dialog.vala',
-		'gradio-filterbox.vala',
+		'gradio-searchbar.vala',
 		'gradio-station-compare.vala',
 		'gradio-thumbnail.vala']
 

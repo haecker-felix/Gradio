@@ -20,7 +20,7 @@
 	<file>ui/selection-menu.ui</file>
 	<file>ui/selection-toolbar.ui</file>
 	<file>ui/organize-collection-dialog.ui</file>
-	<file>ui/filter-box.ui</file>
+	<file>ui/searchbar.ui</file>
 	<file>icons/hicolor/48x48/apps/de.haeckerfelix.gradio.png</file>
   </gresource>
 </gresources>
