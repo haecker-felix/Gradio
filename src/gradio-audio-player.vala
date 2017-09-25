@@ -92,10 +92,9 @@ namespace Gradio{
 		private bool bus_callback (Gst.Bus bus, Gst.Message m) {
 			switch (m.type) {
 				case Gst.MessageType.ELEMENT:
-					state = Gst.State.NULL;
-
 					// TODO: Improve the handling of missing codecs.
-				    	if(m.get_structure() != null && Gst.PbUtils.is_missing_plugin_message(m)) {
+				    	if(Gst.PbUtils.is_missing_plugin_message(m)) {
+				    		state = Gst.State.NULL;
 				    		status_message = "A required codec is missing.";
 				    		codec.install_missing_codec(m);
 				    	}
