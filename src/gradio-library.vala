@@ -23,7 +23,6 @@ namespace Gradio{
 		public signal void removed_radio_station(RadioStation s);
 
 		public static StationModel station_model;
-		public static CollectionModel collection_model;
 
 		private Sqlite.Database db;
 		private string db_error_message;
@@ -34,7 +33,6 @@ namespace Gradio{
 
 		public Library(){
 			station_model = new StationModel();
-			collection_model = new CollectionModel();
 
 			// check for new database
 			if(!database_exists()){
@@ -47,14 +45,18 @@ namespace Gradio{
 
 			// read database data
 			message("Successfully opened database! Reading database data...");
-			read_collections.begin();
-			read_stations.begin();
+			read_database();
 
 			// check for old database (gradio 5 or older)
 			if(is_old_database()){
 				migrate_old_db.begin();
 				return;
 			}
+		}
+
+		private async void read_database(){
+			yield read_collections();
+			yield read_stations();
 		}
 
 		private void open_database(){
@@ -124,7 +126,7 @@ namespace Gradio{
 				case Sqlite.ROW:
 					message("Found collection: %s %s", stmt.column_text(0), stmt.column_text(1));
 					Collection coll = new Collection(stmt.column_text(1), stmt.column_text(0));
-					collection_model.add_collection(coll);
+					station_model.add_item(coll);
 					break;
 				default:
 					printerr ("Error: %d, %s\n", rc, db.errmsg ());
@@ -155,10 +157,10 @@ namespace Gradio{
 					RadioStation station = yield Util.get_station_by_id(int.parse(stmt.column_text(0)));
 
 					message("Found station: %s", station.title);
-					station_model.add_station(station);
+					station_model.add_item(station);
 
 					if(stmt.column_text(1) != "0"){
-						Collection coll = collection_model.get_collection_by_id(stmt.column_text(1));
+						Collection coll = (Collection)station_model.get_item_by_id(stmt.column_text(1));
 						coll.add_station(station);
 
 						message("Added %s to collection \"%s\"", stmt.column_text(0), coll.name);
@@ -175,7 +177,7 @@ namespace Gradio{
 
 		public bool add_station_to_collection(string collection_id, RadioStation station){
 			// Station must be in the library
-			if((!station_model.contains_station(station)))
+			if((!station_model.contains_item(station)))
 				return false;
 
 			// Remove the station from the previous collection (a station can be only in one collection)
@@ -200,7 +202,7 @@ namespace Gradio{
 			} while (rc == Sqlite.ROW);
 
 			// Get the actual collection, where the station gets added
-			Collection coll = (Collection)collection_model.get_collection_by_id(collection_id);
+			Collection coll = (Collection)station_model.get_item_by_id(collection_id);
 
 			// Add the station to the new collection (if the collection exists)
 			if(coll != null){
@@ -233,7 +235,7 @@ namespace Gradio{
 			}
 
 			// Remove the station from the collection itself
-			Collection coll = collection_model.get_collection_by_id(collection_id);
+			Collection coll = (Collection)station_model.get_item_by_id(collection_id);
 			coll.remove_station(station);
 
 			message("Removed station \"%s\" from collection %s", station.title, collection_id);
@@ -241,7 +243,7 @@ namespace Gradio{
 		}
 
 		public bool add_new_collection(Collection collection){
-			if(collection_model.contains_collection(collection) || collection == null)
+			if(station_model.contains_item(collection) || collection == null)
 				return true;
 
 			string query = "INSERT INTO collections (collection_id,collection_name) VALUES ('"+collection.id+"', '"+collection.name+"');";
@@ -251,7 +253,7 @@ namespace Gradio{
 				critical("Could not add collection \"%s\" (%s): %s", collection.name, collection.id, db_error_message);
 				return false;
 			}else{
-				collection_model.add_collection(collection);
+				station_model.add_item(collection);
 				message("Added new collection \"%s\" (%s)", collection.name, collection.id);
 				return true;
 			}
@@ -276,7 +278,7 @@ namespace Gradio{
 			 	return false;
 			}else{
 			 	Idle.add(() => {
-			 		collection_model.remove_collection(collection);
+			 		station_model.remove_item(collection);
 					return false;
 			 	});
 			}
@@ -286,7 +288,7 @@ namespace Gradio{
 		}
 
 		public bool add_radio_station(RadioStation station){
-			if(station_model.contains_station(station) || station == null)
+			if(station_model.contains_item(station) || station == null)
 				return true;
 
 			string query = "INSERT INTO library (station_id,collection_id) VALUES ("+station.id+", '0');";
@@ -297,7 +299,7 @@ namespace Gradio{
 				return false;
 			}else{
 				Idle.add(() => {
-					station_model.add_station(station);
+					station_model.add_item(station);
 					return false;
 				});
 				message("Added station \"%s\" (%s) to library", station.title, station.id);
@@ -306,7 +308,7 @@ namespace Gradio{
 		}
 
 		public bool remove_radio_station(RadioStation station){
-			if(!station_model.contains_station(station))
+			if(!station_model.contains_item(station))
 				return true;
 
 			// Remove the station from the collection
@@ -322,7 +324,7 @@ namespace Gradio{
 				case Sqlite.DONE:
 					break;
 				case Sqlite.ROW:
-					Collection previous_coll = collection_model.get_collection_by_id(stmt.column_text(0));
+					Collection previous_coll = (Collection)station_model.get_item_by_id(stmt.column_text(0));
 					previous_coll.remove_station(station);
 					break;
 				default:
@@ -341,7 +343,7 @@ namespace Gradio{
 				return false;
 			}else{
 				Idle.add(() => {
-					station_model.remove_station(station);
+					station_model.remove_item(station);
 					removed_radio_station(station);
 					return false;
 				});
@@ -370,7 +372,6 @@ namespace Gradio{
 
 			try{
 				station_model.clear();
-				collection_model.clear();
 
 				newdb.delete();
 				external_db.copy(newdb, FileCopyFlags.NONE, null, null);

@@ -21,7 +21,6 @@ namespace Gradio{
 
 	public enum WindowMode {
 		LIBRARY,
-		COLLECTIONS,
 		COLLECTION_ITEMS,
 		SEARCH,
 		ADD
@@ -41,7 +40,6 @@ namespace Gradio{
 		CollectionItemsPage collection_items_page;
 		public SearchPage search_page;
 		LibraryPage library_page;
-		CollectionsPage collections_page;
 		AddPage add_page;
 
 		// History of the pages
@@ -89,9 +87,6 @@ namespace Gradio{
 			library_page = new LibraryPage();
 			MainStack.add_named(library_page, page_name[WindowMode.LIBRARY]);
 
-			collections_page = new CollectionsPage();
-			MainStack.add_named(collections_page, page_name[WindowMode.COLLECTIONS]);
-
 			collection_items_page = new CollectionItemsPage();
 			MainStack.add_named(collection_items_page, page_name[WindowMode.COLLECTION_ITEMS]);
 
@@ -129,7 +124,6 @@ namespace Gradio{
 			});
 
 			header.LibraryToggleButton.clicked.connect(() => { set_mode(WindowMode.LIBRARY); });
-			header.CollectionsToggleButton.clicked.connect(() => { set_mode(WindowMode.COLLECTIONS); });
 			header.SearchToggleButton.clicked.connect(() => { set_mode(WindowMode.SEARCH); });
 			header.AddButton.clicked.connect(() => { set_mode(WindowMode.ADD); });
 			header.BackButton.clicked.connect(() => {set_mode (mode_queue.pop_head());}); //go one page back in history
@@ -190,17 +184,7 @@ namespace Gradio{
 			StationModel model = new StationModel();
 
 			current_selection.foreach ((station) => {
-				model.add_station((RadioStation)station);
-			});
-
-			return model;
-		}
-
-		public CollectionModel get_collection_selection(){
-			CollectionModel model = new CollectionModel();
-
-			current_selection.foreach ((station) => {
-				model.add_collection((Collection)station);
+				model.add_item((RadioStation)station);
 			});
 
 			return model;
@@ -237,7 +221,6 @@ namespace Gradio{
 			header.show_default_bar();
 			header.show_default_buttons();
 			header.LibraryToggleButton.set_active(mode == WindowMode.LIBRARY);
-			header.CollectionsToggleButton.set_active(mode == WindowMode.COLLECTIONS);
 			header.SearchToggleButton.set_active(mode == WindowMode.SEARCH);
 
 			// do action for mode
@@ -245,12 +228,6 @@ namespace Gradio{
 				case WindowMode.LIBRARY: {
 					header.AddButton.set_visible(true);
 					selection_toolbar.set_mode(SelectionMode.LIBRARY);
-					mode_queue.clear();
-					break;
-				};
-				case WindowMode.COLLECTIONS: {
-					selection_toolbar.set_mode(SelectionMode.COLLECTION_OVERVIEW);
-					header.SortBox.set_visible(false);
 					mode_queue.clear();
 					break;
 				};
@@ -263,7 +240,7 @@ namespace Gradio{
 					break;
 				};
 				case WindowMode.COLLECTION_ITEMS: {
-					Collection collection = collections_page.selected_collection;
+					Collection collection = library_page.selected_collection;
 					selection_toolbar.set_mode(SelectionMode.COLLECTION_ITEMS, collection.id);
 					collection_items_page.set_collection(collection);
 					collection_items_page.set_title(collection.name);
@@ -327,12 +304,6 @@ namespace Gradio{
 			// show library
 			if ((event.keyval == Gdk.Key.l) && (event.state & default_modifiers) == Gdk.ModifierType.CONTROL_MASK) {
 				set_mode(WindowMode.LIBRARY);
-				return true;
-			}
-
-			// show collections
-			if ((event.keyval == Gdk.Key.c) && (event.state & default_modifiers) == Gdk.ModifierType.CONTROL_MASK) {
-				set_mode(WindowMode.COLLECTIONS);
 				return true;
 			}
 

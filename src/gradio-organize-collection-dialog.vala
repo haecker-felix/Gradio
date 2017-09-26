@@ -38,7 +38,7 @@ namespace Gradio{
 		public OrganizeCollectionDialog(){
 			CollectionsListBox.set_header_func(header_func);
 
-			if(Library.collection_model.get_n_items() == 0)
+			if(Library.station_model.get_n_items() == 0)
 				WindowStack.set_visible_child_name("empty");
 			else
 				WindowStack.set_visible_child_name("collections");
@@ -63,13 +63,13 @@ namespace Gradio{
 				// The ID is not needful here, so just ""
 				Collection coll = new Collection(text, "");
 
-				if(text.length > 2 && !(Library.collection_model.contains_collection(coll)))
+				if(text.length > 2 && !(Library.station_model.contains_item(coll)))
 					AddButton.set_sensitive(true);
 				else
 					AddButton.set_sensitive(false);
 			});
 
-			CollectionsListBox.bind_model(Library.collection_model, (item) => {
+			CollectionsListBox.bind_model(Library.station_model, (item) => {
 				Collection coll = (Collection) item;
 				Label label = new Label (coll.name);
 				label.halign = Align.START;
@@ -132,7 +132,7 @@ namespace Gradio{
 			string n = label.get_text();
 
 			message("Adding station(s) to collection \""+n+"\"");
-			string id = Library.collection_model.get_id_by_name(n);
+			string id = Library.station_model.get_id_by_name(n);
 
 			for(int i = 0; i < model.get_n_items(); i++){
 				RadioStation station = (RadioStation)model.get_item(i);

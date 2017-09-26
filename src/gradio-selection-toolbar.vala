@@ -130,7 +130,7 @@ namespace Gradio{
 		[GtkCallback]
 		public void RemoveButton_clicked (Gtk.Button button) {
 			if(mode == SelectionMode.COLLECTION_OVERVIEW){
-				CollectionModel model = (CollectionModel)App.window.get_collection_selection();
+				StationModel model = (StationModel)App.window.get_station_selection();
 				for(int i = 0; i < model.get_n_items(); i++){
 					Collection collection = (Collection)model.get_item(i);
 					App.library.remove_collection(collection);
@@ -168,7 +168,7 @@ namespace Gradio{
 		[GtkCallback]
 		public void DetailsButton_clicked (Gtk.Button button) {
 			if(mode == SelectionMode.COLLECTION_OVERVIEW){
-				CollectionModel model = (CollectionModel)App.window.get_collection_selection();
+				StationModel model = (StationModel)App.window.get_station_selection();
 				for(int i = 0; i < model.get_n_items(); i++){
 					Collection collection = (Collection)model.get_item(i);
 					App.window.details_box.set_collection(collection);

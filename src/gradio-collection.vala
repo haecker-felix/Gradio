@@ -23,6 +23,7 @@ namespace Gradio{
 		private string _uri;
 		private bool _pulse;
 		private int64 _mtime;
+		private string _secondary_text;
 
 		private Cairo.Surface _icon;
 		private Thumbnail _thumbnail;
@@ -48,7 +49,9 @@ namespace Gradio{
 		}
 
 		public string secondary_text {
-			get{return "";}
+			get{
+				return _secondary_text;
+			}
 		}
 
 		public bool pulse {
@@ -92,11 +95,15 @@ namespace Gradio{
 		}
 
 		public void add_station(RadioStation station){
-			station_model.add_station(station);
+			station_model.add_item(station);
+			_secondary_text = station_model.get_n_items().to_string() + " Items";
+			notify_property("secondary-text");
 		}
 
 		public void remove_station(RadioStation station){
-			station_model.remove_station(station);
+			station_model.add_item(station);
+			_secondary_text = station_model.get_n_items().to_string() + " Items";
+			notify_property("secondary-text");
 		}
 	}
 }
