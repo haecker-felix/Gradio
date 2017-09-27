@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-10 14:34+0200\n"
+"POT-Creation-Date: 2017-09-27 16:55+0200\n"
 "PO-Revision-Date: 2017-09-13 14:06+0000\n"
 "Last-Translator: Slobodan Terzić <githzerai06@gmail.com>\n"
 "Language-Team: Serbian <https://hosted.weblate.org/projects/gradio/"
@@ -31,55 +31,12 @@ msgstr "О програму"
 msgid "Quit"
 msgstr "Напусти"
 
-#: data/ui/filter-box.ui:27
-msgid "Where"
-msgstr "Где"
-
-#: data/ui/filter-box.ui:44
-msgid "Select Country ..."
-msgstr "Изаберите земљу ..."
-
-#: data/ui/filter-box.ui:125
-msgid "Select State  ..."
-msgstr "Изаберите државу ..."
-
-#: data/ui/filter-box.ui:205 data/ui/station-editor.ui:211
-msgid "Language"
-msgstr "Језик"
-
-#: data/ui/filter-box.ui:222
-msgid "Select Language  ..."
-msgstr "Изаберите језик ..."
-
-#: data/ui/page/add-page.ui:45
-msgid "Fill your library with something new"
-msgstr "Попуните библиотеку нечим новим"
-
-#: data/ui/page/add-page.ui:64
-msgid "There are several options available to add something new."
-msgstr "Доступно је неколико опција да би додали нешто ново."
-
-#: data/ui/page/library-page.ui:44
-msgid "Your library is empty"
-msgstr "Ваша библиотека је празна"
-
-#: data/ui/page/library-page.ui:62
-msgid "If you add stations to the library, you will find them here."
-msgstr "Овде ћете пронаћи станице које додате у библиотеку."
-
-#: data/ui/page/collections-page.ui:43
-msgid "You don't have any collection"
-msgstr "Немате никакву збирку"
-
-#: data/ui/page/collections-page.ui:61
-msgid "You can group stations into collections."
-msgstr "Можете груписати станице у збирке."
-
 #: data/ui/details-box.ui:23 data/ui/selection-toolbar.ui:151
 msgid "Details"
 msgstr "Детаљи"
 
-#: data/ui/details-box.ui:137 data/ui/station-editor.ui:125
+#: data/ui/details-box.ui:137 data/ui/headerbar.ui:171
+#: data/ui/station-editor.ui:125
 msgid "Name"
 msgstr "Име"
 
@@ -115,6 +72,87 @@ msgstr "Отвори домаћу страницу"
 msgid "Edit"
 msgstr "Уреди"
 
+#: data/ui/groupbox.ui:20 data/ui/item/button-item.ui:24
+#: data/ui/item/switch-item.ui:24
+msgid "Title"
+msgstr ""
+
+#: data/ui/headerbar.ui:85
+msgid "Sort Descending"
+msgstr ""
+
+#: data/ui/headerbar.ui:107
+msgid "Sort Ascending"
+msgstr ""
+
+#: data/ui/headerbar.ui:139
+msgid "Sort"
+msgstr ""
+
+#: data/ui/headerbar.ui:152
+msgid "Votes"
+msgstr ""
+
+#: data/ui/headerbar.ui:187 data/ui/searchbar.ui:205
+#: data/ui/station-editor.ui:211
+msgid "Language"
+msgstr "Језик"
+
+#: data/ui/headerbar.ui:203 data/ui/station-editor.ui:181
+msgid "Country"
+msgstr "Земља"
+
+#: data/ui/headerbar.ui:219 data/ui/station-editor.ui:196
+msgid "State"
+msgstr "Држава"
+
+#: data/ui/headerbar.ui:235
+msgid "Bitrate"
+msgstr ""
+
+#: data/ui/headerbar.ui:251
+msgid "Clicks"
+msgstr ""
+
+#: data/ui/headerbar.ui:267
+msgid "Date"
+msgstr ""
+
+#: data/ui/headerbar.ui:369 src/gradio-settings-window.vala:45
+msgid "Library"
+msgstr "Библиотека"
+
+#: data/ui/headerbar.ui:382 data/ui/selection-toolbar.ui:135
+msgid "Collections"
+msgstr "Збирке"
+
+#: data/ui/headerbar.ui:412 data/ui/status-icon.ui:114
+msgid "label"
+msgstr ""
+
+#: data/ui/headerbar.ui:566 data/ui/organize-collection-dialog.ui:192
+#: data/ui/station-editor.ui:501
+msgid "Cancel"
+msgstr "Откажи"
+
+#: data/ui/item/button-item.ui:36 data/ui/item/switch-item.ui:36
+msgid "Subtitle"
+msgstr ""
+
+#: data/ui/main-window.ui:9
+msgid "Gradio"
+msgstr ""
+
+#: data/ui/main-window.ui:128
+#, fuzzy
+msgid "Notification Text"
+msgstr "Обавештења"
+
+#: data/ui/main-window.ui:138
+#, fuzzy
+msgid "Action"
+msgstr "Локација"
+
 #: data/ui/organize-collection-dialog.ui:21
 #: data/ui/organize-collection-dialog.ui:107
 msgid "New Collection…"
@@ -130,9 +168,54 @@ msgstr "Додај"
 msgid "Enter a name for your first collection"
 msgstr "Унесите име ваше прве збирке"
 
-#: data/ui/organize-collection-dialog.ui:192 data/ui/station-editor.ui:501
-msgid "Cancel"
-msgstr "Откажи"
+#: data/ui/page/add-page.ui:45
+msgid "Fill your library with something new"
+msgstr "Попуните библиотеку нечим новим"
+
+#: data/ui/page/add-page.ui:64
+msgid "There are several options available to add something new."
+msgstr "Доступно је неколико опција да би додали нешто ново."
+
+#: data/ui/page/collections-page.ui:43
+msgid "You don't have any collection"
+msgstr "Немате никакву збирку"
+
+#: data/ui/page/collections-page.ui:61
+msgid "You can group stations into collections."
+msgstr "Можете груписати станице у збирке."
+
+#: data/ui/page/library-page.ui:44
+msgid "Your library is empty"
+msgstr "Ваша библиотека је празна"
+
+#: data/ui/page/library-page.ui:62
+msgid "If you add stations to the library, you will find them here."
+msgstr "Овде ћете пронаћи станице које додате у библиотеку."
+
+#: data/ui/page/search-page.ui:127
+msgid "No results found"
+msgstr "Нису нађени резултати"
+
+#: data/ui/page/search-page.ui:145
+msgid ""
+"Either the station does not exist, or you have to search with other keywords."
+msgstr "Или станица не постоји, или морате употребити друге кључне речи."
+
+#: data/ui/searchbar.ui:27
+msgid "Where"
+msgstr "Где"
+
+#: data/ui/searchbar.ui:44
+msgid "Select Country ..."
+msgstr "Изаберите земљу ..."
+
+#: data/ui/searchbar.ui:125
+msgid "Select State  ..."
+msgstr "Изаберите државу ..."
+
+#: data/ui/searchbar.ui:222
+msgid "Select Language  ..."
+msgstr "Изаберите језик ..."
 
 #: data/ui/selection-menu.ui:7
 msgid "Select All"
@@ -149,10 +232,6 @@ msgstr "Додај у збирку"
 #: data/ui/selection-toolbar.ui:46
 msgid "Remove"
 msgstr "Уклони"
-
-#: data/ui/selection-toolbar.ui:135
-msgid "Collections"
-msgstr "Збирке"
 
 #: data/ui/station-editor.ui:39
 msgid "Global database"
@@ -179,14 +258,6 @@ msgstr "Адреса тока"
 msgid "Homepage"
 msgstr "Домаћа страница"
 
-#: data/ui/station-editor.ui:181
-msgid "Country"
-msgstr "Земља"
-
-#: data/ui/station-editor.ui:196
-msgid "State"
-msgstr "Држава"
-
 #: data/ui/station-editor.ui:291
 msgid "Favicon Address"
 msgstr "Адреса фавиконе"
@@ -203,14 +274,19 @@ msgstr "Затвори"
 msgid "Done"
 msgstr "Готово"
 
-#: data/ui/page/search-page.ui:127
-msgid "No results found"
-msgstr "Нису нађени резултати"
+#: data/ui/status-icon.ui:9
+msgid "Connection information"
+msgstr ""
 
-#: data/ui/page/search-page.ui:145
-msgid ""
-"Either the station does not exist, or you have to search with other keywords."
-msgstr "Или станица не постоји, или морате употребити друге кључне речи."
+#: data/ui/status-icon.ui:34
+#, fuzzy
+msgid "page0"
+msgstr "Домаћа страница"
+
+#: data/ui/status-icon.ui:45
+#, fuzzy
+msgid "page2"
+msgstr "Домаћа страница"
 
 #: src/gradio-settings-window.vala:39
 msgid "Features"
@@ -219,10 +295,6 @@ msgstr "Могућности"
 #: src/gradio-settings-window.vala:42
 msgid "Playback"
 msgstr "Пуштање"
-
-#: src/gradio-settings-window.vala:45
-msgid "Library"
-msgstr "Библиотека"
 
 #: src/gradio-settings-window.vala:48
 msgid "Appearance"

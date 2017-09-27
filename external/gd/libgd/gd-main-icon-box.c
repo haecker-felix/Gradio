@@ -2,16 +2,16 @@
  * Copyright (c) 2016, 2017 Red Hat, Inc.
  *
  * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by 
+ * it under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or (at your
  * option) any later version.
  *
  * This program is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
- * or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public 
+ * or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public
  * License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public License 
+ * You should have received a copy of the GNU Lesser General Public License
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
@@ -386,8 +386,8 @@ gd_main_icon_box_button_release_event (GtkWidget *widget, GdkEventButton *event)
     }
 
   if (!priv->selection_mode &&
-      (event->button == GDK_BUTTON_PRIMARY && (event->state & GDK_CONTROL_MASK) != 0 ||
-       event->button == GDK_BUTTON_SECONDARY))
+      (event->button == GDK_BUTTON_PRIMARY && (((event->state & GDK_CONTROL_MASK) != 0) ||
+       event->button == GDK_BUTTON_SECONDARY)))
     {
       g_signal_emit_by_name (self, "selection-mode-request");
       initiating = TRUE;
@@ -595,7 +595,6 @@ gd_main_icon_box_drag_data_get (GtkWidget *widget,
   GdMainIconBox *self = GD_MAIN_ICON_BOX (widget);
   GdMainIconBoxPrivate *priv;
   GPtrArray *uri_array = NULL;
-  gchar **uris = NULL;
 
   priv = gd_main_icon_box_get_instance_private (self);
 

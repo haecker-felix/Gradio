@@ -7,11 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-10 14:34+0200\n"
+"POT-Creation-Date: 2017-09-27 16:55+0200\n"
 "PO-Revision-Date: 2017-09-25 14:25+0000\n"
 "Last-Translator: sispus <eylem.akcay@gmail.com>\n"
-"Language-Team: Turkish "
-"<https://hosted.weblate.org/projects/gradio/translations/tr/>\n"
+"Language-Team: Turkish <https://hosted.weblate.org/projects/gradio/"
+"translations/tr/>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -31,56 +31,12 @@ msgstr "Hakkında"
 msgid "Quit"
 msgstr "Çık"
 
-#: data/ui/filter-box.ui:27
-msgid "Where"
-msgstr "Konum"
-
-#: data/ui/filter-box.ui:44
-msgid "Select Country ..."
-msgstr "Ülke Seçin ..."
-
-#: data/ui/filter-box.ui:125
-msgid "Select State  ..."
-msgstr "Bölge Seçin ..."
-
-#: data/ui/filter-box.ui:205 data/ui/station-editor.ui:211
-msgid "Language"
-msgstr "Dil"
-
-#: data/ui/filter-box.ui:222
-msgid "Select Language  ..."
-msgstr "Dil Seçin ..."
-
-#: data/ui/page/add-page.ui:45
-msgid "Fill your library with something new"
-msgstr "Kütüphanenize yeni bir şeyler ekleyin"
-
-#: data/ui/page/add-page.ui:64
-msgid "There are several options available to add something new."
-msgstr "Yeni şeyler eklemek için kullanabileceğiniz bir kaç seçenek var."
-
-#: data/ui/page/library-page.ui:44
-msgid "Your library is empty"
-msgstr "Kütüphaneniz boş"
-
-#: data/ui/page/library-page.ui:62
-msgid "If you add stations to the library, you will find them here."
-msgstr "Kütüphanenize eklediğiniz istasyonları burada görürsünüz."
-
-#: data/ui/page/collections-page.ui:43
-#, fuzzy
-msgid "You don't have any collection"
-msgstr "Koleksiyon oluşturmamışsınız."
-
-#: data/ui/page/collections-page.ui:61
-msgid "You can group stations into collections."
-msgstr "İstasyonları koleksiyonlar içinde gruplayabilirsiniz."
-
 #: data/ui/details-box.ui:23 data/ui/selection-toolbar.ui:151
 msgid "Details"
 msgstr "İstasyon bilgisi"
 
-#: data/ui/details-box.ui:137 data/ui/station-editor.ui:125
+#: data/ui/details-box.ui:137 data/ui/headerbar.ui:171
+#: data/ui/station-editor.ui:125
 msgid "Name"
 msgstr "İstasyon adı"
 
@@ -117,6 +73,87 @@ msgstr "İstasyon anasayfasına git"
 msgid "Edit"
 msgstr "Düzenle"
 
+#: data/ui/groupbox.ui:20 data/ui/item/button-item.ui:24
+#: data/ui/item/switch-item.ui:24
+msgid "Title"
+msgstr ""
+
+#: data/ui/headerbar.ui:85
+msgid "Sort Descending"
+msgstr ""
+
+#: data/ui/headerbar.ui:107
+msgid "Sort Ascending"
+msgstr ""
+
+#: data/ui/headerbar.ui:139
+msgid "Sort"
+msgstr ""
+
+#: data/ui/headerbar.ui:152
+msgid "Votes"
+msgstr ""
+
+#: data/ui/headerbar.ui:187 data/ui/searchbar.ui:205
+#: data/ui/station-editor.ui:211
+msgid "Language"
+msgstr "Dil"
+
+#: data/ui/headerbar.ui:203 data/ui/station-editor.ui:181
+msgid "Country"
+msgstr "Ülke"
+
+#: data/ui/headerbar.ui:219 data/ui/station-editor.ui:196
+msgid "State"
+msgstr "Bölge/Eyalet"
+
+#: data/ui/headerbar.ui:235
+msgid "Bitrate"
+msgstr ""
+
+#: data/ui/headerbar.ui:251
+msgid "Clicks"
+msgstr ""
+
+#: data/ui/headerbar.ui:267
+msgid "Date"
+msgstr ""
+
+#: data/ui/headerbar.ui:369 src/gradio-settings-window.vala:45
+msgid "Library"
+msgstr "Kütüphane"
+
+#: data/ui/headerbar.ui:382 data/ui/selection-toolbar.ui:135
+msgid "Collections"
+msgstr "Koleksiyonlar"
+
+#: data/ui/headerbar.ui:412 data/ui/status-icon.ui:114
+msgid "label"
+msgstr ""
+
+#: data/ui/headerbar.ui:566 data/ui/organize-collection-dialog.ui:192
+#: data/ui/station-editor.ui:501
+msgid "Cancel"
+msgstr "Vazgeç"
+
+#: data/ui/item/button-item.ui:36 data/ui/item/switch-item.ui:36
+msgid "Subtitle"
+msgstr ""
+
+#: data/ui/main-window.ui:9
+msgid "Gradio"
+msgstr ""
+
+#: data/ui/main-window.ui:128
+#, fuzzy
+msgid "Notification Text"
+msgstr "Bildirimler"
+
+#: data/ui/main-window.ui:138
+#, fuzzy
+msgid "Action"
+msgstr "İstasyonun konumu"
+
 #: data/ui/organize-collection-dialog.ui:21
 #: data/ui/organize-collection-dialog.ui:107
 msgid "New Collection…"
@@ -132,9 +169,55 @@ msgstr "Ekle"
 msgid "Enter a name for your first collection"
 msgstr "İlk koleksiyonunuza bir isim verin"
 
-#: data/ui/organize-collection-dialog.ui:192 data/ui/station-editor.ui:501
-msgid "Cancel"
-msgstr "Vazgeç"
+#: data/ui/page/add-page.ui:45
+msgid "Fill your library with something new"
+msgstr "Kütüphanenize yeni bir şeyler ekleyin"
+
+#: data/ui/page/add-page.ui:64
+msgid "There are several options available to add something new."
+msgstr "Yeni şeyler eklemek için kullanabileceğiniz bir kaç seçenek var."
+
+#: data/ui/page/collections-page.ui:43
+#, fuzzy
+msgid "You don't have any collection"
+msgstr "Koleksiyon oluşturmamışsınız."
+
+#: data/ui/page/collections-page.ui:61
+msgid "You can group stations into collections."
+msgstr "İstasyonları koleksiyonlar içinde gruplayabilirsiniz."
+
+#: data/ui/page/library-page.ui:44
+msgid "Your library is empty"
+msgstr "Kütüphaneniz boş"
+
+#: data/ui/page/library-page.ui:62
+msgid "If you add stations to the library, you will find them here."
+msgstr "Kütüphanenize eklediğiniz istasyonları burada görürsünüz."
+
+#: data/ui/page/search-page.ui:127
+msgid "No results found"
+msgstr "Sonuç bulunamadı"
+
+#: data/ui/page/search-page.ui:145
+msgid ""
+"Either the station does not exist, or you have to search with other keywords."
+msgstr "İstasyon mevcut değil, veya başka anahtar kelimelerle arayın."
+
+#: data/ui/searchbar.ui:27
+msgid "Where"
+msgstr "Konum"
+
+#: data/ui/searchbar.ui:44
+msgid "Select Country ..."
+msgstr "Ülke Seçin ..."
+
+#: data/ui/searchbar.ui:125
+msgid "Select State  ..."
+msgstr "Bölge Seçin ..."
+
+#: data/ui/searchbar.ui:222
+msgid "Select Language  ..."
+msgstr "Dil Seçin ..."
 
 #: data/ui/selection-menu.ui:7
 msgid "Select All"
@@ -151,10 +234,6 @@ msgstr "Kütüphaneye ekle"
 #: data/ui/selection-toolbar.ui:46
 msgid "Remove"
 msgstr "Kaldır"
-
-#: data/ui/selection-toolbar.ui:135
-msgid "Collections"
-msgstr "Koleksiyonlar"
 
 #: data/ui/station-editor.ui:39
 msgid "Global database"
@@ -182,14 +261,6 @@ msgstr "Yayın Adresi"
 msgid "Homepage"
 msgstr "Anasayfa"
 
-#: data/ui/station-editor.ui:181
-msgid "Country"
-msgstr "Ülke"
-
-#: data/ui/station-editor.ui:196
-msgid "State"
-msgstr "Bölge/Eyalet"
-
 #: data/ui/station-editor.ui:291
 msgid "Favicon Address"
 msgstr "Simge (Favicon) Adresi"
@@ -206,14 +277,19 @@ msgstr "Kapat"
 msgid "Done"
 msgstr "Tamam"
 
-#: data/ui/page/search-page.ui:127
-msgid "No results found"
-msgstr "Sonuç bulunamadı"
+#: data/ui/status-icon.ui:9
+msgid "Connection information"
+msgstr ""
 
-#: data/ui/page/search-page.ui:145
-msgid ""
-"Either the station does not exist, or you have to search with other keywords."
-msgstr "İstasyon mevcut değil, veya başka anahtar kelimelerle arayın."
+#: data/ui/status-icon.ui:34
+#, fuzzy
+msgid "page0"
+msgstr "Anasayfa"
+
+#: data/ui/status-icon.ui:45
+#, fuzzy
+msgid "page2"
+msgstr "Anasayfa"
 
 #: src/gradio-settings-window.vala:39
 msgid "Features"
@@ -223,10 +299,6 @@ msgstr "Özellikler"
 #, fuzzy
 msgid "Playback"
 msgstr "Dinle"
-
-#: src/gradio-settings-window.vala:45
-msgid "Library"
-msgstr "Kütüphane"
 
 #: src/gradio-settings-window.vala:48
 msgid "Appearance"

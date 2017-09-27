@@ -6,17 +6,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-10 14:34+0200\n"
+"POT-Creation-Date: 2017-09-27 16:55+0200\n"
 "PO-Revision-Date: 2017-09-15 16:58+0000\n"
 "Last-Translator: gogogogi <trebelnik2@gmail.com>\n"
-"Language-Team: Croatian "
-"<https://hosted.weblate.org/projects/gradio/translations/hr/>\n"
+"Language-Team: Croatian <https://hosted.weblate.org/projects/gradio/"
+"translations/hr/>\n"
 "Language: hr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<="
-"4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 2.17-dev\n"
 
 #: data/ui/app-menu.ui:6
@@ -31,55 +31,12 @@ msgstr "O programu"
 msgid "Quit"
 msgstr "Zatvori"
 
-#: data/ui/filter-box.ui:27
-msgid "Where"
-msgstr "Gdje"
-
-#: data/ui/filter-box.ui:44
-msgid "Select Country ..."
-msgstr "Odaberi zemlju ..."
-
-#: data/ui/filter-box.ui:125
-msgid "Select State  ..."
-msgstr "Odaberi državu  ..."
-
-#: data/ui/filter-box.ui:205 data/ui/station-editor.ui:211
-msgid "Language"
-msgstr "Jezik"
-
-#: data/ui/filter-box.ui:222
-msgid "Select Language  ..."
-msgstr "Odaberi jezik  ..."
-
-#: data/ui/page/add-page.ui:45
-msgid "Fill your library with something new"
-msgstr "Popunite svoju fonoteku s nečim novim"
-
-#: data/ui/page/add-page.ui:64
-msgid "There are several options available to add something new."
-msgstr "Dostupno je nekoliko mogućnosti za dodavanje nečeg novog."
-
-#: data/ui/page/library-page.ui:44
-msgid "Your library is empty"
-msgstr "Vaša fonoteka je prazna"
-
-#: data/ui/page/library-page.ui:62
-msgid "If you add stations to the library, you will find them here."
-msgstr "Ako dodate stanicu u fonoteku, pronaći ćete ju ovdje."
-
-#: data/ui/page/collections-page.ui:43
-msgid "You don't have any collection"
-msgstr "Još nemate kolekcija"
-
-#: data/ui/page/collections-page.ui:61
-msgid "You can group stations into collections."
-msgstr "Možete grupirati stanice u kolekcije."
-
 #: data/ui/details-box.ui:23 data/ui/selection-toolbar.ui:151
 msgid "Details"
 msgstr "Pojedinosti"
 
-#: data/ui/details-box.ui:137 data/ui/station-editor.ui:125
+#: data/ui/details-box.ui:137 data/ui/headerbar.ui:171
+#: data/ui/station-editor.ui:125
 msgid "Name"
 msgstr "Naziv"
 
@@ -115,6 +72,87 @@ msgstr "Otvori naslovnu stranicu"
 msgid "Edit"
 msgstr "Uredi"
 
+#: data/ui/groupbox.ui:20 data/ui/item/button-item.ui:24
+#: data/ui/item/switch-item.ui:24
+msgid "Title"
+msgstr ""
+
+#: data/ui/headerbar.ui:85
+msgid "Sort Descending"
+msgstr ""
+
+#: data/ui/headerbar.ui:107
+msgid "Sort Ascending"
+msgstr ""
+
+#: data/ui/headerbar.ui:139
+msgid "Sort"
+msgstr ""
+
+#: data/ui/headerbar.ui:152
+msgid "Votes"
+msgstr ""
+
+#: data/ui/headerbar.ui:187 data/ui/searchbar.ui:205
+#: data/ui/station-editor.ui:211
+msgid "Language"
+msgstr "Jezik"
+
+#: data/ui/headerbar.ui:203 data/ui/station-editor.ui:181
+msgid "Country"
+msgstr "Zemlja"
+
+#: data/ui/headerbar.ui:219 data/ui/station-editor.ui:196
+msgid "State"
+msgstr "Država"
+
+#: data/ui/headerbar.ui:235
+msgid "Bitrate"
+msgstr ""
+
+#: data/ui/headerbar.ui:251
+msgid "Clicks"
+msgstr ""
+
+#: data/ui/headerbar.ui:267
+msgid "Date"
+msgstr ""
+
+#: data/ui/headerbar.ui:369 src/gradio-settings-window.vala:45
+msgid "Library"
+msgstr "Fonoteka"
+
+#: data/ui/headerbar.ui:382 data/ui/selection-toolbar.ui:135
+msgid "Collections"
+msgstr "Kolekcije"
+
+#: data/ui/headerbar.ui:412 data/ui/status-icon.ui:114
+msgid "label"
+msgstr ""
+
+#: data/ui/headerbar.ui:566 data/ui/organize-collection-dialog.ui:192
+#: data/ui/station-editor.ui:501
+msgid "Cancel"
+msgstr "Odustani"
+
+#: data/ui/item/button-item.ui:36 data/ui/item/switch-item.ui:36
+msgid "Subtitle"
+msgstr ""
+
+#: data/ui/main-window.ui:9
+msgid "Gradio"
+msgstr ""
+
+#: data/ui/main-window.ui:128
+#, fuzzy
+msgid "Notification Text"
+msgstr "Obavijesti"
+
+#: data/ui/main-window.ui:138
+#, fuzzy
+msgid "Action"
+msgstr "Lokacija"
+
 #: data/ui/organize-collection-dialog.ui:21
 #: data/ui/organize-collection-dialog.ui:107
 msgid "New Collection…"
@@ -130,9 +168,54 @@ msgstr "Dodaj"
 msgid "Enter a name for your first collection"
 msgstr "Upišite naziv svoje prve kolekcije"
 
-#: data/ui/organize-collection-dialog.ui:192 data/ui/station-editor.ui:501
-msgid "Cancel"
-msgstr "Odustani"
+#: data/ui/page/add-page.ui:45
+msgid "Fill your library with something new"
+msgstr "Popunite svoju fonoteku s nečim novim"
+
+#: data/ui/page/add-page.ui:64
+msgid "There are several options available to add something new."
+msgstr "Dostupno je nekoliko mogućnosti za dodavanje nečeg novog."
+
+#: data/ui/page/collections-page.ui:43
+msgid "You don't have any collection"
+msgstr "Još nemate kolekcija"
+
+#: data/ui/page/collections-page.ui:61
+msgid "You can group stations into collections."
+msgstr "Možete grupirati stanice u kolekcije."
+
+#: data/ui/page/library-page.ui:44
+msgid "Your library is empty"
+msgstr "Vaša fonoteka je prazna"
+
+#: data/ui/page/library-page.ui:62
+msgid "If you add stations to the library, you will find them here."
+msgstr "Ako dodate stanicu u fonoteku, pronaći ćete ju ovdje."
+
+#: data/ui/page/search-page.ui:127
+msgid "No results found"
+msgstr "Nema pronađenih rezultata"
+
+#: data/ui/page/search-page.ui:145
+msgid ""
+"Either the station does not exist, or you have to search with other keywords."
+msgstr "Ili stanica ne postoji, ili ju potražite s drugim izrazom pretrage."
+
+#: data/ui/searchbar.ui:27
+msgid "Where"
+msgstr "Gdje"
+
+#: data/ui/searchbar.ui:44
+msgid "Select Country ..."
+msgstr "Odaberi zemlju ..."
+
+#: data/ui/searchbar.ui:125
+msgid "Select State  ..."
+msgstr "Odaberi državu  ..."
+
+#: data/ui/searchbar.ui:222
+msgid "Select Language  ..."
+msgstr "Odaberi jezik  ..."
 
 #: data/ui/selection-menu.ui:7
 msgid "Select All"
@@ -149,10 +232,6 @@ msgstr "Dodaj u fonoteku"
 #: data/ui/selection-toolbar.ui:46
 msgid "Remove"
 msgstr "Ukloni"
-
-#: data/ui/selection-toolbar.ui:135
-msgid "Collections"
-msgstr "Kolekcije"
 
 #: data/ui/station-editor.ui:39
 msgid "Global database"
@@ -180,14 +259,6 @@ msgstr "Adresa streama"
 msgid "Homepage"
 msgstr "Naslovna stranica"
 
-#: data/ui/station-editor.ui:181
-msgid "Country"
-msgstr "Zemlja"
-
-#: data/ui/station-editor.ui:196
-msgid "State"
-msgstr "Država"
-
 #: data/ui/station-editor.ui:291
 msgid "Favicon Address"
 msgstr "Adresa favikone"
@@ -204,14 +275,19 @@ msgstr "Zatvori"
 msgid "Done"
 msgstr "Učinjeno"
 
-#: data/ui/page/search-page.ui:127
-msgid "No results found"
-msgstr "Nema pronađenih rezultata"
+#: data/ui/status-icon.ui:9
+msgid "Connection information"
+msgstr ""
 
-#: data/ui/page/search-page.ui:145
-msgid ""
-"Either the station does not exist, or you have to search with other keywords."
-msgstr "Ili stanica ne postoji, ili ju potražite s drugim izrazom pretrage."
+#: data/ui/status-icon.ui:34
+#, fuzzy
+msgid "page0"
+msgstr "Naslovna stranica"
+
+#: data/ui/status-icon.ui:45
+#, fuzzy
+msgid "page2"
+msgstr "Naslovna stranica"
 
 #: src/gradio-settings-window.vala:39
 msgid "Features"
@@ -220,10 +296,6 @@ msgstr "Značajke"
 #: src/gradio-settings-window.vala:42
 msgid "Playback"
 msgstr "Reprodukcija"
-
-#: src/gradio-settings-window.vala:45
-msgid "Library"
-msgstr "Fonoteka"
 
 #: src/gradio-settings-window.vala:48
 msgid "Appearance"

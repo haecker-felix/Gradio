@@ -172,8 +172,6 @@ gd_main_icon_box_icon_size_allocate (GtkWidget *widget, GtkAllocation *allocatio
   gint scale_factor;
   gint width_scaled;
   gint width_zoomed_scaled;
-  gint x_scaled;
-  gint y_scaled;
 
   GTK_WIDGET_CLASS (gd_main_icon_box_icon_parent_class)->size_allocate (widget, allocation);
 
