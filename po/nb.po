@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-10 14:34+0200\n"
+"POT-Creation-Date: 2017-09-27 16:55+0200\n"
 "PO-Revision-Date: 2017-09-10 10:35+0000\n"
 "Last-Translator: Bjørn Lie <bjorn.lie@gmail.com>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/gradio/"
@@ -31,56 +31,12 @@ msgstr "Om"
 msgid "Quit"
 msgstr "Avslutt"
 
-#: data/ui/filter-box.ui:27
-msgid "Where"
-msgstr "Hvor"
-
-#: data/ui/filter-box.ui:44
-msgid "Select Country ..."
-msgstr "Velg land ..."
-
-#: data/ui/filter-box.ui:125
-msgid "Select State  ..."
-msgstr "Velg stat ..."
-
-#: data/ui/filter-box.ui:205 data/ui/station-editor.ui:211
-msgid "Language"
-msgstr "Språk"
-
-#: data/ui/filter-box.ui:222
-msgid "Select Language  ..."
-msgstr "Velg språk ..."
-
-#: data/ui/page/add-page.ui:45
-msgid "Fill your library with something new"
-msgstr "Fyll biblioteket ditt med noe nytt"
-
-#: data/ui/page/add-page.ui:64
-msgid "There are several options available to add something new."
-msgstr "Det finnes flere muligheter for å legge til noe nytt."
-
-#: data/ui/page/library-page.ui:44
-msgid "Your library is empty"
-msgstr "Biblioteket ditt er tomt"
-
-#: data/ui/page/library-page.ui:62
-msgid "If you add stations to the library, you will find them here."
-msgstr ""
-"Hvis du legger til stasjoner til i biblioteket, vil du finne disse her."
-
-#: data/ui/page/collections-page.ui:43
-msgid "You don't have any collection"
-msgstr "Du har ingen samlinger"
-
-#: data/ui/page/collections-page.ui:61
-msgid "You can group stations into collections."
-msgstr "Du kan gruppere stasjoner i samlinger."
-
 #: data/ui/details-box.ui:23 data/ui/selection-toolbar.ui:151
 msgid "Details"
 msgstr "Detaljer"
 
-#: data/ui/details-box.ui:137 data/ui/station-editor.ui:125
+#: data/ui/details-box.ui:137 data/ui/headerbar.ui:171
+#: data/ui/station-editor.ui:125
 msgid "Name"
 msgstr "Navn"
 
@@ -116,6 +72,87 @@ msgstr "Åpne hjemmeside"
 msgid "Edit"
 msgstr "Rediger"
 
+#: data/ui/groupbox.ui:20 data/ui/item/button-item.ui:24
+#: data/ui/item/switch-item.ui:24
+msgid "Title"
+msgstr ""
+
+#: data/ui/headerbar.ui:85
+msgid "Sort Descending"
+msgstr ""
+
+#: data/ui/headerbar.ui:107
+msgid "Sort Ascending"
+msgstr ""
+
+#: data/ui/headerbar.ui:139
+msgid "Sort"
+msgstr ""
+
+#: data/ui/headerbar.ui:152
+msgid "Votes"
+msgstr ""
+
+#: data/ui/headerbar.ui:187 data/ui/searchbar.ui:205
+#: data/ui/station-editor.ui:211
+msgid "Language"
+msgstr "Språk"
+
+#: data/ui/headerbar.ui:203 data/ui/station-editor.ui:181
+msgid "Country"
+msgstr "Land"
+
+#: data/ui/headerbar.ui:219 data/ui/station-editor.ui:196
+msgid "State"
+msgstr "Stat"
+
+#: data/ui/headerbar.ui:235
+msgid "Bitrate"
+msgstr ""
+
+#: data/ui/headerbar.ui:251
+msgid "Clicks"
+msgstr ""
+
+#: data/ui/headerbar.ui:267
+msgid "Date"
+msgstr ""
+
+#: data/ui/headerbar.ui:369 src/gradio-settings-window.vala:45
+msgid "Library"
+msgstr "Bibliotek"
+
+#: data/ui/headerbar.ui:382 data/ui/selection-toolbar.ui:135
+msgid "Collections"
+msgstr "Samlinger"
+
+#: data/ui/headerbar.ui:412 data/ui/status-icon.ui:114
+msgid "label"
+msgstr ""
+
+#: data/ui/headerbar.ui:566 data/ui/organize-collection-dialog.ui:192
+#: data/ui/station-editor.ui:501
+msgid "Cancel"
+msgstr "Avbryt"
+
+#: data/ui/item/button-item.ui:36 data/ui/item/switch-item.ui:36
+msgid "Subtitle"
+msgstr ""
+
+#: data/ui/main-window.ui:9
+msgid "Gradio"
+msgstr ""
+
+#: data/ui/main-window.ui:128
+#, fuzzy
+msgid "Notification Text"
+msgstr "Varsler"
+
+#: data/ui/main-window.ui:138
+#, fuzzy
+msgid "Action"
+msgstr "Plassering"
+
 #: data/ui/organize-collection-dialog.ui:21
 #: data/ui/organize-collection-dialog.ui:107
 msgid "New Collection…"
@@ -131,9 +168,55 @@ msgstr "Legg til"
 msgid "Enter a name for your first collection"
 msgstr "Skriv inn et navn på din første samling"
 
-#: data/ui/organize-collection-dialog.ui:192 data/ui/station-editor.ui:501
-msgid "Cancel"
-msgstr "Avbryt"
+#: data/ui/page/add-page.ui:45
+msgid "Fill your library with something new"
+msgstr "Fyll biblioteket ditt med noe nytt"
+
+#: data/ui/page/add-page.ui:64
+msgid "There are several options available to add something new."
+msgstr "Det finnes flere muligheter for å legge til noe nytt."
+
+#: data/ui/page/collections-page.ui:43
+msgid "You don't have any collection"
+msgstr "Du har ingen samlinger"
+
+#: data/ui/page/collections-page.ui:61
+msgid "You can group stations into collections."
+msgstr "Du kan gruppere stasjoner i samlinger."
+
+#: data/ui/page/library-page.ui:44
+msgid "Your library is empty"
+msgstr "Biblioteket ditt er tomt"
+
+#: data/ui/page/library-page.ui:62
+msgid "If you add stations to the library, you will find them here."
+msgstr ""
+"Hvis du legger til stasjoner til i biblioteket, vil du finne disse her."
+
+#: data/ui/page/search-page.ui:127
+msgid "No results found"
+msgstr ""
+
+#: data/ui/page/search-page.ui:145
+msgid ""
+"Either the station does not exist, or you have to search with other keywords."
+msgstr ""
+
+#: data/ui/searchbar.ui:27
+msgid "Where"
+msgstr "Hvor"
+
+#: data/ui/searchbar.ui:44
+msgid "Select Country ..."
+msgstr "Velg land ..."
+
+#: data/ui/searchbar.ui:125
+msgid "Select State  ..."
+msgstr "Velg stat ..."
+
+#: data/ui/searchbar.ui:222
+msgid "Select Language  ..."
+msgstr "Velg språk ..."
 
 #: data/ui/selection-menu.ui:7
 msgid "Select All"
@@ -150,10 +233,6 @@ msgstr "Legg til i bibliotek"
 #: data/ui/selection-toolbar.ui:46
 msgid "Remove"
 msgstr "Fjern"
-
-#: data/ui/selection-toolbar.ui:135
-msgid "Collections"
-msgstr "Samlinger"
 
 #: data/ui/station-editor.ui:39
 msgid "Global database"
@@ -182,14 +261,6 @@ msgstr "Strøm adresse"
 msgid "Homepage"
 msgstr "Hjemmeside"
 
-#: data/ui/station-editor.ui:181
-msgid "Country"
-msgstr "Land"
-
-#: data/ui/station-editor.ui:196
-msgid "State"
-msgstr "Stat"
-
 #: data/ui/station-editor.ui:291
 msgid "Favicon Address"
 msgstr "Favorittikon adresse"
@@ -206,14 +277,19 @@ msgstr "Lukk"
 msgid "Done"
 msgstr "Ferdig"
 
-#: data/ui/page/search-page.ui:127
-msgid "No results found"
+#: data/ui/status-icon.ui:9
+msgid "Connection information"
 msgstr ""
 
-#: data/ui/page/search-page.ui:145
-msgid ""
-"Either the station does not exist, or you have to search with other keywords."
-msgstr ""
+#: data/ui/status-icon.ui:34
+#, fuzzy
+msgid "page0"
+msgstr "Hjemmeside"
+
+#: data/ui/status-icon.ui:45
+#, fuzzy
+msgid "page2"
+msgstr "Hjemmeside"
 
 #: src/gradio-settings-window.vala:39
 msgid "Features"
@@ -222,10 +298,6 @@ msgstr "Egenskaper"
 #: src/gradio-settings-window.vala:42
 msgid "Playback"
 msgstr "Avspilling"
-
-#: src/gradio-settings-window.vala:45
-msgid "Library"
-msgstr "Bibliotek"
 
 #: src/gradio-settings-window.vala:48
 msgid "Appearance"
