@@ -6,11 +6,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-10 14:34+0200\n"
+"POT-Creation-Date: 2017-09-27 16:55+0200\n"
 "PO-Revision-Date: 2017-09-20 22:47+0000\n"
 "Last-Translator: Erwin van Eijk <erwin.vaneijk@gmail.com>\n"
-"Language-Team: German "
-"<https://hosted.weblate.org/projects/gradio/translations/de/>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/gradio/"
+"translations/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -30,55 +30,12 @@ msgstr "Info"
 msgid "Quit"
 msgstr "Beenden"
 
-#: data/ui/filter-box.ui:27
-msgid "Where"
-msgstr "Wo"
-
-#: data/ui/filter-box.ui:44
-msgid "Select Country ..."
-msgstr "Land auswählen ..."
-
-#: data/ui/filter-box.ui:125
-msgid "Select State  ..."
-msgstr "Provinz auswählen ..."
-
-#: data/ui/filter-box.ui:205 data/ui/station-editor.ui:211
-msgid "Language"
-msgstr "Sprache"
-
-#: data/ui/filter-box.ui:222
-msgid "Select Language  ..."
-msgstr "Sprache auswählen ..."
-
-#: data/ui/page/add-page.ui:45
-msgid "Fill your library with something new"
-msgstr "Füge etwas neues deiner Bibliothek hinzu"
-
-#: data/ui/page/add-page.ui:64
-msgid "There are several options available to add something new."
-msgstr "Es gibt mehrere Optionen um etwas neues hinzuzufügen."
-
-#: data/ui/page/library-page.ui:44
-msgid "Your library is empty"
-msgstr "Deine Bibliothek ist leer"
-
-#: data/ui/page/library-page.ui:62
-msgid "If you add stations to the library, you will find them here."
-msgstr "Wenn du Sender zur Bibliothek hinzufügst, wirst du sie hier finden."
-
-#: data/ui/page/collections-page.ui:43
-msgid "You don't have any collection"
-msgstr "Du hast keine Sammlung"
-
-#: data/ui/page/collections-page.ui:61
-msgid "You can group stations into collections."
-msgstr "Du kannst Sender in Sammlungen gruppieren."
-
 #: data/ui/details-box.ui:23 data/ui/selection-toolbar.ui:151
 msgid "Details"
 msgstr "Details"
 
-#: data/ui/details-box.ui:137 data/ui/station-editor.ui:125
+#: data/ui/details-box.ui:137 data/ui/headerbar.ui:171
+#: data/ui/station-editor.ui:125
 msgid "Name"
 msgstr "Name"
 
@@ -114,6 +71,87 @@ msgstr "Homepage öffnen"
 msgid "Edit"
 msgstr "Bearbeiten"
 
+#: data/ui/groupbox.ui:20 data/ui/item/button-item.ui:24
+#: data/ui/item/switch-item.ui:24
+msgid "Title"
+msgstr ""
+
+#: data/ui/headerbar.ui:85
+msgid "Sort Descending"
+msgstr ""
+
+#: data/ui/headerbar.ui:107
+msgid "Sort Ascending"
+msgstr ""
+
+#: data/ui/headerbar.ui:139
+msgid "Sort"
+msgstr ""
+
+#: data/ui/headerbar.ui:152
+msgid "Votes"
+msgstr ""
+
+#: data/ui/headerbar.ui:187 data/ui/searchbar.ui:205
+#: data/ui/station-editor.ui:211
+msgid "Language"
+msgstr "Sprache"
+
+#: data/ui/headerbar.ui:203 data/ui/station-editor.ui:181
+msgid "Country"
+msgstr "Land"
+
+#: data/ui/headerbar.ui:219 data/ui/station-editor.ui:196
+msgid "State"
+msgstr "Provinz"
+
+#: data/ui/headerbar.ui:235
+msgid "Bitrate"
+msgstr ""
+
+#: data/ui/headerbar.ui:251
+msgid "Clicks"
+msgstr ""
+
+#: data/ui/headerbar.ui:267
+msgid "Date"
+msgstr ""
+
+#: data/ui/headerbar.ui:369 src/gradio-settings-window.vala:45
+msgid "Library"
+msgstr "Bibliothek"
+
+#: data/ui/headerbar.ui:382 data/ui/selection-toolbar.ui:135
+msgid "Collections"
+msgstr "Sammlungen"
+
+#: data/ui/headerbar.ui:412 data/ui/status-icon.ui:114
+msgid "label"
+msgstr ""
+
+#: data/ui/headerbar.ui:566 data/ui/organize-collection-dialog.ui:192
+#: data/ui/station-editor.ui:501
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#: data/ui/item/button-item.ui:36 data/ui/item/switch-item.ui:36
+msgid "Subtitle"
+msgstr ""
+
+#: data/ui/main-window.ui:9
+msgid "Gradio"
+msgstr ""
+
+#: data/ui/main-window.ui:128
+#, fuzzy
+msgid "Notification Text"
+msgstr "Benachrichtigungen"
+
+#: data/ui/main-window.ui:138
+#, fuzzy
+msgid "Action"
+msgstr "Standort"
+
 #: data/ui/organize-collection-dialog.ui:21
 #: data/ui/organize-collection-dialog.ui:107
 msgid "New Collection…"
@@ -129,9 +167,56 @@ msgstr "Hinzufügen"
 msgid "Enter a name for your first collection"
 msgstr "Gebe einen Namen ein für deine erste Sammlung"
 
-#: data/ui/organize-collection-dialog.ui:192 data/ui/station-editor.ui:501
-msgid "Cancel"
-msgstr "Abbrechen"
+#: data/ui/page/add-page.ui:45
+msgid "Fill your library with something new"
+msgstr "Füge etwas neues deiner Bibliothek hinzu"
+
+#: data/ui/page/add-page.ui:64
+msgid "There are several options available to add something new."
+msgstr "Es gibt mehrere Optionen um etwas neues hinzuzufügen."
+
+#: data/ui/page/collections-page.ui:43
+msgid "You don't have any collection"
+msgstr "Du hast keine Sammlung"
+
+#: data/ui/page/collections-page.ui:61
+msgid "You can group stations into collections."
+msgstr "Du kannst Sender in Sammlungen gruppieren."
+
+#: data/ui/page/library-page.ui:44
+msgid "Your library is empty"
+msgstr "Deine Bibliothek ist leer"
+
+#: data/ui/page/library-page.ui:62
+msgid "If you add stations to the library, you will find them here."
+msgstr "Wenn du Sender zur Bibliothek hinzufügst, wirst du sie hier finden."
+
+#: data/ui/page/search-page.ui:127
+msgid "No results found"
+msgstr "Keine Ergebnisse gefunden"
+
+#: data/ui/page/search-page.ui:145
+msgid ""
+"Either the station does not exist, or you have to search with other keywords."
+msgstr ""
+"Entweder der Sender existiert nicht, oder du musst mit einem anderen Begriff "
+"suchen."
+
+#: data/ui/searchbar.ui:27
+msgid "Where"
+msgstr "Wo"
+
+#: data/ui/searchbar.ui:44
+msgid "Select Country ..."
+msgstr "Land auswählen ..."
+
+#: data/ui/searchbar.ui:125
+msgid "Select State  ..."
+msgstr "Provinz auswählen ..."
+
+#: data/ui/searchbar.ui:222
+msgid "Select Language  ..."
+msgstr "Sprache auswählen ..."
 
 #: data/ui/selection-menu.ui:7
 msgid "Select All"
@@ -148,10 +233,6 @@ msgstr "Zur Bibliothek hinzufügen"
 #: data/ui/selection-toolbar.ui:46
 msgid "Remove"
 msgstr "Entfernen"
-
-#: data/ui/selection-toolbar.ui:135
-msgid "Collections"
-msgstr "Sammlungen"
 
 #: data/ui/station-editor.ui:39
 msgid "Global database"
@@ -179,14 +260,6 @@ msgstr "Stream Adresse"
 msgid "Homepage"
 msgstr "Homepage"
 
-#: data/ui/station-editor.ui:181
-msgid "Country"
-msgstr "Land"
-
-#: data/ui/station-editor.ui:196
-msgid "State"
-msgstr "Provinz"
-
 #: data/ui/station-editor.ui:291
 msgid "Favicon Address"
 msgstr "Symbol Adresse"
@@ -203,16 +276,19 @@ msgstr "Schließen"
 msgid "Done"
 msgstr "Fertig"
 
-#: data/ui/page/search-page.ui:127
-msgid "No results found"
-msgstr "Keine Ergebnisse gefunden"
-
-#: data/ui/page/search-page.ui:145
-msgid ""
-"Either the station does not exist, or you have to search with other keywords."
+#: data/ui/status-icon.ui:9
+msgid "Connection information"
 msgstr ""
-"Entweder der Sender existiert nicht, oder du musst mit einem anderen Begriff "
-"suchen."
+
+#: data/ui/status-icon.ui:34
+#, fuzzy
+msgid "page0"
+msgstr "Homepage"
+
+#: data/ui/status-icon.ui:45
+#, fuzzy
+msgid "page2"
+msgstr "Homepage"
 
 #: src/gradio-settings-window.vala:39
 msgid "Features"
@@ -221,10 +297,6 @@ msgstr "Funktionen"
 #: src/gradio-settings-window.vala:42
 msgid "Playback"
 msgstr "Wiedergabe"
-
-#: src/gradio-settings-window.vala:45
-msgid "Library"
-msgstr "Bibliothek"
 
 #: src/gradio-settings-window.vala:48
 msgid "Appearance"
