@@ -22,7 +22,7 @@ namespace Gradio{
 
 		public static async string get_string_from_uri (string url){
 			if(url != ""){
-				var session = new Soup.SessionAsync ();
+				var session = new Soup.Session();
 				session.user_agent = "gradio/"+ Config.VERSION;
 				var message = new Soup.Message ("GET", url);
 
