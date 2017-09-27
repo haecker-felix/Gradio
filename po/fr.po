@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-10 14:34+0200\n"
-"PO-Revision-Date: 2017-09-20 19:46+0000\n"
-"Last-Translator: LL <lu.lecocq@free.fr>\n"
+"PO-Revision-Date: 2017-09-27 18:00+0000\n"
+"Last-Translator: nathanael <bot@blandinenathanael.fr>\n"
 "Language-Team: French "
 "<https://hosted.weblate.org/projects/gradio/translations/fr/>\n"
 "Language: fr\n"
@@ -152,7 +152,7 @@ msgstr "Supprimer"
 
 #: data/ui/selection-toolbar.ui:135
 msgid "Collections"
-msgstr "Collections"
+msgstr "Groupes"
 
 #: data/ui/station-editor.ui:39
 msgid "Global database"
