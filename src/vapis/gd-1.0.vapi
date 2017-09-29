@@ -172,13 +172,6 @@ namespace Gd {
 	}
 	[CCode (cheader_filename = "libgd/gd.h", type_cname = "GdMainBoxItemInterface", type_id = "gd_main_box_item_get_type ()")]
 	public interface MainBoxItem : GLib.Object {
-		//public abstract unowned Cairo.Surface get_icon ();
-		//public abstract unowned string get_id ();
-		//public int64 get_mtime ();
-		//public abstract unowned string get_primary_text ();
-		//public bool get_pulse ();
-		//public abstract unowned string get_secondary_text ();
-		//public abstract unowned string get_uri ();
 		public abstract Cairo.Surface icon { get; }
 		public abstract string id { get; }
 		[ConcreteAccessor]

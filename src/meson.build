@@ -34,7 +34,7 @@ vala_sources = [
 		'gradio-headerbar.vala',
 		'gradio-selection-toolbar.vala',
 		'gradio-image-cache.vala',
-		'gradio-organize-collection-dialog.vala',
+		'gradio-organize-collection-popover.vala',
 		'gradio-searchbar.vala',
 		'gradio-station-compare.vala',
 		'gradio-thumbnail.vala']

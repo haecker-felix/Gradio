@@ -135,24 +135,23 @@ namespace Gradio{
 			SortBox.set_visible(true);
 		}
 
-		public void show_selection_bar(){
-			this.set_visible_child_name("selection");
-		}
-
-		public void show_default_bar(){
-			this.set_visible_child_name("default");
+		public void show_selection_bar(bool b){
+			if(b)
+				this.set_visible_child_name("selection");
+			else
+				this.set_visible_child_name("default");
 		}
 
 		[GtkCallback]
 		private void CancelSelectionButton_clicked(Gtk.Button button){
 			selection_canceled();
-			show_default_bar();
+			show_selection_bar(false);
 		}
 
 		[GtkCallback]
 		private void SelectButton_clicked(Gtk.Button button){
 			selection_started();
-			show_selection_bar();
+			show_selection_bar(true);
 		}
 
 		[GtkCallback]

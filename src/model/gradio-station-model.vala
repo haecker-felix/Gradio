@@ -53,7 +53,8 @@ namespace Gradio{
 	  	}
 
 	  	public void add_item(Gd.MainBoxItem item) {
-	  		items.insert(0, item);
+	  		StationCompare scompare = new StationCompare();
+	  		items.insert_sorted(item, scompare.compare);
 	  	}
 
 		public void remove_item (Gd.MainBoxItem item) {
@@ -72,10 +73,12 @@ namespace Gradio{
 	  	}
 
 	  	private void sort(){
+	  		// TODO: Port the sorting system to the new model. Collection items are currently not sortable
 			StationCompare scompare = new StationCompare();
 	  		items.sort(scompare.compare);
 	  	}
 
+		// TODO: make this also possible for stations
 	  	public string get_id_by_name (string name){
 			int items = (int)get_n_items();
 
@@ -95,6 +98,22 @@ namespace Gradio{
 			}
 
 			return null;
+		}
+
+		public bool contains_radio_station_item(){
+			for (int i = 0; i < get_n_items(); i ++) {
+      				Gd.MainBoxItem fitem = (Gd.MainBoxItem)get_item (i);
+      				if (!Util.is_collection_item(int.parse(fitem.id))) return true;
+			}
+			return false;
+		}
+
+		public bool contains_collection_item(){
+			for (int i = 0; i < get_n_items(); i ++) {
+      				Gd.MainBoxItem fitem = (Gd.MainBoxItem)get_item (i);
+      				if (Util.is_collection_item(int.parse(fitem.id))) return true;
+			}
+			return false;
 		}
 	}
 }

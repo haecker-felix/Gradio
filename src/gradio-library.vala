@@ -325,7 +325,7 @@ namespace Gradio{
 					break;
 				case Sqlite.ROW:
 					Collection previous_coll = (Collection)station_model.get_item_by_id(stmt.column_text(0));
-					previous_coll.remove_station(station);
+					if(previous_coll != null) previous_coll.remove_station(station);
 					break;
 				default:
 					printerr ("Error: %d, %s\n", rc, db.errmsg ());

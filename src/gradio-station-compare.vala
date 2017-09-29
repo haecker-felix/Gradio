@@ -28,13 +28,22 @@ namespace Gradio{
 	}
 
 	public class StationCompare{
-		public CompareDataFunc<RadioStation> compare = (a, b) => {
+		public CompareDataFunc<Gd.MainBoxItem> compare = (a, b) => {
 			int result = 0;
+			RadioStation stationA;
+			RadioStation stationB;
+
+			if(Util.is_collection_item(int.parse(a.id.to_string())) || Util.is_collection_item(int.parse(b.id.to_string()))){
+				return result;
+			}else{
+				stationA = (RadioStation)a;
+				stationB = (RadioStation)b;
+			}
 
 			switch(App.settings.station_sorting){
 				case Compare.VOTES: {
-					int avotes = int.parse(a.votes);
-					int bvotes = int.parse(b.votes);
+					int avotes = int.parse(stationA.votes);
+					int bvotes = int.parse(stationB.votes);
 
 					if(avotes > bvotes) result = 1;
 					if(avotes == bvotes) result = 0;
@@ -42,20 +51,20 @@ namespace Gradio{
 					break;
 				}
 				case Compare.NAME: {
-					result = (strcmp(a.title, b.title)*-1);
+					result = (strcmp(stationA.title, stationB.title)*-1);
 					break;
 				}
 				case Compare.LANGUAGE: {
-					result = (strcmp(a.language, b.language) * -1);
+					result = (strcmp(stationA.language, stationB.language) * -1);
 					break;
 				}
 				case Compare.COUNTRY: {
-					result = (strcmp(a.country, b.country) * -1);
+					result = (strcmp(stationA.country, stationB.country) * -1);
 					break;
 				}
 				case Compare.BITRATE: {
-					int abitrate = int.parse(a.bitrate);
-					int bbitrate = int.parse(b.bitrate);
+					int abitrate = int.parse(stationA.bitrate);
+					int bbitrate = int.parse(stationB.bitrate);
 
 					if(abitrate > bbitrate) result = 1;
 					if(abitrate == bbitrate) result = 0;
@@ -63,8 +72,8 @@ namespace Gradio{
 					break;
 				}
 				case Compare.CLICKS: {
-					int aclicks = int.parse(a.clickcount);
-					int bclicks = int.parse(b.clickcount);
+					int aclicks = int.parse(stationA.clickcount);
+					int bclicks = int.parse(stationB.clickcount);
 
 					if(aclicks > bclicks) result = 1;
 					if(aclicks == bclicks) result = 0;
@@ -72,11 +81,11 @@ namespace Gradio{
 					break;
 				}
 				case Compare.STATE: {
-					result = (strcmp(a.state, b.state) * -1);
+					result = (strcmp(stationA.state, stationB.state) * -1);
 					break;
 				}
 				case Compare.DATE: {
-					result = (strcmp(a.clicktimestamp, b.clicktimestamp)* -1);
+					result = (strcmp(stationA.clicktimestamp, stationB.clicktimestamp)* -1);
 					break;
 				}
 			}

@@ -16,212 +16,189 @@
 
 namespace Gradio{
 
-	public enum SelectionMode {
-		DEFAULT,
-		LIBRARY,
-		COLLECTION_OVERVIEW,
-		COLLECTION_ITEMS
-	}
-
 	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/selection-toolbar.ui")]
 	public class SelectionToolbar : Gtk.Box{
 
-		[GtkChild] private Gtk.Button AddToLibraryButton;
+		[GtkChild] private Gtk.Button AddButton;
 		[GtkChild] private Gtk.Button RemoveButton;
 		[GtkChild] private Gtk.Button DetailsButton;
 		[GtkChild] private Gtk.Button PlayButton;
-		[GtkChild] private Gtk.Button CollectionButton;
+		[GtkChild] private Gtk.MenuButton CollectionButton;
 		[GtkChild] private Gtk.Button VoteButton;
 		[GtkChild] private Gtk.Button EditButton;
+		[GtkChild] private Gtk.Stack SelectionStack;
+		private OrganizeCollectionPopover collection_dialog;
 
-		private string collection_id = "";
-		private int selected_items = 0;
-		private SelectionMode mode;
+		private MainWindow window;
 
-		public SelectionToolbar(){
+		public SelectionToolbar(MainWindow w){
+			window = w;
+			window.notify["current-selection"].connect(update_buttons);
+
+			collection_dialog = new OrganizeCollectionPopover();
+			CollectionButton.set_popover(collection_dialog);
 		}
 
-		public void update_buttons(int count){
-			selected_items = count;
-			set_mode(mode);
-		}
-
-		public void set_mode(SelectionMode m, string cid = ""){
-			mode = m;
-
-			if(cid != "")
-				collection_id = cid;
-
-			// Set to standard
+		private void update_buttons(){
+			// Hide all buttons
+			AddButton.set_visible(false);
 			RemoveButton.set_visible(false);
 			DetailsButton.set_visible(false);
-			AddToLibraryButton.set_visible(false);
+			PlayButton.set_visible(false);
 			CollectionButton.set_visible(false);
-			PlayButton.set_visible(true);
 			VoteButton.set_visible(false);
 			EditButton.set_visible(false);
 
-			// if ONE item is selected
-			bool single = false;
-			if(selected_items <= 1) single = true;
-			DetailsButton.set_visible(single);
-			PlayButton.set_visible(single);
-			VoteButton.set_visible(single);
-			EditButton.set_visible(single);
+			if(window.current_selection.get_n_items() == 0)
+				SelectionStack.set_visible_child_name("no-actions");
+			else
+				SelectionStack.set_visible_child_name("actions");
 
-			// If no item is selected, disabled all actions.
-			if(selected_items == 0){
-				RemoveButton.set_sensitive(false);
-				DetailsButton.set_sensitive(false);
-				AddToLibraryButton.set_sensitive(false);
-				CollectionButton.set_sensitive(false);
-				PlayButton.set_sensitive(false);
-				VoteButton.set_sensitive(false);
-				EditButton.set_sensitive(false);
-			}else{
-				RemoveButton.set_sensitive(true);
-				DetailsButton.set_sensitive(true);
-				AddToLibraryButton.set_sensitive(true);
-				CollectionButton.set_sensitive(true);
-				PlayButton.set_sensitive(true);
-				VoteButton.set_sensitive(true);
-				EditButton.set_sensitive(true);
-			}
-
-			switch(mode){
-				case SelectionMode.DEFAULT: {
-					AddToLibraryButton.set_visible(true);
-					break;
-				}
-				case SelectionMode.LIBRARY: {
-					RemoveButton.set_visible(true);
-					CollectionButton.set_visible(true);
-					break;
-				}
-				case SelectionMode.COLLECTION_OVERVIEW: {
-					RemoveButton.set_visible(true);
+			// Selection contains ONLY radio stations
+			if(window.current_selection.contains_radio_station_item() && !window.current_selection.contains_collection_item()){
+				if(window.current_selection.get_n_items() == 1){
 					DetailsButton.set_visible(true);
-					PlayButton.set_visible(false);
-					VoteButton.set_visible(false);
-					EditButton.set_visible(false);
-					break;
+					PlayButton.set_visible(true);
+					VoteButton.set_visible(true);
+					EditButton.set_visible(true);
 				}
-				case SelectionMode.COLLECTION_ITEMS: {
-					RemoveButton.set_visible(true);
-					CollectionButton.set_visible(true);
-					break;
+			}
+
+			// Selection contains ONLY collections
+			if(window.current_selection.contains_collection_item() && !window.current_selection.contains_radio_station_item()){
+				if(window.current_selection.get_n_items() == 1){
+					DetailsButton.set_visible(true);
+					EditButton.set_visible(true);
 				}
+			}
+
+			// Selection contains ONLY library items
+			if(only_contains_library_items()){
+				RemoveButton.set_visible(true);
+				CollectionButton.set_visible(true);
+			}
+
+			// Selection contains ONLY NON library items
+			if(only_contains_non_library_items()){
+				AddButton.set_visible(true);
+				CollectionButton.set_visible(true);
 			}
 		}
 
-		[GtkCallback]
-		public void ShareButton_clicked (Gtk.Button button) {
+		private bool only_contains_library_items(){
+			// if count == 0, so it cannot contain any library item
+			if(window.current_selection.get_n_items() == 0) return false;
 
+			for(int i = 0; i < window.current_selection.get_n_items(); i++){
+				Gd.MainBoxItem item = (Gd.MainBoxItem)window.current_selection.get_item(i);
+				if(!Library.station_model.contains_item(item)) return false;
+			}
+
+			return true;
 		}
 
-		[GtkCallback]
-		public void CollectionButton_clicked (Gtk.Button button) {
-			OrganizeCollectionDialog orgadiag = new OrganizeCollectionDialog();
-			orgadiag.set_transient_for(App.window);
-			orgadiag.set_modal(true);
-			orgadiag.show_all();
+		private bool only_contains_non_library_items(){
+			// if count == 0, so it cannot contain any non library item
+			if(window.current_selection.get_n_items() == 0) return false;
+
+			for(int i = 0; i < window.current_selection.get_n_items(); i++){
+				Gd.MainBoxItem item = (Gd.MainBoxItem)window.current_selection.get_item(i);
+				if(Library.station_model.contains_item(item)) return false;
+			}
+
+			return true;
 		}
 
 		[GtkCallback]
 		public void RemoveButton_clicked (Gtk.Button button) {
-			if(mode == SelectionMode.COLLECTION_OVERVIEW){
-				StationModel model = (StationModel)App.window.get_station_selection();
-				for(int i = 0; i < model.get_n_items(); i++){
-					Collection collection = (Collection)model.get_item(i);
-					App.library.remove_collection(collection);
-				}
+			for(int i = 0; i < window.current_selection.get_n_items(); i++){
+				Gd.MainBoxItem item = (Gd.MainBoxItem)window.current_selection.get_item(i);
 
-			} else if(mode == SelectionMode.COLLECTION_ITEMS){
-				StationModel model = (StationModel)App.window.get_station_selection();
-				for(int i = 0; i < model.get_n_items(); i++){
-					RadioStation station = (RadioStation)model.get_item(i);
-					App.library.remove_station_from_collection(collection_id, station);
-				}
-
-			} else {
-				StationModel model = (StationModel)App.window.get_station_selection();
-				for(int i = 0; i < model.get_n_items(); i++){
-					RadioStation station = (RadioStation)model.get_item(i);
-					App.library.remove_radio_station(station);
-				}
+				if(Util.is_collection_item(int.parse(item.id)))
+					App.library.remove_collection((Collection)item);
+				else
+					App.library.remove_radio_station((RadioStation)item);
 			}
 
-			App.window.disable_selection_mode();
+			App.window.set_selection_mode(false);
 		}
 
 		[GtkCallback]
-		public void AddToLibraryButton_clicked (Gtk.Button button) {
-			StationModel model = App.window.get_station_selection();
-			App.window.disable_selection_mode();
+		public void AddButton_clicked (Gtk.Button button) {
+			for(int i = 0; i < window.current_selection.get_n_items(); i++){
+				Gd.MainBoxItem item = (Gd.MainBoxItem)window.current_selection.get_item(i);
 
-			for(int i = 0; i < model.get_n_items(); i++){
-				RadioStation station = (RadioStation)model.get_item(i);
-				App.library.add_radio_station(station);
+				if(!Util.is_collection_item(int.parse(item.id)))
+					App.library.add_radio_station((RadioStation)item);
 			}
+
+			App.window.set_selection_mode(false);
 		}
 
 		[GtkCallback]
 		public void DetailsButton_clicked (Gtk.Button button) {
-			if(mode == SelectionMode.COLLECTION_OVERVIEW){
-				StationModel model = (StationModel)App.window.get_station_selection();
-				for(int i = 0; i < model.get_n_items(); i++){
-					Collection collection = (Collection)model.get_item(i);
-					App.window.details_box.set_collection(collection);
-					App.window.details_box.set_visible(true);
-				}
+			Gd.MainBoxItem item = (Gd.MainBoxItem)window.current_selection.get_item(0);
 
-			} else {
-				StationModel model = (StationModel)App.window.get_station_selection();
-				for(int i = 0; i < model.get_n_items(); i++){
-					RadioStation station = (RadioStation)model.get_item(i);
-					App.window.details_box.set_station(station);
-					App.window.details_box.set_visible(true);
-				}
+			if(Util.is_collection_item(int.parse(item.id))){
+				Collection collection = (Collection)item;
+				App.window.details_box.set_collection(collection);
+			}else{
+				RadioStation station = (RadioStation)item;
+				App.window.details_box.set_station(station);
 			}
 
-			App.window.disable_selection_mode();
+			App.window.details_box.set_visible(true);
+			App.window.set_selection_mode(false);
 		}
 
 		[GtkCallback]
 		public void PlayButton_clicked (Gtk.Button button) {
-			StationModel model = App.window.get_station_selection();
-			App.window.disable_selection_mode();
+			Gd.MainBoxItem item = (Gd.MainBoxItem)window.current_selection.get_item(0);
 
-			for(int i = 0; i < model.get_n_items(); i++){
-				RadioStation station = (RadioStation)model.get_item(i);
+			if(!Util.is_collection_item(int.parse(item.id))){
+				RadioStation station = (RadioStation)item;
 				App.player.station = station;
 			}
+
+			App.window.set_selection_mode(false);
 		}
 
 		[GtkCallback]
 		public void VoteButton_clicked (Gtk.Button button) {
-			StationModel model = App.window.get_station_selection();
-			App.window.disable_selection_mode();
+			Gd.MainBoxItem item = (Gd.MainBoxItem)window.current_selection.get_item(0);
 
-			for(int i = 0; i < model.get_n_items(); i++){
-				RadioStation station = (RadioStation)model.get_item(i);
+			// TODO: If you vote a station, instantly update likes value in the mainbox
+			if(!Util.is_collection_item(int.parse(item.id))){
+				RadioStation station = (RadioStation)item;
 				station.vote();
 			}
+
+			App.window.set_selection_mode(false);
 		}
 
 		[GtkCallback]
 		public void EditButton_clicked (Gtk.Button button) {
-			StationModel model = App.window.get_station_selection();
-			App.window.disable_selection_mode();
+			Gd.MainBoxItem item = (Gd.MainBoxItem)window.current_selection.get_item(0);
 
-			for(int i = 0; i < model.get_n_items(); i++){
-				RadioStation station = (RadioStation)model.get_item(i);
-				StationEditorDialog editor_dialog = new StationEditorDialog.edit(station);
+			if(Util.is_collection_item(int.parse(item.id))){
+				// TODO: make collections editable
+				//StationEditorDialog editor_dialog = new StationEditorDialog.edit((Collection)item);
+				//editor_dialog.set_transient_for(App.window);
+				//editor_dialog.set_modal(true);
+				//editor_dialog.set_visible(true);
+			}else{
+				StationEditorDialog editor_dialog = new StationEditorDialog.edit((RadioStation)item);
 				editor_dialog.set_transient_for(App.window);
 				editor_dialog.set_modal(true);
 				editor_dialog.set_visible(true);
 			}
+
+			App.window.set_selection_mode(false);
 		}
 
+		[GtkCallback]
+		public void ShareButton_clicked (Gtk.Button button) {
+			// TODO: implement share button
+		}
 	}
 }
