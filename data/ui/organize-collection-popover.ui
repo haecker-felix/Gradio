@@ -32,7 +32,7 @@
             </child>
             <child>
               <object class="GtkButton" id="CreateButton">
-                <property name="label" translatable="yes">Add</property>
+                <property name="label" translatable="yes">Create</property>
                 <property name="visible">True</property>
                 <property name="sensitive">False</property>
                 <property name="can_focus">True</property>
@@ -94,8 +94,9 @@
         </child>
         <child>
           <object class="GtkButton" id="AddButton">
-            <property name="label" translatable="yes">Add to collection</property>
+            <property name="label" translatable="yes">Move to collection</property>
             <property name="visible">True</property>
+            <property name="sensitive">False</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
             <signal name="clicked" handler="AddButton_clicked" swapped="no"/>

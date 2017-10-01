@@ -157,13 +157,14 @@ namespace Gradio{
 					RadioStation station = yield Util.get_station_by_id(int.parse(stmt.column_text(0)));
 
 					message("Found station: %s", station.title);
-					station_model.add_item(station);
 
 					if(stmt.column_text(1) != "0"){
 						Collection coll = (Collection)station_model.get_item_by_id(stmt.column_text(1));
 						coll.add_station(station);
 
 						message("Added %s to collection \"%s\"", stmt.column_text(0), coll.name);
+					}else{
+						station_model.add_item(station);
 					}
 
 					break;
@@ -175,7 +176,7 @@ namespace Gradio{
 			message("Imported all stations!");
 		}
 
-		public bool add_station_to_collection(string collection_id, RadioStation station){
+		public bool move_station_to_collection(string collection_id, RadioStation station){
 			// Station must be in the library
 			if((!station_model.contains_item(station)))
 				return false;
@@ -203,6 +204,9 @@ namespace Gradio{
 
 			// Get the actual collection, where the station gets added
 			Collection coll = (Collection)station_model.get_item_by_id(collection_id);
+
+			// Remove this station from the library station_model
+			station_model.remove_item(station);
 
 			// Add the station to the new collection (if the collection exists)
 			if(coll != null){

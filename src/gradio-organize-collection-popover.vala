@@ -52,11 +52,9 @@ namespace Gradio{
 			CollectionsListBox.row_activated.connect(() => {
 				AddButton.set_sensitive(true);
 			});
-
-			this.closed.connect(update_collections);
 		}
 
-		private void update_collections(){
+		public void update_collections(){
 			CollectionsListBox.forall((element) => CollectionsListBox.remove(element));
 
 			for (int i = 0; i < Library.station_model.get_n_items(); i ++) {
@@ -98,7 +96,7 @@ namespace Gradio{
 			Collection c = new Collection(CreateEntry.get_text(), Random.int_range(1000000, 9999999).to_string()); 	// TODO: this should not be the right way to generate a id
 			App.library.add_new_collection(c);
 			CreateEntry.set_text("");
-			insert_listbox_label(c.name);
+			update_collections();
 		}
 
 		[GtkCallback]
@@ -116,7 +114,7 @@ namespace Gradio{
 
 			for(int i = 0; i < model.get_n_items(); i++){
 				RadioStation station = (RadioStation)model.get_item(i);
-				App.library.add_station_to_collection(id, station);
+				App.library.move_station_to_collection(id, station);
 
 			}
 		}

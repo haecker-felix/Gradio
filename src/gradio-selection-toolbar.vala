@@ -37,6 +37,7 @@ namespace Gradio{
 
 			collection_dialog = new OrganizeCollectionPopover();
 			CollectionButton.set_popover(collection_dialog);
+			CollectionButton.toggled.connect(collection_dialog.update_collections);
 		}
 
 		private void update_buttons(){
@@ -75,13 +76,15 @@ namespace Gradio{
 			// Selection contains ONLY library items
 			if(only_contains_library_items()){
 				RemoveButton.set_visible(true);
-				CollectionButton.set_visible(true);
+
+				// ... but no collection item!
+				if(!window.current_selection.contains_collection_item())
+					CollectionButton.set_visible(true);
 			}
 
 			// Selection contains ONLY NON library items
 			if(only_contains_non_library_items()){
 				AddButton.set_visible(true);
-				CollectionButton.set_visible(true);
 			}
 		}
 
