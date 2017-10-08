@@ -151,18 +151,23 @@ namespace Gradio{
 				case Sqlite.DONE:
 					break;
 				case Sqlite.ROW:
-					RadioStation station = yield Util.get_station_by_id(int.parse(stmt.column_text(0)));
+					string coll_id = stmt.column_text(1);
+					string station_id = stmt.column_text(0);
 
-					message("Found station: %s", station.title);
+					Util.get_station_by_id.begin(int.parse(station_id), (obj, res) => {
+						RadioStation station = Util.get_station_by_id.end(res);
 
-					if(stmt.column_text(1) != "0"){
-						Collection coll = (Collection)station_model.get_item_by_id(stmt.column_text(1));
-						coll.add_station(station);
+						message("Found station: %s", station.title);
 
-						message("Added %s to collection \"%s\"", stmt.column_text(0), coll.name);
-					}else{
-						station_model.add_item(station);
-					}
+						if(coll_id != "0"){
+							Collection coll = (Collection)station_model.get_item_by_id(coll_id);
+							coll.add_station(station);
+
+							message("Added %s to collection \"%s\"", station_id, coll.name);
+						}else{
+							station_model.add_item(station);
+						}
+					});
 
 					break;
 				default:
@@ -253,7 +258,6 @@ namespace Gradio{
 			// TODO: We can move a station from one collection to a another collection. This means we have to remove it from the old one.
 			Collection collection = get_collection(station);
 			if(collection != null) collection.station_model.remove_item(station);
-
 
 			// Remove station from station_model
 			station_model.remove_item(station);
