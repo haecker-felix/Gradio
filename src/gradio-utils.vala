@@ -69,8 +69,7 @@ namespace Gradio{
 		}
 
 		public static bool is_collection_item(int id){
-			if(id > 1000000)
-				return true;
+			if(id > 1000000) return true;
 			return false;
 		}
 

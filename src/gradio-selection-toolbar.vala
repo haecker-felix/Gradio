@@ -94,7 +94,7 @@ namespace Gradio{
 
 			for(int i = 0; i < window.current_selection.get_n_items(); i++){
 				Gd.MainBoxItem item = (Gd.MainBoxItem)window.current_selection.get_item(i);
-				if(!Library.station_model.contains_item(item)) return false;
+				if(!App.library.contains_item(item)) return false;
 			}
 
 			return true;
@@ -106,7 +106,7 @@ namespace Gradio{
 
 			for(int i = 0; i < window.current_selection.get_n_items(); i++){
 				Gd.MainBoxItem item = (Gd.MainBoxItem)window.current_selection.get_item(i);
-				if(Library.station_model.contains_item(item)) return false;
+				if(App.library.contains_item(item)) return false;
 			}
 
 			return true;

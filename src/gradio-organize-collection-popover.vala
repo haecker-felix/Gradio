@@ -43,7 +43,7 @@ namespace Gradio{
 				// The ID is not needful here, so just ""
 				Collection coll = new Collection(text, "");
 
-				if(text.length > 2 && !(Library.station_model.contains_item(coll)))
+				if(text.length > 2 && !(App.library.contains_item(coll)))
 					CreateButton.set_sensitive(true);
 				else
 					CreateButton.set_sensitive(false);
@@ -94,7 +94,7 @@ namespace Gradio{
 		[GtkCallback]
 		private void CreateButton_clicked(Button button){
 			Collection c = new Collection(CreateEntry.get_text(), Random.int_range(1000000, 9999999).to_string()); 	// TODO: this should not be the right way to generate a id
-			App.library.add_new_collection(c);
+			App.library.add_collection(c);
 			CreateEntry.set_text("");
 			update_collections();
 		}
@@ -115,7 +115,6 @@ namespace Gradio{
 			for(int i = 0; i < model.get_n_items(); i++){
 				RadioStation station = (RadioStation)model.get_item(i);
 				App.library.move_station_to_collection(id, station);
-
 			}
 		}
 	}

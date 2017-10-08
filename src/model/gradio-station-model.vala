@@ -44,14 +44,6 @@ namespace Gradio{
     			return items.get_n_items();
   		}
 
-  		public bool contains_item (Gd.MainBoxItem item) {
-			for (int i = 0; i < get_n_items(); i ++) {
-      				Gd.MainBoxItem fitem = (Gd.MainBoxItem)get_item (i);
-      				if (item.id == fitem.id) return true;
-			}
-	    		return false;
-	  	}
-
 	  	public void add_item(Gd.MainBoxItem item) {
 	  		StationCompare scompare = new StationCompare();
 	  		items.insert_sorted(item, scompare.compare);
@@ -78,16 +70,20 @@ namespace Gradio{
 	  		items.sort(scompare.compare);
 	  	}
 
-		// TODO: make this also possible for stations
 	  	public string get_id_by_name (string name){
-			int items = (int)get_n_items();
+	  		for (int i = 0; i < get_n_items(); i ++) {
+	  			Gd.MainBoxItem item = (Gd.MainBoxItem)get_item(i);
 
-			for(int i = 0; i < items; i++){
-				Collection coll = (Collection)get_item(i);
-				if(name == coll.name)
-					return coll.id;
+				message(item.id);
+
+	  			if(Util.is_collection_item(int.parse(item.id))){
+	  				message("is collection item");
+					if(name == ((Collection)item).name) return item.id;
+	  			}else{
+	  				message("is station item");
+					if(name == ((RadioStation)item).title) return item.id;
+				}
 			}
-
 			return "";
 		}
 
