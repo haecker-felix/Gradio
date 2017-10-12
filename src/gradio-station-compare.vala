@@ -85,7 +85,7 @@ namespace Gradio{
 					break;
 				}
 				case Compare.DATE: {
-					result = (strcmp(stationA.clicktimestamp, stationB.clicktimestamp)* -1);
+					result = (strcmp(stationA.clicktimestamp, stationB.clicktimestamp));
 					break;
 				}
 			}

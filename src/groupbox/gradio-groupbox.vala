@@ -58,11 +58,6 @@ namespace Gradio{
 		}
 
 		public void add_widget(Gtk.Widget widget){
-			widget.set_margin_top(6);
-			widget.set_margin_bottom(6);
-			widget.set_margin_start(6);
-			widget.set_margin_end(6);
-
 			WidgetItem row = new WidgetItem(widget);
 			row.set_size_request(1,40);
 

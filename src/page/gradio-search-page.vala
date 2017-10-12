@@ -68,7 +68,7 @@ namespace Gradio{
 			App.window.header.VotesRButton.set_active(true);
 		}
 
-		public void show_most_clicked(){
+		public void show_most_clicks(){
 			searchbar.reset_filters();
 			App.settings.sort_ascending = false;
 			App.window.header.ClicksRButton.set_active(true);

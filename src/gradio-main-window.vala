@@ -227,9 +227,7 @@ namespace Gradio{
 					break;
 				};
 				case WindowMode.ADD: {
-					header.show_title("");
-					header.SelectButton.set_visible(false);
-					header.ViewButton.set_visible(false);
+					header.show_title(_("Add new radio stations to your Library"));
 					break;
 				};
 			}

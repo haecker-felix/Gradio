@@ -42,8 +42,8 @@ namespace Gradio{
 			return "http://www.radio-browser.info/webservice/json/stations/lastclick/" + count.to_string();
 		}
 
-		public static string recently_changed(int count){
-			return "http://www.radio-browser.info/webservice/json/stations/lastchange/" + count.to_string();
+		public static string most_clicks(int count){
+			return "http://www.radio-browser.info/webservice/json/stations/topclick/" + count.to_string();
 		}
 	}
 

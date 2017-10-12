@@ -3,3 +3,8 @@
     border: 2px solid @borders;
     border-radius: 3px;
 }
+
+.small-button {
+	font-size: smaller;
+	padding: 0px 0px;
+}
