@@ -29,14 +29,18 @@ namespace Gradio{
 
 		[GtkChild] private SearchEntry StationSearchEntry;
 
+		private MainBox most_votes_mainbox;
+		private MainBox recently_clicked_mainbox;
+		private MainBox most_clicks_mainbox;
+
 		public AddPage(){
 			GroupBox add_group = new GroupBox(_("Create a new radio station"));
 
 			HashTable<string, string> filter_table = new HashTable<string, string> (str_hash, str_equal);
 
-			MainBox most_votes_mainbox = new MainBox();
-			MainBox recently_clicked_mainbox = new MainBox();
-			MainBox most_clicks_mainbox = new MainBox();
+			most_votes_mainbox = new MainBox();
+			recently_clicked_mainbox = new MainBox();
+			most_clicks_mainbox = new MainBox();
 
 			StationModel most_votes_model = new StationModel();
 			StationModel recently_clicked_model = new StationModel();
@@ -63,7 +67,12 @@ namespace Gradio{
 			MostClicksFrame.add(most_clicks_mainbox);
 
 			most_votes_mainbox.selection_changed.connect(() => {selection_changed();});
+			recently_clicked_mainbox.selection_changed.connect(() => {selection_changed();});
+			most_clicks_mainbox.selection_changed.connect(() => {selection_changed();});
+
 			most_votes_mainbox.selection_mode_request.connect(() => {selection_mode_enabled();});
+			recently_clicked_mainbox.selection_mode_request.connect(() => {selection_mode_enabled();});
+			most_clicks_mainbox.selection_mode_request.connect(() => {selection_mode_enabled();});
 
 			ButtonItem create_public_button = new ButtonItem(_("New public radio station"), _("Create a new radio station, which is visible for all users."));
 			create_public_button.btn_clicked.connect(() => {show_create_station_dialog();});
@@ -106,6 +115,43 @@ namespace Gradio{
 			editor_dialog.set_transient_for(App.window);
 			editor_dialog.set_modal(true);
 			editor_dialog.set_visible(true);
+		}
+
+		public void set_selection_mode(bool b){
+			most_clicks_mainbox.set_selection_mode(b);
+			recently_clicked_mainbox.set_selection_mode(b);
+			most_votes_mainbox.set_selection_mode(b);
+		}
+
+		public void select_all(){
+			most_clicks_mainbox.select_all();
+			recently_clicked_mainbox.select_all();
+			most_votes_mainbox.select_all();
+		}
+
+		public void select_none(){
+			most_clicks_mainbox.unselect_all();
+			recently_clicked_mainbox.unselect_all();
+			most_votes_mainbox.unselect_all();
+		}
+
+		public StationModel get_selection(){
+			StationModel model = new StationModel();
+
+			List<Gd.MainBoxItem> most_clicks_selection = most_clicks_mainbox.get_selection();
+			List<Gd.MainBoxItem> recently_clicked_selection = recently_clicked_mainbox.get_selection();
+			List<Gd.MainBoxItem> most_votes_selection = most_votes_mainbox.get_selection();
+
+			foreach(Gd.MainBoxItem item in most_clicks_selection){
+				model.add_item(item);
+			}
+			foreach(Gd.MainBoxItem item in recently_clicked_selection){
+				model.add_item(item);
+			}
+			foreach(Gd.MainBoxItem item in most_votes_selection){
+				model.add_item(item);
+			}
+			return model;
 		}
 	}
 
