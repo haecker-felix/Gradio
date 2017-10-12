@@ -74,13 +74,9 @@ namespace Gradio{
 	  		for (int i = 0; i < get_n_items(); i ++) {
 	  			Gd.MainBoxItem item = (Gd.MainBoxItem)get_item(i);
 
-				message(item.id);
-
 	  			if(Util.is_collection_item(int.parse(item.id))){
-	  				message("is collection item");
 					if(name == ((Collection)item).name) return item.id;
 	  			}else{
-	  				message("is station item");
 					if(name == ((RadioStation)item).title) return item.id;
 				}
 			}

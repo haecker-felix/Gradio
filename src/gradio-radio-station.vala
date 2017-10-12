@@ -164,7 +164,6 @@ namespace Gradio{
 				case Compare.BITRATE: _secondary_text = bitrate + " kBit/s"; break;
 				case Compare.LANGUAGE: _secondary_text = language; break;
 			}
-			message(_secondary_text);
 			notify_property("secondary-text");
 		}
 

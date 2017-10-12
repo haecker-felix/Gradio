@@ -114,8 +114,10 @@ namespace Gradio{
 
 		[GtkCallback]
 		public void RemoveButton_clicked (Gtk.Button button) {
-			for(int i = 0; i < window.current_selection.get_n_items(); i++){
-				Gd.MainBoxItem item = (Gd.MainBoxItem)window.current_selection.get_item(i);
+			StationModel selection = window.current_selection;
+
+			for(int i = 0; i < selection.get_n_items(); i++){
+				Gd.MainBoxItem item = (Gd.MainBoxItem)selection.get_item(i);
 
 				if(Util.is_collection_item(int.parse(item.id)))
 					App.library.remove_collection((Collection)item);
@@ -128,8 +130,10 @@ namespace Gradio{
 
 		[GtkCallback]
 		public void AddButton_clicked (Gtk.Button button) {
-			for(int i = 0; i < window.current_selection.get_n_items(); i++){
-				Gd.MainBoxItem item = (Gd.MainBoxItem)window.current_selection.get_item(i);
+			StationModel selection = window.current_selection;
+
+			for(int i = 0; i < selection.get_n_items(); i++){
+				Gd.MainBoxItem item = (Gd.MainBoxItem)selection.get_item(i);
 
 				if(!Util.is_collection_item(int.parse(item.id)))
 					App.library.add_radio_station((RadioStation)item);
