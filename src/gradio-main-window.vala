@@ -216,7 +216,6 @@ namespace Gradio{
 						search_page = new SearchPage();
 						MainStack.add_named(search_page, page_name[WindowMode.SEARCH]);
 					}
-					mode_queue.clear();
 					break;
 				};
 				case WindowMode.COLLECTION_ITEMS: {
@@ -228,6 +227,7 @@ namespace Gradio{
 				};
 				case WindowMode.ADD: {
 					header.show_title(_("Add new radio stations to your Library"));
+					header.ViewButton.set_visible(false);
 					break;
 				};
 			}
