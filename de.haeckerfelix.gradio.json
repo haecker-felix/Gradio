@@ -14,7 +14,7 @@
       "--env=DCONF_USER_CONFIG_DIR=.config/dconf",
       "--filesystem=xdg-run/dconf",
       "--filesystem=~/.config/dconf:ro",
-       "--filesystem=host",
+      "--filesystem=host",
       "--talk-name=ca.desrt.dconf",
       "--own-name=org.mpris.MediaPlayer2.gradio"
    ],

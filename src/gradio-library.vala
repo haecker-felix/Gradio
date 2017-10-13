@@ -42,7 +42,7 @@ namespace Gradio{
 
 			// read database data
 			message("Successfully opened database! Reading database data...");
-			read_database();
+			read_database.begin();
 
 			// check for old database (gradio 5 or older)
 			if(is_old_database()){
@@ -334,7 +334,7 @@ namespace Gradio{
 			}
 
 			open_database();
-			read_database();
+			read_database.begin();
 			message("Successfully imported database!");
 		}
 
