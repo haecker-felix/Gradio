@@ -333,6 +333,8 @@ namespace Gradio{
 				critical("Could not import database: %s", e.message);
 			}
 
+			open_database();
+			read_database();
 			message("Successfully imported database!");
 		}
 
