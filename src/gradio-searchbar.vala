@@ -202,6 +202,7 @@ namespace Gradio{
 		public void set_search(string term){
 			search_term = term;
 			SearchEntry.set_text(term);
+			//TODO: Move cursor to end
 		}
 
 		private void unreveal_all(){

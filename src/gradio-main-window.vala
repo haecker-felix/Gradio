@@ -21,7 +21,6 @@ namespace Gradio{
 
 	public enum WindowMode {
 		LIBRARY,
-		COLLECTIONS,
 		COLLECTION_ITEMS,
 		SEARCH,
 		ADD
@@ -38,10 +37,10 @@ namespace Gradio{
 		[GtkChild] private Stack MainStack;
 		[GtkChild] private Box Bottom;
 
+		// Different pages
 		CollectionItemsPage collection_items_page;
 		public SearchPage search_page;
 		LibraryPage library_page;
-		CollectionsPage collections_page;
 		AddPage add_page;
 
 		// History of the pages
@@ -49,21 +48,25 @@ namespace Gradio{
 		WindowMode current_mode;
 		private bool in_mode_change = false;
 
+		// Selection
 		[GtkChild] private Revealer SelectionToolbarRevealer;
 		[GtkChild] private Box SelectionToolbarBox;
 		private SelectionToolbar selection_toolbar;
-		private GLib.List<Gd.MainBoxItem> current_selection;
+		private ulong selection_changed_id = 0;
+		public StationModel current_selection { get; set;}
 
+
+		// In-App Notification
 		[GtkChild] private Button NotificationCloseButton;
 		[GtkChild] private Label NotificationLabel;
-		//[GtkChild] private Button NotificationButton;
 		[GtkChild] private Revealer NotificationRevealer;
 
+		// Details sidebar
 		[GtkChild] private Box DetailsBox;
 		public DetailsBox details_box;
 
+		// Tray icon
 		public signal void tray_activate();
-
 		private Gtk.StatusIcon trayicon;
 
 		private App app;
@@ -83,20 +86,14 @@ namespace Gradio{
 			header = new Gradio.Headerbar();
 			this.set_titlebar(header);
 
-			selection_toolbar = new SelectionToolbar();
+			selection_toolbar = new SelectionToolbar(this);
 			SelectionToolbarBox.add(selection_toolbar);
 
 			library_page = new LibraryPage();
 			MainStack.add_named(library_page, page_name[WindowMode.LIBRARY]);
 
-			collections_page = new CollectionsPage();
-			MainStack.add_named(collections_page, page_name[WindowMode.COLLECTIONS]);
-
 			collection_items_page = new CollectionItemsPage();
 			MainStack.add_named(collection_items_page, page_name[WindowMode.COLLECTION_ITEMS]);
-
-			add_page = new AddPage();
-			MainStack.add_named(add_page, page_name[WindowMode.ADD]);
 
 			details_box = new Gradio.DetailsBox();
 			DetailsBox.add(details_box);
@@ -109,7 +106,6 @@ namespace Gradio{
 
 	        	player_toolbar = new PlayerToolbar();
 	       		player_toolbar.set_visible(false);
-
 	       		Bottom.pack_end(player_toolbar);
 
 	       		// Load css
@@ -129,12 +125,11 @@ namespace Gradio{
 			});
 
 			header.LibraryToggleButton.clicked.connect(() => { set_mode(WindowMode.LIBRARY); });
-			header.CollectionsToggleButton.clicked.connect(() => { set_mode(WindowMode.COLLECTIONS); });
 			header.SearchToggleButton.clicked.connect(() => { set_mode(WindowMode.SEARCH); });
 			header.AddButton.clicked.connect(() => { set_mode(WindowMode.ADD); });
-			header.BackButton.clicked.connect(() => {set_mode (mode_queue.pop_head());}); //go one page back in history
-			header.selection_canceled.connect(disable_selection_mode);
-			header.selection_started.connect(enable_selection_mode);
+			header.BackButton.clicked.connect(() => {set_mode (mode_queue.pop_head(), true);}); //go one page back in history
+			header.selection_canceled.connect(() => {set_selection_mode(false);});
+			header.selection_started.connect(() => {set_selection_mode(true);});
 			NotificationCloseButton.clicked.connect(hide_notification);
 		}
 
@@ -150,22 +145,12 @@ namespace Gradio{
 			trayicon.set_visible(b);
 		}
 
-		public void enable_selection_mode(){
-			player_toolbar.set_visible(false);
+		public void set_selection_mode(bool b){
+			if(App.player.station != null) player_toolbar.set_visible(!b);
 			Page page = (Page)MainStack.get_visible_child();
-			page.set_selection_mode(true);
-			SelectionToolbarRevealer.set_reveal_child(true);
-			header.show_selection_bar();
-		}
-
-		public void disable_selection_mode(){
-			if(App.player.station != null)
-				player_toolbar.set_visible(true);
-
-			Page page = (Page)MainStack.get_visible_child();
-			page.set_selection_mode(false);
-			SelectionToolbarRevealer.set_reveal_child(false);
-			header.show_default_bar();
+			page.set_selection_mode(b);
+			SelectionToolbarRevealer.set_reveal_child(b);
+			header.show_selection_bar(b);
 		}
 
 		public void select_all(){
@@ -178,32 +163,10 @@ namespace Gradio{
 			page.select_none();
 		}
 
-		public void selection_changed(){
+		private void selection_changed(){
 			Page page = (Page)MainStack.get_visible_child();
 			current_selection = page.get_selection();
-
-			selection_toolbar.update_buttons((int)current_selection.length());
-			header.set_selected_items((int)current_selection.length());
-		}
-
-		public StationModel get_station_selection(){
-			StationModel model = new StationModel();
-
-			current_selection.foreach ((station) => {
-				model.add_station((RadioStation)station);
-			});
-
-			return model;
-		}
-
-		public CollectionModel get_collection_selection(){
-			CollectionModel model = new CollectionModel();
-
-			current_selection.foreach ((station) => {
-				model.add_collection((Collection)station);
-			});
-
-			return model;
+			header.set_selected_items((int)current_selection.get_n_items());
 		}
 
 		public void show_notification(string text){
@@ -215,12 +178,12 @@ namespace Gradio{
 			NotificationRevealer.set_reveal_child(false);
 		}
 
-		public void set_mode(WindowMode mode){
+		public void set_mode(WindowMode mode, bool go_back = false){
 			if(in_mode_change == true)
 				return;
 
 			// insert actual mode in the "back" history
-			mode_queue.push_head(current_mode);
+			if(!go_back) mode_queue.push_head(current_mode);
 			in_mode_change = true;
 
 			// set new mode
@@ -229,51 +192,44 @@ namespace Gradio{
 			// Disconnect old signals and deactivate selection mode
 			Page page = (Page)MainStack.get_visible_child();
 			page.set_selection_mode(false);
-			selection_toolbar.set_mode(SelectionMode.DEFAULT);
 			page.selection_changed.disconnect(selection_changed);
-			page.selection_mode_enabled.disconnect(enable_selection_mode);
+			if (selection_changed_id != 0) page.disconnect(selection_changed_id);
 
 			// set headerbar to default (disable selection mode, show default buttons), and show toggle the correct button
-			header.show_default_bar();
+			header.show_selection_bar(false);
 			header.show_default_buttons();
 			header.LibraryToggleButton.set_active(mode == WindowMode.LIBRARY);
-			header.CollectionsToggleButton.set_active(mode == WindowMode.COLLECTIONS);
 			header.SearchToggleButton.set_active(mode == WindowMode.SEARCH);
 
 			// do action for mode
 			switch(current_mode){
 				case WindowMode.LIBRARY: {
 					header.AddButton.set_visible(true);
-					selection_toolbar.set_mode(SelectionMode.LIBRARY);
-					mode_queue.clear();
-					break;
-				};
-				case WindowMode.COLLECTIONS: {
-					selection_toolbar.set_mode(SelectionMode.COLLECTION_OVERVIEW);
-					header.SortBox.set_visible(false);
 					mode_queue.clear();
 					break;
 				};
 				case WindowMode.SEARCH: {
+					header.show_title(_("Search"));
 					if(search_page == null){
 						search_page = new SearchPage();
 						MainStack.add_named(search_page, page_name[WindowMode.SEARCH]);
 					}
-					mode_queue.clear();
 					break;
 				};
 				case WindowMode.COLLECTION_ITEMS: {
-					Collection collection = collections_page.selected_collection;
-					selection_toolbar.set_mode(SelectionMode.COLLECTION_ITEMS, collection.id);
+					Collection collection = library_page.selected_collection;
 					collection_items_page.set_collection(collection);
 					collection_items_page.set_title(collection.name);
 					header.show_title(collection_items_page.get_title());
 					break;
 				};
 				case WindowMode.ADD: {
-					header.show_title("");
-					header.SelectButton.set_visible(false);
+					header.show_title(_("Add new radio stations to your Library"));
 					header.ViewButton.set_visible(false);
+					if(add_page == null){
+						add_page = new AddPage();
+						MainStack.add_named(add_page, page_name[WindowMode.ADD]);
+					}
 					break;
 				};
 			}
@@ -287,7 +243,7 @@ namespace Gradio{
 			// connect new signals
 			Page new_page = (Page)MainStack.get_visible_child();
 			new_page.selection_changed.connect(selection_changed);
-			new_page.selection_mode_enabled.connect(enable_selection_mode);
+			selection_changed_id = new_page.selection_mode_enabled.connect(() => {set_selection_mode(true);});;
 
 			in_mode_change = false;
 			message("Changed page mode to \"%s\"", page_name[current_mode]);
@@ -330,12 +286,6 @@ namespace Gradio{
 				return true;
 			}
 
-			// show collections
-			if ((event.keyval == Gdk.Key.c) && (event.state & default_modifiers) == Gdk.ModifierType.CONTROL_MASK) {
-				set_mode(WindowMode.COLLECTIONS);
-				return true;
-			}
-
 			// show add page
 			if ((event.keyval == Gdk.Key.a) && (event.state & default_modifiers) == Gdk.ModifierType.CONTROL_MASK) {
 				set_mode(WindowMode.ADD);
@@ -346,4 +296,3 @@ namespace Gradio{
 
 	}
 }
-

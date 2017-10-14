@@ -60,8 +60,14 @@ namespace Gradio{
 			mainbox.unselect_all();
 		}
 
-		public GLib.List<Gd.MainBoxItem> get_selection(){
-			return mainbox.get_selection();
+		public StationModel get_selection(){
+			List<Gd.MainBoxItem> selection = mainbox.get_selection();
+			StationModel model = new StationModel();
+
+			foreach(Gd.MainBoxItem item in selection){
+				model.add_item(item);
+			}
+			return model;
 		}
 
 		public string get_title(){

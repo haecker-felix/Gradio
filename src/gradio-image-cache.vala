@@ -120,7 +120,12 @@ namespace Gradio {
 		    		pixbuf = yield new Gdk.Pixbuf.from_stream_async(image_stream, null);
 			}catch (Error e){
 				warning("Could not load image for \"%s\" (%s)", url, e.message);
-				pixbuf = new Gdk.Pixbuf.from_resource("/de/haecker-felix/gradio/icons/hicolor/48x48/apps/de.haeckerfelix.gradio.png");
+
+				try {
+					pixbuf = new Gdk.Pixbuf.from_resource("/de/haecker-felix/gradio/icons/hicolor/48x48/apps/de.haeckerfelix.gradio.png");
+				}catch (Error e) {
+					error("Could not load resource image (%s)", e.message);
+				}
 			}
 
 			return pixbuf;

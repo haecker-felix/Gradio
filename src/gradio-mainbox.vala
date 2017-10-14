@@ -20,6 +20,8 @@ namespace Gradio{
 
 	public class MainBox : Gd.MainBox{
 
+		public signal void collection_clicked(Collection collection);
+
 		public MainBox(){
 			Object(box_type: Gd.MainBoxType.ICON);
 
@@ -41,13 +43,15 @@ namespace Gradio{
 
 			this.item_activated.connect((t,a) => {
 				Gd.MainBoxItem item = (Gd.MainBoxItem)a;
-
 				if(!Util.is_collection_item(int.parse(item.id))){
 					App.window.details_box.set_station((RadioStation)item);
 					if(App.player.station == (RadioStation)item)
 						App.player.toggle_play_stop();
 					else
 						App.player.station = (RadioStation)item;
+				}else{
+					App.window.details_box.set_collection((Collection)item);
+					collection_clicked((Collection)item);
 				}
 			});
 		}

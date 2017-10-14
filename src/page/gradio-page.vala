@@ -30,9 +30,8 @@ namespace Gradio{
 
 		public signal void selection_mode_enabled();
 		public signal void selection_changed();
-		public virtual GLib.List<Gd.MainBoxItem> get_selection(){
-			List<Gd.MainBoxItem> item = null;
-			return item;
+		public virtual StationModel get_selection(){
+			return null;
 		}
 
 	}

@@ -26,13 +26,19 @@ namespace Gradio{
 
 		private MainBox mainbox;
 
+		public Collection selected_collection;
+
 		public LibraryPage(){
 			mainbox = new MainBox();
 			mainbox.set_model(Library.station_model);
 			mainbox.selection_changed.connect(() => {selection_changed();});
 			mainbox.selection_mode_request.connect(() => {selection_mode_enabled();});
-
 			ScrollViewport.add(mainbox);
+
+			mainbox.collection_clicked.connect((collection) => {
+				selected_collection = collection;
+				App.window.set_mode(WindowMode.COLLECTION_ITEMS);
+			});
 
 			Library.station_model.items_changed.connect(update_page);
 			update_page();
@@ -57,8 +63,14 @@ namespace Gradio{
 			mainbox.unselect_all();
 		}
 
-		public GLib.List<Gd.MainBoxItem> get_selection(){
-			return mainbox.get_selection();
+		public StationModel get_selection(){
+			List<Gd.MainBoxItem> selection = mainbox.get_selection();
+			StationModel model = new StationModel();
+
+			foreach(Gd.MainBoxItem item in selection){
+				model.add_item(item);
+			}
+			return model;
 		}
 	}
 }

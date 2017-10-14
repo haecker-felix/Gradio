@@ -68,7 +68,7 @@ namespace Gradio{
 			App.window.header.VotesRButton.set_active(true);
 		}
 
-		public void show_most_clicked(){
+		public void show_most_clicks(){
 			searchbar.reset_filters();
 			App.settings.sort_ascending = false;
 			App.window.header.ClicksRButton.set_active(true);
@@ -86,8 +86,14 @@ namespace Gradio{
 			mainbox.unselect_all();
 		}
 
-		public GLib.List<Gd.MainBoxItem> get_selection(){
-			return mainbox.get_selection();
+		public StationModel get_selection(){
+			List<Gd.MainBoxItem> selection = mainbox.get_selection();
+			StationModel model = new StationModel();
+
+			foreach(Gd.MainBoxItem item in selection){
+				model.add_item(item);
+			}
+			return model;
 		}
 	}
 }

@@ -135,9 +135,6 @@
                             <property name="halign">start</property>
                             <property name="margin_top">3</property>
                             <property name="label" translatable="yes">Name</property>
-                            <attributes>
-                              <attribute name="size" value="-100"/>
-                            </attributes>
                             <style>
                               <class name="dim-label"/>
                             </style>

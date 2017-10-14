@@ -36,6 +36,7 @@ namespace Gradio{
 		private int64 _mtime;
 		private Cairo.Surface _icon;
 		private Thumbnail _thumbnail;
+		private string _primary_text;
 		private string _secondary_text;
 
 		public string title {
@@ -102,7 +103,15 @@ namespace Gradio{
 		}
 
 		public string primary_text {
-			get{return _title;}
+			get{
+				if(_title.length > 28){
+					_primary_text = _title.substring(0, 25);
+					_primary_text = _primary_text + "...";
+				}else{
+					_primary_text = _title;
+				}
+
+			return _primary_text;}
 		}
 
 		public string secondary_text {

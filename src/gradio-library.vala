@@ -19,11 +19,7 @@ using Sqlite;
 namespace Gradio{
 
 	public class Library : Gtk.Box{
-		public signal void added_radio_station(RadioStation s);
-		public signal void removed_radio_station(RadioStation s);
-
 		public static StationModel station_model;
-		public static CollectionModel collection_model;
 
 		private Sqlite.Database db;
 		private string db_error_message;
@@ -34,7 +30,6 @@ namespace Gradio{
 
 		public Library(){
 			station_model = new StationModel();
-			collection_model = new CollectionModel();
 
 			// check for new database
 			if(!database_exists()){
@@ -47,14 +42,18 @@ namespace Gradio{
 
 			// read database data
 			message("Successfully opened database! Reading database data...");
-			read_collections.begin();
-			read_stations.begin();
+			read_database.begin();
 
 			// check for old database (gradio 5 or older)
 			if(is_old_database()){
 				migrate_old_db.begin();
 				return;
 			}
+		}
+
+		private async void read_database(){
+			yield read_collections();
+			yield read_stations();
 		}
 
 		private void open_database(){
@@ -124,7 +123,7 @@ namespace Gradio{
 				case Sqlite.ROW:
 					message("Found collection: %s %s", stmt.column_text(0), stmt.column_text(1));
 					Collection coll = new Collection(stmt.column_text(1), stmt.column_text(0));
-					collection_model.add_collection(coll);
+					station_model.add_item(coll);
 					break;
 				default:
 					printerr ("Error: %d, %s\n", rc, db.errmsg ());
@@ -152,17 +151,23 @@ namespace Gradio{
 				case Sqlite.DONE:
 					break;
 				case Sqlite.ROW:
-					RadioStation station = yield Util.get_station_by_id(int.parse(stmt.column_text(0)));
+					string coll_id = stmt.column_text(1);
+					string station_id = stmt.column_text(0);
 
-					message("Found station: %s", station.title);
-					station_model.add_station(station);
+					Util.get_station_by_id.begin(int.parse(station_id), (obj, res) => {
+						RadioStation station = Util.get_station_by_id.end(res);
 
-					if(stmt.column_text(1) != "0"){
-						Collection coll = collection_model.get_collection_by_id(stmt.column_text(1));
-						coll.add_station(station);
+						message("Found station: %s", station.title);
 
-						message("Added %s to collection \"%s\"", stmt.column_text(0), coll.name);
-					}
+						if(coll_id != "0"){
+							Collection coll = (Collection)station_model.get_item_by_id(coll_id);
+							coll.add_station(station);
+
+							message("Added %s to collection \"%s\"", station_id, coll.name);
+						}else{
+							station_model.add_item(station);
+						}
+					});
 
 					break;
 				default:
@@ -173,182 +178,133 @@ namespace Gradio{
 			message("Imported all stations!");
 		}
 
-		public bool add_station_to_collection(string collection_id, RadioStation station){
-			// Station must be in the library
-			if((!station_model.contains_station(station)))
-				return false;
-
-			// Remove the station from the previous collection (a station can be only in one collection)
-			Statement stmt; int rc = 0; int cols;
-			if ((rc = db.prepare_v2 ("SELECT collection_id from library WHERE station_id = '"+station.id+"';", -1, out stmt, null)) == 1) {
-				critical ("SQL error: %d, %s\n", rc, db.errmsg ());
-				return false;
-			}
-			cols = stmt.column_count();
-			do {
-				rc = stmt.step();
-				switch (rc) {
-				case Sqlite.DONE:
-					break;
-				case Sqlite.ROW:
-					if(stmt.column_text(0) != "0") // if text == 0, there is no previous collection, so do nothing.
-						remove_station_from_collection(stmt.column_text(0), station); break;
-				default:
-					printerr ("Error: %d, %s\n", rc, db.errmsg ());
-					break;
-				}
-			} while (rc == Sqlite.ROW);
-
-			// Get the actual collection, where the station gets added
-			Collection coll = (Collection)collection_model.get_collection_by_id(collection_id);
-
-			// Add the station to the new collection (if the collection exists)
-			if(coll != null){
-				coll.add_station(station);
-
-				string query = "UPDATE library SET collection_id = '"+collection_id+"' WHERE station_id = "+station.id+";";
-
-				int return_code = db.exec (query, null, out db_error_message);
-				if (return_code != Sqlite.OK) {
-					critical("Could not add station \"%s\" to collection %s: %s", station.title, collection_id, db_error_message);
-					return false;
-				}else{
-					message("Added station \"%s\" to collection %s", station.title, collection_id);
-					return true;
-				}
-			}else{
-				warning("Adding station to collection %s: Collection not found.", collection_id);
-				return false;
-			}
-		}
-
-		public bool remove_station_from_collection(string collection_id, RadioStation station){
-			// Set the collection_id to 0 for the specific station
-			string query = "UPDATE library SET collection_id = '0' WHERE station_id = "+station.id+";";
-
-			int return_code = db.exec (query, null, out db_error_message);
-			if (return_code != Sqlite.OK) {
-				critical("Could not remove station \"%s\" from collection %s: %s", station.title, collection_id, db_error_message);
-				return false;
-			}
-
-			// Remove the station from the collection itself
-			Collection coll = collection_model.get_collection_by_id(collection_id);
-			coll.remove_station(station);
-
-			message("Removed station \"%s\" from collection %s", station.title, collection_id);
-			return true;
-		}
-
-		public bool add_new_collection(Collection collection){
-			if(collection_model.contains_collection(collection) || collection == null)
+		public bool add_collection(Collection collection){
+			if(contains_item(collection)){
+				warning("Library already contains collection \"%s\"", collection.name);
 				return true;
+			}
 
-			string query = "INSERT INTO collections (collection_id,collection_name) VALUES ('"+collection.id+"', '"+collection.name+"');";
-
-			int return_code = db.exec (query, null, out db_error_message);
-			if (return_code != Sqlite.OK) {
-				critical("Could not add collection \"%s\" (%s): %s", collection.name, collection.id, db_error_message);
-				return false;
-			}else{
-				collection_model.add_collection(collection);
+			if(sql_insert_row_collection(collection.id, collection.name)){
+				station_model.add_item(collection);
 				message("Added new collection \"%s\" (%s)", collection.name, collection.id);
 				return true;
+			}else{
+				critical("Could not add collection \"%s\" (%s): %s", collection.name, collection.id, db_error_message);
+				return false;
 			}
 		}
 
 		public bool remove_collection(Collection collection){
-			// Remove the collection_id from the stations
-			string query = "UPDATE library SET collection_id = '0' WHERE collection_id = "+collection.id+";";
+			if(!contains_item(collection)){
+				warning("Library doesn't contains collection \"%s\"", collection.name);
+				return true;
+			}
 
-			int return_code = db.exec (query, null, out db_error_message);
-			if (return_code != Sqlite.OK) {
-				critical ("Could not update collection id: %s\n", db_error_message);
+			// Remove all stations in this collection
+			for(int i = 0; i < collection.station_model.get_n_items(); i++){
+				RadioStation station = (RadioStation)collection.station_model.get_item(i);
+				remove_radio_station(station);
+			}
+
+			// Delete collection itself
+			if(sql_delete_row_collection(collection.id)){
+				station_model.remove_item(collection);
+				message("Removed collection \"%s\" (%s)", collection.name, collection.id);
+				return true;
+			}else{
+				critical ("Could not remove collection from database: %s\n", db_error_message);
 				return false;
 			}
-
-			// Delete the collection itself
-			query = "DELETE FROM collections WHERE collection_id=" + collection.id;
-
-			return_code = db.exec (query, null, out db_error_message);
-			if (return_code != Sqlite.OK) {
-			 	critical ("Could not remove collection from database: %s\n", db_error_message);
-			 	return false;
-			}else{
-			 	Idle.add(() => {
-			 		collection_model.remove_collection(collection);
-					return false;
-			 	});
-			}
-
-			message("Removed collection \"%s\" (%s)", collection.name, collection.id);
-			return true;
 		}
 
 		public bool add_radio_station(RadioStation station){
-			if(station_model.contains_station(station) || station == null)
+			if(contains_item(station)){
+				warning("Library already contains station \"%s\"", station.title);
 				return true;
+			}
 
-			string query = "INSERT INTO library (station_id,collection_id) VALUES ("+station.id+", '0');";
-
-			int return_code = db.exec (query, null, out db_error_message);
-			if (return_code != Sqlite.OK) {
-				critical ("Could not add station to library: %s\n", db_error_message);
-				return false;
-			}else{
-				Idle.add(() => {
-					station_model.add_station(station);
-					return false;
-				});
+			if(sql_insert_row_library(station.id, "0")){
+				station_model.add_item(station);
 				message("Added station \"%s\" (%s) to library", station.title, station.id);
 				return true;
+			}else{
+				critical ("Could not add station to library: %s\n", db_error_message);
+				return false;
 			}
 		}
 
 		public bool remove_radio_station(RadioStation station){
-			if(!station_model.contains_station(station))
+			if(!contains_item(station)){
+				warning("Library doesn't contains station \"%s\"", station.title);
 				return true;
-
-			// Remove the station from the collection
-			Statement stmt; int rc = 0; int cols;
-			if ((rc = db.prepare_v2 ("SELECT collection_id from library WHERE station_id = '"+station.id+"';", -1, out stmt, null)) == 1) {
-				critical ("SQL error: %d, %s\n", rc, db.errmsg ());
-				return false;
 			}
-			cols = stmt.column_count();
-			do {
-				rc = stmt.step();
-				switch (rc) {
-				case Sqlite.DONE:
-					break;
-				case Sqlite.ROW:
-					Collection previous_coll = collection_model.get_collection_by_id(stmt.column_text(0));
-					previous_coll.remove_station(station);
-					break;
-				default:
-					printerr ("Error: %d, %s\n", rc, db.errmsg ());
-					break;
-				}
-			} while (rc == Sqlite.ROW);
 
-
-			// Remove the station itself
-			string query = "DELETE FROM library WHERE station_id=" + station.id;
-
-			int return_code = db.exec (query, null, out db_error_message);
-			if (return_code != Sqlite.OK) {
-				critical ("Could not remove station from database: %s\n", db_error_message);
-				return false;
+			if(sql_delete_row_library(station.id)){
+				station_model.remove_item(station);
+				return true;
 			}else{
-				Idle.add(() => {
-					station_model.remove_station(station);
-					removed_radio_station(station);
-					return false;
-				});
-
+				critical ("Could not remove station from database: %s\n", db_error_message);
 				message("Removed station \"%s\" (%s) from library", station.title, station.id);
+				return false;
+			}
+		}
+
+		public bool move_station_to_collection(string collection_id, RadioStation station){
+			if(!contains_item(station)){
+				warning("Library doesn't contains station \"%s\"", station.title);
 				return true;
 			}
+
+			// TODO: We can move a station from one collection to a another collection. This means we have to remove it from the old one.
+			Collection collection = get_collection(station);
+			if(collection != null) collection.station_model.remove_item(station);
+
+			// Remove station from station_model
+			station_model.remove_item(station);
+
+			// Get the actual collection, where the station gets added
+			Collection coll = (Collection)station_model.get_item_by_id(collection_id);
+
+			// Add station to collection
+			coll.add_station(station);
+
+			if(sql_update_row_library(station.id, collection_id)){
+				message("Added station \"%s\" to collection %s", station.title, collection_id);
+				return true;
+			}else{
+				critical("Could not add station \"%s\" to collection %s: %s", station.title, collection_id, db_error_message);
+				return false;
+			}
+		}
+
+		public bool contains_item(Gd.MainBoxItem item){
+			for (int i = 0; i < station_model.get_n_items(); i ++) {
+      				Gd.MainBoxItem fitem = (Gd.MainBoxItem)station_model.get_item (i);
+				if(item.id == fitem.id) return true;
+      				if(Util.is_collection_item(int.parse(fitem.id))){
+					StationModel m = ((Collection)fitem).station_model;
+					for (int i2 = 0; i2 < m.get_n_items(); i2++) {
+						Gd.MainBoxItem fitem2 = (Gd.MainBoxItem)m.get_item (i2);
+						if (item.id == fitem2.id) return true;
+					}
+      				}
+			}
+	    		return false;
+		}
+
+		public Collection get_collection(RadioStation station){
+			for (int i = 0; i < station_model.get_n_items(); i ++) {
+      				Gd.MainBoxItem fstation = (Gd.MainBoxItem)station_model.get_item (i);
+				if(station.id == fstation.id) return null;
+      				if(Util.is_collection_item(int.parse(fstation.id))){
+					StationModel m = ((Collection)fstation).station_model;
+					for (int i2 = 0; i2 < m.get_n_items(); i2++) {
+						Gd.MainBoxItem fitem2 = (Gd.MainBoxItem)m.get_item (i2);
+						if (station.id == fitem2.id) return (Collection)fstation;
+					}
+      				}
+			}
+	    		return null;
 		}
 
 		public void export_database(string path){
@@ -370,7 +326,6 @@ namespace Gradio{
 
 			try{
 				station_model.clear();
-				collection_model.clear();
 
 				newdb.delete();
 				external_db.copy(newdb, FileCopyFlags.NONE, null, null);
@@ -378,6 +333,8 @@ namespace Gradio{
 				critical("Could not import database: %s", e.message);
 			}
 
+			open_database();
+			read_database.begin();
 			message("Successfully imported database!");
 		}
 
@@ -429,6 +386,35 @@ namespace Gradio{
 			return false;
 		}
 
+		private bool sql_insert_row_library(string station_id, string collection_id){
+			return execute_query("INSERT INTO library (station_id,collection_id) VALUES ('"+station_id+"', '"+collection_id+"');");
+		}
 
+		private bool sql_delete_row_library(string station_id){
+			return execute_query("DELETE FROM library WHERE station_id='"+station_id+"';");
+		}
+
+		private bool sql_update_row_library(string station_id, string collection_id){
+			return execute_query("UPDATE library SET collection_id = '"+collection_id+"' WHERE station_id = '"+station_id+"';");
+		}
+
+		private bool sql_insert_row_collection(string collection_id, string collection_name){
+			return execute_query("INSERT INTO collections (collection_id,collection_name) VALUES ('"+collection_id+"', '"+collection_name+"');");
+		}
+
+		private bool sql_delete_row_collection(string collection_id){
+			return execute_query("DELETE FROM collections WHERE collection_id='"+collection_id+"';");
+		}
+
+		private bool execute_query (string query){
+			message("execute \"%s\"", query);
+
+			int return_code = db.exec (query, null, out db_error_message);
+			if (return_code != Sqlite.OK) {
+				critical("Could not execute query \"%s\"", query);
+				return false;
+			}
+			return true;
+		}
 	}
 }

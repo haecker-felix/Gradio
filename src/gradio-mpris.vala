@@ -359,13 +359,13 @@ public class Gradio.MprisPlayer : GLib.Object {
 
 	public void Next() {
 		RadioStation current = App.player.station;
-		App.player.station = Library.station_model.get_next_station(current);
+		// TODO: Readd code line here :)
 
 	}
 
 	public void Previous() {
 		RadioStation current = App.player.station;
-		App.player.station = Library.station_model.get_previous_station(current);
+		// TODO: Readd code line here :)
 	}
 
 	public void Pause() {
