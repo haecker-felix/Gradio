@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-10 14:34+0200\n"
-"PO-Revision-Date: 2017-10-14 09:55+0000\n"
+"PO-Revision-Date: 2017-10-15 12:45+0000\n"
 "Last-Translator: Tomáš Moravec <otoman100@gmail.com>\n"
 "Language-Team: Czech "
 "<https://hosted.weblate.org/projects/gradio/translations/cs/>\n"
@@ -316,11 +316,11 @@ msgstr ""
 #. enable tray icon
 #: src/gradio-settings-window.vala:123
 msgid "Tray icon"
-msgstr ""
+msgstr "Ikona v oznamovací oblasti"
 
 #: src/gradio-settings-window.vala:123
 msgid "Show a tray icon, to restore the main window"
-msgstr ""
+msgstr "Zobrazovat ikonu v oznamovací oblasti pro obnovení hlavního okna"
 
 #. CACHE
 #. cache station images
@@ -346,11 +346,11 @@ msgstr "_Zrušit"
 
 #: src/gradio-settings-window.vala:170
 msgid "Select database to import"
-msgstr ""
+msgstr "Vyberte databázi k importu"
 
 #: src/page/gradio-add-page.vala:27
 msgid "Create a new radio station"
-msgstr ""
+msgstr "Vytvořit novou stanici"
 
 #: src/page/gradio-add-page.vala:28
 msgid "Discover radio stations"
