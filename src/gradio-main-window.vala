@@ -95,9 +95,6 @@ namespace Gradio{
 			collection_items_page = new CollectionItemsPage();
 			MainStack.add_named(collection_items_page, page_name[WindowMode.COLLECTION_ITEMS]);
 
-			add_page = new AddPage();
-			MainStack.add_named(add_page, page_name[WindowMode.ADD]);
-
 			details_box = new Gradio.DetailsBox();
 			DetailsBox.add(details_box);
 
@@ -130,7 +127,7 @@ namespace Gradio{
 			header.LibraryToggleButton.clicked.connect(() => { set_mode(WindowMode.LIBRARY); });
 			header.SearchToggleButton.clicked.connect(() => { set_mode(WindowMode.SEARCH); });
 			header.AddButton.clicked.connect(() => { set_mode(WindowMode.ADD); });
-			header.BackButton.clicked.connect(() => {set_mode (mode_queue.pop_head());}); //go one page back in history
+			header.BackButton.clicked.connect(() => {set_mode (mode_queue.pop_head(), true);}); //go one page back in history
 			header.selection_canceled.connect(() => {set_selection_mode(false);});
 			header.selection_started.connect(() => {set_selection_mode(true);});
 			NotificationCloseButton.clicked.connect(hide_notification);
@@ -181,12 +178,12 @@ namespace Gradio{
 			NotificationRevealer.set_reveal_child(false);
 		}
 
-		public void set_mode(WindowMode mode){
+		public void set_mode(WindowMode mode, bool go_back = false){
 			if(in_mode_change == true)
 				return;
 
 			// insert actual mode in the "back" history
-			mode_queue.push_head(current_mode);
+			if(!go_back) mode_queue.push_head(current_mode);
 			in_mode_change = true;
 
 			// set new mode
@@ -212,6 +209,7 @@ namespace Gradio{
 					break;
 				};
 				case WindowMode.SEARCH: {
+					header.show_title(_("Search"));
 					if(search_page == null){
 						search_page = new SearchPage();
 						MainStack.add_named(search_page, page_name[WindowMode.SEARCH]);
@@ -228,6 +226,10 @@ namespace Gradio{
 				case WindowMode.ADD: {
 					header.show_title(_("Add new radio stations to your Library"));
 					header.ViewButton.set_visible(false);
+					if(add_page == null){
+						add_page = new AddPage();
+						MainStack.add_named(add_page, page_name[WindowMode.ADD]);
+					}
 					break;
 				};
 			}
