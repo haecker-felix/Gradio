@@ -83,6 +83,8 @@ namespace Gradio{
 			//add_group.add_listbox_row(create_private_button);
 
 			AddBox.pack_end(add_group);
+			this.show_all();
+
 
 		}
 
