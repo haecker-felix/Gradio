@@ -13,7 +13,6 @@
 	<file>ui/station-editor.ui</file>
 	<file>ui/groupbox.ui</file>
 	<file>ui/app-menu.ui</file>
-	<file>ui/view-menu.ui</file>
 	<file>ui/main-window.ui</file>
 	<file>ui/player-toolbar.ui</file>
 	<file>ui/status-icon.ui</file>
