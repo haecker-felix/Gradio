@@ -255,7 +255,6 @@ namespace Gradio{
 				return true;
 			}
 
-			// TODO: We can move a station from one collection to a another collection. This means we have to remove it from the old one.
 			Collection collection = get_collection(station);
 			if(collection != null) collection.station_model.remove_item(station);
 

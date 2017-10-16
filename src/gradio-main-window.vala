@@ -194,11 +194,13 @@ namespace Gradio{
 			page.selection_changed.disconnect(selection_changed);
 			if (selection_changed_id != 0) page.disconnect(selection_changed_id);
 
-			// set headerbar to default (disable selection mode, show default buttons), and show toggle the correct button
-			header.show_selection_bar(false);
+			// set headerbar to default
 			header.show_default_buttons();
 			header.SearchToggleButton.set_active(mode == WindowMode.SEARCH);
 			header.set_title("Gradio");
+
+			// disable selection mode
+			set_selection_mode(false);
 
 			// do action for mode
 			switch(current_mode){
@@ -216,14 +218,14 @@ namespace Gradio{
 					break;
 				};
 				case WindowMode.COLLECTION_ITEMS: {
+					header.set_title(collection_items_page.get_title());
 					Collection collection = library_page.selected_collection;
 					collection_items_page.set_collection(collection);
 					collection_items_page.set_title(collection.name);
-					header.set_title(collection_items_page.get_title());
 					break;
 				};
 				case WindowMode.ADD: {
-					header.set_title(_("Add new radio stations to your Library"));
+					header.set_title(_("Add new radio stations to your library"));
 					header.MenuBox.set_visible(false);
 					if(add_page == null){
 						add_page = new AddPage();
