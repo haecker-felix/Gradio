@@ -31,13 +31,11 @@ namespace Gradio{
 		// Default
 		//
 		[GtkChild] public Gtk.Button AddButton;
-		[GtkChild] public Gtk.ToggleButton LibraryToggleButton;
-		[GtkChild] private Gtk.Stack TitleStack;
-		[GtkChild] private Gtk.Label PageTitle;
 		[GtkChild] public Gtk.Button SelectButton;
 		[GtkChild] public Gtk.Button BackButton;
 		[GtkChild] public Gtk.ToggleButton SearchToggleButton;
 		[GtkChild] public Gtk.Box MenuBox;
+		[GtkChild] private Gtk.HeaderBar DefaultHeaderbar;
 
 		//
 		// Selection
@@ -64,13 +62,11 @@ namespace Gradio{
 			}
 		}
 
-		public void show_title(string t){
-			TitleStack.set_visible_child_name("label");
-			PageTitle.set_text(t);
+		public void set_title(string title){
+			DefaultHeaderbar.set_title(title);
 		}
 
 		public void show_default_buttons(){
-			TitleStack.set_visible_child_name("stackswitcher");
 			SelectButton.set_visible(true);
 			SearchToggleButton.set_visible(true);
 			MenuBox.set_visible(true);

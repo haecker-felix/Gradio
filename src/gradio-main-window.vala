@@ -124,7 +124,6 @@ namespace Gradio{
 			 	App.settings.window_height = height;
 			});
 
-			header.LibraryToggleButton.clicked.connect(() => { set_mode(WindowMode.LIBRARY); });
 			header.SearchToggleButton.clicked.connect(() => { set_mode(WindowMode.SEARCH); });
 			header.AddButton.clicked.connect(() => { set_mode(WindowMode.ADD); });
 			header.BackButton.clicked.connect(() => {set_mode (mode_queue.pop_head(), true);}); //go one page back in history
@@ -198,8 +197,8 @@ namespace Gradio{
 			// set headerbar to default (disable selection mode, show default buttons), and show toggle the correct button
 			header.show_selection_bar(false);
 			header.show_default_buttons();
-			header.LibraryToggleButton.set_active(mode == WindowMode.LIBRARY);
 			header.SearchToggleButton.set_active(mode == WindowMode.SEARCH);
+			header.set_title("Gradio");
 
 			// do action for mode
 			switch(current_mode){
@@ -209,7 +208,7 @@ namespace Gradio{
 					break;
 				};
 				case WindowMode.SEARCH: {
-					header.show_title(_("Search"));
+					header.set_title(_("Search"));
 					if(search_page == null){
 						search_page = new SearchPage();
 						MainStack.add_named(search_page, page_name[WindowMode.SEARCH]);
@@ -220,11 +219,11 @@ namespace Gradio{
 					Collection collection = library_page.selected_collection;
 					collection_items_page.set_collection(collection);
 					collection_items_page.set_title(collection.name);
-					header.show_title(collection_items_page.get_title());
+					header.set_title(collection_items_page.get_title());
 					break;
 				};
 				case WindowMode.ADD: {
-					header.show_title(_("Add new radio stations to your Library"));
+					header.set_title(_("Add new radio stations to your Library"));
 					header.MenuBox.set_visible(false);
 					if(add_page == null){
 						add_page = new AddPage();
