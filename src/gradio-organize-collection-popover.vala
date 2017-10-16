@@ -28,8 +28,11 @@ namespace Gradio{
 		[GtkChild] private Button CreateButton;
 
 		[GtkChild] private ListBox CollectionsListBox;
+		[GtkChild] private Image PlaceholderImage;
 
 		public OrganizeCollectionPopover(){
+			CollectionsListBox.set_placeholder(PlaceholderImage);
+
 			CollectionsListBox.set_header_func(header_func);
 			connect_signals();
 			update_collections();
