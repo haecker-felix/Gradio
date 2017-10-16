@@ -84,8 +84,6 @@ namespace Gradio{
 
 			AddBox.pack_end(add_group);
 			this.show_all();
-
-
 		}
 
 		[GtkCallback]

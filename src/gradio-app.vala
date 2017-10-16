@@ -137,7 +137,26 @@ namespace Gradio {
 			});
 			this.add_action (action);
 
-			GLib.Variant sort_variant = new GLib.Variant.string(App.settings.station_sorting.to_string());
+			GLib.Variant hide_broken_variant = new GLib.Variant.boolean(App.settings.hide_broken_stations);
+			SimpleAction hide_broken_action = new SimpleAction.stateful("hide-broken-stations", null, hide_broken_variant);
+			hide_broken_action.change_state.connect((action,state) => {
+				App.settings.hide_broken_stations = state.get_boolean();
+				action.set_state(state);
+			});
+			this.add_action(hide_broken_action);
+
+			string sort_variant_string = "";
+			switch(App.settings.station_sorting){
+				case Compare.VOTES: sort_variant_string = "votes"; break;
+				case Compare.NAME: sort_variant_string = "name"; break;
+				case Compare.LANGUAGE: sort_variant_string = "language"; break;
+				case Compare.COUNTRY: sort_variant_string = "country"; break;
+				case Compare.STATE: sort_variant_string = "state"; break;
+				case Compare.BITRATE: sort_variant_string = "bitrate"; break;
+				case Compare.CLICKS: sort_variant_string = "clicks"; break;
+				case Compare.DATE: sort_variant_string = "clicktimestamp"; break;
+			}
+			GLib.Variant sort_variant = new GLib.Variant.string(sort_variant_string);
 			SimpleAction sort_action = new SimpleAction.stateful("sort", sort_variant.get_type(), sort_variant);
 			sort_action.activate.connect((a,b) => {
 				switch(b.get_string()){
@@ -156,15 +175,9 @@ namespace Gradio {
 			});
 			this.add_action(sort_action);
 
-			GLib.Variant hide_broken_variant = new GLib.Variant.boolean(App.settings.hide_broken_stations);
-			SimpleAction hide_broken_action = new SimpleAction.stateful("hide-broken-stations", null, hide_broken_variant);
-			hide_broken_action.change_state.connect((action,state) => {
-				App.settings.hide_broken_stations = state.get_boolean();
-				action.set_state(state);
-			});
-			this.add_action(hide_broken_action);
-
-			GLib.Variant order_variant = new GLib.Variant.string(App.settings.sort_ascending.to_string());
+			string order_variant_string = "";
+			if(App.settings.sort_ascending == true) order_variant_string = "ascending"; else order_variant_string = "descending";
+			GLib.Variant order_variant = new GLib.Variant.string(order_variant_string);
 			SimpleAction order_action = new SimpleAction.stateful("sortorder", order_variant.get_type(), order_variant);
 			order_action.activate.connect((a,b) => {
 				switch(b.get_string()){
