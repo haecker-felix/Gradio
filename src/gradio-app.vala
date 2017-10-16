@@ -120,6 +120,63 @@ namespace Gradio {
 			action.activate.connect (() => { window.select_none (); });
 			this.add_action (action);
 
+			action = new GLib.SimpleAction ("import-library", null);
+			action.activate.connect (() => {
+				string path = Util.import_library_dialog();
+				if(path == "") return;
+				if(!Util.show_yes_no_dialog(_("Do you want to replace the current library with this one?"), window))return;
+				App.library.import_database(path);
+			});
+			this.add_action (action);
+
+			action = new GLib.SimpleAction ("export-library", null);
+			action.activate.connect (() => {
+				string path = Util.export_library_dialog();
+				if(path == "") return;
+				App.library.export_database(path);
+			});
+			this.add_action (action);
+
+			GLib.Variant sort_variant = new GLib.Variant.string(App.settings.station_sorting.to_string());
+			SimpleAction sort_action = new SimpleAction.stateful("sort", sort_variant.get_type(), sort_variant);
+			sort_action.activate.connect((a,b) => {
+				switch(b.get_string()){
+					case "votes": App.settings.station_sorting = Compare.VOTES; break;
+					case "name": App.settings.station_sorting = Compare.NAME; break;
+					case "language": App.settings.station_sorting = Compare.LANGUAGE; break;
+					case "country": App.settings.station_sorting = Compare.COUNTRY; break;
+					case "state": App.settings.station_sorting = Compare.STATE; break;
+					case "bitrate": App.settings.station_sorting = Compare.BITRATE; break;
+					case "clicks": App.settings.station_sorting = Compare.CLICKS; break;
+					case "clicktimestamp": App.settings.station_sorting = Compare.DATE; break;
+				}
+
+				message("activate " + b.get_string());
+				a.set_state(b);
+			});
+			this.add_action(sort_action);
+
+			GLib.Variant hide_broken_variant = new GLib.Variant.boolean(App.settings.hide_broken_stations);
+			SimpleAction hide_broken_action = new SimpleAction.stateful("hide-broken-stations", null, hide_broken_variant);
+			hide_broken_action.change_state.connect((action,state) => {
+				App.settings.hide_broken_stations = state.get_boolean();
+				action.set_state(state);
+			});
+			this.add_action(hide_broken_action);
+
+			GLib.Variant order_variant = new GLib.Variant.string(App.settings.sort_ascending.to_string());
+			SimpleAction order_action = new SimpleAction.stateful("sortorder", order_variant.get_type(), order_variant);
+			order_action.activate.connect((a,b) => {
+				switch(b.get_string()){
+					case "ascending": App.settings.sort_ascending = true; break;
+					case "descending": App.settings.sort_ascending = false; break;
+				}
+
+				message("activate " + b.get_string());
+				a.set_state(b);
+			});
+			this.add_action(order_action);
+
 			// setup appmenu
 			var builder = new Gtk.Builder.from_resource ("/de/haecker-felix/gradio/ui/app-menu.ui");
 			var app_menu = builder.get_object ("app-menu") as GLib.MenuModel;

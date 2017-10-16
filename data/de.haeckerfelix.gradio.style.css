@@ -8,3 +8,9 @@
 	font-size: smaller;
 	padding: 2px 2px;
 }
+
+.menu-heading {
+    min-height: 26px;
+    padding-left: 5px;
+    padding-right: 5px;
+}

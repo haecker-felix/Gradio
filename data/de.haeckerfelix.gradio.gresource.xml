@@ -13,6 +13,7 @@
 	<file>ui/station-editor.ui</file>
 	<file>ui/groupbox.ui</file>
 	<file>ui/app-menu.ui</file>
+	<file>ui/view-menu.ui</file>
 	<file>ui/main-window.ui</file>
 	<file>ui/player-toolbar.ui</file>
 	<file>ui/status-icon.ui</file>
@@ -21,6 +22,7 @@
 	<file>ui/selection-toolbar.ui</file>
 	<file>ui/organize-collection-popover.ui</file>
 	<file>ui/searchbar.ui</file>
+	<file>ui/menubutton.ui</file>
 	<file>icons/hicolor/48x48/apps/de.haeckerfelix.gradio.png</file>
   </gresource>
 </gresources>

@@ -225,7 +225,7 @@ namespace Gradio{
 				};
 				case WindowMode.ADD: {
 					header.show_title(_("Add new radio stations to your Library"));
-					header.ViewButton.set_visible(false);
+					header.MenuBox.set_visible(false);
 					if(add_page == null){
 						add_page = new AddPage();
 						MainStack.add_named(add_page, page_name[WindowMode.ADD]);

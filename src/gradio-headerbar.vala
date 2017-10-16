@@ -37,8 +37,7 @@ namespace Gradio{
 		[GtkChild] public Gtk.Button SelectButton;
 		[GtkChild] public Gtk.Button BackButton;
 		[GtkChild] public Gtk.ToggleButton SearchToggleButton;
-		[GtkChild] public Gtk.Button ViewButton;
-		[GtkChild] public Gtk.MenuButton MenuButton;
+		[GtkChild] public Gtk.Box MenuBox;
 
 		//
 		// Selection
@@ -46,71 +45,15 @@ namespace Gradio{
 		[GtkChild] private Gtk.MenuButton SelectionMenuButton;
 		[GtkChild] private Gtk.Label SelectionMenuButtonLabel;
 
-		//
-		// View Popover
-		//
-		[GtkChild] public Gtk.Button ZoomInButton;
-		[GtkChild] public Gtk.Button ZoomOutButton;
-		[GtkChild] public Gtk.RadioButton VotesRButton;
-		[GtkChild] public Gtk.RadioButton NameRButton;
-		[GtkChild] public Gtk.RadioButton LanguageRButton;
-		[GtkChild] public Gtk.RadioButton CountryRButton;
-		[GtkChild] public Gtk.RadioButton StateRButton;
-		[GtkChild] public Gtk.RadioButton BitrateRButton;
-		[GtkChild] public Gtk.RadioButton ClicksRButton;
-		[GtkChild] public Gtk.RadioButton ClickTimestampRButton;
-		[GtkChild] public Gtk.ToggleButton SortDescendingButton;
-		[GtkChild] public Gtk.ToggleButton SortAscendingButton;
-
-		[GtkChild] public Gtk.Box SortBox;
-
-		public int actual_zoom = 100;
-		private const int min_zoom = 50;
-		private const int max_zoom = 175;
-		private const int zoom_steps = 25;
-
-
 		public Headerbar(){
 			var builder = new Gtk.Builder.from_resource ("/de/haecker-felix/gradio/ui/selection-menu.ui");
 			var selection_menu = builder.get_object ("selection-menu") as GLib.MenuModel;
 
+			Gradio.MenuButton mbutton = new Gradio.MenuButton();
+			MenuBox.add(mbutton);
+
 			SelectionMenuButtonLabel.set_text("Click on items to select them");
 			SelectionMenuButton.set_menu_model(selection_menu);
-
-			actual_zoom = Gradio.App.settings.icon_zoom;
-			if(actual_zoom == max_zoom)
-				ZoomInButton.set_sensitive(false);
-			if(actual_zoom == min_zoom)
-				ZoomOutButton.set_sensitive(false);
-
-			switch(App.settings.station_sorting){
-				case Compare.VOTES: VotesRButton.set_active(true); break;
-				case Compare.NAME: NameRButton.set_active(true); break;
-				case Compare.LANGUAGE: LanguageRButton.set_active(true); break;
-				case Compare.COUNTRY: CountryRButton.set_active(true); break;
-				case Compare.BITRATE: BitrateRButton.set_active(true); break;
-				case Compare.CLICKS: ClicksRButton.set_active(true); break;
-				case Compare.STATE: StateRButton.set_active(true); break;
-				case Compare.DATE: ClickTimestampRButton.set_active(true); break;
-			}
-
-			if(App.settings.sort_ascending){
-				SortAscendingButton.set_active(true);
-				SortDescendingButton.set_active(false);
-			}else{
-				SortAscendingButton.set_active(false);
-				SortDescendingButton.set_active(true);
-			}
-
-			// Show Menubutton on non GNOME desktops
-			if(!(GLib.Environment.get_variable("DESKTOP_SESSION")).contains("gnome")) {
-				var appmenu_builder = new Gtk.Builder.from_resource ("/de/haecker-felix/gradio/ui/app-menu.ui");
-				var app_menu = appmenu_builder.get_object ("app-menu") as GLib.MenuModel;
-				MenuButton.set_menu_model(app_menu);
-				MenuButton.set_visible (true);
-			}else{
-				MenuButton.set_visible (false);
-			}
 		}
 
 		public void set_selected_items(int i){
@@ -130,9 +73,8 @@ namespace Gradio{
 			TitleStack.set_visible_child_name("stackswitcher");
 			SelectButton.set_visible(true);
 			SearchToggleButton.set_visible(true);
-			ViewButton.set_visible(true);
+			MenuBox.set_visible(true);
 			AddButton.set_visible(false);
-			SortBox.set_visible(true);
 		}
 
 		public void show_selection_bar(bool b){
@@ -152,62 +94,6 @@ namespace Gradio{
 		private void SelectButton_clicked(Gtk.Button button){
 			selection_started();
 			show_selection_bar(true);
-		}
-
-		[GtkCallback]
-		private void ZoomInButton_clicked(Gtk.Button button){
-			ZoomOutButton.set_sensitive(true);
-			if((actual_zoom + zoom_steps) <= max_zoom){
-				actual_zoom = actual_zoom  + zoom_steps;
-				Gradio.App.settings.icon_zoom = actual_zoom;
-
-				if(actual_zoom == max_zoom)
-					ZoomInButton.set_sensitive(false);
-			}
-		}
-
-		[GtkCallback]
-		private void ZoomOutButton_clicked(Gtk.Button button){
-			ZoomInButton.set_sensitive(true);
-			if((actual_zoom - zoom_steps) >= min_zoom){
-				actual_zoom = actual_zoom  - zoom_steps;
-				Gradio.App.settings.icon_zoom = actual_zoom;
-
-				if(actual_zoom == min_zoom)
-					ZoomOutButton.set_sensitive(false);
-			}
-		}
-
-		[GtkCallback]
-		private void SortRadioButton_toggled(Gtk.ToggleButton button){
-			if(button.active){
-				if(button == VotesRButton) App.settings.station_sorting = Compare.VOTES;
-				if(button == NameRButton) App.settings.station_sorting = Compare.NAME;
-				if(button == LanguageRButton) App.settings.station_sorting = Compare.LANGUAGE;
-				if(button == CountryRButton) App.settings.station_sorting = Compare.COUNTRY;
-				if(button == StateRButton) App.settings.station_sorting = Compare.STATE;
-				if(button == BitrateRButton) App.settings.station_sorting = Compare.BITRATE;
-				if(button == ClicksRButton) App.settings.station_sorting = Compare.CLICKS;
-				if(button == ClickTimestampRButton) App.settings.station_sorting = Compare.DATE;
-			}
-		}
-
-		[GtkCallback]
-		private void SortDescendingButton_toggled(){
-			if(SortDescendingButton.active){
-				App.settings.sort_ascending = false;
-				SortAscendingButton.set_active(false);
-				SortDescendingButton.set_active(true);
-			}
-		}
-
-		[GtkCallback]
-		private void SortAscendingButton_toggled(){
-			if(SortAscendingButton.active){
-				App.settings.sort_ascending = true;
-				SortDescendingButton.set_active(false);
-				SortAscendingButton.set_active(true);
-			}
 		}
 	}
 }
