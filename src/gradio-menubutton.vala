@@ -32,14 +32,6 @@ namespace Gradio{
 		private const int zoom_steps = 25;
 
 		public MenuButton(){
-			// if(App.settings.sort_ascending){
-			// 	SortAscendingButton.set_active(true);
-			// 	SortDescendingButton.set_active(false);
-			// }else{
-			// 	SortAscendingButton.set_active(false);
-			// 	SortDescendingButton.set_active(true);
-			// }
-
 			actual_zoom = Gradio.App.settings.icon_zoom;
 			if(actual_zoom == max_zoom) ZoomInButton.set_sensitive(false);
 			if(actual_zoom == min_zoom) ZoomOutButton.set_sensitive(false);
@@ -48,7 +40,6 @@ namespace Gradio{
 			if(!(GLib.Environment.get_variable("DESKTOP_SESSION")).contains("gnome")) {
 				AppBox.set_visible(true);
 			}
-
 		}
 
 		[GtkCallback]
