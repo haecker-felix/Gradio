@@ -124,7 +124,7 @@ namespace Gradio{
 			 	App.settings.window_height = height;
 			});
 
-			header.SearchToggleButton.clicked.connect(() => { set_mode(WindowMode.SEARCH); });
+			header.SearchToggleButton.toggled.connect(() => { if(!header.SearchToggleButton.get_active()) set_mode (mode_queue.pop_head(), true); else set_mode(WindowMode.SEARCH); });
 			header.AddButton.clicked.connect(() => { set_mode(WindowMode.ADD); });
 			header.BackButton.clicked.connect(() => {set_mode (mode_queue.pop_head(), true);}); //go one page back in history
 			header.selection_canceled.connect(() => {set_selection_mode(false);});
