@@ -55,7 +55,6 @@ namespace Gradio{
 		private ulong selection_changed_id = 0;
 		public StationModel current_selection { get; set;}
 
-
 		// In-App Notification
 		[GtkChild] private Button NotificationCloseButton;
 		[GtkChild] private Label NotificationLabel;
@@ -124,9 +123,15 @@ namespace Gradio{
 			 	App.settings.window_height = height;
 			});
 
-			header.SearchToggleButton.toggled.connect(() => { if(!header.SearchToggleButton.get_active()) set_mode (mode_queue.pop_head(), true); else set_mode(WindowMode.SEARCH); });
+			header.SearchToggleButton.clicked.connect(() => {
+				if(!header.SearchToggleButton.active){
+					if(current_mode == WindowMode.SEARCH) set_mode(mode_queue.pop_head(), true);
+				}else{
+					set_mode(WindowMode.SEARCH);
+				}
+			});
 			header.AddButton.clicked.connect(() => { set_mode(WindowMode.ADD); });
-			header.BackButton.clicked.connect(() => {set_mode (mode_queue.pop_head(), true);}); //go one page back in history
+			header.BackButton.clicked.connect(() => {set_mode(mode_queue.pop_head(), true);});
 			header.selection_canceled.connect(() => {set_selection_mode(false);});
 			header.selection_started.connect(() => {set_selection_mode(true);});
 			NotificationCloseButton.clicked.connect(hide_notification);
@@ -177,12 +182,12 @@ namespace Gradio{
 			NotificationRevealer.set_reveal_child(false);
 		}
 
-		public void set_mode(WindowMode mode, bool go_back = false){
+		public void set_mode(WindowMode mode, bool dont_write_history = false){
 			if(in_mode_change == true)
 				return;
 
 			// insert actual mode in the "back" history
-			if(!go_back) mode_queue.push_head(current_mode);
+			if(!dont_write_history) mode_queue.push_head(current_mode);
 			in_mode_change = true;
 
 			// set new mode
