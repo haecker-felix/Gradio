@@ -59,22 +59,19 @@ namespace Gradio{
 		public void show_recently_clicked(){
 			searchbar.reset_filters();
 			App.settings.sort_ascending = false;
-			// TODO: Find a workaround for this
-			// App.window.header.ClickTimestampRButton.set_active(true);
+			App.settings.station_sorting = Compare.DATE;
 		}
 
 		public void show_most_voted(){
 			searchbar.reset_filters();
 			App.settings.sort_ascending = false;
-			// TODO: Find a workaround for this
-			// App.window.header.VotesRButton.set_active(true);
+			App.settings.station_sorting = Compare.VOTES;
 		}
 
 		public void show_most_clicks(){
 			searchbar.reset_filters();
 			App.settings.sort_ascending = false;
-			// TODO: Find a workaround for this
-			// App.window.header.ClicksRButton.set_active(true);
+			App.settings.station_sorting = Compare.CLICKS;
 		}
 
 		public void set_selection_mode(bool b){

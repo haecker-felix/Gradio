@@ -46,6 +46,16 @@ namespace Gradio{
 			if(!(GLib.Environment.get_variable("DESKTOP_SESSION")).contains("gnome")) {
 				AppBox.set_visible(true);
 			}
+
+			App.settings.notify["station-sorting"].connect(() => {
+ 				var action = action_group.lookup_action ("sort") as GLib.SimpleAction;
+				action.set_state(get_sort_string());
+			});
+
+			App.settings.notify["sort-ascending"].connect(() => {
+ 				var action = action_group.lookup_action ("sortorder") as GLib.SimpleAction;
+				action.set_state(get_sortorder_string());
+			});
 		}
 
 		private void setup_actions(){
@@ -81,18 +91,7 @@ namespace Gradio{
 
 
 			// Sorting
-			string sort_variant_string = "";
-			switch(App.settings.station_sorting){
-				case Compare.VOTES: sort_variant_string = "votes"; break;
-				case Compare.NAME: sort_variant_string = "name"; break;
-				case Compare.LANGUAGE: sort_variant_string = "language"; break;
-				case Compare.COUNTRY: sort_variant_string = "country"; break;
-				case Compare.STATE: sort_variant_string = "state"; break;
-				case Compare.BITRATE: sort_variant_string = "bitrate"; break;
-				case Compare.CLICKS: sort_variant_string = "clicks"; break;
-				case Compare.DATE: sort_variant_string = "clicktimestamp"; break;
-			}
-			variant = new GLib.Variant.string(sort_variant_string);
+			variant = new GLib.Variant.string(get_sort_string());
 			action = new SimpleAction.stateful("sort", variant.get_type(), variant);
 			action.activate.connect((a,b) => {
 				switch(b.get_string()){
@@ -111,9 +110,7 @@ namespace Gradio{
 
 
 			// Sort order
-			string order_variant_string = "";
-			if(App.settings.sort_ascending == true) order_variant_string = "ascending"; else order_variant_string = "descending";
-			variant = new GLib.Variant.string(order_variant_string);
+			variant = new GLib.Variant.string(get_sortorder_string());
 			action = new SimpleAction.stateful("sortorder", variant.get_type(), variant);
 			action.activate.connect((a,b) => {
 				switch(b.get_string()){
@@ -123,6 +120,27 @@ namespace Gradio{
 				a.set_state(b);
 			});
 			action_group.add_action(action);
+		}
+
+		private string get_sort_string(){
+			string sort_variant_string = "";
+			switch(App.settings.station_sorting){
+				case Compare.VOTES: sort_variant_string = "votes"; break;
+				case Compare.NAME: sort_variant_string = "name"; break;
+				case Compare.LANGUAGE: sort_variant_string = "language"; break;
+				case Compare.COUNTRY: sort_variant_string = "country"; break;
+				case Compare.STATE: sort_variant_string = "state"; break;
+				case Compare.BITRATE: sort_variant_string = "bitrate"; break;
+				case Compare.CLICKS: sort_variant_string = "clicks"; break;
+				case Compare.DATE: sort_variant_string = "clicktimestamp"; break;
+			}
+			return sort_variant_string;
+		}
+
+		private string get_sortorder_string(){
+			string order_variant_string = "";
+			if(App.settings.sort_ascending == true) order_variant_string = "ascending"; else order_variant_string = "descending";
+			return order_variant_string;
 		}
 
 		[GtkCallback]
