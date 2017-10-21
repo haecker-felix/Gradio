@@ -358,14 +358,11 @@ public class Gradio.MprisPlayer : GLib.Object {
 	public signal void Seeked(int64 Position);
 
 	public void Next() {
-		RadioStation current = App.player.station;
-		// TODO: Readd code line here :)
 
 	}
 
 	public void Previous() {
-		RadioStation current = App.player.station;
-		// TODO: Readd code line here :)
+
 	}
 
 	public void Pause() {
