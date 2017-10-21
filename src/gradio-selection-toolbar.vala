@@ -27,6 +27,7 @@ namespace Gradio{
 		[GtkChild] private Gtk.Button VoteButton;
 		[GtkChild] private Gtk.Button EditButton;
 		[GtkChild] private Gtk.Stack SelectionStack;
+		[GtkChild] private Gtk.Image InfoImage;
 		private OrganizeCollectionPopover collection_dialog;
 
 		private MainWindow window;
@@ -49,6 +50,7 @@ namespace Gradio{
 			CollectionButton.set_visible(false);
 			VoteButton.set_visible(false);
 			EditButton.set_visible(false);
+			InfoImage.set_visible(false);
 
 			if(window.current_selection.get_n_items() == 0)
 				SelectionStack.set_visible_child_name("no-actions");
@@ -73,43 +75,55 @@ namespace Gradio{
 				}
 			}
 
-			// Selection contains ONLY library items
-			if(only_contains_library_items()){
+
+			int library_count = library_items();
+			int non_library_count = non_library_items();
+
+			// Selection contains more library items than non library items
+			if(library_count > non_library_count){
 				RemoveButton.set_visible(true);
 
 				// ... but no collection item!
 				if(!window.current_selection.contains_collection_item())
 					CollectionButton.set_visible(true);
+
+				if(non_library_count != 0){
+					InfoImage.set_visible(true);
+					InfoImage.set_tooltip_text(non_library_count.to_string() + " object(s) not present in library.");
+				}
 			}
 
-			// Selection contains ONLY NON library items
-			if(only_contains_non_library_items()){
+			// Selection contains more non library items than library items
+			if(library_count <= non_library_count){
 				AddButton.set_visible(true);
+
+				if(library_count != 0){
+					InfoImage.set_visible(true);
+					InfoImage.set_tooltip_text(library_count.to_string() + " object(s) already added to library.");
+				}
 			}
 		}
 
-		private bool only_contains_library_items(){
-			// if count == 0, so it cannot contain any library item
-			if(window.current_selection.get_n_items() == 0) return false;
+		private int non_library_items(){
+			int count = 0;
 
 			for(int i = 0; i < window.current_selection.get_n_items(); i++){
 				Gd.MainBoxItem item = (Gd.MainBoxItem)window.current_selection.get_item(i);
-				if(!App.library.contains_item(item)) return false;
+				if(!App.library.contains_item(item)) count++;
 			}
 
-			return true;
+			return count;
 		}
 
-		private bool only_contains_non_library_items(){
-			// if count == 0, so it cannot contain any non library item
-			if(window.current_selection.get_n_items() == 0) return false;
+		private int library_items(){
+			int count = 0;
 
 			for(int i = 0; i < window.current_selection.get_n_items(); i++){
 				Gd.MainBoxItem item = (Gd.MainBoxItem)window.current_selection.get_item(i);
-				if(App.library.contains_item(item)) return false;
+				if(App.library.contains_item(item)) count++;
 			}
 
-			return true;
+			return count;
 		}
 
 		[GtkCallback]
