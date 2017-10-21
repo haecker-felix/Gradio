@@ -96,7 +96,7 @@ namespace Gradio{
 
 		[GtkCallback]
 		private void CreateButton_clicked(Button button){
-			Collection c = new Collection(CreateEntry.get_text(), Random.int_range(1000000, 9999999).to_string()); 	// TODO: this should not be the right way to generate a id
+			Collection c = new Collection(CreateEntry.get_text(), Random.int_range(1000000, 9999999).to_string());
 			App.library.add_collection(c);
 			CreateEntry.set_text("");
 			update_collections();

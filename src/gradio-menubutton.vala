@@ -31,15 +31,98 @@ namespace Gradio{
 		private const int max_zoom = 175;
 		private const int zoom_steps = 25;
 
+		private GLib.SimpleActionGroup action_group;
+
 		public MenuButton(){
 			actual_zoom = Gradio.App.settings.icon_zoom;
 			if(actual_zoom == max_zoom) ZoomInButton.set_sensitive(false);
 			if(actual_zoom == min_zoom) ZoomOutButton.set_sensitive(false);
 
+			action_group = new GLib.SimpleActionGroup ();
+			this.insert_action_group ("menu", action_group);
+			setup_actions();
+
 			// Show app actions on non GNOME desktops in menu popover
 			if(!(GLib.Environment.get_variable("DESKTOP_SESSION")).contains("gnome")) {
 				AppBox.set_visible(true);
 			}
+		}
+
+		private void setup_actions(){
+			// Import Library
+			var action = new GLib.SimpleAction ("import-library", null);
+			action.activate.connect (() => {
+				string path = Util.import_library_dialog();
+				if(path == "") return;
+				if(!Util.show_yes_no_dialog(_("Do you want to replace the current library with this one?"), App.window))return;
+				App.library.import_database(path);
+			});
+			action_group.add_action(action);
+
+
+			// Export Library
+			action = new GLib.SimpleAction ("export-library", null);
+			action.activate.connect (() => {
+				string path = Util.export_library_dialog();
+				if(path == "") return;
+				App.library.export_database(path);
+			});
+			action_group.add_action(action);
+
+
+			// Hide broken stations
+			var variant = new GLib.Variant.boolean(App.settings.hide_broken_stations);
+			action = new SimpleAction.stateful("hide-broken-stations", null, variant);
+			action.change_state.connect((action,state) => {
+				App.settings.hide_broken_stations = state.get_boolean();
+				action.set_state(state);
+			});
+			action_group.add_action(action);
+
+
+			// Sorting
+			string sort_variant_string = "";
+			switch(App.settings.station_sorting){
+				case Compare.VOTES: sort_variant_string = "votes"; break;
+				case Compare.NAME: sort_variant_string = "name"; break;
+				case Compare.LANGUAGE: sort_variant_string = "language"; break;
+				case Compare.COUNTRY: sort_variant_string = "country"; break;
+				case Compare.STATE: sort_variant_string = "state"; break;
+				case Compare.BITRATE: sort_variant_string = "bitrate"; break;
+				case Compare.CLICKS: sort_variant_string = "clicks"; break;
+				case Compare.DATE: sort_variant_string = "clicktimestamp"; break;
+			}
+			variant = new GLib.Variant.string(sort_variant_string);
+			action = new SimpleAction.stateful("sort", variant.get_type(), variant);
+			action.activate.connect((a,b) => {
+				switch(b.get_string()){
+					case "votes": App.settings.station_sorting = Compare.VOTES; break;
+					case "name": App.settings.station_sorting = Compare.NAME; break;
+					case "language": App.settings.station_sorting = Compare.LANGUAGE; break;
+					case "country": App.settings.station_sorting = Compare.COUNTRY; break;
+					case "state": App.settings.station_sorting = Compare.STATE; break;
+					case "bitrate": App.settings.station_sorting = Compare.BITRATE; break;
+					case "clicks": App.settings.station_sorting = Compare.CLICKS; break;
+					case "clicktimestamp": App.settings.station_sorting = Compare.DATE; break;
+				}
+				a.set_state(b);
+			});
+			action_group.add_action(action);
+
+
+			// Sort order
+			string order_variant_string = "";
+			if(App.settings.sort_ascending == true) order_variant_string = "ascending"; else order_variant_string = "descending";
+			variant = new GLib.Variant.string(order_variant_string);
+			action = new SimpleAction.stateful("sortorder", variant.get_type(), variant);
+			action.activate.connect((a,b) => {
+				switch(b.get_string()){
+					case "ascending": App.settings.sort_ascending = true; break;
+					case "descending": App.settings.sort_ascending = false; break;
+				}
+				a.set_state(b);
+			});
+			action_group.add_action(action);
 		}
 
 		[GtkCallback]

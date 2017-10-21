@@ -36,6 +36,7 @@ namespace Gradio{
 		[GtkChild] public Gtk.ToggleButton SearchToggleButton;
 		[GtkChild] public Gtk.Box MenuBox;
 		[GtkChild] private Gtk.HeaderBar DefaultHeaderbar;
+		public Gradio.MenuButton mbutton;
 
 		//
 		// Selection
@@ -47,7 +48,7 @@ namespace Gradio{
 			var builder = new Gtk.Builder.from_resource ("/de/haecker-felix/gradio/ui/selection-menu.ui");
 			var selection_menu = builder.get_object ("selection-menu") as GLib.MenuModel;
 
-			Gradio.MenuButton mbutton = new Gradio.MenuButton();
+			mbutton = new Gradio.MenuButton();
 			MenuBox.add(mbutton);
 
 			SelectionMenuButtonLabel.set_text("Click on items to select them");

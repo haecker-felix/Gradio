@@ -115,7 +115,7 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
-		<property name="action_name">app.hide-broken-stations</property>
+		<property name="action_name">menu.hide-broken-stations</property>
                 <property name="text" translatable="yes">Hide broken stations</property>
               </object>
               <packing>
@@ -174,7 +174,7 @@
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
-                    <property name="action_name">app.preferences</property>
+                    <property name="action_name">menu.preferences</property>
                     <property name="text" translatable="yes">Settings</property>
                   </object>
                   <packing>
@@ -188,7 +188,7 @@
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
-                    <property name="action_name">app.about</property>
+                    <property name="action_name">menu.about</property>
                     <property name="text" translatable="yes">About</property>
                   </object>
                   <packing>
@@ -202,7 +202,7 @@
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
-                    <property name="action_name">app.quit</property>
+                    <property name="action_name">menu.quit</property>
                     <property name="text" translatable="yes">Quit</property>
                   </object>
                   <packing>
@@ -263,7 +263,7 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
-                <property name="action_name">app.import-library</property>
+                <property name="action_name">menu.import-library</property>
                 <property name="text" translatable="yes">Import</property>
               </object>
               <packing>
@@ -277,7 +277,7 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
-                <property name="action_name">app.export-library</property>
+                <property name="action_name">menu.export-library</property>
                 <property name="text" translatable="yes">Export</property>
               </object>
               <packing>
@@ -336,7 +336,7 @@
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
-                    <property name="action_name">app.sort</property>
+                    <property name="action_name">menu.sort</property>
                     <property name="text" translatable="yes">Votes</property>
 	 	    <property name="action-target">'votes'</property>
                   </object>
@@ -351,7 +351,7 @@
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
-                    <property name="action_name">app.sort</property>
+                    <property name="action_name">menu.sort</property>
                     <property name="text" translatable="yes">Name</property>
 		    <property name="action-target">'name'</property>
                   </object>
@@ -366,7 +366,7 @@
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
-                    <property name="action_name">app.sort</property>
+                    <property name="action_name">menu.sort</property>
                     <property name="text" translatable="yes">Language</property>
 		    <property name="action-target">'language'</property>
                   </object>
@@ -381,7 +381,7 @@
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
-                    <property name="action_name">app.sort</property>
+                    <property name="action_name">menu.sort</property>
                     <property name="text" translatable="yes">Country</property>
 		    <property name="action-target">'country'</property>
                   </object>
@@ -396,7 +396,7 @@
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
-                    <property name="action_name">app.sort</property>
+                    <property name="action_name">menu.sort</property>
                     <property name="text" translatable="yes">State</property>
 		    <property name="action-target">'state'</property>
                   </object>
@@ -411,7 +411,7 @@
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
-                    <property name="action_name">app.sort</property>
+                    <property name="action_name">menu.sort</property>
                     <property name="text" translatable="yes">Clicks</property>
 		    <property name="action-target">'clicks'</property>
                   </object>
@@ -426,7 +426,7 @@
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
-                    <property name="action_name">app.sort</property>
+                    <property name="action_name">menu.sort</property>
                     <property name="text" translatable="yes">Bitrate</property>
 		    <property name="action-target">'bitrate'</property>
                   </object>
@@ -441,7 +441,7 @@
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
-                    <property name="action_name">app.sort</property>
+                    <property name="action_name">menu.sort</property>
                     <property name="text" translatable="yes">Date</property>
 		    <property name="action-target">'clicktimestamp'</property>
                   </object>
@@ -481,7 +481,7 @@
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
-                    <property name="action_name">app.sortorder</property>
+                    <property name="action_name">menu.sortorder</property>
                     <property name="text" translatable="yes">Ascending</property>
 		    <property name="action-target">'ascending'</property>
                   </object>
@@ -496,7 +496,7 @@
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
-                    <property name="action_name">app.sortorder</property>
+                    <property name="action_name">menu.sortorder</property>
                     <property name="text" translatable="yes">Descending</property>
 		    <property name="action-target">'descending'</property>
                   </object>
