@@ -71,7 +71,6 @@ namespace Gradio{
 			if(window.current_selection.contains_collection_item() && !window.current_selection.contains_radio_station_item()){
 				if(window.current_selection.get_n_items() == 1){
 					DetailsButton.set_visible(true);
-					EditButton.set_visible(true);
 				}
 			}
 
@@ -201,13 +200,7 @@ namespace Gradio{
 		public void EditButton_clicked (Gtk.Button button) {
 			Gd.MainBoxItem item = (Gd.MainBoxItem)window.current_selection.get_item(0);
 
-			if(Util.is_collection_item(int.parse(item.id))){
-				// TODO: make collections editable
-				//StationEditorDialog editor_dialog = new StationEditorDialog.edit((Collection)item);
-				//editor_dialog.set_transient_for(App.window);
-				//editor_dialog.set_modal(true);
-				//editor_dialog.set_visible(true);
-			}else{
+			if(!Util.is_collection_item(int.parse(item.id))){
 				StationEditorDialog editor_dialog = new StationEditorDialog.edit((RadioStation)item);
 				editor_dialog.set_transient_for(App.window);
 				editor_dialog.set_modal(true);

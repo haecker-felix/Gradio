@@ -73,6 +73,17 @@ namespace Gradio{
 			// Export Library
 			action = new GLib.SimpleAction ("export-library", null);
 			action.activate.connect (() => {
+				int result = 0;
+
+				Gtk.MessageDialog msg = new Gtk.MessageDialog (App.window, Gtk.DialogFlags.MODAL, Gtk.MessageType.QUESTION, Gtk.ButtonsType.NONE, "test");
+				msg.add_button(_("Gradio Database"), 1);
+				msg.add_button(_("M3U Playlist"), 2);
+				result = msg.run();
+				msg.close();
+				msg.destroy();
+
+				// TODO: Hier weiterarbeiten...
+
 				string path = Util.export_library_dialog();
 				if(path == "") return;
 				App.library.export_database(path);

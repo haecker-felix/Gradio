@@ -319,6 +319,24 @@ namespace Gradio{
 			message("Successfully exported database!");
 		}
 
+		public void export_as_m3u(string path){
+			message("Exporting m3u playlist to: %s", path);
+
+			try {
+				// an output file in the current working directory
+				var file = File.new_for_path (path);
+
+				var dos = new DataOutputStream (file.create (FileCreateFlags.REPLACE_DESTINATION));
+
+				dos.put_string ("#EXTM3U\n");
+
+			} catch (Error e) {
+				stderr.printf ("%s\n", e.message);
+			}
+
+			message("Successfully exported database!");
+		}
+
 		public void import_database(string path){
 			message("Importing database from path: %s", path);
 			File external_db = File.new_for_path(path);
