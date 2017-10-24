@@ -311,7 +311,7 @@ namespace Gradio{
 			File dest = File.new_for_path(path);
 
 			try{
-				newdb.copy(dest, FileCopyFlags.NONE, null, null);
+				newdb.copy(dest, FileCopyFlags.OVERWRITE, null, null);
 			}catch(GLib.Error e){
 				critical("Could not export database: %s", e.message);
 			}
@@ -319,20 +319,45 @@ namespace Gradio{
 			message("Successfully exported database!");
 		}
 
-		public void export_as_m3u(string path){
+		public async void export_as_m3u(string path){
 			message("Exporting m3u playlist to: %s", path);
 
-			try {
-				// an output file in the current working directory
-				var file = File.new_for_path (path);
+			File file = File.new_for_path (path);
+			if(file.query_exists()) file.delete(); // Delete file, if file already exists
 
-				var dos = new DataOutputStream (file.create (FileCreateFlags.REPLACE_DESTINATION));
+			FileIOStream ios = file.create_readwrite(FileCreateFlags.PRIVATE);
+			DataOutputStream dos = new DataOutputStream (ios.output_stream);
+			dos.put_string ("#EXTM3U\n");
 
-				dos.put_string ("#EXTM3U\n");
+			Statement stmt;
+			int rc = 0; int cols;
 
-			} catch (Error e) {
-				stderr.printf ("%s\n", e.message);
+			if ((rc = db.prepare_v2 ("SELECT * FROM library;", -1, out stmt, null)) == 1) {
+				critical ("SQL error: %d, %s\n", rc, db.errmsg ());
+				return;
 			}
+
+			cols = stmt.column_count();
+			do {
+				rc = stmt.step();
+				switch (rc) {
+				case Sqlite.DONE:
+					break;
+				case Sqlite.ROW:
+					string station_id = stmt.column_text(0);
+
+					RadioStation station = yield Util.get_station_by_id(int.parse(station_id));
+					string address = yield station.get_stream_address();
+
+					dos.put_string("#EXTINF:0,"+station.title+"\n");
+					dos.put_string(address+"\n");
+
+					break;
+				default:
+					printerr ("Error: %d, %s\n", rc, db.errmsg ());
+					break;
+				}
+			} while (rc == Sqlite.ROW);
 
 			message("Successfully exported database!");
 		}

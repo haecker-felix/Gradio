@@ -75,18 +75,24 @@ namespace Gradio{
 			action.activate.connect (() => {
 				int result = 0;
 
-				Gtk.MessageDialog msg = new Gtk.MessageDialog (App.window, Gtk.DialogFlags.MODAL, Gtk.MessageType.QUESTION, Gtk.ButtonsType.NONE, "test");
-				msg.add_button(_("Gradio Database"), 1);
-				msg.add_button(_("M3U Playlist"), 2);
+				Gtk.MessageDialog msg = new Gtk.MessageDialog (App.window, Gtk.DialogFlags.MODAL, Gtk.MessageType.QUESTION, Gtk.ButtonsType.NONE, _("Please select export format. The M3U format is compatible with other programs but cannot be re-imported into Gradio. The Gradio database format contains all information and can be imported again."));
+				msg.add_button(_("Gradio Database Format"), 1);
+				msg.add_button(_("M3U Format"), 2);
 				result = msg.run();
 				msg.close();
 				msg.destroy();
 
-				// TODO: Hier weiterarbeiten...
+				if(result == 1){
+					string path = Util.export_library_dialog("gradio_library.db");
+					if(path == "") return;
+					App.library.export_database(path);
+				}
 
-				string path = Util.export_library_dialog();
-				if(path == "") return;
-				App.library.export_database(path);
+				if(result == 2){
+					string path = Util.export_library_dialog("gradio_library.m3u");
+					if(path == "") return;
+					App.library.export_as_m3u(path);
+				}
 			});
 			action_group.add_action(action);
 

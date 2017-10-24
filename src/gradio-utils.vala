@@ -123,17 +123,16 @@ namespace Gradio{
 			return;
 		}
 
-		public static string export_library_dialog (){
+		public static string export_library_dialog (string current_name){
 			Gtk.FileChooserDialog chooser = new Gtk.FileChooserDialog (
-				_("Export the current library"), App.window, Gtk.FileChooserAction.SAVE,
+				_("Export current library"), App.window, Gtk.FileChooserAction.SAVE,
 				_("_Cancel"),
 				Gtk.ResponseType.CANCEL,
 				 _("Export"),
 				Gtk.ResponseType.ACCEPT);
 
-
-			chooser.set_current_name("gradio.db");
-
+			chooser.set_current_name(current_name);
+			chooser.set_do_overwrite_confirmation(true);
 
 			string path = "";
 			if (chooser.run () == Gtk.ResponseType.ACCEPT) {
