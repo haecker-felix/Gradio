@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-10 14:34+0200\n"
-"PO-Revision-Date: 2017-10-15 12:45+0000\n"
+"PO-Revision-Date: 2017-10-29 12:28+0000\n"
 "Last-Translator: Tomáš Moravec <otoman100@gmail.com>\n"
 "Language-Team: Czech "
 "<https://hosted.weblate.org/projects/gradio/translations/cs/>\n"
@@ -37,11 +37,11 @@ msgstr "Místo"
 
 #: data/ui/filter-box.ui:44
 msgid "Select Country ..."
-msgstr "Vyberte zemi ..."
+msgstr "Vyberte zemi…"
 
 #: data/ui/filter-box.ui:125
 msgid "Select State  ..."
-msgstr "Vyberte stát ..."
+msgstr "Vyberte stát…"
 
 #: data/ui/filter-box.ui:205 data/ui/station-editor.ui:211
 msgid "Language"
@@ -49,15 +49,15 @@ msgstr "Jazyk"
 
 #: data/ui/filter-box.ui:222
 msgid "Select Language  ..."
-msgstr "Vyberte jazyk ..."
+msgstr "Vyberte jazyk…"
 
 #: data/ui/page/add-page.ui:45
 msgid "Fill your library with something new"
-msgstr ""
+msgstr "Naplňte svou knihovnu něčím novým"
 
 #: data/ui/page/add-page.ui:64
 msgid "There are several options available to add something new."
-msgstr ""
+msgstr "Je několik způsobů jak přidat něco nového."
 
 #: data/ui/page/library-page.ui:44
 msgid "Your library is empty"
@@ -73,7 +73,7 @@ msgstr "Nemáte žádnou sbírku"
 
 #: data/ui/page/collections-page.ui:61
 msgid "You can group stations into collections."
-msgstr ""
+msgstr "Stanice můžete seskupovat do sbírek."
 
 #: data/ui/details-box.ui:23 data/ui/selection-toolbar.ui:151
 msgid "Details"
@@ -89,7 +89,7 @@ msgstr "Typ"
 
 #: data/ui/details-box.ui:209
 msgid "Items"
-msgstr ""
+msgstr "Položky"
 
 #: data/ui/details-box.ui:285
 msgid "Location"
@@ -193,25 +193,24 @@ msgstr ""
 
 #: data/ui/station-editor.ui:435
 msgid "Server Response"
-msgstr ""
+msgstr "Odpověď serveru"
 
 #: data/ui/station-editor.ui:471
 msgid "Close"
 msgstr "Zavřít"
 
 #: data/ui/station-editor.ui:510
-#, fuzzy
 msgid "Done"
 msgstr "Dokončit"
 
 #: data/ui/page/search-page.ui:127
 msgid "No results found"
-msgstr ""
+msgstr "Nic nebylo nalezeno"
 
 #: data/ui/page/search-page.ui:145
 msgid ""
 "Either the station does not exist, or you have to search with other keywords."
-msgstr ""
+msgstr "Stanice buď neexistuje, nebo zkuste použít jiná klíčová slova."
 
 #: src/gradio-settings-window.vala:39
 msgid "Features"
@@ -283,7 +282,7 @@ msgstr "Nahradí stávající knihovnu jinou"
 
 #: src/gradio-settings-window.vala:93
 msgid "Do you want to replace the current library with this one?"
-msgstr ""
+msgstr "Chcete stávající knihovnu nahradit vybranou?"
 
 #. export library
 #: src/gradio-settings-window.vala:99 src/gradio-settings-window.vala:152
@@ -298,11 +297,11 @@ msgstr "Exportuje Vaší knihovnu"
 #. mpris
 #: src/gradio-settings-window.vala:111
 msgid "MPRIS"
-msgstr ""
+msgstr "MPRIS"
 
 #: src/gradio-settings-window.vala:111
 msgid "Integrate Gradio as media player in your desktop environment"
-msgstr ""
+msgstr "Integruje Gradio do vašeho pracovního prostředí jako hudební přehrávač"
 
 #. enable notifications
 #: src/gradio-settings-window.vala:117
@@ -311,7 +310,7 @@ msgstr "Upozornění"
 
 #: src/gradio-settings-window.vala:117
 msgid "Show desktop notifications"
-msgstr ""
+msgstr "Zobrazovat v pracovním prostředí upozornění"
 
 #. enable tray icon
 #: src/gradio-settings-window.vala:123
@@ -370,15 +369,15 @@ msgstr "Zobrazit oblíbené stanice"
 
 #: src/page/gradio-add-page.vala:35
 msgid "Show radio stations which have the most clicks."
-msgstr ""
+msgstr "Zobrazí nejčastěji navštěvované stanice."
 
 #: src/page/gradio-add-page.vala:39
 msgid "Show recent radio stations"
-msgstr ""
+msgstr "Zobrazit nedávno navštívené stanice"
 
 #: src/page/gradio-add-page.vala:39
 msgid "Show radio stations which have recently been clicked."
-msgstr ""
+msgstr "Zobrazí stanice, které byly navštíveny naposled."
 
 #: src/page/gradio-add-page.vala:43
 msgid "Search for radio stations"
