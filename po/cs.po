@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-10 14:34+0200\n"
-"PO-Revision-Date: 2017-10-29 12:28+0000\n"
+"PO-Revision-Date: 2017-11-06 14:45+0000\n"
 "Last-Translator: Tomáš Moravec <otoman100@gmail.com>\n"
 "Language-Team: Czech "
 "<https://hosted.weblate.org/projects/gradio/translations/cs/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 2.17\n"
+"X-Generator: Weblate 2.18-dev\n"
 
 #: data/ui/app-menu.ui:6
 msgid "Settings"
@@ -393,4 +393,4 @@ msgstr "Nová veřejná stanice"
 
 #: src/page/gradio-add-page.vala:47
 msgid "Create a new radio station, which is visible for all users."
-msgstr ""
+msgstr "Přidat novou stanici, viditelnou pro všechny uživatele."
