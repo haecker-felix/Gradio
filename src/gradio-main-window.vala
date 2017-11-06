@@ -103,6 +103,9 @@ namespace Gradio{
 			var gtk_settings = Gtk.Settings.get_default ();
 			gtk_settings.gtk_application_prefer_dark_theme = App.settings.enable_dark_theme;
 
+			// menubar isn't required, because the appmenu is now integrated into Gradio.MenuButton
+			this.set_show_menubar(false);
+
 	        	player_toolbar = new PlayerToolbar();
 	       		player_toolbar.set_visible(false);
 	       		Bottom.pack_end(player_toolbar);
