@@ -226,10 +226,9 @@ namespace Gradio{
 					break;
 				};
 				case WindowMode.COLLECTION_ITEMS: {
-					header.set_title(collection_items_page.get_title());
 					Collection collection = library_page.selected_collection;
 					collection_items_page.set_collection(collection);
-					collection_items_page.set_title(collection.name);
+					header.set_title(collection_items_page.title);
 					break;
 				};
 				case WindowMode.ADD: {

@@ -25,7 +25,7 @@ namespace Gradio{
 
 		private MainBox mainbox;
 		private StationModel station_model;
-		private string title;
+		public string title = "";
 
 		public string collection_id;
 
@@ -42,6 +42,7 @@ namespace Gradio{
 			collection_id = coll.id;
 			station_model = coll.station_model;
 			mainbox.set_model(station_model);
+			title = coll.name;
 		}
 
 		public StationModel get_model(){
@@ -68,14 +69,6 @@ namespace Gradio{
 				model.add_item(item);
 			}
 			return model;
-		}
-
-		public string get_title(){
-			return title;
-		}
-
-		public void set_title(string t){
-			title = t;
 		}
 	}
 }

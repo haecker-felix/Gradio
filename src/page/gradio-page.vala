@@ -20,10 +20,6 @@ namespace Gradio{
 
 	public interface Page : Gtk.Box{
 
-		public virtual string get_title(){
-			return "";
-		}
-
 		public virtual void set_selection_mode(bool b){}
 		public virtual void select_all(){}
 		public virtual void select_none(){}
