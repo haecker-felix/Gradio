@@ -101,7 +101,7 @@
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="halign">start</property>
-                            <property name="label" translatable="yes">Most votes</property>
+                            <property name="label" translatable="yes">Stations with the most votes</property>
                             <attributes>
                               <attribute name="weight" value="bold"/>
                             </attributes>
@@ -179,7 +179,7 @@
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="halign">start</property>
-                            <property name="label" translatable="yes">Recently clicked</property>
+                            <property name="label" translatable="yes">Recently clicked stations</property>
                             <attributes>
                               <attribute name="weight" value="bold"/>
                             </attributes>
@@ -257,7 +257,7 @@
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="halign">start</property>
-                            <property name="label" translatable="yes">Most clicks</property>
+                            <property name="label" translatable="yes">Stations with the most clicks</property>
                             <attributes>
                               <attribute name="weight" value="bold"/>
                             </attributes>

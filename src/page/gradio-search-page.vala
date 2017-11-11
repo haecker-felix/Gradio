@@ -24,6 +24,7 @@ namespace Gradio{
 		[GtkChild] private Box SearchBox;
 		[GtkChild] private Stack SearchStack;
 		private SearchBar searchbar;
+		private string subtitle;
 
 		private MainBox mainbox;
 		private StationModel station_model;
@@ -49,7 +50,7 @@ namespace Gradio{
 					SearchStack.set_visible_child_name("results");
 			});
 			station_provider.working.connect(() => {SearchStack.set_visible_child_name("loading");});
-			searchbar.timeout_reset.connect(() => {SearchStack.set_visible_child_name("loading");});
+			searchbar.timeout_reset.connect(() => {SearchStack.set_visible_child_name("loading"); subtitle = ""; title_changed();});
 		}
 
 		public void set_search(string term){
@@ -60,18 +61,24 @@ namespace Gradio{
 			searchbar.reset_filters();
 			App.settings.sort_ascending = false;
 			App.settings.station_sorting = Compare.DATE;
+			subtitle = _("Recently clicked stations");
+			title_changed();
 		}
 
 		public void show_most_voted(){
 			searchbar.reset_filters();
 			App.settings.sort_ascending = false;
 			App.settings.station_sorting = Compare.VOTES;
+			subtitle = _("Stations with the most votes");
+			title_changed();
 		}
 
 		public void show_most_clicks(){
 			searchbar.reset_filters();
 			App.settings.sort_ascending = false;
 			App.settings.station_sorting = Compare.CLICKS;
+			subtitle = _("Stations with the most clicks");
+			title_changed();
 		}
 
 		public void set_selection_mode(bool b){
@@ -98,6 +105,10 @@ namespace Gradio{
 
 		public string get_title(){
 			return _("Search");
+		}
+
+		public string get_subtitle(){
+			return subtitle;
 		}
 	}
 }
