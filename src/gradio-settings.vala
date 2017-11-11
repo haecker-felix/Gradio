@@ -221,5 +221,8 @@ namespace Gradio{
 				settings.set_int ("max-search-results", _max_search_results);
 			}
 		}
+		public void apply () {
+			settings.apply();
+		}
 	}
 }
