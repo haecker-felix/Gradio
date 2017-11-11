@@ -23,12 +23,12 @@ namespace Gradio{
 		public virtual void set_selection_mode(bool b){}
 		public virtual void select_all(){}
 		public virtual void select_none(){}
-
 		public signal void selection_mode_enabled();
 		public signal void selection_changed();
-		public virtual StationModel get_selection(){
-			return null;
-		}
+		public virtual StationModel get_selection(){return null;}
 
+		public signal void title_changed();
+		public virtual string get_title(){return "";}
+		public virtual string get_subtitle(){return "";}
 	}
 }

@@ -18,7 +18,7 @@ using Sqlite;
 
 namespace Gradio{
 
-	public class Library : Gtk.Box{
+	public class Library{
 		public static StationModel station_model;
 
 		private Sqlite.Database db;
@@ -26,7 +26,6 @@ namespace Gradio{
 
 		File newdb = File.new_for_path (Path.build_filename (Environment.get_user_data_dir (), "gradio", "gradio.db")); // New DB
 		File olddb = File.new_for_path (Path.build_filename (Environment.get_user_data_dir (), "gradio", "library.gradio")); // Old DB
-
 
 		public Library(){
 			station_model = new StationModel();

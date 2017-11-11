@@ -95,6 +95,10 @@ namespace Gradio{
 			}
 			return model;
 		}
+
+		public string get_title(){
+			return _("Search");
+		}
 	}
 }
 

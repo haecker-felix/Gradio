@@ -40,6 +40,7 @@ namespace Gradio{
 				App.window.set_mode(WindowMode.COLLECTION_ITEMS);
 			});
 
+			Library.station_model.items_changed.connect(() => {title_changed();});
 			Library.station_model.items_changed.connect(update_page);
 			update_page();
 		}
@@ -71,6 +72,14 @@ namespace Gradio{
 				model.add_item(item);
 			}
 			return model;
+		}
+
+		public string get_title(){
+			return "Library";
+		}
+
+		public string get_subtitle(){
+			return App.library.station_model.get_n_items().to_string() + _(" Items");
 		}
 	}
 }

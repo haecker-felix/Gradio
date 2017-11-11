@@ -67,6 +67,10 @@ namespace Gradio{
 			DefaultHeaderbar.set_title(title);
 		}
 
+		public void set_subtitle(string subtitle){
+			DefaultHeaderbar.set_subtitle(subtitle);
+		}
+
 		public void show_default_buttons(){
 			SelectButton.set_visible(true);
 			SearchToggleButton.set_visible(true);

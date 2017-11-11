@@ -176,6 +176,11 @@ namespace Gradio{
 			header.set_selected_items((int)current_selection.get_n_items());
 		}
 
+		private void title_changed(){
+			header.set_title(((Page)MainStack.get_visible_child()).get_title());
+			header.set_subtitle(((Page)MainStack.get_visible_child()).get_subtitle());
+		}
+
 		public void show_notification(string text){
 			NotificationLabel.set_text(text);
 			NotificationRevealer.set_reveal_child(true);
@@ -200,12 +205,12 @@ namespace Gradio{
 			Page page = (Page)MainStack.get_visible_child();
 			page.set_selection_mode(false);
 			page.selection_changed.disconnect(selection_changed);
+			page.title_changed.disconnect(title_changed);
 			if (selection_changed_id != 0) page.disconnect(selection_changed_id);
 
 			// set headerbar to default
 			header.show_default_buttons();
 			header.SearchToggleButton.set_active(mode == WindowMode.SEARCH);
-			header.set_title("Gradio");
 
 			// disable selection mode
 			set_selection_mode(false);
@@ -218,7 +223,6 @@ namespace Gradio{
 					break;
 				};
 				case WindowMode.SEARCH: {
-					header.set_title(_("Search"));
 					if(search_page == null){
 						search_page = new SearchPage();
 						MainStack.add_named(search_page, page_name[WindowMode.SEARCH]);
@@ -228,11 +232,9 @@ namespace Gradio{
 				case WindowMode.COLLECTION_ITEMS: {
 					Collection collection = library_page.selected_collection;
 					collection_items_page.set_collection(collection);
-					header.set_title(collection_items_page.title);
 					break;
 				};
 				case WindowMode.ADD: {
-					header.set_title(_("Add new radio stations to your library"));
 					header.MenuBox.set_visible(false);
 					if(add_page == null){
 						add_page = new AddPage();
@@ -251,7 +253,11 @@ namespace Gradio{
 			// connect new signals
 			Page new_page = (Page)MainStack.get_visible_child();
 			new_page.selection_changed.connect(selection_changed);
+			new_page.title_changed.connect(title_changed);
 			selection_changed_id = new_page.selection_mode_enabled.connect(() => {set_selection_mode(true);});;
+
+			// update title and subtitle
+			title_changed();
 
 			in_mode_change = false;
 			message("Changed page mode to \"%s\"", page_name[current_mode]);

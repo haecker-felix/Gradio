@@ -153,6 +153,10 @@ namespace Gradio{
 			}
 			return model;
 		}
+
+		public string get_title(){
+			return _("Add new radio stations to your library");
+		}
 	}
 
 }
