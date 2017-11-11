@@ -18,7 +18,7 @@ using Sqlite;
 
 namespace Gradio{
 
-	public class Library{
+	public class Library : Object{
 		public static StationModel station_model;
 
 		private Sqlite.Database db;
@@ -27,7 +27,10 @@ namespace Gradio{
 		File newdb = File.new_for_path (Path.build_filename (Environment.get_user_data_dir (), "gradio", "gradio.db")); // New DB
 		File olddb = File.new_for_path (Path.build_filename (Environment.get_user_data_dir (), "gradio", "library.gradio")); // Old DB
 
+		public bool busy {get;set;}
+
 		public Library(){
+			busy = true;
 			station_model = new StationModel();
 
 			// check for new database
@@ -65,6 +68,7 @@ namespace Gradio{
 					coll.add_station((RadioStation)item);
 				}
 			}
+			busy = false;
 		}
 
 		private void open_database(){

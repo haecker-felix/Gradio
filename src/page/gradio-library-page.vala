@@ -42,6 +42,8 @@ namespace Gradio{
 
 			Library.station_model.items_changed.connect(() => {title_changed();});
 			Library.station_model.items_changed.connect(update_page);
+			App.library.notify["busy"].connect(() => {title_changed();});
+			title_changed();
 			update_page();
 		}
 
@@ -79,7 +81,10 @@ namespace Gradio{
 		}
 
 		public string get_subtitle(){
-			return App.library.station_model.get_n_items().to_string() + _(" Items");
+			if(App.library.busy)
+				return _("Fetching station data…");
+			else
+				return App.library.station_model.get_n_items().to_string() + _(" Items");
 		}
 	}
 }
