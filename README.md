@@ -11,7 +11,7 @@ A GTK3 app for finding and listening to internet radio stations.
 Feel free to contribute to Gradio! You don't know how you can help? Here are some open tasks/todos:
 * **New application logo:** The UI of Gradio changed a lot in the last time. Why not a new fresh logo? It should use the GNOME icon style. More information [here](https://developer.gnome.org/hig/stable/icons-and-artwork.html.en) and [here](http://tango.freedesktop.org/Tango_Icon_Theme_Guidelines).
 * **Implement unit testing:** Gradio is getting bigger and bigger. Now it's important to implement unit testing, to prevent some nasty bugs.
-* Any questions? Please contact me: haecker (dot) felix1207 (at) gmail (dot) com
+* For more information click [here](https://github.com/haecker-felix/gradio/blob/master/docs/CONTRIBUTING.md)
 
 
 
