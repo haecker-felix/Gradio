@@ -8,17 +8,17 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-11-12 16:33+0100\n"
-"PO-Revision-Date: 2017-09-15 19:50+0000\n"
+"PO-Revision-Date: 2017-11-12 17:51+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
-"Language-Team: Polish <https://hosted.weblate.org/projects/gradio/"
-"translations/pl/>\n"
+"Language-Team: Polish "
+"<https://hosted.weblate.org/projects/gradio/translations/pl/>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 2.17-dev\n"
+"X-Generator: Weblate 2.18-dev\n"
 
 #: data/ui/app-menu.ui:6 data/ui/menubutton.ui:178
 msgid "Settings"
@@ -39,30 +39,27 @@ msgstr "Wyszukaj stacje radiowe"
 #: data/ui/page/add-page.ui:85 data/ui/page/add-page.ui:163
 #: data/ui/page/add-page.ui:241
 msgid "More..."
-msgstr ""
+msgstr "Więcej…"
 
 #: data/ui/page/add-page.ui:106 src/page/gradio-search-page.vala:72
-#, fuzzy
 msgid "Stations with the most votes"
-msgstr "Wyświetla stacje radiowe z największą liczbą głosów."
+msgstr "Stacje z największą liczbą głosów"
 
 #: data/ui/page/add-page.ui:184 src/page/gradio-search-page.vala:64
-#, fuzzy
 msgid "Recently clicked stations"
-msgstr "Wyświetl ostatnie stacje radiowe"
+msgstr "Ostatnio kliknięte stacje"
 
 #: data/ui/page/add-page.ui:262 src/page/gradio-search-page.vala:80
-#, fuzzy
 msgid "Stations with the most clicks"
-msgstr "Wyświetla najczęściej wybierane stacje radiowe."
+msgstr "Najczęściej klikane stacje"
 
 #: data/ui/page/library-page.ui:44
 msgid "Your library is empty"
-msgstr "Pusta kolekcja"
+msgstr "Pusta biblioteka"
 
 #: data/ui/page/library-page.ui:62
 msgid "If you add stations to the library, you will find them here."
-msgstr "Stacje dodane do kolekcji pojawią się w tym miejscu."
+msgstr "Stacje dodane do biblioteki pojawią się w tym miejscu."
 
 #: data/ui/page/collections-page.ui:43
 msgid "You don't have any collection"
@@ -114,18 +111,16 @@ msgid "Edit"
 msgstr "Modyfikuj"
 
 #: data/ui/organize-collection-popover.ui:25
-#, fuzzy
 msgid "Enter name for new collection..."
-msgstr "Nazwa pierwszej kolekcji"
+msgstr "Nazwa nowej kolekcji…"
 
 #: data/ui/organize-collection-popover.ui:35
 msgid "Create"
-msgstr ""
+msgstr "Utwórz"
 
 #: data/ui/organize-collection-popover.ui:78
-#, fuzzy
 msgid "Select collection:"
-msgstr "Zaznacz wszystko"
+msgstr "Wybór kolekcji:"
 
 #: data/ui/selection-menu.ui:7
 msgid "Select All"
@@ -137,20 +132,19 @@ msgstr "Odznacz wszystko"
 
 #: data/ui/selection-toolbar.ui:18
 msgid "Click an item to view options"
-msgstr ""
+msgstr "Kliknięcie elementu wyświetli opcje"
 
 #: data/ui/selection-toolbar.ui:52
-#, fuzzy
 msgid "Collection"
-msgstr "Kolekcje"
+msgstr "Kolekcja"
 
 #: data/ui/selection-toolbar.ui:65
 msgid "Add to library"
-msgstr "Dodaj do kolekcji"
+msgstr "Dodaj do biblioteki"
 
 #: data/ui/selection-toolbar.ui:82
 msgid "Remove from Library"
-msgstr ""
+msgstr "Usuń z biblioteki"
 
 #: data/ui/station-editor.ui:39
 msgid "Global database"
@@ -221,12 +215,11 @@ msgstr "Stacja nie istnieje lub należy użyć innych słów."
 
 #: data/ui/menubutton.ui:45
 msgid "100%"
-msgstr ""
+msgstr "100%"
 
 #: data/ui/menubutton.ui:104 data/ui/menubutton.ui:318
-#, fuzzy
 msgid "Sorting"
-msgstr "Ustawienia"
+msgstr "Porządkowanie"
 
 #: data/ui/menubutton.ui:119
 msgid "Hide broken stations"
@@ -234,7 +227,7 @@ msgstr "Ukrywanie uszkodzonych stacji"
 
 #: data/ui/menubutton.ui:145 data/ui/menubutton.ui:250
 msgid "Library"
-msgstr "Kolekcja"
+msgstr "Biblioteka"
 
 #: data/ui/menubutton.ui:267
 msgid "Import"
@@ -246,27 +239,27 @@ msgstr "Wyeksportuj"
 
 #: data/ui/menubutton.ui:340
 msgid "Votes"
-msgstr ""
+msgstr "Głosy"
 
 #: data/ui/menubutton.ui:415
 msgid "Clicks"
-msgstr ""
+msgstr "Kliknięcia"
 
 #: data/ui/menubutton.ui:430
 msgid "Bitrate"
-msgstr ""
+msgstr "Gęstość bitowa"
 
 #: data/ui/menubutton.ui:445
 msgid "Date"
-msgstr ""
+msgstr "Data"
 
 #: data/ui/menubutton.ui:485
 msgid "Ascending"
-msgstr ""
+msgstr "Rosnąco"
 
 #: data/ui/menubutton.ui:500
 msgid "Descending"
-msgstr ""
+msgstr "Malejąco"
 
 #: src/gradio-settings-window.vala:39
 msgid "Features"
@@ -373,21 +366,20 @@ msgstr "Tworzy nową stację radiową, widoczną dla wszystkich użytkowników."
 
 #: src/page/gradio-add-page.vala:158
 msgid "Add new radio stations to your library"
-msgstr ""
+msgstr "Dodanie nowych stacji radiowych do biblioteki"
 
 #: src/page/gradio-collection-items-page.vala:75
 #: src/page/gradio-library-page.vala:87
-#, fuzzy
 msgid " Items"
-msgstr "Elementy"
+msgstr " Elementy"
 
 #: src/page/gradio-library-page.vala:85
 msgid "Fetching station data…"
-msgstr ""
+msgstr "Pobieranie danych o stacji…"
 
 #: src/page/gradio-search-page.vala:107
 msgid "Search"
-msgstr ""
+msgstr "Wyszukiwanie"
 
 #~ msgid "Where"
 #~ msgstr "Gdzie"
