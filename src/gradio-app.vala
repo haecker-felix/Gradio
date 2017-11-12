@@ -48,7 +48,6 @@ namespace Gradio {
 					player.station = station;
 				});
 			});
-
 			search_provider.start_search.connect ((timestamp, searchterm) => {
 				ensure_window ();
 				window.present_with_time (timestamp);

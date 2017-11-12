@@ -177,6 +177,8 @@ namespace Gradio{
 		}
 
 		private void title_changed(){
+			header.set_title("");
+			header.set_subtitle("");
 			header.set_title(((Page)MainStack.get_visible_child()).get_title());
 			header.set_subtitle(((Page)MainStack.get_visible_child()).get_subtitle());
 		}
