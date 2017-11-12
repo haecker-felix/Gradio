@@ -7,16 +7,16 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-11-12 16:33+0100\n"
-"PO-Revision-Date: 2017-09-20 22:47+0000\n"
-"Last-Translator: Erwin van Eijk <erwin.vaneijk@gmail.com>\n"
-"Language-Team: German <https://hosted.weblate.org/projects/gradio/"
-"translations/de/>\n"
+"PO-Revision-Date: 2017-11-12 16:03+0000\n"
+"Last-Translator: Häcker Felix <haecker.felix1207@gmail.com>\n"
+"Language-Team: German "
+"<https://hosted.weblate.org/projects/gradio/translations/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.17-dev\n"
+"X-Generator: Weblate 2.18-dev\n"
 
 #: data/ui/app-menu.ui:6 data/ui/menubutton.ui:178
 msgid "Settings"
@@ -37,22 +37,19 @@ msgstr "Nach Radiosender suchen"
 #: data/ui/page/add-page.ui:85 data/ui/page/add-page.ui:163
 #: data/ui/page/add-page.ui:241
 msgid "More..."
-msgstr ""
+msgstr "Mehr..."
 
 #: data/ui/page/add-page.ui:106 src/page/gradio-search-page.vala:72
-#, fuzzy
 msgid "Stations with the most votes"
-msgstr "Sender mit den meisten Votes anzeigen."
+msgstr "Sender mit den meisten Votes"
 
 #: data/ui/page/add-page.ui:184 src/page/gradio-search-page.vala:64
-#, fuzzy
 msgid "Recently clicked stations"
-msgstr "Aktuelle Radiosender anzeigen"
+msgstr "Zuletzt abgespielte Sender"
 
 #: data/ui/page/add-page.ui:262 src/page/gradio-search-page.vala:80
-#, fuzzy
 msgid "Stations with the most clicks"
-msgstr "Radiosender mit den meisten Klicks anzeigen."
+msgstr "Sender mit den meisten Klicks"
 
 #: data/ui/page/library-page.ui:44
 msgid "Your library is empty"
@@ -112,18 +109,16 @@ msgid "Edit"
 msgstr "Bearbeiten"
 
 #: data/ui/organize-collection-popover.ui:25
-#, fuzzy
 msgid "Enter name for new collection..."
-msgstr "Gebe einen Namen ein für deine erste Sammlung"
+msgstr "Name für Sammlung eingeben..."
 
 #: data/ui/organize-collection-popover.ui:35
 msgid "Create"
-msgstr ""
+msgstr "Erstellen"
 
 #: data/ui/organize-collection-popover.ui:78
-#, fuzzy
 msgid "Select collection:"
-msgstr "Alle auswählen"
+msgstr "Sammlung auswählen:"
 
 #: data/ui/selection-menu.ui:7
 msgid "Select All"
@@ -135,12 +130,11 @@ msgstr "Nichts auswählen"
 
 #: data/ui/selection-toolbar.ui:18
 msgid "Click an item to view options"
-msgstr ""
+msgstr "Wähle ein Objekt aus, um Optionen anzuzeigen"
 
 #: data/ui/selection-toolbar.ui:52
-#, fuzzy
 msgid "Collection"
-msgstr "Sammlungen"
+msgstr "Sammlung"
 
 #: data/ui/selection-toolbar.ui:65
 msgid "Add to library"
@@ -148,7 +142,7 @@ msgstr "Zur Bibliothek hinzufügen"
 
 #: data/ui/selection-toolbar.ui:82
 msgid "Remove from Library"
-msgstr ""
+msgstr "Von Bibliothek entfernen"
 
 #: data/ui/station-editor.ui:39
 msgid "Global database"
@@ -221,12 +215,11 @@ msgstr ""
 
 #: data/ui/menubutton.ui:45
 msgid "100%"
-msgstr ""
+msgstr "100%"
 
 #: data/ui/menubutton.ui:104 data/ui/menubutton.ui:318
-#, fuzzy
 msgid "Sorting"
-msgstr "Einstellungen"
+msgstr "Sortierung"
 
 #: data/ui/menubutton.ui:119
 msgid "Hide broken stations"
@@ -246,27 +239,27 @@ msgstr "Exportieren"
 
 #: data/ui/menubutton.ui:340
 msgid "Votes"
-msgstr ""
+msgstr "Votes"
 
 #: data/ui/menubutton.ui:415
 msgid "Clicks"
-msgstr ""
+msgstr "Klicks"
 
 #: data/ui/menubutton.ui:430
 msgid "Bitrate"
-msgstr ""
+msgstr "Bitrate"
 
 #: data/ui/menubutton.ui:445
 msgid "Date"
-msgstr ""
+msgstr "Datum"
 
 #: data/ui/menubutton.ui:485
 msgid "Ascending"
-msgstr ""
+msgstr "Aufsteigend"
 
 #: data/ui/menubutton.ui:500
 msgid "Descending"
-msgstr ""
+msgstr "Absteigend"
 
 #: src/gradio-settings-window.vala:39
 msgid "Features"
@@ -373,21 +366,20 @@ msgstr "Einen neuen Radiosender erstellen, der für alle Benutzer sichtbar ist."
 
 #: src/page/gradio-add-page.vala:158
 msgid "Add new radio stations to your library"
-msgstr ""
+msgstr "Füge neue Sender zu deiner Bibliothek hinzu"
 
 #: src/page/gradio-collection-items-page.vala:75
 #: src/page/gradio-library-page.vala:87
-#, fuzzy
 msgid " Items"
-msgstr "Objekte"
+msgstr " Objekte"
 
 #: src/page/gradio-library-page.vala:85
 msgid "Fetching station data…"
-msgstr ""
+msgstr "Sender Daten abrufen…"
 
 #: src/page/gradio-search-page.vala:107
 msgid "Search"
-msgstr ""
+msgstr "Suchen"
 
 #~ msgid "Where"
 #~ msgstr "Wo"
