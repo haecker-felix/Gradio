@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-11-12 16:33+0100\n"
-"PO-Revision-Date: 2017-09-15 19:49+0000\n"
+"PO-Revision-Date: 2017-11-12 18:56+0000\n"
 "Last-Translator: DaSnoopy <a.antolini@tin.it>\n"
-"Language-Team: Italian <https://hosted.weblate.org/projects/gradio/"
-"translations/it/>\n"
+"Language-Team: Italian "
+"<https://hosted.weblate.org/projects/gradio/translations/it/>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.17-dev\n"
+"X-Generator: Weblate 2.18-dev\n"
 
 #: data/ui/app-menu.ui:6 data/ui/menubutton.ui:178
 msgid "Settings"
@@ -38,22 +38,19 @@ msgstr "Cerca stazioni radio"
 #: data/ui/page/add-page.ui:85 data/ui/page/add-page.ui:163
 #: data/ui/page/add-page.ui:241
 msgid "More..."
-msgstr ""
+msgstr "Mostra altre..."
 
 #: data/ui/page/add-page.ui:106 src/page/gradio-search-page.vala:72
-#, fuzzy
 msgid "Stations with the most votes"
-msgstr "Mostra le stazioni radio più votate."
+msgstr "Stazioni radio più votate."
 
 #: data/ui/page/add-page.ui:184 src/page/gradio-search-page.vala:64
-#, fuzzy
 msgid "Recently clicked stations"
-msgstr "Mostra le stazioni radio aggiunte di recente"
+msgstr "Stazioni radio ascoltate di recente"
 
 #: data/ui/page/add-page.ui:262 src/page/gradio-search-page.vala:80
-#, fuzzy
 msgid "Stations with the most clicks"
-msgstr "Mostra le stazioni radio più cliccate."
+msgstr "Stazioni radio con più clicks"
 
 #: data/ui/page/library-page.ui:44
 msgid "Your library is empty"
@@ -113,18 +110,16 @@ msgid "Edit"
 msgstr "Modifica"
 
 #: data/ui/organize-collection-popover.ui:25
-#, fuzzy
 msgid "Enter name for new collection..."
-msgstr "Inserisci un nome per la tua prima collezione"
+msgstr "Inserisci un nome per una nuova collezione..."
 
 #: data/ui/organize-collection-popover.ui:35
 msgid "Create"
-msgstr ""
+msgstr "Crea"
 
 #: data/ui/organize-collection-popover.ui:78
-#, fuzzy
 msgid "Select collection:"
-msgstr "Seleziona tutto"
+msgstr "Seleziona collezione:"
 
 #: data/ui/selection-menu.ui:7
 msgid "Select All"
@@ -136,12 +131,11 @@ msgstr "Deseleziona tutto"
 
 #: data/ui/selection-toolbar.ui:18
 msgid "Click an item to view options"
-msgstr ""
+msgstr "Click su un oggetto per vedere le opzioni"
 
 #: data/ui/selection-toolbar.ui:52
-#, fuzzy
 msgid "Collection"
-msgstr "Collezioni"
+msgstr "Collezione"
 
 #: data/ui/selection-toolbar.ui:65
 msgid "Add to library"
@@ -149,7 +143,7 @@ msgstr "Aggiungi alla raccolta"
 
 #: data/ui/selection-toolbar.ui:82
 msgid "Remove from Library"
-msgstr ""
+msgstr "Rimuovi dalla raccolta"
 
 #: data/ui/station-editor.ui:39
 msgid "Global database"
@@ -222,12 +216,11 @@ msgstr ""
 
 #: data/ui/menubutton.ui:45
 msgid "100%"
-msgstr ""
+msgstr "100%"
 
 #: data/ui/menubutton.ui:104 data/ui/menubutton.ui:318
-#, fuzzy
 msgid "Sorting"
-msgstr "Impostazioni"
+msgstr "Ordinamento"
 
 #: data/ui/menubutton.ui:119
 msgid "Hide broken stations"
@@ -247,27 +240,27 @@ msgstr "Esporta"
 
 #: data/ui/menubutton.ui:340
 msgid "Votes"
-msgstr ""
+msgstr "Voti"
 
 #: data/ui/menubutton.ui:415
 msgid "Clicks"
-msgstr ""
+msgstr "Clicks"
 
 #: data/ui/menubutton.ui:430
 msgid "Bitrate"
-msgstr ""
+msgstr "Qualità"
 
 #: data/ui/menubutton.ui:445
 msgid "Date"
-msgstr ""
+msgstr "Data"
 
 #: data/ui/menubutton.ui:485
 msgid "Ascending"
-msgstr ""
+msgstr "Ascendente"
 
 #: data/ui/menubutton.ui:500
 msgid "Descending"
-msgstr ""
+msgstr "Discendente"
 
 #: src/gradio-settings-window.vala:39
 msgid "Features"
@@ -374,21 +367,20 @@ msgstr "Crea una stazione radio, visibile a tutti gli utenti."
 
 #: src/page/gradio-add-page.vala:158
 msgid "Add new radio stations to your library"
-msgstr ""
+msgstr "Aggiungi una nuova stazione radio alla tua raccolta"
 
 #: src/page/gradio-collection-items-page.vala:75
 #: src/page/gradio-library-page.vala:87
-#, fuzzy
 msgid " Items"
-msgstr "Oggetti"
+msgstr " Oggetti"
 
 #: src/page/gradio-library-page.vala:85
 msgid "Fetching station data…"
-msgstr ""
+msgstr "Caricamento dati…"
 
 #: src/page/gradio-search-page.vala:107
 msgid "Search"
-msgstr ""
+msgstr "Cerca"
 
 #~ msgid "Where"
 #~ msgstr "Dove"
