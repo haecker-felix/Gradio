@@ -12,20 +12,16 @@ https://img.shields.io/badge/snap-download-brightgreen.svg)](https://snapcraft.i
 [![Packaging status](https://repology.org/badge/tiny-repos/gradio.svg)](https://repology.org/metapackage/gradio)
 [![Translation status](https://hosted.weblate.org/widgets/gradio/-/svg-badge.svg)](https://hosted.weblate.org/engage/gradio/?utm_source=widget)
 
+## News
+* **Gradio 7.0** will be released on 19.011.2017. Please upload translations by this date. Everything that is later will not be included in 7.0.
+* **The Ubuntu PPA no longer exists** and is no longer supported. I only maintain the Flatpak and Snap versions.
+[More information](https://github.com/haecker-felix/gradio/wiki/Install-Gradio)
 
 ## Open tasks
 Feel free to contribute to Gradio! You don't know how you can help? Here are some open tasks/todos:
 * **New application logo:** The UI of Gradio changed a lot in the last time. Why not a new fresh logo? It should use the GNOME icon style. More information [here](https://developer.gnome.org/hig/stable/icons-and-artwork.html.en) and [here](http://tango.freedesktop.org/Tango_Icon_Theme_Guidelines).
 * **Implement unit testing:** Gradio is getting bigger and bigger. Now it's important to implement unit testing, to prevent some nasty bugs.
 * For more information click [here](https://github.com/haecker-felix/gradio/blob/master/docs/CONTRIBUTING.md)
-
-
-
-## News
-* **The Ubuntu PPA no longer exists** and is no longer supported. I only maintain the Flatpak and Snap versions.
-[More information](https://github.com/haecker-felix/gradio/wiki/Install-Gradio)
-
-
 
 ## General Informations
 * **Installation**  
