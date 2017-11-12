@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-11-12 16:33+0100\n"
-"PO-Revision-Date: 2017-11-12 18:56+0000\n"
+"PO-Revision-Date: 2017-11-13 19:40+0000\n"
 "Last-Translator: DaSnoopy <a.antolini@tin.it>\n"
 "Language-Team: Italian "
 "<https://hosted.weblate.org/projects/gradio/translations/it/>\n"
@@ -42,7 +42,7 @@ msgstr "Mostra altre..."
 
 #: data/ui/page/add-page.ui:106 src/page/gradio-search-page.vala:72
 msgid "Stations with the most votes"
-msgstr "Stazioni radio più votate."
+msgstr "Stazioni radio con più voti"
 
 #: data/ui/page/add-page.ui:184 src/page/gradio-search-page.vala:64
 msgid "Recently clicked stations"
@@ -244,7 +244,7 @@ msgstr "Voti"
 
 #: data/ui/menubutton.ui:415
 msgid "Clicks"
-msgstr "Clicks"
+msgstr "Clic"
 
 #: data/ui/menubutton.ui:430
 msgid "Bitrate"
