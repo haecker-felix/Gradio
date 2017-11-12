@@ -105,5 +105,10 @@ namespace Gradio{
 			_secondary_text = station_model.get_n_items().to_string() + " Items";
 			notify_property("secondary-text");
 		}
+
+		public void rename(string name){
+			_name = name;
+			notify_property("primary-text");
+		}
 	}
 }

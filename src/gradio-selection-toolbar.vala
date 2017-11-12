@@ -28,6 +28,12 @@ namespace Gradio{
 		[GtkChild] private Gtk.Button EditButton;
 		[GtkChild] private Gtk.Stack SelectionStack;
 		[GtkChild] private Gtk.Image InfoImage;
+
+		[GtkChild] private Gtk.MenuButton RenameButton;
+		[GtkChild] private Gtk.Entry RenameEntry;
+		[GtkChild] private Gtk.Button RenameSaveButton;
+		[GtkChild] private Gtk.Popover RenamePopover;
+
 		private OrganizeCollectionPopover collection_dialog;
 
 		private MainWindow window;
@@ -51,6 +57,7 @@ namespace Gradio{
 			VoteButton.set_visible(false);
 			EditButton.set_visible(false);
 			InfoImage.set_visible(false);
+			RenameButton.set_visible(false);
 
 			if(window.current_selection.get_n_items() == 0)
 				SelectionStack.set_visible_child_name("no-actions");
@@ -71,6 +78,7 @@ namespace Gradio{
 			if(window.current_selection.contains_collection_item() && !window.current_selection.contains_radio_station_item()){
 				if(window.current_selection.get_n_items() == 1){
 					DetailsButton.set_visible(true);
+					RenameButton.set_visible(true);
 				}
 			}
 
@@ -213,6 +221,21 @@ namespace Gradio{
 		[GtkCallback]
 		public void ShareButton_clicked (Gtk.Button button) {
 			// TODO: implement share button
+		}
+
+		[GtkCallback]
+		public void RenameSaveButton_clicked (Gtk.Button button) {
+			Gd.MainBoxItem item = (Gd.MainBoxItem)window.current_selection.get_item(0);
+
+			if(Util.is_collection_item(int.parse(item.id))){
+				Collection collection = (Collection)item;
+				App.library.rename_collection(collection, RenameEntry.get_text());
+			}
+
+			RenameEntry.set_text("");
+			RenamePopover.hide();
+
+			App.window.set_selection_mode(false);
 		}
 	}
 }

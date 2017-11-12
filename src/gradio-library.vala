@@ -255,6 +255,11 @@ namespace Gradio{
 	    		return coll;
 		}
 
+		public void rename_collection(Collection collection, string new_name){
+			collection.rename(new_name);
+			sql_update_row_collection(collection.id, new_name);
+		}
+
 		public void export_database(string path){
 			message("Exporting database to: %s", path);
 			File dest = File.new_for_path(path);
@@ -462,6 +467,10 @@ namespace Gradio{
 				}
 			} while (rc == Sqlite.ROW);
 			return 0;
+		}
+
+		private bool sql_update_row_collection(string collection_id, string collection_name){
+			return execute_query("UPDATE collections SET collection_name = '"+collection_name+"' WHERE collection_id = '"+collection_id+"';");
 		}
 
 		private bool sql_insert_row_library(string station_id, string collection_id){
