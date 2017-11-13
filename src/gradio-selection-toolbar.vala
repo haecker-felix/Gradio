@@ -114,8 +114,7 @@ namespace Gradio{
 		private int non_library_items(){
 			int count = 0;
 
-			for(int i = 0; i < window.current_selection.get_n_items(); i++){
-				Gd.MainBoxItem item = (Gd.MainBoxItem)window.current_selection.get_item(i);
+			foreach(Gd.MainBoxItem item in window.current_selection){
 				if(!App.library.contains_item(item)) count++;
 			}
 
@@ -125,8 +124,7 @@ namespace Gradio{
 		private int library_items(){
 			int count = 0;
 
-			for(int i = 0; i < window.current_selection.get_n_items(); i++){
-				Gd.MainBoxItem item = (Gd.MainBoxItem)window.current_selection.get_item(i);
+			foreach(Gd.MainBoxItem item in window.current_selection){
 				if(App.library.contains_item(item)) count++;
 			}
 
@@ -137,9 +135,7 @@ namespace Gradio{
 		public void RemoveButton_clicked (Gtk.Button button) {
 			StationModel selection = window.current_selection;
 
-			for(int i = 0; i < selection.get_n_items(); i++){
-				Gd.MainBoxItem item = (Gd.MainBoxItem)selection.get_item(i);
-
+			foreach(Gd.MainBoxItem item in selection){
 				if(Util.is_collection_item(int.parse(item.id)))
 					App.library.remove_collection((Collection)item);
 				else
@@ -153,9 +149,7 @@ namespace Gradio{
 		public void AddButton_clicked (Gtk.Button button) {
 			StationModel selection = window.current_selection;
 
-			for(int i = 0; i < selection.get_n_items(); i++){
-				Gd.MainBoxItem item = (Gd.MainBoxItem)selection.get_item(i);
-
+			foreach(Gd.MainBoxItem item in selection){
 				if(!Util.is_collection_item(int.parse(item.id)))
 					App.library.add_radio_station((RadioStation)item);
 			}
