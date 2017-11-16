@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-11-12 16:33+0100\n"
-"PO-Revision-Date: 2017-11-16 16:42+0000\n"
+"PO-Revision-Date: 2017-11-16 21:32+0000\n"
 "Last-Translator: Slobodan Terzić <githzerai06@gmail.com>\n"
 "Language-Team: Serbian (latin) "
 "<https://hosted.weblate.org/projects/gradio/translations/sr_Latn/>\n"
@@ -58,7 +58,7 @@ msgstr "Vaša fonoteka je prazna"
 
 #: data/ui/page/library-page.ui:62
 msgid "If you add stations to the library, you will find them here."
-msgstr "Ovde ćete pronaći stanice koje dodate u biblioteku."
+msgstr "Ovde ćete pronaći stanice koje dodate u fonoteku."
 
 #: data/ui/page/collections-page.ui:43
 msgid "You don't have any collection"
@@ -83,7 +83,7 @@ msgstr "Vrsta"
 
 #: data/ui/details-box.ui:206
 msgid "Items"
-msgstr "Stavke"
+msgstr "stavki"
 
 #: data/ui/details-box.ui:282
 msgid "Location"
@@ -143,7 +143,7 @@ msgstr "Dodaj u zbirku"
 
 #: data/ui/selection-toolbar.ui:82
 msgid "Remove from Library"
-msgstr "Ukloni iz biblioteke"
+msgstr "Ukloni iz fonoteke"
 
 #: data/ui/station-editor.ui:39
 msgid "Global database"
@@ -364,12 +364,12 @@ msgstr "Stvara novu radio stanicu, vidljivu svim korisnima."
 
 #: src/page/gradio-add-page.vala:158
 msgid "Add new radio stations to your library"
-msgstr "Dodajte nove radio stanice u vašu biblioteku"
+msgstr "Dodajte nove radio stanice u vašu fonoteku"
 
 #: src/page/gradio-collection-items-page.vala:75
 #: src/page/gradio-library-page.vala:87
 msgid " Items"
-msgstr " Stavke"
+msgstr " stavki"
 
 #: src/page/gradio-library-page.vala:85
 msgid "Fetching station data…"
