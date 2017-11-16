@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-11-12 16:33+0100\n"
-"PO-Revision-Date: 2017-11-16 01:13+0000\n"
+"PO-Revision-Date: 2017-11-16 16:38+0000\n"
 "Last-Translator: Slobodan Terzić <githzerai06@gmail.com>\n"
 "Language-Team: Serbian "
 "<https://hosted.weblate.org/projects/gradio/translations/sr/>\n"
@@ -21,7 +21,7 @@ msgstr ""
 
 #: data/ui/app-menu.ui:6 data/ui/menubutton.ui:178
 msgid "Settings"
-msgstr "Поставке"
+msgstr "Подешавања"
 
 #: data/ui/app-menu.ui:12 data/ui/menubutton.ui:192
 msgid "About"
@@ -54,7 +54,7 @@ msgstr "Станице са највише кликова"
 
 #: data/ui/page/library-page.ui:44
 msgid "Your library is empty"
-msgstr "Ваша библиотека је празна"
+msgstr "Ваша фонотека је празна"
 
 #: data/ui/page/library-page.ui:62
 msgid "If you add stations to the library, you will find them here."
@@ -225,7 +225,7 @@ msgstr "Сакриј неисправне станице"
 
 #: data/ui/menubutton.ui:145 data/ui/menubutton.ui:250
 msgid "Library"
-msgstr "Библиотека"
+msgstr "Фонотека"
 
 #: data/ui/menubutton.ui:267
 msgid "Import"
