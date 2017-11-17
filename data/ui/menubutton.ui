@@ -151,6 +151,20 @@
                 <property name="position">6</property>
               </packing>
             </child>
+	    <child>
+              <object class="GtkModelButton" id="CreateStationMButton">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+		<property name="action_name">menu.create-station</property>
+                <property name="text" translatable="yes">Create new radio station</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">7</property>
+              </packing>
+            </child>
             <child>
               <object class="GtkBox" id="AppBox">
                 <property name="can_focus">False</property>

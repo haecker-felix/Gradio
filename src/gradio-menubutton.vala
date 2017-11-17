@@ -97,6 +97,17 @@ namespace Gradio{
 			action_group.add_action(action);
 
 
+			// Create Station
+			action = new GLib.SimpleAction ("create-station", null);
+			action.activate.connect (() => {
+				StationEditorDialog editor_dialog = new StationEditorDialog.create();
+				editor_dialog.set_transient_for(App.window);
+				editor_dialog.set_modal(true);
+				editor_dialog.set_visible(true);
+			});
+			action_group.add_action(action);
+
+
 			// Hide broken stations
 			var variant = new GLib.Variant.boolean(App.settings.hide_broken_stations);
 			action = new SimpleAction.stateful("hide-broken-stations", null, variant);
