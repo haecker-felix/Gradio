@@ -225,6 +225,7 @@ namespace Gradio{
 						search_page = new SearchPage();
 						MainStack.add_named(search_page, page_name[WindowMode.SEARCH]);
 					}
+					header.MenuBox.set_visible(false);
 					break;
 				};
 				case WindowMode.COLLECTION_ITEMS: {
