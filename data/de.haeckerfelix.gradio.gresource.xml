@@ -23,6 +23,7 @@
 	<file>ui/searchbar.ui</file>
 	<file>ui/menubutton.ui</file>
 	<file>ui/collection-row.ui</file>
+	<file>ui/section-menu.ui</file>
 	<file>icons/hicolor/48x48/apps/de.haeckerfelix.gradio.png</file>
   </gresource>
 </gresources>

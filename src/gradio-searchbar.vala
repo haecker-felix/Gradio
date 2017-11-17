@@ -22,12 +22,9 @@ namespace Gradio{
 	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/searchbar.ui")]
 	public class SearchBar : Gtk.Box{
 
-		private const int search_delay = 2;
-		private uint delayed_changed_id;
-
 		private TaggedEntry SearchEntry;
 		private string search_term = "";
-		[GtkChild] Box SearchBox;
+		[GtkChild] private Box SearchBox;
 
 		[GtkChild] private Revealer CountryRevealer;
 		[GtkChild] private Button SelectCountryButton;
@@ -54,12 +51,19 @@ namespace Gradio{
 		private StationProvider station_provider;
 
 		public signal void timeout_reset();
+		private const int search_delay = 2;
+		private uint delayed_changed_id;
+
+		[GtkChild] private Label SortLabel;
+		[GtkChild] public Gtk.MenuButton SectionMenuButton;
+		[GtkChild] public Label SectionLabel;
+
+		private GLib.SimpleActionGroup search_action_group;
 
 		public SearchBar(ref StationProvider sp){
 			station_provider = sp;
 
 			SearchEntry = new TaggedEntry();
-			SearchEntry.width_request = 400;
 			SearchEntry.set_visible(true);
 			SearchBox.pack_start(SearchEntry);
 
@@ -84,6 +88,8 @@ namespace Gradio{
 				return get_row(item.text);
 			});
 
+
+			setup_actions();
 			reset_timeout();
 			connect_signals();
 		}
@@ -152,6 +158,42 @@ namespace Gradio{
 
 			App.settings.notify["station-sorting"].connect(reset_timeout);
 			App.settings.notify["sort-ascending"].connect(reset_timeout);
+		}
+
+		private void setup_actions(){
+			search_action_group = new GLib.SimpleActionGroup ();
+			this.insert_action_group ("search", search_action_group);
+
+			// Sorting
+			var variant = new GLib.Variant.string("");
+			var action = new SimpleAction.stateful("sort", variant.get_type(), variant);
+			action.activate.connect((a,b) => {
+				switch(b.get_string()){
+					case "votes": App.settings.station_sorting = Compare.VOTES; break;
+					case "name": App.settings.station_sorting = Compare.NAME; break;
+					case "language": App.settings.station_sorting = Compare.LANGUAGE; break;
+					case "country": App.settings.station_sorting = Compare.COUNTRY; break;
+					case "state": App.settings.station_sorting = Compare.STATE; break;
+					case "bitrate": App.settings.station_sorting = Compare.BITRATE; break;
+					case "clicks": App.settings.station_sorting = Compare.CLICKS; break;
+					case "clicktimestamp": App.settings.station_sorting = Compare.DATE; break;
+				}
+				a.set_state(b);
+			});
+			search_action_group.add_action(action);
+
+
+			// Sort order
+			variant = new GLib.Variant.string("");
+			action = new SimpleAction.stateful("sortorder", variant.get_type(), variant);
+			action.activate.connect((a,b) => {
+				switch(b.get_string()){
+					case "ascending": App.settings.sort_ascending = true; break;
+					case "descending": App.settings.sort_ascending = false; break;
+				}
+				a.set_state(b);
+			});
+			search_action_group.add_action(action);
 		}
 
 		private void reset_timeout(){

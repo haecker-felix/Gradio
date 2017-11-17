@@ -92,24 +92,6 @@ namespace Gradio{
 			App.window.search_page.set_search(StationSearchEntry.get_text());
 		}
 
-		[GtkCallback]
-		private void MostVotesButton_clicked(){
-			App.window.set_mode(WindowMode.SEARCH);
-			App.window.search_page.show_most_voted();
-		}
-
-		[GtkCallback]
-		private void RecentlyClickedButton_clicked(){
-			App.window.set_mode(WindowMode.SEARCH);
-			App.window.search_page.show_recently_clicked();
-		}
-
-		[GtkCallback]
-		private void MostClicksButton_clicked(){
-			App.window.set_mode(WindowMode.SEARCH);
-			App.window.search_page.show_most_clicks();
-		}
-
 		private void show_create_station_dialog(){
 			StationEditorDialog editor_dialog = new StationEditorDialog.create();
 			editor_dialog.set_transient_for(App.window);
