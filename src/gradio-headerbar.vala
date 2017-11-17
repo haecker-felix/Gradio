@@ -30,7 +30,6 @@ namespace Gradio{
 		//
 		// Default
 		//
-		[GtkChild] public Gtk.Button AddButton;
 		[GtkChild] public Gtk.Button SelectButton;
 		[GtkChild] public Gtk.Button BackButton;
 		[GtkChild] public Gtk.ToggleButton SearchToggleButton;
@@ -75,7 +74,6 @@ namespace Gradio{
 			SelectButton.set_visible(true);
 			SearchToggleButton.set_visible(true);
 			MenuBox.set_visible(true);
-			AddButton.set_visible(false);
 		}
 
 		public void show_selection_bar(bool b){

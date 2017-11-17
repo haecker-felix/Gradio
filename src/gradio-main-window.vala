@@ -23,13 +23,12 @@ namespace Gradio{
 		LIBRARY,
 		COLLECTION_ITEMS,
 		SEARCH,
-		ADD
 	}
 
 	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/main-window.ui")]
 	public class MainWindow : Gtk.ApplicationWindow {
 
-		public string[] page_name = { "library", "collections", "collection_items", "search", "add"};
+		public string[] page_name = { "library", "collections", "collection_items", "search"};
 
 		public Gradio.Headerbar header;
 		PlayerToolbar player_toolbar;
@@ -41,7 +40,6 @@ namespace Gradio{
 		CollectionItemsPage collection_items_page;
 		public SearchPage search_page;
 		LibraryPage library_page;
-		AddPage add_page;
 
 		// History of the pages
 		GLib.Queue<WindowMode> mode_queue = new GLib.Queue<WindowMode>();
@@ -133,7 +131,6 @@ namespace Gradio{
 					set_mode(WindowMode.SEARCH);
 				}
 			});
-			header.AddButton.clicked.connect(() => { set_mode(WindowMode.ADD); });
 			header.BackButton.clicked.connect(() => {set_mode(mode_queue.pop_head(), true);});
 			header.selection_canceled.connect(() => {set_selection_mode(false);});
 			header.selection_started.connect(() => {set_selection_mode(true);});
@@ -220,7 +217,6 @@ namespace Gradio{
 			// do action for mode
 			switch(current_mode){
 				case WindowMode.LIBRARY: {
-					header.AddButton.set_visible(true);
 					mode_queue.clear();
 					break;
 				};
@@ -234,14 +230,6 @@ namespace Gradio{
 				case WindowMode.COLLECTION_ITEMS: {
 					Collection collection = library_page.selected_collection;
 					collection_items_page.set_collection(collection);
-					break;
-				};
-				case WindowMode.ADD: {
-					header.MenuBox.set_visible(false);
-					if(add_page == null){
-						add_page = new AddPage();
-						MainStack.add_named(add_page, page_name[WindowMode.ADD]);
-					}
 					break;
 				};
 			}
@@ -302,11 +290,6 @@ namespace Gradio{
 				return true;
 			}
 
-			// show add page
-			if ((event.keyval == Gdk.Key.a) && (event.state & default_modifiers) == Gdk.ModifierType.CONTROL_MASK) {
-				set_mode(WindowMode.ADD);
-				return true;
-			}
 			return false;
 		}
 
