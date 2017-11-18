@@ -214,6 +214,12 @@ namespace Gradio{
 			// disable selection mode
 			set_selection_mode(false);
 
+			// "delete" search page if necessary
+			if(current_mode != WindowMode.SEARCH){
+				MainStack.remove(search_page);
+				search_page = null;
+			}
+
 			// do action for mode
 			switch(current_mode){
 				case WindowMode.LIBRARY: {
