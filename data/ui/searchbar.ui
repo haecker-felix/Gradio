@@ -414,7 +414,7 @@
                 <property name="receives_default">True</property>
                 <property name="action_name">search.sort</property>
                 <property name="text" translatable="yes">Date</property>
-		<property name="action-target">'date'</property>
+		<property name="action-target">'clicktimestamp'</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -429,6 +429,19 @@
             <property name="position">2</property>
           </packing>
         </child>
+	      <child>
+              <object class="GtkSeparator">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="margin_top">6</property>
+                <property name="margin_bottom">6</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
         <child>
           <object class="GtkBox">
             <property name="visible">True</property>
