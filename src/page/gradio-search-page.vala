@@ -60,7 +60,7 @@ namespace Gradio{
 					SearchStack.set_visible_child_name("results");
 				}
 			});
-			search_station_provider.working.connect(() => {
+			searchbar.timeout_reset.connect(() => {
 				SearchStack.set_visible_child_name("loading");
 			});
 
