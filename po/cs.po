@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-11-12 16:33+0100\n"
-"PO-Revision-Date: 2017-11-16 18:45+0000\n"
+"PO-Revision-Date: 2017-11-18 18:55+0000\n"
 "Last-Translator: Tomáš Moravec <otoman100@gmail.com>\n"
 "Language-Team: Czech "
 "<https://hosted.weblate.org/projects/gradio/translations/cs/>\n"
@@ -38,22 +38,19 @@ msgstr "Hledat stanice"
 #: data/ui/page/add-page.ui:85 data/ui/page/add-page.ui:163
 #: data/ui/page/add-page.ui:241
 msgid "More..."
-msgstr ""
+msgstr "Více..."
 
 #: data/ui/page/add-page.ui:106 src/page/gradio-search-page.vala:72
-#, fuzzy
 msgid "Stations with the most votes"
-msgstr "Zobrazí stanice s největším počtem hlasů."
+msgstr "Zobrazí stanice s největším počtem hlasů"
 
 #: data/ui/page/add-page.ui:184 src/page/gradio-search-page.vala:64
-#, fuzzy
 msgid "Recently clicked stations"
 msgstr "Zobrazit nedávno navštívené stanice"
 
 #: data/ui/page/add-page.ui:262 src/page/gradio-search-page.vala:80
-#, fuzzy
 msgid "Stations with the most clicks"
-msgstr "Zobrazí nejčastěji navštěvované stanice."
+msgstr "Zobrazí nejčastěji navštěvované stanice"
 
 #: data/ui/page/library-page.ui:44
 msgid "Your library is empty"
@@ -113,18 +110,16 @@ msgid "Edit"
 msgstr "Upravit"
 
 #: data/ui/organize-collection-popover.ui:25
-#, fuzzy
 msgid "Enter name for new collection..."
-msgstr "Pojmenujte svou novou sbírku"
+msgstr "Pojmenujte svou novou sbírku..."
 
 #: data/ui/organize-collection-popover.ui:35
 msgid "Create"
-msgstr ""
+msgstr "Vytvořit"
 
 #: data/ui/organize-collection-popover.ui:78
-#, fuzzy
 msgid "Select collection:"
-msgstr "Vybrat vše"
+msgstr "Vybrat sbírku:"
 
 #: data/ui/selection-menu.ui:7
 msgid "Select All"
@@ -139,7 +134,6 @@ msgid "Click an item to view options"
 msgstr ""
 
 #: data/ui/selection-toolbar.ui:52
-#, fuzzy
 msgid "Collection"
 msgstr "Sbírky"
 
@@ -190,7 +184,7 @@ msgstr "Jazyk"
 
 #: data/ui/station-editor.ui:291
 msgid "Favicon Address"
-msgstr ""
+msgstr "Adresa ikony"
 
 #: data/ui/station-editor.ui:435
 msgid "Server Response"
@@ -219,12 +213,11 @@ msgstr "Stanice buď neexistuje, nebo zkuste použít jiná klíčová slova."
 
 #: data/ui/menubutton.ui:45
 msgid "100%"
-msgstr ""
+msgstr "100%"
 
 #: data/ui/menubutton.ui:104 data/ui/menubutton.ui:318
-#, fuzzy
 msgid "Sorting"
-msgstr "Nastavení"
+msgstr "Řazení"
 
 #: data/ui/menubutton.ui:119
 msgid "Hide broken stations"
@@ -244,19 +237,19 @@ msgstr "Export"
 
 #: data/ui/menubutton.ui:340
 msgid "Votes"
-msgstr ""
+msgstr "Hlasy"
 
 #: data/ui/menubutton.ui:415
 msgid "Clicks"
-msgstr ""
+msgstr "Návštěvy"
 
 #: data/ui/menubutton.ui:430
 msgid "Bitrate"
-msgstr ""
+msgstr "Datový tok"
 
 #: data/ui/menubutton.ui:445
 msgid "Date"
-msgstr ""
+msgstr "Datum"
 
 #: data/ui/menubutton.ui:485
 msgid "Ascending"
@@ -371,13 +364,12 @@ msgstr "Přidat novou stanici, viditelnou pro všechny uživatele."
 
 #: src/page/gradio-add-page.vala:158
 msgid "Add new radio stations to your library"
-msgstr ""
+msgstr "Přidat novou stanici do knihovny"
 
 #: src/page/gradio-collection-items-page.vala:75
 #: src/page/gradio-library-page.vala:87
-#, fuzzy
 msgid " Items"
-msgstr "Položky"
+msgstr " Položky"
 
 #: src/page/gradio-library-page.vala:85
 msgid "Fetching station data…"
@@ -385,7 +377,7 @@ msgstr ""
 
 #: src/page/gradio-search-page.vala:107
 msgid "Search"
-msgstr ""
+msgstr "Hledat"
 
 #~ msgid "Where"
 #~ msgstr "Místo"
