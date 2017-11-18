@@ -58,12 +58,13 @@ namespace Gradio{
 					SearchStack.set_visible_child_name("no-results");
 				}else{
 					SearchStack.set_visible_child_name("results");
-					show_search();
 				}
 			});
 			search_station_provider.working.connect(() => {
 				SearchStack.set_visible_child_name("loading");
 			});
+
+			searchbar.SearchEntry.search_changed.connect(show_search);
 
 			setup_section_menubutton();
 			setup_discover_section();

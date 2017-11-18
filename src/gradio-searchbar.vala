@@ -22,7 +22,7 @@ namespace Gradio{
 	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/searchbar.ui")]
 	public class SearchBar : Gtk.Box{
 
-		private TaggedEntry SearchEntry;
+		public TaggedEntry SearchEntry;
 		private string search_term = "";
 		[GtkChild] private Box SearchBox;
 
