@@ -164,5 +164,28 @@ namespace Gradio{
 			chooser.destroy();
 			return path;
 		}
+
+		public static string get_sort_string(){
+			string sort_variant_string = "";
+			switch(App.settings.station_sorting){
+				case Compare.VOTES: sort_variant_string = "votes"; break;
+				case Compare.NAME: sort_variant_string = "name"; break;
+				case Compare.LANGUAGE: sort_variant_string = "language"; break;
+				case Compare.COUNTRY: sort_variant_string = "country"; break;
+				case Compare.STATE: sort_variant_string = "state"; break;
+				case Compare.BITRATE: sort_variant_string = "bitrate"; break;
+				case Compare.CLICKS: sort_variant_string = "clicks"; break;
+				case Compare.DATE: sort_variant_string = "clicktimestamp"; break;
+			}
+			return sort_variant_string;
+		}
+
+		public static string get_sortorder_string(){
+			string order_variant_string = "";
+			if(App.settings.sort_ascending == true) order_variant_string = "ascending"; else order_variant_string = "descending";
+			return order_variant_string;
+		}
+
+
 	}
 }
