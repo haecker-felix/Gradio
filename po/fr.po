@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-11-12 16:33+0100\n"
-"PO-Revision-Date: 2017-11-18 16:12+0000\n"
+"PO-Revision-Date: 2017-11-18 18:55+0000\n"
 "Last-Translator: Florian <floflr@zaclys.net>\n"
 "Language-Team: French "
 "<https://hosted.weblate.org/projects/gradio/translations/fr/>\n"
@@ -33,7 +33,7 @@ msgstr "Quitter"
 
 #: data/ui/page/add-page.ui:54
 msgid "Search for radio stations"
-msgstr "Rechercher des stations de radio"
+msgstr "Rechercher des stations radio"
 
 #: data/ui/page/add-page.ui:85 data/ui/page/add-page.ui:163
 #: data/ui/page/add-page.ui:241
