@@ -88,7 +88,6 @@ namespace Gradio{
 				return get_row(item.text);
 			});
 
-
 			setup_actions();
 			reset_timeout();
 			connect_signals();
@@ -165,7 +164,7 @@ namespace Gradio{
 			this.insert_action_group ("search", search_action_group);
 
 			// Sorting
-			var variant = new GLib.Variant.string("");
+			var variant = new GLib.Variant.string(Util.get_sort_string());
 			var action = new SimpleAction.stateful("sort", variant.get_type(), variant);
 			action.activate.connect((a,b) => {
 				switch(b.get_string()){
@@ -184,7 +183,7 @@ namespace Gradio{
 
 
 			// Sort order
-			variant = new GLib.Variant.string("");
+			variant = new GLib.Variant.string(Util.get_sortorder_string());
 			action = new SimpleAction.stateful("sortorder", variant.get_type(), variant);
 			action.activate.connect((a,b) => {
 				switch(b.get_string()){
@@ -222,19 +221,7 @@ namespace Gradio{
 			if(selected_language != null) filter_table.insert("state", selected_state);
 			if(selected_language != null) filter_table.insert("name", search_term);
 
-			string sort_by = "";
-			switch(App.settings.station_sorting){
-				case Compare.VOTES: sort_by = "votes"; break;
-				case Compare.NAME: sort_by = "name"; break;
-				case Compare.LANGUAGE: sort_by = "language"; break;
-				case Compare.COUNTRY: sort_by = "country"; break;
-				case Compare.STATE: sort_by = "state"; break;
-				case Compare.BITRATE: sort_by = "bitrate"; break;
-				case Compare.CLICKS: sort_by = "clickcount"; break;
-				case Compare.DATE: sort_by = "clicktimestamp"; break;
-			}
-
-			filter_table.insert("order", sort_by);
+			filter_table.insert("order", Util.get_sort_string());
 			filter_table.insert("reverse", (!App.settings.sort_ascending).to_string());
 			filter_table.insert("limit", App.settings.max_search_results.to_string());
 
