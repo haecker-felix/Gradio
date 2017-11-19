@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-11-12 16:33+0100\n"
-"PO-Revision-Date: 2017-11-19 00:58+0000\n"
+"PO-Revision-Date: 2017-11-20 01:47+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål "
 "<https://hosted.weblate.org/projects/gradio/translations/nb/>\n"
@@ -33,7 +33,7 @@ msgstr "Avslutt"
 
 #: data/ui/page/add-page.ui:54
 msgid "Search for radio stations"
-msgstr "Søk etter radio stasjoner"
+msgstr "Søk etter radiostasjoner"
 
 #: data/ui/page/add-page.ui:85 data/ui/page/add-page.ui:163
 #: data/ui/page/add-page.ui:241
@@ -58,8 +58,7 @@ msgstr "Biblioteket ditt er tomt"
 
 #: data/ui/page/library-page.ui:62
 msgid "If you add stations to the library, you will find them here."
-msgstr ""
-"Hvis du legger til stasjoner til i biblioteket, vil du finne disse her."
+msgstr "Hvis du legger til stasjoner i biblioteket, vil du finne dem her."
 
 #: data/ui/page/collections-page.ui:43
 msgid "You don't have any collection"
@@ -67,7 +66,7 @@ msgstr "Du har ingen samlinger"
 
 #: data/ui/page/collections-page.ui:61
 msgid "You can group stations into collections."
-msgstr "Du kan gruppere stasjoner i samlinger."
+msgstr "Du kan gruppere radiostasjoner i samlinger."
 
 #: data/ui/details-box.ui:23 data/ui/selection-toolbar.ui:159
 msgid "Details"
@@ -84,7 +83,7 @@ msgstr "Type"
 
 #: data/ui/details-box.ui:206
 msgid "Items"
-msgstr "Enheter"
+msgstr "Elementer"
 
 #: data/ui/details-box.ui:282
 msgid "Location"
@@ -96,7 +95,7 @@ msgstr "Beskrivelse"
 
 #: data/ui/details-box.ui:346
 msgid "Tags"
-msgstr "Tagger"
+msgstr "Etiketter"
 
 #: data/ui/details-box.ui:433 data/ui/selection-toolbar.ui:31
 msgid "Play"
@@ -112,7 +111,7 @@ msgstr "Rediger"
 
 #: data/ui/organize-collection-popover.ui:25
 msgid "Enter name for new collection..."
-msgstr "Skriv inn navn for på samling…"
+msgstr "Skriv inn navn på ny samling…"
 
 #: data/ui/organize-collection-popover.ui:35
 msgid "Create"
@@ -165,7 +164,7 @@ msgstr "Forsett"
 
 #: data/ui/station-editor.ui:151
 msgid "Stream Address"
-msgstr "Strøm adresse"
+msgstr "Strømmingsadresse"
 
 #: data/ui/station-editor.ui:166
 msgid "Homepage"
@@ -185,11 +184,11 @@ msgstr "Språk"
 
 #: data/ui/station-editor.ui:291
 msgid "Favicon Address"
-msgstr "Favorittikon adresse"
+msgstr "Favikon-adresse"
 
 #: data/ui/station-editor.ui:435
 msgid "Server Response"
-msgstr "Tjener svar"
+msgstr "Tjenersvar"
 
 #: data/ui/station-editor.ui:471
 msgid "Close"
@@ -210,7 +209,8 @@ msgstr "Resultatløst"
 #: data/ui/page/search-page.ui:145
 msgid ""
 "Either the station does not exist, or you have to search with other keywords."
-msgstr "Enten finnes ikke stasjonen, eller så må du søke med andre nøkkelord."
+msgstr ""
+"Enten så finnes ikke radiostasjonen, eller så må du søke med andre nøkkelord."
 
 #: data/ui/menubutton.ui:45
 msgid "100%"
@@ -222,7 +222,7 @@ msgstr "Sortering"
 
 #: data/ui/menubutton.ui:119
 msgid "Hide broken stations"
-msgstr "Gjem ødelagte stasjoner"
+msgstr "Gjem radiostasjoner som ikke fungerer"
 
 #: data/ui/menubutton.ui:145 data/ui/menubutton.ui:250
 msgid "Library"
@@ -238,7 +238,7 @@ msgstr "Eksporter"
 
 #: data/ui/menubutton.ui:340
 msgid "Votes"
-msgstr "Stememr"
+msgstr "Stemmer"
 
 #: data/ui/menubutton.ui:415
 msgid "Clicks"
@@ -262,7 +262,7 @@ msgstr "Synkende"
 
 #: src/gradio-settings-window.vala:39
 msgid "Features"
-msgstr "Egenskaper"
+msgstr "Funksjoner"
 
 #: src/gradio-settings-window.vala:42
 msgid "Playback"
@@ -274,17 +274,17 @@ msgstr "Utseende"
 
 #: src/gradio-settings-window.vala:48
 msgid "Cache"
-msgstr "Mellomlager"
+msgstr "Hurtiglager"
 
 #. APPEARANCE
 #. Dark design
 #: src/gradio-settings-window.vala:56
 msgid "Prefer dark theme"
-msgstr "Foretrekk mørkt tema"
+msgstr "Foretrekk mørk drakt"
 
 #: src/gradio-settings-window.vala:56
 msgid "Use a dark theme, if possible"
-msgstr "Bruk et mørkt tema, om mulig"
+msgstr "Ifør mørk drakt, om mulig"
 
 #. PLAYBACK
 #. enable background playback
@@ -294,7 +294,7 @@ msgstr "Avspilling i bakgrunnen"
 
 #: src/gradio-settings-window.vala:65
 msgid "Continue the playback if you close the Gradio window"
-msgstr "Forsett avspilling selv om du lukker Gradio vinduet"
+msgstr "Forsett avspilling selv om du lukker Gradio-vinduet"
 
 #. resume playback on startup
 #: src/gradio-settings-window.vala:71
@@ -303,7 +303,7 @@ msgstr "Gjenoppta avspilling ved oppstart"
 
 #: src/gradio-settings-window.vala:71
 msgid "Play the latest station if you start Gradio"
-msgstr "Avspill den nyeste stasjonen ved oppstart av Gradio"
+msgstr "Spill av den nyeste radiostasjonen ved oppstart av Gradio"
 
 #. FEATURES
 #. mpris
@@ -313,31 +313,31 @@ msgstr "MPRIS"
 
 #: src/gradio-settings-window.vala:80
 msgid "Integrate Gradio as media player in your desktop environment"
-msgstr "Integrer Gradio som media avspiller i ditt skrivebords miljø"
+msgstr "Integrer Gradio som mediaavspiller i ditt skrivebordsmiljø"
 
 #. enable notifications
 #: src/gradio-settings-window.vala:86
 msgid "Notifications"
-msgstr "Varsler"
+msgstr "Merknader"
 
 #: src/gradio-settings-window.vala:86
 msgid "Show desktop notifications"
-msgstr "Vis skrivebords varsler"
+msgstr "Vis skrivebordsmerknader"
 
 #. enable tray icon
 #: src/gradio-settings-window.vala:92
 msgid "Tray icon"
-msgstr "Skrivebordskuffikon"
+msgstr "Systemkurvsikon"
 
 #: src/gradio-settings-window.vala:92
 msgid "Show a tray icon, to restore the main window"
-msgstr "Vis skrivebordskuffikon, for å gjenopprette hovedvinduet"
+msgstr "Vis systemkurvsikon, for å gjenopprette hovedvinduet"
 
 #. CACHE
 #. cache station images
 #: src/gradio-settings-window.vala:101
 msgid "Cache station icons"
-msgstr "Mellomlagre stasjonsikoner"
+msgstr "Mellomlagre radiostasjonsikoner"
 
 #: src/gradio-settings-window.vala:101
 msgid "Saves the images locally."
@@ -345,23 +345,23 @@ msgstr "Lagre bilder lokalt."
 
 #: src/gradio-settings-window.vala:106
 msgid "Clear Cache"
-msgstr "Tøm mellomlager"
+msgstr "Tøm hurtiglager"
 
 #: src/gradio-settings-window.vala:106
 msgid "Clear all cached station icons"
-msgstr "Tøm alle mellomlagrede stasjonsikoner"
+msgstr "Tøm alle hurtiglagrede stasjonsikoner"
 
 #: src/page/gradio-add-page.vala:37
 msgid "Create a new radio station"
-msgstr "Lag en ny radio stasjon"
+msgstr "Opprett en ny radiostasjon"
 
 #: src/page/gradio-add-page.vala:77
 msgid "New public radio station"
-msgstr "Ny offentlig radio stasjon"
+msgstr "Ny offentlig radiostasjon"
 
 #: src/page/gradio-add-page.vala:77
 msgid "Create a new radio station, which is visible for all users."
-msgstr "Lag en ny radio stasjon, som er synlig for all brukere."
+msgstr "Lag en ny radiostasjon, som er synlig for all brukere."
 
 #: src/page/gradio-add-page.vala:158
 msgid "Add new radio stations to your library"
