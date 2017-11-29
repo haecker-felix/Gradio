@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-11-12 16:33+0100\n"
-"PO-Revision-Date: 2017-11-29 15:49+0000\n"
+"PO-Revision-Date: 2017-11-30 16:45+0000\n"
 "Last-Translator: Erwin van Eijk <erwin.vaneijk@gmail.com>\n"
 "Language-Team: Dutch "
 "<https://hosted.weblate.org/projects/gradio/translations/nl/>\n"
@@ -62,7 +62,7 @@ msgstr "Als u radiozenders aan de bibliotheek toevoegt, zult u ze hier vinden."
 
 #: data/ui/page/collections-page.ui:43
 msgid "You don't have any collection"
-msgstr "U heeft nog geen verzameling"
+msgstr "U heeft nog geen verzamelingen"
 
 #: data/ui/page/collections-page.ui:61
 msgid "You can group stations into collections."
@@ -243,7 +243,7 @@ msgstr "Stemmen"
 
 #: data/ui/menubutton.ui:415
 msgid "Clicks"
-msgstr "Clicks"
+msgstr "Stemmen"
 
 #: data/ui/menubutton.ui:430
 msgid "Bitrate"
