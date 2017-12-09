@@ -151,10 +151,15 @@ namespace Gradio{
 		}
 
 		public void select_all(){
-			search_mainbox.select_all();
-			most_clicks_mainbox.select_all();
-			recently_clicked_mainbox.select_all();
-			most_votes_mainbox.select_all();
+			if(SectionStack.get_visible_child_name() == "discover"){
+				most_clicks_mainbox.select_all();
+				recently_clicked_mainbox.select_all();
+				most_votes_mainbox.select_all();
+			}
+
+			if(SectionStack.get_visible_child_name() == "search"){
+				search_mainbox.select_all();
+			}
 		}
 
 		public void select_none(){
