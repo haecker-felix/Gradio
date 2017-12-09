@@ -148,6 +148,7 @@ namespace Gradio{
 			most_clicks_mainbox.set_selection_mode(b);
 			recently_clicked_mainbox.set_selection_mode(b);
 			most_votes_mainbox.set_selection_mode(b);
+			SearchBox.set_visible(!b);
 		}
 
 		public void select_all(){
