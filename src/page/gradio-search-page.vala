@@ -197,7 +197,7 @@ namespace Gradio{
 			searchbar.reset_filters();
 			App.settings.sort_ascending = false;
 			App.settings.station_sorting = Compare.VOTES;
-			title_changed();
+			show_search();
 		}
 
 		[GtkCallback]
@@ -205,6 +205,7 @@ namespace Gradio{
 			searchbar.reset_filters();
 			App.settings.sort_ascending = false;
 			App.settings.station_sorting = Compare.DATE;
+			show_search();
 		}
 
 		[GtkCallback]
@@ -212,6 +213,7 @@ namespace Gradio{
 			searchbar.reset_filters();
 			App.settings.sort_ascending = false;
 			App.settings.station_sorting = Compare.CLICKS;
+			show_search();
 		}
 	}
 }
