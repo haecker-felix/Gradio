@@ -166,9 +166,8 @@ namespace Gradio{
 			// Sorting
 			var variant = new GLib.Variant.string(Util.get_sort_string());
 			var action = new SimpleAction.stateful("sort", variant.get_type(), variant);
-			set_sort_label(action.state.get_string());
 			action.activate.connect((a,b) => {
-				set_sort_label(b.get_string());
+				set_sort(b.get_string(),(search_action_group.get_action_state("sortorder")).get_string());
 				a.set_state(b);
 			});
 			search_action_group.add_action(action);
@@ -178,26 +177,34 @@ namespace Gradio{
 			variant = new GLib.Variant.string(Util.get_sortorder_string());
 			action = new SimpleAction.stateful("sortorder", variant.get_type(), variant);
 			action.activate.connect((a,b) => {
-				switch(b.get_string()){
-					case "ascending": App.settings.sort_ascending = true; break;
-					case "descending": App.settings.sort_ascending = false; break;
-				}
+				set_sort((search_action_group.get_action_state("sort")).get_string(), b.get_string());
 				a.set_state(b);
 			});
 			search_action_group.add_action(action);
+
+			set_sort((search_action_group.get_action_state("sort")).get_string(), (search_action_group.get_action_state("sortorder")).get_string());
 		}
 
-		private void set_sort_label(string s){
-			switch(s){
-				case "votes": App.settings.station_sorting = Compare.VOTES; SortLabel.set_text(_("Votes")); break;
-				case "name": App.settings.station_sorting = Compare.NAME; SortLabel.set_text(_("Name")); break;
-				case "language": App.settings.station_sorting = Compare.LANGUAGE; SortLabel.set_text(_("Language")); break;
-				case "country": App.settings.station_sorting = Compare.COUNTRY; SortLabel.set_text(_("Country")); break;
-				case "state": App.settings.station_sorting = Compare.STATE; SortLabel.set_text(_("State")); break;
-				case "bitrate": App.settings.station_sorting = Compare.BITRATE; SortLabel.set_text(_("Bitrate")); break;
-				case "clicks": App.settings.station_sorting = Compare.CLICKS; SortLabel.set_text(_("Clicks")); break;
-				case "clicktimestamp": App.settings.station_sorting = Compare.DATE; SortLabel.set_text(_("Date")); break;
+		public void set_sort(string sort_by, string order){
+			string sortlabel = "";
+			string orderlabel = "";
+
+			switch(sort_by){
+				case "votes": App.settings.station_sorting = Compare.VOTES; sortlabel = _("Votes"); break;
+				case "name": App.settings.station_sorting = Compare.NAME; sortlabel = _("Name"); break;
+				case "language": App.settings.station_sorting = Compare.LANGUAGE; sortlabel = _("Language"); break;
+				case "country": App.settings.station_sorting = Compare.COUNTRY; sortlabel = _("Country"); break;
+				case "state": App.settings.station_sorting = Compare.STATE; sortlabel = _("State"); break;
+				case "bitrate": App.settings.station_sorting = Compare.BITRATE; sortlabel = _("Bitrate"); break;
+				case "clicks": App.settings.station_sorting = Compare.CLICKS; sortlabel = _("Clicks"); break;
+				case "clicktimestamp": App.settings.station_sorting = Compare.DATE; sortlabel = _("Date"); break;
 			}
+			switch(order){
+				case "ascending": App.settings.sort_ascending = true; orderlabel = _("Ascending"); break;
+				case "descending": App.settings.sort_ascending = false; orderlabel = _("Descending"); break;
+			}
+
+			SortLabel.set_text(sortlabel + " / " + orderlabel);
 		}
 
 		private void reset_timeout(){

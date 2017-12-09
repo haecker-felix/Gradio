@@ -201,24 +201,21 @@ namespace Gradio{
 		[GtkCallback]
 		private void MostVotesButton_clicked(){
 			searchbar.reset_filters();
-			App.settings.sort_ascending = false;
-			App.settings.station_sorting = Compare.VOTES;
+			searchbar.set_sort("votes", "descending");
 			show_search();
 		}
 
 		[GtkCallback]
 		private void RecentlyClickedButton_clicked(){
 			searchbar.reset_filters();
-			App.settings.sort_ascending = false;
-			App.settings.station_sorting = Compare.DATE;
+			searchbar.set_sort("clicktimestamp", "descending");
 			show_search();
 		}
 
 		[GtkCallback]
 		private void MostClicksButton_clicked(){
 			searchbar.reset_filters();
-			App.settings.sort_ascending = false;
-			App.settings.station_sorting = Compare.CLICKS;
+			searchbar.set_sort("clicks", "descending");
 			show_search();
 		}
 	}
