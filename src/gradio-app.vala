@@ -48,7 +48,6 @@ namespace Gradio {
 					player.station = station;
 				});
 			});
-
 			search_provider.start_search.connect ((timestamp, searchterm) => {
 				ensure_window ();
 				window.present_with_time (timestamp);
@@ -119,6 +118,7 @@ namespace Gradio {
 			action = new GLib.SimpleAction ("select-none", null);
 			action.activate.connect (() => { window.select_none (); });
 			this.add_action (action);
+
 
 			// setup appmenu
 			var builder = new Gtk.Builder.from_resource ("/de/haecker-felix/gradio/ui/app-menu.ui");
@@ -206,6 +206,7 @@ namespace Gradio {
 
 		// Run app
 		app.run (args);
+		app.settings.apply();
 
 		return 0;
 	}

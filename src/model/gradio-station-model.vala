@@ -107,6 +107,39 @@ namespace Gradio{
 			}
 			return false;
 		}
+
+		public bool contains_item_with_id(string id){
+			for (int i = 0; i < get_n_items(); i ++) {
+      				Gd.MainBoxItem fitem = (Gd.MainBoxItem)get_item (i);
+      				if (fitem.id == id) return true;
+			}
+			return false;
+		}
+
+		public Iterator iterator() {
+			return new Iterator(this);
+		}
+
+		public class Iterator {
+			private int index;
+			private StationModel model;
+
+			public Iterator(StationModel model) {
+				this.model = model;
+			}
+
+			public bool next() {
+				if(index < model.get_n_items())
+					return true;
+				else
+					return false;
+			}
+
+			public Gd.MainBoxItem get() {
+				this.index++;
+				return (Gd.MainBoxItem)this.model.get_item(this.index - 1);
+			}
+		}
 	}
 }
 

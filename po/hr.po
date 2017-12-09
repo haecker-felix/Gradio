@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-27 16:55+0200\n"
+"POT-Creation-Date: 2017-11-12 16:33+0100\n"
 "PO-Revision-Date: 2017-09-15 16:58+0000\n"
 "Last-Translator: gogogogi <trebelnik2@gmail.com>\n"
 "Language-Team: Croatian <https://hosted.weblate.org/projects/gradio/"
@@ -19,170 +19,41 @@ msgstr ""
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 2.17-dev\n"
 
-#: data/ui/app-menu.ui:6
+#: data/ui/app-menu.ui:6 data/ui/menubutton.ui:178
 msgid "Settings"
 msgstr "Postavke"
 
-#: data/ui/app-menu.ui:12
+#: data/ui/app-menu.ui:12 data/ui/menubutton.ui:192
 msgid "About"
 msgstr "O programu"
 
-#: data/ui/app-menu.ui:18
+#: data/ui/app-menu.ui:18 data/ui/menubutton.ui:206
 msgid "Quit"
 msgstr "Zatvori"
 
-#: data/ui/details-box.ui:23 data/ui/selection-toolbar.ui:151
-msgid "Details"
-msgstr "Pojedinosti"
+#: data/ui/page/add-page.ui:54
+msgid "Search for radio stations"
+msgstr "Pretraga radio stanica"
 
-#: data/ui/details-box.ui:137 data/ui/headerbar.ui:171
-#: data/ui/station-editor.ui:125
-msgid "Name"
-msgstr "Naziv"
-
-#: data/ui/details-box.ui:172
-msgid "Type"
-msgstr "Vrsta"
-
-#: data/ui/details-box.ui:209
-msgid "Items"
-msgstr "Stavke"
-
-#: data/ui/details-box.ui:285
-msgid "Location"
-msgstr "Lokacija"
-
-#: data/ui/details-box.ui:317
-msgid "Description"
-msgstr "Opis"
-
-#: data/ui/details-box.ui:349
-msgid "Tags"
-msgstr "Oznake"
-
-#: data/ui/details-box.ui:436 data/ui/selection-toolbar.ui:15
-msgid "Play"
-msgstr "Reproduciraj"
-
-#: data/ui/details-box.ui:481
-msgid "Open homepage"
-msgstr "Otvori naslovnu stranicu"
-
-#: data/ui/details-box.ui:526
-msgid "Edit"
-msgstr "Uredi"
-
-#: data/ui/groupbox.ui:20 data/ui/item/button-item.ui:24
-#: data/ui/item/switch-item.ui:24
-msgid "Title"
+#: data/ui/page/add-page.ui:85 data/ui/page/add-page.ui:163
+#: data/ui/page/add-page.ui:241
+msgid "More..."
 msgstr ""
 
-#: data/ui/headerbar.ui:85
-msgid "Sort Descending"
-msgstr ""
-
-#: data/ui/headerbar.ui:107
-msgid "Sort Ascending"
-msgstr ""
-
-#: data/ui/headerbar.ui:139
-msgid "Sort"
-msgstr ""
-
-#: data/ui/headerbar.ui:152
-msgid "Votes"
-msgstr ""
-
-#: data/ui/headerbar.ui:187 data/ui/searchbar.ui:205
-#: data/ui/station-editor.ui:211
-msgid "Language"
-msgstr "Jezik"
-
-#: data/ui/headerbar.ui:203 data/ui/station-editor.ui:181
-msgid "Country"
-msgstr "Zemlja"
-
-#: data/ui/headerbar.ui:219 data/ui/station-editor.ui:196
-msgid "State"
-msgstr "Država"
-
-#: data/ui/headerbar.ui:235
-msgid "Bitrate"
-msgstr ""
-
-#: data/ui/headerbar.ui:251
-msgid "Clicks"
-msgstr ""
-
-#: data/ui/headerbar.ui:267
-msgid "Date"
-msgstr ""
-
-#: data/ui/headerbar.ui:369 src/gradio-settings-window.vala:45
-msgid "Library"
-msgstr "Fonoteka"
-
-#: data/ui/headerbar.ui:382 data/ui/selection-toolbar.ui:135
-msgid "Collections"
-msgstr "Kolekcije"
-
-#: data/ui/headerbar.ui:412 data/ui/status-icon.ui:114
-msgid "label"
-msgstr ""
-
-#: data/ui/headerbar.ui:566 data/ui/organize-collection-dialog.ui:192
-#: data/ui/station-editor.ui:501
-msgid "Cancel"
-msgstr "Odustani"
-
-#: data/ui/item/button-item.ui:36 data/ui/item/switch-item.ui:36
-msgid "Subtitle"
-msgstr ""
-
-#: data/ui/main-window.ui:9
-msgid "Gradio"
-msgstr ""
-
-#: data/ui/main-window.ui:128
+#: data/ui/page/add-page.ui:106 src/page/gradio-search-page.vala:72
 #, fuzzy
-msgid "Notification Text"
-msgstr "Obavijesti"
+msgid "Stations with the most votes"
+msgstr "Prikaži radio stanice koje imaju najviše glasova."
 
-#: data/ui/main-window.ui:138
+#: data/ui/page/add-page.ui:184 src/page/gradio-search-page.vala:64
 #, fuzzy
-msgid "Action"
-msgstr "Lokacija"
+msgid "Recently clicked stations"
+msgstr "Prikaži nedavne radio stanice"
 
-#: data/ui/organize-collection-dialog.ui:21
-#: data/ui/organize-collection-dialog.ui:107
-msgid "New Collection…"
-msgstr "Nova kolekcija…"
-
-#: data/ui/organize-collection-dialog.ui:31
-#: data/ui/organize-collection-dialog.ui:128
-#: data/ui/organize-collection-dialog.ui:201
-msgid "Add"
-msgstr "Dodaj"
-
-#: data/ui/organize-collection-dialog.ui:92
-msgid "Enter a name for your first collection"
-msgstr "Upišite naziv svoje prve kolekcije"
-
-#: data/ui/page/add-page.ui:45
-msgid "Fill your library with something new"
-msgstr "Popunite svoju fonoteku s nečim novim"
-
-#: data/ui/page/add-page.ui:64
-msgid "There are several options available to add something new."
-msgstr "Dostupno je nekoliko mogućnosti za dodavanje nečeg novog."
-
-#: data/ui/page/collections-page.ui:43
-msgid "You don't have any collection"
-msgstr "Još nemate kolekcija"
-
-#: data/ui/page/collections-page.ui:61
-msgid "You can group stations into collections."
-msgstr "Možete grupirati stanice u kolekcije."
+#: data/ui/page/add-page.ui:262 src/page/gradio-search-page.vala:80
+#, fuzzy
+msgid "Stations with the most clicks"
+msgstr "Prikaži radio stanice koje imaju najviše klikova."
 
 #: data/ui/page/library-page.ui:44
 msgid "Your library is empty"
@@ -192,30 +63,68 @@ msgstr "Vaša fonoteka je prazna"
 msgid "If you add stations to the library, you will find them here."
 msgstr "Ako dodate stanicu u fonoteku, pronaći ćete ju ovdje."
 
-#: data/ui/page/search-page.ui:127
-msgid "No results found"
-msgstr "Nema pronađenih rezultata"
+#: data/ui/page/collections-page.ui:43
+msgid "You don't have any collection"
+msgstr "Još nemate kolekcija"
 
-#: data/ui/page/search-page.ui:145
-msgid ""
-"Either the station does not exist, or you have to search with other keywords."
-msgstr "Ili stanica ne postoji, ili ju potražite s drugim izrazom pretrage."
+#: data/ui/page/collections-page.ui:61
+msgid "You can group stations into collections."
+msgstr "Možete grupirati stanice u kolekcije."
 
-#: data/ui/searchbar.ui:27
-msgid "Where"
-msgstr "Gdje"
+#: data/ui/details-box.ui:23 data/ui/selection-toolbar.ui:159
+msgid "Details"
+msgstr "Pojedinosti"
 
-#: data/ui/searchbar.ui:44
-msgid "Select Country ..."
-msgstr "Odaberi zemlju ..."
+#: data/ui/details-box.ui:137 data/ui/station-editor.ui:125
+#: data/ui/menubutton.ui:355
+msgid "Name"
+msgstr "Naziv"
 
-#: data/ui/searchbar.ui:125
-msgid "Select State  ..."
-msgstr "Odaberi državu  ..."
+#: data/ui/details-box.ui:169
+msgid "Type"
+msgstr "Vrsta"
 
-#: data/ui/searchbar.ui:222
-msgid "Select Language  ..."
-msgstr "Odaberi jezik  ..."
+#: data/ui/details-box.ui:206
+msgid "Items"
+msgstr "Stavke"
+
+#: data/ui/details-box.ui:282
+msgid "Location"
+msgstr "Lokacija"
+
+#: data/ui/details-box.ui:314
+msgid "Description"
+msgstr "Opis"
+
+#: data/ui/details-box.ui:346
+msgid "Tags"
+msgstr "Oznake"
+
+#: data/ui/details-box.ui:433 data/ui/selection-toolbar.ui:31
+msgid "Play"
+msgstr "Reproduciraj"
+
+#: data/ui/details-box.ui:478
+msgid "Open homepage"
+msgstr "Otvori naslovnu stranicu"
+
+#: data/ui/details-box.ui:523
+msgid "Edit"
+msgstr "Uredi"
+
+#: data/ui/organize-collection-popover.ui:25
+#, fuzzy
+msgid "Enter name for new collection..."
+msgstr "Upišite naziv svoje prve kolekcije"
+
+#: data/ui/organize-collection-popover.ui:35
+msgid "Create"
+msgstr ""
+
+#: data/ui/organize-collection-popover.ui:78
+#, fuzzy
+msgid "Select collection:"
+msgstr "Odaberi sve"
 
 #: data/ui/selection-menu.ui:7
 msgid "Select All"
@@ -225,13 +134,22 @@ msgstr "Odaberi sve"
 msgid "Select None"
 msgstr "Odaberi ništa"
 
-#: data/ui/selection-toolbar.ui:29
+#: data/ui/selection-toolbar.ui:18
+msgid "Click an item to view options"
+msgstr ""
+
+#: data/ui/selection-toolbar.ui:52
+#, fuzzy
+msgid "Collection"
+msgstr "Kolekcije"
+
+#: data/ui/selection-toolbar.ui:65
 msgid "Add to library"
 msgstr "Dodaj u fonoteku"
 
-#: data/ui/selection-toolbar.ui:46
-msgid "Remove"
-msgstr "Ukloni"
+#: data/ui/selection-toolbar.ui:82
+msgid "Remove from Library"
+msgstr ""
 
 #: data/ui/station-editor.ui:39
 msgid "Global database"
@@ -259,6 +177,18 @@ msgstr "Adresa streama"
 msgid "Homepage"
 msgstr "Naslovna stranica"
 
+#: data/ui/station-editor.ui:181 data/ui/menubutton.ui:385
+msgid "Country"
+msgstr "Zemlja"
+
+#: data/ui/station-editor.ui:196 data/ui/menubutton.ui:400
+msgid "State"
+msgstr "Država"
+
+#: data/ui/station-editor.ui:211 data/ui/menubutton.ui:370
+msgid "Language"
+msgstr "Jezik"
+
 #: data/ui/station-editor.ui:291
 msgid "Favicon Address"
 msgstr "Adresa favikone"
@@ -271,23 +201,71 @@ msgstr "Odgovor poslužitelja"
 msgid "Close"
 msgstr "Zatvori"
 
+#: data/ui/station-editor.ui:501
+msgid "Cancel"
+msgstr "Odustani"
+
 #: data/ui/station-editor.ui:510
 msgid "Done"
 msgstr "Učinjeno"
 
-#: data/ui/status-icon.ui:9
-msgid "Connection information"
+#: data/ui/page/search-page.ui:127
+msgid "No results found"
+msgstr "Nema pronađenih rezultata"
+
+#: data/ui/page/search-page.ui:145
+msgid ""
+"Either the station does not exist, or you have to search with other keywords."
+msgstr "Ili stanica ne postoji, ili ju potražite s drugim izrazom pretrage."
+
+#: data/ui/menubutton.ui:45
+msgid "100%"
 msgstr ""
 
-#: data/ui/status-icon.ui:34
+#: data/ui/menubutton.ui:104 data/ui/menubutton.ui:318
 #, fuzzy
-msgid "page0"
-msgstr "Naslovna stranica"
+msgid "Sorting"
+msgstr "Postavke"
 
-#: data/ui/status-icon.ui:45
-#, fuzzy
-msgid "page2"
-msgstr "Naslovna stranica"
+#: data/ui/menubutton.ui:119
+msgid "Hide broken stations"
+msgstr "Sakrij nedostupne stanice"
+
+#: data/ui/menubutton.ui:145 data/ui/menubutton.ui:250
+msgid "Library"
+msgstr "Fonoteka"
+
+#: data/ui/menubutton.ui:267
+msgid "Import"
+msgstr "Uvezi"
+
+#: data/ui/menubutton.ui:281
+msgid "Export"
+msgstr "Izvezi"
+
+#: data/ui/menubutton.ui:340
+msgid "Votes"
+msgstr ""
+
+#: data/ui/menubutton.ui:415
+msgid "Clicks"
+msgstr ""
+
+#: data/ui/menubutton.ui:430
+msgid "Bitrate"
+msgstr ""
+
+#: data/ui/menubutton.ui:445
+msgid "Date"
+msgstr ""
+
+#: data/ui/menubutton.ui:485
+msgid "Ascending"
+msgstr ""
+
+#: data/ui/menubutton.ui:500
+msgid "Descending"
+msgstr ""
 
 #: src/gradio-settings-window.vala:39
 msgid "Features"
@@ -297,173 +275,175 @@ msgstr "Značajke"
 msgid "Playback"
 msgstr "Reprodukcija"
 
-#: src/gradio-settings-window.vala:48
+#: src/gradio-settings-window.vala:45
 msgid "Appearance"
 msgstr "Izgled"
 
-#: src/gradio-settings-window.vala:51
+#: src/gradio-settings-window.vala:48
 msgid "Cache"
 msgstr "Međuspremnik"
 
 #. APPEARANCE
 #. Dark design
-#: src/gradio-settings-window.vala:59
+#: src/gradio-settings-window.vala:56
 msgid "Prefer dark theme"
 msgstr "Preferiraj tamnu temu"
 
-#: src/gradio-settings-window.vala:59
+#: src/gradio-settings-window.vala:56
 msgid "Use a dark theme, if possible"
 msgstr "Koristi tamnu temu, ako je moguće"
 
-#. hide broken stations
-#: src/gradio-settings-window.vala:65
-msgid "Hide broken stations"
-msgstr "Sakrij nedostupne stanice"
-
-#: src/gradio-settings-window.vala:65
-msgid "Don't show stations, which are not working"
-msgstr "Ne prikazuj stanice koje ne rade"
-
 #. PLAYBACK
 #. enable background playback
-#: src/gradio-settings-window.vala:74
+#: src/gradio-settings-window.vala:65
 msgid "Background Playback"
 msgstr "Reprodukciju u pozadini"
 
-#: src/gradio-settings-window.vala:74
+#: src/gradio-settings-window.vala:65
 msgid "Continue the playback if you close the Gradio window"
 msgstr "Nastavi reprodukciju kada se zatvori Gradio prozor"
 
 #. resume playback on startup
-#: src/gradio-settings-window.vala:80
+#: src/gradio-settings-window.vala:71
 msgid "Resume playback on startup"
 msgstr "Nastavi reprodukciju pri pokretanju"
 
-#: src/gradio-settings-window.vala:80
+#: src/gradio-settings-window.vala:71
 msgid "Play the latest station if you start Gradio"
 msgstr "Reproduciraj posljednju stanicu kada se pokrene Gradio"
 
-#. LIBRARY
-#. import library
-#: src/gradio-settings-window.vala:89 src/gradio-settings-window.vala:173
-msgid "Import"
-msgstr "Uvezi"
-
-#: src/gradio-settings-window.vala:89
-msgid "Replace the current library with a another one"
-msgstr "Zamijeni trenutnu fonoteku s drugom"
-
-#: src/gradio-settings-window.vala:93
-msgid "Do you want to replace the current library with this one?"
-msgstr "Želite li zamijeniti trenutnu fonoteku s ovom?"
-
-#. export library
-#: src/gradio-settings-window.vala:99 src/gradio-settings-window.vala:152
-msgid "Export"
-msgstr "Izvezi"
-
-#: src/gradio-settings-window.vala:99 src/gradio-settings-window.vala:149
-msgid "Export the current library"
-msgstr "Izvezi trenutnu fonoteku"
-
 #. FEATURES
 #. mpris
-#: src/gradio-settings-window.vala:111
+#: src/gradio-settings-window.vala:80
 msgid "MPRIS"
 msgstr "MPRIS"
 
-#: src/gradio-settings-window.vala:111
+#: src/gradio-settings-window.vala:80
 msgid "Integrate Gradio as media player in your desktop environment"
 msgstr "Integrirajte Gradio kao medijski reporduktor u vaše radno okruženje"
 
 #. enable notifications
-#: src/gradio-settings-window.vala:117
+#: src/gradio-settings-window.vala:86
 msgid "Notifications"
 msgstr "Obavijesti"
 
-#: src/gradio-settings-window.vala:117
+#: src/gradio-settings-window.vala:86
 msgid "Show desktop notifications"
 msgstr "Prikaži obavijesti radne površine"
 
 #. enable tray icon
-#: src/gradio-settings-window.vala:123
+#: src/gradio-settings-window.vala:92
 msgid "Tray icon"
 msgstr "Obavijesna ikona"
 
-#: src/gradio-settings-window.vala:123
+#: src/gradio-settings-window.vala:92
 msgid "Show a tray icon, to restore the main window"
 msgstr "Prikaži obavijesnu ikonu, kako bi mogli vratiti glavni prozor"
 
 #. CACHE
 #. cache station images
-#: src/gradio-settings-window.vala:132
+#: src/gradio-settings-window.vala:101
 msgid "Cache station icons"
 msgstr "Predmemorija ikone stanica"
 
-#: src/gradio-settings-window.vala:132
+#: src/gradio-settings-window.vala:101
 msgid "Saves the images locally."
 msgstr "Spremaj ikone lokalno."
 
-#: src/gradio-settings-window.vala:137
+#: src/gradio-settings-window.vala:106
 msgid "Clear Cache"
 msgstr "Obriši predmemoriju"
 
-#: src/gradio-settings-window.vala:137
+#: src/gradio-settings-window.vala:106
 msgid "Clear all cached station icons"
 msgstr "Obriši sve ikone u predmemoriji"
 
-#: src/gradio-settings-window.vala:150 src/gradio-settings-window.vala:171
-msgid "_Cancel"
-msgstr "_Odustani"
-
-#: src/gradio-settings-window.vala:170
-msgid "Select database to import"
-msgstr "Odaberi bazu podataka za uvoz"
-
-#: src/page/gradio-add-page.vala:27
+#: src/page/gradio-add-page.vala:37
 msgid "Create a new radio station"
 msgstr "Stvori novu radio stanicu"
 
-#: src/page/gradio-add-page.vala:28
-msgid "Discover radio stations"
-msgstr "Otkrij radio stanice"
-
-#: src/page/gradio-add-page.vala:31
-msgid "Show famous radio stations"
-msgstr "Prikaži popularne stanice"
-
-#: src/page/gradio-add-page.vala:31
-msgid "Show radio stations which have the most votes."
-msgstr "Prikaži radio stanice koje imaju najviše glasova."
-
-#: src/page/gradio-add-page.vala:35
-msgid "Show popular radio stations"
-msgstr "Prikaži popularne radio stanice"
-
-#: src/page/gradio-add-page.vala:35
-msgid "Show radio stations which have the most clicks."
-msgstr "Prikaži radio stanice koje imaju najviše klikova."
-
-#: src/page/gradio-add-page.vala:39
-msgid "Show recent radio stations"
-msgstr "Prikaži nedavne radio stanice"
-
-#: src/page/gradio-add-page.vala:39
-msgid "Show radio stations which have recently been clicked."
-msgstr "Prikaži radio stanice koje su nedavno kliknute."
-
-#: src/page/gradio-add-page.vala:43
-msgid "Search for radio stations"
-msgstr "Pretraga radio stanica"
-
-#: src/page/gradio-add-page.vala:43
-msgid "Search for specific radio stations."
-msgstr "Pretraga određenih radio stanica."
-
-#: src/page/gradio-add-page.vala:47
+#: src/page/gradio-add-page.vala:77
 msgid "New public radio station"
 msgstr "Nova javna radio stanica"
 
-#: src/page/gradio-add-page.vala:47
+#: src/page/gradio-add-page.vala:77
 msgid "Create a new radio station, which is visible for all users."
 msgstr "Stvori novu radio stanicu, koja je dostupna svim korisnicima."
+
+#: src/page/gradio-add-page.vala:158
+msgid "Add new radio stations to your library"
+msgstr ""
+
+#: src/page/gradio-collection-items-page.vala:75
+#: src/page/gradio-library-page.vala:87
+#, fuzzy
+msgid " Items"
+msgstr "Stavke"
+
+#: src/page/gradio-library-page.vala:85
+msgid "Fetching station data…"
+msgstr ""
+
+#: src/page/gradio-search-page.vala:107
+msgid "Search"
+msgstr ""
+
+#~ msgid "Where"
+#~ msgstr "Gdje"
+
+#~ msgid "Select Country ..."
+#~ msgstr "Odaberi zemlju ..."
+
+#~ msgid "Select State  ..."
+#~ msgstr "Odaberi državu  ..."
+
+#~ msgid "Select Language  ..."
+#~ msgstr "Odaberi jezik  ..."
+
+#~ msgid "Fill your library with something new"
+#~ msgstr "Popunite svoju fonoteku s nečim novim"
+
+#~ msgid "There are several options available to add something new."
+#~ msgstr "Dostupno je nekoliko mogućnosti za dodavanje nečeg novog."
+
+#~ msgid "New Collection…"
+#~ msgstr "Nova kolekcija…"
+
+#~ msgid "Add"
+#~ msgstr "Dodaj"
+
+#~ msgid "Remove"
+#~ msgstr "Ukloni"
+
+#~ msgid "Don't show stations, which are not working"
+#~ msgstr "Ne prikazuj stanice koje ne rade"
+
+#~ msgid "Replace the current library with a another one"
+#~ msgstr "Zamijeni trenutnu fonoteku s drugom"
+
+#~ msgid "Do you want to replace the current library with this one?"
+#~ msgstr "Želite li zamijeniti trenutnu fonoteku s ovom?"
+
+#~ msgid "Export the current library"
+#~ msgstr "Izvezi trenutnu fonoteku"
+
+#~ msgid "_Cancel"
+#~ msgstr "_Odustani"
+
+#~ msgid "Select database to import"
+#~ msgstr "Odaberi bazu podataka za uvoz"
+
+#~ msgid "Discover radio stations"
+#~ msgstr "Otkrij radio stanice"
+
+#~ msgid "Show famous radio stations"
+#~ msgstr "Prikaži popularne stanice"
+
+#~ msgid "Show popular radio stations"
+#~ msgstr "Prikaži popularne radio stanice"
+
+#~ msgid "Show radio stations which have recently been clicked."
+#~ msgstr "Prikaži radio stanice koje su nedavno kliknute."
+
+#~ msgid "Search for specific radio stations."
+#~ msgstr "Pretraga određenih radio stanica."

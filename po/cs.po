@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-10 14:34+0200\n"
-"PO-Revision-Date: 2017-10-14 09:55+0000\n"
+"POT-Creation-Date: 2017-11-12 16:33+0100\n"
+"PO-Revision-Date: 2017-11-18 18:55+0000\n"
 "Last-Translator: Tomáš Moravec <otoman100@gmail.com>\n"
 "Language-Team: Czech "
 "<https://hosted.weblate.org/projects/gradio/translations/cs/>\n"
@@ -17,47 +17,40 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 2.17\n"
+"X-Generator: Weblate 2.18-dev\n"
 
-#: data/ui/app-menu.ui:6
+#: data/ui/app-menu.ui:6 data/ui/menubutton.ui:178
 msgid "Settings"
 msgstr "Nastavení"
 
-#: data/ui/app-menu.ui:12
+#: data/ui/app-menu.ui:12 data/ui/menubutton.ui:192
 msgid "About"
 msgstr "O aplikaci"
 
-#: data/ui/app-menu.ui:18
+#: data/ui/app-menu.ui:18 data/ui/menubutton.ui:206
 msgid "Quit"
 msgstr "Ukončit"
 
-#: data/ui/filter-box.ui:27
-msgid "Where"
-msgstr "Místo"
+#: data/ui/page/add-page.ui:54
+msgid "Search for radio stations"
+msgstr "Hledat stanice"
 
-#: data/ui/filter-box.ui:44
-msgid "Select Country ..."
-msgstr "Vyberte zemi ..."
+#: data/ui/page/add-page.ui:85 data/ui/page/add-page.ui:163
+#: data/ui/page/add-page.ui:241
+msgid "More..."
+msgstr "Více..."
 
-#: data/ui/filter-box.ui:125
-msgid "Select State  ..."
-msgstr "Vyberte stát ..."
+#: data/ui/page/add-page.ui:106 src/page/gradio-search-page.vala:72
+msgid "Stations with the most votes"
+msgstr "Zobrazí stanice s největším počtem hlasů"
 
-#: data/ui/filter-box.ui:205 data/ui/station-editor.ui:211
-msgid "Language"
-msgstr "Jazyk"
+#: data/ui/page/add-page.ui:184 src/page/gradio-search-page.vala:64
+msgid "Recently clicked stations"
+msgstr "Zobrazit nedávno navštívené stanice"
 
-#: data/ui/filter-box.ui:222
-msgid "Select Language  ..."
-msgstr "Vyberte jazyk ..."
-
-#: data/ui/page/add-page.ui:45
-msgid "Fill your library with something new"
-msgstr ""
-
-#: data/ui/page/add-page.ui:64
-msgid "There are several options available to add something new."
-msgstr ""
+#: data/ui/page/add-page.ui:262 src/page/gradio-search-page.vala:80
+msgid "Stations with the most clicks"
+msgstr "Zobrazí nejčastěji navštěvované stanice"
 
 #: data/ui/page/library-page.ui:44
 msgid "Your library is empty"
@@ -73,66 +66,60 @@ msgstr "Nemáte žádnou sbírku"
 
 #: data/ui/page/collections-page.ui:61
 msgid "You can group stations into collections."
-msgstr ""
+msgstr "Stanice můžete seskupovat do sbírek."
 
-#: data/ui/details-box.ui:23 data/ui/selection-toolbar.ui:151
+#: data/ui/details-box.ui:23 data/ui/selection-toolbar.ui:159
 msgid "Details"
 msgstr "Podrobnosti"
 
 #: data/ui/details-box.ui:137 data/ui/station-editor.ui:125
+#: data/ui/menubutton.ui:355
 msgid "Name"
 msgstr "Jméno"
 
-#: data/ui/details-box.ui:172
+#: data/ui/details-box.ui:169
 msgid "Type"
 msgstr "Typ"
 
-#: data/ui/details-box.ui:209
+#: data/ui/details-box.ui:206
 msgid "Items"
-msgstr ""
+msgstr "Položky"
 
-#: data/ui/details-box.ui:285
+#: data/ui/details-box.ui:282
 msgid "Location"
 msgstr "Umístění"
 
-#: data/ui/details-box.ui:317
+#: data/ui/details-box.ui:314
 msgid "Description"
 msgstr "Popis"
 
-#: data/ui/details-box.ui:349
+#: data/ui/details-box.ui:346
 msgid "Tags"
 msgstr "Tagy"
 
-#: data/ui/details-box.ui:436 data/ui/selection-toolbar.ui:15
+#: data/ui/details-box.ui:433 data/ui/selection-toolbar.ui:31
 msgid "Play"
 msgstr "Přehrát"
 
-#: data/ui/details-box.ui:481
+#: data/ui/details-box.ui:478
 msgid "Open homepage"
 msgstr "Otevřít domovskou stránku"
 
-#: data/ui/details-box.ui:526
+#: data/ui/details-box.ui:523
 msgid "Edit"
 msgstr "Upravit"
 
-#: data/ui/organize-collection-dialog.ui:21
-#: data/ui/organize-collection-dialog.ui:107
-msgid "New Collection…"
-msgstr "Nová sbírka…"
+#: data/ui/organize-collection-popover.ui:25
+msgid "Enter name for new collection..."
+msgstr "Pojmenujte svou novou sbírku..."
 
-#: data/ui/organize-collection-dialog.ui:31
-#: data/ui/organize-collection-dialog.ui:128
-#: data/ui/organize-collection-dialog.ui:201
-msgid "Add"
-msgstr "Přidat"
+#: data/ui/organize-collection-popover.ui:35
+msgid "Create"
+msgstr "Vytvořit"
 
-#: data/ui/organize-collection-dialog.ui:92
-msgid "Enter a name for your first collection"
-msgstr "Pojmenujte svou novou sbírku"
-
-#: data/ui/organize-collection-dialog.ui:192 data/ui/station-editor.ui:501
-msgid "Cancel"
-msgstr "Zrušit"
+#: data/ui/organize-collection-popover.ui:78
+msgid "Select collection:"
+msgstr "Vybrat sbírku:"
 
 #: data/ui/selection-menu.ui:7
 msgid "Select All"
@@ -142,17 +129,21 @@ msgstr "Vybrat vše"
 msgid "Select None"
 msgstr "Zrušit výběr"
 
-#: data/ui/selection-toolbar.ui:29
+#: data/ui/selection-toolbar.ui:18
+msgid "Click an item to view options"
+msgstr ""
+
+#: data/ui/selection-toolbar.ui:52
+msgid "Collection"
+msgstr "Sbírky"
+
+#: data/ui/selection-toolbar.ui:65
 msgid "Add to library"
 msgstr "Přidat do knihovny"
 
-#: data/ui/selection-toolbar.ui:46
-msgid "Remove"
-msgstr "Odebrat"
-
-#: data/ui/selection-toolbar.ui:135
-msgid "Collections"
-msgstr "Sbírky"
+#: data/ui/selection-toolbar.ui:82
+msgid "Remove from Library"
+msgstr "Odebrat z knihovny"
 
 #: data/ui/station-editor.ui:39
 msgid "Global database"
@@ -179,39 +170,94 @@ msgstr "Adresa streamu"
 msgid "Homepage"
 msgstr "Domovská stránka"
 
-#: data/ui/station-editor.ui:181
+#: data/ui/station-editor.ui:181 data/ui/menubutton.ui:385
 msgid "Country"
 msgstr "Země"
 
-#: data/ui/station-editor.ui:196
+#: data/ui/station-editor.ui:196 data/ui/menubutton.ui:400
 msgid "State"
 msgstr "Stát"
 
+#: data/ui/station-editor.ui:211 data/ui/menubutton.ui:370
+msgid "Language"
+msgstr "Jazyk"
+
 #: data/ui/station-editor.ui:291
 msgid "Favicon Address"
-msgstr ""
+msgstr "Adresa ikony"
 
 #: data/ui/station-editor.ui:435
 msgid "Server Response"
-msgstr ""
+msgstr "Odpověď serveru"
 
 #: data/ui/station-editor.ui:471
 msgid "Close"
 msgstr "Zavřít"
 
+#: data/ui/station-editor.ui:501
+msgid "Cancel"
+msgstr "Zrušit"
+
 #: data/ui/station-editor.ui:510
-#, fuzzy
 msgid "Done"
 msgstr "Dokončit"
 
 #: data/ui/page/search-page.ui:127
 msgid "No results found"
-msgstr ""
+msgstr "Nic nebylo nalezeno"
 
 #: data/ui/page/search-page.ui:145
 msgid ""
 "Either the station does not exist, or you have to search with other keywords."
-msgstr ""
+msgstr "Stanice buď neexistuje, nebo zkuste použít jiná klíčová slova."
+
+#: data/ui/menubutton.ui:45
+msgid "100%"
+msgstr "100%"
+
+#: data/ui/menubutton.ui:104 data/ui/menubutton.ui:318
+msgid "Sorting"
+msgstr "Řazení"
+
+#: data/ui/menubutton.ui:119
+msgid "Hide broken stations"
+msgstr "Skrýt nefunkční stanice"
+
+#: data/ui/menubutton.ui:145 data/ui/menubutton.ui:250
+msgid "Library"
+msgstr "Knihovna"
+
+#: data/ui/menubutton.ui:267
+msgid "Import"
+msgstr "Import"
+
+#: data/ui/menubutton.ui:281
+msgid "Export"
+msgstr "Export"
+
+#: data/ui/menubutton.ui:340
+msgid "Votes"
+msgstr "Hlasy"
+
+#: data/ui/menubutton.ui:415
+msgid "Clicks"
+msgstr "Návštěvy"
+
+#: data/ui/menubutton.ui:430
+msgid "Bitrate"
+msgstr "Datový tok"
+
+#: data/ui/menubutton.ui:445
+msgid "Date"
+msgstr "Datum"
+
+#: data/ui/menubutton.ui:485
+msgid "Ascending"
+msgstr "Vzestupně"
+
+#: data/ui/menubutton.ui:500
+msgid "Descending"
+msgstr "Sestupně"
 
 #: src/gradio-settings-window.vala:39
 msgid "Features"
@@ -222,176 +268,170 @@ msgid "Playback"
 msgstr "Přehrávání"
 
 #: src/gradio-settings-window.vala:45
-msgid "Library"
-msgstr "Knihovna"
-
-#: src/gradio-settings-window.vala:48
 msgid "Appearance"
 msgstr "Vzhled"
 
-#: src/gradio-settings-window.vala:51
+#: src/gradio-settings-window.vala:48
 msgid "Cache"
 msgstr "Mezipaměť"
 
 #. APPEARANCE
 #. Dark design
-#: src/gradio-settings-window.vala:59
+#: src/gradio-settings-window.vala:56
 msgid "Prefer dark theme"
 msgstr "Upřednostnit tmavý motiv"
 
-#: src/gradio-settings-window.vala:59
+#: src/gradio-settings-window.vala:56
 msgid "Use a dark theme, if possible"
 msgstr "Pokud je to možné, použít tmavý motiv"
 
-#. hide broken stations
-#: src/gradio-settings-window.vala:65
-msgid "Hide broken stations"
-msgstr "Skrýt nefunkční stanice"
-
-#: src/gradio-settings-window.vala:65
-msgid "Don't show stations, which are not working"
-msgstr "Skryje stanice, které nefungují správně"
-
 #. PLAYBACK
 #. enable background playback
-#: src/gradio-settings-window.vala:74
+#: src/gradio-settings-window.vala:65
 msgid "Background Playback"
 msgstr "Přehrávat na pozadí"
 
-#: src/gradio-settings-window.vala:74
+#: src/gradio-settings-window.vala:65
 msgid "Continue the playback if you close the Gradio window"
 msgstr "Pokračuje v přehrávání i po zavření okna Gradio"
 
 #. resume playback on startup
-#: src/gradio-settings-window.vala:80
+#: src/gradio-settings-window.vala:71
 msgid "Resume playback on startup"
 msgstr "Při startu obnovit přehrávání"
 
-#: src/gradio-settings-window.vala:80
+#: src/gradio-settings-window.vala:71
 msgid "Play the latest station if you start Gradio"
 msgstr "Po spuštění Gradia začne přehrávat naposledy přehrávanou stanici"
 
-#. LIBRARY
-#. import library
-#: src/gradio-settings-window.vala:89 src/gradio-settings-window.vala:173
-msgid "Import"
-msgstr "Import"
-
-#: src/gradio-settings-window.vala:89
-msgid "Replace the current library with a another one"
-msgstr "Nahradí stávající knihovnu jinou"
-
-#: src/gradio-settings-window.vala:93
-msgid "Do you want to replace the current library with this one?"
-msgstr ""
-
-#. export library
-#: src/gradio-settings-window.vala:99 src/gradio-settings-window.vala:152
-msgid "Export"
-msgstr "Export"
-
-#: src/gradio-settings-window.vala:99 src/gradio-settings-window.vala:149
-msgid "Export the current library"
-msgstr "Exportuje Vaší knihovnu"
-
 #. FEATURES
 #. mpris
-#: src/gradio-settings-window.vala:111
+#: src/gradio-settings-window.vala:80
 msgid "MPRIS"
-msgstr ""
+msgstr "MPRIS"
 
-#: src/gradio-settings-window.vala:111
+#: src/gradio-settings-window.vala:80
 msgid "Integrate Gradio as media player in your desktop environment"
-msgstr ""
+msgstr "Integruje Gradio do vašeho pracovního prostředí jako hudební přehrávač"
 
 #. enable notifications
-#: src/gradio-settings-window.vala:117
+#: src/gradio-settings-window.vala:86
 msgid "Notifications"
 msgstr "Upozornění"
 
-#: src/gradio-settings-window.vala:117
+#: src/gradio-settings-window.vala:86
 msgid "Show desktop notifications"
-msgstr ""
+msgstr "Zobrazovat v pracovním prostředí upozornění"
 
 #. enable tray icon
-#: src/gradio-settings-window.vala:123
+#: src/gradio-settings-window.vala:92
 msgid "Tray icon"
-msgstr ""
+msgstr "Ikona v oznamovací oblasti"
 
-#: src/gradio-settings-window.vala:123
+#: src/gradio-settings-window.vala:92
 msgid "Show a tray icon, to restore the main window"
-msgstr ""
+msgstr "Zobrazovat ikonu v oznamovací oblasti pro obnovení hlavního okna"
 
 #. CACHE
 #. cache station images
-#: src/gradio-settings-window.vala:132
+#: src/gradio-settings-window.vala:101
 msgid "Cache station icons"
 msgstr "Ukládat obrázky stanic do mezipaměti"
 
-#: src/gradio-settings-window.vala:132
+#: src/gradio-settings-window.vala:101
 msgid "Saves the images locally."
 msgstr "Ukládání obrázků do počítače."
 
-#: src/gradio-settings-window.vala:137
+#: src/gradio-settings-window.vala:106
 msgid "Clear Cache"
 msgstr "Vyčistit mezipaměť"
 
-#: src/gradio-settings-window.vala:137
+#: src/gradio-settings-window.vala:106
 msgid "Clear all cached station icons"
 msgstr "Odstraní z mezipaměti všechny stanice"
 
-#: src/gradio-settings-window.vala:150 src/gradio-settings-window.vala:171
-msgid "_Cancel"
-msgstr "_Zrušit"
-
-#: src/gradio-settings-window.vala:170
-msgid "Select database to import"
-msgstr ""
-
-#: src/page/gradio-add-page.vala:27
+#: src/page/gradio-add-page.vala:37
 msgid "Create a new radio station"
-msgstr ""
+msgstr "Vytvořit novou stanici"
 
-#: src/page/gradio-add-page.vala:28
-msgid "Discover radio stations"
-msgstr ""
-
-#: src/page/gradio-add-page.vala:31
-msgid "Show famous radio stations"
-msgstr "Zobrazit slavné stanice"
-
-#: src/page/gradio-add-page.vala:31
-msgid "Show radio stations which have the most votes."
-msgstr "Zobrazí stanice s největším počtem hlasů."
-
-#: src/page/gradio-add-page.vala:35
-msgid "Show popular radio stations"
-msgstr "Zobrazit oblíbené stanice"
-
-#: src/page/gradio-add-page.vala:35
-msgid "Show radio stations which have the most clicks."
-msgstr ""
-
-#: src/page/gradio-add-page.vala:39
-msgid "Show recent radio stations"
-msgstr ""
-
-#: src/page/gradio-add-page.vala:39
-msgid "Show radio stations which have recently been clicked."
-msgstr ""
-
-#: src/page/gradio-add-page.vala:43
-msgid "Search for radio stations"
-msgstr "Hledat stanice"
-
-#: src/page/gradio-add-page.vala:43
-msgid "Search for specific radio stations."
-msgstr "Vyhledá konkrétní stanice."
-
-#: src/page/gradio-add-page.vala:47
+#: src/page/gradio-add-page.vala:77
 msgid "New public radio station"
 msgstr "Nová veřejná stanice"
 
-#: src/page/gradio-add-page.vala:47
+#: src/page/gradio-add-page.vala:77
 msgid "Create a new radio station, which is visible for all users."
+msgstr "Přidat novou stanici, viditelnou pro všechny uživatele."
+
+#: src/page/gradio-add-page.vala:158
+msgid "Add new radio stations to your library"
+msgstr "Přidat novou stanici do knihovny"
+
+#: src/page/gradio-collection-items-page.vala:75
+#: src/page/gradio-library-page.vala:87
+msgid " Items"
+msgstr " Položky"
+
+#: src/page/gradio-library-page.vala:85
+msgid "Fetching station data…"
 msgstr ""
+
+#: src/page/gradio-search-page.vala:107
+msgid "Search"
+msgstr "Hledat"
+
+#~ msgid "Where"
+#~ msgstr "Místo"
+
+#~ msgid "Select Country ..."
+#~ msgstr "Vyberte zemi…"
+
+#~ msgid "Select State  ..."
+#~ msgstr "Vyberte stát…"
+
+#~ msgid "Select Language  ..."
+#~ msgstr "Vyberte jazyk…"
+
+#~ msgid "Fill your library with something new"
+#~ msgstr "Naplňte svou knihovnu něčím novým"
+
+#~ msgid "There are several options available to add something new."
+#~ msgstr "Je několik způsobů jak přidat něco nového."
+
+#~ msgid "New Collection…"
+#~ msgstr "Nová sbírka…"
+
+#~ msgid "Add"
+#~ msgstr "Přidat"
+
+#~ msgid "Remove"
+#~ msgstr "Odebrat"
+
+#~ msgid "Don't show stations, which are not working"
+#~ msgstr "Skryje stanice, které nefungují správně"
+
+#~ msgid "Replace the current library with a another one"
+#~ msgstr "Nahradí stávající knihovnu jinou"
+
+#~ msgid "Do you want to replace the current library with this one?"
+#~ msgstr "Chcete stávající knihovnu nahradit vybranou?"
+
+#~ msgid "Export the current library"
+#~ msgstr "Exportuje Vaší knihovnu"
+
+#~ msgid "_Cancel"
+#~ msgstr "_Zrušit"
+
+#~ msgid "Select database to import"
+#~ msgstr "Vyberte databázi k importu"
+
+#~ msgid "Show famous radio stations"
+#~ msgstr "Zobrazit slavné stanice"
+
+#~ msgid "Show popular radio stations"
+#~ msgstr "Zobrazit oblíbené stanice"
+
+#~ msgid "Show radio stations which have recently been clicked."
+#~ msgstr "Zobrazí stanice, které byly navštíveny naposled."
+
+#~ msgid "Search for specific radio stations."
+#~ msgstr "Vyhledá konkrétní stanice."

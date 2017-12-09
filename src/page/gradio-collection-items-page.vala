@@ -24,28 +24,25 @@ namespace Gradio{
 		[GtkChild] Viewport ScrollViewport;
 
 		private MainBox mainbox;
-		private StationModel station_model;
-		private string title;
-
-		public string collection_id;
+		private Collection collection;
 
 		public CollectionItemsPage(){
-			station_model =  new StationModel();
 			mainbox = new MainBox();
+			collection = new Collection("", "");
 
 			ScrollViewport.add(mainbox);
+			collection.station_model.items_changed.connect(() => {title_changed();});
 			mainbox.selection_changed.connect(() => {selection_changed();});
 			mainbox.selection_mode_request.connect(() => {selection_mode_enabled();});
 		}
 
 		public void set_collection(Collection coll){
-			collection_id = coll.id;
-			station_model = coll.station_model;
-			mainbox.set_model(station_model);
+			collection = coll;
+			mainbox.set_model(collection.station_model);
 		}
 
 		public StationModel get_model(){
-			return station_model;
+			return collection.station_model;
 		}
 
 		public void set_selection_mode(bool b){
@@ -71,11 +68,11 @@ namespace Gradio{
 		}
 
 		public string get_title(){
-			return title;
+			return collection.name;
 		}
 
-		public void set_title(string t){
-			title = t;
+		public string get_subtitle(){
+			return collection.station_model.get_n_items().to_string() + _(" Items");
 		}
 	}
 }

@@ -3,7 +3,6 @@ vala_sources = [
 		'page/gradio-library-page.vala',
 		'page/gradio-search-page.vala',
 		'page/gradio-page.vala',
-		'page/gradio-add-page.vala',
 		'page/gradio-collection-items-page.vala',
 		'groupbox/gradio-groupbox-switch-item.vala',
 		'groupbox/gradio-groupbox-item.vala',
@@ -37,6 +36,7 @@ vala_sources = [
 		'gradio-organize-collection-popover.vala',
 		'gradio-searchbar.vala',
 		'gradio-station-compare.vala',
+		'gradio-menubutton.vala',
 		'gradio-thumbnail.vala']
 
 vala_args = [

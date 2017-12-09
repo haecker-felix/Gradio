@@ -122,5 +122,70 @@ namespace Gradio{
 
 			return;
 		}
+
+		public static string export_library_dialog (string current_name){
+			Gtk.FileChooserDialog chooser = new Gtk.FileChooserDialog (
+				_("Export current library"), App.window, Gtk.FileChooserAction.SAVE,
+				_("_Cancel"),
+				Gtk.ResponseType.CANCEL,
+				 _("Export"),
+				Gtk.ResponseType.ACCEPT);
+
+			chooser.set_current_name(current_name);
+			chooser.set_do_overwrite_confirmation(true);
+
+			string path = "";
+			if (chooser.run () == Gtk.ResponseType.ACCEPT) {
+				path = chooser.get_file().get_path();
+			}
+			chooser.close();
+			chooser.destroy();
+			return path;
+		}
+
+		public static string import_library_dialog (){
+			Gtk.FileChooserDialog chooser = new Gtk.FileChooserDialog (
+				_("Select database to import"), App.window, Gtk.FileChooserAction.OPEN,
+				_("_Cancel"),
+				Gtk.ResponseType.CANCEL,
+				 _("Import"),
+				Gtk.ResponseType.ACCEPT);
+
+			Gtk.FileFilter filter = new Gtk.FileFilter ();
+			chooser.set_filter (filter);
+			filter.add_mime_type ("application/x-sqlite3");
+
+
+			string path = "";
+			if (chooser.run () == Gtk.ResponseType.ACCEPT) {
+				path = chooser.get_file().get_path();
+			}
+			chooser.close();
+			chooser.destroy();
+			return path;
+		}
+
+		public static string get_sort_string(){
+			string sort_variant_string = "";
+			switch(App.settings.station_sorting){
+				case Compare.VOTES: sort_variant_string = "votes"; break;
+				case Compare.NAME: sort_variant_string = "name"; break;
+				case Compare.LANGUAGE: sort_variant_string = "language"; break;
+				case Compare.COUNTRY: sort_variant_string = "country"; break;
+				case Compare.STATE: sort_variant_string = "state"; break;
+				case Compare.BITRATE: sort_variant_string = "bitrate"; break;
+				case Compare.CLICKS: sort_variant_string = "clicks"; break;
+				case Compare.DATE: sort_variant_string = "clicktimestamp"; break;
+			}
+			return sort_variant_string;
+		}
+
+		public static string get_sortorder_string(){
+			string order_variant_string = "";
+			if(App.settings.sort_ascending == true) order_variant_string = "ascending"; else order_variant_string = "descending";
+			return order_variant_string;
+		}
+
+
 	}
 }

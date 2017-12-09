@@ -6,7 +6,6 @@
 	<file>ui/page/library-page.ui</file>
 	<file>ui/page/search-page.ui</file>
 	<file>ui/page/collection-items-page.ui</file>
-	<file>ui/page/add-page.ui</file>
 	<file>ui/page/collections-page.ui</file>
 	<file>ui/settings-window.ui</file>
 	<file>ui/details-box.ui</file>
@@ -21,6 +20,9 @@
 	<file>ui/selection-toolbar.ui</file>
 	<file>ui/organize-collection-popover.ui</file>
 	<file>ui/searchbar.ui</file>
+	<file>ui/menubutton.ui</file>
+	<file>ui/collection-row.ui</file>
+	<file>ui/section-menu.ui</file>
 	<file>icons/hicolor/48x48/apps/de.haeckerfelix.gradio.png</file>
   </gresource>
 </gresources>

@@ -22,12 +22,9 @@ namespace Gradio{
 	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/searchbar.ui")]
 	public class SearchBar : Gtk.Box{
 
-		private const int search_delay = 2;
-		private uint delayed_changed_id;
-
-		private TaggedEntry SearchEntry;
+		public TaggedEntry SearchEntry;
 		private string search_term = "";
-		[GtkChild] Box SearchBox;
+		[GtkChild] private Box SearchBox;
 
 		[GtkChild] private Revealer CountryRevealer;
 		[GtkChild] private Button SelectCountryButton;
@@ -54,12 +51,19 @@ namespace Gradio{
 		private StationProvider station_provider;
 
 		public signal void timeout_reset();
+		private const int search_delay = 2;
+		private uint delayed_changed_id;
+
+		[GtkChild] private Label SortLabel;
+		[GtkChild] public Gtk.MenuButton SectionMenuButton;
+		[GtkChild] public Label SectionLabel;
+
+		private GLib.SimpleActionGroup search_action_group;
 
 		public SearchBar(ref StationProvider sp){
 			station_provider = sp;
 
 			SearchEntry = new TaggedEntry();
-			SearchEntry.width_request = 400;
 			SearchEntry.set_visible(true);
 			SearchBox.pack_start(SearchEntry);
 
@@ -84,6 +88,7 @@ namespace Gradio{
 				return get_row(item.text);
 			});
 
+			setup_actions();
 			reset_timeout();
 			connect_signals();
 		}
@@ -154,6 +159,47 @@ namespace Gradio{
 			App.settings.notify["sort-ascending"].connect(reset_timeout);
 		}
 
+		private void setup_actions(){
+			search_action_group = new GLib.SimpleActionGroup ();
+			this.insert_action_group ("search", search_action_group);
+
+			// Sorting
+			var variant = new GLib.Variant.string(Util.get_sort_string());
+			var action = new SimpleAction.stateful("sort", variant.get_type(), variant);
+			set_sort_label(action.state.get_string());
+			action.activate.connect((a,b) => {
+				set_sort_label(b.get_string());
+				a.set_state(b);
+			});
+			search_action_group.add_action(action);
+
+
+			// Sort order
+			variant = new GLib.Variant.string(Util.get_sortorder_string());
+			action = new SimpleAction.stateful("sortorder", variant.get_type(), variant);
+			action.activate.connect((a,b) => {
+				switch(b.get_string()){
+					case "ascending": App.settings.sort_ascending = true; break;
+					case "descending": App.settings.sort_ascending = false; break;
+				}
+				a.set_state(b);
+			});
+			search_action_group.add_action(action);
+		}
+
+		private void set_sort_label(string s){
+			switch(s){
+				case "votes": App.settings.station_sorting = Compare.VOTES; SortLabel.set_text(_("Votes")); break;
+				case "name": App.settings.station_sorting = Compare.NAME; SortLabel.set_text(_("Name")); break;
+				case "language": App.settings.station_sorting = Compare.LANGUAGE; SortLabel.set_text(_("Language")); break;
+				case "country": App.settings.station_sorting = Compare.COUNTRY; SortLabel.set_text(_("Country")); break;
+				case "state": App.settings.station_sorting = Compare.STATE; SortLabel.set_text(_("State")); break;
+				case "bitrate": App.settings.station_sorting = Compare.BITRATE; SortLabel.set_text(_("Bitrate")); break;
+				case "clicks": App.settings.station_sorting = Compare.CLICKS; SortLabel.set_text(_("Clicks")); break;
+				case "clicktimestamp": App.settings.station_sorting = Compare.DATE; SortLabel.set_text(_("Date")); break;
+			}
+		}
+
 		private void reset_timeout(){
 			timeout_reset();
 
@@ -180,19 +226,7 @@ namespace Gradio{
 			if(selected_language != null) filter_table.insert("state", selected_state);
 			if(selected_language != null) filter_table.insert("name", search_term);
 
-			string sort_by = "";
-			switch(App.settings.station_sorting){
-				case Compare.VOTES: sort_by = "votes"; break;
-				case Compare.NAME: sort_by = "name"; break;
-				case Compare.LANGUAGE: sort_by = "language"; break;
-				case Compare.COUNTRY: sort_by = "country"; break;
-				case Compare.STATE: sort_by = "state"; break;
-				case Compare.BITRATE: sort_by = "bitrate"; break;
-				case Compare.CLICKS: sort_by = "clickcount"; break;
-				case Compare.DATE: sort_by = "clicktimestamp"; break;
-			}
-
-			filter_table.insert("order", sort_by);
+			filter_table.insert("order", Util.get_sort_string());
 			filter_table.insert("reverse", (!App.settings.sort_ascending).to_string());
 			filter_table.insert("limit", App.settings.max_search_results.to_string());
 
@@ -202,7 +236,7 @@ namespace Gradio{
 		public void set_search(string term){
 			search_term = term;
 			SearchEntry.set_text(term);
-			//TODO: Move cursor to end
+			SearchEntry.set_position(-1);
 		}
 
 		private void unreveal_all(){

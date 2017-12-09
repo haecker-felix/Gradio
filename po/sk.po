@@ -2,182 +2,53 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Slovak (Gradio)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-27 16:55+0200\n"
-"PO-Revision-Date: 2017-09-10 19:13+0000\n"
-"Last-Translator: Dušan Kazik <prescott66@gmail.com>\n"
-"Language-Team: Slovak <https://hosted.weblate.org/projects/gradio/"
-"translations/sk/>\n"
+"POT-Creation-Date: 2017-11-12 16:33+0100\n"
+"PO-Revision-Date: 2017-11-18 18:55+0000\n"
+"Last-Translator: Tomáš Moravec <otoman100@gmail.com>\n"
+"Language-Team: Slovak "
+"<https://hosted.weblate.org/projects/gradio/translations/sk/>\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 2.17-dev\n"
+"X-Generator: Weblate 2.18-dev\n"
 
-#: data/ui/app-menu.ui:6
+#: data/ui/app-menu.ui:6 data/ui/menubutton.ui:178
 msgid "Settings"
 msgstr "Nastavenia"
 
-#: data/ui/app-menu.ui:12
+#: data/ui/app-menu.ui:12 data/ui/menubutton.ui:192
 msgid "About"
 msgstr "O aplikácii"
 
-#: data/ui/app-menu.ui:18
+#: data/ui/app-menu.ui:18 data/ui/menubutton.ui:206
 msgid "Quit"
 msgstr "Ukončiť"
 
-#: data/ui/details-box.ui:23 data/ui/selection-toolbar.ui:151
-msgid "Details"
-msgstr "Podrobnosti"
+#: data/ui/page/add-page.ui:54
+msgid "Search for radio stations"
+msgstr "Vyhľadať rádiové stanice"
 
-#: data/ui/details-box.ui:137 data/ui/headerbar.ui:171
-#: data/ui/station-editor.ui:125
-msgid "Name"
-msgstr "Názov"
-
-#: data/ui/details-box.ui:172
-msgid "Type"
-msgstr "Typ"
-
-#: data/ui/details-box.ui:209
-msgid "Items"
-msgstr "Položky"
-
-#: data/ui/details-box.ui:285
-msgid "Location"
-msgstr "Umiestnenie"
-
-#: data/ui/details-box.ui:317
-msgid "Description"
-msgstr "Popis"
-
-#: data/ui/details-box.ui:349
-msgid "Tags"
-msgstr "Značky"
-
-#: data/ui/details-box.ui:436 data/ui/selection-toolbar.ui:15
-msgid "Play"
-msgstr "Prehrať"
-
-#: data/ui/details-box.ui:481
-msgid "Open homepage"
-msgstr "Otvorí domovskú stránku"
-
-#: data/ui/details-box.ui:526
-msgid "Edit"
-msgstr "Upraví"
-
-#: data/ui/groupbox.ui:20 data/ui/item/button-item.ui:24
-#: data/ui/item/switch-item.ui:24
-msgid "Title"
+#: data/ui/page/add-page.ui:85 data/ui/page/add-page.ui:163
+#: data/ui/page/add-page.ui:241
+msgid "More..."
 msgstr ""
 
-#: data/ui/headerbar.ui:85
-msgid "Sort Descending"
-msgstr ""
-
-#: data/ui/headerbar.ui:107
-msgid "Sort Ascending"
-msgstr ""
-
-#: data/ui/headerbar.ui:139
-msgid "Sort"
-msgstr ""
-
-#: data/ui/headerbar.ui:152
-msgid "Votes"
-msgstr ""
-
-#: data/ui/headerbar.ui:187 data/ui/searchbar.ui:205
-#: data/ui/station-editor.ui:211
-msgid "Language"
-msgstr "Jazyk"
-
-#: data/ui/headerbar.ui:203 data/ui/station-editor.ui:181
-msgid "Country"
-msgstr "Krajina"
-
-#: data/ui/headerbar.ui:219 data/ui/station-editor.ui:196
-msgid "State"
-msgstr "Štát"
-
-#: data/ui/headerbar.ui:235
-msgid "Bitrate"
-msgstr ""
-
-#: data/ui/headerbar.ui:251
-msgid "Clicks"
-msgstr ""
-
-#: data/ui/headerbar.ui:267
-msgid "Date"
-msgstr ""
-
-#: data/ui/headerbar.ui:369 src/gradio-settings-window.vala:45
-msgid "Library"
-msgstr "Zbierka"
-
-#: data/ui/headerbar.ui:382 data/ui/selection-toolbar.ui:135
-msgid "Collections"
-msgstr "Zbierky"
-
-#: data/ui/headerbar.ui:412 data/ui/status-icon.ui:114
-msgid "label"
-msgstr ""
-
-#: data/ui/headerbar.ui:566 data/ui/organize-collection-dialog.ui:192
-#: data/ui/station-editor.ui:501
-msgid "Cancel"
-msgstr "Zrušiť"
-
-#: data/ui/item/button-item.ui:36 data/ui/item/switch-item.ui:36
-msgid "Subtitle"
-msgstr ""
-
-#: data/ui/main-window.ui:9
-msgid "Gradio"
-msgstr ""
-
-#: data/ui/main-window.ui:128
+#: data/ui/page/add-page.ui:106 src/page/gradio-search-page.vala:72
 #, fuzzy
-msgid "Notification Text"
-msgstr "Oznámenia"
+msgid "Stations with the most votes"
+msgstr "Zobrazí rádiové stanice, ktoré majú najviac hlasov."
 
-#: data/ui/main-window.ui:138
+#: data/ui/page/add-page.ui:184 src/page/gradio-search-page.vala:64
 #, fuzzy
-msgid "Action"
-msgstr "Umiestnenie"
+msgid "Recently clicked stations"
+msgstr "Zobraziť nedávne rádiové stanice"
 
-#: data/ui/organize-collection-dialog.ui:21
-#: data/ui/organize-collection-dialog.ui:107
-msgid "New Collection…"
-msgstr "Nová zbierka…"
-
-#: data/ui/organize-collection-dialog.ui:31
-#: data/ui/organize-collection-dialog.ui:128
-#: data/ui/organize-collection-dialog.ui:201
-msgid "Add"
-msgstr "Pridať"
-
-#: data/ui/organize-collection-dialog.ui:92
-msgid "Enter a name for your first collection"
-msgstr "Zadajte názov vašej prvej zbierky"
-
-#: data/ui/page/add-page.ui:45
-msgid "Fill your library with something new"
-msgstr "Naplňte vašu zbierku niečim novým"
-
-#: data/ui/page/add-page.ui:64
-msgid "There are several options available to add something new."
-msgstr "Je dostupných niekoľko volieb na pridanie niečoho nového."
-
-#: data/ui/page/collections-page.ui:43
-msgid "You don't have any collection"
-msgstr "Nemáte žiadne zbierky"
-
-#: data/ui/page/collections-page.ui:61
-msgid "You can group stations into collections."
-msgstr "Môžete zoskupiť stanice do zbierok."
+#: data/ui/page/add-page.ui:262 src/page/gradio-search-page.vala:80
+#, fuzzy
+msgid "Stations with the most clicks"
+msgstr "Zobrazí rádiové stanice, ktoré majú najviac kliknutí."
 
 #: data/ui/page/library-page.ui:44
 msgid "Your library is empty"
@@ -187,30 +58,68 @@ msgstr "Vaša zbierka je prázdna"
 msgid "If you add stations to the library, you will find them here."
 msgstr "Ak pridáte stanice do zbierky, nájdete ich tu."
 
-#: data/ui/page/search-page.ui:127
-msgid "No results found"
-msgstr "Nenašli sa žiadne výsledky"
+#: data/ui/page/collections-page.ui:43
+msgid "You don't have any collection"
+msgstr "Nemáte žiadne zbierky"
 
-#: data/ui/page/search-page.ui:145
-msgid ""
-"Either the station does not exist, or you have to search with other keywords."
-msgstr "Buď stanica neexistuje, alebo musíte hľadať s inými kľúčovými slovami."
+#: data/ui/page/collections-page.ui:61
+msgid "You can group stations into collections."
+msgstr "Môžete zoskupiť stanice do zbierok."
 
-#: data/ui/searchbar.ui:27
-msgid "Where"
-msgstr "Kde"
+#: data/ui/details-box.ui:23 data/ui/selection-toolbar.ui:159
+msgid "Details"
+msgstr "Podrobnosti"
 
-#: data/ui/searchbar.ui:44
-msgid "Select Country ..."
-msgstr "Vybrať krajinu…"
+#: data/ui/details-box.ui:137 data/ui/station-editor.ui:125
+#: data/ui/menubutton.ui:355
+msgid "Name"
+msgstr "Názov"
 
-#: data/ui/searchbar.ui:125
-msgid "Select State  ..."
-msgstr "Vybrať štát…"
+#: data/ui/details-box.ui:169
+msgid "Type"
+msgstr "Typ"
 
-#: data/ui/searchbar.ui:222
-msgid "Select Language  ..."
-msgstr "Vybrať jazyk…"
+#: data/ui/details-box.ui:206
+msgid "Items"
+msgstr "Položky"
+
+#: data/ui/details-box.ui:282
+msgid "Location"
+msgstr "Umiestnenie"
+
+#: data/ui/details-box.ui:314
+msgid "Description"
+msgstr "Popis"
+
+#: data/ui/details-box.ui:346
+msgid "Tags"
+msgstr "Značky"
+
+#: data/ui/details-box.ui:433 data/ui/selection-toolbar.ui:31
+msgid "Play"
+msgstr "Prehrať"
+
+#: data/ui/details-box.ui:478
+msgid "Open homepage"
+msgstr "Otvorí domovskú stránku"
+
+#: data/ui/details-box.ui:523
+msgid "Edit"
+msgstr "Upraví"
+
+#: data/ui/organize-collection-popover.ui:25
+#, fuzzy
+msgid "Enter name for new collection..."
+msgstr "Zadajte názov vašej prvej zbierky"
+
+#: data/ui/organize-collection-popover.ui:35
+msgid "Create"
+msgstr ""
+
+#: data/ui/organize-collection-popover.ui:78
+#, fuzzy
+msgid "Select collection:"
+msgstr "Vybrať všetko"
 
 #: data/ui/selection-menu.ui:7
 msgid "Select All"
@@ -220,13 +129,22 @@ msgstr "Vybrať všetko"
 msgid "Select None"
 msgstr "Zrušiť výber"
 
-#: data/ui/selection-toolbar.ui:29
+#: data/ui/selection-toolbar.ui:18
+msgid "Click an item to view options"
+msgstr ""
+
+#: data/ui/selection-toolbar.ui:52
+#, fuzzy
+msgid "Collection"
+msgstr "Zbierky"
+
+#: data/ui/selection-toolbar.ui:65
 msgid "Add to library"
 msgstr "Pridať do knižnice"
 
-#: data/ui/selection-toolbar.ui:46
-msgid "Remove"
-msgstr "Odstrániť"
+#: data/ui/selection-toolbar.ui:82
+msgid "Remove from Library"
+msgstr ""
 
 #: data/ui/station-editor.ui:39
 msgid "Global database"
@@ -254,6 +172,18 @@ msgstr "Adresa prúdu"
 msgid "Homepage"
 msgstr "Domovská stránka"
 
+#: data/ui/station-editor.ui:181 data/ui/menubutton.ui:385
+msgid "Country"
+msgstr "Krajina"
+
+#: data/ui/station-editor.ui:196 data/ui/menubutton.ui:400
+msgid "State"
+msgstr "Štát"
+
+#: data/ui/station-editor.ui:211 data/ui/menubutton.ui:370
+msgid "Language"
+msgstr "Jazyk"
+
 #: data/ui/station-editor.ui:291
 msgid "Favicon Address"
 msgstr "Adresa ikony Favicon"
@@ -266,23 +196,71 @@ msgstr "Odpoveď servera"
 msgid "Close"
 msgstr "Zavrieť"
 
+#: data/ui/station-editor.ui:501
+msgid "Cancel"
+msgstr "Zrušiť"
+
 #: data/ui/station-editor.ui:510
 msgid "Done"
 msgstr "Dokončiť"
 
-#: data/ui/status-icon.ui:9
-msgid "Connection information"
+#: data/ui/page/search-page.ui:127
+msgid "No results found"
+msgstr "Nenašli sa žiadne výsledky"
+
+#: data/ui/page/search-page.ui:145
+msgid ""
+"Either the station does not exist, or you have to search with other keywords."
+msgstr "Buď stanica neexistuje, alebo musíte hľadať s inými kľúčovými slovami."
+
+#: data/ui/menubutton.ui:45
+msgid "100%"
 msgstr ""
 
-#: data/ui/status-icon.ui:34
+#: data/ui/menubutton.ui:104 data/ui/menubutton.ui:318
 #, fuzzy
-msgid "page0"
-msgstr "Domovská stránka"
+msgid "Sorting"
+msgstr "Nastavenia"
 
-#: data/ui/status-icon.ui:45
-#, fuzzy
-msgid "page2"
-msgstr "Domovská stránka"
+#: data/ui/menubutton.ui:119
+msgid "Hide broken stations"
+msgstr "Skryť poškodené stanice"
+
+#: data/ui/menubutton.ui:145 data/ui/menubutton.ui:250
+msgid "Library"
+msgstr "Zbierka"
+
+#: data/ui/menubutton.ui:267
+msgid "Import"
+msgstr "Importovať"
+
+#: data/ui/menubutton.ui:281
+msgid "Export"
+msgstr "Exportovať"
+
+#: data/ui/menubutton.ui:340
+msgid "Votes"
+msgstr ""
+
+#: data/ui/menubutton.ui:415
+msgid "Clicks"
+msgstr ""
+
+#: data/ui/menubutton.ui:430
+msgid "Bitrate"
+msgstr ""
+
+#: data/ui/menubutton.ui:445
+msgid "Date"
+msgstr ""
+
+#: data/ui/menubutton.ui:485
+msgid "Ascending"
+msgstr ""
+
+#: data/ui/menubutton.ui:500
+msgid "Descending"
+msgstr ""
 
 #: src/gradio-settings-window.vala:39
 msgid "Features"
@@ -292,175 +270,176 @@ msgstr "Funkcie"
 msgid "Playback"
 msgstr "Prehrávanie"
 
-#: src/gradio-settings-window.vala:48
+#: src/gradio-settings-window.vala:45
 msgid "Appearance"
 msgstr "Vzhľad"
 
-#: src/gradio-settings-window.vala:51
+#: src/gradio-settings-window.vala:48
 msgid "Cache"
 msgstr "Vyrovnávacia pamäť"
 
 #. APPEARANCE
 #. Dark design
-#: src/gradio-settings-window.vala:59
+#: src/gradio-settings-window.vala:56
 msgid "Prefer dark theme"
 msgstr "Uprednostniť tmavý motív"
 
-#: src/gradio-settings-window.vala:59
+#: src/gradio-settings-window.vala:56
 msgid "Use a dark theme, if possible"
 msgstr "Ak je to možné, použije sa tmavý motív"
 
-#. hide broken stations
-#: src/gradio-settings-window.vala:65
-msgid "Hide broken stations"
-msgstr "Skryť poškodené stanice"
-
-#: src/gradio-settings-window.vala:65
-msgid "Don't show stations, which are not working"
-msgstr "Nezobrazí stanice, ktoré nie sú funkčné"
-
 #. PLAYBACK
 #. enable background playback
-#: src/gradio-settings-window.vala:74
+#: src/gradio-settings-window.vala:65
 msgid "Background Playback"
 msgstr "Prehrávanie na pozadí"
 
-#: src/gradio-settings-window.vala:74
+#: src/gradio-settings-window.vala:65
 msgid "Continue the playback if you close the Gradio window"
 msgstr "Po zavretí okna aplikácie Gradio bude prehrávanie pokračovať"
 
 #. resume playback on startup
-#: src/gradio-settings-window.vala:80
+#: src/gradio-settings-window.vala:71
 msgid "Resume playback on startup"
 msgstr "Pokračovať v prehrávaní po spustení"
 
-#: src/gradio-settings-window.vala:80
+#: src/gradio-settings-window.vala:71
 msgid "Play the latest station if you start Gradio"
 msgstr "Po spustení aplikácie Gradio sa prehrá posledná stanica"
 
-#. LIBRARY
-#. import library
-#: src/gradio-settings-window.vala:89 src/gradio-settings-window.vala:173
-msgid "Import"
-msgstr "Importovať"
-
-#: src/gradio-settings-window.vala:89
-msgid "Replace the current library with a another one"
-msgstr "Nahradí aktuálnu zbierku s inou"
-
-#: src/gradio-settings-window.vala:93
-msgid "Do you want to replace the current library with this one?"
-msgstr "Chcete nahradiť aktuálnu zbierku s touto?"
-
-#. export library
-#: src/gradio-settings-window.vala:99 src/gradio-settings-window.vala:152
-msgid "Export"
-msgstr "Exportovať"
-
-#: src/gradio-settings-window.vala:99 src/gradio-settings-window.vala:149
-msgid "Export the current library"
-msgstr "Exportuje aktuálnu zbierku"
-
 #. FEATURES
 #. mpris
-#: src/gradio-settings-window.vala:111
+#: src/gradio-settings-window.vala:80
 msgid "MPRIS"
 msgstr "MPRIS"
 
-#: src/gradio-settings-window.vala:111
+#: src/gradio-settings-window.vala:80
 msgid "Integrate Gradio as media player in your desktop environment"
 msgstr ""
 "Integruje aplikáciu Gradio do vášho pracovného prostredia ako prehrávač médií"
 
 #. enable notifications
-#: src/gradio-settings-window.vala:117
+#: src/gradio-settings-window.vala:86
 msgid "Notifications"
 msgstr "Oznámenia"
 
-#: src/gradio-settings-window.vala:117
+#: src/gradio-settings-window.vala:86
 msgid "Show desktop notifications"
 msgstr "Zobrazí oznámenia v pracovnom prostredí"
 
 #. enable tray icon
-#: src/gradio-settings-window.vala:123
+#: src/gradio-settings-window.vala:92
 msgid "Tray icon"
 msgstr "Ikona v systémovej lište"
 
-#: src/gradio-settings-window.vala:123
+#: src/gradio-settings-window.vala:92
 msgid "Show a tray icon, to restore the main window"
 msgstr "Zobrazí ikonu v systémovej lište, na obnovenie hlavného okna"
 
 #. CACHE
 #. cache station images
-#: src/gradio-settings-window.vala:132
+#: src/gradio-settings-window.vala:101
 msgid "Cache station icons"
 msgstr "Ukladať ikony staníc do vyrovnávacej pamäte"
 
-#: src/gradio-settings-window.vala:132
+#: src/gradio-settings-window.vala:101
 msgid "Saves the images locally."
 msgstr "Uloží obrázky v miestnom úložisku."
 
-#: src/gradio-settings-window.vala:137
+#: src/gradio-settings-window.vala:106
 msgid "Clear Cache"
 msgstr "Vymazať vyrovnávaciu pamäť"
 
-#: src/gradio-settings-window.vala:137
+#: src/gradio-settings-window.vala:106
 msgid "Clear all cached station icons"
 msgstr "Vymaže všetky ikony staníc vo vyrovnávacej pamäti"
 
-#: src/gradio-settings-window.vala:150 src/gradio-settings-window.vala:171
-msgid "_Cancel"
-msgstr "_Zrušiť"
-
-#: src/gradio-settings-window.vala:170
-msgid "Select database to import"
-msgstr "Výber databázy na importovanie"
-
-#: src/page/gradio-add-page.vala:27
+#: src/page/gradio-add-page.vala:37
 msgid "Create a new radio station"
 msgstr "Vytvoriť novú rádiovú stanicu"
 
-#: src/page/gradio-add-page.vala:28
-msgid "Discover radio stations"
-msgstr "Preskúmať rádiové stanice"
-
-#: src/page/gradio-add-page.vala:31
-msgid "Show famous radio stations"
-msgstr "Zobraziť slávne rádiové stanice"
-
-#: src/page/gradio-add-page.vala:31
-msgid "Show radio stations which have the most votes."
-msgstr "Zobrazí rádiové stanice, ktoré majú najviac hlasov."
-
-#: src/page/gradio-add-page.vala:35
-msgid "Show popular radio stations"
-msgstr "Zobraziť obľúbené rádiové stanice"
-
-#: src/page/gradio-add-page.vala:35
-msgid "Show radio stations which have the most clicks."
-msgstr "Zobrazí rádiové stanice, ktoré majú najviac kliknutí."
-
-#: src/page/gradio-add-page.vala:39
-msgid "Show recent radio stations"
-msgstr "Zobraziť nedávne rádiové stanice"
-
-#: src/page/gradio-add-page.vala:39
-msgid "Show radio stations which have recently been clicked."
-msgstr "Zobrazí rádiové stanice, na ktoré bolo nedávno kliknuté."
-
-#: src/page/gradio-add-page.vala:43
-msgid "Search for radio stations"
-msgstr "Vyhľadať rádiové stanice"
-
-#: src/page/gradio-add-page.vala:43
-msgid "Search for specific radio stations."
-msgstr "Vyhľadá špecifické rádiové stanice."
-
-#: src/page/gradio-add-page.vala:47
+#: src/page/gradio-add-page.vala:77
 msgid "New public radio station"
 msgstr "Nová verejná rádiová stanica"
 
-#: src/page/gradio-add-page.vala:47
+#: src/page/gradio-add-page.vala:77
 msgid "Create a new radio station, which is visible for all users."
 msgstr ""
 "Vytvorí novú rádiovú stanicu, ktorá bude viditeľná všetkým používateľom."
+
+#: src/page/gradio-add-page.vala:158
+msgid "Add new radio stations to your library"
+msgstr ""
+
+#: src/page/gradio-collection-items-page.vala:75
+#: src/page/gradio-library-page.vala:87
+msgid " Items"
+msgstr " Položky"
+
+#: src/page/gradio-library-page.vala:85
+msgid "Fetching station data…"
+msgstr ""
+
+#: src/page/gradio-search-page.vala:107
+msgid "Search"
+msgstr ""
+
+#~ msgid "Where"
+#~ msgstr "Kde"
+
+#~ msgid "Select Country ..."
+#~ msgstr "Vybrať krajinu…"
+
+#~ msgid "Select State  ..."
+#~ msgstr "Vybrať štát…"
+
+#~ msgid "Select Language  ..."
+#~ msgstr "Vybrať jazyk…"
+
+#~ msgid "Fill your library with something new"
+#~ msgstr "Naplňte vašu zbierku niečim novým"
+
+#~ msgid "There are several options available to add something new."
+#~ msgstr "Je dostupných niekoľko volieb na pridanie niečoho nového."
+
+#~ msgid "New Collection…"
+#~ msgstr "Nová zbierka…"
+
+#~ msgid "Add"
+#~ msgstr "Pridať"
+
+#~ msgid "Remove"
+#~ msgstr "Odstrániť"
+
+#~ msgid "Don't show stations, which are not working"
+#~ msgstr "Nezobrazí stanice, ktoré nie sú funkčné"
+
+#~ msgid "Replace the current library with a another one"
+#~ msgstr "Nahradí aktuálnu zbierku s inou"
+
+#~ msgid "Do you want to replace the current library with this one?"
+#~ msgstr "Chcete nahradiť aktuálnu zbierku s touto?"
+
+#~ msgid "Export the current library"
+#~ msgstr "Exportuje aktuálnu zbierku"
+
+#~ msgid "_Cancel"
+#~ msgstr "_Zrušiť"
+
+#~ msgid "Select database to import"
+#~ msgstr "Výber databázy na importovanie"
+
+#~ msgid "Discover radio stations"
+#~ msgstr "Preskúmať rádiové stanice"
+
+#~ msgid "Show famous radio stations"
+#~ msgstr "Zobraziť slávne rádiové stanice"
+
+#~ msgid "Show popular radio stations"
+#~ msgstr "Zobraziť obľúbené rádiové stanice"
+
+#~ msgid "Show radio stations which have recently been clicked."
+#~ msgstr "Zobrazí rádiové stanice, na ktoré bolo nedávno kliknuté."
+
+#~ msgid "Search for specific radio stations."
+#~ msgstr "Vyhľadá špecifické rádiové stanice."

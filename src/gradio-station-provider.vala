@@ -23,8 +23,6 @@ namespace Gradio{
 		private Json.Parser parser = new Json.Parser();
 
 		private StationModel model = null;
-
-		public signal void working();
 		public signal void ready();
 
 		public StationProvider(ref StationModel m) {

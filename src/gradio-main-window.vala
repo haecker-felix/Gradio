@@ -23,13 +23,12 @@ namespace Gradio{
 		LIBRARY,
 		COLLECTION_ITEMS,
 		SEARCH,
-		ADD
 	}
 
 	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/main-window.ui")]
 	public class MainWindow : Gtk.ApplicationWindow {
 
-		public string[] page_name = { "library", "collections", "collection_items", "search", "add"};
+		public string[] page_name = { "library", "collections", "collection_items", "search"};
 
 		public Gradio.Headerbar header;
 		PlayerToolbar player_toolbar;
@@ -41,7 +40,6 @@ namespace Gradio{
 		CollectionItemsPage collection_items_page;
 		public SearchPage search_page;
 		LibraryPage library_page;
-		AddPage add_page;
 
 		// History of the pages
 		GLib.Queue<WindowMode> mode_queue = new GLib.Queue<WindowMode>();
@@ -54,7 +52,6 @@ namespace Gradio{
 		private SelectionToolbar selection_toolbar;
 		private ulong selection_changed_id = 0;
 		public StationModel current_selection { get; set;}
-
 
 		// In-App Notification
 		[GtkChild] private Button NotificationCloseButton;
@@ -104,6 +101,9 @@ namespace Gradio{
 			var gtk_settings = Gtk.Settings.get_default ();
 			gtk_settings.gtk_application_prefer_dark_theme = App.settings.enable_dark_theme;
 
+			// menubar isn't required, because the appmenu is now integrated into Gradio.MenuButton
+			this.set_show_menubar(false);
+
 	        	player_toolbar = new PlayerToolbar();
 	       		player_toolbar.set_visible(false);
 	       		Bottom.pack_end(player_toolbar);
@@ -124,10 +124,14 @@ namespace Gradio{
 			 	App.settings.window_height = height;
 			});
 
-			header.LibraryToggleButton.clicked.connect(() => { set_mode(WindowMode.LIBRARY); });
-			header.SearchToggleButton.clicked.connect(() => { set_mode(WindowMode.SEARCH); });
-			header.AddButton.clicked.connect(() => { set_mode(WindowMode.ADD); });
-			header.BackButton.clicked.connect(() => {set_mode (mode_queue.pop_head(), true);}); //go one page back in history
+			header.SearchToggleButton.clicked.connect(() => {
+				if(!header.SearchToggleButton.active){
+					if(current_mode == WindowMode.SEARCH) set_mode(mode_queue.pop_head(), true);
+				}else{
+					set_mode(WindowMode.SEARCH);
+				}
+			});
+			header.BackButton.clicked.connect(() => {set_mode(mode_queue.pop_head(), true);});
 			header.selection_canceled.connect(() => {set_selection_mode(false);});
 			header.selection_started.connect(() => {set_selection_mode(true);});
 			NotificationCloseButton.clicked.connect(hide_notification);
@@ -169,6 +173,13 @@ namespace Gradio{
 			header.set_selected_items((int)current_selection.get_n_items());
 		}
 
+		private void title_changed(){
+			header.set_title("");
+			header.set_subtitle("");
+			header.set_title(((Page)MainStack.get_visible_child()).get_title());
+			header.set_subtitle(((Page)MainStack.get_visible_child()).get_subtitle());
+		}
+
 		public void show_notification(string text){
 			NotificationLabel.set_text(text);
 			NotificationRevealer.set_reveal_child(true);
@@ -178,12 +189,12 @@ namespace Gradio{
 			NotificationRevealer.set_reveal_child(false);
 		}
 
-		public void set_mode(WindowMode mode, bool go_back = false){
+		public void set_mode(WindowMode mode, bool dont_write_history = false){
 			if(in_mode_change == true)
 				return;
 
 			// insert actual mode in the "back" history
-			if(!go_back) mode_queue.push_head(current_mode);
+			if(!dont_write_history) mode_queue.push_head(current_mode);
 			in_mode_change = true;
 
 			// set new mode
@@ -193,43 +204,39 @@ namespace Gradio{
 			Page page = (Page)MainStack.get_visible_child();
 			page.set_selection_mode(false);
 			page.selection_changed.disconnect(selection_changed);
+			page.title_changed.disconnect(title_changed);
 			if (selection_changed_id != 0) page.disconnect(selection_changed_id);
 
-			// set headerbar to default (disable selection mode, show default buttons), and show toggle the correct button
-			header.show_selection_bar(false);
+			// set headerbar to default
 			header.show_default_buttons();
-			header.LibraryToggleButton.set_active(mode == WindowMode.LIBRARY);
 			header.SearchToggleButton.set_active(mode == WindowMode.SEARCH);
+
+			// disable selection mode
+			set_selection_mode(false);
+
+			// "delete" search page if necessary
+			if(current_mode != WindowMode.SEARCH){
+				MainStack.remove(search_page);
+				search_page = null;
+			}
 
 			// do action for mode
 			switch(current_mode){
 				case WindowMode.LIBRARY: {
-					header.AddButton.set_visible(true);
 					mode_queue.clear();
 					break;
 				};
 				case WindowMode.SEARCH: {
-					header.show_title(_("Search"));
 					if(search_page == null){
 						search_page = new SearchPage();
 						MainStack.add_named(search_page, page_name[WindowMode.SEARCH]);
 					}
+					header.MenuBox.set_visible(false);
 					break;
 				};
 				case WindowMode.COLLECTION_ITEMS: {
 					Collection collection = library_page.selected_collection;
 					collection_items_page.set_collection(collection);
-					collection_items_page.set_title(collection.name);
-					header.show_title(collection_items_page.get_title());
-					break;
-				};
-				case WindowMode.ADD: {
-					header.show_title(_("Add new radio stations to your Library"));
-					header.ViewButton.set_visible(false);
-					if(add_page == null){
-						add_page = new AddPage();
-						MainStack.add_named(add_page, page_name[WindowMode.ADD]);
-					}
 					break;
 				};
 			}
@@ -243,7 +250,11 @@ namespace Gradio{
 			// connect new signals
 			Page new_page = (Page)MainStack.get_visible_child();
 			new_page.selection_changed.connect(selection_changed);
+			new_page.title_changed.connect(title_changed);
 			selection_changed_id = new_page.selection_mode_enabled.connect(() => {set_selection_mode(true);});;
+
+			// update title and subtitle
+			title_changed();
 
 			in_mode_change = false;
 			message("Changed page mode to \"%s\"", page_name[current_mode]);
@@ -286,11 +297,6 @@ namespace Gradio{
 				return true;
 			}
 
-			// show add page
-			if ((event.keyval == Gdk.Key.a) && (event.state & default_modifiers) == Gdk.ModifierType.CONTROL_MASK) {
-				set_mode(WindowMode.ADD);
-				return true;
-			}
 			return false;
 		}
 

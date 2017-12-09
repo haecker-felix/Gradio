@@ -1,3 +1,4 @@
 .flatpak-builder
 *_source.tar*
 *.snap
+.buildconfig

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<interface>
+  <menu id="section-menu">
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">Discover</attribute>
+        <attribute name="action">section.discover</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">Search</attribute>
+        <attribute name="action">section.search</attribute>
+      </item>
+    </section>
+  </menu>
+</interface>

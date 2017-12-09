@@ -42,9 +42,6 @@ namespace Gradio{
 			playback_group = new GroupBox(_("Playback"));
 			SettingsBox.add(playback_group);
 
-			library_group = new GroupBox(_("Library"));
-			SettingsBox.add(library_group);
-
 			appearance_group = new GroupBox(_("Appearance"));
 			SettingsBox.add(appearance_group);
 
@@ -61,12 +58,6 @@ namespace Gradio{
 			use_dark_design_switch.toggled.connect(() => {App.settings.enable_dark_theme = use_dark_design_switch.get_state();});
 			appearance_group.add_listbox_row(use_dark_design_switch);
 
-			// hide broken stations
-			SwitchItem hide_broken_stations_switch = new SwitchItem(_("Hide broken stations"), _("Don't show stations, which are not working"));
-			hide_broken_stations_switch.set_state(App.settings.hide_broken_stations);
-			hide_broken_stations_switch.toggled.connect(() => {App.settings.hide_broken_stations = hide_broken_stations_switch.get_state();});
-			appearance_group.add_listbox_row(hide_broken_stations_switch);
-
 
 			// PLAYBACK
 
@@ -81,28 +72,6 @@ namespace Gradio{
 			resume_playback_on_startup_switch.set_state(App.settings.resume_playback_on_startup);
 			resume_playback_on_startup_switch.toggled.connect(() => {App.settings.resume_playback_on_startup = resume_playback_on_startup_switch.get_state();});
 			playback_group.add_listbox_row(resume_playback_on_startup_switch);
-
-
-			// LIBRARY
-
-			// import library
-			ButtonItem import_library_button = new ButtonItem(_("Import"), _("Replace the current library with a another one"));
-			import_library_button.btn_clicked.connect(() => {
-				string path = import_library_dialog();
-				if(path == "") return;
-				if(!Util.show_yes_no_dialog(_("Do you want to replace the current library with this one?"), this))return;
-				App.library.import_database(path);
-			});
-			library_group.add_listbox_row(import_library_button);
-
-			// export library
-			ButtonItem export_library_button = new ButtonItem(_("Export"), _("Export the current library"));
-			export_library_button.btn_clicked.connect(() => {
-				string path = export_library_dialog();
-				if(path == "") return;
-				App.library.export_database(path);
-			});
-			library_group.add_listbox_row(export_library_button);
 
 
 			// FEATURES
@@ -142,49 +111,6 @@ namespace Gradio{
 			});
 			cache_group.add_listbox_row(clear_cache_button);
 
-		}
-
-		private string export_library_dialog (){
-			Gtk.FileChooserDialog chooser = new Gtk.FileChooserDialog (
-				_("Export the current library"), this, Gtk.FileChooserAction.SAVE,
-				_("_Cancel"),
-				Gtk.ResponseType.CANCEL,
-				 _("Export"),
-				Gtk.ResponseType.ACCEPT);
-
-
-			chooser.set_current_name("gradio.db");
-
-
-			string path = "";
-			if (chooser.run () == Gtk.ResponseType.ACCEPT) {
-				path = chooser.get_file().get_path();
-			}
-			chooser.close();
-			chooser.destroy();
-			return path;
-		}
-
-		private string import_library_dialog (){
-			Gtk.FileChooserDialog chooser = new Gtk.FileChooserDialog (
-				_("Select database to import"), this, Gtk.FileChooserAction.OPEN,
-				_("_Cancel"),
-				Gtk.ResponseType.CANCEL,
-				 _("Import"),
-				Gtk.ResponseType.ACCEPT);
-
-			Gtk.FileFilter filter = new Gtk.FileFilter ();
-			chooser.set_filter (filter);
-			filter.add_mime_type ("application/x-sqlite3");
-
-
-			string path = "";
-			if (chooser.run () == Gtk.ResponseType.ACCEPT) {
-				path = chooser.get_file().get_path();
-			}
-			chooser.close();
-			chooser.destroy();
-			return path;
 		}
 
 	}

@@ -18,7 +18,7 @@ using Sqlite;
 
 namespace Gradio{
 
-	public class Library : Gtk.Box{
+	public class Library : Object{
 		public static StationModel station_model;
 
 		private Sqlite.Database db;
@@ -27,8 +27,10 @@ namespace Gradio{
 		File newdb = File.new_for_path (Path.build_filename (Environment.get_user_data_dir (), "gradio", "gradio.db")); // New DB
 		File olddb = File.new_for_path (Path.build_filename (Environment.get_user_data_dir (), "gradio", "library.gradio")); // Old DB
 
+		public bool busy {get;set;}
 
 		public Library(){
+			busy = true;
 			station_model = new StationModel();
 
 			// check for new database
@@ -52,8 +54,21 @@ namespace Gradio{
 		}
 
 		private async void read_database(){
-			yield read_collections();
-			yield read_stations();
+			StationModel collections = yield sql_select_collections();
+			foreach(Gd.MainBoxItem item in collections){station_model.add_item(item);}
+
+			StationModel stations = yield sql_select_library();
+			foreach(Gd.MainBoxItem item in stations){
+				int coll_id = sql_get_collection_id(item.id);
+
+				if(coll_id == 0)
+					station_model.add_item(item);
+				else{
+					Collection coll = (Collection)station_model.get_item_by_id(coll_id.to_string());
+					coll.add_station((RadioStation)item);
+				}
+			}
+			busy = false;
 		}
 
 		private void open_database(){
@@ -103,81 +118,6 @@ namespace Gradio{
 			message("Successfully initialized database!");
 		}
 
-		private async void read_collections(){
-			message("Importing collections...");
-			Statement stmt;
-			int rc = 0;
-			int cols;
-
-			if ((rc = db.prepare_v2 ("SELECT * FROM collections;", -1, out stmt, null)) == 1) {
-				critical ("SQL error: %d, %s\n", rc, db.errmsg ());
-				return;
-			}
-
-			cols = stmt.column_count();
-			do {
-				rc = stmt.step();
-				switch (rc) {
-				case Sqlite.DONE:
-					break;
-				case Sqlite.ROW:
-					message("Found collection: %s %s", stmt.column_text(0), stmt.column_text(1));
-					Collection coll = new Collection(stmt.column_text(1), stmt.column_text(0));
-					station_model.add_item(coll);
-					break;
-				default:
-					printerr ("Error: %d, %s\n", rc, db.errmsg ());
-					break;
-				}
-			} while (rc == Sqlite.ROW);
-			message("Imported all collections!");
-		}
-
-		private async void read_stations(){
-			message("Importing stations...");
-			Statement stmt;
-			int rc = 0;
-			int cols;
-
-			if ((rc = db.prepare_v2 ("SELECT * FROM library;", -1, out stmt, null)) == 1) {
-				critical ("SQL error: %d, %s\n", rc, db.errmsg ());
-				return;
-			}
-
-			cols = stmt.column_count();
-			do {
-				rc = stmt.step();
-				switch (rc) {
-				case Sqlite.DONE:
-					break;
-				case Sqlite.ROW:
-					string coll_id = stmt.column_text(1);
-					string station_id = stmt.column_text(0);
-
-					Util.get_station_by_id.begin(int.parse(station_id), (obj, res) => {
-						RadioStation station = Util.get_station_by_id.end(res);
-
-						message("Found station: %s", station.title);
-
-						if(coll_id != "0"){
-							Collection coll = (Collection)station_model.get_item_by_id(coll_id);
-							coll.add_station(station);
-
-							message("Added %s to collection \"%s\"", station_id, coll.name);
-						}else{
-							station_model.add_item(station);
-						}
-					});
-
-					break;
-				default:
-					printerr ("Error: %d, %s\n", rc, db.errmsg ());
-					break;
-				}
-			} while (rc == Sqlite.ROW);
-			message("Imported all stations!");
-		}
-
 		public bool add_collection(Collection collection){
 			if(contains_item(collection)){
 				warning("Library already contains collection \"%s\"", collection.name);
@@ -201,8 +141,8 @@ namespace Gradio{
 			}
 
 			// Remove all stations in this collection
-			for(int i = 0; i < collection.station_model.get_n_items(); i++){
-				RadioStation station = (RadioStation)collection.station_model.get_item(i);
+			foreach(Gd.MainBoxItem item in collection.station_model){
+				RadioStation station = (RadioStation)item;
 				remove_radio_station(station);
 			}
 
@@ -249,24 +189,29 @@ namespace Gradio{
 			}
 		}
 
-		public bool move_station_to_collection(string collection_id, RadioStation station){
+		public bool station_set_collection_id(RadioStation station, string collection_id){
 			if(!contains_item(station)){
 				warning("Library doesn't contains station \"%s\"", station.title);
 				return true;
 			}
 
-			// TODO: We can move a station from one collection to a another collection. This means we have to remove it from the old one.
-			Collection collection = get_collection(station);
+			Collection collection = get_collection_by_station(station);
 			if(collection != null) collection.station_model.remove_item(station);
 
-			// Remove station from station_model
-			station_model.remove_item(station);
+			if(collection_id == "0"){ // remove station from a collection
+				// Add station to station_model
+				if(!station_model.contains_item_with_id(station.id)) station_model.add_item(station);
+			}else{ // add station to a collection
+				// Remove station from station_model
+				station_model.remove_item(station);
 
-			// Get the actual collection, where the station gets added
-			Collection coll = (Collection)station_model.get_item_by_id(collection_id);
+				// Get the actual collection, where the station gets added
+				Collection coll = (Collection)station_model.get_item_by_id(collection_id);
 
-			// Add station to collection
-			coll.add_station(station);
+				// Add station to collection
+				coll.add_station(station);
+			}
+
 
 			if(sql_update_row_library(station.id, collection_id)){
 				message("Added station \"%s\" to collection %s", station.title, collection_id);
@@ -278,13 +223,11 @@ namespace Gradio{
 		}
 
 		public bool contains_item(Gd.MainBoxItem item){
-			for (int i = 0; i < station_model.get_n_items(); i ++) {
-      				Gd.MainBoxItem fitem = (Gd.MainBoxItem)station_model.get_item (i);
+			foreach(Gd.MainBoxItem fitem in station_model){
 				if(item.id == fitem.id) return true;
       				if(Util.is_collection_item(int.parse(fitem.id))){
 					StationModel m = ((Collection)fitem).station_model;
-					for (int i2 = 0; i2 < m.get_n_items(); i2++) {
-						Gd.MainBoxItem fitem2 = (Gd.MainBoxItem)m.get_item (i2);
+					foreach(Gd.MainBoxItem fitem2 in m){
 						if (item.id == fitem2.id) return true;
 					}
       				}
@@ -292,19 +235,29 @@ namespace Gradio{
 	    		return false;
 		}
 
-		public Collection get_collection(RadioStation station){
-			for (int i = 0; i < station_model.get_n_items(); i ++) {
-      				Gd.MainBoxItem fstation = (Gd.MainBoxItem)station_model.get_item (i);
-				if(station.id == fstation.id) return null;
-      				if(Util.is_collection_item(int.parse(fstation.id))){
-					StationModel m = ((Collection)fstation).station_model;
-					for (int i2 = 0; i2 < m.get_n_items(); i2++) {
-						Gd.MainBoxItem fitem2 = (Gd.MainBoxItem)m.get_item (i2);
-						if (station.id == fitem2.id) return (Collection)fstation;
-					}
-      				}
+		public StationModel get_collections(){
+			StationModel model = new StationModel();
+
+			// TODO: search in sqlite directly
+			foreach(Gd.MainBoxItem item in station_model){
+				if(Util.is_collection_item(int.parse(item.id))){
+					Collection coll = (Collection) item;
+					model.add_item(coll);
+				}
 			}
-	    		return null;
+
+			return model;
+		}
+
+		public Collection get_collection_by_station(RadioStation station){
+			int coll_id = sql_get_collection_id(station.id);
+			Collection coll = (Collection)station_model.get_item_by_id(coll_id.to_string());
+	    		return coll;
+		}
+
+		public void rename_collection(Collection collection, string new_name){
+			collection.rename(new_name);
+			sql_update_row_collection(collection.id, new_name);
 		}
 
 		public void export_database(string path){
@@ -312,10 +265,53 @@ namespace Gradio{
 			File dest = File.new_for_path(path);
 
 			try{
-				newdb.copy(dest, FileCopyFlags.NONE, null, null);
+				newdb.copy(dest, FileCopyFlags.OVERWRITE, null, null);
 			}catch(GLib.Error e){
 				critical("Could not export database: %s", e.message);
 			}
+
+			message("Successfully exported database!");
+		}
+
+		public async void export_as_m3u(string path){
+			message("Exporting m3u playlist to: %s", path);
+
+			File file = File.new_for_path (path);
+			if(file.query_exists()) file.delete(); // Delete file, if file already exists
+
+			FileIOStream ios = file.create_readwrite(FileCreateFlags.PRIVATE);
+			DataOutputStream dos = new DataOutputStream (ios.output_stream);
+			dos.put_string ("#EXTM3U\n");
+
+			Statement stmt;
+			int rc = 0; int cols;
+
+			if ((rc = db.prepare_v2 ("SELECT * FROM library;", -1, out stmt, null)) == 1) {
+				critical ("SQL error: %d, %s\n", rc, db.errmsg ());
+				return;
+			}
+
+			cols = stmt.column_count();
+			do {
+				rc = stmt.step();
+				switch (rc) {
+				case Sqlite.DONE:
+					break;
+				case Sqlite.ROW:
+					string station_id = stmt.column_text(0);
+
+					RadioStation station = yield Util.get_station_by_id(int.parse(station_id));
+					string address = yield station.get_stream_address();
+
+					dos.put_string("#EXTINF:0,"+station.title+"\n");
+					dos.put_string(address+"\n");
+
+					break;
+				default:
+					printerr ("Error: %d, %s\n", rc, db.errmsg ());
+					break;
+				}
+			} while (rc == Sqlite.ROW);
 
 			message("Successfully exported database!");
 		}
@@ -384,6 +380,97 @@ namespace Gradio{
 				return true;
 			}
 			return false;
+		}
+
+		private async StationModel sql_select_collections (){
+			StationModel result = new StationModel();
+			Statement stmt;
+			int rc = 0;
+			int cols;
+
+			if ((rc = db.prepare_v2 ("SELECT * FROM collections;", -1, out stmt, null)) == 1) {
+				critical ("SQL error: %d, %s\n", rc, db.errmsg ());
+				return null;
+			}
+
+			cols = stmt.column_count();
+			do {
+				rc = stmt.step();
+				switch (rc) {
+				case Sqlite.DONE:
+					break;
+				case Sqlite.ROW:
+					Collection coll = new Collection(stmt.column_text(1), stmt.column_text(0));
+					result.add_item(coll);
+					break;
+				default:
+					printerr ("Error: %d, %s\n", rc, db.errmsg ());
+					break;
+				}
+			} while (rc == Sqlite.ROW);
+			return result;
+		}
+
+		private async StationModel sql_select_library (){
+			StationModel result = new StationModel();
+			Statement stmt;
+			int rc = 0;
+			int cols;
+
+			if ((rc = db.prepare_v2 ("SELECT * FROM library;", -1, out stmt, null)) == 1) {
+				critical ("SQL error: %d, %s\n", rc, db.errmsg ());
+				return null;
+			}
+
+			cols = stmt.column_count();
+			do {
+				rc = stmt.step();
+				switch (rc) {
+				case Sqlite.DONE:
+					break;
+				case Sqlite.ROW:
+					RadioStation station = yield Util.get_station_by_id(int.parse(stmt.column_text(0)));
+					result.add_item(station);
+					break;
+				default:
+					printerr ("Error: %d, %s\n", rc, db.errmsg ());
+					break;
+				}
+			} while (rc == Sqlite.ROW);
+			return result;
+		}
+
+		// SELECT collection_id FROM library WHERE station_id="0" ;
+		private int sql_get_collection_id(string id){
+			Statement stmt;
+			int rc = 0;
+			int cols;
+
+			if ((rc = db.prepare_v2 ("SELECT collection_id FROM library WHERE station_id=\""+id+"\";", -1, out stmt, null)) == 1) {
+				critical ("SQL error: %d, %s\n", rc, db.errmsg ());
+				return 0;
+			}
+
+			cols = stmt.column_count();
+			do {
+				rc = stmt.step();
+				switch (rc) {
+				case Sqlite.DONE:
+					break;
+				case Sqlite.ROW:
+					int result = int.parse(stmt.column_text(0));
+					return result;
+					break;
+				default:
+					printerr ("Error: %d, %s\n", rc, db.errmsg ());
+					break;
+				}
+			} while (rc == Sqlite.ROW);
+			return 0;
+		}
+
+		private bool sql_update_row_collection(string collection_id, string collection_name){
+			return execute_query("UPDATE collections SET collection_name = '"+collection_name+"' WHERE collection_id = '"+collection_id+"';");
 		}
 
 		private bool sql_insert_row_library(string station_id, string collection_id){
