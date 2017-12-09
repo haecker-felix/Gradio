@@ -58,7 +58,7 @@ namespace Gradio{
 			// Description
 			station.get_description.begin((obj,res) => {
 				string desc = station.get_description.end(res);
-				DescriptionLabel.set_text(desc);
+				DescriptionLabel.set_markup(desc);
 			});
 
 			OpenHomepageButton.set_visible(true);
@@ -122,4 +122,4 @@ namespace Gradio{
 			App.player.station = station;
 		}
 	}
-}		
+}
