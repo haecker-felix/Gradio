@@ -553,5 +553,8 @@
         <property name="icon_name">open-menu-symbolic</property>
       </object>
     </child>
+    <style>
+      <class name="image-button"/>
+    </style>
   </template>
 </interface>
