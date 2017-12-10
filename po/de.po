@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-10 15:17+0100\n"
-"PO-Revision-Date: 2017-12-10 14:27+0000\n"
+"PO-Revision-Date: 2017-12-10 14:29+0000\n"
 "Last-Translator: Häcker Felix <haecker.felix1207@gmail.com>\n"
 "Language-Team: German "
 "<https://hosted.weblate.org/projects/gradio/translations/de/>\n"
@@ -212,7 +212,7 @@ msgstr "Suchen"
 
 #: data/ui/page/search-page.ui:395
 msgid "Results:"
-msgstr ""
+msgstr "Ergebnisse:"
 
 #: data/ui/page/search-page.ui:489
 msgid "No results found"
@@ -239,7 +239,6 @@ msgid "Library"
 msgstr "Bibliothek"
 
 #: data/ui/menubutton.ui:160
-#, fuzzy
 msgid "Create new radio station"
 msgstr "Neuen Radiosender erstellen"
 
@@ -376,18 +375,16 @@ msgid "Fetching station data…"
 msgstr "Sender Daten abrufen…"
 
 #: src/gradio-station-editor-dialog.vala:53
-#, fuzzy
 msgid "Create radio station"
 msgstr "Neuen Radiosender erstellen"
 
 #: src/gradio-station-editor-dialog.vala:59
-#, fuzzy
 msgid "Edit radio station"
-msgstr "Radiosender entdecken"
+msgstr "Radiosender bearbeiten"
 
 #: src/gradio-station-editor-dialog.vala:169
 msgid "\"Name\" and \"Stream\" information is required."
-msgstr ""
+msgstr "\"Name\" und \"Stream\" Information wird benötigt."
 
 #~ msgid "100%"
 #~ msgstr "100%"
