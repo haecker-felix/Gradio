@@ -7,7 +7,7 @@
 	<file>ui/page/search-page.ui</file>
 	<file>ui/page/collection-items-page.ui</file>
 	<file>ui/page/collections-page.ui</file>
-	<file>ui/settings-window.ui</file>
+	<file>ui/page/settings-page.ui</file>
 	<file>ui/details-box.ui</file>
 	<file>ui/station-editor.ui</file>
 	<file>ui/groupbox.ui</file>

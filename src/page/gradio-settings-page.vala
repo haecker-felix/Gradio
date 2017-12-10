@@ -17,8 +17,8 @@
 using Gtk;
 namespace Gradio{
 
-	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/settings-window.ui")]
-	public class SettingsWindow : Gtk.Window {
+	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/page/settings-page.ui")]
+	public class SettingsPage : Gtk.Box, Page {
 
 		[GtkChild] private Box SettingsBox;
 
@@ -29,7 +29,7 @@ namespace Gradio{
 		private GroupBox cache_group;
 
 
-		public SettingsWindow () {
+		public SettingsPage () {
 			setup_groups();
 			setup_items();
 			this.show_all();
@@ -111,6 +111,10 @@ namespace Gradio{
 			});
 			cache_group.add_listbox_row(clear_cache_button);
 
+		}
+
+		public string get_title(){
+			return _("Settings");
 		}
 
 	}

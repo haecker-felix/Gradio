@@ -42,7 +42,7 @@
                 </child>
                 <child>
                   <object class="GtkButton" id="ResetZoomButton">
-                    <property name="label" translatable="yes">100%</property>
+                    <property name="label">100%</property>
                     <property name="visible">False</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>

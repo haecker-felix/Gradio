@@ -77,7 +77,7 @@ namespace Gradio{
 		}
 
 		public string get_title(){
-			return "Library";
+			return _("Library");
 		}
 
 		public string get_subtitle(){

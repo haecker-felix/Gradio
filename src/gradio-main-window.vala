@@ -23,12 +23,13 @@ namespace Gradio{
 		LIBRARY,
 		COLLECTION_ITEMS,
 		SEARCH,
+		SETTINGS
 	}
 
 	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/main-window.ui")]
 	public class MainWindow : Gtk.ApplicationWindow {
 
-		public string[] page_name = { "library", "collections", "collection_items", "search"};
+		public string[] page_name = { "library", "collections", "collection_items", "search", "settings"};
 
 		public Gradio.Headerbar header;
 		PlayerToolbar player_toolbar;
@@ -40,6 +41,7 @@ namespace Gradio{
 		CollectionItemsPage collection_items_page;
 		public SearchPage search_page;
 		LibraryPage library_page;
+		SettingsPage settings_page;
 
 		// History of the pages
 		GLib.Queue<WindowMode> mode_queue = new GLib.Queue<WindowMode>();
@@ -91,6 +93,9 @@ namespace Gradio{
 
 			collection_items_page = new CollectionItemsPage();
 			MainStack.add_named(collection_items_page, page_name[WindowMode.COLLECTION_ITEMS]);
+
+			settings_page = new SettingsPage();
+			MainStack.add_named(settings_page, page_name[WindowMode.SETTINGS]);
 
 			details_box = new Gradio.DetailsBox();
 			DetailsBox.add(details_box);
@@ -239,6 +244,12 @@ namespace Gradio{
 					collection_items_page.set_collection(collection);
 					break;
 				};
+				case WindowMode.SETTINGS: {
+					header.MenuBox.set_visible(false);
+					header.SearchToggleButton.set_visible(false);
+					header.SelectButton.set_visible(false);
+					break;
+				}
 			}
 
 			// show back button if needed
