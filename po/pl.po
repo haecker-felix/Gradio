@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-10 15:17+0100\n"
-"PO-Revision-Date: 2017-12-10 14:32+0000\n"
+"PO-Revision-Date: 2017-12-10 14:33+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish "
 "<https://hosted.weblate.org/projects/gradio/translations/pl/>\n"
@@ -384,7 +384,7 @@ msgstr "Modyfikacja stacji radiowej"
 
 #: src/gradio-station-editor-dialog.vala:169
 msgid "\"Name\" and \"Stream\" information is required."
-msgstr ""
+msgstr "Informacje „Nazwa” i „Strumień” są wymagane."
 
 #~ msgid "100%"
 #~ msgstr "100%"
