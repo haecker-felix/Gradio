@@ -15,7 +15,7 @@ https://img.shields.io/badge/snap-download-brightgreen.svg)](https://snapcraft.i
 ## News
 * **Gradio 7.0** will be released when #243 is implemented (WIP). Please upload updated translations soon.
 * **The Ubuntu PPA no longer exists** and is no longer supported. I only maintain the Flatpak and Snap versions.
-[More information](https://github.com/haecker-felix/gradio/wiki/Install-Gradio)
+[More information](https://github.com/haecker-felix/gradio/wiki/Install-Instructions
 
 ## Open tasks
 Feel free to contribute to Gradio! You don't know how you can help? Here are some open tasks/todos:
