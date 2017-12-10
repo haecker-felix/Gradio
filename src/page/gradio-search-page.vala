@@ -65,19 +65,19 @@ namespace Gradio{
 			});
 
 			searchbar.SearchEntry.search_changed.connect(show_search);
+			searchbar.BackButton.clicked.connect(show_discover);
 
-			setup_section_menubutton();
 			setup_discover_section();
 		}
 
 		private void show_search(){
-			searchbar.SectionLabel.set_text(_("Search"));
 			SectionStack.set_visible_child_name("search");
+			searchbar.BackBox.set_visible(true);
 		}
 
 		private void show_discover(){
-			searchbar.SectionLabel.set_text(_("Discover"));
 			SectionStack.set_visible_child_name("discover");
+			searchbar.BackBox.set_visible(false);
 		}
 
 		private void setup_discover_section(){
@@ -118,25 +118,6 @@ namespace Gradio{
 			most_votes_mainbox.selection_mode_request.connect(() => {selection_mode_enabled();});
 			recently_clicked_mainbox.selection_mode_request.connect(() => {selection_mode_enabled();});
 			most_clicks_mainbox.selection_mode_request.connect(() => {selection_mode_enabled();});
-		}
-
-		private void setup_section_menubutton(){
-			section_action_group = new GLib.SimpleActionGroup ();
-			this.insert_action_group ("section", section_action_group);
-
-			var action = new GLib.SimpleAction ("discover", null);
-			action.activate.connect (show_discover);
-			section_action_group.add_action (action);
-
-			action = new GLib.SimpleAction ("search", null);
-			action.activate.connect (show_search);
-			section_action_group.add_action (action);
-
-			var builder = new Gtk.Builder.from_resource ("/de/haecker-felix/gradio/ui/section-menu.ui");
-			var section_menu = builder.get_object ("section-menu") as GLib.MenuModel;
-
-			Popover section_popover = new Popover.from_model(searchbar.SectionMenuButton, section_menu);
-			searchbar.SectionMenuButton.set_popover(section_popover);
 		}
 
 		public void set_search(string term){

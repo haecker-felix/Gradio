@@ -490,6 +490,7 @@
       </packing>
     </child>
   </object>
+
   <template class="GradioSearchBar" parent="GtkBox">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
@@ -500,20 +501,17 @@
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <child>
-          <object class="GtkBox">
-            <property name="visible">True</property>
+          <object class="GtkBox" id="BackBox">
+	    <property name="visible">False</property>
+	    <property name="no_show_all">True</property>
             <property name="can_focus">False</property>
+            <property name="margin_right">30</property>
             <property name="orientation">vertical</property>
             <child>
               <object class="GtkLabel">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="halign">start</property>
                 <property name="margin_bottom">3</property>
-                <property name="label" translatable="yes">Show</property>
-		<attributes>
-                  <attribute name="weight" value="bold"/>
-                </attributes>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -522,20 +520,20 @@
               </packing>
             </child>
             <child>
-              <object class="GtkMenuButton" id="SectionMenuButton">
-                <property name="width_request">150</property>
-                <property name="visible">True</property>
+              <object class="GtkButton" id="BackButton">
+		<property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <child>
                   <object class="GtkBox">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="spacing">6</property>
                     <child>
-                      <object class="GtkLabel" id="SectionLabel">
+                      <object class="GtkImage">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="label" translatable="yes">Discover</property>
+                        <property name="icon_name">go-home-symbolic</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -544,15 +542,14 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkArrow">
+                      <object class="GtkLabel">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="arrow_type">down</property>
+                        <property name="label" translatable="yes">Discover</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">True</property>
-                        <property name="pack_type">end</property>
                         <property name="position">1</property>
                       </packing>
                     </child>
@@ -576,8 +573,6 @@
           <object class="GtkBox">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="margin_left">30</property>
-            <property name="margin_right">30</property>
             <property name="orientation">vertical</property>
             <child>
               <object class="GtkLabel">
@@ -586,7 +581,7 @@
                 <property name="halign">start</property>
                 <property name="margin_bottom">3</property>
                 <property name="label" translatable="yes">Search for radio stations</property>
-		<attributes>
+                <attributes>
                   <attribute name="weight" value="bold"/>
                 </attributes>
               </object>
@@ -645,6 +640,7 @@
           <object class="GtkBox">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="margin_left">30</property>
             <property name="orientation">vertical</property>
             <child>
               <object class="GtkLabel">
@@ -653,7 +649,7 @@
                 <property name="halign">start</property>
                 <property name="margin_bottom">3</property>
                 <property name="label" translatable="yes">Sort by</property>
-		<attributes>
+                <attributes>
                   <attribute name="weight" value="bold"/>
                 </attributes>
               </object>

@@ -55,8 +55,8 @@ namespace Gradio{
 		private uint delayed_changed_id;
 
 		[GtkChild] private Label SortLabel;
-		[GtkChild] public Gtk.MenuButton SectionMenuButton;
-		[GtkChild] public Label SectionLabel;
+		[GtkChild] public Button BackButton;
+		[GtkChild] public Box BackBox;
 
 		private GLib.SimpleActionGroup search_action_group;
 
