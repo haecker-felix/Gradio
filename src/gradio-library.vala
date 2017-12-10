@@ -301,14 +301,14 @@ namespace Gradio{
 					string station_id = stmt.column_text(0);
 
 					RadioStation station = yield Util.get_station_by_id(int.parse(station_id));
-                    if (station != null) {
-                        string address = yield station.get_stream_address();
+					if (station != null) {
+						string address = yield station.get_stream_address();
 
-                        dos.put_string("#EXTINF:0,"+station.title+"\n");
-                        dos.put_string(address+"\n");
-                    }else{
-                        warning("Station [%s] not exported: not found.", station_id);
-                    }
+						dos.put_string("#EXTINF:0,"+station.title+"\n");
+						dos.put_string(address+"\n");
+					}else{
+						warning("Station [%s] not exported: ID not found.", station_id);
+					}
 
 					break;
 				default:
