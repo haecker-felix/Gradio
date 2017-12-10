@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-10 17:22+0100\n"
-"PO-Revision-Date: 2017-11-12 23:03+0000\n"
+"PO-Revision-Date: 2017-12-10 20:39+0000\n"
 "Last-Translator: Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
-"Language-Team: Swedish <https://hosted.weblate.org/projects/gradio/"
-"translations/sv/>\n"
+"Language-Team: Swedish "
+"<https://hosted.weblate.org/projects/gradio/translations/sv/>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -111,7 +111,7 @@ msgstr "Markera ingen"
 
 #: data/ui/selection-toolbar.ui:28
 msgid "Save"
-msgstr ""
+msgstr "Spara"
 
 #: data/ui/selection-toolbar.ui:59
 msgid "Click an item to view options"
@@ -131,7 +131,7 @@ msgstr "Ta bort från bibliotek"
 
 #: data/ui/selection-toolbar.ui:148
 msgid "Rename"
-msgstr ""
+msgstr "Byt namn"
 
 #: data/ui/station-editor.ui:39
 msgid "Global database"
@@ -216,7 +216,7 @@ msgstr "Sök"
 
 #: data/ui/page/search-page.ui:395
 msgid "Results:"
-msgstr ""
+msgstr "Resultat:"
 
 #: data/ui/page/search-page.ui:489
 msgid "No results found"
@@ -243,9 +243,8 @@ msgid "Library"
 msgstr "Bibliotek"
 
 #: data/ui/menubutton.ui:160
-#, fuzzy
 msgid "Create new radio station"
-msgstr "Skapa en ny radiostation"
+msgstr "Skapa ny radiostation"
 
 #: data/ui/menubutton.ui:281
 msgid "Import"
@@ -288,9 +287,8 @@ msgid "Fetching station data…"
 msgstr "Hämtar stationsdata…"
 
 #: src/page/gradio-library-page.vala:87
-#, fuzzy
 msgid "Items: "
-msgstr "Objekt"
+msgstr "Objekt: "
 
 #: src/page/gradio-settings-page.vala:39
 msgid "Features"
@@ -384,17 +382,15 @@ msgid "Clear all cached station icons"
 msgstr "Töm alla cachade stationsikoner"
 
 #: src/gradio-headerbar.vala:53 src/gradio-headerbar.vala:59
-#, fuzzy
 msgid "Click on items to select them"
-msgstr "Klicka på ett objekt för att visa alternativ"
+msgstr "Klicka på objekt för att välja dem"
 
 #: src/gradio-headerbar.vala:61
 #, c-format
 msgid "%s selected"
-msgstr ""
+msgstr "%s vald(a)"
 
 #: src/gradio-searchbar.vala:288
-#, fuzzy
 msgid "Select Language ..."
 msgstr "Välj språk…"
 
@@ -403,33 +399,30 @@ msgid "Select Country ..."
 msgstr "Välj land…"
 
 #: src/gradio-searchbar.vala:309
-#, fuzzy
 msgid "Select State ..."
 msgstr "Välj delstat…"
 
 #: src/gradio-station-editor-dialog.vala:53
-#, fuzzy
 msgid "Create radio station"
-msgstr "Skapa en ny radiostation"
+msgstr "Skapa radiostation"
 
 #: src/gradio-station-editor-dialog.vala:59
-#, fuzzy
 msgid "Edit radio station"
-msgstr "Upptäck radiostationer"
+msgstr "Redigera radiostation"
 
 #: src/gradio-station-editor-dialog.vala:169
 msgid "\"Name\" and \"Stream\" information is required."
-msgstr ""
+msgstr "Information om namn eller ström krävs."
 
 #: src/gradio-selection-toolbar.vala:99
-#, fuzzy, c-format
+#, c-format
 msgid "%i radio station(s) not present in library."
-msgstr "Lägg till nya radiostationer till ditt bibliotek"
+msgstr "%i radiostation(er) finns inte i biblioteket."
 
 #: src/gradio-selection-toolbar.vala:109
-#, fuzzy, c-format
+#, c-format
 msgid "%i radio station(s) already added to library."
-msgstr "Lägg till nya radiostationer till ditt bibliotek"
+msgstr "%i radiostation(er) har redan lagts till i biblioteket."
 
 #~ msgid "100%"
 #~ msgstr "100%"
