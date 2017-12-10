@@ -369,12 +369,12 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkLabel" id="ResultsCountLabel">
+                                  <object class="GtkLabel" id="ResultsLabel">
                                     <property name="height_request">30</property>
+                                    <property name="visible">True</property>
                                     <property name="can_focus">False</property>
-                                    <property name="no_show_all">True</property>
                                     <property name="halign">start</property>
-                                    <property name="label" translatable="yes">25</property>
+                                    <property name="label" translatable="yes">0</property>
                                     <attributes>
                                       <attribute name="weight" value="bold"/>
                                     </attributes>
@@ -389,10 +389,10 @@
                                 <child>
                                   <object class="GtkLabel">
                                     <property name="height_request">30</property>
+                                    <property name="visible">True</property>
                                     <property name="can_focus">False</property>
-                                    <property name="no_show_all">True</property>
                                     <property name="halign">start</property>
-                                    <property name="label" translatable="yes">Items:</property>
+                                    <property name="label" translatable="yes">Results:</property>
                                     <attributes>
                                       <attribute name="weight" value="bold"/>
                                     </attributes>

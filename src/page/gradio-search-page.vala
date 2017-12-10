@@ -38,6 +38,8 @@ namespace Gradio{
 		private MainBox recently_clicked_mainbox;
 		private MainBox most_clicks_mainbox;
 
+		[GtkChild] private Label ResultsLabel;
+
 		private GLib.SimpleActionGroup section_action_group;
 
 		public SearchPage(){
@@ -59,6 +61,7 @@ namespace Gradio{
 				}else{
 					SearchStack.set_visible_child_name("results");
 				}
+				ResultsLabel.set_text(search_station_model.get_n_items().to_string());
 			});
 			searchbar.timeout_reset.connect(() => {
 				SearchStack.set_visible_child_name("loading");
