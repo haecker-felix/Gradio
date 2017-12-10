@@ -21,6 +21,7 @@ namespace Gradio{
 	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/page/search-page.ui")]
 	public class SearchPage : Gtk.Box, Page{
 		[GtkChild] private Box ResultsBox;
+		[GtkChild] private Label ResultsLabel;
 		[GtkChild] private Box SearchBox;
 		[GtkChild] private Stack SearchStack;
 		[GtkChild] private Stack SectionStack;
@@ -38,22 +39,9 @@ namespace Gradio{
 		private MainBox recently_clicked_mainbox;
 		private MainBox most_clicks_mainbox;
 
-		[GtkChild] private Label ResultsLabel;
-
-		private GLib.SimpleActionGroup section_action_group;
-
 		public SearchPage(){
 			search_station_model =  new StationModel();
 			search_station_provider = new StationProvider(ref search_station_model);
-
-			searchbar = new Gradio.SearchBar(ref search_station_provider);
-			SearchBox.add(searchbar);
-
-			search_mainbox = new MainBox();
-			search_mainbox.set_model(search_station_model);
-			search_mainbox.selection_changed.connect(() => {selection_changed();});
-			search_mainbox.selection_mode_request.connect(() => {selection_mode_enabled();});
-			ResultsBox.add(search_mainbox);
 
 			search_station_provider.ready.connect(() => {
 				if(search_station_model.get_n_items() == 0){
@@ -63,24 +51,15 @@ namespace Gradio{
 				}
 				ResultsLabel.set_text(search_station_model.get_n_items().to_string());
 			});
-			searchbar.timeout_reset.connect(() => {
-				SearchStack.set_visible_child_name("loading");
-			});
 
+			searchbar = new Gradio.SearchBar(ref search_station_provider);
+			searchbar.timeout_reset.connect(() => {SearchStack.set_visible_child_name("loading");});
 			searchbar.SearchEntry.search_changed.connect(show_search);
 			searchbar.BackButton.clicked.connect(show_discover);
+			SearchBox.add(searchbar);
 
 			setup_discover_section();
-		}
-
-		private void show_search(){
-			SectionStack.set_visible_child_name("search");
-			searchbar.BackBox.set_visible(true);
-		}
-
-		private void show_discover(){
-			SectionStack.set_visible_child_name("discover");
-			searchbar.BackBox.set_visible(false);
+			setup_search_section();
 		}
 
 		private void setup_discover_section(){
@@ -123,6 +102,24 @@ namespace Gradio{
 			most_clicks_mainbox.selection_mode_request.connect(() => {selection_mode_enabled();});
 		}
 
+		private void setup_search_section(){
+			search_mainbox = new MainBox();
+			search_mainbox.set_model(search_station_model);
+			search_mainbox.selection_changed.connect(() => {selection_changed();});
+			search_mainbox.selection_mode_request.connect(() => {selection_mode_enabled();});
+			ResultsBox.add(search_mainbox);
+		}
+
+		private void show_search(){
+			SectionStack.set_visible_child_name("search");
+			searchbar.BackBox.set_visible(true);
+		}
+
+		private void show_discover(){
+			SectionStack.set_visible_child_name("discover");
+			searchbar.BackBox.set_visible(false);
+		}
+
 		public void set_search(string term){
 			searchbar.set_search(term);
 		}
@@ -162,18 +159,10 @@ namespace Gradio{
 			List<Gd.MainBoxItem> recently_clicked_selection = recently_clicked_mainbox.get_selection();
 			List<Gd.MainBoxItem> most_votes_selection = most_votes_mainbox.get_selection();
 
-			foreach(Gd.MainBoxItem item in most_clicks_selection){
-				model.add_item(item);
-			}
-			foreach(Gd.MainBoxItem item in recently_clicked_selection){
-				model.add_item(item);
-			}
-			foreach(Gd.MainBoxItem item in most_votes_selection){
-				model.add_item(item);
-			}
-			foreach(Gd.MainBoxItem item in selection){
-				model.add_item(item);
-			}
+			foreach(Gd.MainBoxItem item in most_clicks_selection) model.add_item(item);
+			foreach(Gd.MainBoxItem item in recently_clicked_selection) model.add_item(item);
+			foreach(Gd.MainBoxItem item in most_votes_selection) model.add_item(item);
+			foreach(Gd.MainBoxItem item in selection) model.add_item(item);
 
 			return model;
 		}

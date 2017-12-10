@@ -95,20 +95,9 @@ namespace Gradio{
 
 		private void connect_signals(){
 			SearchEntry.tag_button_clicked.connect((t,a) => {
-				if(a == language_tag){
-					clear_selected_language();
-				}
-				if(a == country_tag){
-					clear_selected_country();
-				}
-				if(a == state_tag){
-					clear_selected_state();
-				}
-			});
-
-			SearchEntry.search_changed.connect(() => {
-				search_term = SearchEntry.get_text();
-				reset_timeout();
+				if(a == language_tag) clear_selected_language();
+				if(a == country_tag) clear_selected_country();
+				if(a == state_tag) clear_selected_state();
 			});
 
 			CountryListBox.row_activated.connect((t,a) => {
@@ -155,6 +144,11 @@ namespace Gradio{
 				reset_timeout();
 			});
 
+			SearchEntry.search_changed.connect(() => {
+				search_term = SearchEntry.get_text();
+				reset_timeout();
+			});
+
 			App.settings.notify["station-sorting"].connect(reset_timeout);
 			App.settings.notify["sort-ascending"].connect(reset_timeout);
 		}
@@ -173,7 +167,7 @@ namespace Gradio{
 			search_action_group.add_action(action);
 
 
-			// Sort order
+			// Order
 			variant = new GLib.Variant.string(Util.get_sortorder_string());
 			action = new SimpleAction.stateful("sortorder", variant.get_type(), variant);
 			action.activate.connect((a,b) => {
@@ -217,15 +211,7 @@ namespace Gradio{
 
 		private bool timeout(){
 			message("Sending new search request to server");
-			apply_new_filter();
 
-			delayed_changed_id = 0;
-			return false;
-		}
-
-
-		private void apply_new_filter(){
-			message("Apply new search filter...");
 			HashTable<string, string> filter_table = new HashTable<string, string> (str_hash, str_equal);
 
 			if(selected_language != null) filter_table.insert("language", selected_language);
@@ -238,6 +224,9 @@ namespace Gradio{
 			filter_table.insert("limit", App.settings.max_search_results.to_string());
 
 			station_provider.get_stations.begin("http://www.radio-browser.info/webservice/json/stations/search", filter_table);
+
+			delayed_changed_id = 0;
+			return false;
 		}
 
 		public void set_search(string term){
@@ -246,21 +235,23 @@ namespace Gradio{
 			SearchEntry.set_position(-1);
 		}
 
+		public void reset_filters(){
+			ClearCountryButton_clicked();
+			ClearLanguageButton_clicked();
+			ClearStateButton_clicked();
+			SearchEntry.set_text("");
+		}
+
 		private void unreveal_all(){
 			CountryRevealer.set_reveal_child(false);
 			StateRevealer.set_reveal_child(false);
 			LanguageRevealer.set_reveal_child(false);
 		}
 
-		private void clear_selected_country(){
-			selected_country = "";
-			country_tag.set_label("");
-			SearchEntry.remove_tag(country_tag);
-			SelectCountryButton.set_label("Select Country ...");
-			ClearCountryButton.set_visible(false);
-			SelectStateButton.set_sensitive(true);
-
-			reset_timeout();
+		[GtkCallback]
+		private void SelectLanguageButton_clicked(){
+			unreveal_all();
+			LanguageRevealer.set_reveal_child(!LanguageRevealer.get_child_revealed());
 		}
 
 		[GtkCallback]
@@ -270,25 +261,19 @@ namespace Gradio{
 		}
 
 		[GtkCallback]
-		private void ClearCountryButton_clicked(){
-			clear_selected_country();
-		}
-
-		private void clear_selected_state(){
-			selected_state = "";
-			state_tag.set_label("");
-			SearchEntry.remove_tag(state_tag);
-			SelectStateButton.set_label("Select State ...");
-			ClearStateButton.set_visible(false);
-			SelectCountryButton.set_sensitive(true);
-
-			reset_timeout();
-		}
-
-		[GtkCallback]
 		private void SelectStateButton_clicked(){
 			unreveal_all();
 			StateRevealer.set_reveal_child(!StateRevealer.get_child_revealed());
+		}
+
+		[GtkCallback]
+		private void ClearLanguageButton_clicked(){
+			clear_selected_language();
+		}
+
+		[GtkCallback]
+		private void ClearCountryButton_clicked(){
+			clear_selected_country();
 		}
 
 		[GtkCallback]
@@ -300,28 +285,32 @@ namespace Gradio{
 			selected_language = "";
 			language_tag.set_label("");
 			SearchEntry.remove_tag(language_tag);
-			SelectLanguageButton.set_label("Select Language ...");
+			SelectLanguageButton.set_label(_("Select Language ..."));
 			ClearLanguageButton.set_visible(false);
 
 			reset_timeout();
 		}
 
-		[GtkCallback]
-		private void SelectLanguageButton_clicked(){
-			unreveal_all();
-			LanguageRevealer.set_reveal_child(!LanguageRevealer.get_child_revealed());
+		private void clear_selected_country(){
+			selected_country = "";
+			country_tag.set_label("");
+			SearchEntry.remove_tag(country_tag);
+			SelectCountryButton.set_label(_("Select Country ..."));
+			ClearCountryButton.set_visible(false);
+			SelectStateButton.set_sensitive(true);
+
+			reset_timeout();
 		}
 
-		[GtkCallback]
-		private void ClearLanguageButton_clicked(){
-			clear_selected_language();
-		}
+		private void clear_selected_state(){
+			selected_state = "";
+			state_tag.set_label("");
+			SearchEntry.remove_tag(state_tag);
+			SelectStateButton.set_label(_("Select State ..."));
+			ClearStateButton.set_visible(false);
+			SelectCountryButton.set_sensitive(true);
 
-		public void reset_filters(){
-			ClearCountryButton_clicked();
-			ClearLanguageButton_clicked();
-			ClearStateButton_clicked();
-			SearchEntry.set_text("");
+			reset_timeout();
 		}
 
 		private ListBoxRow get_row(string text){
