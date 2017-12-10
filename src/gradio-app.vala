@@ -141,24 +141,20 @@ namespace Gradio {
 		}
 
 		private void show_about_dialog(){
-			string[] authors = {
-				"Felix Häcker <haecker.felix1207@gmail.com>"
-			};
-			string[] artists = {
-				"Juan Pablo Lozano <lozanotux@gmail.com>"
-			};
+			string[] authors = { "Felix Häcker <haecker.felix1207@gmail.com>" };
+			string[] artists = { "Juan Pablo Lozano <lozanotux@gmail.com>" };
+
 			Gtk.show_about_dialog (window,
 				"artists", artists,
 				"authors", authors,
-				"translator-credits", "translator-credits",
 				"program-name", "Gradio",
 				"title", "About Gradio",
 				"license-type", Gtk.License.GPL_3_0,
 				"logo-icon-name", "de.haeckerfelix.gradio",
 				"version", Config.VERSION,
-				"comments", "Database: www.radio-browser.info",
+				"comments", "Find and listen to internet radio stations.",
 				"website", "https://github.com/haecker-felix/gradio",
-				"wrap-license", true);
+				"website-label", "GitHub Homepage");
 		}
 
 		// make sure that window != null, but don't present it
