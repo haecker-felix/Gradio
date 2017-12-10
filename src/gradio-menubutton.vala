@@ -91,7 +91,7 @@ namespace Gradio{
 				if(result == 2){
 					string path = Util.export_library_dialog("gradio_library.m3u");
 					if(path == "") return;
-					App.library.export_as_m3u(path);
+					App.library.export_as_m3u.begin(path);
 				}
 			});
 			action_group.add_action(action);

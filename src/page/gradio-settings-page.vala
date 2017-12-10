@@ -24,10 +24,8 @@ namespace Gradio{
 
 		private GroupBox appearance_group;
 		private GroupBox playback_group;
-		private GroupBox library_group;
 		private GroupBox features_group;
 		private GroupBox cache_group;
-
 
 		public SettingsPage () {
 			setup_groups();

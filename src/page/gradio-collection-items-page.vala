@@ -72,7 +72,7 @@ namespace Gradio{
 		}
 
 		public string get_subtitle(){
-			return collection.station_model.get_n_items().to_string() + _(" Items");
+			return _("Items: ") + collection.station_model.get_n_items().to_string();
 		}
 	}
 }

@@ -58,7 +58,7 @@ namespace Gradio{
 			if(i == 0){
 				SelectionMenuButtonLabel.set_text(_("Click on items to select them"));
 			}else{
-				SelectionMenuButtonLabel.set_text(_("%s selected").printf(i));
+				SelectionMenuButtonLabel.set_text(_("%i selected").printf(i));
 			}
 		}
 

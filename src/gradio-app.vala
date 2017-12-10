@@ -201,7 +201,7 @@ namespace Gradio {
 
 		// Run app
 		app.run (args);
-		app.settings.apply();
+		App.settings.apply();
 
 		return 0;
 	}

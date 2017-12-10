@@ -23,7 +23,6 @@ namespace Gradio{
 	public class CollectionRow : ListBoxRow{
 
 		[GtkChild] private Label CollectionLabel;
-		[GtkChild] private Button EditButton;
 		[GtkChild] private Image AddedImage;
 
 		public bool selected = false;

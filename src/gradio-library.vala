@@ -464,7 +464,6 @@ namespace Gradio{
 				case Sqlite.ROW:
 					int result = int.parse(stmt.column_text(0));
 					return result;
-					break;
 				default:
 					printerr ("Error: %d, %s\n", rc, db.errmsg ());
 					break;

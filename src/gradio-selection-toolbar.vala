@@ -31,7 +31,6 @@ namespace Gradio{
 
 		[GtkChild] private Gtk.MenuButton RenameButton;
 		[GtkChild] private Gtk.Entry RenameEntry;
-		[GtkChild] private Gtk.Button RenameSaveButton;
 		[GtkChild] private Gtk.Popover RenamePopover;
 
 		private OrganizeCollectionPopover collection_dialog;
