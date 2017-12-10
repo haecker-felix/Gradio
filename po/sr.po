@@ -6,20 +6,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-10 15:17+0100\n"
+"POT-Creation-Date: 2017-12-10 17:22+0100\n"
 "PO-Revision-Date: 2017-12-10 14:35+0000\n"
 "Last-Translator: Slobodan Terzić <githzerai06@gmail.com>\n"
-"Language-Team: Serbian "
-"<https://hosted.weblate.org/projects/gradio/translations/sr/>\n"
+"Language-Team: Serbian <https://hosted.weblate.org/projects/gradio/"
+"translations/sr/>\n"
 "Language: sr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<="
-"4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 2.18-dev\n"
 
 #: data/ui/app-menu.ui:6 data/ui/menubutton.ui:192
+#: src/page/gradio-settings-page.vala:117
 msgid "Settings"
 msgstr "Подешавања"
 
@@ -47,12 +48,12 @@ msgstr "Немате никакву збирку"
 msgid "You can group stations into collections."
 msgstr "Можете груписати станице у збирке."
 
-#: data/ui/details-box.ui:23 data/ui/selection-toolbar.ui:220
+#: data/ui/details-box.ui:23 data/ui/selection-toolbar.ui:222
 msgid "Details"
 msgstr "Детаљи"
 
 #: data/ui/details-box.ui:137 data/ui/station-editor.ui:125
-#: data/ui/menubutton.ui:369
+#: data/ui/menubutton.ui:369 src/gradio-searchbar.vala:188
 msgid "Name"
 msgstr "Име"
 
@@ -84,7 +85,7 @@ msgstr "Пусти"
 msgid "Open homepage"
 msgstr "Отвори домаћу страницу"
 
-#: data/ui/details-box.ui:523
+#: data/ui/details-box.ui:523 data/ui/selection-toolbar.ui:204
 msgid "Edit"
 msgstr "Уреди"
 
@@ -158,14 +159,17 @@ msgid "Homepage"
 msgstr "Домаћа страница"
 
 #: data/ui/station-editor.ui:181 data/ui/menubutton.ui:399
+#: src/gradio-searchbar.vala:190
 msgid "Country"
 msgstr "Земља"
 
 #: data/ui/station-editor.ui:196 data/ui/menubutton.ui:414
+#: src/gradio-searchbar.vala:191
 msgid "State"
 msgstr "Држава"
 
 #: data/ui/station-editor.ui:211 data/ui/menubutton.ui:384
+#: src/gradio-searchbar.vala:189
 msgid "Language"
 msgstr "Језик"
 
@@ -248,129 +252,157 @@ msgstr "Увоз"
 msgid "Export"
 msgstr "Извоз"
 
-#: data/ui/menubutton.ui:354
+#: data/ui/menubutton.ui:354 src/gradio-searchbar.vala:187
 msgid "Votes"
 msgstr "Гласови"
 
-#: data/ui/menubutton.ui:429
+#: data/ui/menubutton.ui:429 src/gradio-searchbar.vala:193
 msgid "Clicks"
 msgstr "Кликови"
 
-#: data/ui/menubutton.ui:444
+#: data/ui/menubutton.ui:444 src/gradio-searchbar.vala:192
 msgid "Bitrate"
 msgstr "Битски проток"
 
-#: data/ui/menubutton.ui:459
+#: data/ui/menubutton.ui:459 src/gradio-searchbar.vala:194
 msgid "Date"
 msgstr "Датум"
 
-#: data/ui/menubutton.ui:499
+#: data/ui/menubutton.ui:499 src/gradio-searchbar.vala:197
 msgid "Ascending"
 msgstr "Растуће"
 
-#: data/ui/menubutton.ui:514
+#: data/ui/menubutton.ui:514 src/gradio-searchbar.vala:198
 msgid "Descending"
 msgstr "Опадајуће"
 
-#: src/gradio-settings-window.vala:39
-msgid "Features"
-msgstr "Могућности"
-
-#: src/gradio-settings-window.vala:42
-msgid "Playback"
-msgstr "Пуштање"
-
-#: src/gradio-settings-window.vala:45
-msgid "Appearance"
-msgstr "Изглед"
-
-#: src/gradio-settings-window.vala:48
-msgid "Cache"
-msgstr "Кеш"
-
-#. APPEARANCE
-#. Dark design
-#: src/gradio-settings-window.vala:56
-msgid "Prefer dark theme"
-msgstr "Предност тамној теми"
-
-#: src/gradio-settings-window.vala:56
-msgid "Use a dark theme, if possible"
-msgstr "Уколико је могуће, користи тамну тему"
-
-#. PLAYBACK
-#. enable background playback
-#: src/gradio-settings-window.vala:65
-msgid "Background Playback"
-msgstr "Пуштање у позадини"
-
-#: src/gradio-settings-window.vala:65
-msgid "Continue the playback if you close the Gradio window"
-msgstr "Настави пуштање по затварању прозора Градија"
-
-#. resume playback on startup
-#: src/gradio-settings-window.vala:71
-msgid "Resume playback on startup"
-msgstr "Настави пуштање по покретању"
-
-#: src/gradio-settings-window.vala:71
-msgid "Play the latest station if you start Gradio"
-msgstr "Пушта последњу станицу по покретању Градија"
-
-#. FEATURES
-#. mpris
-#: src/gradio-settings-window.vala:80
-msgid "MPRIS"
-msgstr "МПРИС"
-
-#: src/gradio-settings-window.vala:80
-msgid "Integrate Gradio as media player in your desktop environment"
-msgstr "Уграђује Градио у окружење површи"
-
-#. enable notifications
-#: src/gradio-settings-window.vala:86
-msgid "Notifications"
-msgstr "Обавештења"
-
-#: src/gradio-settings-window.vala:86
-msgid "Show desktop notifications"
-msgstr "Приказује обавештења радне површи"
-
-#. enable tray icon
-#: src/gradio-settings-window.vala:92
-msgid "Tray icon"
-msgstr "Икона системске касете"
-
-#: src/gradio-settings-window.vala:92
-msgid "Show a tray icon, to restore the main window"
-msgstr "Приказује икону системске касете за обнову главног прозора"
-
-#. CACHE
-#. cache station images
-#: src/gradio-settings-window.vala:101
-msgid "Cache station icons"
-msgstr "Кеширање слика станица"
-
-#: src/gradio-settings-window.vala:101
-msgid "Saves the images locally."
-msgstr "Чува слике станица локално."
-
-#: src/gradio-settings-window.vala:106
-msgid "Clear Cache"
-msgstr "Чишћење кеша"
-
-#: src/gradio-settings-window.vala:106
-msgid "Clear all cached station icons"
-msgstr "Чисти све кеширане слике станица"
-
 #: src/page/gradio-collection-items-page.vala:75
-#: src/page/gradio-library-page.vala:87
 msgid " Items"
 msgstr " ставки"
 
 #: src/page/gradio-library-page.vala:85
 msgid "Fetching station data…"
 msgstr "Добављам податке о станици…"
+
+#: src/page/gradio-library-page.vala:87
+#, fuzzy
+msgid "Items: "
+msgstr "ставки"
+
+#: src/page/gradio-settings-page.vala:39
+msgid "Features"
+msgstr "Могућности"
+
+#: src/page/gradio-settings-page.vala:42
+msgid "Playback"
+msgstr "Пуштање"
+
+#: src/page/gradio-settings-page.vala:45
+msgid "Appearance"
+msgstr "Изглед"
+
+#: src/page/gradio-settings-page.vala:48
+msgid "Cache"
+msgstr "Кеш"
+
+#. APPEARANCE
+#. Dark design
+#: src/page/gradio-settings-page.vala:56
+msgid "Prefer dark theme"
+msgstr "Предност тамној теми"
+
+#: src/page/gradio-settings-page.vala:56
+msgid "Use a dark theme, if possible"
+msgstr "Уколико је могуће, користи тамну тему"
+
+#. PLAYBACK
+#. enable background playback
+#: src/page/gradio-settings-page.vala:65
+msgid "Background Playback"
+msgstr "Пуштање у позадини"
+
+#: src/page/gradio-settings-page.vala:65
+msgid "Continue the playback if you close the Gradio window"
+msgstr "Настави пуштање по затварању прозора Градија"
+
+#. resume playback on startup
+#: src/page/gradio-settings-page.vala:71
+msgid "Resume playback on startup"
+msgstr "Настави пуштање по покретању"
+
+#: src/page/gradio-settings-page.vala:71
+msgid "Play the latest station if you start Gradio"
+msgstr "Пушта последњу станицу по покретању Градија"
+
+#. FEATURES
+#. mpris
+#: src/page/gradio-settings-page.vala:80
+msgid "MPRIS"
+msgstr "МПРИС"
+
+#: src/page/gradio-settings-page.vala:80
+msgid "Integrate Gradio as media player in your desktop environment"
+msgstr "Уграђује Градио у окружење површи"
+
+#. enable notifications
+#: src/page/gradio-settings-page.vala:86
+msgid "Notifications"
+msgstr "Обавештења"
+
+#: src/page/gradio-settings-page.vala:86
+msgid "Show desktop notifications"
+msgstr "Приказује обавештења радне површи"
+
+#. enable tray icon
+#: src/page/gradio-settings-page.vala:92
+msgid "Tray icon"
+msgstr "Икона системске касете"
+
+#: src/page/gradio-settings-page.vala:92
+msgid "Show a tray icon, to restore the main window"
+msgstr "Приказује икону системске касете за обнову главног прозора"
+
+#. CACHE
+#. cache station images
+#: src/page/gradio-settings-page.vala:101
+msgid "Cache station icons"
+msgstr "Кеширање слика станица"
+
+#: src/page/gradio-settings-page.vala:101
+msgid "Saves the images locally."
+msgstr "Чува слике станица локално."
+
+#: src/page/gradio-settings-page.vala:106
+msgid "Clear Cache"
+msgstr "Чишћење кеша"
+
+#: src/page/gradio-settings-page.vala:106
+msgid "Clear all cached station icons"
+msgstr "Чисти све кеширане слике станица"
+
+#: src/gradio-headerbar.vala:53 src/gradio-headerbar.vala:59
+#, fuzzy
+msgid "Click on items to select them"
+msgstr "Кликните на ставку за приказ опција"
+
+#: src/gradio-headerbar.vala:61
+#, c-format
+msgid "%s selected"
+msgstr ""
+
+#: src/gradio-searchbar.vala:288
+#, fuzzy
+msgid "Select Language ..."
+msgstr "Изаберите језик ..."
+
+#: src/gradio-searchbar.vala:298
+msgid "Select Country ..."
+msgstr "Изаберите земљу ..."
+
+#: src/gradio-searchbar.vala:309
+#, fuzzy
+msgid "Select State ..."
+msgstr "Изаберите државу ..."
 
 #: src/gradio-station-editor-dialog.vala:53
 msgid "Create radio station"
@@ -384,6 +416,16 @@ msgstr "Уреди радио станицу"
 msgid "\"Name\" and \"Stream\" information is required."
 msgstr "Неопходно је унети „Име“ и „Ток“."
 
+#: src/gradio-selection-toolbar.vala:99
+#, fuzzy, c-format
+msgid "%i radio station(s) not present in library."
+msgstr "Додајте нове радио станице у вашу фонотеку"
+
+#: src/gradio-selection-toolbar.vala:109
+#, fuzzy, c-format
+msgid "%i radio station(s) already added to library."
+msgstr "Додајте нове радио станице у вашу фонотеку"
+
 #~ msgid "100%"
 #~ msgstr "100%"
 
@@ -396,20 +438,8 @@ msgstr "Неопходно је унети „Име“ и „Ток“."
 #~ msgid "Create a new radio station, which is visible for all users."
 #~ msgstr "Ствара нову радио станицу, видљиву свим кориснима."
 
-#~ msgid "Add new radio stations to your library"
-#~ msgstr "Додајте нове радио станице у вашу фонотеку"
-
 #~ msgid "Where"
 #~ msgstr "Где"
-
-#~ msgid "Select Country ..."
-#~ msgstr "Изаберите земљу ..."
-
-#~ msgid "Select State  ..."
-#~ msgstr "Изаберите државу ..."
-
-#~ msgid "Select Language  ..."
-#~ msgstr "Изаберите језик ..."
 
 #~ msgid "Fill your library with something new"
 #~ msgstr "Попуните библиотеку нечим новим"

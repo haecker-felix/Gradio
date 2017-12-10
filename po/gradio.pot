@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-10 15:17+0100\n"
+"POT-Creation-Date: 2017-12-10 17:22+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: data/ui/app-menu.ui:6 data/ui/menubutton.ui:192
-#: src/page/gradio-settings-page:117
+#: src/page/gradio-settings-page.vala:117
 msgid "Settings"
 msgstr ""
 
@@ -46,12 +46,12 @@ msgstr ""
 msgid "You can group stations into collections."
 msgstr ""
 
-#: data/ui/details-box.ui:23 data/ui/selection-toolbar.ui:220
+#: data/ui/details-box.ui:23 data/ui/selection-toolbar.ui:222
 msgid "Details"
 msgstr ""
 
 #: data/ui/details-box.ui:137 data/ui/station-editor.ui:125
-#: data/ui/menubutton.ui:369
+#: data/ui/menubutton.ui:369 src/gradio-searchbar.vala:188
 msgid "Name"
 msgstr ""
 
@@ -83,7 +83,7 @@ msgstr ""
 msgid "Open homepage"
 msgstr ""
 
-#: data/ui/details-box.ui:523
+#: data/ui/details-box.ui:523 data/ui/selection-toolbar.ui:204
 msgid "Edit"
 msgstr ""
 
@@ -155,14 +155,17 @@ msgid "Homepage"
 msgstr ""
 
 #: data/ui/station-editor.ui:181 data/ui/menubutton.ui:399
+#: src/gradio-searchbar.vala:190
 msgid "Country"
 msgstr ""
 
 #: data/ui/station-editor.ui:196 data/ui/menubutton.ui:414
+#: src/gradio-searchbar.vala:191
 msgid "State"
 msgstr ""
 
 #: data/ui/station-editor.ui:211 data/ui/menubutton.ui:384
+#: src/gradio-searchbar.vala:189
 msgid "Language"
 msgstr ""
 
@@ -245,128 +248,152 @@ msgstr ""
 msgid "Export"
 msgstr ""
 
-#: data/ui/menubutton.ui:354
+#: data/ui/menubutton.ui:354 src/gradio-searchbar.vala:187
 msgid "Votes"
 msgstr ""
 
-#: data/ui/menubutton.ui:429
+#: data/ui/menubutton.ui:429 src/gradio-searchbar.vala:193
 msgid "Clicks"
 msgstr ""
 
-#: data/ui/menubutton.ui:444
+#: data/ui/menubutton.ui:444 src/gradio-searchbar.vala:192
 msgid "Bitrate"
 msgstr ""
 
-#: data/ui/menubutton.ui:459
+#: data/ui/menubutton.ui:459 src/gradio-searchbar.vala:194
 msgid "Date"
 msgstr ""
 
-#: data/ui/menubutton.ui:499
+#: data/ui/menubutton.ui:499 src/gradio-searchbar.vala:197
 msgid "Ascending"
 msgstr ""
 
-#: data/ui/menubutton.ui:514
+#: data/ui/menubutton.ui:514 src/gradio-searchbar.vala:198
 msgid "Descending"
 msgstr ""
 
-#: src/gradio-settings-window.vala:39
-msgid "Features"
-msgstr ""
-
-#: src/gradio-settings-window.vala:42
-msgid "Playback"
-msgstr ""
-
-#: src/gradio-settings-window.vala:45
-msgid "Appearance"
-msgstr ""
-
-#: src/gradio-settings-window.vala:48
-msgid "Cache"
-msgstr ""
-
-#. APPEARANCE
-#. Dark design
-#: src/gradio-settings-window.vala:56
-msgid "Prefer dark theme"
-msgstr ""
-
-#: src/gradio-settings-window.vala:56
-msgid "Use a dark theme, if possible"
-msgstr ""
-
-#. PLAYBACK
-#. enable background playback
-#: src/gradio-settings-window.vala:65
-msgid "Background Playback"
-msgstr ""
-
-#: src/gradio-settings-window.vala:65
-msgid "Continue the playback if you close the Gradio window"
-msgstr ""
-
-#. resume playback on startup
-#: src/gradio-settings-window.vala:71
-msgid "Resume playback on startup"
-msgstr ""
-
-#: src/gradio-settings-window.vala:71
-msgid "Play the latest station if you start Gradio"
-msgstr ""
-
-#. FEATURES
-#. mpris
-#: src/gradio-settings-window.vala:80
-msgid "MPRIS"
-msgstr ""
-
-#: src/gradio-settings-window.vala:80
-msgid "Integrate Gradio as media player in your desktop environment"
-msgstr ""
-
-#. enable notifications
-#: src/gradio-settings-window.vala:86
-msgid "Notifications"
-msgstr ""
-
-#: src/gradio-settings-window.vala:86
-msgid "Show desktop notifications"
-msgstr ""
-
-#. enable tray icon
-#: src/gradio-settings-window.vala:92
-msgid "Tray icon"
-msgstr ""
-
-#: src/gradio-settings-window.vala:92
-msgid "Show a tray icon, to restore the main window"
-msgstr ""
-
-#. CACHE
-#. cache station images
-#: src/gradio-settings-window.vala:101
-msgid "Cache station icons"
-msgstr ""
-
-#: src/gradio-settings-window.vala:101
-msgid "Saves the images locally."
-msgstr ""
-
-#: src/gradio-settings-window.vala:106
-msgid "Clear Cache"
-msgstr ""
-
-#: src/gradio-settings-window.vala:106
-msgid "Clear all cached station icons"
-msgstr ""
-
 #: src/page/gradio-collection-items-page.vala:75
-#: src/page/gradio-library-page.vala:87
 msgid " Items"
 msgstr ""
 
 #: src/page/gradio-library-page.vala:85
 msgid "Fetching station data…"
+msgstr ""
+
+#: src/page/gradio-library-page.vala:87
+msgid "Items: "
+msgstr ""
+
+#: src/page/gradio-settings-page.vala:39
+msgid "Features"
+msgstr ""
+
+#: src/page/gradio-settings-page.vala:42
+msgid "Playback"
+msgstr ""
+
+#: src/page/gradio-settings-page.vala:45
+msgid "Appearance"
+msgstr ""
+
+#: src/page/gradio-settings-page.vala:48
+msgid "Cache"
+msgstr ""
+
+#. APPEARANCE
+#. Dark design
+#: src/page/gradio-settings-page.vala:56
+msgid "Prefer dark theme"
+msgstr ""
+
+#: src/page/gradio-settings-page.vala:56
+msgid "Use a dark theme, if possible"
+msgstr ""
+
+#. PLAYBACK
+#. enable background playback
+#: src/page/gradio-settings-page.vala:65
+msgid "Background Playback"
+msgstr ""
+
+#: src/page/gradio-settings-page.vala:65
+msgid "Continue the playback if you close the Gradio window"
+msgstr ""
+
+#. resume playback on startup
+#: src/page/gradio-settings-page.vala:71
+msgid "Resume playback on startup"
+msgstr ""
+
+#: src/page/gradio-settings-page.vala:71
+msgid "Play the latest station if you start Gradio"
+msgstr ""
+
+#. FEATURES
+#. mpris
+#: src/page/gradio-settings-page.vala:80
+msgid "MPRIS"
+msgstr ""
+
+#: src/page/gradio-settings-page.vala:80
+msgid "Integrate Gradio as media player in your desktop environment"
+msgstr ""
+
+#. enable notifications
+#: src/page/gradio-settings-page.vala:86
+msgid "Notifications"
+msgstr ""
+
+#: src/page/gradio-settings-page.vala:86
+msgid "Show desktop notifications"
+msgstr ""
+
+#. enable tray icon
+#: src/page/gradio-settings-page.vala:92
+msgid "Tray icon"
+msgstr ""
+
+#: src/page/gradio-settings-page.vala:92
+msgid "Show a tray icon, to restore the main window"
+msgstr ""
+
+#. CACHE
+#. cache station images
+#: src/page/gradio-settings-page.vala:101
+msgid "Cache station icons"
+msgstr ""
+
+#: src/page/gradio-settings-page.vala:101
+msgid "Saves the images locally."
+msgstr ""
+
+#: src/page/gradio-settings-page.vala:106
+msgid "Clear Cache"
+msgstr ""
+
+#: src/page/gradio-settings-page.vala:106
+msgid "Clear all cached station icons"
+msgstr ""
+
+#: src/gradio-headerbar.vala:53 src/gradio-headerbar.vala:59
+msgid "Click on items to select them"
+msgstr ""
+
+#: src/gradio-headerbar.vala:61
+#, c-format
+msgid "%s selected"
+msgstr ""
+
+#: src/gradio-searchbar.vala:288
+msgid "Select Language ..."
+msgstr ""
+
+#: src/gradio-searchbar.vala:298
+msgid "Select Country ..."
+msgstr ""
+
+#: src/gradio-searchbar.vala:309
+msgid "Select State ..."
 msgstr ""
 
 #: src/gradio-station-editor-dialog.vala:53
@@ -379,4 +406,14 @@ msgstr ""
 
 #: src/gradio-station-editor-dialog.vala:169
 msgid "\"Name\" and \"Stream\" information is required."
+msgstr ""
+
+#: src/gradio-selection-toolbar.vala:99
+#, c-format
+msgid "%i radio station(s) not present in library."
+msgstr ""
+
+#: src/gradio-selection-toolbar.vala:109
+#, c-format
+msgid "%i radio station(s) already added to library."
 msgstr ""
