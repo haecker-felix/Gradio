@@ -25,7 +25,7 @@ Feel free to contribute to Gradio! You don't know how you can help? Here are som
 
 ## General Informations
 * **Installation**  
-[Open installation guide](https://github.com/haecker-felix/gradio/wiki/Install-Gradio)
+[Open install instructions](https://github.com/haecker-felix/gradio/wiki/Install-Instructions) / [Open build instructions](https://github.com/haecker-felix/gradio/wiki/Build-Instructions)
 
 * **License**  
 GNU General Public License, Version 3
