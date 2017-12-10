@@ -217,10 +217,6 @@ msgstr "გამოაჩინე რადიო სადგურები 
 msgid "Search"
 msgstr ""
 
-#: data/ui/page/search-page.ui:377
-msgid "0"
-msgstr ""
-
 #: data/ui/page/search-page.ui:395
 msgid "Results:"
 msgstr ""
@@ -233,10 +229,6 @@ msgstr "რეზულტატები ვერ მოიძებნა"
 msgid ""
 "Either the station does not exist, or you have to search with other keywords."
 msgstr "სადგური არ არსებობს, ან სხვა სიტყვებით უნდა მოძებნოთ."
-
-#: data/ui/menubutton.ui:45
-msgid "100%"
-msgstr ""
 
 #: data/ui/menubutton.ui:104 data/ui/menubutton.ui:332
 #, fuzzy

@@ -210,10 +210,6 @@ msgstr "Zobrazí nejčastěji navštěvované stanice"
 msgid "Search"
 msgstr "Hledat"
 
-#: data/ui/page/search-page.ui:377
-msgid "0"
-msgstr ""
-
 #: data/ui/page/search-page.ui:395
 msgid "Results:"
 msgstr ""
@@ -226,10 +222,6 @@ msgstr "Nic nebylo nalezeno"
 msgid ""
 "Either the station does not exist, or you have to search with other keywords."
 msgstr "Stanice buď neexistuje, nebo zkuste použít jiná klíčová slova."
-
-#: data/ui/menubutton.ui:45
-msgid "100%"
-msgstr "100%"
 
 #: data/ui/menubutton.ui:104 data/ui/menubutton.ui:332
 msgid "Sorting"
@@ -394,6 +386,9 @@ msgstr "Nová veřejná stanice"
 #: src/gradio-station-editor-dialog.vala:169
 msgid "\"Name\" and \"Stream\" information is required."
 msgstr ""
+
+#~ msgid "100%"
+#~ msgstr "100%"
 
 #~ msgid "Search for radio stations"
 #~ msgstr "Hledat stanice"
