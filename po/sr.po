@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-10 15:17+0100\n"
-"PO-Revision-Date: 2017-12-10 14:32+0000\n"
+"PO-Revision-Date: 2017-12-10 14:35+0000\n"
 "Last-Translator: Slobodan Terzić <githzerai06@gmail.com>\n"
 "Language-Team: Serbian "
 "<https://hosted.weblate.org/projects/gradio/translations/sr/>\n"
@@ -212,7 +212,7 @@ msgstr "Тражи"
 
 #: data/ui/page/search-page.ui:395
 msgid "Results:"
-msgstr ""
+msgstr "Резултати:"
 
 #: data/ui/page/search-page.ui:489
 msgid "No results found"
@@ -237,9 +237,8 @@ msgid "Library"
 msgstr "Фонотека"
 
 #: data/ui/menubutton.ui:160
-#, fuzzy
 msgid "Create new radio station"
-msgstr "Направите нову радио станицу"
+msgstr "Направи нову радио станицу"
 
 #: data/ui/menubutton.ui:281
 msgid "Import"
@@ -374,18 +373,16 @@ msgid "Fetching station data…"
 msgstr "Добављам податке о станици…"
 
 #: src/gradio-station-editor-dialog.vala:53
-#, fuzzy
 msgid "Create radio station"
-msgstr "Направите нову радио станицу"
+msgstr "Направи радио станицу"
 
 #: src/gradio-station-editor-dialog.vala:59
-#, fuzzy
 msgid "Edit radio station"
-msgstr "Откријте радио станице"
+msgstr "Уреди радио станицу"
 
 #: src/gradio-station-editor-dialog.vala:169
 msgid "\"Name\" and \"Stream\" information is required."
-msgstr ""
+msgstr "Неопходно је унети „Име“ и „Ток“."
 
 #~ msgid "100%"
 #~ msgstr "100%"
