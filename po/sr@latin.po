@@ -7,16 +7,16 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-10 15:17+0100\n"
-"PO-Revision-Date: 2017-11-16 21:32+0000\n"
+"PO-Revision-Date: 2017-12-10 14:39+0000\n"
 "Last-Translator: Slobodan Terzić <githzerai06@gmail.com>\n"
-"Language-Team: Serbian (latin) <https://hosted.weblate.org/projects/gradio/"
-"translations/sr_Latn/>\n"
+"Language-Team: Serbian (latin) "
+"<https://hosted.weblate.org/projects/gradio/translations/sr_Latn/>\n"
 "Language: sr@latin\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<="
+"4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 2.18-dev\n"
 
 #: data/ui/app-menu.ui:6 data/ui/menubutton.ui:192
@@ -110,7 +110,7 @@ msgstr "Izaberi ništa"
 
 #: data/ui/selection-toolbar.ui:28
 msgid "Save"
-msgstr ""
+msgstr "Sačuvaj"
 
 #: data/ui/selection-toolbar.ui:59
 msgid "Click an item to view options"
@@ -130,7 +130,7 @@ msgstr "Ukloni iz fonoteke"
 
 #: data/ui/selection-toolbar.ui:148
 msgid "Rename"
-msgstr ""
+msgstr "Preimenuj"
 
 #: data/ui/station-editor.ui:39
 msgid "Global database"
@@ -212,7 +212,7 @@ msgstr "Traži"
 
 #: data/ui/page/search-page.ui:395
 msgid "Results:"
-msgstr ""
+msgstr "Rezultati:"
 
 #: data/ui/page/search-page.ui:489
 msgid "No results found"
@@ -237,9 +237,8 @@ msgid "Library"
 msgstr "Fonoteka"
 
 #: data/ui/menubutton.ui:160
-#, fuzzy
 msgid "Create new radio station"
-msgstr "Napravite novu radio stanicu"
+msgstr "Napravi novu radio stanicu"
 
 #: data/ui/menubutton.ui:281
 msgid "Import"
@@ -374,18 +373,16 @@ msgid "Fetching station data…"
 msgstr "Dobavljam podatke o stanici…"
 
 #: src/gradio-station-editor-dialog.vala:53
-#, fuzzy
 msgid "Create radio station"
-msgstr "Napravite novu radio stanicu"
+msgstr "Napravi radio stanicu"
 
 #: src/gradio-station-editor-dialog.vala:59
-#, fuzzy
 msgid "Edit radio station"
-msgstr "Otkrijte radio stanice"
+msgstr "Uredi radio stanicu"
 
 #: src/gradio-station-editor-dialog.vala:169
 msgid "\"Name\" and \"Stream\" information is required."
-msgstr ""
+msgstr "Neophodno je uneti „Ỉme“ i „Tok“."
 
 #~ msgid "100%"
 #~ msgstr "100%"
