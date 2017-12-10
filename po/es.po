@@ -216,10 +216,6 @@ msgstr "Mostrar las estaciones de radio con más clics."
 msgid "Search"
 msgstr ""
 
-#: data/ui/page/search-page.ui:377
-msgid "0"
-msgstr ""
-
 #: data/ui/page/search-page.ui:395
 msgid "Results:"
 msgstr ""
@@ -233,10 +229,6 @@ msgid ""
 "Either the station does not exist, or you have to search with other keywords."
 msgstr ""
 "O bien la estación no existe, o tiene que buscar con otras palabras clave."
-
-#: data/ui/menubutton.ui:45
-msgid "100%"
-msgstr ""
 
 #: data/ui/menubutton.ui:104 data/ui/menubutton.ui:332
 #, fuzzy

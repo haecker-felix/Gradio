@@ -219,10 +219,6 @@ msgstr "En fazla tıklanan radyo istasyonlarını görün."
 msgid "Search"
 msgstr ""
 
-#: data/ui/page/search-page.ui:377
-msgid "0"
-msgstr ""
-
 #: data/ui/page/search-page.ui:395
 msgid "Results:"
 msgstr ""
@@ -235,10 +231,6 @@ msgstr "Sonuç bulunamadı"
 msgid ""
 "Either the station does not exist, or you have to search with other keywords."
 msgstr "İstasyon mevcut değil, veya başka anahtar kelimelerle arayın."
-
-#: data/ui/menubutton.ui:45
-msgid "100%"
-msgstr ""
 
 #: data/ui/menubutton.ui:104 data/ui/menubutton.ui:332
 #, fuzzy

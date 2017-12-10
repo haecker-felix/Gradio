@@ -210,10 +210,6 @@ msgstr "Radiostasjoner med flest klikk"
 msgid "Search"
 msgstr "Søk"
 
-#: data/ui/page/search-page.ui:377
-msgid "0"
-msgstr ""
-
 #: data/ui/page/search-page.ui:395
 msgid "Results:"
 msgstr ""
@@ -227,10 +223,6 @@ msgid ""
 "Either the station does not exist, or you have to search with other keywords."
 msgstr ""
 "Enten så finnes ikke radiostasjonen, eller så må du søke med andre nøkkelord."
-
-#: data/ui/menubutton.ui:45
-msgid "100%"
-msgstr "100%"
 
 #: data/ui/menubutton.ui:104 data/ui/menubutton.ui:332
 msgid "Sorting"
@@ -395,6 +387,9 @@ msgstr "Oppdag radio stasjoner"
 #: src/gradio-station-editor-dialog.vala:169
 msgid "\"Name\" and \"Stream\" information is required."
 msgstr ""
+
+#~ msgid "100%"
+#~ msgstr "100%"
 
 #~ msgid "Search for radio stations"
 #~ msgstr "Søk etter radiostasjoner"

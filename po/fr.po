@@ -212,10 +212,6 @@ msgstr "Stations radio avec le plus de vues"
 msgid "Search"
 msgstr "Recherche"
 
-#: data/ui/page/search-page.ui:377
-msgid "0"
-msgstr ""
-
 #: data/ui/page/search-page.ui:395
 msgid "Results:"
 msgstr ""
@@ -230,10 +226,6 @@ msgid ""
 msgstr ""
 "Soit la station n'existe pas, soit vous devez rechercher avec d'autres mots-"
 "clés."
-
-#: data/ui/menubutton.ui:45
-msgid "100%"
-msgstr "100%"
 
 #: data/ui/menubutton.ui:104 data/ui/menubutton.ui:332
 msgid "Sorting"
@@ -400,6 +392,9 @@ msgstr "Découvrir des stations de radio"
 #: src/gradio-station-editor-dialog.vala:169
 msgid "\"Name\" and \"Stream\" information is required."
 msgstr ""
+
+#~ msgid "100%"
+#~ msgstr "100%"
 
 #~ msgid "Search for radio stations"
 #~ msgstr "Rechercher des stations radio"

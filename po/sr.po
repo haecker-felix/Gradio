@@ -210,10 +210,6 @@ msgstr "Станице са највише кликова"
 msgid "Search"
 msgstr "Тражи"
 
-#: data/ui/page/search-page.ui:377
-msgid "0"
-msgstr ""
-
 #: data/ui/page/search-page.ui:395
 msgid "Results:"
 msgstr ""
@@ -226,10 +222,6 @@ msgstr "Нису нађени резултати"
 msgid ""
 "Either the station does not exist, or you have to search with other keywords."
 msgstr "Или станица не постоји, или морате употребити друге кључне речи."
-
-#: data/ui/menubutton.ui:45
-msgid "100%"
-msgstr "100%"
 
 #: data/ui/menubutton.ui:104 data/ui/menubutton.ui:332
 msgid "Sorting"
@@ -394,6 +386,9 @@ msgstr "Откријте радио станице"
 #: src/gradio-station-editor-dialog.vala:169
 msgid "\"Name\" and \"Stream\" information is required."
 msgstr ""
+
+#~ msgid "100%"
+#~ msgstr "100%"
 
 #~ msgid "Search for radio stations"
 #~ msgstr "Претрага радио станица"
