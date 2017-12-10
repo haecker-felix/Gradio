@@ -18,6 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: data/ui/app-menu.ui:6 data/ui/menubutton.ui:192
+#: src/page/gradio-settings-page:117
 msgid "Settings"
 msgstr ""
 
