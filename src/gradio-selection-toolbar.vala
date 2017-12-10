@@ -96,7 +96,7 @@ namespace Gradio{
 
 				if(non_library_count != 0){
 					InfoImage.set_visible(true);
-					InfoImage.set_tooltip_text(non_library_count.to_string() + " object(s) not present in library.");
+					InfoImage.set_tooltip_text((_("%i radio station(s) not present in library.").printf(non_library_count)));
 				}
 			}
 
@@ -106,7 +106,7 @@ namespace Gradio{
 
 				if(library_count != 0){
 					InfoImage.set_visible(true);
-					InfoImage.set_tooltip_text(library_count.to_string() + " object(s) already added to library.");
+					InfoImage.set_tooltip_text((_("%i radio station(s) already added to library.").printf(library_count)));
 				}
 			}
 		}

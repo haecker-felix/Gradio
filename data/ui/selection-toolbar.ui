@@ -160,6 +160,7 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="no_show_all">True</property>
+                <property name="tooltip_text">Like</property>
                 <signal name="clicked" handler="VoteButton_clicked" swapped="no"/>
                 <child>
                   <object class="GtkImage">
@@ -176,26 +177,6 @@
               </packing>
             </child>
             <child>
-              <object class="GtkButton" id="EditButton">
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="no_show_all">True</property>
-                <signal name="clicked" handler="EditButton_clicked" swapped="no"/>
-                <child>
-                  <object class="GtkImage">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="icon_name">document-edit-symbolic</property>
-                  </object>
-                </child>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">6</property>
-              </packing>
-            </child>
-            <child>
               <object class="GtkButton" id="ShareButton">
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
@@ -206,6 +187,27 @@
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="icon_name">emblem-shared-symbolic</property>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">6</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="EditButton">
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="no_show_all">True</property>
+                <property name="tooltip_text" translatable="yes">Edit</property>
+                <signal name="clicked" handler="EditButton_clicked" swapped="no"/>
+                <child>
+                  <object class="GtkImage">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="icon_name">document-edit-symbolic</property>
                   </object>
                 </child>
               </object>

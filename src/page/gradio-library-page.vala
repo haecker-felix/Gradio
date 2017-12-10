@@ -84,7 +84,7 @@ namespace Gradio{
 			if(App.library.busy)
 				return _("Fetching station data…");
 			else
-				return App.library.station_model.get_n_items().to_string() + _(" Items");
+				return _("Items: ") + App.library.station_model.get_n_items().to_string();
 		}
 	}
 }

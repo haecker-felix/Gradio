@@ -50,15 +50,15 @@ namespace Gradio{
 			mbutton = new Gradio.MenuButton();
 			MenuBox.add(mbutton);
 
-			SelectionMenuButtonLabel.set_text("Click on items to select them");
+			SelectionMenuButtonLabel.set_text(_("Click on items to select them"));
 			SelectionMenuButton.set_menu_model(selection_menu);
 		}
 
 		public void set_selected_items(int i){
 			if(i == 0){
-				SelectionMenuButtonLabel.set_text("Click on items to select them");
+				SelectionMenuButtonLabel.set_text(_("Click on items to select them"));
 			}else{
-				SelectionMenuButtonLabel.set_text(i.to_string() + " selected");
+				SelectionMenuButtonLabel.set_text(_("%s selected").printf(i));
 			}
 		}
 
