@@ -148,13 +148,19 @@ namespace Gradio{
 			most_clicks_mainbox.set_selection_mode(b);
 			recently_clicked_mainbox.set_selection_mode(b);
 			most_votes_mainbox.set_selection_mode(b);
+			SearchBox.set_visible(!b);
 		}
 
 		public void select_all(){
-			search_mainbox.select_all();
-			most_clicks_mainbox.select_all();
-			recently_clicked_mainbox.select_all();
-			most_votes_mainbox.select_all();
+			if(SectionStack.get_visible_child_name() == "discover"){
+				most_clicks_mainbox.select_all();
+				recently_clicked_mainbox.select_all();
+				most_votes_mainbox.select_all();
+			}
+
+			if(SectionStack.get_visible_child_name() == "search"){
+				search_mainbox.select_all();
+			}
 		}
 
 		public void select_none(){
@@ -195,23 +201,22 @@ namespace Gradio{
 		[GtkCallback]
 		private void MostVotesButton_clicked(){
 			searchbar.reset_filters();
-			App.settings.sort_ascending = false;
-			App.settings.station_sorting = Compare.VOTES;
-			title_changed();
+			searchbar.set_sort("votes", "descending");
+			show_search();
 		}
 
 		[GtkCallback]
 		private void RecentlyClickedButton_clicked(){
 			searchbar.reset_filters();
-			App.settings.sort_ascending = false;
-			App.settings.station_sorting = Compare.DATE;
+			searchbar.set_sort("clicktimestamp", "descending");
+			show_search();
 		}
 
 		[GtkCallback]
 		private void MostClicksButton_clicked(){
 			searchbar.reset_filters();
-			App.settings.sort_ascending = false;
-			App.settings.station_sorting = Compare.CLICKS;
+			searchbar.set_sort("clicks", "descending");
+			show_search();
 		}
 	}
 }
