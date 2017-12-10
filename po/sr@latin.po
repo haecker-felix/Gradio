@@ -7,16 +7,16 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-10 17:22+0100\n"
-"PO-Revision-Date: 2017-12-10 14:39+0000\n"
+"PO-Revision-Date: 2017-12-10 22:45+0000\n"
 "Last-Translator: Slobodan Terzić <githzerai06@gmail.com>\n"
-"Language-Team: Serbian (latin) <https://hosted.weblate.org/projects/gradio/"
-"translations/sr_Latn/>\n"
+"Language-Team: Serbian (latin) "
+"<https://hosted.weblate.org/projects/gradio/translations/sr_Latn/>\n"
 "Language: sr@latin\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<="
+"4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 2.18-dev\n"
 
 #: data/ui/app-menu.ui:6 data/ui/menubutton.ui:192
@@ -285,9 +285,8 @@ msgid "Fetching station data…"
 msgstr "Dobavljam podatke o stanici…"
 
 #: src/page/gradio-library-page.vala:87
-#, fuzzy
 msgid "Items: "
-msgstr "stavki"
+msgstr "Stavki: "
 
 #: src/page/gradio-settings-page.vala:39
 msgid "Features"
@@ -381,17 +380,15 @@ msgid "Clear all cached station icons"
 msgstr "Čisti sve keširane slike stanica"
 
 #: src/gradio-headerbar.vala:53 src/gradio-headerbar.vala:59
-#, fuzzy
 msgid "Click on items to select them"
 msgstr "Kliknite na stavku za prikaz opcija"
 
 #: src/gradio-headerbar.vala:61
 #, c-format
 msgid "%s selected"
-msgstr ""
+msgstr "Izabranih: %s"
 
 #: src/gradio-searchbar.vala:288
-#, fuzzy
 msgid "Select Language ..."
 msgstr "Izaberite jezik ..."
 
@@ -400,7 +397,6 @@ msgid "Select Country ..."
 msgstr "Izaberite zemlju ..."
 
 #: src/gradio-searchbar.vala:309
-#, fuzzy
 msgid "Select State ..."
 msgstr "Izaberite državu ..."
 
@@ -417,14 +413,14 @@ msgid "\"Name\" and \"Stream\" information is required."
 msgstr "Neophodno je uneti „Ỉme“ i „Tok“."
 
 #: src/gradio-selection-toolbar.vala:99
-#, fuzzy, c-format
+#, c-format
 msgid "%i radio station(s) not present in library."
-msgstr "Dodajte nove radio stanice u vašu fonoteku"
+msgstr "Stanica %i nije prisutna u fonoteci."
 
 #: src/gradio-selection-toolbar.vala:109
-#, fuzzy, c-format
+#, c-format
 msgid "%i radio station(s) already added to library."
-msgstr "Dodajte nove radio stanice u vašu fonoteku"
+msgstr "Stanica %i je već dodata u fonoteku."
 
 #~ msgid "100%"
 #~ msgstr "100%"
