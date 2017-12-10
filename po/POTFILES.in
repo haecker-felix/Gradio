@@ -1,6 +1,5 @@
 # List of source files containing translatable strings.
 data/ui/app-menu.ui
-data/ui/page/add-page.ui
 data/ui/page/library-page.ui
 data/ui/page/collections-page.ui
 data/ui/details-box.ui
@@ -11,9 +10,9 @@ data/ui/station-editor.ui
 data/ui/page/search-page.ui
 data/ui/menubutton.ui
 src/gradio-settings-window.vala
-src/page/gradio-add-page.vala
 src/page/gradio-collection-items-page.vala
 src/page/gradio-library-page.vala
 src/page/gradio-search-page.vala
 src/gradio-headerbar.vala
 src/gradio-library.vala
+src/gradio-station-editor-dialog.vala

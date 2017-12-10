@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-12 16:33+0100\n"
+"POT-Creation-Date: 2017-12-10 15:17+0100\n"
 "PO-Revision-Date: 2017-09-25 14:25+0000\n"
 "Last-Translator: sispus <eylem.akcay@gmail.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/gradio/"
@@ -19,41 +19,17 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
 "X-Generator: Weblate 2.17-dev\n"
 
-#: data/ui/app-menu.ui:6 data/ui/menubutton.ui:178
+#: data/ui/app-menu.ui:6 data/ui/menubutton.ui:192
 msgid "Settings"
 msgstr "Ayarlar"
 
-#: data/ui/app-menu.ui:12 data/ui/menubutton.ui:192
+#: data/ui/app-menu.ui:12 data/ui/menubutton.ui:206
 msgid "About"
 msgstr "Hakkında"
 
-#: data/ui/app-menu.ui:18 data/ui/menubutton.ui:206
+#: data/ui/app-menu.ui:18 data/ui/menubutton.ui:220
 msgid "Quit"
 msgstr "Çık"
-
-#: data/ui/page/add-page.ui:54
-msgid "Search for radio stations"
-msgstr "İstasyon ara"
-
-#: data/ui/page/add-page.ui:85 data/ui/page/add-page.ui:163
-#: data/ui/page/add-page.ui:241
-msgid "More..."
-msgstr ""
-
-#: data/ui/page/add-page.ui:106 src/page/gradio-search-page.vala:72
-#, fuzzy
-msgid "Stations with the most votes"
-msgstr "En çok oy alan radyo istasyonlarını görün."
-
-#: data/ui/page/add-page.ui:184 src/page/gradio-search-page.vala:64
-#, fuzzy
-msgid "Recently clicked stations"
-msgstr "Son eklenen radyo istasyonlarını göster"
-
-#: data/ui/page/add-page.ui:262 src/page/gradio-search-page.vala:80
-#, fuzzy
-msgid "Stations with the most clicks"
-msgstr "En fazla tıklanan radyo istasyonlarını görün."
 
 #: data/ui/page/library-page.ui:44
 msgid "Your library is empty"
@@ -72,12 +48,12 @@ msgstr "Koleksiyon oluşturmamışsınız."
 msgid "You can group stations into collections."
 msgstr "İstasyonları koleksiyonlar içinde gruplayabilirsiniz."
 
-#: data/ui/details-box.ui:23 data/ui/selection-toolbar.ui:159
+#: data/ui/details-box.ui:23 data/ui/selection-toolbar.ui:220
 msgid "Details"
 msgstr "İstasyon bilgisi"
 
 #: data/ui/details-box.ui:137 data/ui/station-editor.ui:125
-#: data/ui/menubutton.ui:355
+#: data/ui/menubutton.ui:369
 msgid "Name"
 msgstr "İstasyon adı"
 
@@ -102,7 +78,7 @@ msgstr "İstasyon tanımı"
 msgid "Tags"
 msgstr "Etiketler"
 
-#: data/ui/details-box.ui:433 data/ui/selection-toolbar.ui:31
+#: data/ui/details-box.ui:433 data/ui/selection-toolbar.ui:72
 msgid "Play"
 msgstr "Çal"
 
@@ -136,21 +112,29 @@ msgstr "Tümünü Seç"
 msgid "Select None"
 msgstr "Hiçbirini Seçme"
 
-#: data/ui/selection-toolbar.ui:18
+#: data/ui/selection-toolbar.ui:28
+msgid "Save"
+msgstr ""
+
+#: data/ui/selection-toolbar.ui:59
 msgid "Click an item to view options"
 msgstr ""
 
-#: data/ui/selection-toolbar.ui:52
+#: data/ui/selection-toolbar.ui:93
 #, fuzzy
 msgid "Collection"
 msgstr "Koleksiyonlar"
 
-#: data/ui/selection-toolbar.ui:65
+#: data/ui/selection-toolbar.ui:106
 msgid "Add to library"
 msgstr "Kütüphaneye ekle"
 
-#: data/ui/selection-toolbar.ui:82
+#: data/ui/selection-toolbar.ui:123
 msgid "Remove from Library"
+msgstr ""
+
+#: data/ui/selection-toolbar.ui:148
+msgid "Rename"
 msgstr ""
 
 #: data/ui/station-editor.ui:39
@@ -179,15 +163,15 @@ msgstr "Yayın Adresi"
 msgid "Homepage"
 msgstr "Anasayfa"
 
-#: data/ui/station-editor.ui:181 data/ui/menubutton.ui:385
+#: data/ui/station-editor.ui:181 data/ui/menubutton.ui:399
 msgid "Country"
 msgstr "Ülke"
 
-#: data/ui/station-editor.ui:196 data/ui/menubutton.ui:400
+#: data/ui/station-editor.ui:196 data/ui/menubutton.ui:414
 msgid "State"
 msgstr "Bölge/Eyalet"
 
-#: data/ui/station-editor.ui:211 data/ui/menubutton.ui:370
+#: data/ui/station-editor.ui:211 data/ui/menubutton.ui:384
 msgid "Language"
 msgstr "Dil"
 
@@ -211,11 +195,43 @@ msgstr "Vazgeç"
 msgid "Done"
 msgstr "Tamam"
 
-#: data/ui/page/search-page.ui:127
+#: data/ui/page/search-page.ui:92 data/ui/page/search-page.ui:171
+#: data/ui/page/search-page.ui:250
+msgid "More..."
+msgstr ""
+
+#: data/ui/page/search-page.ui:114
+#, fuzzy
+msgid "Stations with the most votes"
+msgstr "En çok oy alan radyo istasyonlarını görün."
+
+#: data/ui/page/search-page.ui:193
+#, fuzzy
+msgid "Recently clicked stations"
+msgstr "Son eklenen radyo istasyonlarını göster"
+
+#: data/ui/page/search-page.ui:272
+#, fuzzy
+msgid "Stations with the most clicks"
+msgstr "En fazla tıklanan radyo istasyonlarını görün."
+
+#: data/ui/page/search-page.ui:360 src/page/gradio-search-page.vala:171
+msgid "Search"
+msgstr ""
+
+#: data/ui/page/search-page.ui:377
+msgid "0"
+msgstr ""
+
+#: data/ui/page/search-page.ui:395
+msgid "Results:"
+msgstr ""
+
+#: data/ui/page/search-page.ui:489
 msgid "No results found"
 msgstr "Sonuç bulunamadı"
 
-#: data/ui/page/search-page.ui:145
+#: data/ui/page/search-page.ui:507
 msgid ""
 "Either the station does not exist, or you have to search with other keywords."
 msgstr "İstasyon mevcut değil, veya başka anahtar kelimelerle arayın."
@@ -224,7 +240,7 @@ msgstr "İstasyon mevcut değil, veya başka anahtar kelimelerle arayın."
 msgid "100%"
 msgstr ""
 
-#: data/ui/menubutton.ui:104 data/ui/menubutton.ui:318
+#: data/ui/menubutton.ui:104 data/ui/menubutton.ui:332
 #, fuzzy
 msgid "Sorting"
 msgstr "Ayarlar"
@@ -233,39 +249,45 @@ msgstr "Ayarlar"
 msgid "Hide broken stations"
 msgstr "Arızalı istasyonlar gösterme"
 
-#: data/ui/menubutton.ui:145 data/ui/menubutton.ui:250
+#: data/ui/menubutton.ui:145 data/ui/menubutton.ui:264
+#: src/page/gradio-library-page.vala:80
 msgid "Library"
 msgstr "Kütüphane"
 
-#: data/ui/menubutton.ui:267
+#: data/ui/menubutton.ui:160
+#, fuzzy
+msgid "Create new radio station"
+msgstr "Yeni istasyon oluştur"
+
+#: data/ui/menubutton.ui:281
 msgid "Import"
 msgstr "İçe aktar"
 
-#: data/ui/menubutton.ui:281
+#: data/ui/menubutton.ui:295
 msgid "Export"
 msgstr "Dışa Aktar"
 
-#: data/ui/menubutton.ui:340
+#: data/ui/menubutton.ui:354
 msgid "Votes"
 msgstr ""
 
-#: data/ui/menubutton.ui:415
+#: data/ui/menubutton.ui:429
 msgid "Clicks"
 msgstr ""
 
-#: data/ui/menubutton.ui:430
+#: data/ui/menubutton.ui:444
 msgid "Bitrate"
 msgstr ""
 
-#: data/ui/menubutton.ui:445
+#: data/ui/menubutton.ui:459
 msgid "Date"
 msgstr ""
 
-#: data/ui/menubutton.ui:485
+#: data/ui/menubutton.ui:499
 msgid "Ascending"
 msgstr ""
 
-#: data/ui/menubutton.ui:500
+#: data/ui/menubutton.ui:514
 msgid "Descending"
 msgstr ""
 
@@ -363,23 +385,6 @@ msgstr "Önbelleği temizle"
 msgid "Clear all cached station icons"
 msgstr "Önbelleğe alınmış tüm istasyon ikonlarını silin"
 
-#: src/page/gradio-add-page.vala:37
-msgid "Create a new radio station"
-msgstr "Yeni istasyon oluştur"
-
-#: src/page/gradio-add-page.vala:77
-#, fuzzy
-msgid "New public radio station"
-msgstr "Erişilebilir yeni bir istasyon ekle"
-
-#: src/page/gradio-add-page.vala:77
-msgid "Create a new radio station, which is visible for all users."
-msgstr "Tüm kullanıcıların erişebileceği yeni bir radyo istasyonu oluşturun."
-
-#: src/page/gradio-add-page.vala:158
-msgid "Add new radio stations to your library"
-msgstr ""
-
 #: src/page/gradio-collection-items-page.vala:75
 #: src/page/gradio-library-page.vala:87
 #, fuzzy
@@ -390,9 +395,30 @@ msgstr "Nesneler"
 msgid "Fetching station data…"
 msgstr ""
 
-#: src/page/gradio-search-page.vala:107
-msgid "Search"
+#: src/gradio-station-editor-dialog.vala:53
+#, fuzzy
+msgid "Create radio station"
+msgstr "Yeni istasyon oluştur"
+
+#: src/gradio-station-editor-dialog.vala:59
+#, fuzzy
+msgid "Edit radio station"
+msgstr "Radyo istasyonlarını bul"
+
+#: src/gradio-station-editor-dialog.vala:169
+msgid "\"Name\" and \"Stream\" information is required."
 msgstr ""
+
+#~ msgid "Search for radio stations"
+#~ msgstr "İstasyon ara"
+
+#, fuzzy
+#~ msgid "New public radio station"
+#~ msgstr "Erişilebilir yeni bir istasyon ekle"
+
+#~ msgid "Create a new radio station, which is visible for all users."
+#~ msgstr ""
+#~ "Tüm kullanıcıların erişebileceği yeni bir radyo istasyonu oluşturun."
 
 #~ msgid "Where"
 #~ msgstr "Konum"
@@ -439,9 +465,6 @@ msgstr ""
 
 #~ msgid "Select database to import"
 #~ msgstr "İçe aktarılacak veritabanını şeç"
-
-#~ msgid "Discover radio stations"
-#~ msgstr "Radyo istasyonlarını bul"
 
 #~ msgid "Show famous radio stations"
 #~ msgstr "Beğenilen radyo istasyonlarını göster"

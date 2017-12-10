@@ -6,11 +6,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-12 16:33+0100\n"
+"POT-Creation-Date: 2017-12-10 15:17+0100\n"
 "PO-Revision-Date: 2017-11-12 16:03+0000\n"
 "Last-Translator: Häcker Felix <haecker.felix1207@gmail.com>\n"
-"Language-Team: German "
-"<https://hosted.weblate.org/projects/gradio/translations/de/>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/gradio/"
+"translations/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,38 +18,17 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 2.18-dev\n"
 
-#: data/ui/app-menu.ui:6 data/ui/menubutton.ui:178
+#: data/ui/app-menu.ui:6 data/ui/menubutton.ui:192
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: data/ui/app-menu.ui:12 data/ui/menubutton.ui:192
+#: data/ui/app-menu.ui:12 data/ui/menubutton.ui:206
 msgid "About"
 msgstr "Info"
 
-#: data/ui/app-menu.ui:18 data/ui/menubutton.ui:206
+#: data/ui/app-menu.ui:18 data/ui/menubutton.ui:220
 msgid "Quit"
 msgstr "Beenden"
-
-#: data/ui/page/add-page.ui:54
-msgid "Search for radio stations"
-msgstr "Nach Radiosender suchen"
-
-#: data/ui/page/add-page.ui:85 data/ui/page/add-page.ui:163
-#: data/ui/page/add-page.ui:241
-msgid "More..."
-msgstr "Mehr..."
-
-#: data/ui/page/add-page.ui:106 src/page/gradio-search-page.vala:72
-msgid "Stations with the most votes"
-msgstr "Sender mit den meisten Votes"
-
-#: data/ui/page/add-page.ui:184 src/page/gradio-search-page.vala:64
-msgid "Recently clicked stations"
-msgstr "Zuletzt abgespielte Sender"
-
-#: data/ui/page/add-page.ui:262 src/page/gradio-search-page.vala:80
-msgid "Stations with the most clicks"
-msgstr "Sender mit den meisten Klicks"
 
 #: data/ui/page/library-page.ui:44
 msgid "Your library is empty"
@@ -67,12 +46,12 @@ msgstr "Du hast keine Sammlung"
 msgid "You can group stations into collections."
 msgstr "Du kannst Sender in Sammlungen gruppieren."
 
-#: data/ui/details-box.ui:23 data/ui/selection-toolbar.ui:159
+#: data/ui/details-box.ui:23 data/ui/selection-toolbar.ui:220
 msgid "Details"
 msgstr "Details"
 
 #: data/ui/details-box.ui:137 data/ui/station-editor.ui:125
-#: data/ui/menubutton.ui:355
+#: data/ui/menubutton.ui:369
 msgid "Name"
 msgstr "Name"
 
@@ -96,7 +75,7 @@ msgstr "Beschreibung"
 msgid "Tags"
 msgstr "Tags"
 
-#: data/ui/details-box.ui:433 data/ui/selection-toolbar.ui:31
+#: data/ui/details-box.ui:433 data/ui/selection-toolbar.ui:72
 msgid "Play"
 msgstr "Abspielen"
 
@@ -128,21 +107,29 @@ msgstr "Alle auswählen"
 msgid "Select None"
 msgstr "Nichts auswählen"
 
-#: data/ui/selection-toolbar.ui:18
+#: data/ui/selection-toolbar.ui:28
+msgid "Save"
+msgstr ""
+
+#: data/ui/selection-toolbar.ui:59
 msgid "Click an item to view options"
 msgstr "Wähle ein Objekt aus, um Optionen anzuzeigen"
 
-#: data/ui/selection-toolbar.ui:52
+#: data/ui/selection-toolbar.ui:93
 msgid "Collection"
 msgstr "Sammlung"
 
-#: data/ui/selection-toolbar.ui:65
+#: data/ui/selection-toolbar.ui:106
 msgid "Add to library"
 msgstr "Zur Bibliothek hinzufügen"
 
-#: data/ui/selection-toolbar.ui:82
+#: data/ui/selection-toolbar.ui:123
 msgid "Remove from Library"
 msgstr "Von Bibliothek entfernen"
+
+#: data/ui/selection-toolbar.ui:148
+msgid "Rename"
+msgstr ""
 
 #: data/ui/station-editor.ui:39
 msgid "Global database"
@@ -170,15 +157,15 @@ msgstr "Stream Adresse"
 msgid "Homepage"
 msgstr "Homepage"
 
-#: data/ui/station-editor.ui:181 data/ui/menubutton.ui:385
+#: data/ui/station-editor.ui:181 data/ui/menubutton.ui:399
 msgid "Country"
 msgstr "Land"
 
-#: data/ui/station-editor.ui:196 data/ui/menubutton.ui:400
+#: data/ui/station-editor.ui:196 data/ui/menubutton.ui:414
 msgid "State"
 msgstr "Provinz"
 
-#: data/ui/station-editor.ui:211 data/ui/menubutton.ui:370
+#: data/ui/station-editor.ui:211 data/ui/menubutton.ui:384
 msgid "Language"
 msgstr "Sprache"
 
@@ -202,11 +189,40 @@ msgstr "Abbrechen"
 msgid "Done"
 msgstr "Fertig"
 
-#: data/ui/page/search-page.ui:127
+#: data/ui/page/search-page.ui:92 data/ui/page/search-page.ui:171
+#: data/ui/page/search-page.ui:250
+msgid "More..."
+msgstr "Mehr..."
+
+#: data/ui/page/search-page.ui:114
+msgid "Stations with the most votes"
+msgstr "Sender mit den meisten Votes"
+
+#: data/ui/page/search-page.ui:193
+msgid "Recently clicked stations"
+msgstr "Zuletzt abgespielte Sender"
+
+#: data/ui/page/search-page.ui:272
+msgid "Stations with the most clicks"
+msgstr "Sender mit den meisten Klicks"
+
+#: data/ui/page/search-page.ui:360 src/page/gradio-search-page.vala:171
+msgid "Search"
+msgstr "Suchen"
+
+#: data/ui/page/search-page.ui:377
+msgid "0"
+msgstr ""
+
+#: data/ui/page/search-page.ui:395
+msgid "Results:"
+msgstr ""
+
+#: data/ui/page/search-page.ui:489
 msgid "No results found"
 msgstr "Keine Ergebnisse gefunden"
 
-#: data/ui/page/search-page.ui:145
+#: data/ui/page/search-page.ui:507
 msgid ""
 "Either the station does not exist, or you have to search with other keywords."
 msgstr ""
@@ -217,7 +233,7 @@ msgstr ""
 msgid "100%"
 msgstr "100%"
 
-#: data/ui/menubutton.ui:104 data/ui/menubutton.ui:318
+#: data/ui/menubutton.ui:104 data/ui/menubutton.ui:332
 msgid "Sorting"
 msgstr "Sortierung"
 
@@ -225,39 +241,45 @@ msgstr "Sortierung"
 msgid "Hide broken stations"
 msgstr "Defekte Sender ausblenden"
 
-#: data/ui/menubutton.ui:145 data/ui/menubutton.ui:250
+#: data/ui/menubutton.ui:145 data/ui/menubutton.ui:264
+#: src/page/gradio-library-page.vala:80
 msgid "Library"
 msgstr "Bibliothek"
 
-#: data/ui/menubutton.ui:267
+#: data/ui/menubutton.ui:160
+#, fuzzy
+msgid "Create new radio station"
+msgstr "Neuen Radiosender erstellen"
+
+#: data/ui/menubutton.ui:281
 msgid "Import"
 msgstr "Importieren"
 
-#: data/ui/menubutton.ui:281
+#: data/ui/menubutton.ui:295
 msgid "Export"
 msgstr "Exportieren"
 
-#: data/ui/menubutton.ui:340
+#: data/ui/menubutton.ui:354
 msgid "Votes"
 msgstr "Votes"
 
-#: data/ui/menubutton.ui:415
+#: data/ui/menubutton.ui:429
 msgid "Clicks"
 msgstr "Klicks"
 
-#: data/ui/menubutton.ui:430
+#: data/ui/menubutton.ui:444
 msgid "Bitrate"
 msgstr "Bitrate"
 
-#: data/ui/menubutton.ui:445
+#: data/ui/menubutton.ui:459
 msgid "Date"
 msgstr "Datum"
 
-#: data/ui/menubutton.ui:485
+#: data/ui/menubutton.ui:499
 msgid "Ascending"
 msgstr "Aufsteigend"
 
-#: data/ui/menubutton.ui:500
+#: data/ui/menubutton.ui:514
 msgid "Descending"
 msgstr "Absteigend"
 
@@ -352,22 +374,6 @@ msgstr "Zwischenspeicher leeeren"
 msgid "Clear all cached station icons"
 msgstr "Löscht alle zwischengespeicherte Symbole"
 
-#: src/page/gradio-add-page.vala:37
-msgid "Create a new radio station"
-msgstr "Neuen Radiosender erstellen"
-
-#: src/page/gradio-add-page.vala:77
-msgid "New public radio station"
-msgstr "Neuer öffentlicher Radiosender"
-
-#: src/page/gradio-add-page.vala:77
-msgid "Create a new radio station, which is visible for all users."
-msgstr "Einen neuen Radiosender erstellen, der für alle Benutzer sichtbar ist."
-
-#: src/page/gradio-add-page.vala:158
-msgid "Add new radio stations to your library"
-msgstr "Füge neue Sender zu deiner Bibliothek hinzu"
-
 #: src/page/gradio-collection-items-page.vala:75
 #: src/page/gradio-library-page.vala:87
 msgid " Items"
@@ -377,9 +383,32 @@ msgstr " Objekte"
 msgid "Fetching station data…"
 msgstr "Sender Daten abrufen…"
 
-#: src/page/gradio-search-page.vala:107
-msgid "Search"
-msgstr "Suchen"
+#: src/gradio-station-editor-dialog.vala:53
+#, fuzzy
+msgid "Create radio station"
+msgstr "Neuen Radiosender erstellen"
+
+#: src/gradio-station-editor-dialog.vala:59
+#, fuzzy
+msgid "Edit radio station"
+msgstr "Radiosender entdecken"
+
+#: src/gradio-station-editor-dialog.vala:169
+msgid "\"Name\" and \"Stream\" information is required."
+msgstr ""
+
+#~ msgid "Search for radio stations"
+#~ msgstr "Nach Radiosender suchen"
+
+#~ msgid "New public radio station"
+#~ msgstr "Neuer öffentlicher Radiosender"
+
+#~ msgid "Create a new radio station, which is visible for all users."
+#~ msgstr ""
+#~ "Einen neuen Radiosender erstellen, der für alle Benutzer sichtbar ist."
+
+#~ msgid "Add new radio stations to your library"
+#~ msgstr "Füge neue Sender zu deiner Bibliothek hinzu"
 
 #~ msgid "Where"
 #~ msgstr "Wo"
@@ -425,9 +454,6 @@ msgstr "Suchen"
 
 #~ msgid "Select database to import"
 #~ msgstr "Eine Datenbank zum importieren auswählen"
-
-#~ msgid "Discover radio stations"
-#~ msgstr "Radiosender entdecken"
 
 #~ msgid "Show famous radio stations"
 #~ msgstr "Berühmte Radiosender anzeigen"

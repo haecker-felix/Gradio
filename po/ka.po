@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-12 16:33+0100\n"
+"POT-Creation-Date: 2017-12-10 15:17+0100\n"
 "PO-Revision-Date: 2017-09-10 21:39+0000\n"
 "Last-Translator: George Grigalashvili <grigalaa@gmail.com>\n"
 "Language-Team: Georgian <https://hosted.weblate.org/projects/gradio/"
@@ -18,41 +18,17 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Weblate 2.17-dev\n"
 
-#: data/ui/app-menu.ui:6 data/ui/menubutton.ui:178
+#: data/ui/app-menu.ui:6 data/ui/menubutton.ui:192
 msgid "Settings"
 msgstr "პარამეტრები"
 
-#: data/ui/app-menu.ui:12 data/ui/menubutton.ui:192
+#: data/ui/app-menu.ui:12 data/ui/menubutton.ui:206
 msgid "About"
 msgstr "პროგრამის შესახებ"
 
-#: data/ui/app-menu.ui:18 data/ui/menubutton.ui:206
+#: data/ui/app-menu.ui:18 data/ui/menubutton.ui:220
 msgid "Quit"
 msgstr "პროგრამის დატოვება"
-
-#: data/ui/page/add-page.ui:54
-msgid "Search for radio stations"
-msgstr "რადიო სადგურების ძებნა"
-
-#: data/ui/page/add-page.ui:85 data/ui/page/add-page.ui:163
-#: data/ui/page/add-page.ui:241
-msgid "More..."
-msgstr ""
-
-#: data/ui/page/add-page.ui:106 src/page/gradio-search-page.vala:72
-#, fuzzy
-msgid "Stations with the most votes"
-msgstr "გამოაჩინე რადიო სადგურები რომლებსაც მეტი ხმები აქვთ."
-
-#: data/ui/page/add-page.ui:184 src/page/gradio-search-page.vala:64
-#, fuzzy
-msgid "Recently clicked stations"
-msgstr "გამოაჩინე უკანასკნელი რადიო სადგურები"
-
-#: data/ui/page/add-page.ui:262 src/page/gradio-search-page.vala:80
-#, fuzzy
-msgid "Stations with the most clicks"
-msgstr "გამოაჩინე რადიო სადგურები რომლებსაც ყველაზე მეტი კლიკი აქვთ."
 
 #: data/ui/page/library-page.ui:44
 msgid "Your library is empty"
@@ -71,12 +47,12 @@ msgstr "თქვენ არ გაქვთ კოლექციები"
 msgid "You can group stations into collections."
 msgstr "თქვენ შეგიძლიათ დააჯგუფოთ არხები კოლექციებად."
 
-#: data/ui/details-box.ui:23 data/ui/selection-toolbar.ui:159
+#: data/ui/details-box.ui:23 data/ui/selection-toolbar.ui:220
 msgid "Details"
 msgstr "დეტალები"
 
 #: data/ui/details-box.ui:137 data/ui/station-editor.ui:125
-#: data/ui/menubutton.ui:355
+#: data/ui/menubutton.ui:369
 msgid "Name"
 msgstr "სახელი"
 
@@ -100,7 +76,7 @@ msgstr "აღწერა"
 msgid "Tags"
 msgstr "ტეგები"
 
-#: data/ui/details-box.ui:433 data/ui/selection-toolbar.ui:31
+#: data/ui/details-box.ui:433 data/ui/selection-toolbar.ui:72
 msgid "Play"
 msgstr "ჩართვა"
 
@@ -134,21 +110,29 @@ msgstr "ყველას მონიშნვა"
 msgid "Select None"
 msgstr "არც-ერთის მონიშნვა"
 
-#: data/ui/selection-toolbar.ui:18
+#: data/ui/selection-toolbar.ui:28
+msgid "Save"
+msgstr ""
+
+#: data/ui/selection-toolbar.ui:59
 msgid "Click an item to view options"
 msgstr ""
 
-#: data/ui/selection-toolbar.ui:52
+#: data/ui/selection-toolbar.ui:93
 #, fuzzy
 msgid "Collection"
 msgstr "კოლექციები"
 
-#: data/ui/selection-toolbar.ui:65
+#: data/ui/selection-toolbar.ui:106
 msgid "Add to library"
 msgstr "დაამატეთ ბიბლიოთეკაში"
 
-#: data/ui/selection-toolbar.ui:82
+#: data/ui/selection-toolbar.ui:123
 msgid "Remove from Library"
+msgstr ""
+
+#: data/ui/selection-toolbar.ui:148
+msgid "Rename"
 msgstr ""
 
 #: data/ui/station-editor.ui:39
@@ -177,15 +161,15 @@ msgstr "სტრიმის მისამართი"
 msgid "Homepage"
 msgstr "საწყისი გვერდი"
 
-#: data/ui/station-editor.ui:181 data/ui/menubutton.ui:385
+#: data/ui/station-editor.ui:181 data/ui/menubutton.ui:399
 msgid "Country"
 msgstr "ქვეყანა"
 
-#: data/ui/station-editor.ui:196 data/ui/menubutton.ui:400
+#: data/ui/station-editor.ui:196 data/ui/menubutton.ui:414
 msgid "State"
 msgstr "რეგიონი"
 
-#: data/ui/station-editor.ui:211 data/ui/menubutton.ui:370
+#: data/ui/station-editor.ui:211 data/ui/menubutton.ui:384
 msgid "Language"
 msgstr "ენა"
 
@@ -209,11 +193,43 @@ msgstr "უარყოფა"
 msgid "Done"
 msgstr "დასრულება"
 
-#: data/ui/page/search-page.ui:127
+#: data/ui/page/search-page.ui:92 data/ui/page/search-page.ui:171
+#: data/ui/page/search-page.ui:250
+msgid "More..."
+msgstr ""
+
+#: data/ui/page/search-page.ui:114
+#, fuzzy
+msgid "Stations with the most votes"
+msgstr "გამოაჩინე რადიო სადგურები რომლებსაც მეტი ხმები აქვთ."
+
+#: data/ui/page/search-page.ui:193
+#, fuzzy
+msgid "Recently clicked stations"
+msgstr "გამოაჩინე უკანასკნელი რადიო სადგურები"
+
+#: data/ui/page/search-page.ui:272
+#, fuzzy
+msgid "Stations with the most clicks"
+msgstr "გამოაჩინე რადიო სადგურები რომლებსაც ყველაზე მეტი კლიკი აქვთ."
+
+#: data/ui/page/search-page.ui:360 src/page/gradio-search-page.vala:171
+msgid "Search"
+msgstr ""
+
+#: data/ui/page/search-page.ui:377
+msgid "0"
+msgstr ""
+
+#: data/ui/page/search-page.ui:395
+msgid "Results:"
+msgstr ""
+
+#: data/ui/page/search-page.ui:489
 msgid "No results found"
 msgstr "რეზულტატები ვერ მოიძებნა"
 
-#: data/ui/page/search-page.ui:145
+#: data/ui/page/search-page.ui:507
 msgid ""
 "Either the station does not exist, or you have to search with other keywords."
 msgstr "სადგური არ არსებობს, ან სხვა სიტყვებით უნდა მოძებნოთ."
@@ -222,7 +238,7 @@ msgstr "სადგური არ არსებობს, ან სხვ�
 msgid "100%"
 msgstr ""
 
-#: data/ui/menubutton.ui:104 data/ui/menubutton.ui:318
+#: data/ui/menubutton.ui:104 data/ui/menubutton.ui:332
 #, fuzzy
 msgid "Sorting"
 msgstr "პარამეტრები"
@@ -231,39 +247,45 @@ msgstr "პარამეტრები"
 msgid "Hide broken stations"
 msgstr "დამალე გაწყვეტილი სადგურები"
 
-#: data/ui/menubutton.ui:145 data/ui/menubutton.ui:250
+#: data/ui/menubutton.ui:145 data/ui/menubutton.ui:264
+#: src/page/gradio-library-page.vala:80
 msgid "Library"
 msgstr "ბიბლიოთეკა"
 
-#: data/ui/menubutton.ui:267
+#: data/ui/menubutton.ui:160
+#, fuzzy
+msgid "Create new radio station"
+msgstr "შექმენი ახალი რადიო სადგური"
+
+#: data/ui/menubutton.ui:281
 msgid "Import"
 msgstr "იმპორტი"
 
-#: data/ui/menubutton.ui:281
+#: data/ui/menubutton.ui:295
 msgid "Export"
 msgstr "ექსპორტი"
 
-#: data/ui/menubutton.ui:340
+#: data/ui/menubutton.ui:354
 msgid "Votes"
 msgstr ""
 
-#: data/ui/menubutton.ui:415
+#: data/ui/menubutton.ui:429
 msgid "Clicks"
 msgstr ""
 
-#: data/ui/menubutton.ui:430
+#: data/ui/menubutton.ui:444
 msgid "Bitrate"
 msgstr ""
 
-#: data/ui/menubutton.ui:445
+#: data/ui/menubutton.ui:459
 msgid "Date"
 msgstr ""
 
-#: data/ui/menubutton.ui:485
+#: data/ui/menubutton.ui:499
 msgid "Ascending"
 msgstr ""
 
-#: data/ui/menubutton.ui:500
+#: data/ui/menubutton.ui:514
 msgid "Descending"
 msgstr ""
 
@@ -358,23 +380,6 @@ msgstr "ქეშის გაწმენდა"
 msgid "Clear all cached station icons"
 msgstr "გაწმინდე ყველა ქეშირებული სადგურის იარლიყები"
 
-#: src/page/gradio-add-page.vala:37
-msgid "Create a new radio station"
-msgstr "შექმენი ახალი რადიო სადგური"
-
-#: src/page/gradio-add-page.vala:77
-msgid "New public radio station"
-msgstr "ახალი საჯარო რადიო სადგური"
-
-#: src/page/gradio-add-page.vala:77
-msgid "Create a new radio station, which is visible for all users."
-msgstr ""
-"შექმენით ახალი რადიო სადგური, რომელიც ხელმისაწვდომია ყველა მომხმარებლისთვის."
-
-#: src/page/gradio-add-page.vala:158
-msgid "Add new radio stations to your library"
-msgstr ""
-
 #: src/page/gradio-collection-items-page.vala:75
 #: src/page/gradio-library-page.vala:87
 #, fuzzy
@@ -385,9 +390,30 @@ msgstr "პუნქტები"
 msgid "Fetching station data…"
 msgstr ""
 
-#: src/page/gradio-search-page.vala:107
-msgid "Search"
+#: src/gradio-station-editor-dialog.vala:53
+#, fuzzy
+msgid "Create radio station"
+msgstr "შექმენი ახალი რადიო სადგური"
+
+#: src/gradio-station-editor-dialog.vala:59
+#, fuzzy
+msgid "Edit radio station"
+msgstr "აღმოაჩინე რადიო სადგურები"
+
+#: src/gradio-station-editor-dialog.vala:169
+msgid "\"Name\" and \"Stream\" information is required."
 msgstr ""
+
+#~ msgid "Search for radio stations"
+#~ msgstr "რადიო სადგურების ძებნა"
+
+#~ msgid "New public radio station"
+#~ msgstr "ახალი საჯარო რადიო სადგური"
+
+#~ msgid "Create a new radio station, which is visible for all users."
+#~ msgstr ""
+#~ "შექმენით ახალი რადიო სადგური, რომელიც ხელმისაწვდომია ყველა "
+#~ "მომხმარებლისთვის."
 
 #~ msgid "Where"
 #~ msgstr "სად"
@@ -433,9 +459,6 @@ msgstr ""
 
 #~ msgid "Select database to import"
 #~ msgstr "აირჩიე მონაცემთა ბაზა იმპორტისთვის"
-
-#~ msgid "Discover radio stations"
-#~ msgstr "აღმოაჩინე რადიო სადგურები"
 
 #~ msgid "Show famous radio stations"
 #~ msgstr "გამოაჩინე პოპულარული რადიო სადგურები"

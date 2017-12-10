@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-12 16:33+0100\n"
+"POT-Creation-Date: 2017-12-10 15:17+0100\n"
 "PO-Revision-Date: 2017-09-15 16:58+0000\n"
 "Last-Translator: gogogogi <trebelnik2@gmail.com>\n"
 "Language-Team: Croatian <https://hosted.weblate.org/projects/gradio/"
@@ -19,41 +19,17 @@ msgstr ""
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 2.17-dev\n"
 
-#: data/ui/app-menu.ui:6 data/ui/menubutton.ui:178
+#: data/ui/app-menu.ui:6 data/ui/menubutton.ui:192
 msgid "Settings"
 msgstr "Postavke"
 
-#: data/ui/app-menu.ui:12 data/ui/menubutton.ui:192
+#: data/ui/app-menu.ui:12 data/ui/menubutton.ui:206
 msgid "About"
 msgstr "O programu"
 
-#: data/ui/app-menu.ui:18 data/ui/menubutton.ui:206
+#: data/ui/app-menu.ui:18 data/ui/menubutton.ui:220
 msgid "Quit"
 msgstr "Zatvori"
-
-#: data/ui/page/add-page.ui:54
-msgid "Search for radio stations"
-msgstr "Pretraga radio stanica"
-
-#: data/ui/page/add-page.ui:85 data/ui/page/add-page.ui:163
-#: data/ui/page/add-page.ui:241
-msgid "More..."
-msgstr ""
-
-#: data/ui/page/add-page.ui:106 src/page/gradio-search-page.vala:72
-#, fuzzy
-msgid "Stations with the most votes"
-msgstr "Prikaži radio stanice koje imaju najviše glasova."
-
-#: data/ui/page/add-page.ui:184 src/page/gradio-search-page.vala:64
-#, fuzzy
-msgid "Recently clicked stations"
-msgstr "Prikaži nedavne radio stanice"
-
-#: data/ui/page/add-page.ui:262 src/page/gradio-search-page.vala:80
-#, fuzzy
-msgid "Stations with the most clicks"
-msgstr "Prikaži radio stanice koje imaju najviše klikova."
 
 #: data/ui/page/library-page.ui:44
 msgid "Your library is empty"
@@ -71,12 +47,12 @@ msgstr "Još nemate kolekcija"
 msgid "You can group stations into collections."
 msgstr "Možete grupirati stanice u kolekcije."
 
-#: data/ui/details-box.ui:23 data/ui/selection-toolbar.ui:159
+#: data/ui/details-box.ui:23 data/ui/selection-toolbar.ui:220
 msgid "Details"
 msgstr "Pojedinosti"
 
 #: data/ui/details-box.ui:137 data/ui/station-editor.ui:125
-#: data/ui/menubutton.ui:355
+#: data/ui/menubutton.ui:369
 msgid "Name"
 msgstr "Naziv"
 
@@ -100,7 +76,7 @@ msgstr "Opis"
 msgid "Tags"
 msgstr "Oznake"
 
-#: data/ui/details-box.ui:433 data/ui/selection-toolbar.ui:31
+#: data/ui/details-box.ui:433 data/ui/selection-toolbar.ui:72
 msgid "Play"
 msgstr "Reproduciraj"
 
@@ -134,21 +110,29 @@ msgstr "Odaberi sve"
 msgid "Select None"
 msgstr "Odaberi ništa"
 
-#: data/ui/selection-toolbar.ui:18
+#: data/ui/selection-toolbar.ui:28
+msgid "Save"
+msgstr ""
+
+#: data/ui/selection-toolbar.ui:59
 msgid "Click an item to view options"
 msgstr ""
 
-#: data/ui/selection-toolbar.ui:52
+#: data/ui/selection-toolbar.ui:93
 #, fuzzy
 msgid "Collection"
 msgstr "Kolekcije"
 
-#: data/ui/selection-toolbar.ui:65
+#: data/ui/selection-toolbar.ui:106
 msgid "Add to library"
 msgstr "Dodaj u fonoteku"
 
-#: data/ui/selection-toolbar.ui:82
+#: data/ui/selection-toolbar.ui:123
 msgid "Remove from Library"
+msgstr ""
+
+#: data/ui/selection-toolbar.ui:148
+msgid "Rename"
 msgstr ""
 
 #: data/ui/station-editor.ui:39
@@ -177,15 +161,15 @@ msgstr "Adresa streama"
 msgid "Homepage"
 msgstr "Naslovna stranica"
 
-#: data/ui/station-editor.ui:181 data/ui/menubutton.ui:385
+#: data/ui/station-editor.ui:181 data/ui/menubutton.ui:399
 msgid "Country"
 msgstr "Zemlja"
 
-#: data/ui/station-editor.ui:196 data/ui/menubutton.ui:400
+#: data/ui/station-editor.ui:196 data/ui/menubutton.ui:414
 msgid "State"
 msgstr "Država"
 
-#: data/ui/station-editor.ui:211 data/ui/menubutton.ui:370
+#: data/ui/station-editor.ui:211 data/ui/menubutton.ui:384
 msgid "Language"
 msgstr "Jezik"
 
@@ -209,11 +193,43 @@ msgstr "Odustani"
 msgid "Done"
 msgstr "Učinjeno"
 
-#: data/ui/page/search-page.ui:127
+#: data/ui/page/search-page.ui:92 data/ui/page/search-page.ui:171
+#: data/ui/page/search-page.ui:250
+msgid "More..."
+msgstr ""
+
+#: data/ui/page/search-page.ui:114
+#, fuzzy
+msgid "Stations with the most votes"
+msgstr "Prikaži radio stanice koje imaju najviše glasova."
+
+#: data/ui/page/search-page.ui:193
+#, fuzzy
+msgid "Recently clicked stations"
+msgstr "Prikaži nedavne radio stanice"
+
+#: data/ui/page/search-page.ui:272
+#, fuzzy
+msgid "Stations with the most clicks"
+msgstr "Prikaži radio stanice koje imaju najviše klikova."
+
+#: data/ui/page/search-page.ui:360 src/page/gradio-search-page.vala:171
+msgid "Search"
+msgstr ""
+
+#: data/ui/page/search-page.ui:377
+msgid "0"
+msgstr ""
+
+#: data/ui/page/search-page.ui:395
+msgid "Results:"
+msgstr ""
+
+#: data/ui/page/search-page.ui:489
 msgid "No results found"
 msgstr "Nema pronađenih rezultata"
 
-#: data/ui/page/search-page.ui:145
+#: data/ui/page/search-page.ui:507
 msgid ""
 "Either the station does not exist, or you have to search with other keywords."
 msgstr "Ili stanica ne postoji, ili ju potražite s drugim izrazom pretrage."
@@ -222,7 +238,7 @@ msgstr "Ili stanica ne postoji, ili ju potražite s drugim izrazom pretrage."
 msgid "100%"
 msgstr ""
 
-#: data/ui/menubutton.ui:104 data/ui/menubutton.ui:318
+#: data/ui/menubutton.ui:104 data/ui/menubutton.ui:332
 #, fuzzy
 msgid "Sorting"
 msgstr "Postavke"
@@ -231,39 +247,45 @@ msgstr "Postavke"
 msgid "Hide broken stations"
 msgstr "Sakrij nedostupne stanice"
 
-#: data/ui/menubutton.ui:145 data/ui/menubutton.ui:250
+#: data/ui/menubutton.ui:145 data/ui/menubutton.ui:264
+#: src/page/gradio-library-page.vala:80
 msgid "Library"
 msgstr "Fonoteka"
 
-#: data/ui/menubutton.ui:267
+#: data/ui/menubutton.ui:160
+#, fuzzy
+msgid "Create new radio station"
+msgstr "Stvori novu radio stanicu"
+
+#: data/ui/menubutton.ui:281
 msgid "Import"
 msgstr "Uvezi"
 
-#: data/ui/menubutton.ui:281
+#: data/ui/menubutton.ui:295
 msgid "Export"
 msgstr "Izvezi"
 
-#: data/ui/menubutton.ui:340
+#: data/ui/menubutton.ui:354
 msgid "Votes"
 msgstr ""
 
-#: data/ui/menubutton.ui:415
+#: data/ui/menubutton.ui:429
 msgid "Clicks"
 msgstr ""
 
-#: data/ui/menubutton.ui:430
+#: data/ui/menubutton.ui:444
 msgid "Bitrate"
 msgstr ""
 
-#: data/ui/menubutton.ui:445
+#: data/ui/menubutton.ui:459
 msgid "Date"
 msgstr ""
 
-#: data/ui/menubutton.ui:485
+#: data/ui/menubutton.ui:499
 msgid "Ascending"
 msgstr ""
 
-#: data/ui/menubutton.ui:500
+#: data/ui/menubutton.ui:514
 msgid "Descending"
 msgstr ""
 
@@ -358,22 +380,6 @@ msgstr "Obriši predmemoriju"
 msgid "Clear all cached station icons"
 msgstr "Obriši sve ikone u predmemoriji"
 
-#: src/page/gradio-add-page.vala:37
-msgid "Create a new radio station"
-msgstr "Stvori novu radio stanicu"
-
-#: src/page/gradio-add-page.vala:77
-msgid "New public radio station"
-msgstr "Nova javna radio stanica"
-
-#: src/page/gradio-add-page.vala:77
-msgid "Create a new radio station, which is visible for all users."
-msgstr "Stvori novu radio stanicu, koja je dostupna svim korisnicima."
-
-#: src/page/gradio-add-page.vala:158
-msgid "Add new radio stations to your library"
-msgstr ""
-
 #: src/page/gradio-collection-items-page.vala:75
 #: src/page/gradio-library-page.vala:87
 #, fuzzy
@@ -384,9 +390,28 @@ msgstr "Stavke"
 msgid "Fetching station data…"
 msgstr ""
 
-#: src/page/gradio-search-page.vala:107
-msgid "Search"
+#: src/gradio-station-editor-dialog.vala:53
+#, fuzzy
+msgid "Create radio station"
+msgstr "Stvori novu radio stanicu"
+
+#: src/gradio-station-editor-dialog.vala:59
+#, fuzzy
+msgid "Edit radio station"
+msgstr "Otkrij radio stanice"
+
+#: src/gradio-station-editor-dialog.vala:169
+msgid "\"Name\" and \"Stream\" information is required."
 msgstr ""
+
+#~ msgid "Search for radio stations"
+#~ msgstr "Pretraga radio stanica"
+
+#~ msgid "New public radio station"
+#~ msgstr "Nova javna radio stanica"
+
+#~ msgid "Create a new radio station, which is visible for all users."
+#~ msgstr "Stvori novu radio stanicu, koja je dostupna svim korisnicima."
 
 #~ msgid "Where"
 #~ msgstr "Gdje"
@@ -432,9 +457,6 @@ msgstr ""
 
 #~ msgid "Select database to import"
 #~ msgstr "Odaberi bazu podataka za uvoz"
-
-#~ msgid "Discover radio stations"
-#~ msgstr "Otkrij radio stanice"
 
 #~ msgid "Show famous radio stations"
 #~ msgstr "Prikaži popularne stanice"
