@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-10 15:17+0100\n"
-"PO-Revision-Date: 2017-11-30 16:45+0000\n"
+"PO-Revision-Date: 2017-12-10 16:10+0000\n"
 "Last-Translator: Erwin van Eijk <erwin.vaneijk@gmail.com>\n"
-"Language-Team: Dutch <https://hosted.weblate.org/projects/gradio/"
-"translations/nl/>\n"
+"Language-Team: Dutch "
+"<https://hosted.weblate.org/projects/gradio/translations/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -110,7 +110,7 @@ msgstr "Niets kiezen"
 
 #: data/ui/selection-toolbar.ui:28
 msgid "Save"
-msgstr ""
+msgstr "Opslaan"
 
 #: data/ui/selection-toolbar.ui:59
 msgid "Click an item to view options"
@@ -130,7 +130,7 @@ msgstr "Verwijder uit de bibliotheek"
 
 #: data/ui/selection-toolbar.ui:148
 msgid "Rename"
-msgstr ""
+msgstr "Hernoemen"
 
 #: data/ui/station-editor.ui:39
 msgid "Global database"
@@ -213,7 +213,7 @@ msgstr "Zoeken"
 
 #: data/ui/page/search-page.ui:395
 msgid "Results:"
-msgstr ""
+msgstr "Resultaten:"
 
 #: data/ui/page/search-page.ui:489
 msgid "No results found"
@@ -239,9 +239,8 @@ msgid "Library"
 msgstr "Bibliotheek"
 
 #: data/ui/menubutton.ui:160
-#, fuzzy
 msgid "Create new radio station"
-msgstr "Maak een nieuw radiozender"
+msgstr "Maak een nieuwe radiozender"
 
 #: data/ui/menubutton.ui:281
 msgid "Import"
@@ -376,18 +375,16 @@ msgid "Fetching station data…"
 msgstr "Zender data ophalen…"
 
 #: src/gradio-station-editor-dialog.vala:53
-#, fuzzy
 msgid "Create radio station"
-msgstr "Maak een nieuw radiozender"
+msgstr "Maak een nieuwe radiozender"
 
 #: src/gradio-station-editor-dialog.vala:59
-#, fuzzy
 msgid "Edit radio station"
-msgstr "Ontdek nieuwe radiozenders"
+msgstr "Bewerk de radiozender"
 
 #: src/gradio-station-editor-dialog.vala:169
 msgid "\"Name\" and \"Stream\" information is required."
-msgstr ""
+msgstr "\"Name\" en \"Stream\" informatie is nodig."
 
 #~ msgid "100%"
 #~ msgstr "100%"
