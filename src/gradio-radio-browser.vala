@@ -17,33 +17,35 @@
 namespace Gradio{
 
 	public class RadioBrowser{
-		public const string radio_stations_by_name = "http://www.radio-browser.info/webservice/json/stations/byname/";
-		public const string radio_stations_by_codec = "http://www.radio-browser.info/webservice/json/stations/bycodec/";
-		public const string radio_stations_by_country = "http://www.radio-browser.info/webservice/json/stations/bycountry/";
-		public const string radio_stations_by_state = "http://www.radio-browser.info/webservice/json/stations/bystate/";
-		public const string radio_stations_by_language = "http://www.radio-browser.info/webservice/json/stations/bylanguage/";
-		public const string radio_stations_by_tag = "http://www.radio-browser.info/webservice/json/stations/bytag/";
-		public const string radio_stations_by_id = "http://www.radio-browser.info/webservice/json/stations/byid/";
+        private const string radio_browser = "https://www.radio-browser.info/webservice/json";
 
-		public const string radio_station_vote = "http://www.radio-browser.info/webservice/json/vote/";
-		public const string radio_station_stream_url = "http://www.radio-browser.info/webservice/v2/json/url/";
+		public const string radio_stations_by_name = radio_browser + "/stations/byname/";
+		public const string radio_stations_by_codec = radio_browser + "/stations/bycodec/";
+		public const string radio_stations_by_country = radio_browser + "/stations/bycountry/";
+		public const string radio_stations_by_state = radio_browser + "/stations/bystate/";
+		public const string radio_stations_by_language = radio_browser + "/stations/bylanguage/";
+		public const string radio_stations_by_tag = radio_browser + "/stations/bytag/";
+		public const string radio_stations_by_id = radio_browser + "/stations/byid/";
 
-		public const string radio_station_languages = "http://www.radio-browser.info/webservice/json/languages";
-		public const string radio_station_countries = "http://www.radio-browser.info/webservice/json/countries";
-		public const string radio_station_codecs = "http://www.radio-browser.info/webservice/json/codecs";
-		public const string radio_station_states = "http://www.radio-browser.info/webservice/json/states";
-		public const string radio_station_tags = "http://www.radio-browser.info/webservice/json/tags";
+		public const string radio_station_vote = radio_browser + "/vote/";
+		public const string radio_station_stream_url = "https://www.radio-browser.info/webservice/v2/json/url/";
+
+		public const string radio_station_languages = radio_browser + "/languages";
+		public const string radio_station_countries = radio_browser + "/countries";
+		public const string radio_station_codecs = radio_browser + "/codecs";
+		public const string radio_station_states = radio_browser + "/states";
+		public const string radio_station_tags = radio_browser + "/tags";
 
 		public static string most_votes(int count){
-			return "http://www.radio-browser.info/webservice/json/stations/topvote/" + count.to_string();
+			return radio_browser + "/stations/topvote/" + count.to_string();
 		}
 
 		public static string recently_clicked(int count){
-			return "http://www.radio-browser.info/webservice/json/stations/lastclick/" + count.to_string();
+			return radio_browser + "/stations/lastclick/" + count.to_string();
 		}
 
 		public static string most_clicks(int count){
-			return "http://www.radio-browser.info/webservice/json/stations/topclick/" + count.to_string();
+			return radio_browser + "/stations/topclick/" + count.to_string();
 		}
 	}
 
