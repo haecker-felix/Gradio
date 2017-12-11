@@ -438,6 +438,8 @@
                   <object class="GtkSpinner">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="halign">center</property>
+                    <property name="valign">center</property>
                     <property name="active">True</property>
                   </object>
                   <packing>

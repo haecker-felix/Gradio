@@ -56,6 +56,9 @@ namespace Gradio{
  				var action = action_group.lookup_action ("sortorder") as GLib.SimpleAction;
 				action.set_state(Util.get_sortorder_string());
 			});
+
+			var context = this.get_style_context();
+			context.add_class("image-button");
 		}
 
 		private void setup_actions(){
