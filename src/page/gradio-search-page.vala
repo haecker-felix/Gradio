@@ -112,12 +112,12 @@ namespace Gradio{
 
 		private void show_search(){
 			SectionStack.set_visible_child_name("search");
-			searchbar.BackBox.set_visible(true);
+			searchbar.BackButton.set_visible(true);
 		}
 
 		private void show_discover(){
 			SectionStack.set_visible_child_name("discover");
-			searchbar.BackBox.set_visible(false);
+			searchbar.BackButton.set_visible(false);
 		}
 
 		public void set_search(string term){

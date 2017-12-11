@@ -56,7 +56,6 @@ namespace Gradio{
 
 		[GtkChild] private Label SortLabel;
 		[GtkChild] public Button BackButton;
-		[GtkChild] public Box BackBox;
 
 		private GLib.SimpleActionGroup search_action_group;
 
@@ -65,6 +64,7 @@ namespace Gradio{
 
 			SearchEntry = new TaggedEntry();
 			SearchEntry.set_visible(true);
+			SearchEntry.set_placeholder_text(_("Search for radio stations"));
 			SearchBox.pack_start(SearchEntry);
 
 			country_tag = new TaggedEntryTag("");
@@ -198,7 +198,7 @@ namespace Gradio{
 				case "descending": App.settings.sort_ascending = false; orderlabel = _("Descending"); break;
 			}
 
-			SortLabel.set_text(sortlabel + " / " + orderlabel);
+			SortLabel.set_text(_("Sorting: %s / %s").printf(sortlabel, orderlabel));
 		}
 
 		private void reset_timeout(){
