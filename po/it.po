@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-10 17:22+0100\n"
-"PO-Revision-Date: 2017-12-11 16:57+0000\n"
+"PO-Revision-Date: 2017-12-11 18:34+0000\n"
 "Last-Translator: DaSnoopy <a.antolini@tin.it>\n"
 "Language-Team: Italian "
 "<https://hosted.weblate.org/projects/gradio/translations/it/>\n"
@@ -217,7 +217,7 @@ msgstr "Cerca"
 
 #: data/ui/page/search-page.ui:395
 msgid "Results:"
-msgstr "Risultaiti:"
+msgstr "Risultati:"
 
 #: data/ui/page/search-page.ui:489
 msgid "No results found"
@@ -261,7 +261,7 @@ msgstr "Voti"
 
 #: data/ui/menubutton.ui:429 src/gradio-searchbar.vala:193
 msgid "Clicks"
-msgstr "Clic"
+msgstr "Clics"
 
 #: data/ui/menubutton.ui:444 src/gradio-searchbar.vala:192
 msgid "Bitrate"
@@ -389,7 +389,7 @@ msgstr "Click sulle stazioni per selezionarle"
 #: src/gradio-headerbar.vala:61
 #, c-format
 msgid "%s selected"
-msgstr "%s"
+msgstr "%s selezionate"
 
 #: src/gradio-searchbar.vala:288
 msgid "Select Language ..."
@@ -413,17 +413,17 @@ msgstr "Modifica una stazione radio"
 
 #: src/gradio-station-editor-dialog.vala:169
 msgid "\"Name\" and \"Stream\" information is required."
-msgstr "\"Nome\" e \"Flusso\" sono informazioni necessarie."
+msgstr "\"Nome\" e \"Flusso dati \" sono informazioni richieste."
 
 #: src/gradio-selection-toolbar.vala:99
 #, c-format
 msgid "%i radio station(s) not present in library."
-msgstr "%i stazione(i) radio non presenti nella raccolta."
+msgstr "%i stazione(i) radio non presente(i) nella raccolta."
 
 #: src/gradio-selection-toolbar.vala:109
 #, c-format
 msgid "%i radio station(s) already added to library."
-msgstr "%i stazione(i) radio già aggiunte alla raccolta"
+msgstr "%i stazione(i) radio già aggiunta(e) alla raccolta."
 
 #~ msgid "100%"
 #~ msgstr "100%"
