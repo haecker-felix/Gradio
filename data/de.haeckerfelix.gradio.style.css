@@ -8,18 +8,3 @@
 	font-size: smaller;
 	padding: 2px 2px;
 }
-
-.menu-heading {
-    min-height: 26px;
-    padding-left: 5px;
-    padding-right: 5px;
-}
-
-.searchbox{
-    padding-left: 30px;
-    padding-right: 30px;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    background-color: mix(@theme_base_color,@theme_fg_color,0.2);
-    border-bottom: solid @borders 1px;
-}
