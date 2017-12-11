@@ -1,6 +1,6 @@
 .thumbnail {
     background-color: #ffffff;
-    border: 2px solid @borders;
+    border: 2px solid @insensitive_fg_color;
     border-radius: 3px;
 }
 
