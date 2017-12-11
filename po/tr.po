@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-10 17:22+0100\n"
-"PO-Revision-Date: 2017-12-11 12:40+0000\n"
+"PO-Revision-Date: 2017-12-11 12:46+0000\n"
 "Last-Translator: sispus <eylem.akcay@gmail.com>\n"
 "Language-Team: Turkish "
 "<https://hosted.weblate.org/projects/gradio/translations/tr/>\n"
@@ -407,7 +407,7 @@ msgstr "Radyo istasyonu oluştur"
 
 #: src/gradio-station-editor-dialog.vala:59
 msgid "Edit radio station"
-msgstr "Radyo istasyonunu düzenle"
+msgstr "İstasyonu editle"
 
 #: src/gradio-station-editor-dialog.vala:169
 msgid "\"Name\" and \"Stream\" information is required."
