@@ -51,15 +51,15 @@ namespace Gradio{
 					break;
 				}
 				case Compare.NAME: {
-					result = (strcmp(stationA.title, stationB.title)*-1);
+					result = strcmp(stationA.title, stationB.title);
 					break;
 				}
 				case Compare.LANGUAGE: {
-					result = (strcmp(stationA.language, stationB.language) * -1);
+					result = strcmp(stationA.language, stationB.language);
 					break;
 				}
 				case Compare.COUNTRY: {
-					result = (strcmp(stationA.country, stationB.country) * -1);
+					result = strcmp(stationA.country, stationB.country);
 					break;
 				}
 				case Compare.BITRATE: {
@@ -81,11 +81,11 @@ namespace Gradio{
 					break;
 				}
 				case Compare.STATE: {
-					result = (strcmp(stationA.state, stationB.state) * -1);
+					result = strcmp(stationA.state, stationB.state);
 					break;
 				}
 				case Compare.DATE: {
-					result = (strcmp(stationA.clicktimestamp, stationB.clicktimestamp));
+					result = strcmp(stationA.clicktimestamp, stationB.clicktimestamp);
 					break;
 				}
 			}
