@@ -174,7 +174,7 @@ namespace Gradio{
 				case Compare.COUNTRY: sort_variant_string = "country"; break;
 				case Compare.STATE: sort_variant_string = "state"; break;
 				case Compare.BITRATE: sort_variant_string = "bitrate"; break;
-				case Compare.CLICKS: sort_variant_string = "clicks"; break;
+				case Compare.CLICKS: sort_variant_string = "clickcount"; break;
 				case Compare.DATE: sort_variant_string = "clicktimestamp"; break;
 			}
 			return sort_variant_string;
