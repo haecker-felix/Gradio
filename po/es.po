@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-10 17:22+0100\n"
+"POT-Creation-Date: 2017-12-12 19:53+0100\n"
 "PO-Revision-Date: 2017-11-03 20:57+0000\n"
 "Last-Translator: Carlos moreno <carlosmorenoe.cm@gmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/gradio/"
@@ -20,7 +20,7 @@ msgstr ""
 "X-Generator: Weblate 2.18-dev\n"
 
 #: data/ui/app-menu.ui:6 data/ui/menubutton.ui:192
-#: src/page/gradio-settings-page.vala:117
+#: src/page/gradio-settings-page.vala:115
 msgid "Settings"
 msgstr "Configuraciones"
 
@@ -48,7 +48,7 @@ msgstr "No tienes ninguna colección"
 msgid "You can group stations into collections."
 msgstr "Puede agrupar estaciones en colecciones."
 
-#: data/ui/details-box.ui:23 data/ui/selection-toolbar.ui:222
+#: data/ui/details-box.ui:23 data/ui/selection-toolbar.ui:233
 msgid "Details"
 msgstr "detalles"
 
@@ -65,6 +65,11 @@ msgstr "Tipo"
 msgid "Items"
 msgstr "Elementos"
 
+#: data/ui/details-box.ui:250 data/ui/menubutton.ui:354
+#: src/gradio-searchbar.vala:187
+msgid "Votes"
+msgstr ""
+
 #: data/ui/details-box.ui:282
 msgid "Location"
 msgstr "Ubicación"
@@ -77,7 +82,7 @@ msgstr "Descripción"
 msgid "Tags"
 msgstr "Etiquetas"
 
-#: data/ui/details-box.ui:433 data/ui/selection-toolbar.ui:72
+#: data/ui/details-box.ui:433 data/ui/selection-toolbar.ui:83
 msgid "Play"
 msgstr "Reproducir"
 
@@ -85,7 +90,7 @@ msgstr "Reproducir"
 msgid "Open homepage"
 msgstr "Abrir página de inicio"
 
-#: data/ui/details-box.ui:523 data/ui/selection-toolbar.ui:204
+#: data/ui/details-box.ui:523 data/ui/selection-toolbar.ui:195
 msgid "Edit"
 msgstr "Editar"
 
@@ -115,25 +120,29 @@ msgstr "No seleccionar ninguno"
 msgid "Save"
 msgstr ""
 
-#: data/ui/selection-toolbar.ui:59
+#: data/ui/selection-toolbar.ui:70
 msgid "Click an item to view options"
 msgstr ""
 
-#: data/ui/selection-toolbar.ui:93
+#: data/ui/selection-toolbar.ui:104
 #, fuzzy
 msgid "Collection"
 msgstr "Colecciones"
 
-#: data/ui/selection-toolbar.ui:106
+#: data/ui/selection-toolbar.ui:117
 msgid "Add to library"
 msgstr "Agregar a la biblioteca"
 
-#: data/ui/selection-toolbar.ui:123
+#: data/ui/selection-toolbar.ui:134
 msgid "Remove from Library"
 msgstr ""
 
-#: data/ui/selection-toolbar.ui:148
+#: data/ui/selection-toolbar.ui:159
 msgid "Rename"
+msgstr ""
+
+#: data/ui/selection-toolbar.ui:174
+msgid "Vote"
 msgstr ""
 
 #: data/ui/station-editor.ui:39
@@ -196,39 +205,39 @@ msgstr "Cancelar"
 msgid "Done"
 msgstr "Hecho"
 
-#: data/ui/page/search-page.ui:92 data/ui/page/search-page.ui:171
-#: data/ui/page/search-page.ui:250
+#: data/ui/page/search-page.ui:80 data/ui/page/search-page.ui:159
+#: data/ui/page/search-page.ui:238
 msgid "More..."
 msgstr ""
 
-#: data/ui/page/search-page.ui:114
+#: data/ui/page/search-page.ui:102
 #, fuzzy
 msgid "Stations with the most votes"
 msgstr "Mostrar las estaciones de radio mas votadas."
 
-#: data/ui/page/search-page.ui:193
+#: data/ui/page/search-page.ui:181
 #, fuzzy
 msgid "Recently clicked stations"
 msgstr "Mostrar estaciones de radio recientes"
 
-#: data/ui/page/search-page.ui:272
+#: data/ui/page/search-page.ui:260
 #, fuzzy
 msgid "Stations with the most clicks"
 msgstr "Mostrar las estaciones de radio con más clics."
 
-#: data/ui/page/search-page.ui:360 src/page/gradio-search-page.vala:171
+#: data/ui/page/search-page.ui:348 src/page/gradio-search-page.vala:171
 msgid "Search"
 msgstr ""
 
-#: data/ui/page/search-page.ui:395
+#: data/ui/page/search-page.ui:383
 msgid "Results:"
 msgstr ""
 
-#: data/ui/page/search-page.ui:489
+#: data/ui/page/search-page.ui:479
 msgid "No results found"
 msgstr "No se han encontrado resultados"
 
-#: data/ui/page/search-page.ui:507
+#: data/ui/page/search-page.ui:497
 msgid ""
 "Either the station does not exist, or you have to search with other keywords."
 msgstr ""
@@ -261,10 +270,6 @@ msgstr "Importar"
 msgid "Export"
 msgstr "Exportar"
 
-#: data/ui/menubutton.ui:354 src/gradio-searchbar.vala:187
-msgid "Votes"
-msgstr ""
-
 #: data/ui/menubutton.ui:429 src/gradio-searchbar.vala:193
 msgid "Clicks"
 msgstr ""
@@ -286,107 +291,103 @@ msgid "Descending"
 msgstr ""
 
 #: src/page/gradio-collection-items-page.vala:75
+#: src/page/gradio-library-page.vala:87
 #, fuzzy
-msgid " Items"
+msgid "Items: "
 msgstr "Elementos"
 
 #: src/page/gradio-library-page.vala:85
 msgid "Fetching station data…"
 msgstr ""
 
-#: src/page/gradio-library-page.vala:87
-#, fuzzy
-msgid "Items: "
-msgstr "Elementos"
-
-#: src/page/gradio-settings-page.vala:39
+#: src/page/gradio-settings-page.vala:37
 msgid "Features"
 msgstr "Caracteristicas"
 
-#: src/page/gradio-settings-page.vala:42
+#: src/page/gradio-settings-page.vala:40
 msgid "Playback"
 msgstr "Reproducción"
 
-#: src/page/gradio-settings-page.vala:45
+#: src/page/gradio-settings-page.vala:43
 msgid "Appearance"
 msgstr "Apariencia"
 
-#: src/page/gradio-settings-page.vala:48
+#: src/page/gradio-settings-page.vala:46
 msgid "Cache"
 msgstr "Cache"
 
 #. APPEARANCE
 #. Dark design
-#: src/page/gradio-settings-page.vala:56
+#: src/page/gradio-settings-page.vala:54
 msgid "Prefer dark theme"
 msgstr "Preferir tema oscuro"
 
-#: src/page/gradio-settings-page.vala:56
+#: src/page/gradio-settings-page.vala:54
 msgid "Use a dark theme, if possible"
 msgstr "Use el tema oscuro, si es posible"
 
 #. PLAYBACK
 #. enable background playback
-#: src/page/gradio-settings-page.vala:65
+#: src/page/gradio-settings-page.vala:63
 msgid "Background Playback"
 msgstr "Reproducción de fondo"
 
-#: src/page/gradio-settings-page.vala:65
+#: src/page/gradio-settings-page.vala:63
 msgid "Continue the playback if you close the Gradio window"
 msgstr "Continúa la reproducción si cierras la ventana de Gradio"
 
 #. resume playback on startup
-#: src/page/gradio-settings-page.vala:71
+#: src/page/gradio-settings-page.vala:69
 msgid "Resume playback on startup"
 msgstr "Reanudar la reproducción al iniciar"
 
-#: src/page/gradio-settings-page.vala:71
+#: src/page/gradio-settings-page.vala:69
 msgid "Play the latest station if you start Gradio"
 msgstr "Reproducir la última estación al arrancarGradio"
 
 #. FEATURES
 #. mpris
-#: src/page/gradio-settings-page.vala:80
+#: src/page/gradio-settings-page.vala:78
 msgid "MPRIS"
 msgstr "MPRIS"
 
-#: src/page/gradio-settings-page.vala:80
+#: src/page/gradio-settings-page.vala:78
 msgid "Integrate Gradio as media player in your desktop environment"
 msgstr "Integre Gradio como reproductor multimedia en su entorno de escritorio"
 
 #. enable notifications
-#: src/page/gradio-settings-page.vala:86
+#: src/page/gradio-settings-page.vala:84
 msgid "Notifications"
 msgstr "permitir notificaciones"
 
-#: src/page/gradio-settings-page.vala:86
+#: src/page/gradio-settings-page.vala:84
 msgid "Show desktop notifications"
 msgstr "Mostrar notificaciones de escritorio"
 
 #. enable tray icon
-#: src/page/gradio-settings-page.vala:92
+#: src/page/gradio-settings-page.vala:90
 msgid "Tray icon"
 msgstr "Icono en la bandeja"
 
-#: src/page/gradio-settings-page.vala:92
+#: src/page/gradio-settings-page.vala:90
 msgid "Show a tray icon, to restore the main window"
 msgstr "Mostrar icono en la bandeja, para restaurar la ventana principal"
 
 #. CACHE
 #. cache station images
-#: src/page/gradio-settings-page.vala:101
+#: src/page/gradio-settings-page.vala:99
 msgid "Cache station icons"
 msgstr "Cache de Iconos de la estaciones"
 
-#: src/page/gradio-settings-page.vala:101
+#: src/page/gradio-settings-page.vala:99
 msgid "Saves the images locally."
 msgstr "Guarda las imágenes locamente."
 
-#: src/page/gradio-settings-page.vala:106
+#: src/page/gradio-settings-page.vala:104
 msgid "Clear Cache"
 msgstr "Limpiar cache"
 
-#: src/page/gradio-settings-page.vala:106
+#: src/page/gradio-settings-page.vala:104
 msgid "Clear all cached station icons"
 msgstr "Borrar todos los iconos de la estaciones en caché"
 
@@ -396,8 +397,17 @@ msgstr ""
 
 #: src/gradio-headerbar.vala:61
 #, c-format
-msgid "%s selected"
+msgid "%i selected"
 msgstr ""
+
+#: src/gradio-searchbar.vala:67
+msgid "Search for radio stations"
+msgstr "Buscar emisoras de radio"
+
+#: src/gradio-searchbar.vala:201
+#, fuzzy, c-format
+msgid "Sorting: %s / %s"
+msgstr "Configuraciones"
 
 #: src/gradio-searchbar.vala:288
 #, fuzzy
@@ -427,18 +437,19 @@ msgstr "Descubre estaciones de radio"
 msgid "\"Name\" and \"Stream\" information is required."
 msgstr ""
 
-#: src/gradio-selection-toolbar.vala:99
+#: src/gradio-selection-toolbar.vala:98
 #, c-format
 msgid "%i radio station(s) not present in library."
 msgstr ""
 
-#: src/gradio-selection-toolbar.vala:109
+#: src/gradio-selection-toolbar.vala:108
 #, c-format
 msgid "%i radio station(s) already added to library."
 msgstr ""
 
-#~ msgid "Search for radio stations"
-#~ msgstr "Buscar emisoras de radio"
+#, fuzzy
+#~ msgid " Items"
+#~ msgstr "Elementos"
 
 #~ msgid "New public radio station"
 #~ msgstr "Nueva estación de radio pública"
