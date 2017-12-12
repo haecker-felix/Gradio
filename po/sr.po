@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-12 19:53+0100\n"
 "PO-Revision-Date: 2017-12-12 23:25+0000\n"
-"Last-Translator: Erwin van Eijk <erwin.vaneijk@gmail.com>\n"
+"Last-Translator: Slobodan Terzić <githzerai06@gmail.com>\n"
 "Language-Team: Serbian "
 "<https://hosted.weblate.org/projects/gradio/translations/sr/>\n"
 "Language: sr\n"
@@ -139,9 +139,8 @@ msgid "Rename"
 msgstr "Преименуј"
 
 #: data/ui/selection-toolbar.ui:174
-#, fuzzy
 msgid "Vote"
-msgstr "Гласови"
+msgstr "Гласaj"
 
 #: data/ui/station-editor.ui:39
 msgid "Global database"
