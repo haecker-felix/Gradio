@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-12 19:53+0100\n"
-"PO-Revision-Date: 2017-12-11 15:32+0000\n"
+"PO-Revision-Date: 2017-12-12 21:51+0000\n"
 "Last-Translator: Erwin van Eijk <erwin.vaneijk@gmail.com>\n"
-"Language-Team: Dutch <https://hosted.weblate.org/projects/gradio/"
-"translations/nl/>\n"
+"Language-Team: Dutch "
+"<https://hosted.weblate.org/projects/gradio/translations/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -139,9 +139,8 @@ msgid "Rename"
 msgstr "Hernoemen"
 
 #: data/ui/selection-toolbar.ui:174
-#, fuzzy
 msgid "Vote"
-msgstr "Stemmen"
+msgstr "Stem"
 
 #: data/ui/station-editor.ui:39
 msgid "Global database"
@@ -389,18 +388,18 @@ msgid "Click on items to select them"
 msgstr "Selecteer op een of meer objecten om ze te selecteren"
 
 #: src/gradio-headerbar.vala:61
-#, fuzzy, c-format
+#, c-format
 msgid "%i selected"
-msgstr "%s gekozen"
+msgstr "%i gekozen"
 
 #: src/gradio-searchbar.vala:67
 msgid "Search for radio stations"
 msgstr "Zoek naar radiozenders"
 
 #: src/gradio-searchbar.vala:201
-#, fuzzy, c-format
+#, c-format
 msgid "Sorting: %s / %s"
-msgstr "Sortering"
+msgstr "Sorteervolgorde: %s / %s"
 
 #: src/gradio-searchbar.vala:288
 msgid "Select Language ..."
