@@ -7,17 +7,17 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-14 20:44+0100\n"
-"PO-Revision-Date: 2017-12-12 23:26+0000\n"
+"PO-Revision-Date: 2017-12-15 17:16+0000\n"
 "Last-Translator: Slobodan Terzić <githzerai06@gmail.com>\n"
-"Language-Team: Serbian (latin) <https://hosted.weblate.org/projects/gradio/"
-"translations/sr_Latn/>\n"
+"Language-Team: Serbian (latin) "
+"<https://hosted.weblate.org/projects/gradio/translations/sr_Latn/>\n"
 "Language: sr@latin\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 2.18-dev\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<="
+"4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 2.18\n"
 
 #: data/ui/app-menu.ui:6 data/ui/menubutton.ui:192
 #: src/page/gradio-settings-page.vala:115
@@ -41,9 +41,8 @@ msgid "If you add stations to the library, you will find them here."
 msgstr "Ovde ćete pronaći stanice koje dodate u fonoteku."
 
 #: data/ui/page/library-page.ui:75
-#, fuzzy
 msgid "Add stations to library"
-msgstr "Dodaj u zbirku"
+msgstr "Dodaj stanice u fonoteku"
 
 #: data/ui/page/collections-page.ui:43
 msgid "You don't have any collection"
