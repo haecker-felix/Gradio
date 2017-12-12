@@ -1,5 +1,3 @@
-@define-color colorPrimary #ffcb5c;
-
 .thumbnail {
     background-color: #ffffff;
     border: 2px solid @insensitive_fg_color;
