@@ -23,6 +23,7 @@ namespace Gradio{
 
 		[GtkChild] Viewport ScrollViewport;
 		[GtkChild] Stack LibraryStack;
+		[GtkChild] Button SearchButton;
 
 		private MainBox mainbox;
 
@@ -85,6 +86,11 @@ namespace Gradio{
 				return _("Fetching station data…");
 			else
 				return _("Items: ") + Library.station_model.get_n_items().to_string();
+		}
+
+		[GtkCallback]
+		private void SearchButton_clicked(Gtk.Button button){
+			App.window.set_mode(WindowMode.SEARCH);
 		}
 	}
 }
