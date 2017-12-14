@@ -167,8 +167,8 @@ namespace Gradio{
 				case Compare.NAME: _secondary_text = ""; break;
 				case Compare.DATE: _secondary_text = clicktimestamp; break;
 				case Compare.STATE: _secondary_text = state; break;
-				case Compare.VOTES: _secondary_text = votes + " Likes"; break;
-				case Compare.CLICKS: _secondary_text = clickcount + _(" Clicks"); break;
+				case Compare.VOTES: _secondary_text = votes + " " + _("Votes"); break;
+				case Compare.CLICKS: _secondary_text = clickcount + " " + _("Clicks"); break;
 				case Compare.COUNTRY: _secondary_text = country; break;
 				case Compare.BITRATE: _secondary_text = bitrate + " kBit/s"; break;
 				case Compare.LANGUAGE: _secondary_text = language; break;

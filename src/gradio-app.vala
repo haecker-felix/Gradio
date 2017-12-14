@@ -148,13 +148,12 @@ namespace Gradio {
 				"artists", artists,
 				"authors", authors,
 				"program-name", "Gradio",
-				"title", "About Gradio",
 				"license-type", Gtk.License.GPL_3_0,
 				"logo-icon-name", "de.haeckerfelix.gradio",
 				"version", Config.VERSION,
-				"comments", "Find and listen to internet radio stations.",
+				"comments", _("Find and listen to internet radio stations."),
 				"website", "https://github.com/haecker-felix/gradio",
-				"website-label", "GitHub Homepage");
+				"website-label", _("GitHub Homepage"));
 		}
 
 		// make sure that window != null, but don't present it
