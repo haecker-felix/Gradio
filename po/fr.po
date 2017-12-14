@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-12 19:53+0100\n"
+"POT-Creation-Date: 2017-12-14 20:44+0100\n"
 "PO-Revision-Date: 2017-12-11 18:34+0000\n"
 "Last-Translator: Erwin van Eijk <erwin.vaneijk@gmail.com>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/gradio/"
@@ -40,6 +40,11 @@ msgstr "Votre bibliothèque est vide"
 msgid "If you add stations to the library, you will find them here."
 msgstr "Les dernières stations rajoutées se trouvent ici."
 
+#: data/ui/page/library-page.ui:75
+#, fuzzy
+msgid "Add stations to library"
+msgstr "Ajouter à la bibliothèque"
+
 #: data/ui/page/collections-page.ui:43
 msgid "You don't have any collection"
 msgstr "Vous n'avez aucune collection / liste de lecture"
@@ -54,7 +59,7 @@ msgid "Details"
 msgstr "Détails"
 
 #: data/ui/details-box.ui:137 data/ui/station-editor.ui:125
-#: data/ui/menubutton.ui:369 src/gradio-searchbar.vala:188
+#: data/ui/menubutton.ui:369 src/gradio-searchbar.vala:193
 msgid "Name"
 msgstr "Nom"
 
@@ -67,7 +72,7 @@ msgid "Items"
 msgstr "Contenu"
 
 #: data/ui/details-box.ui:250 data/ui/menubutton.ui:354
-#: src/gradio-searchbar.vala:187
+#: src/gradio-searchbar.vala:192
 msgid "Votes"
 msgstr "Votes"
 
@@ -173,17 +178,17 @@ msgid "Homepage"
 msgstr "Page d'accueil"
 
 #: data/ui/station-editor.ui:181 data/ui/menubutton.ui:399
-#: src/gradio-searchbar.vala:190
+#: src/gradio-searchbar.vala:195
 msgid "Country"
 msgstr "Pays"
 
 #: data/ui/station-editor.ui:196 data/ui/menubutton.ui:414
-#: src/gradio-searchbar.vala:191
+#: src/gradio-searchbar.vala:196
 msgid "State"
 msgstr "Ville"
 
 #: data/ui/station-editor.ui:211 data/ui/menubutton.ui:384
-#: src/gradio-searchbar.vala:189
+#: src/gradio-searchbar.vala:194
 msgid "Language"
 msgstr "Langue"
 
@@ -253,7 +258,7 @@ msgid "Hide broken stations"
 msgstr "Cacher les stations sans lien valide"
 
 #: data/ui/menubutton.ui:145 data/ui/menubutton.ui:264
-#: src/page/gradio-library-page.vala:80
+#: src/page/gradio-library-page.vala:81
 msgid "Library"
 msgstr "Bibliothèque"
 
@@ -270,32 +275,32 @@ msgstr "Importer"
 msgid "Export"
 msgstr "Exporter"
 
-#: data/ui/menubutton.ui:429 src/gradio-searchbar.vala:193
+#: data/ui/menubutton.ui:429 src/gradio-searchbar.vala:198
 msgid "Clicks"
 msgstr "Vues"
 
-#: data/ui/menubutton.ui:444 src/gradio-searchbar.vala:192
+#: data/ui/menubutton.ui:444 src/gradio-searchbar.vala:197
 msgid "Bitrate"
 msgstr "Débit"
 
-#: data/ui/menubutton.ui:459 src/gradio-searchbar.vala:194
+#: data/ui/menubutton.ui:459 src/gradio-searchbar.vala:199
 msgid "Date"
 msgstr "Date"
 
-#: data/ui/menubutton.ui:499 src/gradio-searchbar.vala:197
+#: data/ui/menubutton.ui:499 src/gradio-searchbar.vala:202
 msgid "Ascending"
 msgstr "Croissant"
 
-#: data/ui/menubutton.ui:514 src/gradio-searchbar.vala:198
+#: data/ui/menubutton.ui:514 src/gradio-searchbar.vala:203
 msgid "Descending"
 msgstr "Décroissant"
 
 #: src/page/gradio-collection-items-page.vala:75
-#: src/page/gradio-library-page.vala:87
+#: src/page/gradio-library-page.vala:88
 msgid "Items: "
 msgstr "Contenu: "
 
-#: src/page/gradio-library-page.vala:85
+#: src/page/gradio-library-page.vala:86
 msgid "Fetching station data…"
 msgstr "Récupération des données de la station radio…"
 
@@ -402,24 +407,24 @@ msgstr "Cliquer sur des éléments pour les sélectionner"
 msgid "%i selected"
 msgstr "%s sélectionnés"
 
-#: src/gradio-searchbar.vala:67
+#: src/gradio-searchbar.vala:68
 msgid "Search for radio stations"
 msgstr "Rechercher des stations radio"
 
-#: src/gradio-searchbar.vala:201
+#: src/gradio-searchbar.vala:206
 #, fuzzy, c-format
 msgid "Sorting: %s / %s"
 msgstr "Trier"
 
-#: src/gradio-searchbar.vala:288
+#: src/gradio-searchbar.vala:293
 msgid "Select Language ..."
 msgstr "Sélectionner la langue ..."
 
-#: src/gradio-searchbar.vala:298
+#: src/gradio-searchbar.vala:303
 msgid "Select Country ..."
 msgstr "Sélectionner un pays..."
 
-#: src/gradio-searchbar.vala:309
+#: src/gradio-searchbar.vala:314
 msgid "Select State ..."
 msgstr "Sélectionner une ville ..."
 
