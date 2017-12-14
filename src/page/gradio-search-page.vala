@@ -54,7 +54,7 @@ namespace Gradio{
 
 			searchbar = new Gradio.SearchBar(ref search_station_provider);
 			searchbar.timeout_reset.connect(() => {SearchStack.set_visible_child_name("loading");});
-			searchbar.SearchEntry.search_changed.connect(show_search);
+			searchbar.show_search_results.connect(show_search);
 			searchbar.BackButton.clicked.connect(show_discover);
 			SearchBox.add(searchbar);
 

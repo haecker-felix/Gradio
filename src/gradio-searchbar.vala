@@ -22,7 +22,7 @@ namespace Gradio{
 	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/searchbar.ui")]
 	public class SearchBar : Gtk.Box{
 
-		public TaggedEntry SearchEntry;
+		private TaggedEntry SearchEntry;
 		private string search_term = "";
 		[GtkChild] private Box SearchBox;
 
@@ -58,6 +58,7 @@ namespace Gradio{
 		[GtkChild] public Button BackButton;
 
 		private GLib.SimpleActionGroup search_action_group;
+		public signal void show_search_results();
 
 		public SearchBar(ref StationProvider sp){
 			station_provider = sp;
@@ -113,6 +114,7 @@ namespace Gradio{
 				SelectStateButton.set_sensitive(false);
 
 				reset_timeout();
+				show_search_results();
 			});
 
 			StateListBox.row_activated.connect((t,a) => {
@@ -128,6 +130,7 @@ namespace Gradio{
 				ClearStateButton.set_visible(true);
 
 				reset_timeout();
+				show_search_results();
 			});
 
 			LanguageListBox.row_activated.connect((t,a) => {
@@ -142,11 +145,13 @@ namespace Gradio{
 				ClearLanguageButton.set_visible(true);
 
 				reset_timeout();
+				show_search_results();
 			});
 
 			SearchEntry.search_changed.connect(() => {
 				search_term = SearchEntry.get_text();
 				reset_timeout();
+				show_search_results();
 			});
 
 			App.settings.notify["station-sorting"].connect(reset_timeout);
