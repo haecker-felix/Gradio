@@ -58,6 +58,12 @@
   </content_rating>
   <releases>
 
+    <release version="7.0" date="2017-12-15">
+      <description>
+        <p>The "Discover" section is back! Merged "Add" and "Search" page. New unified library view. Library can now be exported as M3U playlist. And much more..!</p>
+      </description>
+    </release>
+
     <release version="6.0" date="2017-09-10">
       <description>
         <p>Group your stations into collections, Everything is now sortable, Extended search page, Stations can be created and edited, New details sidebar, New selection system</p>
