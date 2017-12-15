@@ -195,7 +195,7 @@ namespace Gradio{
 				case "country": App.settings.station_sorting = Compare.COUNTRY; sortlabel = _("Country"); break;
 				case "state": App.settings.station_sorting = Compare.STATE; sortlabel = _("State"); break;
 				case "bitrate": App.settings.station_sorting = Compare.BITRATE; sortlabel = _("Bitrate"); break;
-				case "clicks": App.settings.station_sorting = Compare.CLICKS; sortlabel = _("Clicks"); break;
+				case "clickcount": App.settings.station_sorting = Compare.CLICKS; sortlabel = _("Clicks"); break;
 				case "clicktimestamp": App.settings.station_sorting = Compare.DATE; sortlabel = _("Date"); break;
 			}
 			switch(order){

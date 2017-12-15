@@ -384,7 +384,7 @@
                 <property name="receives_default">True</property>
                 <property name="action_name">search.sort</property>
                 <property name="text" translatable="yes">Clicks</property>
-		<property name="action-target">'clicks'</property>
+		<property name="action-target">'clickcount'</property>
               </object>
               <packing>
                 <property name="expand">False</property>
