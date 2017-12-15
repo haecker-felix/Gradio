@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-14 20:44+0100\n"
-"PO-Revision-Date: 2017-12-15 18:08+0000\n"
+"PO-Revision-Date: 2017-12-23 18:05+0000\n"
 "Last-Translator: Carlos moreno <carlosmorenoe.cm@gmail.com>\n"
 "Language-Team: Spanish "
 "<https://hosted.weblate.org/projects/gradio/translations/es/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.18\n"
+"X-Generator: Weblate 2.19-dev\n"
 
 #: data/ui/app-menu.ui:6 data/ui/menubutton.ui:192
 #: src/page/gradio-settings-page.vala:115
@@ -353,7 +353,7 @@ msgstr "Integre Gradio como reproductor multimedia en su entorno de escritorio"
 #. enable notifications
 #: src/page/gradio-settings-page.vala:84
 msgid "Notifications"
-msgstr "permitir notificaciones"
+msgstr "Permitir notificaciones"
 
 #: src/page/gradio-settings-page.vala:84
 msgid "Show desktop notifications"
@@ -384,7 +384,7 @@ msgstr "Limpiar cache"
 
 #: src/page/gradio-settings-page.vala:104
 msgid "Clear all cached station icons"
-msgstr "Borrar todos los iconos de la estaciones en caché"
+msgstr "Borrar todos los iconos de estaciones en caché"
 
 #: src/gradio-headerbar.vala:53 src/gradio-headerbar.vala:59
 msgid "Click on items to select them"
