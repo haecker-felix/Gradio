@@ -20,11 +20,13 @@ namespace Gradio{
 		public GenericModel languages_model;
 		public GenericModel countries_model;
 		public GenericModel states_model;
+        public Gtk.ListStore tags_model;
 
 		public CategoryItems(){
 			languages_model = new GenericModel();
 			countries_model = new GenericModel();
 			states_model = new GenericModel();
+            tags_model = new Gtk.ListStore(2, typeof(string), typeof(int));
 			load_lists.begin();
 		}
 
@@ -73,6 +75,20 @@ namespace Gradio{
 					var item_data = item.get_object ();
 					GenericItem genericitem = new GenericItem(item_data.get_string_member("value"));
 					states_model.add_item(genericitem);
+				}
+
+				// Tags
+				data = yield Util.get_string_from_uri(RadioBrowser.radio_station_tags);
+				parser.load_from_data (data);
+				root = parser.get_root ();
+				items = root.get_array ();
+				max_items = (int)items.get_length();
+                Gtk.TreeIter iter;
+				for(int a = 0; a < max_items; a++){
+					var item = items.get_element(a);
+					var item_data = item.get_object ();
+                    tags_model.append(out iter);
+                    tags_model.set(iter, 0, item_data.get_string_member("value"), 1, item_data.get_int_member("stationcount"));
 				}
 
 				message("Loaded all category items.");
