@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-14 20:44+0100\n"
-"PO-Revision-Date: 2017-12-16 06:52+0000\n"
+"PO-Revision-Date: 2017-12-23 18:05+0000\n"
 "Last-Translator: DaSnoopy <a.antolini@tin.it>\n"
 "Language-Team: Italian "
 "<https://hosted.weblate.org/projects/gradio/translations/it/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.18\n"
+"X-Generator: Weblate 2.19-dev\n"
 
 #: data/ui/app-menu.ui:6 data/ui/menubutton.ui:192
 #: src/page/gradio-settings-page.vala:115
@@ -46,7 +46,7 @@ msgstr "Aggiungi nuove stazioni alla raccolta"
 
 #: data/ui/page/collections-page.ui:43
 msgid "You don't have any collection"
-msgstr "Nessuna collezione presente"
+msgstr "Ancora nessuna collezione presente"
 
 #: data/ui/page/collections-page.ui:61
 msgid "You can group stations into collections."
@@ -124,7 +124,7 @@ msgstr "Salva"
 
 #: data/ui/selection-toolbar.ui:70
 msgid "Click an item to view options"
-msgstr "Click su un oggetto per vedere le opzioni"
+msgstr "Seleziona un oggetto per vedere le opzioni disponibili"
 
 #: data/ui/selection-toolbar.ui:104
 msgid "Collection"
@@ -144,7 +144,7 @@ msgstr "Rinomina"
 
 #: data/ui/selection-toolbar.ui:174
 msgid "Vote"
-msgstr "Voto"
+msgstr "Vota"
 
 #: data/ui/station-editor.ui:39
 msgid "Global database"
@@ -222,7 +222,7 @@ msgstr "Stazioni radio ascoltate di recente"
 
 #: data/ui/page/search-page.ui:260
 msgid "Stations with the most clicks"
-msgstr "Stazioni radio con più clicks"
+msgstr "Stazioni radio piu' cliccate"
 
 #: data/ui/page/search-page.ui:348 src/page/gradio-search-page.vala:171
 msgid "Search"
@@ -270,7 +270,7 @@ msgstr "Esporta"
 
 #: data/ui/menubutton.ui:429 src/gradio-searchbar.vala:198
 msgid "Clicks"
-msgstr "Clics"
+msgstr "Clic"
 
 #: data/ui/menubutton.ui:444 src/gradio-searchbar.vala:197
 msgid "Bitrate"
@@ -295,7 +295,7 @@ msgstr "Oggetti: "
 
 #: src/page/gradio-library-page.vala:86
 msgid "Fetching station data…"
-msgstr "Caricamento dati…"
+msgstr "Caricamento dati stazioni radio…"
 
 #: src/page/gradio-settings-page.vala:37
 msgid "Features"
@@ -390,7 +390,7 @@ msgstr "Elimina tutte le icone salvate"
 
 #: src/gradio-headerbar.vala:53 src/gradio-headerbar.vala:59
 msgid "Click on items to select them"
-msgstr "Click sulle stazioni per selezionarle"
+msgstr "Clic sulle stazioni per selezionarle"
 
 #: src/gradio-headerbar.vala:61
 #, c-format
@@ -412,7 +412,7 @@ msgstr "Seleziona la lingua..."
 
 #: src/gradio-searchbar.vala:303
 msgid "Select Country ..."
-msgstr "Seleziona paese ..."
+msgstr "Seleziona lo stato ..."
 
 #: src/gradio-searchbar.vala:314
 msgid "Select State ..."
