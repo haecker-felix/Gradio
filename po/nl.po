@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-14 20:44+0100\n"
-"PO-Revision-Date: 2017-12-16 10:41+0000\n"
+"PO-Revision-Date: 2017-12-23 18:05+0000\n"
 "Last-Translator: Erwin van Eijk <erwin.vaneijk@gmail.com>\n"
 "Language-Team: Dutch "
 "<https://hosted.weblate.org/projects/gradio/translations/nl/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.18\n"
+"X-Generator: Weblate 2.19-dev\n"
 
 #: data/ui/app-menu.ui:6 data/ui/menubutton.ui:192
 #: src/page/gradio-settings-page.vala:115
@@ -34,11 +34,11 @@ msgstr "Beëindigen"
 
 #: data/ui/page/library-page.ui:44
 msgid "Your library is empty"
-msgstr "Uw bibliotheek is leeg"
+msgstr "De bibliotheek is leeg"
 
 #: data/ui/page/library-page.ui:62
 msgid "If you add stations to the library, you will find them here."
-msgstr "Als u radiozenders aan de bibliotheek toevoegt, zult u ze hier vinden."
+msgstr "Als je radiozenders aan de bibliotheek toevoegt, zul je ze hier vinden."
 
 #: data/ui/page/library-page.ui:75
 msgid "Add stations to library"
@@ -46,11 +46,11 @@ msgstr "Voeg radiostations toe aan de bibliotheek"
 
 #: data/ui/page/collections-page.ui:43
 msgid "You don't have any collection"
-msgstr "U heeft nog geen verzamelingen"
+msgstr "Je hebt nog geen verzamelingen"
 
 #: data/ui/page/collections-page.ui:61
 msgid "You can group stations into collections."
-msgstr "U kunt radiozenders groeperen in verzamelingen."
+msgstr "Je kunt radiozenders groeperen in verzamelingen."
 
 #: data/ui/details-box.ui:23 data/ui/selection-toolbar.ui:233
 msgid "Details"
@@ -148,7 +148,7 @@ msgstr "Stem"
 
 #: data/ui/station-editor.ui:39
 msgid "Global database"
-msgstr "Algemene database"
+msgstr "Globale database"
 
 #: data/ui/station-editor.ui:54
 msgid ""
@@ -156,9 +156,9 @@ msgid ""
 "going to be visible for all users. Please be careful, and double check your "
 "input!"
 msgstr ""
-"Gradio gebruikt een database op Internet. Alles wat u hier invoert, zal "
-"zichtbaar zijn voor alle andere gebruikers. Weest voorzichtig, en "
-"controleert uw invoer!"
+"Gradio gebruikt een database op Internet. Alles wat je hier invoert, zal "
+"zichtbaar zijn voor alle andere gebruikers. Wees voorzichtig, en controleer "
+"de invoer!"
 
 #: data/ui/station-editor.ui:68
 msgid "Continue"
@@ -240,7 +240,7 @@ msgstr "Geen resultaten gevonden"
 msgid ""
 "Either the station does not exist, or you have to search with other keywords."
 msgstr ""
-"Of de radiozender bestaat niet, of u moet met andere zoekwoorden zoeken."
+"Of de radiozender bestaat niet, of je moet met andere zoekwoorden zoeken."
 
 #: data/ui/menubutton.ui:104 data/ui/menubutton.ui:332
 msgid "Sorting"
@@ -294,11 +294,11 @@ msgstr "Objecten: "
 
 #: src/page/gradio-library-page.vala:86
 msgid "Fetching station data…"
-msgstr "Zender data ophalen…"
+msgstr "Radiozender data ophalen…"
 
 #: src/page/gradio-settings-page.vala:37
 msgid "Features"
-msgstr "Functies"
+msgstr "Functionaliteiten"
 
 #: src/page/gradio-settings-page.vala:40
 msgid "Playback"
@@ -326,11 +326,13 @@ msgstr "Gebruik een donker uiterlijk, indien mogelijk"
 #. enable background playback
 #: src/page/gradio-settings-page.vala:63
 msgid "Background Playback"
-msgstr "Afspelen in de achtergrond"
+msgstr ""
+"Afspelen\n"
+"verzorg afspelen in de achtergrond"
 
 #: src/page/gradio-settings-page.vala:63
 msgid "Continue the playback if you close the Gradio window"
-msgstr "Doorgaan met afspelen, als u het Gradio venster sluit"
+msgstr "Doorgaan met afspelen, als je het Gradio venster sluit"
 
 #. resume playback on startup
 #: src/page/gradio-settings-page.vala:69
@@ -339,17 +341,19 @@ msgstr "Verder gaan met afspelen bij het opstarten"
 
 #: src/page/gradio-settings-page.vala:69
 msgid "Play the latest station if you start Gradio"
-msgstr "Speel automatisch de laatste radiozender af, als u Gradio start"
+msgstr "Speel automatisch de laatste radiozender af, als je Gradio start"
 
 #. FEATURES
 #. mpris
 #: src/page/gradio-settings-page.vala:78
 msgid "MPRIS"
-msgstr "MPRIS"
+msgstr ""
+"FUNCTIONALITEITEN\n"
+"mpris"
 
 #: src/page/gradio-settings-page.vala:78
 msgid "Integrate Gradio as media player in your desktop environment"
-msgstr "Integreer Gradio als media speler in uw desktop omgeving"
+msgstr "Integreer Gradio als media speler in de desktop omgeving"
 
 #. enable notifications
 #: src/page/gradio-settings-page.vala:84
