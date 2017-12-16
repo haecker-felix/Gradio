@@ -220,7 +220,7 @@ namespace Gradio{
 			set_selection_mode(false);
 
 			// "delete" search page if necessary
-			if(current_mode != WindowMode.SEARCH){
+			if(current_mode != WindowMode.SEARCH && search_page != null){
 				MainStack.remove(search_page);
 				search_page = null;
 			}

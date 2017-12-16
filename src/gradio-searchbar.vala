@@ -22,7 +22,7 @@ namespace Gradio{
 	[GtkTemplate (ui = "/de/haecker-felix/gradio/ui/searchbar.ui")]
 	public class SearchBar : Gtk.Box{
 
-		public TaggedEntry SearchEntry;
+		private TaggedEntry SearchEntry;
 		private string search_term = "";
 		[GtkChild] private Box SearchBox;
 
@@ -66,6 +66,7 @@ namespace Gradio{
 		[GtkChild] public Button BackButton;
 
 		private GLib.SimpleActionGroup search_action_group;
+		public signal void show_search_results();
 
 		public SearchBar(ref StationProvider sp){
 			station_provider = sp;
@@ -128,6 +129,7 @@ namespace Gradio{
 				SelectStateButton.set_sensitive(false);
 
 				reset_timeout();
+				show_search_results();
 			});
 
 			StateListBox.row_activated.connect((t,a) => {
@@ -143,6 +145,7 @@ namespace Gradio{
 				ClearStateButton.set_visible(true);
 
 				reset_timeout();
+				show_search_results();
 			});
 
 			LanguageListBox.row_activated.connect((t,a) => {
@@ -157,6 +160,7 @@ namespace Gradio{
 				ClearLanguageButton.set_visible(true);
 
 				reset_timeout();
+				show_search_results();
 			});
 
             TagsEntry.activate.connect(() => {
@@ -178,6 +182,7 @@ namespace Gradio{
 			SearchEntry.search_changed.connect(() => {
 				search_term = SearchEntry.get_text();
 				reset_timeout();
+				show_search_results();
 			});
 
 			App.settings.notify["station-sorting"].connect(reset_timeout);
@@ -221,7 +226,7 @@ namespace Gradio{
 				case "country": App.settings.station_sorting = Compare.COUNTRY; sortlabel = _("Country"); break;
 				case "state": App.settings.station_sorting = Compare.STATE; sortlabel = _("State"); break;
 				case "bitrate": App.settings.station_sorting = Compare.BITRATE; sortlabel = _("Bitrate"); break;
-				case "clicks": App.settings.station_sorting = Compare.CLICKS; sortlabel = _("Clicks"); break;
+				case "clickcount": App.settings.station_sorting = Compare.CLICKS; sortlabel = _("Clicks"); break;
 				case "clicktimestamp": App.settings.station_sorting = Compare.DATE; sortlabel = _("Date"); break;
 			}
 			switch(order){
