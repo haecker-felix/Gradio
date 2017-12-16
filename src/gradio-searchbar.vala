@@ -29,7 +29,8 @@ namespace Gradio{
 		[GtkChild] private Revealer TagsRevealer;
 		[GtkChild] private Button SelectTagsButton;
 		[GtkChild] private Button ClearTagsButton;
-		[GtkChild] private ComboBox TagsListBox;
+		[GtkChild] private Entry TagsEntry;
+        private Gtk.EntryCompletion completion = new Gtk.EntryCompletion();
 		private string selected_tag = "";
 		private TaggedEntryTag tag_tag;
 
@@ -81,7 +82,10 @@ namespace Gradio{
 
 			category_items = new CategoryItems();
 
-            TagsListBox.set_model(category_items.tags_model);
+            completion.set_model(category_items.tags_model);
+            completion.set_text_column(0);
+            completion.set_minimum_key_length(0);
+            TagsEntry.set_completion(completion);
 
 			LanguageListBox.bind_model(category_items.languages_model, (i) => {
 				GenericItem item = (GenericItem)i;
@@ -108,6 +112,7 @@ namespace Gradio{
 				if(a == language_tag) clear_selected_language();
 				if(a == country_tag) clear_selected_country();
 				if(a == state_tag) clear_selected_state();
+				if(a == tag_tag) clear_selected_tag();
 			});
 
 			CountryListBox.row_activated.connect((t,a) => {
@@ -154,16 +159,14 @@ namespace Gradio{
 				reset_timeout();
 			});
 
-            TagsListBox.changed.connect(() => {
-                Gtk.TreeIter iter;
-                Value tag_name;
+            TagsEntry.activate.connect(() => {
+                unowned string tag_name;
 
-                TagsListBox.get_active_iter(out iter);
-                category_items.tags_model.get_value(iter, 0, out tag_name);
-                SelectTagsButton.set_label((string)tag_name);
+                tag_name = TagsEntry.get_text();
+                SelectTagsButton.set_label(tag_name);
 
-                selected_tag = (string)tag_name;
-                tag_tag.set_label((string) tag_name);
+                selected_tag = tag_name;
+                tag_tag.set_label( tag_name);
                 SearchEntry.add_tag(tag_tag);
 
                 TagsRevealer.set_reveal_child(false);
@@ -245,7 +248,10 @@ namespace Gradio{
 			if(selected_language != null) filter_table.insert("language", selected_language);
 			if(selected_country != null) filter_table.insert("country", selected_country);
 			if(selected_state != null) filter_table.insert("state", selected_state);
-			if(selected_tag != null) filter_table.insert("tag", selected_tag);
+			if(selected_tag != null){
+                message("Selecting tag: " + selected_tag);
+                filter_table.insert("tag", selected_tag);
+            }
 			if(search_term != null) filter_table.insert("name", search_term);
 
 			filter_table.insert("order", Util.get_sort_string());
@@ -361,6 +367,17 @@ namespace Gradio{
 			SelectStateButton.set_label(_("Select State ..."));
 			ClearStateButton.set_visible(false);
 			SelectCountryButton.set_sensitive(true);
+
+			reset_timeout();
+		}
+
+		private void clear_selected_tag(){
+			selected_tag = "";
+			tag_tag.set_label("");
+			SearchEntry.remove_tag(tag_tag);
+			SelectTagsButton.set_label(_("Select Tag ..."));
+			ClearTagsButton.set_visible(false);
+			SelectTagsButton.set_sensitive(true);
 
 			reset_timeout();
 		}
