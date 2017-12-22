@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-14 20:44+0100\n"
-"PO-Revision-Date: 2017-12-22 02:38+0000\n"
+"PO-Revision-Date: 2017-12-23 18:05+0000\n"
 "Last-Translator: Ricardo Pinto <pinto_3383@hotmail.com>\n"
 "Language-Team: Portuguese (Portugal) "
 "<https://hosted.weblate.org/projects/gradio/translations/pt_PT/>\n"
@@ -38,7 +38,7 @@ msgstr "A tua biblioteca está vazia"
 
 #: data/ui/page/library-page.ui:62
 msgid "If you add stations to the library, you will find them here."
-msgstr "Se adicionares estações à biblioteca, vais encontra-las lá."
+msgstr "Se adicionares estações à biblioteca, vais encontra-las aqui."
 
 #: data/ui/page/library-page.ui:75
 msgid "Add stations to library"
@@ -157,8 +157,8 @@ msgid ""
 "input!"
 msgstr ""
 "O Gradio está a usar uma base de dados na Internet. Tudo o que introduzires "
-"aqui, será visível para todos os utilizadores. Tem cuidado, e verifica "
-"novamente a entrada!"
+"aqui, será visível para todos os utilizadores. Por favor tem cuidado, e "
+"verifica novamente a entrada!"
 
 #: data/ui/station-editor.ui:68
 msgid "Continue"
@@ -234,7 +234,7 @@ msgstr "Resultados:"
 
 #: data/ui/page/search-page.ui:479
 msgid "No results found"
-msgstr "Sem resultados encontrados"
+msgstr "Nenhum resultado encontrado"
 
 #: data/ui/page/search-page.ui:497
 msgid ""
@@ -334,7 +334,7 @@ msgstr "Continuar a reprodução se fechares a janela do Gradio"
 #. resume playback on startup
 #: src/page/gradio-settings-page.vala:69
 msgid "Resume playback on startup"
-msgstr "Resumir a reprodução no arranque"
+msgstr "Resumir a reprodução ao iniciar"
 
 #: src/page/gradio-settings-page.vala:69
 msgid "Play the latest station if you start Gradio"
@@ -402,7 +402,7 @@ msgstr "Procurar por estações de rádio"
 #: src/gradio-searchbar.vala:206
 #, c-format
 msgid "Sorting: %s / %s"
-msgstr "Organizar: %s / %s"
+msgstr "Organizar: %s/%s"
 
 #: src/gradio-searchbar.vala:293
 msgid "Select Language ..."
@@ -426,12 +426,12 @@ msgstr "Editar estação de rádio"
 
 #: src/gradio-station-editor-dialog.vala:169
 msgid "\"Name\" and \"Stream\" information is required."
-msgstr "Informação sobre \"Nome\" e \"Stream\" necessário."
+msgstr "É necessária informação sobre \"Nome\" e \"Stream\"."
 
 #: src/gradio-selection-toolbar.vala:98
 #, c-format
 msgid "%i radio station(s) not present in library."
-msgstr "%i estações de rádio(s) não estão presentes na biblioteca."
+msgstr "%i estações de rádio não estão presentes na biblioteca."
 
 #: src/gradio-selection-toolbar.vala:108
 #, c-format
