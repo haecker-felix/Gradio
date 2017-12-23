@@ -13,6 +13,7 @@ https://img.shields.io/badge/snap-download-brightgreen.svg)](https://snapcraft.i
 [![Translation status](https://hosted.weblate.org/widgets/gradio/-/svg-badge.svg)](https://hosted.weblate.org/engage/gradio/?utm_source=widget)
 
 ## News
+* Gradio is no longer available on snapcraft / snap store. [More information](https://plus.google.com/u/0/+FelixH%C3%A4cker1207/posts/Q1zbCi27zDj)
 * **Gradio 7.0** is here! Check out the [changelog](https://github.com/haecker-felix/gradio/releases/tag/v7.0)!
 
 ## Open tasks
