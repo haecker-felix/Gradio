@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-14 20:44+0100\n"
-"PO-Revision-Date: 2017-11-18 18:55+0000\n"
+"PO-Revision-Date: 2017-12-23 18:05+0000\n"
 "Last-Translator: Tomáš Moravec <otoman100@gmail.com>\n"
-"Language-Team: Czech <https://hosted.weblate.org/projects/gradio/"
-"translations/cs/>\n"
+"Language-Team: Czech "
+"<https://hosted.weblate.org/projects/gradio/translations/cs/>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 2.18-dev\n"
+"X-Generator: Weblate 2.19-dev\n"
 
 #: data/ui/app-menu.ui:6 data/ui/menubutton.ui:192
 #: src/page/gradio-settings-page.vala:115
@@ -41,7 +41,6 @@ msgid "If you add stations to the library, you will find them here."
 msgstr "Stanice, které přidáte do knihovny, najdete zde."
 
 #: data/ui/page/library-page.ui:75
-#, fuzzy
 msgid "Add stations to library"
 msgstr "Přidat do knihovny"
 
@@ -121,11 +120,11 @@ msgstr "Zrušit výběr"
 
 #: data/ui/selection-toolbar.ui:28
 msgid "Save"
-msgstr ""
+msgstr "Uložit"
 
 #: data/ui/selection-toolbar.ui:70
 msgid "Click an item to view options"
-msgstr ""
+msgstr "Pro zobrazení možností vyberte alespoň jednu položku"
 
 #: data/ui/selection-toolbar.ui:104
 msgid "Collection"
@@ -141,12 +140,11 @@ msgstr "Odebrat z knihovny"
 
 #: data/ui/selection-toolbar.ui:159
 msgid "Rename"
-msgstr ""
+msgstr "Přejmenovat"
 
 #: data/ui/selection-toolbar.ui:174
-#, fuzzy
 msgid "Vote"
-msgstr "Hlasy"
+msgstr "Hlasovat"
 
 #: data/ui/station-editor.ui:39
 msgid "Global database"
@@ -215,15 +213,15 @@ msgstr "Více..."
 
 #: data/ui/page/search-page.ui:102
 msgid "Stations with the most votes"
-msgstr "Zobrazí stanice s největším počtem hlasů"
+msgstr "Stanice s největším počtem hlasů"
 
 #: data/ui/page/search-page.ui:181
 msgid "Recently clicked stations"
-msgstr "Zobrazit nedávno navštívené stanice"
+msgstr "Nedávno navštívené stanice"
 
 #: data/ui/page/search-page.ui:260
 msgid "Stations with the most clicks"
-msgstr "Zobrazí nejčastěji navštěvované stanice"
+msgstr "Nejčastěji navštěvované stanice"
 
 #: data/ui/page/search-page.ui:348 src/page/gradio-search-page.vala:171
 msgid "Search"
@@ -231,7 +229,7 @@ msgstr "Hledat"
 
 #: data/ui/page/search-page.ui:383
 msgid "Results:"
-msgstr ""
+msgstr "Výsledky:"
 
 #: data/ui/page/search-page.ui:479
 msgid "No results found"
@@ -256,7 +254,6 @@ msgid "Library"
 msgstr "Knihovna"
 
 #: data/ui/menubutton.ui:160
-#, fuzzy
 msgid "Create new radio station"
 msgstr "Vytvořit novou stanici"
 
@@ -290,13 +287,12 @@ msgstr "Sestupně"
 
 #: src/page/gradio-collection-items-page.vala:75
 #: src/page/gradio-library-page.vala:88
-#, fuzzy
 msgid "Items: "
-msgstr "Položky"
+msgstr "Položky: "
 
 #: src/page/gradio-library-page.vala:86
 msgid "Fetching station data…"
-msgstr ""
+msgstr "Načítání dat…"
 
 #: src/page/gradio-settings-page.vala:37
 msgid "Features"
@@ -391,49 +387,45 @@ msgstr "Odstraní z mezipaměti všechny stanice"
 
 #: src/gradio-headerbar.vala:53 src/gradio-headerbar.vala:59
 msgid "Click on items to select them"
-msgstr ""
+msgstr "Klikněte na položky pro jejich vybrání"
 
 #: src/gradio-headerbar.vala:61
 #, c-format
 msgid "%i selected"
-msgstr ""
+msgstr "Vybráno: %i"
 
 #: src/gradio-searchbar.vala:68
 msgid "Search for radio stations"
 msgstr "Hledat stanice"
 
 #: src/gradio-searchbar.vala:206
-#, fuzzy, c-format
+#, c-format
 msgid "Sorting: %s / %s"
-msgstr "Řazení"
+msgstr "Řazení: %s / %s"
 
 #: src/gradio-searchbar.vala:293
-#, fuzzy
 msgid "Select Language ..."
-msgstr "Vyberte jazyk…"
+msgstr "Vyberte jazyk..."
 
 #: src/gradio-searchbar.vala:303
 msgid "Select Country ..."
 msgstr "Vyberte zemi…"
 
 #: src/gradio-searchbar.vala:314
-#, fuzzy
 msgid "Select State ..."
-msgstr "Vyberte stát…"
+msgstr "Vyberte stát..."
 
 #: src/gradio-station-editor-dialog.vala:53
-#, fuzzy
 msgid "Create radio station"
 msgstr "Vytvořit novou stanici"
 
 #: src/gradio-station-editor-dialog.vala:59
-#, fuzzy
 msgid "Edit radio station"
-msgstr "Nová veřejná stanice"
+msgstr "Upravit stanici"
 
 #: src/gradio-station-editor-dialog.vala:169
 msgid "\"Name\" and \"Stream\" information is required."
-msgstr ""
+msgstr "Je třeba vyplnit alespoň pole \"Jméno\" a \"Adresa streamu\"."
 
 #: src/gradio-selection-toolbar.vala:98
 #, fuzzy, c-format
