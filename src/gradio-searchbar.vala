@@ -26,6 +26,14 @@ namespace Gradio{
 		private string search_term = "";
 		[GtkChild] private Box SearchBox;
 
+		[GtkChild] private Revealer TagsRevealer;
+		[GtkChild] private Button SelectTagsButton;
+		[GtkChild] private Button ClearTagsButton;
+		[GtkChild] private Entry TagsEntry;
+        private Gtk.EntryCompletion completion = new Gtk.EntryCompletion();
+		private string selected_tag = "";
+		private TaggedEntryTag tag_tag;
+
 		[GtkChild] private Revealer CountryRevealer;
 		[GtkChild] private Button SelectCountryButton;
 		[GtkChild] private Button ClearCountryButton;
@@ -68,11 +76,17 @@ namespace Gradio{
 			SearchEntry.set_placeholder_text(_("Search for radio stations"));
 			SearchBox.pack_start(SearchEntry);
 
+			tag_tag = new TaggedEntryTag("");
 			country_tag = new TaggedEntryTag("");
 			state_tag = new TaggedEntryTag("");
 			language_tag = new TaggedEntryTag("");
 
 			category_items = new CategoryItems();
+
+            completion.set_model(category_items.tags_model);
+            completion.set_text_column(0);
+            completion.set_minimum_key_length(0);
+            TagsEntry.set_completion(completion);
 
 			LanguageListBox.bind_model(category_items.languages_model, (i) => {
 				GenericItem item = (GenericItem)i;
@@ -99,6 +113,7 @@ namespace Gradio{
 				if(a == language_tag) clear_selected_language();
 				if(a == country_tag) clear_selected_country();
 				if(a == state_tag) clear_selected_state();
+				if(a == tag_tag) clear_selected_tag();
 			});
 
 			CountryListBox.row_activated.connect((t,a) => {
@@ -147,6 +162,22 @@ namespace Gradio{
 				reset_timeout();
 				show_search_results();
 			});
+
+            TagsEntry.activate.connect(() => {
+                unowned string tag_name;
+
+                tag_name = TagsEntry.get_text();
+                SelectTagsButton.set_label(tag_name);
+
+                selected_tag = tag_name;
+                tag_tag.set_label( tag_name);
+                SearchEntry.add_tag(tag_tag);
+
+                TagsRevealer.set_reveal_child(false);
+                ClearTagsButton.set_visible(true);
+
+                reset_timeout();
+            });
 
 			SearchEntry.search_changed.connect(() => {
 				search_term = SearchEntry.get_text();
@@ -220,15 +251,19 @@ namespace Gradio{
 			HashTable<string, string> filter_table = new HashTable<string, string> (str_hash, str_equal);
 
 			if(selected_language != null) filter_table.insert("language", selected_language);
-			if(selected_language != null) filter_table.insert("country", selected_country);
-			if(selected_language != null) filter_table.insert("state", selected_state);
-			if(selected_language != null) filter_table.insert("name", search_term);
+			if(selected_country != null) filter_table.insert("country", selected_country);
+			if(selected_state != null) filter_table.insert("state", selected_state);
+			if(selected_tag != null){
+                message("Selecting tag: " + selected_tag);
+                filter_table.insert("tag", selected_tag);
+            }
+			if(search_term != null) filter_table.insert("name", search_term);
 
 			filter_table.insert("order", Util.get_sort_string());
 			filter_table.insert("reverse", (!App.settings.sort_ascending).to_string());
 			filter_table.insert("limit", App.settings.max_search_results.to_string());
 
-			station_provider.get_stations.begin("http://www.radio-browser.info/webservice/json/stations/search", filter_table);
+			station_provider.get_stations.begin(RadioBrowser.radio_station_search, filter_table);
 
 			delayed_changed_id = 0;
 			return false;
@@ -244,6 +279,7 @@ namespace Gradio{
 			ClearCountryButton_clicked();
 			ClearLanguageButton_clicked();
 			ClearStateButton_clicked();
+            ClearTagsButton_clicked();
 			SearchEntry.set_text("");
 		}
 
@@ -251,12 +287,19 @@ namespace Gradio{
 			CountryRevealer.set_reveal_child(false);
 			StateRevealer.set_reveal_child(false);
 			LanguageRevealer.set_reveal_child(false);
+            TagsRevealer.set_reveal_child(false);
 		}
 
 		[GtkCallback]
 		private void SelectLanguageButton_clicked(){
 			unreveal_all();
 			LanguageRevealer.set_reveal_child(!LanguageRevealer.get_child_revealed());
+		}
+
+		[GtkCallback]
+		private void SelectTagsButton_clicked(){
+			unreveal_all();
+			TagsRevealer.set_reveal_child(!TagsRevealer.get_child_revealed());
 		}
 
 		[GtkCallback]
@@ -277,6 +320,11 @@ namespace Gradio{
 		}
 
 		[GtkCallback]
+		private void ClearTagsButton_clicked(){
+			clear_tags();
+		}
+
+		[GtkCallback]
 		private void ClearCountryButton_clicked(){
 			clear_selected_country();
 		}
@@ -284,6 +332,16 @@ namespace Gradio{
 		[GtkCallback]
 		private void ClearStateButton_clicked(){
 			clear_selected_state();
+		}
+
+		private void clear_tags(){
+			selected_tag = "";
+			tag_tag.set_label("");
+			SearchEntry.remove_tag(tag_tag);
+			SelectTagsButton.set_label(_("Select Tags ..."));
+			ClearTagsButton.set_visible(false);
+
+			reset_timeout();
 		}
 
 		private void clear_selected_language(){
@@ -314,6 +372,17 @@ namespace Gradio{
 			SelectStateButton.set_label(_("Select State ..."));
 			ClearStateButton.set_visible(false);
 			SelectCountryButton.set_sensitive(true);
+
+			reset_timeout();
+		}
+
+		private void clear_selected_tag(){
+			selected_tag = "";
+			tag_tag.set_label("");
+			SearchEntry.remove_tag(tag_tag);
+			SelectTagsButton.set_label(_("Select Tag ..."));
+			ClearTagsButton.set_visible(false);
+			SelectTagsButton.set_sensitive(true);
 
 			reset_timeout();
 		}
