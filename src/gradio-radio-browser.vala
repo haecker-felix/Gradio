@@ -29,7 +29,7 @@ namespace Gradio{
 
 		public const string radio_station_vote = radio_browser + "/vote/";
 		public const string radio_station_stream_url = "https://www.radio-browser.info/webservice/v2/json/url/";
-        public const string radio_station_search = radio_browser + "/stations/search";
+                public const string radio_station_search = radio_browser + "/stations/search";
 		public const string radio_station_languages = radio_browser + "/languages";
 		public const string radio_station_countries = radio_browser + "/countries";
 		public const string radio_station_codecs = radio_browser + "/codecs";
