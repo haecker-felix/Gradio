@@ -54,6 +54,10 @@ namespace Gradio {
 				window.set_mode(WindowMode.SEARCH);
 				window.search_page.set_search(searchterm);
 			});
+
+                        Environment.set_variable("PULSE_PROP_media.role", "music", true);
+                        Environment.set_variable("PULSE_PROP_application.icon_name", "de.haeckerfelix.gradio", true);
+                        Environment.set_application_name("Gradio");
 		}
 
 		protected override void startup () {
