@@ -49,8 +49,7 @@ namespace Gradio{
 					StationMetadataLabel.set_text(App.player.current_title_tag);
 					Util.send_notification(App.player.station.title,
 							       App.player.current_title_tag + "\r" +
-							       "(" + App.player.station.techinfo +
-							       ")");
+							       techinfo_string());
 				}
 
 			});
@@ -69,6 +68,17 @@ namespace Gradio{
 
 			if(App.player.station != null)
 				station_changed();
+			App.settings.notify["show-technical-info"].connect(() => {
+				StationTechinfoLabel.set_text(techinfo_string());
+			});
+		}
+
+		private string techinfo_string() {
+			if (App.settings.show_technical_info){
+				return "(" + App.player.station.techinfo + ")";
+			}else{
+				return "";
+			}
 		}
 
 		private void setup_view(){
@@ -88,13 +98,14 @@ namespace Gradio{
 		private void station_changed (){
 			// Title
 			StationTitleLabel.set_text(App.player.station.title);
-			StationTechinfoLabel.set_text(App.player.station.techinfo);
+			StationTechinfoLabel.set_text(techinfo_string());
 
 			Thumbnail _thumbnail = new Thumbnail.for_address(42, App.player.station.icon_address);
 			_thumbnail.updated.connect(() => {
 				StationLogo.set_from_surface(_thumbnail.surface);
 			});
 			_thumbnail.show_empty_box();
+			StationLogo.set_tooltip_text(App.player.station.techinfo);
 
 			this.set_visible(true);
 		}

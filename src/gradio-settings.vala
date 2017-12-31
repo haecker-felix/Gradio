@@ -28,6 +28,7 @@ namespace Gradio{
 		private bool _enable_caching;
 		private bool _resume_playback_on_startup;
 		private bool _hide_broken_stations;
+		private bool _show_technical_information;
 		private int _previous_station;
 		private double _volume_position;
 		private int _window_height;
@@ -48,6 +49,7 @@ namespace Gradio{
 			_enable_caching = settings.get_boolean("enable-caching");
 			_resume_playback_on_startup = settings.get_boolean("resume-playback-on-startup");
 			_hide_broken_stations = settings.get_boolean("hide-broken-stations");
+			_show_technical_information = settings.get_boolean("show-technical-information");
 			_previous_station = settings.get_int("previous-station");
 			_volume_position = settings.get_double("volume-position");
 			_window_height = settings.get_int("window-height");
@@ -89,6 +91,16 @@ namespace Gradio{
 				var gtk_settings = Gtk.Settings.get_default ();
 				gtk_settings.gtk_application_prefer_dark_theme = value;
 				settings.set_boolean ("enable-dark-theme", value);
+			}
+		}
+
+		public bool show_technical_info{
+			get{
+				return _show_technical_information;
+			}
+			set{
+				_show_technical_information = value;
+				settings.set_boolean ("show-technical-information", value);
 			}
 		}
 
