@@ -274,7 +274,7 @@ namespace Gradio{
 			selected_country = "";
 			country_tag.set_label("");
 			SearchEntry.remove_tag(country_tag);
-			SelectCountryButton.set_label(_("Select Country ..."));
+			SelectCountryButton.set_label(_("Select Country …"));
 			CountryEntry.set_text("");
 			ClearCountryButton.set_visible(false);
 			SelectCountryButton.set_sensitive(true);
@@ -305,7 +305,7 @@ namespace Gradio{
 			selected_state = "";
 			state_tag.set_label("");
 			SearchEntry.remove_tag(state_tag);
-			SelectStateButton.set_label(_("Select State ..."));
+			SelectStateButton.set_label(_("Select State …"));
 			StateEntry.set_text("");
 			ClearStateButton.set_visible(false);
 			SelectStateButton.set_sensitive(true);
@@ -336,7 +336,7 @@ namespace Gradio{
 			selected_language = "";
 			language_tag.set_label("");
 			SearchEntry.remove_tag(language_tag);
-			SelectLanguageButton.set_label(_("Select Language ..."));
+			SelectLanguageButton.set_label(_("Select Language …"));
 			LanguageEntry.set_text("");
 			ClearLanguageButton.set_visible(false);
 			SelectLanguageButton.set_sensitive(true);
@@ -367,7 +367,7 @@ namespace Gradio{
 			selected_tag = "";
 			tag_tag.set_label("");
 			SearchEntry.remove_tag(tag_tag);
-			SelectTagButton.set_label(_("Select Tag ..."));
+			SelectTagButton.set_label(_("Select Tag …"));
 			TagEntry.set_text("");
 			ClearTagButton.set_visible(false);
 			SelectTagButton.set_sensitive(true);

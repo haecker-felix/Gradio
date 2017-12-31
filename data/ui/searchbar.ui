@@ -46,7 +46,7 @@
                     <property name="can_focus">False</property>
                     <child>
                       <object class="GtkButton" id="SelectCountryButton">
-                        <property name="label" translatable="yes">Select Country  ...</property>
+                        <property name="label" translatable="yes">Select Country …</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
@@ -146,7 +146,7 @@
                     <property name="can_focus">False</property>
                     <child>
                       <object class="GtkButton" id="SelectStateButton">
-                        <property name="label" translatable="yes">Select State  ...</property>
+                        <property name="label" translatable="yes">Select State …</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
@@ -262,7 +262,7 @@
                     <property name="can_focus">False</property>
                     <child>
                       <object class="GtkButton" id="SelectLanguageButton">
-                        <property name="label" translatable="yes">Select Language  ...</property>
+                        <property name="label" translatable="yes">Select Language …</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
@@ -378,7 +378,7 @@
                     <property name="can_focus">False</property>
                     <child>
                       <object class="GtkButton" id="SelectTagButton">
-                        <property name="label" translatable="yes">Select Tag  ...</property>
+                        <property name="label" translatable="yes">Select Tag …</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
