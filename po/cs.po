@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-14 20:44+0100\n"
-"PO-Revision-Date: 2017-12-23 18:05+0000\n"
+"PO-Revision-Date: 2017-12-31 20:42+0000\n"
 "Last-Translator: Tomáš Moravec <otoman100@gmail.com>\n"
 "Language-Team: Czech "
 "<https://hosted.weblate.org/projects/gradio/translations/cs/>\n"
@@ -428,14 +428,14 @@ msgid "\"Name\" and \"Stream\" information is required."
 msgstr "Je třeba vyplnit alespoň pole \"Jméno\" a \"Adresa streamu\"."
 
 #: src/gradio-selection-toolbar.vala:98
-#, fuzzy, c-format
+#, c-format
 msgid "%i radio station(s) not present in library."
-msgstr "Přidat novou stanici do knihovny"
+msgstr "%i stanice(stanic) ještě není v knihovně."
 
 #: src/gradio-selection-toolbar.vala:108
-#, fuzzy, c-format
+#, c-format
 msgid "%i radio station(s) already added to library."
-msgstr "Přidat novou stanici do knihovny"
+msgstr "%i stanice(stanic) již v knihovně je."
 
 #~ msgid " Items"
 #~ msgstr " Položky"
