@@ -79,6 +79,7 @@ namespace Gradio{
 
 			status_icon = new StatusIcon();
 			StatusBox.pack_start(status_icon);
+			StationTechinfoLabel.get_style_context().add_class("bitrate-text");
 			this.show_all();
 
 			VolumeButton.set_value(App.settings.volume_position);
@@ -87,7 +88,7 @@ namespace Gradio{
 		private void station_changed (){
 			// Title
 			StationTitleLabel.set_text(App.player.station.title);
-			StationTechinfoLabel.set_markup("<i>" + App.player.station.techinfo + "</i>");
+			StationTechinfoLabel.set_text(App.player.station.techinfo);
 
 			Thumbnail _thumbnail = new Thumbnail.for_address(42, App.player.station.icon_address);
 			_thumbnail.updated.connect(() => {
