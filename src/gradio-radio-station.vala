@@ -27,6 +27,7 @@ namespace Gradio{
 		private string _state;
 		private string _votes;
 		private string _codec;
+		private string _techinfo;
 		private string _bitrate;
 		private string _clickcount;
 		private string _clicktimestamp;
@@ -86,6 +87,13 @@ namespace Gradio{
 		public string bitrate {
 			get{return _bitrate;}
 			set{_bitrate = value;}
+		}
+
+		public string techinfo {
+			get{
+				_techinfo = _codec + "/" + _bitrate + " kBit/s";
+				return _techinfo;
+			}
 		}
 
 		public string clickcount {
