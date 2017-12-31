@@ -31,7 +31,7 @@
     </key>
 
     <key name="show-technical-information" type="b">
-      <default>true</default>
+      <default>false</default>
       <summary>Show technical information in the UI</summary>
     </key>
 

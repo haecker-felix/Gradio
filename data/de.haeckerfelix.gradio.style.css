@@ -8,11 +8,3 @@
 	font-size: smaller;
 	padding: 2px 2px;
 }
-
-.bitrate-text {
-	font-size: smaller;
-	font-style: italic;
-	position: absolute;
-	top: 50%;
-	transform: translateY(-50%);
-}

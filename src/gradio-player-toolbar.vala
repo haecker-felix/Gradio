@@ -65,14 +65,6 @@ namespace Gradio{
 				station_changed();
 		}
 
-		private string techinfo_string() {
-			if (App.settings.show_technical_info){
-				return "(" + App.player.station.techinfo + ")";
-			}else{
-				return "";
-			}
-		}
-
 		private void setup_view(){
 			this.pack_start(MediaControlBox);
 			this.pack_start(StationLogoBox);

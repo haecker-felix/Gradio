@@ -58,8 +58,8 @@ namespace Gradio{
 
 			// Show technical station information.
 			SwitchItem show_technical_info =
-				new SwitchItem(_("Show technical information at playback"),
-				_("Show technical information, such as bitrate and codec at playback"));
+				new SwitchItem(_("Show technical information"),
+				_("Show the advertised bitrate and codec from the internet database"));
 			show_technical_info.set_state(App.settings.show_technical_info);
 			show_technical_info.toggled.connect(() =>
 							    {App.settings.show_technical_info = show_technical_info.get_state();});
