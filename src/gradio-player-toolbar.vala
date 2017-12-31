@@ -22,7 +22,6 @@ namespace Gradio{
 	public class PlayerToolbar : Gtk.ActionBar{
 
 		[GtkChild] private Label StationTitleLabel;
-		[GtkChild] private Label StationTechinfoLabel;
 		[GtkChild] private Label StationMetadataLabel;
 		[GtkChild] private Image StationLogo;
 
@@ -47,17 +46,13 @@ namespace Gradio{
 			App.player.notify["current-title-tag"].connect (() => {
 				if(!(App.player.current_title_tag == "" || App.player.current_title_tag == null)){
 					StationMetadataLabel.set_text(App.player.current_title_tag);
-					Util.send_notification(App.player.station.title,
-							       App.player.current_title_tag + "\r" +
-							       techinfo_string());
+					Util.send_notification(App.player.station.title, App.player.current_title_tag);
 				}
 
 			});
 			App.player.notify["status-message"].connect (() => {
-				if(App.player.current_title_tag == "" ||
-				   App.player.current_title_tag == null){
+				if(App.player.current_title_tag == "" || App.player.current_title_tag == null)
 					StationMetadataLabel.set_markup("<i>"+App.player.status_message+"</i>");
-				}
 			});
 			App.player.notify["station"].connect(() => {
 				Idle.add(() => {
@@ -68,9 +63,6 @@ namespace Gradio{
 
 			if(App.player.station != null)
 				station_changed();
-			App.settings.notify["show-technical-info"].connect(() => {
-				StationTechinfoLabel.set_text(techinfo_string());
-			});
 		}
 
 		private string techinfo_string() {
@@ -89,7 +81,6 @@ namespace Gradio{
 
 			status_icon = new StatusIcon();
 			StatusBox.pack_start(status_icon);
-			StationTechinfoLabel.get_style_context().add_class("bitrate-text");
 			this.show_all();
 
 			VolumeButton.set_value(App.settings.volume_position);
@@ -98,7 +89,6 @@ namespace Gradio{
 		private void station_changed (){
 			// Title
 			StationTitleLabel.set_text(App.player.station.title);
-			StationTechinfoLabel.set_text(techinfo_string());
 
 			Thumbnail _thumbnail = new Thumbnail.for_address(42, App.player.station.icon_address);
 			_thumbnail.updated.connect(() => {
@@ -114,11 +104,9 @@ namespace Gradio{
 			if(App.player.state != Gst.State.NULL){
 				StopImage.set_visible(true);
 				PlayImage.set_visible(false);
-				StationTechinfoLabel.set_visible(true);
 			}else{
 				StopImage.set_visible(false);
 				PlayImage.set_visible(true);
-				StationTechinfoLabel.set_visible(false);
 			}
 		}
 
