@@ -91,7 +91,12 @@ namespace Gradio{
 
 		public string techinfo {
 			get{
-				_techinfo = _codec + "/" + _bitrate + " kBit/s";
+				if(strcmp(_codec, "UNKNOWN")!=0){
+					_techinfo = _codec + "-" + _bitrate + "kB/s";
+				}else{
+					_techinfo = "???-" + _bitrate + "kB/s";
+				}
+
 				return _techinfo;
 			}
 		}
@@ -168,6 +173,7 @@ namespace Gradio{
 		private void connect_signals(){
 			App.settings.notify["station-sorting"].connect(update_secondary_text);
 			App.settings.notify["icon-zoom"].connect(update_thumbnail);
+			App.settings.notify["show-technical-info"].connect(update_secondary_text);
 		}
 
 		private void update_secondary_text(){
@@ -180,6 +186,10 @@ namespace Gradio{
 				case Compare.COUNTRY: _secondary_text = country; break;
 				case Compare.BITRATE: _secondary_text = bitrate + " kBit/s"; break;
 				case Compare.LANGUAGE: _secondary_text = language; break;
+			}
+			if(App.settings.station_sorting != Compare.BITRATE &&
+			   App.settings.show_technical_info){
+				_secondary_text = _secondary_text + " (" + techinfo + ")";
 			}
 			notify_property("secondary-text");
 		}
