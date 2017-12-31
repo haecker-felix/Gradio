@@ -17,15 +17,15 @@
 namespace Gradio{
 
 	public class CategoryItems{
-		public GenericModel languages_model;
-		public GenericModel countries_model;
-		public GenericModel states_model;
+		public Gtk.ListStore languages_model;
+		public Gtk.ListStore countries_model;
+		public Gtk.ListStore states_model;
                 public Gtk.ListStore tags_model;
 
 		public CategoryItems(){
-			languages_model = new GenericModel();
-			countries_model = new GenericModel();
-			states_model = new GenericModel();
+			languages_model = new Gtk.ListStore(2, typeof(string), typeof(int));
+			countries_model = new Gtk.ListStore(2, typeof(string), typeof(int));
+			states_model = new Gtk.ListStore(2, typeof(string), typeof(int));
                         tags_model = new Gtk.ListStore(2, typeof(string), typeof(int));
 			load_lists.begin();
 		}
@@ -44,11 +44,12 @@ namespace Gradio{
 				root = parser.get_root ();
 				items = root.get_array ();
 				max_items = (int)items.get_length();
+                                Gtk.TreeIter language_iter;
 				for(int a = 0; a < max_items; a++){
 					var item = items.get_element(a);
 					var item_data = item.get_object ();
-					GenericItem genericitem = new GenericItem(item_data.get_string_member("value"));
-					languages_model.add_item(genericitem);
+                                        languages_model.append(out language_iter);
+                                        languages_model.set(language_iter, 0, item_data.get_string_member("value"), 1, item_data.get_int_member("stationcount"));
 				}
 
 				// Countries
@@ -57,11 +58,12 @@ namespace Gradio{
 				root = parser.get_root ();
 				items = root.get_array ();
 				max_items = (int)items.get_length();
+                                Gtk.TreeIter country_iter;
 				for(int a = 0; a < max_items; a++){
 					var item = items.get_element(a);
 					var item_data = item.get_object ();
-					GenericItem genericitem = new GenericItem(item_data.get_string_member("value"));
-					countries_model.add_item(genericitem);
+                                        countries_model.append(out country_iter);
+                                        countries_model.set(country_iter, 0, item_data.get_string_member("value"), 1, item_data.get_int_member("stationcount"));
 				}
 
 				// States
@@ -70,11 +72,12 @@ namespace Gradio{
 				root = parser.get_root ();
 				items = root.get_array ();
 				max_items = (int)items.get_length();
+                                Gtk.TreeIter state_iter;
 				for(int a = 0; a < max_items; a++){
 					var item = items.get_element(a);
 					var item_data = item.get_object ();
-					GenericItem genericitem = new GenericItem(item_data.get_string_member("value"));
-					states_model.add_item(genericitem);
+                                        states_model.append(out state_iter);
+                                        states_model.set(state_iter, 0, item_data.get_string_member("value"), 1, item_data.get_int_member("stationcount"));
 				}
 
 				// Tags
@@ -83,12 +86,12 @@ namespace Gradio{
 				root = parser.get_root ();
 				items = root.get_array ();
 				max_items = (int)items.get_length();
-                                Gtk.TreeIter iter;
+                                Gtk.TreeIter tag_iter;
 				for(int a = 0; a < max_items; a++){
 					var item = items.get_element(a);
 					var item_data = item.get_object ();
-                                        tags_model.append(out iter);
-                                        tags_model.set(iter, 0, item_data.get_string_member("value"), 1, item_data.get_int_member("stationcount"));
+                                        tags_model.append(out tag_iter);
+                                        tags_model.set(tag_iter, 0, item_data.get_string_member("value"), 1, item_data.get_int_member("stationcount"));
 				}
 
 				message("Loaded all category items.");

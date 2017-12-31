@@ -26,34 +26,41 @@ namespace Gradio{
 		private string search_term = "";
 		[GtkChild] private Box SearchBox;
 
-		[GtkChild] private Revealer TagsRevealer;
-		[GtkChild] private Button SelectTagsButton;
-		[GtkChild] private Button ClearTagsButton;
-		[GtkChild] private Entry TagsEntry;
-                private Gtk.EntryCompletion completion = new Gtk.EntryCompletion();
-		private string selected_tag = "";
-		private TaggedEntryTag tag_tag;
-
-		[GtkChild] private Revealer CountryRevealer;
+		[GtkChild] private Stack CountryStack;
 		[GtkChild] private Button SelectCountryButton;
 		[GtkChild] private Button ClearCountryButton;
-		[GtkChild] private ListBox CountryListBox;
+		[GtkChild] private Button ApplyCountryButton;
+		[GtkChild] private Entry CountryEntry;
+		private Gtk.EntryCompletion country_completion = new Gtk.EntryCompletion();
 		private string selected_country = "";
 		private TaggedEntryTag country_tag;
 
-		[GtkChild] private Revealer StateRevealer;
+                [GtkChild] private Stack StateStack;
 		[GtkChild] private Button SelectStateButton;
 		[GtkChild] private Button ClearStateButton;
-		[GtkChild] private ListBox StateListBox;
+		[GtkChild] private Button ApplyStateButton;
+		[GtkChild] private Entry StateEntry;
+                private Gtk.EntryCompletion state_completion = new Gtk.EntryCompletion();
 		private string selected_state = "";
 		private TaggedEntryTag state_tag;
 
-		[GtkChild] private Revealer LanguageRevealer;
+                [GtkChild] private Stack LanguageStack;
 		[GtkChild] private Button SelectLanguageButton;
 		[GtkChild] private Button ClearLanguageButton;
-		[GtkChild] private ListBox LanguageListBox;
+		[GtkChild] private Button ApplyLanguageButton;
+		[GtkChild] private Entry LanguageEntry;
+		private Gtk.EntryCompletion language_completion = new Gtk.EntryCompletion();
 		private string selected_language = "";
 		private TaggedEntryTag language_tag;
+
+                [GtkChild] private Stack TagStack;
+		[GtkChild] private Button SelectTagButton;
+		[GtkChild] private Button ClearTagButton;
+		[GtkChild] private Button ApplyTagButton;
+		[GtkChild] private Entry TagEntry;
+                private Gtk.EntryCompletion tag_completion = new Gtk.EntryCompletion();
+		private string selected_tag = "";
+		private TaggedEntryTag tag_tag;
 
 		private CategoryItems category_items;
 		private StationProvider station_provider;
@@ -83,25 +90,25 @@ namespace Gradio{
 
 			category_items = new CategoryItems();
 
-                        completion.set_model(category_items.tags_model);
-                        completion.set_text_column(0);
-                        completion.set_minimum_key_length(0);
-                        TagsEntry.set_completion(completion);
+                        country_completion.set_model(category_items.countries_model);
+                        country_completion.set_text_column(0);
+                        country_completion.set_minimum_key_length(0);
+                        CountryEntry.set_completion(country_completion);
 
-			LanguageListBox.bind_model(category_items.languages_model, (i) => {
-				GenericItem item = (GenericItem)i;
-				return get_row(item.text);
-			});
+                        state_completion.set_model(category_items.states_model);
+                        state_completion.set_text_column(0);
+                        state_completion.set_minimum_key_length(0);
+                        StateEntry.set_completion(state_completion);
 
-			CountryListBox.bind_model(category_items.countries_model, (i) => {
-				GenericItem item = (GenericItem)i;
-				return get_row(item.text);
-			});
+                        language_completion.set_model(category_items.languages_model);
+                        language_completion.set_text_column(0);
+                        language_completion.set_minimum_key_length(0);
+                        LanguageEntry.set_completion(language_completion);
 
-			StateListBox.bind_model(category_items.states_model, (i) => {
-				GenericItem item = (GenericItem)i;
-				return get_row(item.text);
-			});
+                        tag_completion.set_model(category_items.tags_model);
+                        tag_completion.set_text_column(0);
+                        tag_completion.set_minimum_key_length(0);
+                        TagEntry.set_completion(tag_completion);
 
 			setup_actions();
 			reset_timeout();
@@ -116,69 +123,25 @@ namespace Gradio{
 				if(a == tag_tag) clear_selected_tag();
 			});
 
-			CountryListBox.row_activated.connect((t,a) => {
-				string selected_item = a.get_data("ITEM");
-				SelectCountryButton.set_label(selected_item);
+			CountryEntry.activate.connect(() => { set_country(); });
+                        ApplyCountryButton.clicked.connect(() => { set_country(); });
+                        SelectCountryButton.clicked.connect(() => { reset_view(); CountryStack.set_visible_child_name("entry"); });
+                        ClearCountryButton.clicked.connect(() => { clear_selected_country(); });
 
-				selected_country = selected_item;
-				country_tag.set_label(selected_item);
-				SearchEntry.add_tag(country_tag);
+                        StateEntry.activate.connect(() => { set_state(); });
+                        ApplyStateButton.clicked.connect(() => { set_state(); });
+                        SelectStateButton.clicked.connect(() => { reset_view(); StateStack.set_visible_child_name("entry"); });
+                        ClearStateButton.clicked.connect(() => { clear_selected_state(); });
 
-				CountryRevealer.set_reveal_child(false);
-				ClearCountryButton.set_visible(true);
-				SelectStateButton.set_sensitive(false);
+                        LanguageEntry.activate.connect(() => { set_language(); });
+                        ApplyLanguageButton.clicked.connect(() => { set_language(); });
+                        SelectLanguageButton.clicked.connect(() => { reset_view(); LanguageStack.set_visible_child_name("entry"); });
+                        ClearLanguageButton.clicked.connect(() => { clear_selected_language(); });
 
-				reset_timeout();
-				show_search_results();
-			});
-
-			StateListBox.row_activated.connect((t,a) => {
-				string selected_item = a.get_data("ITEM");
-				SelectStateButton.set_label(selected_item);
-
-				selected_state = selected_item;
-				state_tag.set_label(selected_item);
-				SearchEntry.add_tag(state_tag);
-
-				StateRevealer.set_reveal_child(false);
-				SelectCountryButton.set_sensitive(false);
-				ClearStateButton.set_visible(true);
-
-				reset_timeout();
-				show_search_results();
-			});
-
-			LanguageListBox.row_activated.connect((t,a) => {
-				string selected_item = a.get_data("ITEM");
-				SelectLanguageButton.set_label(selected_item);
-
-				selected_language = selected_item;
-				language_tag.set_label(selected_item);
-				SearchEntry.add_tag(language_tag);
-
-				LanguageRevealer.set_reveal_child(false);
-				ClearLanguageButton.set_visible(true);
-
-				reset_timeout();
-				show_search_results();
-			});
-
-                        TagsEntry.activate.connect(() => {
-                                unowned string tag_name;
-
-                                tag_name = TagsEntry.get_text();
-                                SelectTagsButton.set_label(tag_name);
-
-                                selected_tag = tag_name;
-                                tag_tag.set_label( tag_name);
-                                SearchEntry.add_tag(tag_tag);
-
-                                TagsRevealer.set_reveal_child(false);
-                                ClearTagsButton.set_visible(true);
-
-                                reset_timeout();
-                                show_search_results();
-                        });
+                        TagEntry.activate.connect(() => { set_tag(); });
+                        ApplyTagButton.clicked.connect(() => { set_tag(); });
+                        SelectTagButton.clicked.connect(() => { reset_view(); TagStack.set_visible_child_name("entry"); });
+                        ClearTagButton.clicked.connect(() => { clear_selected_tag(); });
 
 			SearchEntry.search_changed.connect(() => {
 				search_term = SearchEntry.get_text();
@@ -274,82 +237,37 @@ namespace Gradio{
 		}
 
 		public void reset_filters(){
-			ClearCountryButton_clicked();
-			ClearLanguageButton_clicked();
-			ClearStateButton_clicked();
-                        ClearTagsButton_clicked();
+			clear_selected_language();
+			clear_selected_country();
+			clear_selected_state();
+                        clear_selected_tag();
 			SearchEntry.set_text("");
 		}
 
-		private void unreveal_all(){
-			CountryRevealer.set_reveal_child(false);
-			StateRevealer.set_reveal_child(false);
-			LanguageRevealer.set_reveal_child(false);
-                        TagsRevealer.set_reveal_child(false);
+		private void reset_view(){
+			CountryStack.set_visible_child_name("main");
+			StateStack.set_visible_child_name("main");
+			LanguageStack.set_visible_child_name("main");
+                        TagStack.set_visible_child_name("main");
 		}
 
-		[GtkCallback]
-		private void SelectLanguageButton_clicked(){
-			unreveal_all();
-			LanguageRevealer.set_reveal_child(!LanguageRevealer.get_child_revealed());
-		}
+		private void set_country(){
+		        unowned string name;
+                        name = CountryEntry.get_text();
 
-		[GtkCallback]
-		private void SelectTagsButton_clicked(){
-			unreveal_all();
-			TagsRevealer.set_reveal_child(!TagsRevealer.get_child_revealed());
-		}
+                        if(name != ""){
+                                SelectCountryButton.set_label(name);
 
-		[GtkCallback]
-		private void SelectCountryButton_clicked(){
-			unreveal_all();
-			CountryRevealer.set_reveal_child(!CountryRevealer.get_child_revealed());
-		}
+                                selected_country = name;
+                                country_tag.set_label(name);
+                                SearchEntry.add_tag(country_tag);
 
-		[GtkCallback]
-		private void SelectStateButton_clicked(){
-			unreveal_all();
-			StateRevealer.set_reveal_child(!StateRevealer.get_child_revealed());
-		}
+                                ClearCountryButton.set_visible(true);
+                                reset_timeout();
+                                show_search_results();
+                        }
 
-		[GtkCallback]
-		private void ClearLanguageButton_clicked(){
-			clear_selected_language();
-		}
-
-		[GtkCallback]
-		private void ClearTagsButton_clicked(){
-			clear_tags();
-		}
-
-		[GtkCallback]
-		private void ClearCountryButton_clicked(){
-			clear_selected_country();
-		}
-
-		[GtkCallback]
-		private void ClearStateButton_clicked(){
-			clear_selected_state();
-		}
-
-		private void clear_tags(){
-			selected_tag = "";
-			tag_tag.set_label("");
-			SearchEntry.remove_tag(tag_tag);
-			SelectTagsButton.set_label(_("Select Tags ..."));
-			ClearTagsButton.set_visible(false);
-
-			reset_timeout();
-		}
-
-		private void clear_selected_language(){
-			selected_language = "";
-			language_tag.set_label("");
-			SearchEntry.remove_tag(language_tag);
-			SelectLanguageButton.set_label(_("Select Language ..."));
-			ClearLanguageButton.set_visible(false);
-
-			reset_timeout();
+                        CountryStack.set_visible_child_name("main");
 		}
 
 		private void clear_selected_country(){
@@ -357,10 +275,30 @@ namespace Gradio{
 			country_tag.set_label("");
 			SearchEntry.remove_tag(country_tag);
 			SelectCountryButton.set_label(_("Select Country ..."));
+			CountryEntry.set_text("");
 			ClearCountryButton.set_visible(false);
-			SelectStateButton.set_sensitive(true);
+			SelectCountryButton.set_sensitive(true);
 
 			reset_timeout();
+		}
+
+                private void set_state(){
+		        unowned string name;
+                        name = StateEntry.get_text();
+
+                        if(name != ""){
+                                SelectStateButton.set_label(name);
+
+                                selected_state = name;
+                                state_tag.set_label(name);
+                                SearchEntry.add_tag(state_tag);
+
+                                ClearStateButton.set_visible(true);
+                                reset_timeout();
+                                show_search_results();
+                        }
+
+                        StateStack.set_visible_child_name("main");
 		}
 
 		private void clear_selected_state(){
@@ -368,47 +306,73 @@ namespace Gradio{
 			state_tag.set_label("");
 			SearchEntry.remove_tag(state_tag);
 			SelectStateButton.set_label(_("Select State ..."));
+			StateEntry.set_text("");
 			ClearStateButton.set_visible(false);
-			SelectCountryButton.set_sensitive(true);
+			SelectStateButton.set_sensitive(true);
 
 			reset_timeout();
+		}
+
+		private void set_language(){
+		        unowned string name;
+                        name = LanguageEntry.get_text();
+
+                        if(name != ""){
+                                SelectLanguageButton.set_label(name);
+
+                                selected_language = name;
+                                language_tag.set_label(name);
+                                SearchEntry.add_tag(language_tag);
+
+                                ClearLanguageButton.set_visible(true);
+                                reset_timeout();
+                                show_search_results();
+                        }
+
+                        LanguageStack.set_visible_child_name("main");
+		}
+
+		private void clear_selected_language(){
+			selected_language = "";
+			language_tag.set_label("");
+			SearchEntry.remove_tag(language_tag);
+			SelectLanguageButton.set_label(_("Select Language ..."));
+			LanguageEntry.set_text("");
+			ClearLanguageButton.set_visible(false);
+			SelectLanguageButton.set_sensitive(true);
+
+			reset_timeout();
+		}
+
+		private void set_tag(){
+		        unowned string name;
+                        name = TagEntry.get_text();
+
+                        if(name != ""){
+                                SelectTagButton.set_label(name);
+
+                                selected_tag = name;
+                                tag_tag.set_label(name);
+                                SearchEntry.add_tag(tag_tag);
+
+                                ClearTagButton.set_visible(true);
+                                reset_timeout();
+                                show_search_results();
+                        }
+
+                        TagStack.set_visible_child_name("main");
 		}
 
 		private void clear_selected_tag(){
 			selected_tag = "";
 			tag_tag.set_label("");
 			SearchEntry.remove_tag(tag_tag);
-			SelectTagsButton.set_label(_("Select Tag ..."));
-			ClearTagsButton.set_visible(false);
-			SelectTagsButton.set_sensitive(true);
+			SelectTagButton.set_label(_("Select Tag ..."));
+			TagEntry.set_text("");
+			ClearTagButton.set_visible(false);
+			SelectTagButton.set_sensitive(true);
 
 			reset_timeout();
-		}
-
-		private ListBoxRow get_row(string text){
-			ListBoxRow row = new ListBoxRow();
-
-			Gtk.Box box = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 0);
-			box.vexpand = true;
-
-			Gtk.Box rowbox = new Gtk.Box(Gtk.Orientation.VERTICAL, 0);
-			rowbox.add(box);
-			row.add(rowbox);
-
-			Label label = new Label (text);
-			label.margin = 5;
-			box.add(label);
-
-			Separator sep = new Separator(Gtk.Orientation.HORIZONTAL);
-			sep.set_halign(Align.FILL);
-			sep.set_valign(Align.END);
-			rowbox.pack_end(sep);
-
-			row.height_request = 40;
-			row.set_data("ITEM", text);
-			row.show_all();
-
-			return row;
 		}
 	}
 }
