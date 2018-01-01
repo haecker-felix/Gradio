@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-14 20:44+0100\n"
-"PO-Revision-Date: 2017-12-30 16:44+0000\n"
+"PO-Revision-Date: 2018-01-01 11:17+0000\n"
 "Last-Translator: Florian <floflr@zaclys.net>\n"
 "Language-Team: French "
 "<https://hosted.weblate.org/projects/gradio/translations/fr/>\n"
@@ -38,7 +38,8 @@ msgstr "Votre bibliothèque est vide"
 
 #: data/ui/page/library-page.ui:62
 msgid "If you add stations to the library, you will find them here."
-msgstr "Les dernières stations rajoutées se trouvent ici."
+msgstr ""
+"Si vous ajoutez des stations radio à la bibliothèque, vous les trouverez ici."
 
 #: data/ui/page/library-page.ui:75
 msgid "Add stations to library"
