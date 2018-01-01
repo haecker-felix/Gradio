@@ -31,6 +31,7 @@ namespace Gradio{
 		[GtkChild] private Label ItemsLabel;
 
 		[GtkChild] private Label TagsLabel;
+		[GtkChild] private Label CodecLabel;
 		[GtkChild] private Label DescriptionLabel;
 		[GtkChild] private Label LocationLabel;
 		[GtkChild] private Label VotesLabel;
@@ -52,6 +53,7 @@ namespace Gradio{
 			TypeLabel.set_text("Radio station");
 			DescriptionLabel.set_text("...");
 			TagsLabel.set_text(station.tags);
+			CodecLabel.set_text(station.techinfo);
 			LocationLabel.set_text(station.country + " " + station.state);
 			VotesLabel.set_text(station.votes.to_string());
 

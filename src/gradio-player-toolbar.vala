@@ -87,6 +87,7 @@ namespace Gradio{
 				StationLogo.set_from_surface(_thumbnail.surface);
 			});
 			_thumbnail.show_empty_box();
+			StationLogo.set_tooltip_text(App.player.station.techinfo);
 
 			this.set_visible(true);
 		}

@@ -30,6 +30,11 @@
       <summary>Show notifications</summary>
     </key>
 
+    <key name="show-technical-information" type="b">
+      <default>false</default>
+      <summary>Show technical information in the UI</summary>
+    </key>
+
     <key name="volume-position" type="d">
       <default>0.99</default>
       <summary>Volume position</summary>

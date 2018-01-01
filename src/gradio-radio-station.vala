@@ -27,6 +27,7 @@ namespace Gradio{
 		private string _state;
 		private string _votes;
 		private string _codec;
+		private string _techinfo;
 		private string _bitrate;
 		private string _clickcount;
 		private string _clicktimestamp;
@@ -86,6 +87,24 @@ namespace Gradio{
 		public string bitrate {
 			get{return _bitrate;}
 			set{_bitrate = value;}
+		}
+
+		public string techinfo {
+			get{
+				bool unknownCodec = strcmp(_codec, "UNKNOWN")==0;
+				bool zeroBitrate = strcmp(_bitrate, "0")==0;
+				if(!unknownCodec && !zeroBitrate){
+					_techinfo = _codec + "-" + _bitrate + "kB/s";
+				}else if (unknownCodec && !zeroBitrate){
+					_techinfo = "???-" + _bitrate + "kB/s";
+				}else if (!unknownCodec && zeroBitrate){
+					_techinfo = _codec + "-??kB/s";
+				}else{
+					_techinfo = _("missing");
+				}
+
+				return _techinfo;
+			}
 		}
 
 		public string clickcount {
@@ -160,6 +179,7 @@ namespace Gradio{
 		private void connect_signals(){
 			App.settings.notify["station-sorting"].connect(update_secondary_text);
 			App.settings.notify["icon-zoom"].connect(update_thumbnail);
+			App.settings.notify["show-technical-info"].connect(update_secondary_text);
 		}
 
 		private void update_secondary_text(){
@@ -172,6 +192,10 @@ namespace Gradio{
 				case Compare.COUNTRY: _secondary_text = country; break;
 				case Compare.BITRATE: _secondary_text = bitrate + " kBit/s"; break;
 				case Compare.LANGUAGE: _secondary_text = language; break;
+			}
+			if(App.settings.station_sorting != Compare.BITRATE &&
+			   App.settings.show_technical_info){
+				_secondary_text = _secondary_text + " (" + techinfo + ")";
 			}
 			notify_property("secondary-text");
 		}
