@@ -1,6 +1,4 @@
 # Gradio
-
-[![Join the chat at https://gitter.im/haecker-felix/gradio](https://badges.gitter.im/haecker-felix/gradio.svg)](https://gitter.im/haecker-felix/gradio?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 A GTK3 app for finding and listening to internet radio stations.
 
 ![alt text](https://raw.githubusercontent.com/haecker-felix/gradio/master/data/icons/hicolor/256x256/apps/de.haeckerfelix.gradio.png "Logo")
@@ -11,6 +9,7 @@ https://img.shields.io/badge/flatpak-download-brightgreen.svg)](https://flathub.
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Packaging status](https://repology.org/badge/tiny-repos/gradio.svg)](https://repology.org/metapackage/gradio)
 [![Translation status](https://hosted.weblate.org/widgets/gradio/-/svg-badge.svg)](https://hosted.weblate.org/engage/gradio/?utm_source=widget)
+[![Join the chat at https://gitter.im/haecker-felix/gradio](https://badges.gitter.im/haecker-felix/gradio.svg)](https://gitter.im/haecker-felix/gradio?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ## News
 * Gradio is no longer available on snapcraft / snap store. [More information](https://plus.google.com/u/0/+FelixH%C3%A4cker1207/posts/Q1zbCi27zDj)
