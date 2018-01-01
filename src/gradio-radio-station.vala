@@ -91,14 +91,14 @@ namespace Gradio{
 
 		public string techinfo {
 			get{
-				bool unknownCodec = strcmp(_codec, "UNKNOWN")==0;
-				bool zeroBitrate = strcmp(_bitrate, "0")==0;
+				bool unknownCodec = strcmp(_codec, "UNKNOWN") == 0;
+				bool zeroBitrate = strcmp(_bitrate, "0") == 0;
 				if(!unknownCodec && !zeroBitrate){
-					_techinfo = _codec + "-" + _bitrate + "kB/s";
+					_techinfo = _codec + " / " + _bitrate + " kBit/s";
 				}else if (unknownCodec && !zeroBitrate){
-					_techinfo = "???-" + _bitrate + "kB/s";
+					_techinfo = "? / " + _bitrate + " kBit/s";
 				}else if (!unknownCodec && zeroBitrate){
-					_techinfo = _codec + "-??kB/s";
+					_techinfo = _codec + " / ? kBit/s";
 				}else{
 					_techinfo = _("missing");
 				}

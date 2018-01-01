@@ -57,12 +57,9 @@ namespace Gradio{
 			appearance_group.add_listbox_row(use_dark_design_switch);
 
 			// Show technical station information.
-			SwitchItem show_technical_info =
-				new SwitchItem(_("Show technical information"),
-				_("Show the advertised bitrate and codec from the internet database"));
+			SwitchItem show_technical_info = new SwitchItem(_("Show technical information"), _("Display additional information such as bitrate and codec"));
 			show_technical_info.set_state(App.settings.show_technical_info);
-			show_technical_info.toggled.connect(() =>
-							    {App.settings.show_technical_info = show_technical_info.get_state();});
+			show_technical_info.toggled.connect(() => {App.settings.show_technical_info = show_technical_info.get_state();});
 			appearance_group.add_listbox_row(show_technical_info);
 
 			// PLAYBACK
