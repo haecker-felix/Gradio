@@ -7,16 +7,16 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-01-01 14:42+0100\n"
-"PO-Revision-Date: 2017-12-12 18:57+0000\n"
+"PO-Revision-Date: 2018-01-01 13:50+0000\n"
 "Last-Translator: Häcker Felix <haecker.felix1207@gmail.com>\n"
-"Language-Team: German <https://hosted.weblate.org/projects/gradio/"
-"translations/de/>\n"
+"Language-Team: German "
+"<https://hosted.weblate.org/projects/gradio/translations/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.18-dev\n"
+"X-Generator: Weblate 2.19-dev\n"
 
 #: data/ui/app-menu.ui:6 data/ui/menubutton.ui:192
 #: src/page/gradio-settings-page.vala:120
@@ -40,9 +40,8 @@ msgid "If you add stations to the library, you will find them here."
 msgstr "Wenn du Sender zur Bibliothek hinzufügst, wirst du sie hier finden."
 
 #: data/ui/page/library-page.ui:75
-#, fuzzy
 msgid "Add stations to library"
-msgstr "Zur Bibliothek hinzufügen"
+msgstr "Radiosender zur Bibliothek hinzufügen"
 
 #: data/ui/page/collections-page.ui:43
 msgid "You don't have any collection"
@@ -84,7 +83,7 @@ msgstr "Tags"
 
 #: data/ui/details-box.ui:346
 msgid "Codec"
-msgstr ""
+msgstr "Codec"
 
 #: data/ui/details-box.ui:433 data/ui/selection-toolbar.ui:83
 msgid "Play"
@@ -189,7 +188,7 @@ msgstr "Symbol Adresse"
 
 #: data/ui/station-editor.ui:304
 msgid "Enter tags separated by commas"
-msgstr ""
+msgstr "Tags durch Kommas getrennt eingeben"
 
 #: data/ui/station-editor.ui:337
 msgid "Homepage"
@@ -330,11 +329,11 @@ msgstr "Verwendet ein dunkles Thema, falls möglich"
 #. Show technical station information.
 #: src/page/gradio-settings-page.vala:60
 msgid "Show technical information"
-msgstr ""
+msgstr "Technische Informationen anzeigen"
 
 #: src/page/gradio-settings-page.vala:60
 msgid "Display additional information such as bitrate and codec"
-msgstr ""
+msgstr "Zusätzliche Informationen wie Bitrate und Codec anzeigen"
 
 #. PLAYBACK
 #. enable background playback
@@ -420,24 +419,20 @@ msgid "Sorting: %s / %s"
 msgstr "Sortierung: %s / %s"
 
 #: src/gradio-searchbar.vala:277
-#, fuzzy
 msgid "Select Country …"
-msgstr "Land auswählen ..."
+msgstr "Land auswählen …"
 
 #: src/gradio-searchbar.vala:308
-#, fuzzy
 msgid "Select State …"
-msgstr "Provinz auswählen ..."
+msgstr "Provinz auswählen …"
 
 #: src/gradio-searchbar.vala:339
-#, fuzzy
 msgid "Select Language …"
-msgstr "Sprache auswählen ..."
+msgstr "Sprache auswählen …"
 
 #: src/gradio-searchbar.vala:370
-#, fuzzy
 msgid "Select Tag …"
-msgstr "Sprache auswählen ..."
+msgstr "Tag auswählen …"
 
 #: src/gradio-station-editor-dialog.vala:54
 msgid "Create radio station"
