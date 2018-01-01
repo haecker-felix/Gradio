@@ -6,21 +6,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-14 20:44+0100\n"
+"POT-Creation-Date: 2018-01-01 14:42+0100\n"
 "PO-Revision-Date: 2017-12-15 17:16+0000\n"
 "Last-Translator: Slobodan Terzić <githzerai06@gmail.com>\n"
-"Language-Team: Serbian (latin) "
-"<https://hosted.weblate.org/projects/gradio/translations/sr_Latn/>\n"
+"Language-Team: Serbian (latin) <https://hosted.weblate.org/projects/gradio/"
+"translations/sr_Latn/>\n"
 "Language: sr@latin\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<="
-"4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 2.18\n"
 
 #: data/ui/app-menu.ui:6 data/ui/menubutton.ui:192
-#: src/page/gradio-settings-page.vala:115
+#: src/page/gradio-settings-page.vala:120
 msgid "Settings"
 msgstr "Podešavanja"
 
@@ -57,7 +57,7 @@ msgid "Details"
 msgstr "Detalji"
 
 #: data/ui/details-box.ui:137 data/ui/station-editor.ui:125
-#: data/ui/menubutton.ui:369 src/gradio-searchbar.vala:193
+#: data/ui/menubutton.ui:369 src/gradio-searchbar.vala:188
 msgid "Name"
 msgstr "Ime"
 
@@ -70,7 +70,7 @@ msgid "Items"
 msgstr "stavki"
 
 #: data/ui/details-box.ui:250 data/ui/menubutton.ui:354
-#: src/gradio-searchbar.vala:192
+#: src/gradio-searchbar.vala:187
 msgid "Votes"
 msgstr "Glasovi"
 
@@ -78,13 +78,13 @@ msgstr "Glasovi"
 msgid "Location"
 msgstr "Lokacija"
 
-#: data/ui/details-box.ui:314
-msgid "Description"
-msgstr "Opis"
-
-#: data/ui/details-box.ui:346
+#: data/ui/details-box.ui:314 data/ui/station-editor.ui:322
 msgid "Tags"
 msgstr "Oznake"
+
+#: data/ui/details-box.ui:346
+msgid "Codec"
+msgstr ""
 
 #: data/ui/details-box.ui:433 data/ui/selection-toolbar.ui:83
 msgid "Play"
@@ -167,75 +167,79 @@ msgstr "Nastavi"
 msgid "Stream Address"
 msgstr "Adresa toka"
 
-#: data/ui/station-editor.ui:166
-msgid "Homepage"
-msgstr "Domaća stranica"
-
-#: data/ui/station-editor.ui:181 data/ui/menubutton.ui:399
-#: src/gradio-searchbar.vala:195
+#: data/ui/station-editor.ui:166 data/ui/menubutton.ui:399
+#: src/gradio-searchbar.vala:190
 msgid "Country"
 msgstr "Zemlja"
 
-#: data/ui/station-editor.ui:196 data/ui/menubutton.ui:414
-#: src/gradio-searchbar.vala:196
+#: data/ui/station-editor.ui:181 data/ui/menubutton.ui:414
+#: src/gradio-searchbar.vala:191
 msgid "State"
 msgstr "Država"
 
-#: data/ui/station-editor.ui:211 data/ui/menubutton.ui:384
-#: src/gradio-searchbar.vala:194
+#: data/ui/station-editor.ui:196 data/ui/menubutton.ui:384
+#: src/gradio-searchbar.vala:189
 msgid "Language"
 msgstr "Jezik"
 
-#: data/ui/station-editor.ui:291
+#: data/ui/station-editor.ui:266
 msgid "Favicon Address"
 msgstr "Adresa favikone"
 
-#: data/ui/station-editor.ui:435
+#: data/ui/station-editor.ui:304
+msgid "Enter tags separated by commas"
+msgstr ""
+
+#: data/ui/station-editor.ui:337
+msgid "Homepage"
+msgstr "Domaća stranica"
+
+#: data/ui/station-editor.ui:480
 msgid "Server Response"
 msgstr "Odziv servera"
 
-#: data/ui/station-editor.ui:471
+#: data/ui/station-editor.ui:516
 msgid "Close"
 msgstr "Zatvori"
 
-#: data/ui/station-editor.ui:501
+#: data/ui/station-editor.ui:546
 msgid "Cancel"
 msgstr "Otkaži"
 
-#: data/ui/station-editor.ui:510
+#: data/ui/station-editor.ui:555
 msgid "Done"
 msgstr "Gotovo"
 
-#: data/ui/page/search-page.ui:80 data/ui/page/search-page.ui:159
-#: data/ui/page/search-page.ui:238
+#: data/ui/page/search-page.ui:79 data/ui/page/search-page.ui:158
+#: data/ui/page/search-page.ui:237
 msgid "More..."
 msgstr "Više..."
 
-#: data/ui/page/search-page.ui:102
+#: data/ui/page/search-page.ui:101
 msgid "Stations with the most votes"
 msgstr "Stanice sa najviše glasova"
 
-#: data/ui/page/search-page.ui:181
+#: data/ui/page/search-page.ui:180
 msgid "Recently clicked stations"
 msgstr "Nedavno birane stanice"
 
-#: data/ui/page/search-page.ui:260
+#: data/ui/page/search-page.ui:259
 msgid "Stations with the most clicks"
 msgstr "Stanice sa najviše klikova"
 
-#: data/ui/page/search-page.ui:348 src/page/gradio-search-page.vala:171
+#: data/ui/page/search-page.ui:346 src/page/gradio-search-page.vala:171
 msgid "Search"
 msgstr "Traži"
 
-#: data/ui/page/search-page.ui:383
+#: data/ui/page/search-page.ui:381
 msgid "Results:"
 msgstr "Rezultati:"
 
-#: data/ui/page/search-page.ui:479
+#: data/ui/page/search-page.ui:477
 msgid "No results found"
 msgstr "Nisu nađeni rezultati"
 
-#: data/ui/page/search-page.ui:497
+#: data/ui/page/search-page.ui:495
 msgid ""
 "Either the station does not exist, or you have to search with other keywords."
 msgstr "Ili stanica ne postoji, ili morate upotrebiti druge ključne reči."
@@ -265,23 +269,23 @@ msgstr "Uvoz"
 msgid "Export"
 msgstr "Izvoz"
 
-#: data/ui/menubutton.ui:429 src/gradio-searchbar.vala:198
+#: data/ui/menubutton.ui:429 src/gradio-searchbar.vala:193
 msgid "Clicks"
 msgstr "Klikovi"
 
-#: data/ui/menubutton.ui:444 src/gradio-searchbar.vala:197
+#: data/ui/menubutton.ui:444 src/gradio-searchbar.vala:192
 msgid "Bitrate"
 msgstr "Bitski protok"
 
-#: data/ui/menubutton.ui:459 src/gradio-searchbar.vala:199
+#: data/ui/menubutton.ui:459 src/gradio-searchbar.vala:194
 msgid "Date"
 msgstr "Datum"
 
-#: data/ui/menubutton.ui:499 src/gradio-searchbar.vala:202
+#: data/ui/menubutton.ui:499 src/gradio-searchbar.vala:197
 msgid "Ascending"
 msgstr "Rastuće"
 
-#: data/ui/menubutton.ui:514 src/gradio-searchbar.vala:203
+#: data/ui/menubutton.ui:514 src/gradio-searchbar.vala:198
 msgid "Descending"
 msgstr "Opadajuće"
 
@@ -320,68 +324,77 @@ msgstr "Prednost tamnoj temi"
 msgid "Use a dark theme, if possible"
 msgstr "Ukoliko je moguće, koristi tamnu temu"
 
+#. Show technical station information.
+#: src/page/gradio-settings-page.vala:60
+msgid "Show technical information"
+msgstr ""
+
+#: src/page/gradio-settings-page.vala:60
+msgid "Display additional information such as bitrate and codec"
+msgstr ""
+
 #. PLAYBACK
 #. enable background playback
-#: src/page/gradio-settings-page.vala:63
+#: src/page/gradio-settings-page.vala:68
 msgid "Background Playback"
 msgstr "Puštanje u pozadini"
 
-#: src/page/gradio-settings-page.vala:63
+#: src/page/gradio-settings-page.vala:68
 msgid "Continue the playback if you close the Gradio window"
 msgstr "Nastavi puštanje po zatvaranju prozora Gradija"
 
 #. resume playback on startup
-#: src/page/gradio-settings-page.vala:69
+#: src/page/gradio-settings-page.vala:74
 msgid "Resume playback on startup"
 msgstr "Nastavi puštanje po pokretanju"
 
-#: src/page/gradio-settings-page.vala:69
+#: src/page/gradio-settings-page.vala:74
 msgid "Play the latest station if you start Gradio"
 msgstr "Pušta poslednju stanicu po pokretanju Gradija"
 
 #. FEATURES
 #. mpris
-#: src/page/gradio-settings-page.vala:78
+#: src/page/gradio-settings-page.vala:83
 msgid "MPRIS"
 msgstr "MPRIS"
 
-#: src/page/gradio-settings-page.vala:78
+#: src/page/gradio-settings-page.vala:83
 msgid "Integrate Gradio as media player in your desktop environment"
 msgstr "Ugrađuje Gradio u okruženje površi"
 
 #. enable notifications
-#: src/page/gradio-settings-page.vala:84
+#: src/page/gradio-settings-page.vala:89
 msgid "Notifications"
 msgstr "Obaveštenja"
 
-#: src/page/gradio-settings-page.vala:84
+#: src/page/gradio-settings-page.vala:89
 msgid "Show desktop notifications"
 msgstr "Prikazuje obaveštenja radne površi"
 
 #. enable tray icon
-#: src/page/gradio-settings-page.vala:90
+#: src/page/gradio-settings-page.vala:95
 msgid "Tray icon"
 msgstr "Ikona sistemske kasete"
 
-#: src/page/gradio-settings-page.vala:90
+#: src/page/gradio-settings-page.vala:95
 msgid "Show a tray icon, to restore the main window"
 msgstr "Prikazuje ikonu sistemske kasete za obnovu glavnog prozora"
 
 #. CACHE
 #. cache station images
-#: src/page/gradio-settings-page.vala:99
+#: src/page/gradio-settings-page.vala:104
 msgid "Cache station icons"
 msgstr "Keširanje slika stanica"
 
-#: src/page/gradio-settings-page.vala:99
+#: src/page/gradio-settings-page.vala:104
 msgid "Saves the images locally."
 msgstr "Čuva slike stanica lokalno."
 
-#: src/page/gradio-settings-page.vala:104
+#: src/page/gradio-settings-page.vala:109
 msgid "Clear Cache"
 msgstr "Čišćenje keša"
 
-#: src/page/gradio-settings-page.vala:104
+#: src/page/gradio-settings-page.vala:109
 msgid "Clear all cached station icons"
 msgstr "Čisti sve keširane slike stanica"
 
@@ -394,36 +407,44 @@ msgstr "Kliknite na stavku za prikaz opcija"
 msgid "%i selected"
 msgstr "Izabranih: %i"
 
-#: src/gradio-searchbar.vala:68
+#: src/gradio-searchbar.vala:83
 msgid "Search for radio stations"
 msgstr "Pretraga radio stanica"
 
-#: src/gradio-searchbar.vala:206
+#: src/gradio-searchbar.vala:201
 #, c-format
 msgid "Sorting: %s / %s"
 msgstr "Slaganje: %s / %s"
 
-#: src/gradio-searchbar.vala:293
-msgid "Select Language ..."
-msgstr "Izaberite jezik ..."
-
-#: src/gradio-searchbar.vala:303
-msgid "Select Country ..."
+#: src/gradio-searchbar.vala:277
+#, fuzzy
+msgid "Select Country …"
 msgstr "Izaberite zemlju ..."
 
-#: src/gradio-searchbar.vala:314
-msgid "Select State ..."
+#: src/gradio-searchbar.vala:308
+#, fuzzy
+msgid "Select State …"
 msgstr "Izaberite državu ..."
 
-#: src/gradio-station-editor-dialog.vala:53
+#: src/gradio-searchbar.vala:339
+#, fuzzy
+msgid "Select Language …"
+msgstr "Izaberite jezik ..."
+
+#: src/gradio-searchbar.vala:370
+#, fuzzy
+msgid "Select Tag …"
+msgstr "Izaberite jezik ..."
+
+#: src/gradio-station-editor-dialog.vala:54
 msgid "Create radio station"
 msgstr "Napravi radio stanicu"
 
-#: src/gradio-station-editor-dialog.vala:59
+#: src/gradio-station-editor-dialog.vala:60
 msgid "Edit radio station"
 msgstr "Uredi radio stanicu"
 
-#: src/gradio-station-editor-dialog.vala:169
+#: src/gradio-station-editor-dialog.vala:131
 msgid "\"Name\" and \"Stream\" information is required."
 msgstr "Neophodno je uneti „Ỉme“ i „Tok“."
 
@@ -436,6 +457,9 @@ msgstr "Stanica %i nije prisutna u fonoteci."
 #, c-format
 msgid "%i radio station(s) already added to library."
 msgstr "Stanica %i je već dodata u fonoteku."
+
+#~ msgid "Description"
+#~ msgstr "Opis"
 
 #~ msgid " Items"
 #~ msgstr " stavki"

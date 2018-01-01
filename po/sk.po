@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Slovak (Gradio)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-14 20:44+0100\n"
+"POT-Creation-Date: 2018-01-01 14:42+0100\n"
 "PO-Revision-Date: 2017-11-18 18:55+0000\n"
 "Last-Translator: Tomáš Moravec <otoman100@gmail.com>\n"
 "Language-Team: Slovak <https://hosted.weblate.org/projects/gradio/"
@@ -15,7 +15,7 @@ msgstr ""
 "X-Generator: Weblate 2.18-dev\n"
 
 #: data/ui/app-menu.ui:6 data/ui/menubutton.ui:192
-#: src/page/gradio-settings-page.vala:115
+#: src/page/gradio-settings-page.vala:120
 msgid "Settings"
 msgstr "Nastavenia"
 
@@ -53,7 +53,7 @@ msgid "Details"
 msgstr "Podrobnosti"
 
 #: data/ui/details-box.ui:137 data/ui/station-editor.ui:125
-#: data/ui/menubutton.ui:369 src/gradio-searchbar.vala:193
+#: data/ui/menubutton.ui:369 src/gradio-searchbar.vala:188
 msgid "Name"
 msgstr "Názov"
 
@@ -66,7 +66,7 @@ msgid "Items"
 msgstr "Položky"
 
 #: data/ui/details-box.ui:250 data/ui/menubutton.ui:354
-#: src/gradio-searchbar.vala:192
+#: src/gradio-searchbar.vala:187
 msgid "Votes"
 msgstr ""
 
@@ -74,13 +74,13 @@ msgstr ""
 msgid "Location"
 msgstr "Umiestnenie"
 
-#: data/ui/details-box.ui:314
-msgid "Description"
-msgstr "Popis"
-
-#: data/ui/details-box.ui:346
+#: data/ui/details-box.ui:314 data/ui/station-editor.ui:322
 msgid "Tags"
 msgstr "Značky"
+
+#: data/ui/details-box.ui:346
+msgid "Codec"
+msgstr ""
 
 #: data/ui/details-box.ui:433 data/ui/selection-toolbar.ui:83
 msgid "Play"
@@ -167,78 +167,82 @@ msgstr "Pokračovať"
 msgid "Stream Address"
 msgstr "Adresa prúdu"
 
-#: data/ui/station-editor.ui:166
-msgid "Homepage"
-msgstr "Domovská stránka"
-
-#: data/ui/station-editor.ui:181 data/ui/menubutton.ui:399
-#: src/gradio-searchbar.vala:195
+#: data/ui/station-editor.ui:166 data/ui/menubutton.ui:399
+#: src/gradio-searchbar.vala:190
 msgid "Country"
 msgstr "Krajina"
 
-#: data/ui/station-editor.ui:196 data/ui/menubutton.ui:414
-#: src/gradio-searchbar.vala:196
+#: data/ui/station-editor.ui:181 data/ui/menubutton.ui:414
+#: src/gradio-searchbar.vala:191
 msgid "State"
 msgstr "Štát"
 
-#: data/ui/station-editor.ui:211 data/ui/menubutton.ui:384
-#: src/gradio-searchbar.vala:194
+#: data/ui/station-editor.ui:196 data/ui/menubutton.ui:384
+#: src/gradio-searchbar.vala:189
 msgid "Language"
 msgstr "Jazyk"
 
-#: data/ui/station-editor.ui:291
+#: data/ui/station-editor.ui:266
 msgid "Favicon Address"
 msgstr "Adresa ikony Favicon"
 
-#: data/ui/station-editor.ui:435
+#: data/ui/station-editor.ui:304
+msgid "Enter tags separated by commas"
+msgstr ""
+
+#: data/ui/station-editor.ui:337
+msgid "Homepage"
+msgstr "Domovská stránka"
+
+#: data/ui/station-editor.ui:480
 msgid "Server Response"
 msgstr "Odpoveď servera"
 
-#: data/ui/station-editor.ui:471
+#: data/ui/station-editor.ui:516
 msgid "Close"
 msgstr "Zavrieť"
 
-#: data/ui/station-editor.ui:501
+#: data/ui/station-editor.ui:546
 msgid "Cancel"
 msgstr "Zrušiť"
 
-#: data/ui/station-editor.ui:510
+#: data/ui/station-editor.ui:555
 msgid "Done"
 msgstr "Dokončiť"
 
-#: data/ui/page/search-page.ui:80 data/ui/page/search-page.ui:159
-#: data/ui/page/search-page.ui:238
+#: data/ui/page/search-page.ui:79 data/ui/page/search-page.ui:158
+#: data/ui/page/search-page.ui:237
 msgid "More..."
 msgstr ""
 
-#: data/ui/page/search-page.ui:102
+#: data/ui/page/search-page.ui:101
 #, fuzzy
 msgid "Stations with the most votes"
 msgstr "Zobrazí rádiové stanice, ktoré majú najviac hlasov."
 
-#: data/ui/page/search-page.ui:181
+#: data/ui/page/search-page.ui:180
 #, fuzzy
 msgid "Recently clicked stations"
 msgstr "Zobraziť nedávne rádiové stanice"
 
-#: data/ui/page/search-page.ui:260
+#: data/ui/page/search-page.ui:259
 #, fuzzy
 msgid "Stations with the most clicks"
 msgstr "Zobrazí rádiové stanice, ktoré majú najviac kliknutí."
 
-#: data/ui/page/search-page.ui:348 src/page/gradio-search-page.vala:171
+#: data/ui/page/search-page.ui:346 src/page/gradio-search-page.vala:171
 msgid "Search"
 msgstr ""
 
-#: data/ui/page/search-page.ui:383
+#: data/ui/page/search-page.ui:381
 msgid "Results:"
 msgstr ""
 
-#: data/ui/page/search-page.ui:479
+#: data/ui/page/search-page.ui:477
 msgid "No results found"
 msgstr "Nenašli sa žiadne výsledky"
 
-#: data/ui/page/search-page.ui:497
+#: data/ui/page/search-page.ui:495
 msgid ""
 "Either the station does not exist, or you have to search with other keywords."
 msgstr "Buď stanica neexistuje, alebo musíte hľadať s inými kľúčovými slovami."
@@ -270,23 +274,23 @@ msgstr "Importovať"
 msgid "Export"
 msgstr "Exportovať"
 
-#: data/ui/menubutton.ui:429 src/gradio-searchbar.vala:198
+#: data/ui/menubutton.ui:429 src/gradio-searchbar.vala:193
 msgid "Clicks"
 msgstr ""
 
-#: data/ui/menubutton.ui:444 src/gradio-searchbar.vala:197
+#: data/ui/menubutton.ui:444 src/gradio-searchbar.vala:192
 msgid "Bitrate"
 msgstr ""
 
-#: data/ui/menubutton.ui:459 src/gradio-searchbar.vala:199
+#: data/ui/menubutton.ui:459 src/gradio-searchbar.vala:194
 msgid "Date"
 msgstr ""
 
-#: data/ui/menubutton.ui:499 src/gradio-searchbar.vala:202
+#: data/ui/menubutton.ui:499 src/gradio-searchbar.vala:197
 msgid "Ascending"
 msgstr ""
 
-#: data/ui/menubutton.ui:514 src/gradio-searchbar.vala:203
+#: data/ui/menubutton.ui:514 src/gradio-searchbar.vala:198
 msgid "Descending"
 msgstr ""
 
@@ -326,69 +330,78 @@ msgstr "Uprednostniť tmavý motív"
 msgid "Use a dark theme, if possible"
 msgstr "Ak je to možné, použije sa tmavý motív"
 
+#. Show technical station information.
+#: src/page/gradio-settings-page.vala:60
+msgid "Show technical information"
+msgstr ""
+
+#: src/page/gradio-settings-page.vala:60
+msgid "Display additional information such as bitrate and codec"
+msgstr ""
+
 #. PLAYBACK
 #. enable background playback
-#: src/page/gradio-settings-page.vala:63
+#: src/page/gradio-settings-page.vala:68
 msgid "Background Playback"
 msgstr "Prehrávanie na pozadí"
 
-#: src/page/gradio-settings-page.vala:63
+#: src/page/gradio-settings-page.vala:68
 msgid "Continue the playback if you close the Gradio window"
 msgstr "Po zavretí okna aplikácie Gradio bude prehrávanie pokračovať"
 
 #. resume playback on startup
-#: src/page/gradio-settings-page.vala:69
+#: src/page/gradio-settings-page.vala:74
 msgid "Resume playback on startup"
 msgstr "Pokračovať v prehrávaní po spustení"
 
-#: src/page/gradio-settings-page.vala:69
+#: src/page/gradio-settings-page.vala:74
 msgid "Play the latest station if you start Gradio"
 msgstr "Po spustení aplikácie Gradio sa prehrá posledná stanica"
 
 #. FEATURES
 #. mpris
-#: src/page/gradio-settings-page.vala:78
+#: src/page/gradio-settings-page.vala:83
 msgid "MPRIS"
 msgstr "MPRIS"
 
-#: src/page/gradio-settings-page.vala:78
+#: src/page/gradio-settings-page.vala:83
 msgid "Integrate Gradio as media player in your desktop environment"
 msgstr ""
 "Integruje aplikáciu Gradio do vášho pracovného prostredia ako prehrávač médií"
 
 #. enable notifications
-#: src/page/gradio-settings-page.vala:84
+#: src/page/gradio-settings-page.vala:89
 msgid "Notifications"
 msgstr "Oznámenia"
 
-#: src/page/gradio-settings-page.vala:84
+#: src/page/gradio-settings-page.vala:89
 msgid "Show desktop notifications"
 msgstr "Zobrazí oznámenia v pracovnom prostredí"
 
 #. enable tray icon
-#: src/page/gradio-settings-page.vala:90
+#: src/page/gradio-settings-page.vala:95
 msgid "Tray icon"
 msgstr "Ikona v systémovej lište"
 
-#: src/page/gradio-settings-page.vala:90
+#: src/page/gradio-settings-page.vala:95
 msgid "Show a tray icon, to restore the main window"
 msgstr "Zobrazí ikonu v systémovej lište, na obnovenie hlavného okna"
 
 #. CACHE
 #. cache station images
-#: src/page/gradio-settings-page.vala:99
+#: src/page/gradio-settings-page.vala:104
 msgid "Cache station icons"
 msgstr "Ukladať ikony staníc do vyrovnávacej pamäte"
 
-#: src/page/gradio-settings-page.vala:99
+#: src/page/gradio-settings-page.vala:104
 msgid "Saves the images locally."
 msgstr "Uloží obrázky v miestnom úložisku."
 
-#: src/page/gradio-settings-page.vala:104
+#: src/page/gradio-settings-page.vala:109
 msgid "Clear Cache"
 msgstr "Vymazať vyrovnávaciu pamäť"
 
-#: src/page/gradio-settings-page.vala:104
+#: src/page/gradio-settings-page.vala:109
 msgid "Clear all cached station icons"
 msgstr "Vymaže všetky ikony staníc vo vyrovnávacej pamäti"
 
@@ -401,40 +414,46 @@ msgstr ""
 msgid "%i selected"
 msgstr ""
 
-#: src/gradio-searchbar.vala:68
+#: src/gradio-searchbar.vala:83
 msgid "Search for radio stations"
 msgstr "Vyhľadať rádiové stanice"
 
-#: src/gradio-searchbar.vala:206
+#: src/gradio-searchbar.vala:201
 #, fuzzy, c-format
 msgid "Sorting: %s / %s"
 msgstr "Nastavenia"
 
-#: src/gradio-searchbar.vala:293
+#: src/gradio-searchbar.vala:277
 #, fuzzy
-msgid "Select Language ..."
-msgstr "Vybrať jazyk…"
-
-#: src/gradio-searchbar.vala:303
-msgid "Select Country ..."
+msgid "Select Country …"
 msgstr "Vybrať krajinu…"
 
-#: src/gradio-searchbar.vala:314
+#: src/gradio-searchbar.vala:308
 #, fuzzy
-msgid "Select State ..."
+msgid "Select State …"
 msgstr "Vybrať štát…"
 
-#: src/gradio-station-editor-dialog.vala:53
+#: src/gradio-searchbar.vala:339
+#, fuzzy
+msgid "Select Language …"
+msgstr "Vybrať jazyk…"
+
+#: src/gradio-searchbar.vala:370
+#, fuzzy
+msgid "Select Tag …"
+msgstr "Vybrať jazyk…"
+
+#: src/gradio-station-editor-dialog.vala:54
 #, fuzzy
 msgid "Create radio station"
 msgstr "Vytvoriť novú rádiovú stanicu"
 
-#: src/gradio-station-editor-dialog.vala:59
+#: src/gradio-station-editor-dialog.vala:60
 #, fuzzy
 msgid "Edit radio station"
 msgstr "Preskúmať rádiové stanice"
 
-#: src/gradio-station-editor-dialog.vala:169
+#: src/gradio-station-editor-dialog.vala:131
 msgid "\"Name\" and \"Stream\" information is required."
 msgstr ""
 
@@ -447,6 +466,9 @@ msgstr ""
 #, c-format
 msgid "%i radio station(s) already added to library."
 msgstr ""
+
+#~ msgid "Description"
+#~ msgstr "Popis"
 
 #~ msgid " Items"
 #~ msgstr " Položky"
