@@ -32,7 +32,6 @@ namespace Gradio{
 
 		[GtkChild] private Label TagsLabel;
 		[GtkChild] private Label CodecLabel;
-		[GtkChild] private Label DescriptionLabel;
 		[GtkChild] private Label LocationLabel;
 		[GtkChild] private Label VotesLabel;
 
@@ -51,17 +50,10 @@ namespace Gradio{
 
 			NameLabel.set_text(station.title);
 			TypeLabel.set_text("Radio station");
-			DescriptionLabel.set_text("...");
 			TagsLabel.set_text(station.tags);
 			CodecLabel.set_text(station.techinfo);
 			LocationLabel.set_text(station.country + " " + station.state);
 			VotesLabel.set_text(station.votes.to_string());
-
-			// Description
-			station.get_description.begin((obj,res) => {
-				string desc = station.get_description.end(res);
-				DescriptionLabel.set_markup(desc);
-			});
 
 			OpenHomepageButton.set_visible(true);
 			EditButton.set_visible(true);
