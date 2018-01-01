@@ -28,6 +28,7 @@ namespace Gradio{
 		[GtkChild] private Entry StateEntry;
 		[GtkChild] private Entry LanguageEntry;
 		[GtkChild] private Entry FaviconEntry;
+		[GtkChild] private Entry TagsEntry;
 
 		[GtkChild] private Stack EditorStack;
 		[GtkChild] private Box AnswerBox;
@@ -66,6 +67,7 @@ namespace Gradio{
 			LanguageEntry.set_text(station.language);
 			FaviconEntry.set_text(station.icon_address);
 			StreamEntry.set_text("...");
+			TagsEntry.set_text(station.tags);
 
 			station.get_stream_address.begin((obj,res) => {
 				string address = station.get_stream_address.end(res);
@@ -141,6 +143,7 @@ namespace Gradio{
 			table.insert("country", CountryEntry.get_text());
 			table.insert("state", StateEntry.get_text());
 			table.insert("language", LanguageEntry.get_text());
+			table.insert("tags", TagsEntry.get_text());
 
 			Soup.Message msg = Soup.Form.request_new_from_hash("POST", address, table);
 
