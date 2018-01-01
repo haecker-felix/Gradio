@@ -198,7 +198,7 @@ namespace Gradio{
 				case "descending": App.settings.sort_ascending = false; orderlabel = _("Descending"); break;
 			}
 
-			SortLabel.set_text(_("Sorting: %s / %s").printf(sortlabel, orderlabel));
+			SortLabel.set_markup(_("<b>Sorting:</b> %s / %s").printf(sortlabel, orderlabel));
 		}
 
 		private void reset_timeout(){
