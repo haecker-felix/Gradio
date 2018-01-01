@@ -1,4 +1,6 @@
 # Gradio
+
+[![Join the chat at https://gitter.im/haecker-felix/gradio](https://badges.gitter.im/haecker-felix/gradio.svg)](https://gitter.im/haecker-felix/gradio?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 A GTK3 app for finding and listening to internet radio stations.
 
 ![alt text](https://raw.githubusercontent.com/haecker-felix/gradio/master/data/icons/hicolor/256x256/apps/de.haeckerfelix.gradio.png "Logo")
