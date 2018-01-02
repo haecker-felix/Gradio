@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-01-01 14:42+0100\n"
-"PO-Revision-Date: 2018-01-02 08:59+0000\n"
+"PO-Revision-Date: 2018-01-02 09:22+0000\n"
 "Last-Translator: DaSnoopy <a.antolini@tin.it>\n"
 "Language-Team: Italian "
 "<https://hosted.weblate.org/projects/gradio/translations/it/>\n"
@@ -84,7 +84,7 @@ msgstr "Etichette"
 
 #: data/ui/details-box.ui:346
 msgid "Codec"
-msgstr "Codec"
+msgstr "Codifica"
 
 #: data/ui/details-box.ui:433 data/ui/selection-toolbar.ui:83
 msgid "Play"
