@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-01-01 14:42+0100\n"
-"PO-Revision-Date: 2017-12-15 21:08+0000\n"
+"PO-Revision-Date: 2018-01-11 14:02+0000\n"
 "Last-Translator: Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
-"Language-Team: Swedish <https://hosted.weblate.org/projects/gradio/"
-"translations/sv/>\n"
+"Language-Team: Swedish "
+"<https://hosted.weblate.org/projects/gradio/translations/sv/>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.18\n"
+"X-Generator: Weblate 2.19-dev\n"
 
 #: data/ui/app-menu.ui:6 data/ui/menubutton.ui:192
 #: src/page/gradio-settings-page.vala:120
@@ -84,7 +84,7 @@ msgstr "Taggar"
 
 #: data/ui/details-box.ui:346
 msgid "Codec"
-msgstr ""
+msgstr "Kodek"
 
 #: data/ui/details-box.ui:433 data/ui/selection-toolbar.ui:83
 msgid "Play"
@@ -188,7 +188,7 @@ msgstr "Ikonadress"
 
 #: data/ui/station-editor.ui:304
 msgid "Enter tags separated by commas"
-msgstr ""
+msgstr "Mata in taggar avskilda med kommatecken"
 
 #: data/ui/station-editor.ui:337
 msgid "Homepage"
@@ -329,11 +329,11 @@ msgstr "Använd ett mörkt tema om möjligt"
 #. Show technical station information.
 #: src/page/gradio-settings-page.vala:60
 msgid "Show technical information"
-msgstr ""
+msgstr "Visa teknisk information"
 
 #: src/page/gradio-settings-page.vala:60
 msgid "Display additional information such as bitrate and codec"
-msgstr ""
+msgstr "Visa ytterligare information så som bithastighet och kodek"
 
 #. PLAYBACK
 #. enable background playback
