@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-01-01 14:42+0100\n"
-"PO-Revision-Date: 2018-01-02 09:22+0000\n"
+"PO-Revision-Date: 2018-01-20 15:52+0000\n"
 "Last-Translator: DaSnoopy <a.antolini@tin.it>\n"
 "Language-Team: Italian "
 "<https://hosted.weblate.org/projects/gradio/translations/it/>\n"
@@ -334,7 +334,7 @@ msgstr "Visualizza informazioni tecniche"
 
 #: src/page/gradio-settings-page.vala:60
 msgid "Display additional information such as bitrate and codec"
-msgstr "Mostra informazioni aggiuntive quali il bitrate e il codec usato"
+msgstr "Mostra informazioni aggiuntive quali il bitrate e la codifica usata"
 
 #. PLAYBACK
 #. enable background playback
