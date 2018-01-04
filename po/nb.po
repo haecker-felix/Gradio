@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-01-01 14:42+0100\n"
-"PO-Revision-Date: 2018-01-04 18:56+0000\n"
+"PO-Revision-Date: 2018-01-14 17:05+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål "
 "<https://hosted.weblate.org/projects/gradio/translations/nb/>\n"
@@ -188,7 +188,7 @@ msgstr "Favikon-adresse"
 
 #: data/ui/station-editor.ui:304
 msgid "Enter tags separated by commas"
-msgstr "Skriv in"
+msgstr "Skriv inn etiketter, inndelt med komma"
 
 #: data/ui/station-editor.ui:337
 msgid "Homepage"
