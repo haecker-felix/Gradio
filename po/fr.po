@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-01-01 14:42+0100\n"
-"PO-Revision-Date: 2018-01-01 14:44+0000\n"
-"Last-Translator: Erwin van Eijk <erwin.vaneijk@gmail.com>\n"
+"PO-Revision-Date: 2018-01-05 12:13+0000\n"
+"Last-Translator: anonymous <>\n"
 "Language-Team: French "
 "<https://hosted.weblate.org/projects/gradio/translations/fr/>\n"
 "Language: fr\n"
@@ -332,11 +332,11 @@ msgstr "Utiliser un thème sombre, si possible"
 #. Show technical station information.
 #: src/page/gradio-settings-page.vala:60
 msgid "Show technical information"
-msgstr ""
+msgstr "Afficher les informations techniques"
 
 #: src/page/gradio-settings-page.vala:60
 msgid "Display additional information such as bitrate and codec"
-msgstr ""
+msgstr "Afficher des informations supplémentaires (bitrate et codec)"
 
 #. PLAYBACK
 #. enable background playback
