@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-01-01 14:42+0100\n"
 "PO-Revision-Date: 2018-01-11 14:02+0000\n"
-"Last-Translator: Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
+"Last-Translator: Sebastian Rasmussen <sebras@gmail.com>\n"
 "Language-Team: Swedish "
 "<https://hosted.weblate.org/projects/gradio/translations/sv/>\n"
 "Language: sv\n"
@@ -419,24 +419,20 @@ msgid "Sorting: %s / %s"
 msgstr "Sortering: %s/%s"
 
 #: src/gradio-searchbar.vala:277
-#, fuzzy
 msgid "Select Country …"
 msgstr "Välj land…"
 
 #: src/gradio-searchbar.vala:308
-#, fuzzy
 msgid "Select State …"
 msgstr "Välj delstat…"
 
 #: src/gradio-searchbar.vala:339
-#, fuzzy
 msgid "Select Language …"
 msgstr "Välj språk…"
 
 #: src/gradio-searchbar.vala:370
-#, fuzzy
 msgid "Select Tag …"
-msgstr "Välj språk…"
+msgstr "Välj tagg…"
 
 #: src/gradio-station-editor-dialog.vala:54
 msgid "Create radio station"
