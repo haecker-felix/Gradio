@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-01-01 14:42+0100\n"
-"PO-Revision-Date: 2018-01-18 13:04+0000\n"
+"PO-Revision-Date: 2018-01-20 15:53+0000\n"
 "Last-Translator: monolifed <monolifed@gmail.com>\n"
 "Language-Team: Turkish "
 "<https://hosted.weblate.org/projects/gradio/translations/tr/>\n"
@@ -157,8 +157,8 @@ msgid ""
 "input!"
 msgstr ""
 "Gradio bir internet veritabanı kullanmakta. Buraya girdiğiniz her bilgi, tüm "
-"kullanıcılar için görülebilir olacaktır. Lütfen dikkatli olun, ve girdiğiniz "
-"bilgileri iki defa kontrol edin!"
+"kullanıcılar için görülebilir olacaktır. Lütfen dikkatli olun, ve "
+"girdiklerinizi iki defa kontrol edin!"
 
 #: data/ui/station-editor.ui:68
 msgid "Continue"
@@ -319,11 +319,11 @@ msgstr "Önbellek"
 #. Dark design
 #: src/page/gradio-settings-page.vala:54
 msgid "Prefer dark theme"
-msgstr "Koyu temayı tercih et"
+msgstr "Koyu temayı yeğle"
 
 #: src/page/gradio-settings-page.vala:54
 msgid "Use a dark theme, if possible"
-msgstr "Koyu bir tema kullan, olabilirse"
+msgstr "Koyu bir tema kullan, olanaklı ise"
 
 #. Show technical station information.
 #: src/page/gradio-settings-page.vala:60
@@ -375,21 +375,21 @@ msgstr "Masaüstü bildirimlerini gösterir"
 #. enable tray icon
 #: src/page/gradio-settings-page.vala:95
 msgid "Tray icon"
-msgstr "Masaüstü tepsisine ikon ekle"
+msgstr "Tepsi simgesi"
 
 #: src/page/gradio-settings-page.vala:95
 msgid "Show a tray icon, to restore the main window"
-msgstr "Sistem çubuğuna ana pencereyi görmeyi sağlayan bir ikon yerleştirir"
+msgstr "Ana pencereyi geri yüklemek için bir tepsi simgesi göster"
 
 #. CACHE
 #. cache station images
 #: src/page/gradio-settings-page.vala:104
 msgid "Cache station icons"
-msgstr "İstasyon ikonlarını önbelleğe al"
+msgstr "İstasyon simgelerini önbelleğe al"
 
 #: src/page/gradio-settings-page.vala:104
 msgid "Saves the images locally."
-msgstr "Görüntüleri bilgisayarınıza kaydeder."
+msgstr "Görüntüleri yerel olarak kaydeder."
 
 #: src/page/gradio-settings-page.vala:109
 msgid "Clear Cache"
@@ -397,7 +397,7 @@ msgstr "Önbelleği temizle"
 
 #: src/page/gradio-settings-page.vala:109
 msgid "Clear all cached station icons"
-msgstr "Önbelleğe alınmış tüm istasyon ikonlarını siler"
+msgstr "Önbellekteki tüm istasyon simgelerini temizler"
 
 #: src/gradio-headerbar.vala:53 src/gradio-headerbar.vala:59
 msgid "Click on items to select them"
@@ -406,11 +406,11 @@ msgstr "Seçmek için ögelere tıklayın"
 #: src/gradio-headerbar.vala:61
 #, c-format
 msgid "%i selected"
-msgstr "%i nesne seçildi"
+msgstr "%i öge seçildi"
 
 #: src/gradio-searchbar.vala:83
 msgid "Search for radio stations"
-msgstr "İstasyon ara"
+msgstr "Radyo istasyonu ara"
 
 #: src/gradio-searchbar.vala:201
 #, c-format
@@ -419,19 +419,19 @@ msgstr "Sıralama: %s / %s"
 
 #: src/gradio-searchbar.vala:277
 msgid "Select Country …"
-msgstr "Ülke Seçin …"
+msgstr "Ülke Seç …"
 
 #: src/gradio-searchbar.vala:308
 msgid "Select State …"
-msgstr "Bölge/Eyalet Seçin …"
+msgstr "Bölge/Eyalet Seç …"
 
 #: src/gradio-searchbar.vala:339
 msgid "Select Language …"
-msgstr "Dil Seçin …"
+msgstr "Dil Seç …"
 
 #: src/gradio-searchbar.vala:370
 msgid "Select Tag …"
-msgstr "Etiket Seçin …"
+msgstr "Etiket Seç …"
 
 #: src/gradio-station-editor-dialog.vala:54
 msgid "Create radio station"
@@ -439,11 +439,11 @@ msgstr "Radyo istasyonu oluştur"
 
 #: src/gradio-station-editor-dialog.vala:60
 msgid "Edit radio station"
-msgstr "İstasyonu editle"
+msgstr "Radyo istasyonunu düzenle"
 
 #: src/gradio-station-editor-dialog.vala:131
 msgid "\"Name\" and \"Stream\" information is required."
-msgstr "\"İsim\" ve \"Yayın\" bilgisi gerekli."
+msgstr "\"Ad\" ve \"Yayın\" bilgisi gereklidir."
 
 #: src/gradio-selection-toolbar.vala:98
 #, c-format
