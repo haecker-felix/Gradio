@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-01-01 14:42+0100\n"
-"PO-Revision-Date: 2017-12-31 20:42+0000\n"
+"PO-Revision-Date: 2018-01-20 15:52+0000\n"
 "Last-Translator: Tomáš Moravec <otoman100@gmail.com>\n"
-"Language-Team: Czech <https://hosted.weblate.org/projects/gradio/"
-"translations/cs/>\n"
+"Language-Team: Czech "
+"<https://hosted.weblate.org/projects/gradio/translations/cs/>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -80,11 +80,11 @@ msgstr "Umístění"
 
 #: data/ui/details-box.ui:314 data/ui/station-editor.ui:322
 msgid "Tags"
-msgstr "Tagy"
+msgstr "Štítky"
 
 #: data/ui/details-box.ui:346
 msgid "Codec"
-msgstr ""
+msgstr "Kodek"
 
 #: data/ui/details-box.ui:433 data/ui/selection-toolbar.ui:83
 msgid "Play"
@@ -188,7 +188,7 @@ msgstr "Adresa ikony"
 
 #: data/ui/station-editor.ui:304
 msgid "Enter tags separated by commas"
-msgstr ""
+msgstr "Zadejte názvy štítků oddělené čárkami"
 
 #: data/ui/station-editor.ui:337
 msgid "Homepage"
@@ -331,7 +331,7 @@ msgstr ""
 
 #: src/page/gradio-settings-page.vala:60
 msgid "Display additional information such as bitrate and codec"
-msgstr ""
+msgstr "Zobrazit doplňující údaje jako datový tok nebo kodek"
 
 #. PLAYBACK
 #. enable background playback
@@ -417,24 +417,20 @@ msgid "Sorting: %s / %s"
 msgstr "Řazení: %s / %s"
 
 #: src/gradio-searchbar.vala:277
-#, fuzzy
 msgid "Select Country …"
-msgstr "Vyberte zemi…"
+msgstr "Vyberte zemi …"
 
 #: src/gradio-searchbar.vala:308
-#, fuzzy
 msgid "Select State …"
-msgstr "Vyberte stát..."
+msgstr "Vyberte stát …"
 
 #: src/gradio-searchbar.vala:339
-#, fuzzy
 msgid "Select Language …"
-msgstr "Vyberte jazyk..."
+msgstr "Vyberte jazyk …"
 
 #: src/gradio-searchbar.vala:370
-#, fuzzy
 msgid "Select Tag …"
-msgstr "Vyberte jazyk..."
+msgstr "Vyberte jazyk …"
 
 #: src/gradio-station-editor-dialog.vala:54
 msgid "Create radio station"
