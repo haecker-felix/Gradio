@@ -274,6 +274,9 @@ namespace Gradio{
 		}
 
 		public async void export_as_m3u(string path){
+			Gtk.MessageDialog progress_dialog = new Gtk.MessageDialog (null, Gtk.DialogFlags.MODAL, Gtk.MessageType.INFO, Gtk.ButtonsType.NONE, "Please wait...");
+			progress_dialog.show ();
+
 			message("Exporting m3u playlist to: %s", path);
 
 			File file = File.new_for_path (path);
@@ -302,6 +305,7 @@ namespace Gradio{
 
 					RadioStation station = yield Util.get_station_by_id(int.parse(station_id));
 					if (station != null) {
+						progress_dialog.text = "Exporting \"" + station.title + "\" ...";
 						string address = yield station.get_stream_address();
 
 						dos.put_string("#EXTINF:0,"+station.title+"\n");
@@ -317,6 +321,7 @@ namespace Gradio{
 				}
 			} while (rc == Sqlite.ROW);
 
+			progress_dialog.destroy();
 			message("Successfully exported database!");
 		}
 
