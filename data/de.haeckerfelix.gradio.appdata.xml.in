@@ -58,6 +58,12 @@
   </content_rating>
   <releases>
 
+    <release version="7.1" date="2018-01-20">
+      <description>
+        <p>Some discover design tweaks, improved tags support, improved filter popover, updated translations, improved m3u export</p>
+      </description>
+    </release>
+
     <release version="7.0" date="2017-12-15">
       <description>
         <p>The "Discover" section is back! Merged "Add" and "Search" page. New unified library view. Library can now be exported as M3U playlist. And much more..!</p>
