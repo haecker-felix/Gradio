@@ -12,6 +12,10 @@
         <attribute name="label" translatable="yes">About</attribute>
         <attribute name="action">app.about</attribute>
       </item>
+      <item>
+        <attribute name="label" translatable="no">radio-browser.info</attribute>
+        <attribute name="action">app.opendatabase</attribute>
+      </item>
     </section>
     <section>
       <item>
