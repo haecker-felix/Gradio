@@ -198,6 +198,20 @@
                   </packing>
                 </child>
                 <child>
+                  <object class="GtkModelButton" id="OpenDatabaseMButton">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <property name="action_name">app.opendatabase</property>
+                    <property name="text" translatable="no">radio-browser.info</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+                <child>
                   <object class="GtkModelButton" id="AboutMButton">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
