@@ -114,9 +114,9 @@ namespace Gradio{
 		[GtkCallback]
 		private void PlayButton_clicked(Button button){
 			App.player.station = station;
-            if (App.player.state != Gst.State.PLAYING) {
-                App.player.toggle_play_stop();
-            }
+			if (App.player.state != Gst.State.PLAYING) {
+				App.player.toggle_play_stop();
+			}
 		}
 	}
 }

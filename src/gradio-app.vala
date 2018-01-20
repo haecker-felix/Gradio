@@ -106,6 +106,16 @@ namespace Gradio {
 			action.activate.connect (() => { this.show_about_dialog (); });
 			this.add_action (action);
 
+			action = new GLib.SimpleAction ("opendatabase", null);
+			action.activate.connect (() => {
+				try{
+					Gtk.show_uri(null, "http://radio-browser.info", 0);
+				}catch(Error e){
+					warning(e.message);
+				}
+			});
+			this.add_action (action);
+
 			action = new GLib.SimpleAction ("quit", null);
 			action.activate.connect (this.quit);
 			this.add_action (action);
