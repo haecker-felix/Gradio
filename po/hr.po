@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-01-01 14:42+0100\n"
-"PO-Revision-Date: 2018-01-01 18:15+0000\n"
+"PO-Revision-Date: 2018-02-05 13:35+0000\n"
 "Last-Translator: gogogogi <trebelnik2@gmail.com>\n"
 "Language-Team: Croatian "
 "<https://hosted.weblate.org/projects/gradio/translations/hr/>\n"
@@ -209,7 +209,7 @@ msgstr "Odustani"
 
 #: data/ui/station-editor.ui:555
 msgid "Done"
-msgstr "Završeno"
+msgstr "Završi"
 
 #: data/ui/page/search-page.ui:79 data/ui/page/search-page.ui:158
 #: data/ui/page/search-page.ui:237
