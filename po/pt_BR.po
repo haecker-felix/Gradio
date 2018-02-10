@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-01-01 14:42+0100\n"
-"PO-Revision-Date: 2018-01-20 15:53+0000\n"
-"Last-Translator: Alex Wender <wender.ijui@gmail.com>\n"
+"PO-Revision-Date: 2018-02-11 03:39+0000\n"
+"Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Portuguese (Brazil) "
 "<https://hosted.weblate.org/projects/gradio/translations/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -84,7 +84,6 @@ msgid "Tags"
 msgstr "Etiquetas"
 
 #: data/ui/details-box.ui:346
-#, fuzzy
 msgid "Codec"
 msgstr "Codec"
 
@@ -125,7 +124,6 @@ msgid "Save"
 msgstr "Salvar"
 
 #: data/ui/selection-toolbar.ui:70
-#, fuzzy
 msgid "Click an item to view options"
 msgstr "Clique em um item para ver as opções"
 
