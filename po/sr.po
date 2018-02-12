@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-01-01 14:42+0100\n"
-"PO-Revision-Date: 2018-01-20 15:53+0000\n"
+"PO-Revision-Date: 2018-02-12 19:59+0000\n"
 "Last-Translator: Slobodan Terzić <githzerai06@gmail.com>\n"
 "Language-Team: Serbian "
 "<https://hosted.weblate.org/projects/gradio/translations/sr/>\n"
@@ -188,7 +188,7 @@ msgstr "Адреса фавиконе"
 
 #: data/ui/station-editor.ui:304
 msgid "Enter tags separated by commas"
-msgstr ""
+msgstr "Унесите зарезом раздвојене ознаке"
 
 #: data/ui/station-editor.ui:337
 msgid "Homepage"
@@ -327,11 +327,11 @@ msgstr "Уколико је могуће, користи тамну тему"
 #. Show technical station information.
 #: src/page/gradio-settings-page.vala:60
 msgid "Show technical information"
-msgstr ""
+msgstr "Прикажи техничке податке"
 
 #: src/page/gradio-settings-page.vala:60
 msgid "Display additional information such as bitrate and codec"
-msgstr ""
+msgstr "Приказује додатне податке попут битског протока и кодека"
 
 #. PLAYBACK
 #. enable background playback
@@ -417,24 +417,20 @@ msgid "Sorting: %s / %s"
 msgstr "Слагање: %s / %s"
 
 #: src/gradio-searchbar.vala:277
-#, fuzzy
 msgid "Select Country …"
-msgstr "Изаберите земљу ..."
+msgstr "Изаберите земљу …"
 
 #: src/gradio-searchbar.vala:308
-#, fuzzy
 msgid "Select State …"
-msgstr "Изаберите државу ..."
+msgstr "Изаберите државу …"
 
 #: src/gradio-searchbar.vala:339
-#, fuzzy
 msgid "Select Language …"
-msgstr "Изаберите језик ..."
+msgstr "Изаберите језик …"
 
 #: src/gradio-searchbar.vala:370
-#, fuzzy
 msgid "Select Tag …"
-msgstr "Изаберите језик ..."
+msgstr "Изаберите ознаку …"
 
 #: src/gradio-station-editor-dialog.vala:54
 msgid "Create radio station"
