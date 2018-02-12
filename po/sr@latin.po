@@ -7,17 +7,17 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-01-01 14:42+0100\n"
-"PO-Revision-Date: 2017-12-15 17:16+0000\n"
+"PO-Revision-Date: 2018-02-12 20:03+0000\n"
 "Last-Translator: Slobodan Terzić <githzerai06@gmail.com>\n"
-"Language-Team: Serbian (latin) <https://hosted.weblate.org/projects/gradio/"
-"translations/sr_Latn/>\n"
+"Language-Team: Serbian (latin) "
+"<https://hosted.weblate.org/projects/gradio/translations/sr_Latn/>\n"
 "Language: sr@latin\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 2.18\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<="
+"4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 2.19-dev\n"
 
 #: data/ui/app-menu.ui:6 data/ui/menubutton.ui:192
 #: src/page/gradio-settings-page.vala:120
@@ -84,7 +84,7 @@ msgstr "Oznake"
 
 #: data/ui/details-box.ui:346
 msgid "Codec"
-msgstr ""
+msgstr "Kodek"
 
 #: data/ui/details-box.ui:433 data/ui/selection-toolbar.ui:83
 msgid "Play"
@@ -188,7 +188,7 @@ msgstr "Adresa favikone"
 
 #: data/ui/station-editor.ui:304
 msgid "Enter tags separated by commas"
-msgstr ""
+msgstr "Unesite zarezom razdvijene oznake"
 
 #: data/ui/station-editor.ui:337
 msgid "Homepage"
@@ -327,11 +327,11 @@ msgstr "Ukoliko je moguće, koristi tamnu temu"
 #. Show technical station information.
 #: src/page/gradio-settings-page.vala:60
 msgid "Show technical information"
-msgstr ""
+msgstr "Prikaži tehničke podatke"
 
 #: src/page/gradio-settings-page.vala:60
 msgid "Display additional information such as bitrate and codec"
-msgstr ""
+msgstr "Prikazuje dodatne podatke poput bitskog protoka i kodeka"
 
 #. PLAYBACK
 #. enable background playback
@@ -417,24 +417,20 @@ msgid "Sorting: %s / %s"
 msgstr "Slaganje: %s / %s"
 
 #: src/gradio-searchbar.vala:277
-#, fuzzy
 msgid "Select Country …"
-msgstr "Izaberite zemlju ..."
+msgstr "Izaberite zemlju …"
 
 #: src/gradio-searchbar.vala:308
-#, fuzzy
 msgid "Select State …"
-msgstr "Izaberite državu ..."
+msgstr "Izaberite državu …"
 
 #: src/gradio-searchbar.vala:339
-#, fuzzy
 msgid "Select Language …"
-msgstr "Izaberite jezik ..."
+msgstr "Izaberite jezik …"
 
 #: src/gradio-searchbar.vala:370
-#, fuzzy
 msgid "Select Tag …"
-msgstr "Izaberite jezik ..."
+msgstr "Izaberite oznaku …"
 
 #: src/gradio-station-editor-dialog.vala:54
 msgid "Create radio station"
