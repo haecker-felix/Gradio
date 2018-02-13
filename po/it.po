@@ -152,7 +152,7 @@ msgstr "Database globale"
 
 #: data/ui/station-editor.ui:54
 msgid ""
-"Gradio is using a internet database. Everything what you enter here, is "
+"Gradio is using an internet database. Everything you enter here, is "
 "going to be visible for all users. Please be careful, and double check your "
 "input!"
 msgstr ""
