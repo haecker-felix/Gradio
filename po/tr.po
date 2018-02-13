@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-01-01 14:42+0100\n"
-"PO-Revision-Date: 2018-01-20 15:53+0000\n"
-"Last-Translator: monolifed <monolifed@gmail.com>\n"
+"PO-Revision-Date: 2018-02-14 07:39+0000\n"
+"Last-Translator: Eylem Akçay <eylem.akcay@gmail.com>\n"
 "Language-Team: Turkish "
 "<https://hosted.weblate.org/projects/gradio/translations/tr/>\n"
 "Language: tr\n"
@@ -46,7 +46,7 @@ msgstr "İstasyonları kitaplığa ekle"
 
 #: data/ui/page/collections-page.ui:43
 msgid "You don't have any collection"
-msgstr "Bir koleksiyonunuz yok"
+msgstr "Hiç koleksiyonunuz yok"
 
 #: data/ui/page/collections-page.ui:61
 msgid "You can group stations into collections."
