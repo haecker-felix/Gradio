@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-01-01 14:42+0100\n"
-"PO-Revision-Date: 2018-01-20 15:52+0000\n"
+"PO-Revision-Date: 2018-02-20 15:29+0000\n"
 "Last-Translator: Tomáš Moravec <otoman100@gmail.com>\n"
 "Language-Team: Czech "
 "<https://hosted.weblate.org/projects/gradio/translations/cs/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 2.19-dev\n"
+"X-Generator: Weblate 2.19.1\n"
 
 #: data/ui/app-menu.ui:6 data/ui/menubutton.ui:192
 #: src/page/gradio-settings-page.vala:120
@@ -327,7 +327,7 @@ msgstr "Pokud je to možné, použít tmavý motiv"
 #. Show technical station information.
 #: src/page/gradio-settings-page.vala:60
 msgid "Show technical information"
-msgstr ""
+msgstr "Zobrazit technické informace"
 
 #: src/page/gradio-settings-page.vala:60
 msgid "Display additional information such as bitrate and codec"
