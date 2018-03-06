@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-01-01 14:42+0100\n"
-"PO-Revision-Date: 2018-03-06 11:40+0000\n"
+"PO-Revision-Date: 2018-03-07 12:37+0000\n"
 "Last-Translator: ovari <ovari123@zoho.com>\n"
 "Language-Team: Hungarian "
 "<https://hosted.weblate.org/projects/gradio/translations/hu/>\n"
@@ -108,7 +108,7 @@ msgstr "Létrehoz"
 
 #: data/ui/organize-collection-popover.ui:78
 msgid "Select collection:"
-msgstr "Gyűjtemény kiválasztása"
+msgstr "Gyűjtemény kiválasztása:"
 
 #: data/ui/selection-menu.ui:7
 msgid "Select All"
