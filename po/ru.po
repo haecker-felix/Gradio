@@ -8,17 +8,17 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-01-01 14:42+0100\n"
-"PO-Revision-Date: 2018-01-20 15:53+0000\n"
-"Last-Translator: Faust30000 <mr.arthurclarke@protonmail.com>\n"
-"Language-Team: Russian "
-"<https://hosted.weblate.org/projects/gradio/translations/ru/>\n"
+"PO-Revision-Date: 2018-03-18 10:02+0000\n"
+"Last-Translator: Sergey N <yardox@gmail.com>\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/gradio/"
+"translations/ru/>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<="
 "4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 2.19-dev\n"
+"X-Generator: Weblate 2.20-dev\n"
 
 #: data/ui/app-menu.ui:6 data/ui/menubutton.ui:192
 #: src/page/gradio-settings-page.vala:120
@@ -48,10 +48,12 @@ msgstr "Добавить станции в библиотеку"
 #: data/ui/page/collections-page.ui:43
 msgid "You don't have any collection"
 msgstr ""
+"29/5000\n"
+"У вас нет коллекции"
 
 #: data/ui/page/collections-page.ui:61
 msgid "You can group stations into collections."
-msgstr ""
+msgstr "Вы можете группировать станции в коллекции."
 
 #: data/ui/details-box.ui:23 data/ui/selection-toolbar.ui:233
 msgid "Details"
@@ -68,7 +70,7 @@ msgstr "Тип"
 
 #: data/ui/details-box.ui:206
 msgid "Items"
-msgstr ""
+msgstr "Радиостанции"
 
 #: data/ui/details-box.ui:250 data/ui/menubutton.ui:354
 #: src/gradio-searchbar.vala:187
@@ -149,7 +151,7 @@ msgstr "Проголосовать"
 
 #: data/ui/station-editor.ui:39
 msgid "Global database"
-msgstr ""
+msgstr "Глобальная база данных"
 
 #: data/ui/station-editor.ui:54
 msgid ""
@@ -157,6 +159,9 @@ msgid ""
 "going to be visible for all users. Please be careful, and double check your "
 "input!"
 msgstr ""
+"Gradio использует базу данных в интернете. Все, что вы вводите здесь, будет "
+"доступно для всех пользователей. Пожалуйста, будьте осторожны и дважды "
+"проверьте свой ввод!"
 
 #: data/ui/station-editor.ui:68
 msgid "Continue"
@@ -187,7 +192,7 @@ msgstr "Адрес иконки"
 
 #: data/ui/station-editor.ui:304
 msgid "Enter tags separated by commas"
-msgstr ""
+msgstr "Введите теги через запятую"
 
 #: data/ui/station-editor.ui:337
 msgid "Homepage"
@@ -195,7 +200,7 @@ msgstr "Домашняя страница"
 
 #: data/ui/station-editor.ui:480
 msgid "Server Response"
-msgstr ""
+msgstr "Отклик сервера"
 
 #: data/ui/station-editor.ui:516
 msgid "Close"
@@ -220,11 +225,11 @@ msgstr "Станции с наибольшим количеством голос
 
 #: data/ui/page/search-page.ui:180
 msgid "Recently clicked stations"
-msgstr ""
+msgstr "Недавно открытые станции"
 
 #: data/ui/page/search-page.ui:259
 msgid "Stations with the most clicks"
-msgstr ""
+msgstr "Часто открываемые станции"
 
 #: data/ui/page/search-page.ui:346 src/page/gradio-search-page.vala:171
 msgid "Search"
@@ -242,6 +247,7 @@ msgstr "Результаты не найдены"
 msgid ""
 "Either the station does not exist, or you have to search with other keywords."
 msgstr ""
+"Либо станция не существует, либо вам нужно искать по другим ключевым словам."
 
 #: data/ui/menubutton.ui:104 data/ui/menubutton.ui:332
 msgid "Sorting"
@@ -270,7 +276,7 @@ msgstr "Экспортировать"
 
 #: data/ui/menubutton.ui:429 src/gradio-searchbar.vala:193
 msgid "Clicks"
-msgstr ""
+msgstr "Ранее открытые"
 
 #: data/ui/menubutton.ui:444 src/gradio-searchbar.vala:192
 msgid "Bitrate"
@@ -299,11 +305,11 @@ msgstr "Получение данных о станции…"
 
 #: src/page/gradio-settings-page.vala:37
 msgid "Features"
-msgstr ""
+msgstr "Свойства"
 
 #: src/page/gradio-settings-page.vala:40
 msgid "Playback"
-msgstr ""
+msgstr "Воспроизведение"
 
 #: src/page/gradio-settings-page.vala:43
 msgid "Appearance"
@@ -326,11 +332,11 @@ msgstr "Использовать тёмную тему, если это возм
 #. Show technical station information.
 #: src/page/gradio-settings-page.vala:60
 msgid "Show technical information"
-msgstr ""
+msgstr "Показать техническую информацию"
 
 #: src/page/gradio-settings-page.vala:60
 msgid "Display additional information such as bitrate and codec"
-msgstr ""
+msgstr "Отображать дополнительную информацию, такую как битрейт и кодек"
 
 #. PLAYBACK
 #. enable background playback
@@ -340,7 +346,7 @@ msgstr "Фоновое воспроизведение"
 
 #: src/page/gradio-settings-page.vala:68
 msgid "Continue the playback if you close the Gradio window"
-msgstr ""
+msgstr "Продолжайте воспроизведение, если закрыть окно Gradio"
 
 #. resume playback on startup
 #: src/page/gradio-settings-page.vala:74
@@ -355,7 +361,7 @@ msgstr "Воспроизвести последнюю радиостанцию �
 #. mpris
 #: src/page/gradio-settings-page.vala:83
 msgid "MPRIS"
-msgstr ""
+msgstr "MPRIS(стандарт. интерфейс упр. медиаплеерами)"
 
 #: src/page/gradio-settings-page.vala:83
 msgid "Integrate Gradio as media player in your desktop environment"
@@ -399,7 +405,7 @@ msgstr "Стереть все временные файлы значков ра�
 
 #: src/gradio-headerbar.vala:53 src/gradio-headerbar.vala:59
 msgid "Click on items to select them"
-msgstr ""
+msgstr "Нажмите для выбора"
 
 #: src/gradio-headerbar.vala:61
 #, c-format
@@ -446,9 +452,9 @@ msgstr "Пункты \"Название\" и \"Поток\" обязательн
 #: src/gradio-selection-toolbar.vala:98
 #, c-format
 msgid "%i radio station(s) not present in library."
-msgstr ""
+msgstr "%i радиостанция(-и) отсутствует в библиотеке."
 
 #: src/gradio-selection-toolbar.vala:108
 #, c-format
 msgid "%i radio station(s) already added to library."
-msgstr ""
+msgstr "%i радиостанция(-и), добавленна в библиотеку."
