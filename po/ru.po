@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-01-01 14:42+0100\n"
-"PO-Revision-Date: 2018-03-18 10:05+0000\n"
-"Last-Translator: anonymous <>\n"
+"PO-Revision-Date: 2018-03-19 21:48+0000\n"
+"Last-Translator: Sergey N <yardox@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/gradio/"
 "translations/ru/>\n"
 "Language: ru\n"
@@ -51,7 +51,7 @@ msgstr "У вас нет коллекции"
 
 #: data/ui/page/collections-page.ui:61
 msgid "You can group stations into collections."
-msgstr "Вы можете сгруппировать радиостанции в коллекции"
+msgstr "Вы можете сгруппировать радиостанции в коллекции."
 
 #: data/ui/details-box.ui:23 data/ui/selection-toolbar.ui:233
 msgid "Details"
