@@ -11,17 +11,6 @@ https://img.shields.io/badge/flatpak-download-brightgreen.svg)](https://flathub.
 [![Translation status](https://hosted.weblate.org/widgets/gradio/-/svg-badge.svg)](https://hosted.weblate.org/engage/gradio/?utm_source=widget)
 [![Join the chat at https://gitter.im/haecker-felix/gradio](https://badges.gitter.im/haecker-felix/gradio.svg)](https://gitter.im/haecker-felix/gradio?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-## News
-* **Gradio 7.1** is here! Check out the [changelog](https://github.com/haecker-felix/gradio/releases/tag/v7.1)!
-* Gradio is no longer available on snapcraft / snap store. [More information](https://plus.google.com/u/0/+FelixH%C3%A4cker1207/posts/Q1zbCi27zDj)
-* **Gradio 7.0** is here! Check out the [changelog](https://github.com/haecker-felix/gradio/releases/tag/v7.0)!
-
-## Open tasks
-Feel free to contribute to Gradio! You don't know how you can help? Here are some open tasks/todos:
-* **New application logo:** The UI of Gradio changed a lot in the last time. Why not a new fresh logo? It should use the GNOME icon style. More information [here](https://developer.gnome.org/hig/stable/icons-and-artwork.html.en) and [here](http://tango.freedesktop.org/Tango_Icon_Theme_Guidelines).
-* **Implement unit testing:** Gradio is getting bigger and bigger. Now it's important to implement unit testing, to prevent some nasty bugs.
-* For more information click [here](https://github.com/haecker-felix/gradio/blob/master/docs/CONTRIBUTING.md)
-
 ## General Informations
 * **Installation**  
 [Open install instructions](https://github.com/haecker-felix/gradio/wiki/Install-Instructions) / [Open build instructions](https://github.com/haecker-felix/gradio/wiki/Build-Instructions)
