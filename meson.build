@@ -18,7 +18,5 @@ subdir('data')
 subdir('po')
 subdir('external')
 subdir('src')
-# subdir('tests')
-# TODO: unit tests
 
 meson.add_install_script('meson_post_install.sh')
