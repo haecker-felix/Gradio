@@ -31,11 +31,14 @@ namespace Gradio{
 		[GtkChild] private Box InfoBox;
 		[GtkChild] private Box StatusBox;
 		[GtkChild] private Box VolumeBox;
+		[GtkChild] private Box RecordBox;
 
 		[GtkChild] private VolumeButton VolumeButton;
 
 		[GtkChild] private Image PlayImage;
 		[GtkChild] private Image StopImage;
+		[GtkChild] private Image RecordImage;
+
 
 		private StatusIcon status_icon;
 
@@ -67,6 +70,7 @@ namespace Gradio{
 
 		private void setup_view(){
 			this.pack_start(MediaControlBox);
+			this.pack_start(RecordBox);
 			this.pack_start(StationLogoBox);
 			this.pack_start(InfoBox);
 			this.pack_end(VolumeBox);
