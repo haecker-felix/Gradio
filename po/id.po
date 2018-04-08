@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-01-01 14:42+0100\n"
-"PO-Revision-Date: 2018-04-08 16:04+0000\n"
+"PO-Revision-Date: 2018-04-09 02:06+0000\n"
 "Last-Translator: Roger <narayanroger@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/gradio/"
 "translations/id/>\n"
@@ -102,7 +102,7 @@ msgstr "Mengedit"
 
 #: data/ui/organize-collection-popover.ui:25
 msgid "Enter name for new collection..."
-msgstr ""
+msgstr "Masukkan nama untuk koleksi baru..."
 
 #: data/ui/organize-collection-popover.ui:35
 msgid "Create"
@@ -110,7 +110,7 @@ msgstr "Membuat"
 
 #: data/ui/organize-collection-popover.ui:78
 msgid "Select collection:"
-msgstr ""
+msgstr "Pilih koleksi:"
 
 #: data/ui/selection-menu.ui:7
 msgid "Select All"
@@ -118,39 +118,39 @@ msgstr "Pilih Semua"
 
 #: data/ui/selection-menu.ui:11
 msgid "Select None"
-msgstr ""
+msgstr "Pilih None"
 
 #: data/ui/selection-toolbar.ui:28
 msgid "Save"
-msgstr ""
+msgstr "Simpan"
 
 #: data/ui/selection-toolbar.ui:70
 msgid "Click an item to view options"
-msgstr ""
+msgstr "Klik sebuah item untuk melihat opsi"
 
 #: data/ui/selection-toolbar.ui:104
 msgid "Collection"
-msgstr ""
+msgstr "Koleksi"
 
 #: data/ui/selection-toolbar.ui:117
 msgid "Add to library"
-msgstr ""
+msgstr "Tambahkan ke Perpustakaan"
 
 #: data/ui/selection-toolbar.ui:134
 msgid "Remove from Library"
-msgstr ""
+msgstr "Hapus dari Perpustakaan"
 
 #: data/ui/selection-toolbar.ui:159
 msgid "Rename"
-msgstr ""
+msgstr "Ganti nama"
 
 #: data/ui/selection-toolbar.ui:174
 msgid "Vote"
-msgstr ""
+msgstr "Memilih"
 
 #: data/ui/station-editor.ui:39
 msgid "Global database"
-msgstr ""
+msgstr "Database global"
 
 #: data/ui/station-editor.ui:54
 msgid ""
@@ -158,74 +158,77 @@ msgid ""
 "going to be visible for all users. Please be careful, and double check your "
 "input!"
 msgstr ""
+"Gradio menggunakan basis data internet. Semua yang Anda masukkan di sini, "
+"akan terlihat oleh semua pengguna. Harap berhati-hati, dan periksa kembali "
+"masukan Anda!"
 
 #: data/ui/station-editor.ui:68
 msgid "Continue"
-msgstr ""
+msgstr "Lanjutkan"
 
 #: data/ui/station-editor.ui:151
 msgid "Stream Address"
-msgstr ""
+msgstr "Alamat Stream"
 
 #: data/ui/station-editor.ui:166 data/ui/menubutton.ui:399
 #: src/gradio-searchbar.vala:190
 msgid "Country"
-msgstr ""
+msgstr "Negara"
 
 #: data/ui/station-editor.ui:181 data/ui/menubutton.ui:414
 #: src/gradio-searchbar.vala:191
 msgid "State"
-msgstr ""
+msgstr "negara bagian"
 
 #: data/ui/station-editor.ui:196 data/ui/menubutton.ui:384
 #: src/gradio-searchbar.vala:189
 msgid "Language"
-msgstr ""
+msgstr "Bahasa"
 
 #: data/ui/station-editor.ui:266
 msgid "Favicon Address"
-msgstr ""
+msgstr "Alamat Favicon"
 
 #: data/ui/station-editor.ui:304
 msgid "Enter tags separated by commas"
-msgstr ""
+msgstr "Masukkan tag yang dipisahkan oleh koma"
 
 #: data/ui/station-editor.ui:337
 msgid "Homepage"
-msgstr ""
+msgstr "halaman rumah"
 
 #: data/ui/station-editor.ui:480
 msgid "Server Response"
-msgstr ""
+msgstr "Respons Server"
 
 #: data/ui/station-editor.ui:516
 msgid "Close"
-msgstr ""
+msgstr "Dekat"
 
 #: data/ui/station-editor.ui:546
 msgid "Cancel"
-msgstr ""
+msgstr "Membatalkan"
 
 #: data/ui/station-editor.ui:555
 msgid "Done"
-msgstr ""
+msgstr "Selesai"
 
 #: data/ui/page/search-page.ui:79 data/ui/page/search-page.ui:158
 #: data/ui/page/search-page.ui:237
 msgid "More..."
-msgstr ""
+msgstr "Lebih..."
 
 #: data/ui/page/search-page.ui:101
 msgid "Stations with the most votes"
-msgstr ""
+msgstr "Stasiun dengan suara terbanyak"
 
 #: data/ui/page/search-page.ui:180
 msgid "Recently clicked stations"
-msgstr ""
+msgstr "Stasiun yang baru saja diklik"
 
 #: data/ui/page/search-page.ui:259
 msgid "Stations with the most clicks"
-msgstr ""
+msgstr "Stasiun dengan klik terbanyak"
 
 #: data/ui/page/search-page.ui:346 src/page/gradio-search-page.vala:171
 msgid "Search"
@@ -233,16 +236,17 @@ msgstr "Pencarian"
 
 #: data/ui/page/search-page.ui:381
 msgid "Results:"
-msgstr ""
+msgstr "Hasil:"
 
 #: data/ui/page/search-page.ui:477
 msgid "No results found"
-msgstr ""
+msgstr "Tidak ada hasil yang ditemukan"
 
 #: data/ui/page/search-page.ui:495
 msgid ""
 "Either the station does not exist, or you have to search with other keywords."
 msgstr ""
+"Entah stasiun tidak ada, atau Anda harus mencari dengan kata kunci lain."
 
 #: data/ui/menubutton.ui:104 data/ui/menubutton.ui:332
 msgid "Sorting"
@@ -250,7 +254,7 @@ msgstr "Penyortiran"
 
 #: data/ui/menubutton.ui:119
 msgid "Hide broken stations"
-msgstr ""
+msgstr "Sembunyikan stasiun yang rusak"
 
 #: data/ui/menubutton.ui:145 data/ui/menubutton.ui:264
 #: src/page/gradio-library-page.vala:81
@@ -259,7 +263,7 @@ msgstr "Perpustakaan"
 
 #: data/ui/menubutton.ui:160
 msgid "Create new radio station"
-msgstr ""
+msgstr "Buat stasiun radio baru"
 
 #: data/ui/menubutton.ui:281
 msgid "Import"
@@ -275,7 +279,7 @@ msgstr "Klik"
 
 #: data/ui/menubutton.ui:444 src/gradio-searchbar.vala:192
 msgid "Bitrate"
-msgstr ""
+msgstr "sedikit menilai"
 
 #: data/ui/menubutton.ui:459 src/gradio-searchbar.vala:194
 msgid "Date"
@@ -296,160 +300,160 @@ msgstr "Item: "
 
 #: src/page/gradio-library-page.vala:86
 msgid "Fetching station data…"
-msgstr "Mengambil data stasiun"
+msgstr "Mengambil data stasiun…"
 
 #: src/page/gradio-settings-page.vala:37
 msgid "Features"
-msgstr ""
+msgstr "Fitur"
 
 #: src/page/gradio-settings-page.vala:40
 msgid "Playback"
-msgstr ""
+msgstr "Putar kembali"
 
 #: src/page/gradio-settings-page.vala:43
 msgid "Appearance"
-msgstr ""
+msgstr "Penampilan"
 
 #: src/page/gradio-settings-page.vala:46
 msgid "Cache"
-msgstr ""
+msgstr "tersembunyi"
 
 #. APPEARANCE
 #. Dark design
 #: src/page/gradio-settings-page.vala:54
 msgid "Prefer dark theme"
-msgstr ""
+msgstr "Lebih suka tema gelap"
 
 #: src/page/gradio-settings-page.vala:54
 msgid "Use a dark theme, if possible"
-msgstr ""
+msgstr "Gunakan tema gelap, jika memungkinkan"
 
 #. Show technical station information.
 #: src/page/gradio-settings-page.vala:60
 msgid "Show technical information"
-msgstr ""
+msgstr "Tampilkan informasi teknis"
 
 #: src/page/gradio-settings-page.vala:60
 msgid "Display additional information such as bitrate and codec"
-msgstr ""
+msgstr "Tampilkan informasi tambahan seperti bitrate dan codec"
 
 #. PLAYBACK
 #. enable background playback
 #: src/page/gradio-settings-page.vala:68
 msgid "Background Playback"
-msgstr ""
+msgstr "Pemutaran Latar Belakang"
 
 #: src/page/gradio-settings-page.vala:68
 msgid "Continue the playback if you close the Gradio window"
-msgstr ""
+msgstr "Lanjutkan pemutaran jika Anda menutup jendela Gradio"
 
 #. resume playback on startup
 #: src/page/gradio-settings-page.vala:74
 msgid "Resume playback on startup"
-msgstr ""
+msgstr "Lanjutkan pemutaran saat startup"
 
 #: src/page/gradio-settings-page.vala:74
 msgid "Play the latest station if you start Gradio"
-msgstr ""
+msgstr "Mainkan stasiun terbaru jika Anda memulai Gradio"
 
 #. FEATURES
 #. mpris
 #: src/page/gradio-settings-page.vala:83
 msgid "MPRIS"
-msgstr ""
+msgstr "MPRIS"
 
 #: src/page/gradio-settings-page.vala:83
 msgid "Integrate Gradio as media player in your desktop environment"
-msgstr ""
+msgstr "Integrasikan Gradio sebagai media player di lingkungan desktop Anda"
 
 #. enable notifications
 #: src/page/gradio-settings-page.vala:89
 msgid "Notifications"
-msgstr ""
+msgstr "Notifikasi"
 
 #: src/page/gradio-settings-page.vala:89
 msgid "Show desktop notifications"
-msgstr ""
+msgstr "Tampilkan pemberitahuan desktop"
 
 #. enable tray icon
 #: src/page/gradio-settings-page.vala:95
 msgid "Tray icon"
-msgstr ""
+msgstr "Ikon Baki"
 
 #: src/page/gradio-settings-page.vala:95
 msgid "Show a tray icon, to restore the main window"
-msgstr ""
+msgstr "Tampilkan ikon baki, untuk memulihkan jendela utama"
 
 #. CACHE
 #. cache station images
 #: src/page/gradio-settings-page.vala:104
 msgid "Cache station icons"
-msgstr ""
+msgstr "Ikon stasiun cache"
 
 #: src/page/gradio-settings-page.vala:104
 msgid "Saves the images locally."
-msgstr ""
+msgstr "Menyimpan gambar secara lokal."
 
 #: src/page/gradio-settings-page.vala:109
 msgid "Clear Cache"
-msgstr ""
+msgstr "Hapus Cache"
 
 #: src/page/gradio-settings-page.vala:109
 msgid "Clear all cached station icons"
-msgstr ""
+msgstr "Hapus semua ikon stasiun cache"
 
 #: src/gradio-headerbar.vala:53 src/gradio-headerbar.vala:59
 msgid "Click on items to select them"
-msgstr ""
+msgstr "Klik pada item untuk memilihnya"
 
 #: src/gradio-headerbar.vala:61
 #, c-format
 msgid "%i selected"
-msgstr ""
+msgstr "%i terpilih"
 
 #: src/gradio-searchbar.vala:83
 msgid "Search for radio stations"
-msgstr ""
+msgstr "Cari stasiun radio"
 
 #: src/gradio-searchbar.vala:201
 #, c-format
 msgid "Sorting: %s / %s"
-msgstr ""
+msgstr "Penyortiran: %s / %s"
 
 #: src/gradio-searchbar.vala:277
 msgid "Select Country …"
-msgstr ""
+msgstr "Pilih negara…"
 
 #: src/gradio-searchbar.vala:308
 msgid "Select State …"
-msgstr ""
+msgstr "Pilih negara bagian…"
 
 #: src/gradio-searchbar.vala:339
 msgid "Select Language …"
-msgstr ""
+msgstr "Pilih bahasa…"
 
 #: src/gradio-searchbar.vala:370
 msgid "Select Tag …"
-msgstr ""
+msgstr "Pilih Tag…"
 
 #: src/gradio-station-editor-dialog.vala:54
 msgid "Create radio station"
-msgstr ""
+msgstr "Buat stasiun radio"
 
 #: src/gradio-station-editor-dialog.vala:60
 msgid "Edit radio station"
-msgstr ""
+msgstr "Edit stasiun radio"
 
 #: src/gradio-station-editor-dialog.vala:131
 msgid "\"Name\" and \"Stream\" information is required."
-msgstr ""
+msgstr "Informasi \"Nama\" dan \"Aliran\" diperlukan."
 
 #: src/gradio-selection-toolbar.vala:98
 #, c-format
 msgid "%i radio station(s) not present in library."
-msgstr ""
+msgstr "%i stasiun radio tidak ada di perpustakaan."
 
 #: src/gradio-selection-toolbar.vala:108
 #, c-format
 msgid "%i radio station(s) already added to library."
-msgstr ""
+msgstr "%i stasiun radio sudah ditambahkan ke perpustakaan."
