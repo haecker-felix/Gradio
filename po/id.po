@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-01-01 14:42+0100\n"
-"PO-Revision-Date: 2018-04-08 06:09+0000\n"
+"PO-Revision-Date: 2018-04-08 15:23+0000\n"
 "Last-Translator: Roger <narayanroger@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/gradio/"
 "translations/id/>\n"
@@ -34,23 +34,25 @@ msgstr "Berhenti"
 
 #: data/ui/page/library-page.ui:44
 msgid "Your library is empty"
-msgstr ""
+msgstr "Perpustakaan Anda kosong"
 
 #: data/ui/page/library-page.ui:62
 msgid "If you add stations to the library, you will find them here."
 msgstr ""
+"Jika Anda menambahkan stasiun ke perpustakaan, Anda akan menemukannya di "
+"sini."
 
 #: data/ui/page/library-page.ui:75
 msgid "Add stations to library"
-msgstr ""
+msgstr "Tambahkan stasiun ke pustaka"
 
 #: data/ui/page/collections-page.ui:43
 msgid "You don't have any collection"
-msgstr ""
+msgstr "Anda tidak memiliki setiap koleksi"
 
 #: data/ui/page/collections-page.ui:61
 msgid "You can group stations into collections."
-msgstr ""
+msgstr "Anda dapat mengelompokkan stasiun menjadi koleksi."
 
 #: data/ui/details-box.ui:23 data/ui/selection-toolbar.ui:233
 msgid "Details"
@@ -59,36 +61,36 @@ msgstr "Rincian"
 #: data/ui/details-box.ui:137 data/ui/station-editor.ui:125
 #: data/ui/menubutton.ui:369 src/gradio-searchbar.vala:188
 msgid "Name"
-msgstr "nama"
+msgstr "Nama"
 
 #: data/ui/details-box.ui:169
 msgid "Type"
-msgstr "tipe"
+msgstr "Tipe"
 
 #: data/ui/details-box.ui:206
 msgid "Items"
-msgstr ""
+msgstr "Item"
 
 #: data/ui/details-box.ui:250 data/ui/menubutton.ui:354
 #: src/gradio-searchbar.vala:187
 msgid "Votes"
-msgstr ""
+msgstr "Suara"
 
 #: data/ui/details-box.ui:282
 msgid "Location"
-msgstr ""
+msgstr "Lokasi"
 
 #: data/ui/details-box.ui:314 data/ui/station-editor.ui:322
 msgid "Tags"
-msgstr ""
+msgstr "Tag"
 
 #: data/ui/details-box.ui:346
 msgid "Codec"
-msgstr ""
+msgstr "Codec"
 
 #: data/ui/details-box.ui:433 data/ui/selection-toolbar.ui:83
 msgid "Play"
-msgstr ""
+msgstr "Bermain"
 
 #: data/ui/details-box.ui:478
 msgid "Open homepage"
@@ -96,7 +98,7 @@ msgstr ""
 
 #: data/ui/details-box.ui:523 data/ui/selection-toolbar.ui:195
 msgid "Edit"
-msgstr ""
+msgstr "Mengedit"
 
 #: data/ui/organize-collection-popover.ui:25
 msgid "Enter name for new collection..."
