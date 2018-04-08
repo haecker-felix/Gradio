@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-01-01 14:42+0100\n"
-"PO-Revision-Date: 2017-12-20 12:06+0000\n"
-"Last-Translator: George Grigalashvili <c0mrad@java.net>\n"
+"PO-Revision-Date: 2018-04-09 12:34+0000\n"
+"Last-Translator: Roger <narayanroger@gmail.com>\n"
 "Language-Team: Georgian <https://hosted.weblate.org/projects/gradio/"
 "translations/ka/>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 2.18\n"
+"X-Generator: Weblate 2.20\n"
 
 #: data/ui/app-menu.ui:6 data/ui/menubutton.ui:192
 #: src/page/gradio-settings-page.vala:120
@@ -84,7 +84,7 @@ msgstr "ტეგები"
 
 #: data/ui/details-box.ui:346
 msgid "Codec"
-msgstr ""
+msgstr "კოდეკი"
 
 #: data/ui/details-box.ui:433 data/ui/selection-toolbar.ui:83
 msgid "Play"
@@ -189,7 +189,7 @@ msgstr "Favicon მისამართი"
 
 #: data/ui/station-editor.ui:304
 msgid "Enter tags separated by commas"
-msgstr ""
+msgstr "შეიტანეთ ტეგები, რომლებიც გამოყოფილია მძიმით"
 
 #: data/ui/station-editor.ui:337
 msgid "Homepage"
@@ -328,11 +328,11 @@ msgstr "გამოიყენე შავი თემა, თუ შეს�
 #. Show technical station information.
 #: src/page/gradio-settings-page.vala:60
 msgid "Show technical information"
-msgstr ""
+msgstr "ტექნიკური ინფორმაციის ჩვენება"
 
 #: src/page/gradio-settings-page.vala:60
 msgid "Display additional information such as bitrate and codec"
-msgstr ""
+msgstr "დამატებითი ინფორმაცია, როგორიცაა ბიტრეიტი და კოდეკი"
 
 #. PLAYBACK
 #. enable background playback
@@ -418,24 +418,20 @@ msgid "Sorting: %s / %s"
 msgstr "სორტირება: %s/%s"
 
 #: src/gradio-searchbar.vala:277
-#, fuzzy
 msgid "Select Country …"
-msgstr "აირჩიეთ ქვეყანა..."
+msgstr "აირჩიეთ ქვეყანა…"
 
 #: src/gradio-searchbar.vala:308
-#, fuzzy
 msgid "Select State …"
-msgstr "აირჩიეთ რეგიონი ..."
+msgstr "აირჩიეთ სახელმწიფო…"
 
 #: src/gradio-searchbar.vala:339
-#, fuzzy
 msgid "Select Language …"
-msgstr "აირჩიეთ ენა ..."
+msgstr "აირჩიეთ ენა…"
 
 #: src/gradio-searchbar.vala:370
-#, fuzzy
 msgid "Select Tag …"
-msgstr "აირჩიეთ ენა ..."
+msgstr "აირჩიეთ საკვანძო…"
 
 #: src/gradio-station-editor-dialog.vala:54
 msgid "Create radio station"
