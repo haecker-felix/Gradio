@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-01-01 14:42+0100\n"
-"PO-Revision-Date: 2018-04-08 15:23+0000\n"
+"PO-Revision-Date: 2018-04-08 16:04+0000\n"
 "Last-Translator: Roger <narayanroger@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/gradio/"
 "translations/id/>\n"
@@ -86,7 +86,7 @@ msgstr "Tag"
 
 #: data/ui/details-box.ui:346
 msgid "Codec"
-msgstr "Codec"
+msgstr "kodek"
 
 #: data/ui/details-box.ui:433 data/ui/selection-toolbar.ui:83
 msgid "Play"
@@ -94,7 +94,7 @@ msgstr "Bermain"
 
 #: data/ui/details-box.ui:478
 msgid "Open homepage"
-msgstr ""
+msgstr "Buka beranda"
 
 #: data/ui/details-box.ui:523 data/ui/selection-toolbar.ui:195
 msgid "Edit"
@@ -106,7 +106,7 @@ msgstr ""
 
 #: data/ui/organize-collection-popover.ui:35
 msgid "Create"
-msgstr ""
+msgstr "Membuat"
 
 #: data/ui/organize-collection-popover.ui:78
 msgid "Select collection:"
@@ -114,7 +114,7 @@ msgstr ""
 
 #: data/ui/selection-menu.ui:7
 msgid "Select All"
-msgstr ""
+msgstr "Pilih Semua"
 
 #: data/ui/selection-menu.ui:11
 msgid "Select None"
@@ -229,7 +229,7 @@ msgstr ""
 
 #: data/ui/page/search-page.ui:346 src/page/gradio-search-page.vala:171
 msgid "Search"
-msgstr ""
+msgstr "Pencarian"
 
 #: data/ui/page/search-page.ui:381
 msgid "Results:"
@@ -246,7 +246,7 @@ msgstr ""
 
 #: data/ui/menubutton.ui:104 data/ui/menubutton.ui:332
 msgid "Sorting"
-msgstr ""
+msgstr "Penyortiran"
 
 #: data/ui/menubutton.ui:119
 msgid "Hide broken stations"
@@ -255,7 +255,7 @@ msgstr ""
 #: data/ui/menubutton.ui:145 data/ui/menubutton.ui:264
 #: src/page/gradio-library-page.vala:81
 msgid "Library"
-msgstr ""
+msgstr "Perpustakaan"
 
 #: data/ui/menubutton.ui:160
 msgid "Create new radio station"
@@ -263,15 +263,15 @@ msgstr ""
 
 #: data/ui/menubutton.ui:281
 msgid "Import"
-msgstr ""
+msgstr "Impor"
 
 #: data/ui/menubutton.ui:295
 msgid "Export"
-msgstr ""
+msgstr "Ekspor"
 
 #: data/ui/menubutton.ui:429 src/gradio-searchbar.vala:193
 msgid "Clicks"
-msgstr ""
+msgstr "Klik"
 
 #: data/ui/menubutton.ui:444 src/gradio-searchbar.vala:192
 msgid "Bitrate"
@@ -279,24 +279,24 @@ msgstr ""
 
 #: data/ui/menubutton.ui:459 src/gradio-searchbar.vala:194
 msgid "Date"
-msgstr ""
+msgstr "Tanggal"
 
 #: data/ui/menubutton.ui:499 src/gradio-searchbar.vala:197
 msgid "Ascending"
-msgstr ""
+msgstr "Naik"
 
 #: data/ui/menubutton.ui:514 src/gradio-searchbar.vala:198
 msgid "Descending"
-msgstr ""
+msgstr "Menurun"
 
 #: src/page/gradio-collection-items-page.vala:75
 #: src/page/gradio-library-page.vala:88
 msgid "Items: "
-msgstr ""
+msgstr "Item: "
 
 #: src/page/gradio-library-page.vala:86
 msgid "Fetching station data…"
-msgstr ""
+msgstr "Mengambil data stasiun"
 
 #: src/page/gradio-settings-page.vala:37
 msgid "Features"
