@@ -8,88 +8,91 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-01-01 14:42+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2018-04-10 14:37+0000\n"
+"Last-Translator: Roger <narayanroger@gmail.com>\n"
+"Language-Team: Hindi <https://hosted.weblate.org/projects/gradio/"
+"translations/hi/>\n"
 "Language: hi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 2.20\n"
 
 #: data/ui/app-menu.ui:6 data/ui/menubutton.ui:192
 #: src/page/gradio-settings-page.vala:120
 msgid "Settings"
-msgstr ""
+msgstr "सेटिंग्स"
 
 #: data/ui/app-menu.ui:12 data/ui/menubutton.ui:206
 msgid "About"
-msgstr ""
+msgstr "के बारे में"
 
 #: data/ui/app-menu.ui:18 data/ui/menubutton.ui:220
 msgid "Quit"
-msgstr ""
+msgstr "छोड़ना"
 
 #: data/ui/page/library-page.ui:44
 msgid "Your library is empty"
-msgstr ""
+msgstr "आपकी लाइब्रेरी खाली है"
 
 #: data/ui/page/library-page.ui:62
 msgid "If you add stations to the library, you will find them here."
-msgstr ""
+msgstr "यदि आप स्टेशनों को लाइब्रेरी में जोड़ते हैं, तो आप उन्हें यहां मिलेंगे।"
 
 #: data/ui/page/library-page.ui:75
 msgid "Add stations to library"
-msgstr ""
+msgstr "स्टेशनों को पुस्तकालय में जोड़ें"
 
 #: data/ui/page/collections-page.ui:43
 msgid "You don't have any collection"
-msgstr ""
+msgstr "आपके पास कोई संग्रह नहीं है"
 
 #: data/ui/page/collections-page.ui:61
 msgid "You can group stations into collections."
-msgstr ""
+msgstr "आप समूह स्टेशनों को संग्रह में जोड़ सकते हैं"
 
 #: data/ui/details-box.ui:23 data/ui/selection-toolbar.ui:233
 msgid "Details"
-msgstr ""
+msgstr "विवरण"
 
 #: data/ui/details-box.ui:137 data/ui/station-editor.ui:125
 #: data/ui/menubutton.ui:369 src/gradio-searchbar.vala:188
 msgid "Name"
-msgstr ""
+msgstr "नाम"
 
 #: data/ui/details-box.ui:169
 msgid "Type"
-msgstr ""
+msgstr "प्रकार"
 
 #: data/ui/details-box.ui:206
 msgid "Items"
-msgstr ""
+msgstr "आइटम"
 
 #: data/ui/details-box.ui:250 data/ui/menubutton.ui:354
 #: src/gradio-searchbar.vala:187
 msgid "Votes"
-msgstr ""
+msgstr "वोट"
 
 #: data/ui/details-box.ui:282
 msgid "Location"
-msgstr ""
+msgstr "स्थान"
 
 #: data/ui/details-box.ui:314 data/ui/station-editor.ui:322
 msgid "Tags"
-msgstr ""
+msgstr "टैग"
 
 #: data/ui/details-box.ui:346
 msgid "Codec"
-msgstr ""
+msgstr "कोडेक"
 
 #: data/ui/details-box.ui:433 data/ui/selection-toolbar.ui:83
 msgid "Play"
-msgstr ""
+msgstr "प्ले"
 
 #: data/ui/details-box.ui:478
 msgid "Open homepage"
-msgstr ""
+msgstr "मुखपृष्ठ खोलें"
 
 #: data/ui/details-box.ui:523 data/ui/selection-toolbar.ui:195
 msgid "Edit"
