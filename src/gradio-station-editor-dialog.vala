@@ -74,9 +74,9 @@ namespace Gradio{
 				StreamEntry.set_text(address);
 
 				if(!station.is_broken)
-					StreamEntry.set_sensitive(false);
+					StreamEntry.set_editable(false);
 				else
-					StreamEntry.set_sensitive(true);
+					StreamEntry.set_editable(true);
 
 			});
 		}
