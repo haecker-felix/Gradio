@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-01-01 14:42+0100\n"
-"PO-Revision-Date: 2018-04-27 00:40+0000\n"
+"PO-Revision-Date: 2018-04-29 03:41+0000\n"
 "Last-Translator: J. O. M. <jgortegam@unal.edu.co>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/gradio/"
 "translations/es/>\n"
@@ -38,7 +38,7 @@ msgstr "Tu biblioteca está vacía"
 
 #: data/ui/page/library-page.ui:62
 msgid "If you add stations to the library, you will find them here."
-msgstr "Si agrega estaciones a la biblioteca, las encontrará aquí."
+msgstr "Si agregas estaciones a la biblioteca, las encontrarás aquí."
 
 #: data/ui/page/library-page.ui:75
 msgid "Add stations to library"
@@ -166,7 +166,7 @@ msgstr "Continuar"
 
 #: data/ui/station-editor.ui:151
 msgid "Stream Address"
-msgstr "Dirección de la emisora (flujo)"
+msgstr "Dirección de la transmisión ('stream')"
 
 #: data/ui/station-editor.ui:166 data/ui/menubutton.ui:399
 #: src/gradio-searchbar.vala:190
@@ -380,17 +380,17 @@ msgstr "Icono en la bandeja"
 
 #: src/page/gradio-settings-page.vala:95
 msgid "Show a tray icon, to restore the main window"
-msgstr "Mostrar icono en la bandeja, para restaurar la ventana principal"
+msgstr "Mostrar icono en la bandeja para restaurar la ventana principal"
 
 #. CACHE
 #. cache station images
 #: src/page/gradio-settings-page.vala:104
 msgid "Cache station icons"
-msgstr "Cache de iconos de las estaciones"
+msgstr "Almacenar los iconos de las estaciones en caché"
 
 #: src/page/gradio-settings-page.vala:104
 msgid "Saves the images locally."
-msgstr "Guarda las imágenes locamente."
+msgstr "Guarda las imágenes localmente."
 
 #: src/page/gradio-settings-page.vala:109
 msgid "Clear Cache"
@@ -398,7 +398,7 @@ msgstr "Limpiar cache"
 
 #: src/page/gradio-settings-page.vala:109
 msgid "Clear all cached station icons"
-msgstr "Borrar todos los iconos de estaciones en caché"
+msgstr "Borrar todos los iconos de estaciones almacenados en caché"
 
 #: src/gradio-headerbar.vala:53 src/gradio-headerbar.vala:59
 msgid "Click on items to select them"
