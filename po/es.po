@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-01-01 14:42+0100\n"
-"PO-Revision-Date: 2018-04-29 03:41+0000\n"
-"Last-Translator: J. O. M. <jgortegam@unal.edu.co>\n"
+"PO-Revision-Date: 2018-05-01 15:41+0000\n"
+"Last-Translator: Tõnis Rand <tonis.rand@gmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/gradio/"
 "translations/es/>\n"
 "Language: es\n"
@@ -54,7 +54,7 @@ msgstr "Puede agrupar estaciones en colecciones."
 
 #: data/ui/details-box.ui:23 data/ui/selection-toolbar.ui:233
 msgid "Details"
-msgstr "detalles"
+msgstr "Detalles"
 
 #: data/ui/details-box.ui:137 data/ui/station-editor.ui:125
 #: data/ui/menubutton.ui:369 src/gradio-searchbar.vala:188
