@@ -1,11 +1,13 @@
-#[macro_use] extern crate log;
+#[macro_use]
+extern crate log;
 extern crate pretty_env_logger;
 
-extern crate gtk;
 extern crate gio;
+extern crate gtk;
 extern crate rustio;
 
 mod app;
+mod page;
 use app::GradioApp;
 
 fn main() {

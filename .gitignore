@@ -3,4 +3,7 @@
 target/
 target
 **/*.rs.bk
-Cargo.toml
+Cargo.lock
+_build
+.buildconfig
+de.haeckerfelix.Gradio.json~
