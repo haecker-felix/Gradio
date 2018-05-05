@@ -5,7 +5,7 @@ use std::cell::RefCell;
 use std::rc::Rc;
 use std::str::FromStr;
 
-use page::page::Page;
+use page::Page;
 use rustio::{audioplayer::AudioPlayer, client::Client};
 
 pub struct TestPage {
@@ -68,15 +68,15 @@ impl Page for TestPage {
         Self { title, name, builder, container }
     }
 
-    fn get_title(&self) -> &String {
+    fn title(&self) -> &String {
         &self.title
     }
 
-    fn get_name(&self) -> &String {
+    fn name(&self) -> &String {
         &self.name
     }
 
-    fn get_container(&self) -> &gtk::Box {
+    fn container(&self) -> &gtk::Box {
         &self.container
     }
 }

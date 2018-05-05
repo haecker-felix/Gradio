@@ -10,7 +10,7 @@ use std::cell::RefCell;
 use std::rc::Rc;
 
 use page::library_page::LibraryPage;
-use page::page::Page;
+use page::Page;
 use page::test_page::TestPage;
 
 pub struct GradioApp {
@@ -37,9 +37,9 @@ impl GradioApp {
         let page_stack: gtk::Stack = builder.get_object("page_stack").unwrap();
 
         let library_page: LibraryPage = Page::new();
-        page_stack.add_titled(library_page.get_container(), &library_page.get_name(), &library_page.get_title());
+        page_stack.add_titled(library_page.container(), &library_page.name(), &library_page.title());
         let test_page: TestPage = Page::new();
-        page_stack.add_titled(test_page.get_container(), &test_page.get_name(), &test_page.get_title());
+        page_stack.add_titled(test_page.container(), &test_page.name(), &test_page.title());
 
         GradioApp {
             player,
