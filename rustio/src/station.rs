@@ -30,8 +30,4 @@ pub struct Station {
     pub clicktrend: String,
 }
 
-impl Station{
-    pub fn print(&self){
-        info!("#{} \"{}\" ({}/{})", self.id, self.name, self.country, self.state);
-    }
-}
+impl Station{}

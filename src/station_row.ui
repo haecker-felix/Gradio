@@ -2,14 +2,15 @@
 <!-- Generated with glade 3.22.0 -->
 <interface>
   <requires lib="gtk+" version="3.20"/>
-  <object class="GtkBox" id="library_page">
+  <object class="GtkBox" id="station_row">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="orientation">vertical</property>
     <child>
-      <object class="GtkListBox" id="station_listbox">
+      <object class="GtkLabel" id="station_label">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
+        <property name="label" translatable="yes">label</property>
       </object>
       <packing>
         <property name="expand">False</property>

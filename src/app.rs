@@ -13,9 +13,12 @@ use page::library_page::LibraryPage;
 use page::Page;
 use page::test_page::TestPage;
 
+use library::Library;
+
 pub struct GradioApp {
     pub player: Rc<RefCell<AudioPlayer>>,
     pub client: Rc<Client>,
+    pub library: Library,
 
     builder: gtk::Builder,
     gtk_app: gtk::Application,
@@ -30,6 +33,7 @@ impl GradioApp {
     pub fn new() -> GradioApp {
         let player = Rc::new(RefCell::new(AudioPlayer::new()));
         let client = Rc::new(Client::new());
+        let mut library = Library::new();
 
         let builder = gtk::Builder::new_from_string(include_str!("window.ui"));
         let gtk_app = gtk::Application::new("de.haeckerfelix.Gradio", gio::ApplicationFlags::empty()).expect("Failed to initialize GtkApplication");
@@ -44,6 +48,7 @@ impl GradioApp {
         GradioApp {
             player,
             client,
+            library,
             builder,
             gtk_app,
             window,
@@ -53,7 +58,10 @@ impl GradioApp {
         }
     }
 
-    pub fn run(&self) {
+    pub fn run(&mut self) {
+        let client = self.client.clone();
+        self.library.read(&client);
+
         self.connect_signals();
         self.gtk_app.run(&[]);
     }
@@ -70,5 +78,8 @@ impl GradioApp {
         let player = self.player.clone();
         let client = self.client.clone();
         self.test_page.connect_signals(&player, &client);
+
+        // Library page
+        self.library_page.init(&self.library);
     }
 }

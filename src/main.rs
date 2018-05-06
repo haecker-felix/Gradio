@@ -2,12 +2,16 @@
 extern crate log;
 extern crate pretty_env_logger;
 
+extern crate glib;
 extern crate gio;
 extern crate gtk;
+extern crate rusqlite;
 extern crate rustio;
 
 mod app;
 mod page;
+mod library;
+mod station_row;
 use app::GradioApp;
 
 fn main() {
@@ -21,6 +25,6 @@ fn main() {
     }
 
     // Run App
-    let app = GradioApp::new();
+    let mut app = GradioApp::new();
     app.run();
 }
