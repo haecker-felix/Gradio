@@ -7,12 +7,27 @@
     <property name="can_focus">False</property>
     <property name="orientation">vertical</property>
     <child>
-      <object class="GtkListBox" id="station_listbox">
+      <object class="GtkScrolledWindow">
         <property name="visible">True</property>
-        <property name="can_focus">False</property>
+        <property name="can_focus">True</property>
+        <child>
+          <object class="GtkViewport">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="shadow_type">none</property>
+            <child>
+              <object class="GtkListBox" id="station_listbox">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="selection_mode">none</property>
+                <property name="activate_on_single_click">False</property>
+              </object>
+            </child>
+          </object>
+        </child>
       </object>
       <packing>
-        <property name="expand">False</property>
+        <property name="expand">True</property>
         <property name="fill">True</property>
         <property name="position">0</property>
       </packing>

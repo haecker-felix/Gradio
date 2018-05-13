@@ -5,17 +5,42 @@
   <object class="GtkBox" id="station_row">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
-    <property name="orientation">vertical</property>
     <child>
       <object class="GtkLabel" id="station_label">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
+        <property name="halign">start</property>
         <property name="label" translatable="yes">label</property>
+        <attributes>
+          <attribute name="weight" value="bold"/>
+        </attributes>
       </object>
       <packing>
         <property name="expand">False</property>
         <property name="fill">True</property>
         <property name="position">0</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkButton" id="play_button">
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <property name="receives_default">True</property>
+        <property name="relief">none</property>
+        <property name="always_show_image">True</property>
+        <child>
+          <object class="GtkImage">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="icon_name">media-playback-start-symbolic</property>
+          </object>
+        </child>
+      </object>
+      <packing>
+        <property name="expand">False</property>
+        <property name="fill">True</property>
+        <property name="pack_type">end</property>
+        <property name="position">1</property>
       </packing>
     </child>
   </object>
