@@ -31,6 +31,7 @@ impl AudioPlayer{
     }
 
     pub fn set_station(&self, station: &Station){
+        self.playbin.set_state(gstreamer::State::Null);
         let client = Client::new();
         let station_url = client.get_playable_station_url(&station);
         self.playbin.set_property("uri", &station_url);
