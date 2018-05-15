@@ -1,6 +1,6 @@
 use serde_json::de::from_str;
 
-#[derive(Deserialize)]
+#[derive(Deserialize, Clone)]
 pub struct Station {
     pub name: String,
     pub language: String,

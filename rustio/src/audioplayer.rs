@@ -1,6 +1,8 @@
 extern crate gstreamer;
 use gstreamer::{Element, ElementFactory, ElementExt};
 use gstreamer::prelude::*;
+use station::Station;
+use client::Client;
 
 pub struct AudioPlayer{
     playbin: Element,
@@ -28,8 +30,9 @@ impl AudioPlayer{
         debug!("gstreamer state is \"{:?}\"", ret);
     }
 
-    pub fn set_station_url(&mut self, url: String){
-        info!("Set station url: {}", url);
-        self.playbin.set_property("uri", &url);
+    pub fn set_station(&self, station: &Station){
+        let client = Client::new();
+        let station_url = client.get_playable_station_url(&station);
+        self.playbin.set_property("uri", &station_url);
     }
 }

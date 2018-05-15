@@ -3,7 +3,6 @@ extern crate gtk;
 use gio::{ApplicationExt, ApplicationExtManual};
 use gtk::prelude::*;
 
-extern crate rustio;
 use rustio::{audioplayer::AudioPlayer, client::Client};
 
 use std::cell::RefCell;
@@ -11,14 +10,30 @@ use std::rc::Rc;
 
 use page::library_page::LibraryPage;
 use page::Page;
-use page::test_page::TestPage;
 
 use library::Library;
+use std::sync::mpsc::Receiver;
+use std::sync::mpsc::Sender;
+use std::sync::mpsc::channel;
+use rustio::station::Station;
+
+pub enum Action {
+    /* Audio Playback Actions */
+    PlaybackStart,
+    PlaybackStop,
+    PlaybackSetStation(Station),
+
+    /* Library Actions */
+    LibraryAdd(String),
+    LibraryRemove(String),
+}
 
 pub struct GradioApp {
-    pub player: Rc<RefCell<AudioPlayer>>,
-    pub client: Rc<Client>,
-    pub library: Library,
+    player: AudioPlayer,
+    library: Library,
+
+    receiver: Receiver<Action>,
+    sender: Sender<Action>,
 
     builder: gtk::Builder,
     gtk_app: gtk::Application,
@@ -26,43 +41,54 @@ pub struct GradioApp {
     page_stack: gtk::Stack,
 
     library_page: LibraryPage,
-    test_page: TestPage,
 }
 
 impl GradioApp {
     pub fn new() -> GradioApp {
-        let player = Rc::new(RefCell::new(AudioPlayer::new()));
-        let client = Rc::new(Client::new());
-        let mut library = Library::new();
+        let player = AudioPlayer::new();
+        let library = Library::new();
+
+        let (sender, receiver) = channel();
 
         let builder = gtk::Builder::new_from_string(include_str!("window.ui"));
         let gtk_app = gtk::Application::new("de.haeckerfelix.Gradio", gio::ApplicationFlags::empty()).expect("Failed to initialize GtkApplication");
         let window: gtk::ApplicationWindow = builder.get_object("main_window").unwrap();
         let page_stack: gtk::Stack = builder.get_object("page_stack").unwrap();
 
-        let library_page: LibraryPage = Page::new();
+        let library_page: LibraryPage = Page::new(sender.clone());
+        library_page.update_stations(&library.stations);
         page_stack.add_titled(library_page.container(), &library_page.name(), &library_page.title());
-        let test_page: TestPage = Page::new();
-        page_stack.add_titled(test_page.container(), &test_page.name(), &test_page.title());
 
         GradioApp {
             player,
-            client,
             library,
+            receiver,
+            sender,
             builder,
             gtk_app,
             window,
             page_stack,
             library_page,
-            test_page,
         }
     }
 
-    pub fn run(&mut self) {
-        let client = self.client.clone();
-        self.library.read(&client);
-
+    pub fn run(self) {
         self.connect_signals();
+
+        let receiver = self.receiver;
+        let player = self.player;
+        gtk::timeout_add(50, move || {
+            match receiver.try_recv() {
+                Ok(Action::PlaybackStart) => player.set_playback(true),
+                Ok(Action::PlaybackStop) => player.set_playback(false),
+                Ok(Action::PlaybackSetStation(station)) => player.set_station(&station),
+                Ok(Action::LibraryAdd(station)) => info!("setplayback"),
+                Ok(Action::LibraryRemove(station)) => info!("setplayback"),
+                Err(_) => (),
+            }
+            Continue(true)
+        });
+
         self.gtk_app.run(&[]);
     }
 
@@ -73,13 +99,5 @@ impl GradioApp {
             app.add_window(&window_clone);
             debug!("gtk application activate");
         });
-
-        // Test Page
-        let player = self.player.clone();
-        let client = self.client.clone();
-        self.test_page.connect_signals(&player, &client);
-
-        // Library page
-        self.library_page.init(&self.library);
     }
 }
