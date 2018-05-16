@@ -69,6 +69,12 @@ impl Library{
 
     fn get_library_path() -> io::Result<String> {
         let mut path = glib::get_user_data_dir().unwrap();
+        debug!("User data dir: {:?}", path);
+
+        if !path.exists() {
+            info!("Create new user data directory...");
+            fs::create_dir(&path.to_str().unwrap())?;
+        }
 
         path.push("gradio");
         if !path.exists() {

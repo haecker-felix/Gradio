@@ -38,9 +38,13 @@ pub struct GradioApp {
     builder: gtk::Builder,
     gtk_app: gtk::Application,
     window: gtk::ApplicationWindow,
-    page_stack: gtk::Stack,
 
+    page_stack: gtk::Stack,
     library_page: LibraryPage,
+
+    playerbar: gtk::ActionBar,
+    station_title: gtk::Label,
+    station_subtitle: gtk::Label,
 }
 
 impl GradioApp {
@@ -59,6 +63,11 @@ impl GradioApp {
         library_page.update_stations(&library.stations);
         page_stack.add_titled(library_page.container(), &library_page.name(), &library_page.title());
 
+        let playerbar: gtk::ActionBar = builder.get_object("playerbar").unwrap();
+        playerbar.set_visible(false);
+        let station_title: gtk::Label = builder.get_object("station_title").unwrap();
+        let station_subtitle: gtk::Label = builder.get_object("station_subtitle").unwrap();
+
         GradioApp {
             player,
             library,
@@ -69,6 +78,9 @@ impl GradioApp {
             window,
             page_stack,
             library_page,
+            playerbar,
+            station_title,
+            station_subtitle,
         }
     }
 
@@ -77,11 +89,18 @@ impl GradioApp {
 
         let receiver = self.receiver;
         let player = self.player;
+        let playerbar = self.playerbar;
+        let station_title = self.station_title;
+        let station_subtitle = self.station_subtitle;
         gtk::timeout_add(50, move || {
             match receiver.try_recv() {
                 Ok(Action::PlaybackStart) => player.set_playback(true),
                 Ok(Action::PlaybackStop) => player.set_playback(false),
-                Ok(Action::PlaybackSetStation(station)) => player.set_station(&station),
+                Ok(Action::PlaybackSetStation(station)) => {
+                    playerbar.set_visible(true);
+                    station_title.set_text(&station.name);
+                    player.set_station(&station)
+                },
                 Ok(Action::LibraryAdd(station)) => info!("setplayback"),
                 Ok(Action::LibraryRemove(station)) => info!("setplayback"),
                 Err(_) => (),
