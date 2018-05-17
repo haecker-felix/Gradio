@@ -9,6 +9,7 @@ use std::cell::RefCell;
 use std::rc::Rc;
 
 use page::library_page::LibraryPage;
+use page::search_page::SearchPage;
 use page::Page;
 
 use library::Library;
@@ -41,6 +42,7 @@ pub struct GradioApp {
 
     page_stack: gtk::Stack,
     library_page: LibraryPage,
+    search_page: SearchPage,
 
     playerbar: gtk::ActionBar,
     station_title: gtk::Label,
@@ -63,6 +65,9 @@ impl GradioApp {
         library_page.update_stations(&library.stations);
         page_stack.add_titled(library_page.container(), &library_page.name(), &library_page.title());
 
+        let search_page: SearchPage = Page::new(sender.clone());
+        page_stack.add_titled(search_page.container(), &search_page.name(), &search_page.title());
+
         let playerbar: gtk::ActionBar = builder.get_object("playerbar").unwrap();
         playerbar.set_visible(false);
         let station_title: gtk::Label = builder.get_object("station_title").unwrap();
@@ -78,6 +83,7 @@ impl GradioApp {
             window,
             page_stack,
             library_page,
+            search_page,
             playerbar,
             station_title,
             station_subtitle,

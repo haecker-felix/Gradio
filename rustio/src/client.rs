@@ -5,6 +5,7 @@ extern crate reqwest;
 use country::Country;
 use station::Station;
 use std::env;
+use std::collections::HashMap;
 
 #[derive(Deserialize)]
 pub struct StationUrlResult{
@@ -12,7 +13,7 @@ pub struct StationUrlResult{
     url: String,
 }
 
-const BASE_URL: &'static str = "http://www.radio-browser.info/webservice/";
+const BASE_URL: &'static str = "https://www.radio-browser.info/webservice/";
 
 const LANGUAGES: &'static str = "json/languages/";
 const COUNTRIES: &'static str = "json/countries/";
@@ -81,8 +82,12 @@ impl Client {
         result.url
     }
 
-    pub fn search(&self, params: [(&str, &str); 2]) -> Vec<Station>{
+    pub fn search(&self, params: &HashMap<String, String>) -> Vec<Station>{
         let url = format!("{}{}", BASE_URL, SEARCH);
+
+        let result = self.client.post(&url).form(&params).send().unwrap();
+        info!("result: {:?}", result);
+
         self.client.post(&url).form(&params).send().unwrap().json().unwrap()
     }
 }

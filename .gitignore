@@ -7,3 +7,5 @@ Cargo.lock
 _build
 .buildconfig
 de.haeckerfelix.Gradio.json~
+*.ui~
+.ui~

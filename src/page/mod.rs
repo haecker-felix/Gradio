@@ -1,4 +1,5 @@
 pub mod library_page;
+pub mod search_page;
 
 extern crate gtk;
 use gtk::prelude::*;
