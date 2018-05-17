@@ -22,7 +22,7 @@ const TAGS: &'static str = "json/tags/";
 
 const PLAYABLE_STATION_URL: &'static str = "v2/json/url/";
 const STATION_BY_ID: &'static str = "json/stations/byid/";
-const SEARCH: &'static str ="json/stations/search/";
+const SEARCH: &'static str ="json/stations/search";
 
 pub struct Client {
     client: reqwest::Client,
@@ -85,9 +85,9 @@ impl Client {
     pub fn search(&self, params: &HashMap<String, String>) -> Vec<Station>{
         let url = format!("{}{}", BASE_URL, SEARCH);
 
-        let result = self.client.post(&url).form(&params).send().unwrap();
-        info!("result: {:?}", result);
+        let mut result = self.client.post(&url).form(&params).send().unwrap();
+        debug!("Search Result: {:?}", result);
 
-        self.client.post(&url).form(&params).send().unwrap().json().unwrap()
+        result.json().unwrap()
     }
 }

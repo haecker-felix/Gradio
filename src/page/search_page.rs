@@ -30,19 +30,29 @@ impl SearchPage {
         let sender = self.sender.clone();
 
         search_button.connect_clicked(move|_|{
+            let client = Client::new();
+
+            // Remove old list rows
+            for row in station_listbox.get_children().iter() {
+                station_listbox.remove(row);
+            }
+
+            // Get search term
             let search_term = search_entry.get_text().unwrap();
             search_entry.set_text("");
 
-            let client = Client::new();
-
+            // prepare search params
             let mut params = HashMap::new();
             params.insert("name".to_string(), search_term);
+            params.insert("limit".to_string(), "30".to_string());
 
-            info!("search for: {:?}", params);
+            // do the search itself
+            debug!("Search for: {:?}", params);
             let result = client.search(&params);
 
+            // show search results
             for station in result {
-                info!("result: {}", station.name   );
+                debug!("Found station: {}", station.name   );
                 let row = StationRow::new(&station, sender.clone());
                 station_listbox.add(&row.container);
             }
