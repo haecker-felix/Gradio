@@ -4,6 +4,7 @@ extern crate reqwest;
 
 use country::Country;
 use station::Station;
+use std::env;
 
 #[derive(Deserialize)]
 pub struct StationUrlResult{
@@ -20,6 +21,7 @@ const TAGS: &'static str = "json/tags/";
 
 const PLAYABLE_STATION_URL: &'static str = "v2/json/url/";
 const STATION_BY_ID: &'static str = "json/stations/byid/";
+const SEARCH: &'static str ="json/stations/search/";
 
 pub struct Client {
     client: reqwest::Client,
@@ -27,7 +29,20 @@ pub struct Client {
 
 impl Client {
     pub fn new() -> Client {
-        let client = reqwest::Client::new();
+
+        let proxy: Option<String> = match env::var("http_proxy") {
+            Ok(proxy) => Some(proxy),
+            Err(error) => None,
+        };
+
+        let client = match proxy {
+            Some(proxy_address) => {
+                let proxy = reqwest::Proxy::http(&proxy_address).unwrap();
+                reqwest::Client::builder().proxy(proxy).build().unwrap()
+            },
+            None => reqwest::Client::new(),
+        };
+
         Client {
             client: client,
         }
@@ -63,5 +78,10 @@ impl Client {
         let url = format!("{}{}{}", BASE_URL, PLAYABLE_STATION_URL, station.id);
         let mut result: StationUrlResult = self.client.get(&url).send().unwrap().json().unwrap();
         result.url
+    }
+
+    pub fn search(&self, params: [(&str, &str); 2]) -> Vec<Station>{
+        let url = format!("{}{}", BASE_URL, SEARCH);
+        self.client.post(&url).form(&params).send().unwrap().json().unwrap()
     }
 }
