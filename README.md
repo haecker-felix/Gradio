@@ -10,3 +10,7 @@ It is splitted into two parts:
   - GTK Interface
   - Desktop integration
   - Library management
+
+####  Environment variables for Gradio
+- **Debug output**: `RUST_LOG=rustio,gradio=debug`
+- **Proxy**: `http_proxy=http://myproxy:80`
