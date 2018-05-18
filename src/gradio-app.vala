@@ -86,7 +86,7 @@ namespace Gradio {
 				mpris = new MPRIS();
 				mpris.initialize();
 				mpris.requested_quit.connect(this.quit);
-				mpris.requested_raise.connect(window.present);
+				mpris.requested_raise.connect(() => window.present());
 			}
 		}
 
