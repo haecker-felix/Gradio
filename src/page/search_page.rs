@@ -10,6 +10,7 @@ use rustio::station::Station;
 use rustio::client::Client;
 use std::sync::mpsc::Sender;
 use app::Action;
+use station_listbox::StationListBox;
 use std::collections::HashMap;
 
 pub struct SearchPage {
@@ -18,6 +19,7 @@ pub struct SearchPage {
 
     builder: gtk::Builder,
     container: gtk::Box,
+    result_listbox: Rc<StationListBox>,
 
     sender: Sender<Action>,
 }
@@ -26,16 +28,10 @@ impl SearchPage {
     fn connect_signals(&self){
         let search_button: gtk::Button = self.builder.get_object("search_button").unwrap();
         let search_entry: gtk::Entry = self.builder.get_object("search_entry").unwrap();
-        let station_listbox: gtk::ListBox = self.builder.get_object("station_listbox").unwrap();
-        let sender = self.sender.clone();
+        let result_listbox = self.result_listbox.clone();
 
         search_button.connect_clicked(move|_|{
             let client = Client::new();
-
-            // Remove old list rows
-            for row in station_listbox.get_children().iter() {
-                station_listbox.remove(row);
-            }
 
             // Get search term
             let search_term = search_entry.get_text().unwrap();
@@ -50,12 +46,8 @@ impl SearchPage {
             debug!("Search for: {:?}", params);
             let result = client.search(&params);
 
-            // show search results
-            for station in result {
-                debug!("Found station: {}", station.name   );
-                let row = StationRow::new(&station, sender.clone());
-                station_listbox.add(&row.container);
-            }
+            // show results
+            result_listbox.show_stations(&result);
         });
     }
 }
@@ -68,7 +60,11 @@ impl Page for SearchPage {
         let builder = gtk::Builder::new_from_string(include_str!("search_page.ui"));
         let container: gtk::Box = builder.get_object("search_page").unwrap();
 
-        let searchpage = SearchPage{ title, name, builder, container, sender };
+        let result_listbox: Rc<StationListBox> = Rc::new(StationListBox::new(sender.clone()));
+        let results_box: gtk::Box = builder.get_object("results_box").unwrap();
+        results_box.add(&result_listbox.container);
+
+        let searchpage = SearchPage{ title, name, builder, container, result_listbox, sender };
         searchpage.connect_signals();
         searchpage
     }

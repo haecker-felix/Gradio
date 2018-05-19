@@ -9,6 +9,7 @@ pretty_env_logger = "0.2"
 gio = "0.4.0"
 rusqlite = "0.13.0"
 glib = "0.5.0"
+gdk = "0.8.0"
 
 [dependencies.gtk]
 version = "0.4.0"

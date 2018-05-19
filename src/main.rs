@@ -5,6 +5,7 @@ extern crate pretty_env_logger;
 extern crate glib;
 extern crate gio;
 extern crate gtk;
+extern crate gdk;
 extern crate rusqlite;
 extern crate rustio;
 
@@ -12,6 +13,7 @@ mod app;
 mod page;
 mod library;
 mod station_row;
+mod station_listbox;
 use app::GradioApp;
 
 fn main() {

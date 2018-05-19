@@ -39,7 +39,7 @@ impl Client {
         let client = match proxy {
             Some(proxy_address) => {
                 info!("Use Proxy: {}", proxy_address);
-                let proxy = reqwest::Proxy::http(&proxy_address).unwrap();
+                let proxy = reqwest::Proxy::all(&proxy_address).unwrap();
                 reqwest::Client::builder().proxy(proxy).build().unwrap()
             },
             None => reqwest::Client::new(),

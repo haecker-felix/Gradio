@@ -1,5 +1,6 @@
 extern crate gio;
 extern crate gtk;
+extern crate gdk;
 use gio::{ApplicationExt, ApplicationExtManual};
 use gtk::prelude::*;
 
@@ -113,6 +114,10 @@ impl GradioApp {
             }
             Continue(true)
         });
+
+        //let provider = gtk::CssProvider::new();
+        //provider.load_from_file("style.css");
+        //gtk::StyleContext::add_provider_for_screen(&gdk::Screen::get_default().unwrap(), &provider, 600);
 
         self.gtk_app.run(&[]);
     }
