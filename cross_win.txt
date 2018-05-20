@@ -1,0 +1,24 @@
+[binaries]
+c = '/usr/bin/x86_64-w64-mingw32-gcc'
+cpp = '/usr/bin/x86_64-w64-mingw32-cpp'
+ar = '/usr/bin/x86_64-w64-mingw32-ar'
+strip = '/usr/bin/x86_64-w64-mingw32-strip'
+exe_wrapper = 'wine' # A command used to run generated executables.
+pkgconfig = '/usr/bin/x86_64-w64-mingw32-pkg-config'
+
+[properties]
+sizeof_int = 4
+sizeof_wchar_t = 4
+sizeof_void* = 4
+
+alignment_char = 1
+alignment_void* = 4
+alignment_double = 4
+
+has_function_printf = true
+
+[host_machine]
+system = 'windows'
+cpu_family = 'x86_64'
+cpu = 'i586'
+endian = 'little'
