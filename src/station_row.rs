@@ -10,7 +10,7 @@ use gtk::IconSize;
 use glib::error::Error;
 
 pub struct StationRow {
-    pub container: gtk::Box,
+    pub container: gtk::ListBoxRow,
     builder: gtk::Builder,
     sender: Sender<Action>,
     station: Station,
@@ -20,7 +20,7 @@ impl StationRow {
      pub fn new(station: &Station, sender: Sender<Action>) -> Self {
          let builder = gtk::Builder::new_from_string(include_str!("station_row.ui"));
 
-         let container: gtk::Box = builder.get_object("station_row").unwrap();
+         let container: gtk::ListBoxRow = builder.get_object("station_row").unwrap();
          let station_label: gtk::Label = builder.get_object("station_label").unwrap();
          station_label.set_text(&station.name);
 

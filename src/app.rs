@@ -8,6 +8,7 @@ use rustio::{audioplayer::AudioPlayer, client::Client};
 
 use std::cell::RefCell;
 use std::rc::Rc;
+use std::io::Read;
 
 use page::library_page::LibraryPage;
 use page::search_page::SearchPage;
@@ -18,6 +19,7 @@ use std::sync::mpsc::Receiver;
 use std::sync::mpsc::Sender;
 use std::sync::mpsc::channel;
 use rustio::station::Station;
+use std::fs::File;
 
 pub enum Action {
     /* Audio Playback Actions */
@@ -56,6 +58,11 @@ impl GradioApp {
         let library = Library::new();
 
         let (sender, receiver) = channel();
+
+        // load custom stylesheet
+        let provider = gtk::CssProvider::new();
+        provider.load_from_data(include_str!("style.css").as_bytes());
+        gtk::StyleContext::add_provider_for_screen(&gdk::Screen::get_default().unwrap(), &provider, 600);
 
         let builder = gtk::Builder::new_from_string(include_str!("window.ui"));
         let gtk_app = gtk::Application::new("de.haeckerfelix.Gradio", gio::ApplicationFlags::empty()).expect("Failed to initialize GtkApplication");
@@ -114,10 +121,6 @@ impl GradioApp {
             }
             Continue(true)
         });
-
-        //let provider = gtk::CssProvider::new();
-        //provider.load_from_file("style.css");
-        //gtk::StyleContext::add_provider_for_screen(&gdk::Screen::get_default().unwrap(), &provider, 600);
 
         self.gtk_app.run(&[]);
     }
