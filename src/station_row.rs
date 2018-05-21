@@ -4,6 +4,9 @@ use gtk::prelude::*;
 use rustio::station::Station;
 use std::sync::mpsc::Sender;
 use app::Action;
+use favicon_downloader::FaviconDownloader;
+use gdk_pixbuf::Pixbuf;
+use gtk::IconSize;
 
 pub struct StationRow {
     pub container: gtk::Box,
@@ -19,6 +22,15 @@ impl StationRow {
          let container: gtk::Box = builder.get_object("station_row").unwrap();
          let station_label: gtk::Label = builder.get_object("station_label").unwrap();
          station_label.set_text(&station.name);
+
+         let downloader = FaviconDownloader::new();
+         let station_favicon: gtk::Image = builder.get_object("station_favicon").unwrap();
+         let pixbuf = Pixbuf::new_from_file_at_size(downloader.get_favicon_path(&station).unwrap().as_path(), 48, 48);
+         match pixbuf{
+             Ok(p) => station_favicon.set_from_pixbuf(&p),
+             Err(err) => station_favicon.set_from_icon_name("emblem-music-symbolic", 48),
+         }
+
 
          let row = Self {container, builder, sender, station: station.clone()};
          row.connect_signals();

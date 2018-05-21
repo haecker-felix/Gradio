@@ -8,12 +8,15 @@ extern crate gtk;
 extern crate gdk;
 extern crate rusqlite;
 extern crate rustio;
+extern crate reqwest;
+extern crate gdk_pixbuf;
 
 mod app;
 mod page;
 mod library;
 mod station_row;
 mod station_listbox;
+mod favicon_downloader;
 use app::GradioApp;
 
 fn main() {

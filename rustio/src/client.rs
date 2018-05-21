@@ -30,7 +30,6 @@ pub struct Client {
 
 impl Client {
     pub fn new() -> Client {
-
         let proxy: Option<String> = match env::var("http_proxy") {
             Ok(proxy) => Some(proxy),
             Err(error) => None,
