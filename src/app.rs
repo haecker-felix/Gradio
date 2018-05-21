@@ -71,7 +71,7 @@ impl GradioApp {
 
         let library_page: LibraryPage = Page::new(sender.clone());
         library_page.update_stations(&library.stations);
-        page_stack.add_titled(library_page.container(), &library_page.name(), &library_page.title());
+        //page_stack.add_titled(library_page.container(), &library_page.name(), &library_page.title());
 
         let search_page: SearchPage = Page::new(sender.clone());
         page_stack.add_titled(search_page.container(), &search_page.name(), &search_page.title());

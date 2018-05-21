@@ -40,7 +40,7 @@ impl SearchPage {
             // prepare search params
             let mut params = HashMap::new();
             params.insert("name".to_string(), search_term);
-            params.insert("limit".to_string(), "30".to_string());
+            params.insert("limit".to_string(), "250".to_string());
 
             // do the search itself
             debug!("Search for: {:?}", params);
