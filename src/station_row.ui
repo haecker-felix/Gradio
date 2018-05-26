@@ -38,7 +38,7 @@
           <object class="GtkImage" id="station_favicon">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="pixel_size">42</property>
+            <property name="pixel_size">32</property>
             <property name="icon_name">emblem-music-symbolic</property>
           </object>
           <packing>
