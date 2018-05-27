@@ -24,6 +24,7 @@ use std::thread;
 use glib::Source;
 use rustio::client::Client;
 use std::sync::Arc;
+use url::{Url, ParseError};
 
 pub struct FaviconDownloader {
     client: Arc<reqwest::Client>,
@@ -60,7 +61,11 @@ impl FaviconDownloader {
         path.push(&station.id);
 
         if !path.exists() {
-            let mut response = client.get(&station.favicon).send()?;
+            let url = Url::parse(&station.favicon)?;
+            if url.cannot_be_a_base(){
+                return Err(Error::ParseError);
+            }
+            let mut response = client.get(url).send()?;
 
             let mut file = File::create(&path)?;
             let mut buffer = Vec::new();

@@ -10,6 +10,7 @@ extern crate rusqlite;
 extern crate rustio;
 extern crate reqwest;
 extern crate gdk_pixbuf;
+extern crate url;
 
 mod app;
 mod page;
