@@ -30,17 +30,15 @@ pub struct SearchPage {
 
 impl SearchPage {
     fn connect_signals(&self){
-        let search_button: gtk::Button = self.builder.get_object("search_button").unwrap();
-        let search_entry: gtk::Entry = self.builder.get_object("search_entry").unwrap();
+        let search_entry: gtk::SearchEntry = self.builder.get_object("search_entry").unwrap();
         let result_listbox = self.result_listbox.clone();
         let client_sender = self.client_sender.clone();
 
-        search_button.connect_clicked(move|_|{
+        search_entry.connect_search_changed(move|search_entry|{
             let client = Client::new_with_sender(client_sender.clone());
 
             // Get search term
             let search_term = search_entry.get_text().unwrap();
-            search_entry.set_text("");
 
             // prepare search params
             let mut params = HashMap::new();

@@ -119,11 +119,13 @@ impl Client {
     }
 
     fn send_post_request(url: String, params: HashMap<String, String>) -> Result<reqwest::Response, reqwest::Error>{
+        debug!("Post request -> {:?} ({:?})", url, params);
         let client = Self::create_reqwest_client();
         client.post(&url).form(&params).send()
     }
 
     fn send_get_request(url: String) -> Result<reqwest::Response, reqwest::Error>{
+        debug!("Get request -> {:?}", url);
         let client = Self::create_reqwest_client();
         client.get(&url).send()
     }
