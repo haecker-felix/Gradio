@@ -1,11 +1,16 @@
 extern crate serde;
 extern crate serde_json;
 extern crate reqwest;
+extern crate gtk;
+use gtk::prelude::*;
 
 use country::Country;
 use station::Station;
 use std::env;
 use std::collections::HashMap;
+use std::sync::mpsc::Sender;
+use std::sync::mpsc::channel;
+use std::thread;
 
 #[derive(Deserialize)]
 pub struct StationUrlResult{
@@ -24,69 +29,102 @@ const PLAYABLE_STATION_URL: &'static str = "v2/json/url/";
 const STATION_BY_ID: &'static str = "json/stations/byid/";
 const SEARCH: &'static str ="json/stations/search";
 
+pub enum ClientUpdate {
+    NewStations(Vec<Station>),
+    Clear,
+}
+
 pub struct Client {
-    client: reqwest::Client,
+    client_sender: Sender<ClientUpdate>,
 }
 
 impl Client {
     pub fn new() -> Client {
+        let (sender, receiver) = channel();
+        Self::new_with_sender(sender)
+    }
+
+    pub fn new_with_sender(client_sender: Sender<ClientUpdate>) -> Client {
+        Client {
+            client_sender
+        }
+    }
+
+    pub fn create_reqwest_client() -> reqwest::Client{
         let proxy: Option<String> = match env::var("http_proxy") {
             Ok(proxy) => Some(proxy),
             Err(error) => None,
         };
 
-        let client = match proxy {
+        match proxy {
             Some(proxy_address) => {
                 info!("Use Proxy: {}", proxy_address);
                 let proxy = reqwest::Proxy::all(&proxy_address).unwrap();
                 reqwest::Client::builder().proxy(proxy).build().unwrap()
             },
             None => reqwest::Client::new(),
-        };
-
-        Client {
-            client: client,
         }
     }
 
     pub fn get_all_languages(&self) -> Vec<Country>{
         let url = format!("{}{}", BASE_URL, LANGUAGES);
-        self.client.get(&url).send().unwrap().json().unwrap()
+        Self::send_get_request(url).unwrap().json().unwrap()
     }
 
     pub fn get_all_countries(&self) -> Vec<Country>{
         let url = format!("{}{}", BASE_URL, LANGUAGES);
-        self.client.get(&url).send().unwrap().json().unwrap()
+        Self::send_get_request(url).unwrap().json().unwrap()
     }
 
     pub fn get_all_states(&self) -> Vec<Country>{
         let url = format!("{}{}", BASE_URL, STATES);
-        self.client.get(&url).send().unwrap().json().unwrap()
+        Self::send_get_request(url).unwrap().json().unwrap()
     }
 
     pub fn get_all_tags(&self) -> Vec<Country>{
         let url = format!("{}{}", BASE_URL, TAGS);
-        self.client.get(&url).send().unwrap().json().unwrap()
+        Self::send_get_request(url).unwrap().json().unwrap()
     }
 
     pub fn get_station_by_id(&self, id: i32) -> Station{
         let url = format!("{}{}{}", BASE_URL, STATION_BY_ID, id);
-        let mut result: Vec<Station> = self.client.get(&url).send().unwrap().json().unwrap();
+        let mut result: Vec<Station> = Self::send_get_request(url).unwrap().json().unwrap();
         result.remove(0)
     }
 
     pub fn get_playable_station_url(&self, station: &Station) -> String{
         let url = format!("{}{}{}", BASE_URL, PLAYABLE_STATION_URL, station.id);
-        let mut result: StationUrlResult = self.client.get(&url).send().unwrap().json().unwrap();
+        let mut result: StationUrlResult = Self::send_get_request(url).unwrap().json().unwrap();
         result.url
     }
 
-    pub fn search(&self, params: &HashMap<String, String>) -> Vec<Station>{
+    pub fn search(&self, params: HashMap<String, String>){
+        self.client_sender.send(ClientUpdate::Clear);
         let url = format!("{}{}", BASE_URL, SEARCH);
 
-        let mut result = self.client.post(&url).form(&params).send().unwrap();
-        debug!("Search Result: {:?}", result);
+        let (search_sender, search_receiver) = channel();
+        thread::spawn(move || search_sender.send(Self::send_post_request(url, params)));
 
-        result.json().unwrap()
+        let client_sender = self.client_sender.clone();
+        gtk::timeout_add(100, move || {
+            match search_receiver.try_recv(){
+                Ok(mut result) => {
+                    let stations: Vec<Station> = result.unwrap().json().unwrap(); // TODO: don't unwrap
+                    client_sender.send(ClientUpdate::NewStations(stations));
+                    Continue(false)
+                }
+                Err(err) => Continue(true),
+            }
+        });
+    }
+
+    fn send_post_request(url: String, params: HashMap<String, String>) -> Result<reqwest::Response, reqwest::Error>{
+        let client = Self::create_reqwest_client();
+        client.post(&url).form(&params).send()
+    }
+
+    fn send_get_request(url: String) -> Result<reqwest::Response, reqwest::Error>{
+        let client = Self::create_reqwest_client();
+        client.get(&url).send()
     }
 }

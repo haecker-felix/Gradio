@@ -21,14 +21,15 @@ impl StationListBox {
         Self {container, builder, sender}
     }
 
-    pub fn show_stations(&self, stations: &Vec<Station>){
+    pub fn clear(&self){
         let listbox: gtk::ListBox = self.builder.get_object("listbox").unwrap();
-
-        // Remove old list rows
         for row in listbox.get_children().iter() {
             listbox.remove(row);
         }
+    }
 
+    pub fn add_stations(&self, stations: &Vec<Station>){
+        let listbox: gtk::ListBox = self.builder.get_object("listbox").unwrap();
         for station in stations {
             let row = StationRow::new(&station, self.sender.clone());
             listbox.add(&row.container);

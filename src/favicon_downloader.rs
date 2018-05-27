@@ -16,33 +16,21 @@ use std::rc::Rc;
 use std::collections::HashMap;
 use std::sync::mpsc::Sender;
 use app::Action;
-use reqwest::Client;
 use rustio::station::Station;
 use rustio::error::Error;
 use gdk_pixbuf::Pixbuf;
 use std::sync::mpsc::channel;
 use std::thread;
 use glib::Source;
+use rustio::client::Client;
 
 pub struct FaviconDownloader {
-    client: Client,
+    client: reqwest::Client,
 }
 
 impl FaviconDownloader {
     pub fn new() -> Self{
-        let proxy: Option<String> = match env::var("http_proxy") {
-            Ok(proxy) => Some(proxy),
-            Err(error) => None,
-        };
-
-        let client = match proxy {
-            Some(proxy_address) => {
-                info!("Use Proxy: {}", proxy_address);
-                let proxy = reqwest::Proxy::all(&proxy_address).unwrap();
-                reqwest::Client::builder().proxy(proxy).build().unwrap()
-            },
-            None => reqwest::Client::new(),
-        };
+        let client = Client::create_reqwest_client();
 
         FaviconDownloader {
             client: client,

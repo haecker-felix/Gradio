@@ -5,6 +5,8 @@ extern crate serde;
 extern crate serde_json;
 extern crate reqwest;
 extern crate gstreamer;
+extern crate gtk; // TODO: Don't require gtk
+
 
 pub mod error;
 pub mod client;

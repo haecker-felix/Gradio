@@ -12,6 +12,9 @@ use std::sync::mpsc::Sender;
 use app::Action;
 use station_listbox::StationListBox;
 use std::collections::HashMap;
+use std::sync::mpsc::channel;
+use rustio::client::ClientUpdate;
+use std::sync::mpsc::Receiver;
 
 pub struct SearchPage {
     title: String,
@@ -21,7 +24,8 @@ pub struct SearchPage {
     container: gtk::Box,
     result_listbox: Rc<StationListBox>,
 
-    sender: Sender<Action>,
+    app_sender: Sender<Action>,
+    client_sender: Sender<ClientUpdate>,
 }
 
 impl SearchPage {
@@ -29,9 +33,10 @@ impl SearchPage {
         let search_button: gtk::Button = self.builder.get_object("search_button").unwrap();
         let search_entry: gtk::Entry = self.builder.get_object("search_entry").unwrap();
         let result_listbox = self.result_listbox.clone();
+        let client_sender = self.client_sender.clone();
 
         search_button.connect_clicked(move|_|{
-            let client = Client::new();
+            let client = Client::new_with_sender(client_sender.clone());
 
             // Get search term
             let search_term = search_entry.get_text().unwrap();
@@ -43,28 +48,35 @@ impl SearchPage {
             params.insert("limit".to_string(), "250".to_string());
 
             // do the search itself
-            debug!("Search for: {:?}", params);
-            let result = client.search(&params);
-
-            // show results
-            result_listbox.show_stations(&result);
+            client.search(params);
         });
     }
 }
 
 impl Page for SearchPage {
-    fn new(sender: Sender<Action>) -> Self {
+    fn new(app_sender: Sender<Action>) -> Self {
         let title = "Search".to_string();
         let name = "search_page".to_string();
 
         let builder = gtk::Builder::new_from_string(include_str!("search_page.ui"));
         let container: gtk::Box = builder.get_object("search_page").unwrap();
 
-        let result_listbox: Rc<StationListBox> = Rc::new(StationListBox::new(sender.clone()));
+        let result_listbox: Rc<StationListBox> = Rc::new(StationListBox::new(app_sender.clone()));
         let results_box: gtk::Box = builder.get_object("results_box").unwrap();
         results_box.add(&result_listbox.container);
 
-        let searchpage = SearchPage{ title, name, builder, container, result_listbox, sender };
+        let (client_sender, client_receiver) = channel();
+        let result_listbox_clone = result_listbox.clone();
+        gtk::timeout_add(100, move || {
+            match client_receiver.try_recv() {
+                Ok(ClientUpdate::NewStations(stations)) => result_listbox_clone.add_stations(&stations),
+                Ok(ClientUpdate::Clear) => result_listbox_clone.clear(),
+                Err(err) => (),
+            }
+            Continue(true)
+        });
+
+        let searchpage = SearchPage{ title, name, builder, container, result_listbox, app_sender, client_sender };
         searchpage.connect_signals();
         searchpage
     }
