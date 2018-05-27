@@ -22,7 +22,7 @@ pub struct StationRow {
 }
 
 impl StationRow {
-     pub fn new(station: &Station, sender: Sender<Action>) -> Self {
+     pub fn new(station: &Station, sender: Sender<Action>, fdl: &FaviconDownloader) -> Self {
          let builder = gtk::Builder::new_from_string(include_str!("station_row.ui"));
 
          let container: gtk::ListBoxRow = builder.get_object("station_row").unwrap();
@@ -30,7 +30,6 @@ impl StationRow {
          let station_label: gtk::Label = builder.get_object("station_label").unwrap();
          station_label.set_text(&station.name);
 
-         let fdl = FaviconDownloader::new();
          fdl.set_favicon_async(favicon_image, &station, 32);
 
          let row = Self {container, builder, sender, station: station.clone()};

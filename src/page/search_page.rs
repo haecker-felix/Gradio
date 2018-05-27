@@ -45,7 +45,7 @@ impl SearchPage {
             // prepare search params
             let mut params = HashMap::new();
             params.insert("name".to_string(), search_term);
-            params.insert("limit".to_string(), "250".to_string());
+            params.insert("limit".to_string(), "100".to_string());
 
             // do the search itself
             client.search(params);
@@ -63,14 +63,21 @@ impl Page for SearchPage {
 
         let result_listbox: Rc<StationListBox> = Rc::new(StationListBox::new(app_sender.clone()));
         let results_box: gtk::Box = builder.get_object("results_box").unwrap();
+        let results_stack: gtk::Stack = builder.get_object("results_stack").unwrap();
         results_box.add(&result_listbox.container);
 
         let (client_sender, client_receiver) = channel();
         let result_listbox_clone = result_listbox.clone();
         gtk::timeout_add(100, move || {
             match client_receiver.try_recv() {
-                Ok(ClientUpdate::NewStations(stations)) => result_listbox_clone.add_stations(&stations),
-                Ok(ClientUpdate::Clear) => result_listbox_clone.clear(),
+                Ok(ClientUpdate::NewStations(stations)) => {
+                    result_listbox_clone.add_stations(&stations);
+                    results_stack.set_visible_child_name("results");
+                },
+                Ok(ClientUpdate::Clear) => {
+                    results_stack.set_visible_child_name("loading");
+                    result_listbox_clone.clear();
+                },
                 Err(err) => (),
             }
             Continue(true)

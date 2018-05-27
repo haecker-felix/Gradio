@@ -5,6 +5,7 @@ use rustio::station::Station;
 use std::sync::mpsc::Sender;
 use app::Action;
 use station_row::StationRow;
+use favicon_downloader::FaviconDownloader;
 
 pub struct StationListBox {
     pub container: gtk::Box,
@@ -30,8 +31,9 @@ impl StationListBox {
 
     pub fn add_stations(&self, stations: &Vec<Station>){
         let listbox: gtk::ListBox = self.builder.get_object("listbox").unwrap();
+        let fdl = FaviconDownloader::new();
         for station in stations {
-            let row = StationRow::new(&station, self.sender.clone());
+            let row = StationRow::new(&station, self.sender.clone(), &fdl);
             listbox.add(&row.container);
         }
     }

@@ -10,6 +10,7 @@ use rustio::station::Station;
 use std::sync::mpsc::Sender;
 use app::Action;
 use std::collections::HashMap;
+use favicon_downloader::FaviconDownloader;
 
 pub struct LibraryPage {
     title: String,
@@ -24,8 +25,9 @@ pub struct LibraryPage {
 
 impl LibraryPage {
     pub fn update_stations(&self, stations: &HashMap<i32, Station>){
+        let fdl = FaviconDownloader::new();
         for station in stations {
-            let row = StationRow::new(&station.1, self.sender.clone());
+            let row = StationRow::new(&station.1, self.sender.clone(), &fdl);
             self.station_listbox.add(&row.container);
         }
     }

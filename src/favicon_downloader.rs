@@ -23,14 +23,15 @@ use std::sync::mpsc::channel;
 use std::thread;
 use glib::Source;
 use rustio::client::Client;
+use std::sync::Arc;
 
 pub struct FaviconDownloader {
-    client: reqwest::Client,
+    client: Arc<reqwest::Client>,
 }
 
 impl FaviconDownloader {
     pub fn new() -> Self{
-        let client = Client::create_reqwest_client();
+        let client = Arc::new(Client::create_reqwest_client());
 
         FaviconDownloader {
             client: client,
@@ -54,12 +55,12 @@ impl FaviconDownloader {
         return Ok(path);
     }
 
-    fn get_favicon_path(&self, station: &Station) -> Result<PathBuf, Error>{
+    fn get_favicon_path(station: &Station, client: &reqwest::Client) -> Result<PathBuf, Error>{
         let mut path = Self::get_cache_path()?;
         path.push(&station.id);
 
         if !path.exists() {
-            let mut response = self.client.get(&station.favicon).send()?;
+            let mut response = client.get(&station.favicon).send()?;
 
             let mut file = File::create(&path)?;
             let mut buffer = Vec::new();
@@ -80,11 +81,11 @@ impl FaviconDownloader {
     pub fn set_favicon_async(&self, gtkimage: gtk::Image, station: &Station, size: i32){
         let station_clone = station.clone();
         let gtkimage = gtkimage.clone();
+        let client = self.client.clone();
         let (sender, receiver) = channel();
 
         thread::spawn(move || {
-            let fdl = Self::new();
-            let result = fdl.get_favicon_path(&station_clone);
+            let result = Self::get_favicon_path(&station_clone, &client);
             sender.send(result);
         });
 
