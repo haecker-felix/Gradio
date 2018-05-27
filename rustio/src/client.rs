@@ -103,13 +103,12 @@ impl Client {
         let url = format!("{}{}", BASE_URL, SEARCH);
 
         let (search_sender, search_receiver) = channel();
-        thread::spawn(move || search_sender.send(Self::send_post_request(url, params)));
+        thread::spawn(move || search_sender.send(Self::send_post_request(url, params).unwrap().json().unwrap())); //TODO: don't unwrap
 
         let client_sender = self.client_sender.clone();
         gtk::timeout_add(100, move || {
             match search_receiver.try_recv(){
-                Ok(mut result) => {
-                    let stations: Vec<Station> = result.unwrap().json().unwrap(); // TODO: don't unwrap
+                Ok(mut stations) => {
                     client_sender.send(ClientUpdate::NewStations(stations));
                     Continue(false)
                 }
