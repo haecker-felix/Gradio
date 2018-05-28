@@ -35,7 +35,7 @@ impl SearchPage {
         let client_sender = self.client_sender.clone();
 
         search_entry.connect_search_changed(move|search_entry|{
-            let client = Client::new_with_sender(client_sender.clone());
+            let mut client = Client::new_with_sender(client_sender.clone());
 
             // Get search term
             let search_term = search_entry.get_text().unwrap();

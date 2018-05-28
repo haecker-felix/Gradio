@@ -2,6 +2,7 @@ extern crate serde;
 extern crate serde_json;
 extern crate reqwest;
 extern crate gtk;
+extern crate rand;
 use gtk::prelude::*;
 
 use country::Country;
@@ -11,6 +12,10 @@ use std::collections::HashMap;
 use std::sync::mpsc::Sender;
 use std::sync::mpsc::channel;
 use std::thread;
+use std::rc::Rc;
+use rand::*;
+use std::cell::RefCell;
+use std::sync::atomic::AtomicUsize;
 
 #[derive(Deserialize)]
 pub struct StationUrlResult{
@@ -36,6 +41,7 @@ pub enum ClientUpdate {
 
 pub struct Client {
     client_sender: Sender<ClientUpdate>,
+    current_search_id: AtomicUsize,
 }
 
 impl Client {
@@ -45,8 +51,10 @@ impl Client {
     }
 
     pub fn new_with_sender(client_sender: Sender<ClientUpdate>) -> Client {
+        let mut current_search_id = AtomicUsize::new(0);
         Client {
-            client_sender
+            client_sender,
+            current_search_id,
         }
     }
 
@@ -98,15 +106,30 @@ impl Client {
         result.url
     }
 
-    pub fn search(&self, params: HashMap<String, String>){
+    pub fn search(&mut self, params: HashMap<String, String>){
+        // Generate a new search ID. It is possible, that the old thread is still running,
+        // while a new one already have started. With this ID we can check, if the search request is still up-to-date.
+        *self.current_search_id.get_mut() = rand::random();
+        debug!("Start new search with ID {}", self.current_search_id.into_inner());
         self.client_sender.send(ClientUpdate::Clear);
-        let url = format!("{}{}", BASE_URL, SEARCH);
 
+        // Do the actual search in a new thread
         let (search_sender, search_receiver) = channel();
+        let url = format!("{}{}", BASE_URL, SEARCH);
         thread::spawn(move || search_sender.send(Self::send_post_request(url, params).unwrap().json().unwrap())); //TODO: don't unwrap
 
+        // Start a loop, and wait for a message from the thread.
+        let search_id: usize = self.current_search_id.into_inner();
+        //let current_search_id = self.current_search_id.copy();
         let client_sender = self.client_sender.clone();
-        gtk::timeout_add(100, move || {
+        gtk::timeout_add(100,  move|| {
+            //debug!("timeout search_id: {}", search_id);
+            //debug!(" - current_search_id: {}", current_search_id.borrow());
+            if search_id != *current_search_id.borrow() { // Compare with current search id
+                error!("Search ID changed -> cancel this loop. (This: {} <-> Current: {})", search_id, current_search_id.borrow());
+                return Continue(false);
+            }
+
             match search_receiver.try_recv(){
                 Ok(mut stations) => {
                     client_sender.send(ClientUpdate::NewStations(stations));
