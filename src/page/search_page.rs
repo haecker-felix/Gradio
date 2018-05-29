@@ -15,6 +15,7 @@ use std::collections::HashMap;
 use std::sync::mpsc::channel;
 use rustio::client::ClientUpdate;
 use std::sync::mpsc::Receiver;
+use std::cell::RefCell;
 
 pub struct SearchPage {
     title: String,
@@ -25,6 +26,8 @@ pub struct SearchPage {
     result_listbox: Rc<StationListBox>,
 
     app_sender: Sender<Action>,
+
+    client: Rc<RefCell<Client>>,
     client_sender: Sender<ClientUpdate>,
 }
 
@@ -32,11 +35,10 @@ impl SearchPage {
     fn connect_signals(&self){
         let search_entry: gtk::SearchEntry = self.builder.get_object("search_entry").unwrap();
         let result_listbox = self.result_listbox.clone();
+        let client = self.client.clone();
         let client_sender = self.client_sender.clone();
 
         search_entry.connect_search_changed(move|search_entry|{
-            let mut client = Client::new_with_sender(client_sender.clone());
-
             // Get search term
             let search_term = search_entry.get_text().unwrap();
 
@@ -46,7 +48,7 @@ impl SearchPage {
             params.insert("limit".to_string(), "100".to_string());
 
             // do the search itself
-            client.search(params);
+            client.borrow_mut().search(params);
         });
     }
 }
@@ -65,6 +67,8 @@ impl Page for SearchPage {
         results_box.add(&result_listbox.container);
 
         let (client_sender, client_receiver) = channel();
+        let client = Rc::new(RefCell::new(Client::new_with_sender((client_sender.clone()))));
+
         let result_listbox_clone = result_listbox.clone();
         gtk::timeout_add(100, move || {
             match client_receiver.try_recv() {
@@ -81,7 +85,7 @@ impl Page for SearchPage {
             Continue(true)
         });
 
-        let searchpage = SearchPage{ title, name, builder, container, result_listbox, app_sender, client_sender };
+        let searchpage = SearchPage{ title, name, builder, container, result_listbox, app_sender, client, client_sender };
         searchpage.connect_signals();
         searchpage
     }

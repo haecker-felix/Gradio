@@ -41,7 +41,7 @@ pub enum ClientUpdate {
 
 pub struct Client {
     client_sender: Sender<ClientUpdate>,
-    current_search_id: AtomicUsize,
+    current_search_id: Rc<RefCell<u64>>,
 }
 
 impl Client {
@@ -51,10 +51,9 @@ impl Client {
     }
 
     pub fn new_with_sender(client_sender: Sender<ClientUpdate>) -> Client {
-        let mut current_search_id = AtomicUsize::new(0);
         Client {
             client_sender,
-            current_search_id,
+            current_search_id: Rc::new(RefCell::new(0)),
         }
     }
 
@@ -109,8 +108,8 @@ impl Client {
     pub fn search(&mut self, params: HashMap<String, String>){
         // Generate a new search ID. It is possible, that the old thread is still running,
         // while a new one already have started. With this ID we can check, if the search request is still up-to-date.
-        *self.current_search_id.get_mut() = rand::random();
-        debug!("Start new search with ID {}", self.current_search_id.into_inner());
+        *self.current_search_id.borrow_mut() += 1;
+        debug!("Start new search with ID {}", self.current_search_id.borrow());
         self.client_sender.send(ClientUpdate::Clear);
 
         // Do the actual search in a new thread
@@ -119,14 +118,12 @@ impl Client {
         thread::spawn(move || search_sender.send(Self::send_post_request(url, params).unwrap().json().unwrap())); //TODO: don't unwrap
 
         // Start a loop, and wait for a message from the thread.
-        let search_id: usize = self.current_search_id.into_inner();
-        //let current_search_id = self.current_search_id.copy();
+        let current_search_id = self.current_search_id.clone();
+        let search_id = *self.current_search_id.borrow();
         let client_sender = self.client_sender.clone();
         gtk::timeout_add(100,  move|| {
-            //debug!("timeout search_id: {}", search_id);
-            //debug!(" - current_search_id: {}", current_search_id.borrow());
             if search_id != *current_search_id.borrow() { // Compare with current search id
-                error!("Search ID changed -> cancel this loop. (This: {} <-> Current: {})", search_id, current_search_id.borrow());
+                debug!("Search ID changed -> cancel this search loop. (This: {} <-> Current: {})", search_id, current_search_id.borrow());
                 return Continue(false);
             }
 
