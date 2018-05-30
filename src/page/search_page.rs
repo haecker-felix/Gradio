@@ -26,6 +26,8 @@ pub struct SearchPage {
     builder: gtk::Builder,
     container: gtk::Box,
     result_listbox: Rc<StationListBox>,
+
+    search_sender: Sender<ClientUpdate>,
 }
 
 impl SearchPage {
@@ -33,6 +35,7 @@ impl SearchPage {
         let search_entry: gtk::SearchEntry = self.builder.get_object("search_entry").unwrap();
         let result_listbox = self.result_listbox.clone();
         let app_state = self.app_state.clone();
+        let search_sender = self.search_sender.clone();
 
         search_entry.connect_search_changed(move |search_entry| {
             // Get search term
@@ -41,10 +44,10 @@ impl SearchPage {
             // prepare search params
             let mut params = HashMap::new();
             params.insert("name".to_string(), search_term);
-            params.insert("limit".to_string(), "100".to_string());
+            params.insert("limit".to_string(), "150".to_string());
 
             // do the search itself
-            app_state.borrow_mut().client.search(params);
+            app_state.borrow_mut().client.search(params, search_sender.clone());
         });
     }
 }
@@ -62,12 +65,11 @@ impl Page for SearchPage {
         let results_stack: gtk::Stack = builder.get_object("results_stack").unwrap();
         results_box.add(&result_listbox.container);
 
-        let (client_sender, client_receiver) = channel();
-        let client = Rc::new(RefCell::new(Client::new_with_sender((client_sender.clone()))));
+        let (search_sender, search_receiver) = channel();
 
         let result_listbox_clone = result_listbox.clone();
         gtk::timeout_add(100, move || {
-            match client_receiver.try_recv() {
+            match search_receiver.try_recv() {
                 Ok(ClientUpdate::NewStations(stations)) => {
                     result_listbox_clone.add_stations(&stations);
                     results_stack.set_visible_child_name("results");
@@ -88,6 +90,7 @@ impl Page for SearchPage {
             builder,
             container,
             result_listbox,
+            search_sender,
         };
         searchpage.connect_signals();
         searchpage

@@ -49,8 +49,7 @@ pub struct GradioApp {
 impl GradioApp {
     pub fn new() -> GradioApp {
         // Create App State
-        let (client_sender, client_receiver) = channel();
-        let client = Client::new_with_sender(client_sender.clone());
+        let client = Client::new();
         let player = AudioPlayer::new();
         let fdl = FaviconDownloader::new();
 
