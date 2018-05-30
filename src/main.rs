@@ -2,22 +2,22 @@
 extern crate log;
 extern crate pretty_env_logger;
 
-extern crate glib;
-extern crate gio;
-extern crate gtk;
 extern crate gdk;
+extern crate gdk_pixbuf;
+extern crate gio;
+extern crate glib;
+extern crate gtk;
+extern crate reqwest;
 extern crate rusqlite;
 extern crate rustio;
-extern crate reqwest;
-extern crate gdk_pixbuf;
 extern crate url;
 
 mod app;
-mod page;
-mod library;
-mod station_row;
-mod station_listbox;
 mod favicon_downloader;
+mod library;
+mod page;
+mod station_listbox;
+mod station_row;
 use app::GradioApp;
 
 fn main() {

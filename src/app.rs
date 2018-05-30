@@ -1,35 +1,34 @@
+extern crate gdk;
 extern crate gio;
 extern crate gtk;
-extern crate gdk;
 use gio::{ApplicationExt, ApplicationExtManual};
 use gtk::prelude::*;
 
 use rustio::{audioplayer::AudioPlayer, client::Client};
 
 use std::cell::RefCell;
-use std::rc::Rc;
 use std::io::Read;
+use std::rc::Rc;
 
+use page::Page;
 use page::library_page::LibraryPage;
 use page::search_page::SearchPage;
-use page::Page;
 
+use favicon_downloader::FaviconDownloader;
 use library::Library;
+use rustio::station::Station;
+use std::fs::File;
 use std::sync::mpsc::Receiver;
 use std::sync::mpsc::Sender;
 use std::sync::mpsc::channel;
-use rustio::station::Station;
-use std::fs::File;
-use favicon_downloader::FaviconDownloader;
 
-pub struct AppState{
+pub struct AppState {
     pub client: Client,
     pub player: AudioPlayer,
     pub fdl: FaviconDownloader,
 }
 
 pub struct GradioApp {
-
     library: Library,
 
     builder: gtk::Builder,
@@ -55,11 +54,7 @@ impl GradioApp {
         let player = AudioPlayer::new();
         let fdl = FaviconDownloader::new();
 
-        let app_state = Rc::new(RefCell::new(AppState{
-            client,
-            player,
-            fdl,
-        }));
+        let app_state = Rc::new(RefCell::new(AppState { client, player, fdl }));
 
         let library = Library::new(app_state.clone());
 
@@ -98,7 +93,7 @@ impl GradioApp {
         }
     }
 
-    fn add_page<P: Page>(&self, page: &P){
+    fn add_page<P: Page>(&self, page: &P) {
         let page_stack: gtk::Stack = self.builder.get_object("page_stack").unwrap();
         page_stack.add_titled(page.container(), &page.name(), &page.title());
     }

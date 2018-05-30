@@ -1,17 +1,17 @@
 extern crate gtk;
 use gtk::prelude::*;
 
+use library::Library;
 use page::Page;
 use station_row::StationRow;
 use std::rc::Rc;
-use library::Library;
 
-use rustio::station::Station;
-use std::sync::mpsc::Sender;
-use std::collections::HashMap;
-use favicon_downloader::FaviconDownloader;
-use std::cell::RefCell;
 use app::AppState;
+use favicon_downloader::FaviconDownloader;
+use rustio::station::Station;
+use std::cell::RefCell;
+use std::collections::HashMap;
+use std::sync::mpsc::Sender;
 
 pub struct LibraryPage {
     app_state: Rc<RefCell<AppState>>,
@@ -25,9 +25,9 @@ pub struct LibraryPage {
 }
 
 impl LibraryPage {
-    pub fn update_stations(&self, stations: &HashMap<i32, Station>){
+    pub fn update_stations(&self, stations: &HashMap<i32, Station>) {
         for station in stations {
-            let row = StationRow::new(self.app_state.clone(),&station.1);
+            let row = StationRow::new(self.app_state.clone(), &station.1);
             self.station_listbox.add(&row.container);
         }
     }
@@ -42,7 +42,14 @@ impl Page for LibraryPage {
         let container: gtk::Box = builder.get_object("library_page").unwrap();
         let station_listbox: gtk::ListBox = builder.get_object("station_listbox").unwrap();
 
-        Self { app_state, title, name, builder, container, station_listbox }
+        Self {
+            app_state,
+            title,
+            name,
+            builder,
+            container,
+            station_listbox,
+        }
     }
 
     fn title(&self) -> &String {

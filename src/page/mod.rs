@@ -2,11 +2,11 @@ pub mod library_page;
 pub mod search_page;
 
 extern crate gtk;
-use gtk::prelude::*;
-use std::sync::mpsc::Sender;
-use std::rc::Rc;
-use std::cell::RefCell;
 use app::AppState;
+use gtk::prelude::*;
+use std::cell::RefCell;
+use std::rc::Rc;
+use std::sync::mpsc::Sender;
 
 pub trait Page {
     fn new(app_state: Rc<RefCell<AppState>>) -> Self;

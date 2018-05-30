@@ -2,28 +2,28 @@ extern crate glib;
 extern crate rusqlite;
 use rusqlite::{Connection, OpenFlags};
 
-use std::io;
-use std::fs::File;
-use std::fs;
-use std::rc::Rc;
-use std::collections::HashMap;
-use rustio::{client::Client, station::Station};
-use std::sync::mpsc::Sender;
-use std::cell::RefCell;
 use app::AppState;
+use rustio::{client::Client, station::Station};
+use std::cell::RefCell;
+use std::collections::HashMap;
+use std::fs;
+use std::fs::File;
+use std::io;
+use std::rc::Rc;
+use std::sync::mpsc::Sender;
 
-pub struct Library{
+pub struct Library {
     app_state: Rc<RefCell<AppState>>,
 
     pub stations: HashMap<i32, Station>,
     connection: Connection,
 }
 
-impl Library{
-    pub fn new(app_state: Rc<RefCell<AppState>>) -> Self{
+impl Library {
+    pub fn new(app_state: Rc<RefCell<AppState>>) -> Self {
         let mut stations: HashMap<i32, Station> = HashMap::new();
         let path = Self::get_library_path();
-        let connection = match path{
+        let connection = match path {
             Ok(path) => Connection::open(path).unwrap(),
             Err(err) => {
                 warn!("Cannot open database: {}", err);
@@ -32,12 +32,12 @@ impl Library{
             }
         };
 
-        let mut library = Library{app_state, stations, connection, };
+        let mut library = Library { app_state, stations, connection };
         library.read();
         library
     }
 
-    fn read(&mut self){
+    fn read(&mut self) {
         // Check if database is initialized
         let mut stmt = self.connection.prepare("SELECT * FROM sqlite_master where type='table';").unwrap();
         let mut rows = stmt.query(&[]).unwrap();
@@ -84,7 +84,7 @@ impl Library{
         }
 
         path.push("gradio.db");
-        if(!path.exists()){
+        if (!path.exists()) {
             info!("Create new database...");
             File::create(&path.to_str().unwrap())?;
         }

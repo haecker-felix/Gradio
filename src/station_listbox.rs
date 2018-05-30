@@ -1,13 +1,13 @@
 extern crate gtk;
 use gtk::prelude::*;
 
-use rustio::station::Station;
-use std::sync::mpsc::Sender;
-use station_row::StationRow;
-use favicon_downloader::FaviconDownloader;
-use std::rc::Rc;
-use std::cell::RefCell;
 use app::AppState;
+use favicon_downloader::FaviconDownloader;
+use rustio::station::Station;
+use station_row::StationRow;
+use std::cell::RefCell;
+use std::rc::Rc;
+use std::sync::mpsc::Sender;
 
 pub struct StationListBox {
     app_state: Rc<RefCell<AppState>>,
@@ -22,17 +22,17 @@ impl StationListBox {
 
         let container: gtk::Box = builder.get_object("station_listbox").unwrap();
 
-        Self {app_state, container, builder}
+        Self { app_state, container, builder }
     }
 
-    pub fn clear(&self){
+    pub fn clear(&self) {
         let listbox: gtk::ListBox = self.builder.get_object("listbox").unwrap();
         for row in listbox.get_children().iter() {
             listbox.remove(row);
         }
     }
 
-    pub fn add_stations(&self, stations: &Vec<Station>){
+    pub fn add_stations(&self, stations: &Vec<Station>) {
         let listbox: gtk::ListBox = self.builder.get_object("listbox").unwrap();
         for station in stations {
             let row = StationRow::new(self.app_state.clone(), &station);

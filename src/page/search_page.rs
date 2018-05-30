@@ -1,21 +1,21 @@
 extern crate gtk;
 use gtk::prelude::*;
 
+use library::Library;
 use page::Page;
 use station_row::StationRow;
 use std::rc::Rc;
-use library::Library;
 
-use rustio::station::Station;
-use rustio::client::Client;
-use std::sync::mpsc::Sender;
-use station_listbox::StationListBox;
-use std::collections::HashMap;
-use std::sync::mpsc::channel;
-use rustio::client::ClientUpdate;
-use std::sync::mpsc::Receiver;
-use std::cell::RefCell;
 use app::AppState;
+use rustio::client::Client;
+use rustio::client::ClientUpdate;
+use rustio::station::Station;
+use station_listbox::StationListBox;
+use std::cell::RefCell;
+use std::collections::HashMap;
+use std::sync::mpsc::Receiver;
+use std::sync::mpsc::Sender;
+use std::sync::mpsc::channel;
 
 pub struct SearchPage {
     app_state: Rc<RefCell<AppState>>,
@@ -29,12 +29,12 @@ pub struct SearchPage {
 }
 
 impl SearchPage {
-    fn connect_signals(&self){
+    fn connect_signals(&self) {
         let search_entry: gtk::SearchEntry = self.builder.get_object("search_entry").unwrap();
         let result_listbox = self.result_listbox.clone();
         let app_state = self.app_state.clone();
 
-        search_entry.connect_search_changed(move|search_entry|{
+        search_entry.connect_search_changed(move |search_entry| {
             // Get search term
             let search_term = search_entry.get_text().unwrap();
 
@@ -71,17 +71,24 @@ impl Page for SearchPage {
                 Ok(ClientUpdate::NewStations(stations)) => {
                     result_listbox_clone.add_stations(&stations);
                     results_stack.set_visible_child_name("results");
-                },
+                }
                 Ok(ClientUpdate::Clear) => {
                     results_stack.set_visible_child_name("loading");
                     result_listbox_clone.clear();
-                },
+                }
                 Err(err) => (),
             }
             Continue(true)
         });
 
-        let searchpage = SearchPage{ app_state, title, name, builder, container, result_listbox };
+        let searchpage = SearchPage {
+            app_state,
+            title,
+            name,
+            builder,
+            container,
+            result_listbox,
+        };
         searchpage.connect_signals();
         searchpage
     }

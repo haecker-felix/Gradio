@@ -1,20 +1,20 @@
 extern crate gtk;
 use gtk::prelude::*;
 
-use rustio::station::Station;
-use std::sync::mpsc::Sender;
+use app::AppState;
 use favicon_downloader::FaviconDownloader;
 use gdk_pixbuf::Pixbuf;
-use gtk::IconSize;
 use glib::error::Error;
-use std::thread;
-use std::time::Duration;
-use std::sync::mpsc::channel;
+use gtk::IconSize;
+use rustio::station::Station;
+use std::cell::RefCell;
 use std::path::Path;
 use std::path::PathBuf;
-use std::cell::RefCell;
-use app::AppState;
 use std::rc::Rc;
+use std::sync::mpsc::Sender;
+use std::sync::mpsc::channel;
+use std::thread;
+use std::time::Duration;
 
 pub struct StationRow {
     app_state: Rc<RefCell<AppState>>,
@@ -24,31 +24,35 @@ pub struct StationRow {
 }
 
 impl StationRow {
-     pub fn new(app_state: Rc<RefCell<AppState>>, station: &Station) -> Self {
-         let builder = gtk::Builder::new_from_string(include_str!("station_row.ui"));
+    pub fn new(app_state: Rc<RefCell<AppState>>, station: &Station) -> Self {
+        let builder = gtk::Builder::new_from_string(include_str!("station_row.ui"));
 
-         let container: gtk::ListBoxRow = builder.get_object("station_row").unwrap();
-         let favicon_image: gtk::Image = builder.get_object("station_favicon").unwrap();
-         let station_label: gtk::Label = builder.get_object("station_label").unwrap();
-         station_label.set_text(&station.name);
+        let container: gtk::ListBoxRow = builder.get_object("station_row").unwrap();
+        let favicon_image: gtk::Image = builder.get_object("station_favicon").unwrap();
+        let station_label: gtk::Label = builder.get_object("station_label").unwrap();
+        station_label.set_text(&station.name);
 
-         app_state.borrow().fdl.set_favicon_async(favicon_image, &station, 32);
+        app_state.borrow().fdl.set_favicon_async(favicon_image, &station, 32);
 
-         let row = Self {app_state, container, builder, station: station.clone()};
-         row.connect_signals();
-         row
+        let row = Self {
+            app_state,
+            container,
+            builder,
+            station: station.clone(),
+        };
+        row.connect_signals();
+        row
     }
 
-    fn connect_signals(&self){
-         let play_button: gtk::Button = self.builder.get_object("play_button").unwrap();
-         let station = self.station.clone();
-         let app_state = self.app_state.clone();
+    fn connect_signals(&self) {
+        let play_button: gtk::Button = self.builder.get_object("play_button").unwrap();
+        let station = self.station.clone();
+        let app_state = self.app_state.clone();
 
-         play_button.connect_clicked(move|_|{
-             let station = station.clone();
-             app_state.borrow().player.set_station(&station);
-             app_state.borrow().player.set_playback(true);
-         });
-
+        play_button.connect_clicked(move |_| {
+            let station = station.clone();
+            app_state.borrow().player.set_station(&station);
+            app_state.borrow().player.set_playback(true);
+        });
     }
 }
