@@ -20,24 +20,17 @@ use std::sync::mpsc::Sender;
 use std::sync::mpsc::channel;
 use rustio::station::Station;
 use std::fs::File;
+use favicon_downloader::FaviconDownloader;
 
-pub enum Action {
-    /* Audio Playback Actions */
-    PlaybackStart,
-    PlaybackStop,
-    PlaybackSetStation(Station),
-
-    /* Library Actions */
-    LibraryAdd(String),
-    LibraryRemove(String),
+pub struct AppState{
+    pub client: Client,
+    pub player: AudioPlayer,
+    pub fdl: FaviconDownloader,
 }
 
 pub struct GradioApp {
-    player: AudioPlayer,
-    library: Library,
 
-    receiver: Receiver<Action>,
-    sender: Sender<Action>,
+    library: Library,
 
     builder: gtk::Builder,
     gtk_app: gtk::Application,
@@ -50,14 +43,25 @@ pub struct GradioApp {
     playerbar: gtk::ActionBar,
     station_title: gtk::Label,
     station_subtitle: gtk::Label,
+
+    app_state: Rc<RefCell<AppState>>,
 }
 
 impl GradioApp {
     pub fn new() -> GradioApp {
+        // Create App State
+        let (client_sender, client_receiver) = channel();
+        let client = Client::new_with_sender(client_sender.clone());
         let player = AudioPlayer::new();
-        let library = Library::new();
+        let fdl = FaviconDownloader::new();
 
-        let (sender, receiver) = channel();
+        let app_state = Rc::new(RefCell::new(AppState{
+            client,
+            player,
+            fdl,
+        }));
+
+        let library = Library::new(app_state.clone());
 
         // load custom stylesheet
         let provider = gtk::CssProvider::new();
@@ -69,12 +73,10 @@ impl GradioApp {
         let window: gtk::ApplicationWindow = builder.get_object("main_window").unwrap();
         let page_stack: gtk::Stack = builder.get_object("page_stack").unwrap();
 
-        let library_page: LibraryPage = Page::new(sender.clone());
-        library_page.update_stations(&library.stations);
-        //page_stack.add_titled(library_page.container(), &library_page.name(), &library_page.title());
+        let library_page: LibraryPage = Page::new(app_state.clone());
+        let search_page: SearchPage = Page::new(app_state.clone());
 
-        let search_page: SearchPage = Page::new(sender.clone());
-        page_stack.add_titled(search_page.container(), &search_page.name(), &search_page.title());
+        library_page.update_stations(&library.stations);
 
         let playerbar: gtk::ActionBar = builder.get_object("playerbar").unwrap();
         playerbar.set_visible(false);
@@ -82,10 +84,7 @@ impl GradioApp {
         let station_subtitle: gtk::Label = builder.get_object("station_subtitle").unwrap();
 
         GradioApp {
-            player,
             library,
-            receiver,
-            sender,
             builder,
             gtk_app,
             window,
@@ -95,33 +94,20 @@ impl GradioApp {
             playerbar,
             station_title,
             station_subtitle,
+            app_state,
         }
     }
 
+    fn add_page<P: Page>(&self, page: &P){
+        let page_stack: gtk::Stack = self.builder.get_object("page_stack").unwrap();
+        page_stack.add_titled(page.container(), &page.name(), &page.title());
+    }
+
     pub fn run(self) {
+        self.add_page(&self.library_page);
+        self.add_page(&self.search_page);
+
         self.connect_signals();
-
-        let receiver = self.receiver;
-        let player = self.player;
-        let playerbar = self.playerbar;
-        let station_title = self.station_title;
-        let station_subtitle = self.station_subtitle;
-        gtk::timeout_add(50, move || {
-            match receiver.try_recv() {
-                Ok(Action::PlaybackStart) => player.set_playback(true),
-                Ok(Action::PlaybackStop) => player.set_playback(false),
-                Ok(Action::PlaybackSetStation(station)) => {
-                    playerbar.set_visible(true);
-                    station_title.set_text(&station.name);
-                    player.set_station(&station)
-                },
-                Ok(Action::LibraryAdd(station)) => info!("setplayback"),
-                Ok(Action::LibraryRemove(station)) => info!("setplayback"),
-                Err(_) => (),
-            }
-            Continue(true)
-        });
-
         self.gtk_app.run(&[]);
     }
 

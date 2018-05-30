@@ -9,18 +9,19 @@ use std::rc::Rc;
 use std::collections::HashMap;
 use rustio::{client::Client, station::Station};
 use std::sync::mpsc::Sender;
-use app::Action;
+use std::cell::RefCell;
+use app::AppState;
 
 pub struct Library{
+    app_state: Rc<RefCell<AppState>>,
+
     pub stations: HashMap<i32, Station>,
     connection: Connection,
-    client: Client,
 }
 
 impl Library{
-    pub fn new() -> Self{
+    pub fn new(app_state: Rc<RefCell<AppState>>) -> Self{
         let mut stations: HashMap<i32, Station> = HashMap::new();
-        let client = Client::new();
         let path = Self::get_library_path();
         let connection = match path{
             Ok(path) => Connection::open(path).unwrap(),
@@ -31,7 +32,7 @@ impl Library{
             }
         };
 
-        let mut library = Library{stations, connection, client};
+        let mut library = Library{app_state, stations, connection, };
         library.read();
         library
     }
@@ -61,7 +62,7 @@ impl Library{
             let station_id: i32 = row.get(0);
             let collection_id: i32 = row.get(1);
 
-            let station = self.client.get_station_by_id(station_id);
+            let station = self.app_state.borrow().client.get_station_by_id(station_id);
             info!("Found Station: {}", station.name);
             self.stations.insert(station_id, station);
         }

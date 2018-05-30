@@ -8,33 +8,33 @@ use library::Library;
 
 use rustio::station::Station;
 use std::sync::mpsc::Sender;
-use app::Action;
 use std::collections::HashMap;
 use favicon_downloader::FaviconDownloader;
+use std::cell::RefCell;
+use app::AppState;
 
 pub struct LibraryPage {
+    app_state: Rc<RefCell<AppState>>,
+
     title: String,
     name: String,
 
     builder: gtk::Builder,
     container: gtk::Box,
     station_listbox: gtk::ListBox,
-
-    sender: Sender<Action>,
 }
 
 impl LibraryPage {
     pub fn update_stations(&self, stations: &HashMap<i32, Station>){
-        let fdl = FaviconDownloader::new();
         for station in stations {
-            let row = StationRow::new(&station.1, self.sender.clone(), &fdl);
+            let row = StationRow::new(self.app_state.clone(),&station.1);
             self.station_listbox.add(&row.container);
         }
     }
 }
 
 impl Page for LibraryPage {
-    fn new(sender: Sender<Action>) -> Self {
+    fn new(app_state: Rc<RefCell<AppState>>) -> Self {
         let title = "Library".to_string();
         let name = "library_page".to_string();
 
@@ -42,7 +42,7 @@ impl Page for LibraryPage {
         let container: gtk::Box = builder.get_object("library_page").unwrap();
         let station_listbox: gtk::ListBox = builder.get_object("station_listbox").unwrap();
 
-        Self { title, name, builder, container, station_listbox, sender }
+        Self { app_state, title, name, builder, container, station_listbox }
     }
 
     fn title(&self) -> &String {

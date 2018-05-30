@@ -3,23 +3,26 @@ use gtk::prelude::*;
 
 use rustio::station::Station;
 use std::sync::mpsc::Sender;
-use app::Action;
 use station_row::StationRow;
 use favicon_downloader::FaviconDownloader;
+use std::rc::Rc;
+use std::cell::RefCell;
+use app::AppState;
 
 pub struct StationListBox {
+    app_state: Rc<RefCell<AppState>>,
+
     pub container: gtk::Box,
     builder: gtk::Builder,
-    sender: Sender<Action>,
 }
 
 impl StationListBox {
-    pub fn new(sender: Sender<Action>) -> Self {
+    pub fn new(app_state: Rc<RefCell<AppState>>) -> Self {
         let builder = gtk::Builder::new_from_string(include_str!("station_listbox.ui"));
 
         let container: gtk::Box = builder.get_object("station_listbox").unwrap();
 
-        Self {container, builder, sender}
+        Self {app_state, container, builder}
     }
 
     pub fn clear(&self){
@@ -31,9 +34,8 @@ impl StationListBox {
 
     pub fn add_stations(&self, stations: &Vec<Station>){
         let listbox: gtk::ListBox = self.builder.get_object("listbox").unwrap();
-        let fdl = FaviconDownloader::new();
         for station in stations {
-            let row = StationRow::new(&station, self.sender.clone(), &fdl);
+            let row = StationRow::new(self.app_state.clone(), &station);
             listbox.add(&row.container);
         }
     }

@@ -15,7 +15,6 @@ use std::env;
 use std::rc::Rc;
 use std::collections::HashMap;
 use std::sync::mpsc::Sender;
-use app::Action;
 use rustio::station::Station;
 use rustio::error::Error;
 use gdk_pixbuf::Pixbuf;

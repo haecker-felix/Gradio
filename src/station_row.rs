@@ -3,7 +3,6 @@ use gtk::prelude::*;
 
 use rustio::station::Station;
 use std::sync::mpsc::Sender;
-use app::Action;
 use favicon_downloader::FaviconDownloader;
 use gdk_pixbuf::Pixbuf;
 use gtk::IconSize;
@@ -13,16 +12,19 @@ use std::time::Duration;
 use std::sync::mpsc::channel;
 use std::path::Path;
 use std::path::PathBuf;
+use std::cell::RefCell;
+use app::AppState;
+use std::rc::Rc;
 
 pub struct StationRow {
+    app_state: Rc<RefCell<AppState>>,
     pub container: gtk::ListBoxRow,
     builder: gtk::Builder,
-    sender: Sender<Action>,
     station: Station,
 }
 
 impl StationRow {
-     pub fn new(station: &Station, sender: Sender<Action>, fdl: &FaviconDownloader) -> Self {
+     pub fn new(app_state: Rc<RefCell<AppState>>, station: &Station) -> Self {
          let builder = gtk::Builder::new_from_string(include_str!("station_row.ui"));
 
          let container: gtk::ListBoxRow = builder.get_object("station_row").unwrap();
@@ -30,9 +32,9 @@ impl StationRow {
          let station_label: gtk::Label = builder.get_object("station_label").unwrap();
          station_label.set_text(&station.name);
 
-         fdl.set_favicon_async(favicon_image, &station, 32);
+         app_state.borrow().fdl.set_favicon_async(favicon_image, &station, 32);
 
-         let row = Self {container, builder, sender, station: station.clone()};
+         let row = Self {app_state, container, builder, station: station.clone()};
          row.connect_signals();
          row
     }
@@ -40,11 +42,12 @@ impl StationRow {
     fn connect_signals(&self){
          let play_button: gtk::Button = self.builder.get_object("play_button").unwrap();
          let station = self.station.clone();
-         let sender = self.sender.clone();
+         let app_state = self.app_state.clone();
+
          play_button.connect_clicked(move|_|{
              let station = station.clone();
-             sender.send(Action::PlaybackSetStation(station));
-             sender.send(Action::PlaybackStart);
+             app_state.borrow().player.set_station(&station);
+             app_state.borrow().player.set_playback(true);
          });
 
     }
