@@ -31,6 +31,6 @@ fn main() {
     }
 
     // Run App
-    let mut app = GradioApp::new();
+    let app = GradioApp::new();
     app.run();
 }

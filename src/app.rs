@@ -7,7 +7,6 @@ use gtk::prelude::*;
 use rustio::{audioplayer::AudioPlayer, client::Client};
 
 use std::cell::RefCell;
-use std::io::Read;
 use std::rc::Rc;
 
 use page::Page;
@@ -16,11 +15,6 @@ use page::search_page::SearchPage;
 
 use favicon_downloader::FaviconDownloader;
 use library::Library;
-use rustio::station::Station;
-use std::fs::File;
-use std::sync::mpsc::Receiver;
-use std::sync::mpsc::Sender;
-use std::sync::mpsc::channel;
 
 pub struct AppState {
     pub client: Client,

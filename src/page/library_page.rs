@@ -1,17 +1,14 @@
 extern crate gtk;
 use gtk::prelude::*;
 
-use library::Library;
 use page::Page;
 use station_row::StationRow;
 use std::rc::Rc;
 
 use app::AppState;
-use favicon_downloader::FaviconDownloader;
 use rustio::station::Station;
 use std::cell::RefCell;
 use std::collections::HashMap;
-use std::sync::mpsc::Sender;
 
 pub struct LibraryPage {
     app_state: Rc<RefCell<AppState>>,
@@ -19,7 +16,6 @@ pub struct LibraryPage {
     title: String,
     name: String,
 
-    builder: gtk::Builder,
     container: gtk::Box,
     station_listbox: gtk::ListBox,
 }
@@ -46,7 +42,6 @@ impl Page for LibraryPage {
             app_state,
             title,
             name,
-            builder,
             container,
             station_listbox,
         }

@@ -13,13 +13,10 @@ use std::sync::mpsc::Sender;
 use std::sync::mpsc::channel;
 use std::thread;
 use std::rc::Rc;
-use rand::*;
 use std::cell::RefCell;
-use std::sync::atomic::AtomicUsize;
 
 #[derive(Deserialize)]
 pub struct StationUrlResult{
-    ok: String,
     url: String,
 }
 
@@ -53,7 +50,7 @@ impl Client {
     pub fn create_reqwest_client() -> reqwest::Client{
         let proxy: Option<String> = match env::var("http_proxy") {
             Ok(proxy) => Some(proxy),
-            Err(error) => None,
+            Err(_) => None,
         };
 
         match proxy {
@@ -94,7 +91,7 @@ impl Client {
 
     pub fn get_playable_station_url(&self, station: &Station) -> String{
         let url = format!("{}{}{}", BASE_URL, PLAYABLE_STATION_URL, station.id);
-        let mut result: StationUrlResult = Self::send_get_request(url).unwrap().json().unwrap();
+        let result: StationUrlResult = Self::send_get_request(url).unwrap().json().unwrap();
         result.url
     }
 
@@ -121,11 +118,11 @@ impl Client {
             }
 
             match search_receiver.try_recv(){
-                Ok(mut stations) => {
+                Ok(stations) => {
                     sender.send(ClientUpdate::NewStations(stations));
                     Continue(false)
                 }
-                Err(err) => Continue(true),
+                Err(_) => Continue(true),
             }
         });
     }

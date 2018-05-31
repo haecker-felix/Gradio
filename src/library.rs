@@ -1,16 +1,15 @@
 extern crate glib;
 extern crate rusqlite;
-use rusqlite::{Connection, OpenFlags};
+use rusqlite::{Connection};
 
 use app::AppState;
-use rustio::{client::Client, station::Station};
+use rustio::station::Station;
 use std::cell::RefCell;
 use std::collections::HashMap;
 use std::fs;
 use std::fs::File;
 use std::io;
 use std::rc::Rc;
-use std::sync::mpsc::Sender;
 
 pub struct Library {
     app_state: Rc<RefCell<AppState>>,
@@ -21,7 +20,7 @@ pub struct Library {
 
 impl Library {
     pub fn new(app_state: Rc<RefCell<AppState>>) -> Self {
-        let mut stations: HashMap<i32, Station> = HashMap::new();
+        let stations: HashMap<i32, Station> = HashMap::new();
         let path = Self::get_library_path();
         let connection = match path {
             Ok(path) => Connection::open(path).unwrap(),
@@ -43,7 +42,7 @@ impl Library {
         let mut rows = stmt.query(&[]).unwrap();
 
         match rows.next() {
-            Some(row) => (),
+            Some(_) => (),
             None => {
                 info!("Initialize database...");
                 let sql = "CREATE TABLE \"library\" ('station_id' INTEGER, 'collection_id' INTEGER); CREATE TABLE \"collections\" ('collection_id' INTEGER, 'collection_name' TEXT)";
@@ -60,7 +59,7 @@ impl Library {
         while let Some(result_row) = rows.next() {
             let row = result_row.unwrap();
             let station_id: i32 = row.get(0);
-            let collection_id: i32 = row.get(1);
+            //let collection_id: i32 = row.get(1);
 
             let station = self.app_state.borrow().client.get_station_by_id(station_id);
             info!("Found Station: {}", station.name);
@@ -84,7 +83,7 @@ impl Library {
         }
 
         path.push("gradio.db");
-        if (!path.exists()) {
+        if !path.exists() {
             info!("Create new database...");
             File::create(&path.to_str().unwrap())?;
         }

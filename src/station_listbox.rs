@@ -2,12 +2,10 @@ extern crate gtk;
 use gtk::prelude::*;
 
 use app::AppState;
-use favicon_downloader::FaviconDownloader;
 use rustio::station::Station;
 use station_row::StationRow;
 use std::cell::RefCell;
 use std::rc::Rc;
-use std::sync::mpsc::Sender;
 
 pub struct StationListBox {
     app_state: Rc<RefCell<AppState>>,

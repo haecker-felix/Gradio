@@ -5,25 +5,19 @@ extern crate gtk;
 use gtk::prelude::*;
 
 use gdk_pixbuf::Pixbuf;
-use glib::Source;
 use rustio::client::Client;
 use rustio::error::Error;
 use rustio::station::Station;
-use std::collections::HashMap;
-use std::env;
 use std::fs;
 use std::fs::File;
 use std::io;
-use std::io::BufWriter;
 use std::io::Read;
 use std::io::Write;
 use std::path::PathBuf;
-use std::rc::Rc;
 use std::sync::Arc;
-use std::sync::mpsc::Sender;
 use std::sync::mpsc::channel;
 use std::thread;
-use url::{ParseError, Url};
+use url::Url;
 
 pub struct FaviconDownloader {
     client: Arc<reqwest::Client>,
@@ -111,7 +105,7 @@ impl FaviconDownloader {
 
                     Continue(false)
                 }
-                Err(err) => Continue(true),
+                Err(_) => Continue(true),
             }
         });
     }

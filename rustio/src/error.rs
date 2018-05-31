@@ -1,7 +1,5 @@
 use reqwest;
 use std::io;
-use reqwest::Url;
-use reqwest::UrlError;
 
 #[derive(Fail, Debug)]
 pub enum Error {

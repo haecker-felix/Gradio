@@ -6,7 +6,6 @@ use client::Client;
 
 pub struct AudioPlayer{
     playbin: Element,
-    station_url: String,
 }
 
 impl AudioPlayer{
@@ -15,7 +14,6 @@ impl AudioPlayer{
         let playbin = ElementFactory::make("playbin", "playbin").unwrap();
         AudioPlayer{
             playbin,
-            station_url: "".to_string()
         }
     }
 

@@ -2,19 +2,9 @@ extern crate gtk;
 use gtk::prelude::*;
 
 use app::AppState;
-use favicon_downloader::FaviconDownloader;
-use gdk_pixbuf::Pixbuf;
-use glib::error::Error;
-use gtk::IconSize;
 use rustio::station::Station;
 use std::cell::RefCell;
-use std::path::Path;
-use std::path::PathBuf;
 use std::rc::Rc;
-use std::sync::mpsc::Sender;
-use std::sync::mpsc::channel;
-use std::thread;
-use std::time::Duration;
 
 pub struct StationRow {
     app_state: Rc<RefCell<AppState>>,

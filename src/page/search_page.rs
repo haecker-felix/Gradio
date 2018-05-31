@@ -1,19 +1,14 @@
 extern crate gtk;
 use gtk::prelude::*;
 
-use library::Library;
 use page::Page;
-use station_row::StationRow;
 use std::rc::Rc;
 
 use app::AppState;
-use rustio::client::Client;
 use rustio::client::ClientUpdate;
-use rustio::station::Station;
 use station_listbox::StationListBox;
 use std::cell::RefCell;
 use std::collections::HashMap;
-use std::sync::mpsc::Receiver;
 use std::sync::mpsc::Sender;
 use std::sync::mpsc::channel;
 
@@ -33,7 +28,6 @@ pub struct SearchPage {
 impl SearchPage {
     fn connect_signals(&self) {
         let search_entry: gtk::SearchEntry = self.builder.get_object("search_entry").unwrap();
-        let result_listbox = self.result_listbox.clone();
         let app_state = self.app_state.clone();
         let search_sender = self.search_sender.clone();
 
@@ -78,7 +72,7 @@ impl Page for SearchPage {
                     results_stack.set_visible_child_name("loading");
                     result_listbox_clone.clear();
                 }
-                Err(err) => (),
+                Err(_) => (),
             }
             Continue(true)
         });
