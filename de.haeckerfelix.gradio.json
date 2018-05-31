@@ -1,0 +1,48 @@
+{
+    "app-id" : "de.haeckerfelix.gradio",
+    "runtime" : "org.gnome.Sdk",
+    "runtime-version" : "3.28",
+    "sdk" : "org.gnome.Sdk",
+    "sdk-extensions" : [
+        "org.freedesktop.Sdk.Extension.rust-stable"
+    ],
+    "command" : "gradio",
+    "finish-args" : [
+        "--filesystem=xdg-run/dconf",
+        "--filesystem=~/.config/dconf:ro",
+        "--talk-name=ca.desrt.dconf",
+        "--env=DCONF_USER_CONFIG_DIR=.config/dconf",
+        "--share=network",
+        "--share=ipc",
+        "--socket=x11",
+        "--socket=wayland",
+        "--filesystem=home"
+    ],
+    "build-options" : {
+        "append-path" : "/usr/lib/sdk/rust-stable/bin",
+        "build-args" : [
+            "--share=network"
+        ],
+        "env" : {
+            "CARGO_HOME" : "./.cargo",
+            "DEBUG" : "true"
+        }
+    },
+    "modules" : [
+        {
+            "name" : "gradio",
+            "buildsystem" : "simple",
+            "sources" : [
+                {
+                    "type" : "git",
+                    "url" : "https://github.com/haecker-felix/Gradio.git",
+                    "branch" : "rust-port"
+                }
+            ],
+            "build-commands" : [
+                "cargo build",
+                "install -D target/debug/gradio /app/bin/gradio"
+            ]
+        }
+    ]
+}

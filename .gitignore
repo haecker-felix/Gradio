@@ -6,6 +6,8 @@ target
 Cargo.lock
 _build
 .buildconfig
-de.haeckerfelix.Gradio.json~
+de.haeckerfelix.gradio.json~
 *.ui~
 .ui~
+./.cargo
+.cargo

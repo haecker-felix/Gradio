@@ -3,7 +3,7 @@ use gtk::prelude::*;
 
 use app::AppState;
 use rustio::station::Station;
-use station_row::StationRow;
+use widgets::station_row::StationRow;
 use std::cell::RefCell;
 use std::rc::Rc;
 

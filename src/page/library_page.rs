@@ -2,7 +2,7 @@ extern crate gtk;
 use gtk::prelude::*;
 
 use page::Page;
-use station_row::StationRow;
+use widgets::station_row::StationRow;
 use std::rc::Rc;
 
 use app::AppState;

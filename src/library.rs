@@ -3,7 +3,7 @@ extern crate rusqlite;
 use rusqlite::{Connection};
 
 use app::AppState;
-use rustio::station::Station;
+use rustio::{station::Station, client::Client};
 use std::cell::RefCell;
 use std::collections::HashMap;
 use std::fs;
@@ -12,14 +12,13 @@ use std::io;
 use std::rc::Rc;
 
 pub struct Library {
-    app_state: Rc<RefCell<AppState>>,
-
     pub stations: HashMap<i32, Station>,
     connection: Connection,
+    client: Client,
 }
 
 impl Library {
-    pub fn new(app_state: Rc<RefCell<AppState>>) -> Self {
+    pub fn new() -> Self {
         let stations: HashMap<i32, Station> = HashMap::new();
         let path = Self::get_library_path();
         let connection = match path {
@@ -30,8 +29,9 @@ impl Library {
                 Connection::open_in_memory().unwrap()
             }
         };
+        let client = Client::new();
 
-        let mut library = Library { app_state, stations, connection };
+        let mut library = Library { client, stations, connection };
         library.read();
         library
     }
@@ -61,7 +61,7 @@ impl Library {
             let station_id: i32 = row.get(0);
             //let collection_id: i32 = row.get(1);
 
-            let station = self.app_state.borrow().client.get_station_by_id(station_id);
+            let station = self.client.get_station_by_id(station_id);
             info!("Found Station: {}", station.name);
             self.stations.insert(station_id, station);
         }

@@ -13,11 +13,11 @@ extern crate rustio;
 extern crate url;
 
 mod app;
-mod favicon_downloader;
-mod library;
 mod page;
-mod station_listbox;
-mod station_row;
+mod widgets;
+mod library;
+mod favicon_downloader;
+
 use app::GradioApp;
 
 fn main() {
@@ -26,7 +26,7 @@ fn main() {
 
     // Init GTK
     if gtk::init().is_err() {
-        error!("Failed to initialize GTK.");
+        error!("Failed to init GTK.");
         return;
     }
 

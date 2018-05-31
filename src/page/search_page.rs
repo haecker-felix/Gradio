@@ -6,7 +6,7 @@ use std::rc::Rc;
 
 use app::AppState;
 use rustio::client::ClientUpdate;
-use station_listbox::StationListBox;
+use widgets::station_listbox::StationListBox;
 use std::cell::RefCell;
 use std::collections::HashMap;
 use std::sync::mpsc::Sender;
