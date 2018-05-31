@@ -1,15 +1,15 @@
 extern crate glib;
 extern crate rusqlite;
-use rusqlite::{Connection};
 
 use app::AppState;
 use rustio::{station::Station, client::Client};
+use std::rc::Rc;
 use std::cell::RefCell;
 use std::collections::HashMap;
 use std::fs;
 use std::fs::File;
 use std::io;
-use std::rc::Rc;
+use rusqlite::{Connection};
 
 pub struct Library {
     pub stations: HashMap<i32, Station>,

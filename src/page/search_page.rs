@@ -1,12 +1,11 @@
 extern crate gtk;
+
 use gtk::prelude::*;
-
 use page::Page;
-use std::rc::Rc;
-
 use app::AppState;
 use rustio::client::ClientUpdate;
 use widgets::station_listbox::StationListBox;
+use std::rc::Rc;
 use std::cell::RefCell;
 use std::collections::HashMap;
 use std::sync::mpsc::Sender;

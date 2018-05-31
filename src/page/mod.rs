@@ -1,7 +1,8 @@
+extern crate gtk;
+
 pub mod library_page;
 pub mod search_page;
 
-extern crate gtk;
 use app::AppState;
 use std::cell::RefCell;
 use std::rc::Rc;
