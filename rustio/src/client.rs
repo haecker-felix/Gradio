@@ -2,7 +2,6 @@ extern crate serde;
 extern crate serde_json;
 extern crate reqwest;
 extern crate gtk;
-extern crate rand;
 use gtk::prelude::*;
 
 use country::Country;
