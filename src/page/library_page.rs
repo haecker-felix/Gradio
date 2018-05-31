@@ -1,13 +1,13 @@
 extern crate gtk;
 
+use app::AppState;
 use gtk::prelude::*;
 use page::Page;
-use widgets::station_row::StationRow;
-use app::AppState;
 use rustio::station::Station;
-use std::rc::Rc;
 use std::cell::RefCell;
 use std::collections::HashMap;
+use std::rc::Rc;
+use widgets::station_row::StationRow;
 
 pub struct LibraryPage {
     app_state: Rc<RefCell<AppState>>,

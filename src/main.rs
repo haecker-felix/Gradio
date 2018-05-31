@@ -13,10 +13,10 @@ extern crate rustio;
 extern crate url;
 
 mod app;
+mod favicon_downloader;
+mod library;
 mod page;
 mod widgets;
-mod library;
-mod favicon_downloader;
 
 use app::GradioApp;
 

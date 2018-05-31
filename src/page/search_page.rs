@@ -1,15 +1,15 @@
 extern crate gtk;
 
+use app::AppState;
 use gtk::prelude::*;
 use page::Page;
-use app::AppState;
 use rustio::client::ClientUpdate;
-use widgets::station_listbox::StationListBox;
-use std::rc::Rc;
 use std::cell::RefCell;
 use std::collections::HashMap;
-use std::sync::mpsc::Sender;
+use std::rc::Rc;
 use std::sync::mpsc::channel;
+use std::sync::mpsc::Sender;
+use widgets::station_listbox::StationListBox;
 
 pub struct SearchPage {
     app_state: Rc<RefCell<AppState>>,

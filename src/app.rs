@@ -12,9 +12,9 @@ use rustio::{audioplayer::AudioPlayer, client::Client};
 use favicon_downloader::FaviconDownloader;
 use library::Library;
 
-use page::Page;
 use page::library_page::LibraryPage;
 use page::search_page::SearchPage;
+use page::Page;
 
 pub struct AppState {
     pub library: Library,
@@ -74,18 +74,14 @@ impl GradioApp {
         }));
 
         let gtk_app = gtk::Application::new("de.haeckerfelix.gradio", gio::ApplicationFlags::empty()).expect("Failed to initialize GtkApplication");
-        GradioApp {
-            gtk_app,
-            app_state,
-            app_ui,
-        }
+        GradioApp { gtk_app, app_state, app_ui }
     }
 
     fn add_page<P: Page>(&self, page: &P) {
         self.app_ui.borrow().page_stack.add_titled(page.container(), &page.name(), &page.title());
     }
 
-    fn load_css(){
+    fn load_css() {
         let provider = gtk::CssProvider::new();
         provider.load_from_data(include_str!("style.css").as_bytes());
         gtk::StyleContext::add_provider_for_screen(&gdk::Screen::get_default().unwrap(), &provider, 600);

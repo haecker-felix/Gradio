@@ -1,17 +1,17 @@
 extern crate glib;
-extern crate reqwest;
 extern crate gtk;
+extern crate reqwest;
 
-use gtk::prelude::*;
 use gdk_pixbuf::Pixbuf;
+use gtk::prelude::*;
 use rustio::{client::Client, error::Error, station::Station};
-use std::io;
-use std::io::{Read,Write};
 use std::fs;
 use std::fs::File;
-use std::sync::Arc;
-use std::sync::mpsc::channel;
+use std::io;
+use std::io::{Read, Write};
 use std::path::PathBuf;
+use std::sync::mpsc::channel;
+use std::sync::Arc;
 use std::thread;
 use url::Url;
 

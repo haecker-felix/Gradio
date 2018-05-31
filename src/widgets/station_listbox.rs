@@ -3,9 +3,9 @@ use gtk::prelude::*;
 
 use app::AppState;
 use rustio::station::Station;
-use widgets::station_row::StationRow;
 use std::cell::RefCell;
 use std::rc::Rc;
+use widgets::station_row::StationRow;
 
 pub struct StationListBox {
     app_state: Rc<RefCell<AppState>>,
