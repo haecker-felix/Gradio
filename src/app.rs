@@ -1,5 +1,6 @@
 extern crate gdk;
 extern crate gio;
+extern crate glib;
 extern crate gtk;
 
 use gio::{ApplicationExt, ApplicationExtManual};
@@ -16,6 +17,8 @@ use page::library_page::LibraryPage;
 use page::search_page::SearchPage;
 use page::Page;
 
+use widgets::playerbar::Playerbar;
+
 pub struct AppState {
     pub library: Library,
     pub client: Client,
@@ -30,9 +33,7 @@ pub struct AppUI {
     pub library_page: LibraryPage,
     pub search_page: SearchPage,
 
-    pub playerbar: gtk::ActionBar,
-    pub station_title: gtk::Label,
-    pub station_subtitle: gtk::Label,
+    pub playerbar: Playerbar,
 }
 
 pub struct GradioApp {
@@ -59,9 +60,10 @@ impl GradioApp {
         let page_stack: gtk::Stack = builder.get_object("page_stack").unwrap();
         let library_page: LibraryPage = Page::new(app_state.clone());
         let search_page: SearchPage = Page::new(app_state.clone());
-        let playerbar: gtk::ActionBar = builder.get_object("playerbar").unwrap();
-        let station_title: gtk::Label = builder.get_object("station_title").unwrap();
-        let station_subtitle: gtk::Label = builder.get_object("station_subtitle").unwrap();
+
+        let playerbar_box: gtk::Box = builder.get_object("playerbar_box").unwrap();
+        let playerbar = Playerbar::new(app_state.clone());
+        playerbar_box.add(&playerbar.container);
 
         let app_ui = Rc::new(RefCell::new(AppUI {
             window,
@@ -69,11 +71,12 @@ impl GradioApp {
             library_page,
             search_page,
             playerbar,
-            station_title,
-            station_subtitle,
         }));
 
         let gtk_app = gtk::Application::new("de.haeckerfelix.gradio", gio::ApplicationFlags::empty()).expect("Failed to initialize GtkApplication");
+        glib::set_application_name("Radio");
+        glib::set_prgname(Some("Radio"));
+
         GradioApp { gtk_app, app_state, app_ui }
     }
 

@@ -25,7 +25,6 @@
         ],
         "env" : {
             "CARGO_HOME" : "./.cargo",
-            "DEBUG" : "true",
             "RUST_LOG" : "rustio,gradio=debug"
         }
     },
