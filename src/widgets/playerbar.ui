@@ -51,7 +51,7 @@
       </packing>
     </child>
     <child>
-      <object class="GtkImage">
+      <object class="GtkImage" id="favicon_image">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="valign">center</property>
@@ -68,7 +68,7 @@
         <property name="valign">center</property>
         <property name="orientation">vertical</property>
         <child>
-          <object class="GtkLabel" id="station_title">
+          <object class="GtkLabel" id="title_label">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="label" translatable="yes">label</property>
@@ -83,7 +83,7 @@
           </packing>
         </child>
         <child>
-          <object class="GtkLabel" id="station_subtitle">
+          <object class="GtkLabel" id="subtitle_label">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="label" translatable="yes">label</property>

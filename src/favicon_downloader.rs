@@ -73,7 +73,7 @@ impl FaviconDownloader {
         }
     }
 
-    pub fn set_favicon_async(&self, gtkimage: gtk::Image, station: &Station, size: i32) {
+    pub fn set_favicon_async(&self, gtkimage: &gtk::Image, station: &Station, size: i32) {
         let station_clone = station.clone();
         let gtkimage = gtkimage.clone();
         let client = self.client.clone();

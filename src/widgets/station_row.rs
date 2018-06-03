@@ -22,7 +22,7 @@ impl StationRow {
         let station_label: gtk::Label = builder.get_object("station_label").unwrap();
         station_label.set_text(&station.name);
 
-        app_state.borrow().fdl.set_favicon_async(favicon_image, &station, 32);
+        app_state.borrow().fdl.set_favicon_async(&favicon_image, &station, 32);
 
         let row = Self {
             app_state,
@@ -42,7 +42,7 @@ impl StationRow {
         play_button.connect_clicked(move |_| {
             let station = station.clone();
             app_state.borrow_mut().player.set_station(station);
-            app_state.borrow().player.set_playback(true);
+            app_state.borrow_mut().player.set_playback(true);
         });
     }
 }
