@@ -4,12 +4,11 @@
 extern crate serde;
 extern crate serde_json;
 extern crate reqwest;
-extern crate gstreamer;
 extern crate gtk; // TODO: Don't require gtk
+extern crate glib;
 
 pub mod error;
 pub mod client;
-pub mod audioplayer;
 pub mod station;
 pub mod country;
 pub mod state;

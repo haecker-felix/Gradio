@@ -8,11 +8,13 @@ extern crate gio;
 extern crate glib;
 extern crate gtk;
 extern crate reqwest;
+extern crate gstreamer;
 extern crate rusqlite;
 extern crate rustio;
 extern crate url;
 
 mod app;
+mod audioplayer;
 mod favicon_downloader;
 mod library;
 mod page;

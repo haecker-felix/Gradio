@@ -7,8 +7,7 @@ use rustio::client::ClientUpdate;
 use std::cell::RefCell;
 use std::collections::HashMap;
 use std::rc::Rc;
-use std::sync::mpsc::channel;
-use std::sync::mpsc::Sender;
+use std::sync::mpsc::{channel, Sender};
 use widgets::station_listbox::StationListBox;
 
 pub struct SearchPage {

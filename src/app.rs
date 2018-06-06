@@ -8,10 +8,11 @@ use gtk::prelude::*;
 use std::cell::RefCell;
 use std::rc::Rc;
 
-use rustio::{audioplayer::AudioPlayer, client::Client};
+use rustio::{client::Client};
 
 use favicon_downloader::FaviconDownloader;
 use library::Library;
+use audioplayer::AudioPlayer;
 
 use page::library_page::LibraryPage;
 use page::search_page::SearchPage;
@@ -38,6 +39,7 @@ pub struct AppUI {
 
 pub struct GradioApp {
     gtk_app: gtk::Application,
+
     app_state: Rc<RefCell<AppState>>,
     app_ui: Rc<RefCell<AppUI>>,
 }
@@ -95,6 +97,8 @@ impl GradioApp {
         self.add_page(&self.app_ui.borrow().search_page);
 
         self.app_ui.borrow().library_page.update_stations(&self.app_state.borrow().library.stations);
+
+        let app_state = self.app_state.clone();
 
         self.connect_signals();
         self.gtk_app.run(&[]);
