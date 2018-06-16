@@ -33,8 +33,6 @@ pub struct AppUI {
     pub page_stack: gtk::Stack,
     pub library_page: LibraryPage,
     pub search_page: SearchPage,
-
-    pub playerbar: Playerbar,
 }
 
 pub struct GradioApp {
@@ -48,7 +46,7 @@ impl GradioApp {
     pub fn new() -> GradioApp {
         // Create App State
         let client = Client::new();
-        let player = AudioPlayer::new();
+        let mut player = AudioPlayer::new();
         let fdl = FaviconDownloader::new();
         let library = Library::new();
 
@@ -72,7 +70,6 @@ impl GradioApp {
             page_stack,
             library_page,
             search_page,
-            playerbar,
         }));
 
         let gtk_app = gtk::Application::new("de.haeckerfelix.gradio", gio::ApplicationFlags::empty()).expect("Failed to initialize GtkApplication");

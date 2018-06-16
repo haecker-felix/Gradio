@@ -5,6 +5,9 @@ use app::AppState;
 use std::cell::RefCell;
 use std::rc::Rc;
 
+use rustio::station::Station;
+use audioplayer::Update;
+
 pub struct Playerbar {
     app_state: Rc<RefCell<AppState>>,
 
@@ -36,24 +39,26 @@ impl Playerbar {
             app_state.borrow_mut().player.set_playback(false);
         });
 
-        let playback_stack: gtk::Stack = self.builder.get_object("playback_stack").unwrap();
-        let container: gtk::ActionBar = self.builder.get_object("playerbar").unwrap();
-        self.app_state.borrow_mut().player.connect_playback_changed(move|player|{
-            if player.playback(){
-                container.set_visible(true);
-                playback_stack.set_visible_child_name("stop_playback");
-            }else{
-                playback_stack.set_visible_child_name("start_playback");
-            }
-
-        });
-
-        let title_label: gtk::Label = self.builder.get_object("title_label").unwrap();
-        let favicon_image: gtk::Image = self.builder.get_object("favicon_image").unwrap();
         let app_state = self.app_state.clone();
-        self.app_state.borrow_mut().player.connect_station_changed(move|player|{
-            title_label.set_text(&player.station().unwrap().name);
-            //app_state.borrow_mut().fdl.set_favicon_async(&favicon_image, &player.station().unwrap(), 32);
+        let container = self.container.clone();
+        let title_label: gtk::Label = self.builder.get_object("title_label").unwrap();
+        let subtitle_label: gtk::Label = self.builder.get_object("subtitle_label").unwrap();
+        let favicon_image: gtk::Image = self.builder.get_object("favicon_image").unwrap();
+        let playback_stack: gtk::Stack = self.builder.get_object("playback_stack").unwrap();
+        app_state.borrow_mut().player.register_update_callback(move |update|{
+            match update{
+                Update::Station(station) => {
+                    container.set_visible(true);
+                    title_label.set_text(&station.name);
+                },
+                Update::Playback(playback) => {
+                    if playback{
+                        playback_stack.set_visible_child_name("stop_playback");
+                    }else{
+                        playback_stack.set_visible_child_name("start_playback");
+                    }
+                }
+            }
         });
     }
 }
