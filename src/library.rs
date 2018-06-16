@@ -59,6 +59,8 @@ impl Library {
             //let collection_id: i32 = row.get(1);
 
             let station = self.client.get_station_by_id(station_id);
+            if station.is_err() { continue };
+            let station = station.unwrap();
             info!("Found Station: {}", station.name);
             self.stations.insert(station_id, station);
         }
