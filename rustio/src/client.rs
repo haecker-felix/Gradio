@@ -85,9 +85,11 @@ impl Client {
     pub fn get_station_by_id(&self, id: i32) -> Result<Station,&str> {
         let url = format!("{}{}{}", BASE_URL, STATION_BY_ID, id);
         let mut result : Vec<Station> = Self::send_get_request(url).unwrap().json().unwrap();
-        if result.len()>0 { Ok(result.remove(0))
-        }
-        else { Err("id points to an empty station")
+
+        if result.len() > 0 {
+            Ok(result.remove(0))
+        }else {
+            Err("ID points to an empty station")
         }
     }
 

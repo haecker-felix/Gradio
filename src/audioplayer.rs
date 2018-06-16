@@ -34,40 +34,13 @@ impl AudioPlayer{
         let station = None;
         let update_callbacks = Rc::new(RefCell::new(Vec::new()));
 
-        let update_cb_clone = update_callbacks.clone();
-        gtk::timeout_add(250, move ||{
-            while(bus.have_pending()){
-                match bus.pop(){
-                    Some(message) => {
-                        match Self::parse_message(&message){
-                            Some(update) => Self::update(&update_cb_clone, update),
-                            None => (),
-                        };
-                    }
-                    None => (),
-                };
-            }
-            Continue(true)
-        });
+        Self::new_bus_messages(update_callbacks.clone(), bus);
 
         AudioPlayer{
             playbin,
             client,
             station,
             update_callbacks,
-        }
-    }
-
-    fn parse_message(message: &Message) -> Option<Update> {
-        match message.view(){
-            //MessageView::Tag(tag) => (),
-            MessageView::StateChanged(sc) => {
-                match sc.get_current(){
-                    State::Playing => Some(Update::Playback(true)),
-                    _ => Some(Update::Playback(false)),
-                }
-            }
-            _ => None,
         }
     }
 
@@ -78,7 +51,6 @@ impl AudioPlayer{
         }else{
             debug!("Stop playback...");
             self.playbin.set_state(gstreamer::State::Paused);
-            self.playbin.set_state(gstreamer::State::Null);
         };
     }
 
@@ -101,5 +73,36 @@ impl AudioPlayer{
             let mut closure = callback.borrow_mut();
             (&mut *closure)(val.clone());
         }
+    }
+
+
+    fn parse_message(message: &Message) -> Option<Update> {
+        match message.view(){
+            //MessageView::Tag(tag) => (),
+            MessageView::StateChanged(sc) => {
+                match sc.get_current(){
+                    State::Playing => Some(Update::Playback(true)),
+                    _ => Some(Update::Playback(false)),
+                }
+            }
+            _ => None,
+        }
+    }
+
+    fn new_bus_messages (update_callbacks: Rc<RefCell<Vec<Rc<RefCell<FnMut(Update)>>>>>, bus: gstreamer::Bus){
+        gtk::timeout_add(250, move ||{
+            while(bus.have_pending()){
+                match bus.pop(){
+                    Some(message) => {
+                        match Self::parse_message(&message){
+                            Some(update) => Self::update(&update_callbacks, update),
+                            None => (),
+                        };
+                    }
+                    None => (),
+                };
+            }
+            Continue(true)
+        });
     }
 }
