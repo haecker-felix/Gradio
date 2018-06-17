@@ -76,7 +76,8 @@
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="valign">center</property>
-        <property name="stock">gtk-missing-image</property>
+        <property name="pixel_size">40</property>
+        <property name="icon_name">emblem-music-symbolic</property>
       </object>
       <packing>
         <property name="position">1</property>

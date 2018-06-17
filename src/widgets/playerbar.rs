@@ -7,21 +7,31 @@ use std::rc::Rc;
 
 use rustio::station::Station;
 use audioplayer::{Update, State};
+use favicon_downloader::FaviconDownloader;
 
 pub struct Playerbar {
     app_state: Rc<RefCell<AppState>>,
 
     pub container: gtk::ActionBar,
     builder: gtk::Builder,
+
+    fdl: Rc<FaviconDownloader>,
 }
 
 impl Playerbar {
     pub fn new(app_state: Rc<RefCell<AppState>>) -> Self {
         let builder = gtk::Builder::new_from_string(include_str!("playerbar.ui"));
-
         let container: gtk::ActionBar = builder.get_object("playerbar").unwrap();
 
-        let playerbar = Self { app_state, container, builder };
+        let fdl = Rc::new(FaviconDownloader::new());
+
+        let playerbar = Self {
+            app_state,
+            container,
+            builder,
+            fdl,
+        };
+
         playerbar.connect_signals();
         playerbar
     }
@@ -41,6 +51,7 @@ impl Playerbar {
 
         let app_state = self.app_state.clone();
         let container = self.container.clone();
+        let fdl = self.fdl.clone();
         let title_label: gtk::Label = self.builder.get_object("title_label").unwrap();
         let subtitle_label: gtk::Label = self.builder.get_object("subtitle_label").unwrap();
         let subtitle_revealer: gtk::Revealer = self.builder.get_object("subtitle_revealer").unwrap();
@@ -51,6 +62,8 @@ impl Playerbar {
                 Update::Station(station) => {
                     container.set_visible(true);
                     title_label.set_text(&station.name);
+                    favicon_image.set_from_icon_name("emblem-music-symbolic", 40);
+                    fdl.set_favicon_async(&favicon_image, &station, 40);
                 },
                 Update::Title(title) => {
                     if title == "" { subtitle_revealer.set_reveal_child(false);
