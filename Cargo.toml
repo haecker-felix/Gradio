@@ -14,6 +14,8 @@ reqwest = "0.8.5"
 gdk-pixbuf = "0.4.0"
 url = "1.7.0"
 gstreamer = "0.11.1"
+mpris = "1.0.0"
+dbus = "0.6.1"
 
 [dependencies.gtk]
 version = "0.4.0"

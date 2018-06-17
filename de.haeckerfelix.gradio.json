@@ -8,15 +8,18 @@
     ],
     "command" : "gradio",
     "finish-args" : [
-        "--filesystem=xdg-run/dconf",
-        "--filesystem=~/.config/dconf:ro",
-        "--talk-name=ca.desrt.dconf",
-        "--env=DCONF_USER_CONFIG_DIR=.config/dconf",
-        "--share=network",
         "--share=ipc",
+        "--share=network",
         "--socket=x11",
         "--socket=wayland",
-        "--filesystem=home"
+        "--socket=pulseaudio",
+        "--device=dri",
+        "--env=DCONF_USER_CONFIG_DIR=.config/dconf",
+        "--filesystem=xdg-run/dconf",
+        "--filesystem=host",
+        "--filesystem=~/.config/dconf:ro",
+        "--talk-name=ca.desrt.dconf",
+        "--own-name=org.mpris.MediaPlayer2.gradio"
     ],
     "build-options" : {
         "append-path" : "/usr/lib/sdk/rust-stable/bin",

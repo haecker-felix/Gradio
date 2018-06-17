@@ -12,6 +12,8 @@ extern crate gstreamer;
 extern crate rusqlite;
 extern crate rustio;
 extern crate url;
+extern crate mpris as m;
+extern crate dbus;
 
 mod app;
 mod audioplayer;
@@ -19,6 +21,7 @@ mod favicon_downloader;
 mod library;
 mod page;
 mod widgets;
+mod mpris;
 
 use app::GradioApp;
 

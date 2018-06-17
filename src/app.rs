@@ -13,6 +13,7 @@ use rustio::{client::Client};
 use favicon_downloader::FaviconDownloader;
 use library::Library;
 use audioplayer::AudioPlayer;
+use mpris::MPRIS;
 
 use page::library_page::LibraryPage;
 use page::search_page::SearchPage;
@@ -64,6 +65,8 @@ impl GradioApp {
         let playerbar_box: gtk::Box = builder.get_object("playerbar_box").unwrap();
         let playerbar = Playerbar::new(app_state.clone());
         playerbar_box.add(&playerbar.container);
+
+        //let mpris = MPRIS::new(app_state.clone());
 
         let app_ui = Rc::new(RefCell::new(AppUI {
             window,
