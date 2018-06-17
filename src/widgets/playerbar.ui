@@ -71,6 +71,7 @@
           <object class="GtkLabel" id="title_label">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="halign">start</property>
             <property name="label" translatable="yes">label</property>
             <attributes>
               <attribute name="weight" value="bold"/>
@@ -86,7 +87,7 @@
           <object class="GtkLabel" id="subtitle_label">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="label" translatable="yes">label</property>
+            <property name="halign">start</property>
           </object>
           <packing>
             <property name="expand">False</property>

@@ -21,7 +21,8 @@ pub struct AudioPlayer{
 #[derive(Clone)]
 pub enum Update{
     Playback(bool),
-    Station(Station)
+    Station(Station),
+    Title(String),
 }
 
 impl AudioPlayer{
@@ -78,7 +79,13 @@ impl AudioPlayer{
 
     fn parse_message(message: &Message) -> Option<Update> {
         match message.view(){
-            //MessageView::Tag(tag) => (),
+            MessageView::Tag(tag) => {
+                let taglist = tag.get_tags();
+                match taglist.get::<gstreamer::tags::Title>(){
+                    Some(title) => Some(Update::Title(title.get().unwrap().to_string())),
+                    None => None
+                }
+            },
             MessageView::StateChanged(sc) => {
                 match sc.get_current(){
                     State::Playing => Some(Update::Playback(true)),

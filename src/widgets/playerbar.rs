@@ -51,6 +51,9 @@ impl Playerbar {
                     container.set_visible(true);
                     title_label.set_text(&station.name);
                 },
+                Update::Title(title) => {
+                    subtitle_label.set_text(&title);
+                },
                 Update::Playback(playback) => {
                     if playback{
                         playback_stack.set_visible_child_name("stop_playback");
