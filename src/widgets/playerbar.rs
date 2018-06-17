@@ -6,7 +6,7 @@ use std::cell::RefCell;
 use std::rc::Rc;
 
 use rustio::station::Station;
-use audioplayer::Update;
+use audioplayer::{Update, State};
 
 pub struct Playerbar {
     app_state: Rc<RefCell<AppState>>,
@@ -43,6 +43,7 @@ impl Playerbar {
         let container = self.container.clone();
         let title_label: gtk::Label = self.builder.get_object("title_label").unwrap();
         let subtitle_label: gtk::Label = self.builder.get_object("subtitle_label").unwrap();
+        let subtitle_revealer: gtk::Revealer = self.builder.get_object("subtitle_revealer").unwrap();
         let favicon_image: gtk::Image = self.builder.get_object("favicon_image").unwrap();
         let playback_stack: gtk::Stack = self.builder.get_object("playback_stack").unwrap();
         app_state.borrow_mut().player.register_update_callback(move |update|{
@@ -52,14 +53,17 @@ impl Playerbar {
                     title_label.set_text(&station.name);
                 },
                 Update::Title(title) => {
+                    if title == "" { subtitle_revealer.set_reveal_child(false);
+                    }else{subtitle_revealer.set_reveal_child(true);}
                     subtitle_label.set_text(&title);
+
                 },
                 Update::Playback(playback) => {
-                    if playback{
-                        playback_stack.set_visible_child_name("stop_playback");
-                    }else{
-                        playback_stack.set_visible_child_name("start_playback");
-                    }
+                    match playback{
+                        State::Playing => playback_stack.set_visible_child_name("stop_playback"),
+                        State::Stopped => playback_stack.set_visible_child_name("start_playback"),
+                        State::Loading => playback_stack.set_visible_child_name("loading"),
+                    };
                 }
             }
         });

@@ -2,7 +2,7 @@ extern crate gstreamer;
 extern crate gtk;
 extern crate glib;
 use glib::prelude::*;
-use gstreamer::{Element, ElementFactory, ElementExt, Bus, Message, Continue, MessageView, State};
+use gstreamer::{Element, ElementFactory, ElementExt, Bus, Message, Continue, MessageView};
 use gstreamer::prelude::*;
 use rustio::station::Station;
 use std::rc::Rc;
@@ -19,8 +19,15 @@ pub struct AudioPlayer{
 }
 
 #[derive(Clone)]
+pub enum State{
+    Playing,
+    Stopped,
+    Loading,
+}
+
+#[derive(Clone)]
 pub enum Update{
-    Playback(bool),
+    Playback(State),
     Station(Station),
     Title(String),
 }
@@ -51,13 +58,14 @@ impl AudioPlayer{
             self.playbin.set_state(gstreamer::State::Playing);
         }else{
             debug!("Stop playback...");
-            self.playbin.set_state(gstreamer::State::Paused);
+            self.playbin.set_state(gstreamer::State::Ready);
         };
     }
 
     pub fn set_station(&mut self, station: Station){
         let station_url = self.client.get_playable_station_url(&station);
         Self::update(&self.update_callbacks, Update::Station(station.clone()));
+        Self::update(&self.update_callbacks, Update::Title("".to_string()));
         self.station = Some(station);
 
         self.playbin.set_state(gstreamer::State::Null);
@@ -87,9 +95,11 @@ impl AudioPlayer{
                 }
             },
             MessageView::StateChanged(sc) => {
+                info!("State: {:?}", sc.get_current());
                 match sc.get_current(){
-                    State::Playing => Some(Update::Playback(true)),
-                    _ => Some(Update::Playback(false)),
+                    gstreamer::State::Playing => Some(Update::Playback(State::Playing)),
+                    gstreamer::State::Paused => Some(Update::Playback(State::Loading)),
+                    _ => Some(Update::Playback(State::Stopped)),
                 }
             }
             _ => None,
