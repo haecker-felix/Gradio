@@ -1,8 +1,9 @@
 # Gradio
 A GTK3 app for finding and listening to internet radio stations.
-
 ___
-Development? [Click here](https://github.com/haecker-felix/Gradio/tree/rust_port)
+If you have any questions, want to discuss design or simply hang out, please join us on #Gradio:matrix.org (You can use [Fractal](https://gitlab.gnome.org/World/fractal) as matrix client!)
+
+=> [Rust port / development here](https://github.com/haecker-felix/Gradio/tree/rust_port)
 ___
 
 ![alt text](https://raw.githubusercontent.com/haecker-felix/gradio/master/data/icons/hicolor/256x256/apps/de.haeckerfelix.gradio.png "Logo")
@@ -13,7 +14,6 @@ https://img.shields.io/badge/flatpak-download-brightgreen.svg)](https://flathub.
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Packaging status](https://repology.org/badge/tiny-repos/gradio.svg)](https://repology.org/metapackage/gradio)
 [![Translation status](https://hosted.weblate.org/widgets/gradio/-/svg-badge.svg)](https://hosted.weblate.org/engage/gradio/?utm_source=widget)
-[![Join the chat at https://gitter.im/haecker-felix/gradio](https://badges.gitter.im/haecker-felix/gradio.svg)](https://gitter.im/haecker-felix/gradio?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ## General Informations
 * **Installation**  
