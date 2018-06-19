@@ -27,6 +27,7 @@
             "--share=network"
         ],
         "env" : {
+            "DEBUG" : "true",
             "CARGO_HOME" : "./.cargo",
             "RUST_LOG" : "rustio,gradio=debug",
             "RUST_BACKTRACE" : "1"
@@ -35,17 +36,13 @@
     "modules" : [
         {
             "name" : "gradio",
-            "buildsystem" : "simple",
+            "buildsystem" : "meson",
             "sources" : [
                 {
                     "type" : "git",
                     "url" : "https://github.com/haecker-felix/Gradio.git",
                     "branch" : "rust-port"
                 }
-            ],
-            "build-commands" : [
-                "cargo build",
-                "install -D target/debug/gradio /app/bin/gradio"
             ]
         }
     ]
