@@ -1,8 +1,7 @@
-extern crate mpris as m;
-use m::Player;
+extern crate dbus_macros;
 
 extern crate dbus;
-use dbus::{Connection, BusType, BusName, Path};
+use dbus::{Connection, BusType, BusName, Path, NameFlag};
 
 use app::AppState;
 use std::cell::RefCell;
@@ -12,22 +11,41 @@ use rustio::station::Station;
 use audioplayer::{Update, State};
 use favicon_downloader::FaviconDownloader;
 
-pub struct MPRIS<'a>{
+
+dbus_class!("org.mpris.MediaPlayer2", class MprisRoot (variable: i32) {
+    fn Raise(&this) {}
+    fn CanRaise(&this) -> bool { true }
+
+    fn Quit(&this) {}
+    fn CanQuit(&this) -> bool { true }
+
+    fn Fullscreen(&this) {}
+    fn CanSetFullscreen(&this) -> bool { false }
+
+    fn HasTrackList(&this) -> bool { false }
+    fn Identity(&this) -> String { "Gradio" }
+    fn DesktopEntry(&this) -> String { "de.haeckerfelix.gradio" }
+    fn SupportedUriSchemes(&this) -> String { "" }
+    fn SupportedMimeTypes(&this) -> String { "" }
+});
+
+dbus_class!("org.mpris.MediaPlayer2.Player", class MprisPlayer (variable: i32) {
+
+});
+
+
+pub struct MPRIS{
     app_state: Rc<RefCell<AppState>>,
-    player: Player<'a>,
 }
 
-impl<'a>MPRIS<'a> {
+impl MPRIS {
     pub fn new(app_state: Rc<RefCell<AppState>>) -> Self {
-        let connection = Connection::get_private(BusType::Session).unwrap();
-        let busname = BusName::new("org.mpris.MediaPlayer2.gradio").unwrap();
-        let path = Path::new("/org/mpris/MediaPlayer2").unwrap();
 
-        let player = Player::new(connection, busname, path, 1000).unwrap();
+        let session_connection = Connection::get_private(BusType::Session).unwrap();
+        let hello = MprisRoot::new(24);
 
         let mpris = Self {
             app_state,
-            player,
         };
 
         mpris.connect_signals();

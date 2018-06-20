@@ -66,7 +66,7 @@ impl GradioApp {
         let playerbar = Playerbar::new(app_state.clone());
         playerbar_box.add(&playerbar.container);
 
-        //let mpris = MPRIS::new(app_state.clone());
+        let mpris = MPRIS::new(app_state.clone());
 
         let app_ui = Rc::new(RefCell::new(AppUI {
             window,

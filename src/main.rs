@@ -12,7 +12,9 @@ extern crate gstreamer;
 extern crate rusqlite;
 extern crate rustio;
 extern crate url;
-extern crate mpris as m;
+
+#[macro_use]
+extern crate dbus_macros;
 extern crate dbus;
 
 mod app;

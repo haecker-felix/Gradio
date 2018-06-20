@@ -23,7 +23,7 @@ i18n.merge_file(
 )
 
 
-# DBUS service (required for mpris) #
+# DBUS service #
 dbusconf = configuration_data()
 dbusconf.set('bindir', join_paths(get_option('prefix'), get_option('bindir')))
 configure_file(
