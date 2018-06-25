@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-01-01 14:42+0100\n"
-"PO-Revision-Date: 2018-06-25 16:34+0000\n"
+"PO-Revision-Date: 2018-06-26 17:38+0000\n"
 "Last-Translator: Bernard PS Ryan <bearnard.oriain@gmail.com>\n"
 "Language-Team: Irish <https://hosted.weblate.org/projects/gradio/"
 "translations/ga/>\n"
@@ -187,60 +187,60 @@ msgstr "Teanga"
 
 #: data/ui/station-editor.ui:266
 msgid "Favicon Address"
-msgstr ""
+msgstr "Seoladh favicon"
 
 #: data/ui/station-editor.ui:304
 msgid "Enter tags separated by commas"
-msgstr ""
+msgstr "Cuir isteach clibeanna scartha le camóga"
 
 #: data/ui/station-editor.ui:337
 msgid "Homepage"
-msgstr ""
+msgstr "Leathanach baile"
 
 #: data/ui/station-editor.ui:480
 msgid "Server Response"
-msgstr ""
+msgstr "Freagra freastalaí"
 
 #: data/ui/station-editor.ui:516
 msgid "Close"
-msgstr ""
+msgstr "Dún"
 
 #: data/ui/station-editor.ui:546
 msgid "Cancel"
-msgstr ""
+msgstr "Cealaigh"
 
 #: data/ui/station-editor.ui:555
 msgid "Done"
-msgstr ""
+msgstr "Déanta"
 
 #: data/ui/page/search-page.ui:79 data/ui/page/search-page.ui:158
 #: data/ui/page/search-page.ui:237
 msgid "More..."
-msgstr ""
+msgstr "Tuilleadh..."
 
 #: data/ui/page/search-page.ui:101
 msgid "Stations with the most votes"
-msgstr ""
+msgstr "Stáisiúin leis na vótaí is mó"
 
 #: data/ui/page/search-page.ui:180
 msgid "Recently clicked stations"
-msgstr ""
+msgstr "Stáisiúin cliceáilte le déanaí"
 
 #: data/ui/page/search-page.ui:259
 msgid "Stations with the most clicks"
-msgstr ""
+msgstr "Stáisiúin leis na cliceanna is mó"
 
 #: data/ui/page/search-page.ui:346 src/page/gradio-search-page.vala:171
 msgid "Search"
-msgstr ""
+msgstr "Cuardaigh"
 
 #: data/ui/page/search-page.ui:381
 msgid "Results:"
-msgstr ""
+msgstr "Torthaí:"
 
 #: data/ui/page/search-page.ui:477
 msgid "No results found"
-msgstr ""
+msgstr "Níor aimsíodh aon toradh"
 
 #: data/ui/page/search-page.ui:495
 msgid ""
