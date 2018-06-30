@@ -11,12 +11,13 @@ use std::collections::HashMap;
 use std::sync::mpsc::Sender;
 use std::sync::mpsc::channel;
 use std::thread;
+use std::thread::JoinHandle;
 use std::rc::Rc;
 use std::cell::RefCell;
 
 #[derive(Deserialize)]
 pub struct StationUrlResult{
-    url: String,
+    pub url: String,
 }
 
 const BASE_URL: &'static str = "https://www.radio-browser.info/webservice/";
@@ -93,10 +94,12 @@ impl Client {
         }
     }
 
-    pub fn get_playable_station_url(&self, station: &Station) -> String{
+    pub fn get_playable_station_url(&self, station: &Station) -> JoinHandle<StationUrlResult> {
         let url = format!("{}{}{}", BASE_URL, PLAYABLE_STATION_URL, station.id);
-        let result: StationUrlResult = Self::send_get_request(url).unwrap().json().unwrap();
-        result.url
+        let result:JoinHandle<StationUrlResult>  = thread::spawn(move || {
+            Self::send_get_request(url).unwrap().json().unwrap()
+        });
+        result
     }
 
     pub fn search(&mut self, params: HashMap<String, String>, sender: Sender<ClientUpdate>){
