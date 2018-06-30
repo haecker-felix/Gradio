@@ -96,9 +96,9 @@ impl Client {
 
     pub fn get_playable_station_url(&self, station: &Station) -> JoinHandle<StationUrlResult> {
         let url = format!("{}{}{}", BASE_URL, PLAYABLE_STATION_URL, station.id);
-        let result:JoinHandle<StationUrlResult>  = thread::spawn(move || {
+        let result:JoinHandle<StationUrlResult>  = thread::Builder::new().name("UrlRequest Thread".to_string()).spawn(move || {
             Self::send_get_request(url).unwrap().json().unwrap()
-        });
+        }).unwrap();
         result
     }
 
