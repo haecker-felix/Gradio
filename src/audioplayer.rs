@@ -9,6 +9,8 @@ use std::rc::Rc;
 use std::cell::RefCell;
 use std::sync::mpsc::{channel, Sender, Receiver};
 use rustio::client::Client;
+use std::sync::Arc;
+use std::thread;
 
 pub struct AudioPlayer{
     playbin: Element,
@@ -69,7 +71,14 @@ impl AudioPlayer{
         self.station = Some(station);
 
         self.playbin.set_state(gstreamer::State::Null);
-        self.playbin.set_property("uri", &station_url);
+
+        let mut player_property = Arc::new(self.playbin.clone());
+        let mut player_state = Arc::new(self.playbin.clone());
+        
+        thread::spawn(move  || {         
+           Arc::try_unwrap(player_property).unwrap().set_property("uri", &station_url.join().unwrap().url);
+           Arc::try_unwrap(player_state).unwrap().set_state(gstreamer::State::Playing);
+        }); 
     }
 
     pub fn register_update_callback<F: FnMut(Update)+'static>(&mut self, callback: F) {
