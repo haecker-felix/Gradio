@@ -65,8 +65,6 @@ impl AudioPlayer{
     }
 
     pub fn set_station(&mut self, station: Station){
-
-        
         Self::update(&self.update_callbacks, Update::Station(station.clone()));
         Self::update(&self.update_callbacks, Update::Title("".to_string()));
         self.playbin.set_state(gstreamer::State::Null);
