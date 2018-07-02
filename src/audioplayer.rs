@@ -65,19 +65,17 @@ impl AudioPlayer{
     }
 
     pub fn set_station(&mut self, station: Station){
-        let station_url = self.client.get_playable_station_url(&station);
+
+        
         Self::update(&self.update_callbacks, Update::Station(station.clone()));
         Self::update(&self.update_callbacks, Update::Title("".to_string()));
-        self.station = Some(station);
-
         self.playbin.set_state(gstreamer::State::Null);
 
-        let mut atomic_playbin = Arc::new(self.playbin.clone());
         
-        thread::spawn(move  || {         
-           Arc::get_mut(&mut atomic_playbin).unwrap().set_property("uri", &station_url.join().unwrap().url);
-           Arc::get_mut(&mut atomic_playbin).unwrap().set_state(gstreamer::State::Playing);
-        }); 
+        let mut atomic_playbin = Arc::new(self.playbin.clone());
+        let mut url_request_thread = thread::Builder::new().name("UrlRequest Thread".to_string());
+        let station_url = self.client.play_station(&station,url_request_thread, atomic_playbin);
+        self.station = Some(station);
     }
 
     pub fn register_update_callback<F: FnMut(Update)+'static>(&mut self, callback: F) {
