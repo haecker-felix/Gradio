@@ -11,7 +11,6 @@ use std::collections::HashMap;
 use std::sync::mpsc::Sender;
 use std::sync::mpsc::channel;
 use std::thread;
-use std::thread::JoinHandle;
 use std::rc::Rc;
 use std::cell::RefCell;
 use std::sync::Arc;
