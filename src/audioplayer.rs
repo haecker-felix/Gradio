@@ -71,8 +71,7 @@ impl AudioPlayer{
 
         
         let mut atomic_playbin = Arc::new(self.playbin.clone());
-        let mut url_request_thread = thread::Builder::new().name("UrlRequest Thread".to_string());
-        let station_url = self.client.play_station(&station,url_request_thread, atomic_playbin);
+        let station_url = self.client.play_station(&station,atomic_playbin);
         self.station = Some(station);
     }
 
