@@ -72,12 +72,11 @@ impl AudioPlayer{
 
         self.playbin.set_state(gstreamer::State::Null);
 
-        let mut player_property = Arc::new(self.playbin.clone());
-        let mut player_state = Arc::new(self.playbin.clone());
+        let mut atomic_playbin = Arc::new(self.playbin.clone());
         
         thread::spawn(move  || {         
-           Arc::try_unwrap(player_property).unwrap().set_property("uri", &station_url.join().unwrap().url);
-           Arc::try_unwrap(player_state).unwrap().set_state(gstreamer::State::Playing);
+           Arc::get_mut(&mut atomic_playbin).unwrap().set_property("uri", &station_url.join().unwrap().url);
+           Arc::get_mut(&mut atomic_playbin).unwrap().set_state(gstreamer::State::Playing);
         }); 
     }
 
