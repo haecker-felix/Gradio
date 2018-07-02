@@ -97,10 +97,11 @@ impl Client {
         }
     }
 
-    pub fn play_station(&self, station: &Station,urlThread:thread::Builder,mut atomic_playbin: Arc<gstreamer::Element>) {
+    pub fn play_station(&self, station: &Station,mut atomic_playbin: Arc<gstreamer::Element>) {
         let url = format!("{}{}{}", BASE_URL, PLAYABLE_STATION_URL, station.id);
 
-        urlThread.spawn(move || {
+
+        thread::Builder::new().name("UrlRequest Thread".to_string()).spawn(move || {
             let station_json:StationUrlResult=Self::send_get_request(url).unwrap().json().unwrap();
             Arc::get_mut(&mut atomic_playbin).unwrap().set_property("uri", &station_json.url);
             Arc::get_mut(&mut atomic_playbin).unwrap().set_state(gstreamer::State::Playing);
