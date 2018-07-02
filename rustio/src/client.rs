@@ -14,6 +14,10 @@ use std::thread;
 use std::thread::JoinHandle;
 use std::rc::Rc;
 use std::cell::RefCell;
+use std::sync::Arc;
+
+extern crate gstreamer;
+use client::gstreamer::ElementExt;
 
 #[derive(Deserialize)]
 pub struct StationUrlResult{
@@ -94,12 +98,15 @@ impl Client {
         }
     }
 
-    pub fn get_playable_station_url(&self, station: &Station) -> JoinHandle<StationUrlResult> {
+    pub fn play_station(&self, station: &Station,urlThread:thread::Builder,mut atomic_playbin: Arc<gstreamer::Element>) {
         let url = format!("{}{}{}", BASE_URL, PLAYABLE_STATION_URL, station.id);
-        let result:JoinHandle<StationUrlResult>  = thread::Builder::new().name("UrlRequest Thread".to_string()).spawn(move || {
-            Self::send_get_request(url).unwrap().json().unwrap()
-        }).unwrap();
-        result
+        //let mut atomic_playbind = atomic_playbin.clone();
+        urlThread.spawn(move || {
+            let station_json:StationUrlResult=Self::send_get_request(url).unwrap().json().unwrap();
+            Arc::get_mut(&mut atomic_playbin).unwrap().set_property("uri", &station_json.url);
+            Arc::get_mut(&mut atomic_playbin).unwrap().set_state(gstreamer::State::Playing);
+        }).unwrap(); 
+        
     }
 
     pub fn search(&mut self, params: HashMap<String, String>, sender: Sender<ClientUpdate>){
