@@ -9,7 +9,7 @@ use std::rc::Rc;
 use std::cell::RefCell;
 use std::sync::mpsc::{channel, Sender, Receiver};
 use rustio::client::Client;
-use std::sync::Arc;
+use std::sync::Mutex;
 use std::thread;
 
 pub struct AudioPlayer{
@@ -70,7 +70,7 @@ impl AudioPlayer{
         self.playbin.set_state(gstreamer::State::Null);
 
         
-        let mut atomic_playbin = Arc::new(self.playbin.clone());
+        let mut atomic_playbin = Mutex::new(self.playbin.clone());
         let station_url = self.client.play_station(&station,atomic_playbin);
         self.station = Some(station);
     }
