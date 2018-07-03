@@ -13,7 +13,7 @@ use std::sync::mpsc::channel;
 use std::thread;
 use std::rc::Rc;
 use std::cell::RefCell;
-use std::sync::Arc;
+use std::sync::Mutex;
 
 extern crate gstreamer;
 use client::gstreamer::ElementExt;
@@ -97,14 +97,14 @@ impl Client {
         }
     }
 
-    pub fn play_station(&self, station: &Station,mut atomic_playbin: Arc<gstreamer::Element>) {
+    pub fn play_station(&self, station: &Station,mut atomic_playbin: Mutex<gstreamer::Element>) {
         let url = format!("{}{}{}", BASE_URL, PLAYABLE_STATION_URL, station.id);
 
 
         thread::Builder::new().name("UrlRequest Thread".to_string()).spawn(move || {
             let station_json:StationUrlResult=Self::send_get_request(url).unwrap().json().unwrap();
-            Arc::get_mut(&mut atomic_playbin).unwrap().set_property("uri", &station_json.url);
-            Arc::get_mut(&mut atomic_playbin).unwrap().set_state(gstreamer::State::Playing);
+            atomic_playbin.lock().unwrap().set_property("uri", &station_json.url);
+            atomic_playbin.lock().unwrap().set_state(gstreamer::State::Playing);
         }).unwrap(); 
         
     }
