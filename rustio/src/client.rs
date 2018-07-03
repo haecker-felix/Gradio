@@ -13,14 +13,11 @@ use std::sync::mpsc::channel;
 use std::thread;
 use std::rc::Rc;
 use std::cell::RefCell;
-use std::sync::Mutex;
-
-extern crate gstreamer;
-use client::gstreamer::ElementExt;
+use std::sync::{Arc,Mutex};
 
 #[derive(Deserialize)]
 pub struct StationUrlResult{
-    pub url: String,
+    url: String,
 }
 
 const BASE_URL: &'static str = "https://www.radio-browser.info/webservice/";
@@ -39,14 +36,15 @@ pub enum ClientUpdate {
     Clear,
 }
 
+#[derive(Clone)]
 pub struct Client {
-    current_search_id: Rc<RefCell<u64>>,
+    current_search_id: Arc<Mutex<u64>>,
 }
 
 impl Client {
     pub fn new() -> Client {
         Client {
-            current_search_id: Rc::new(RefCell::new(0)),
+            current_search_id: Arc::new(Mutex::new(0)),
         }
     }
 
@@ -97,23 +95,17 @@ impl Client {
         }
     }
 
-    pub fn play_station(&self, station: &Station,mut atomic_playbin: Mutex<gstreamer::Element>) {
+    pub fn get_playable_station_url(&self, station: &Station) -> String{
         let url = format!("{}{}{}", BASE_URL, PLAYABLE_STATION_URL, station.id);
-
-
-        thread::Builder::new().name("UrlRequest Thread".to_string()).spawn(move || {
-            let station_json:StationUrlResult=Self::send_get_request(url).unwrap().json().unwrap();
-            atomic_playbin.lock().unwrap().set_property("uri", &station_json.url);
-            atomic_playbin.lock().unwrap().set_state(gstreamer::State::Playing);
-        }).unwrap(); 
-        
+        let result: StationUrlResult = Self::send_get_request(url).unwrap().json().unwrap();
+        result.url
     }
 
     pub fn search(&mut self, params: HashMap<String, String>, sender: Sender<ClientUpdate>){
         // Generate a new search ID. It is possible, that the old thread is still running,
         // while a new one already have started. With this ID we can check, if the search request is still up-to-date.
-        *self.current_search_id.borrow_mut() += 1;
-        debug!("Start new search with ID {}", self.current_search_id.borrow());
+        *self.current_search_id.lock().unwrap() += 1;
+        debug!("Start new search with ID {}", self.current_search_id.lock().unwrap());
         sender.send(ClientUpdate::Clear);
 
         // Do the actual search in a new thread
@@ -123,11 +115,11 @@ impl Client {
 
         // Start a loop, and wait for a message from the thread.
         let current_search_id = self.current_search_id.clone();
-        let search_id = *self.current_search_id.borrow();
+        let search_id = *self.current_search_id.lock().unwrap();
         let sender = sender.clone();
         gtk::timeout_add(100,  move|| {
-            if search_id != *current_search_id.borrow() { // Compare with current search id
-                debug!("Search ID changed -> cancel this search loop. (This: {} <-> Current: {})", search_id, current_search_id.borrow());
+            if search_id != *current_search_id.lock().unwrap() { // Compare with current search id
+                debug!("Search ID changed -> cancel this search loop. (This: {} <-> Current: {})", search_id, *current_search_id.lock().unwrap());
                 return Continue(false);
             }
 
