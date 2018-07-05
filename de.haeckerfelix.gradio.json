@@ -30,7 +30,8 @@
             "DEBUG" : "true",
             "CARGO_HOME" : "./.cargo",
             "RUST_LOG" : "rustio,gradio=debug",
-            "RUST_BACKTRACE" : "1"
+            "RUST_BACKTRACE" : "1",
+            "RUSTFLAGS" : "-Awarnings"
         }
     },
     "modules" : [

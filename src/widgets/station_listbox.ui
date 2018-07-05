@@ -8,47 +8,33 @@
     <property name="vexpand">True</property>
     <property name="orientation">vertical</property>
     <child>
-      <object class="GtkScrolledWindow">
+      <object class="GtkLabel" id="title_label">
+        <property name="can_focus">False</property>
+        <property name="halign">start</property>
+        <property name="label" translatable="yes">label</property>
+        <attributes>
+          <attribute name="weight" value="bold"/>
+        </attributes>
+      </object>
+      <packing>
+        <property name="expand">False</property>
+        <property name="fill">True</property>
+        <property name="position">0</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkListBox" id="listbox">
         <property name="visible">True</property>
-        <property name="can_focus">True</property>
-        <child>
-          <object class="GtkViewport">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="shadow_type">none</property>
-            <child>
-              <object class="GtkBox">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="orientation">vertical</property>
-                <child>
-                  <object class="GtkListBox" id="listbox">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="halign">center</property>
-                    <property name="margin_left">6</property>
-                    <property name="margin_right">6</property>
-                    <property name="selection_mode">none</property>
-                    <property name="activate_on_single_click">False</property>
-                    <style>
-                      <class name="transparent"/>
-                    </style>
-                  </object>
-                  <packing>
-                    <property name="expand">True</property>
-                    <property name="fill">True</property>
-                    <property name="position">0</property>
-                  </packing>
-                </child>
-              </object>
-            </child>
-          </object>
-        </child>
+        <property name="can_focus">False</property>
+        <property name="selection_mode">none</property>
+        <property name="activate_on_single_click">False</property>
+        <style>
+          <class name="transparent"/>
+        </style>
       </object>
       <packing>
         <property name="expand">True</property>
         <property name="fill">True</property>
-        <property name="pack_type">end</property>
         <property name="position">1</property>
       </packing>
     </child>

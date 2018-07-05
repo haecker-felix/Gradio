@@ -23,6 +23,12 @@ impl StationListBox {
         Self { app_state, container, builder }
     }
 
+    pub fn set_title(&self, title: String) {
+        let title_label: gtk::Label = self.builder.get_object("title_label").unwrap();
+        title_label.set_text(&title);
+        title_label.set_visible(true);
+    }
+
     pub fn clear(&self) {
         let listbox: gtk::ListBox = self.builder.get_object("listbox").unwrap();
         for row in listbox.get_children().iter() {
@@ -36,5 +42,11 @@ impl StationListBox {
             let row = StationRow::new(self.app_state.clone(), &station);
             listbox.add(&row.container);
         }
+    }
+
+    pub fn add_station(&self, station: &Station){
+        let listbox: gtk::ListBox = self.builder.get_object("listbox").unwrap();
+        let row = StationRow::new(self.app_state.clone(), &station);
+        listbox.add(&row.container);
     }
 }

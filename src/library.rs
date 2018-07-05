@@ -9,14 +9,15 @@ use std::fs::File;
 use std::io;
 
 pub struct Library {
-    pub stations: HashMap<i32, Station>,
+    pub stations: HashMap<i32, (Station, i32)>,
     connection: Connection,
     client: Client,
 }
 
 impl Library {
     pub fn new() -> Self {
-        let stations: HashMap<i32, Station> = HashMap::new();
+        // < Station ID, (Station , Collection ID) >
+        let stations: HashMap<i32, (Station, i32)> = HashMap::new();
         let path = Self::get_library_path();
         let connection = match path {
             Ok(path) => Connection::open(path).unwrap(),
@@ -56,14 +57,14 @@ impl Library {
         while let Some(result_row) = rows.next() {
             let row = result_row.unwrap();
             let station_id: i32 = row.get(0);
-            //let collection_id: i32 = row.get(1);
+            let collection_id: i32 = row.get(1);
 
             let station = self.client.get_station_by_id(station_id);
             if station.is_err() { continue };
             let station = station.unwrap();
 
             info!("Found Station: {}", station.name);
-            self.stations.insert(station_id, station);
+            self.stations.insert(station_id, (station, collection_id));
         }
     }
 
