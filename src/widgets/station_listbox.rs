@@ -6,6 +6,8 @@ use rustio::station::Station;
 use std::cell::RefCell;
 use std::rc::Rc;
 use widgets::station_row::StationRow;
+use gtk::WidgetExt;
+use libhandy::{Column, ColumnExt};
 
 pub struct StationListBox {
     app_state: Rc<RefCell<AppState>>,
@@ -17,8 +19,12 @@ pub struct StationListBox {
 impl StationListBox {
     pub fn new(app_state: Rc<RefCell<AppState>>) -> Self {
         let builder = gtk::Builder::new_from_string(include_str!("station_listbox.ui"));
-
         let container: gtk::Box = builder.get_object("station_listbox").unwrap();
+
+        let column: Column = builder.get_object("column").unwrap();
+        column.set_maximum_width(600);
+        //let column = Column::new();
+        //container.add(&column);
 
         Self { app_state, container, builder }
     }

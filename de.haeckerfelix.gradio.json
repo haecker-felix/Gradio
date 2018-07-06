@@ -36,6 +36,16 @@
     },
     "modules" : [
         {
+            "name" : "libhandy",
+            "buildsystem" : "meson",
+            "sources" : [
+                {
+                    "type" : "git",
+                    "url" : "https://source.puri.sm/Librem5/libhandy.git"
+                }
+            ]
+        },
+        {
             "name" : "gradio",
             "buildsystem" : "meson",
             "sources" : [

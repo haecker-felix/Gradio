@@ -12,6 +12,7 @@ extern crate gstreamer;
 extern crate rusqlite;
 extern crate rustio;
 extern crate url;
+extern crate libhandy;
 
 #[macro_use]
 extern crate dbus_macros;

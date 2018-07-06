@@ -72,7 +72,6 @@
                         <property name="label" translatable="yes">label</property>
                         <property name="wrap">True</property>
                         <property name="wrap_mode">char</property>
-                        <property name="selectable">True</property>
                         <property name="ellipsize">end</property>
                       </object>
                       <packing>
@@ -92,7 +91,6 @@
                             <property name="can_focus">False</property>
                             <property name="wrap">True</property>
                             <property name="wrap_mode">char</property>
-                            <property name="selectable">True</property>
                             <property name="ellipsize">end</property>
                           </object>
                           <packing>
@@ -119,7 +117,6 @@
                             <property name="can_focus">False</property>
                             <property name="wrap">True</property>
                             <property name="wrap_mode">char</property>
-                            <property name="selectable">True</property>
                             <property name="ellipsize">end</property>
                           </object>
                           <packing>
