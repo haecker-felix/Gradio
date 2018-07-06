@@ -37,7 +37,7 @@ impl LibraryPage {
                 None => { // no -> create new listbox, add station, and return it...
                     debug!("Create new listbox container...");
                     let station_listbox = StationListBox::new(self.app_state.clone());
-                    station_listbox.set_title(collection_id.to_string());
+                    station_listbox.set_title(self.app_state.borrow().library.get_collection_name(&collection_id));
                     station_listbox.add_station(&station);
                     Some(station_listbox)
                 }

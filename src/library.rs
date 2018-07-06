@@ -43,8 +43,11 @@ impl Library {
             Some(_) => (),
             None => {
                 info!("Initialize database...");
-                let sql = "CREATE TABLE \"library\" ('station_id' INTEGER, 'collection_id' INTEGER); CREATE TABLE \"collections\" ('collection_id' INTEGER, 'collection_name' TEXT)";
-                self.connection.execute(sql, &[]).expect("Could not initialize database");
+                let library_table = "CREATE TABLE \"library\" ('station_id' INTEGER, 'collection_id' INTEGER);";
+                self.connection.execute(library_table, &[]).expect("Could not initialize database");
+
+                let collection_table = "CREATE TABLE \"collections\" ('collection_id' INTEGER, 'collection_name' TEXT);";
+                self.connection.execute(collection_table, &[]).expect("Could not initialize database");
             }
         }
 
@@ -66,6 +69,18 @@ impl Library {
             info!("Found Station: {}", station.name);
             self.stations.insert(station_id, (station, collection_id));
         }
+    }
+
+    pub fn get_collection_name(&self, collection_id: &i32) -> String {
+        let mut stmt = self.connection.prepare(&format!("SELECT collection_name FROM collections WHERE collection_id = {}", collection_id)).unwrap();
+        let mut rows = stmt.query(&[]).unwrap();
+        let mut name: String = "".to_string();
+
+        while let Some(result_row) = rows.next() {
+            let row = result_row.unwrap();
+            name = row.get(0);
+        }
+        name
     }
 
     fn get_library_path() -> io::Result<String> {
