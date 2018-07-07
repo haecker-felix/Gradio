@@ -73,9 +73,10 @@ impl Library {
             let collection_id: i32 = row.get(1);
 
             let station = self.client.get_station_by_id(station_id);
-            if station.is_err() { continue };
-            let station = station.unwrap();
-
+            let station = match station {
+                Ok(v) => v,
+                Err(_)=> continue, 
+            };
             info!("Found Station: {}", station.name);
             Self::update(&self.update_callbacks, Update::CollectionAdded(collection_id, self.get_collection_name(&collection_id)));
             Self::update(&self.update_callbacks, Update::StationAdded(station, collection_id));
