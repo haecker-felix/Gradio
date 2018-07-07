@@ -50,7 +50,7 @@ impl Client {
 
     pub fn clone(&self) -> Box<Self> {
         Box::new(Self {
-            current_search_id: AtomicUsize::new(self.current_search_id.load(Ordering::SeqCst)),
+            current_search_id: AtomicUsize::new(self.current_search_id.load(Ordering::Relaxed)),
         })
     }
 
@@ -111,7 +111,7 @@ impl Client {
         // Generate a new search ID. It is possible, that the old thread is still running,
         // while a new one already have started. With this ID we can check, if the search request is still up-to-date.
         *self.current_search_id.get_mut() += 1;
-        debug!("Start new search with ID {}", self.current_search_id.load(Ordering::SeqCst));
+        debug!("Start new search with ID {}", self.current_search_id.load(Ordering::Relaxed));
         sender.send(ClientUpdate::Clear);
 
         // Do the actual search in a new thread
@@ -120,8 +120,8 @@ impl Client {
         thread::spawn(move || search_sender.send(Self::send_post_request(url, params).unwrap().json().unwrap())); //TODO: don't unwrap
 
         // Start a loop, and wait for a message from the thread.
-        let current_search_id = self.current_search_id.load(Ordering::SeqCst);
-        let search_id = self.current_search_id.load(Ordering::SeqCst);
+        let current_search_id = self.current_search_id.load(Ordering::Relaxed);
+        let search_id = self.current_search_id.load(Ordering::Relaxed);
         let sender = sender.clone();
         gtk::timeout_add(100,  move|| {
             if search_id != current_search_id{ // Compare with current search id
