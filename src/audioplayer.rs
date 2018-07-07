@@ -68,16 +68,16 @@ impl AudioPlayer{
         Self::update(&self.update_callbacks, Update::Station(station.clone()));
         Self::update(&self.update_callbacks, Update::Title("".to_string()));
         self.playbin.set_state(gstreamer::State::Null);
+        self.station = Some(station);
         
         //request url and set it in a new thread
-        let atomic_playbin = Mutex::new(self.playbin.clone());
-        let atomic_client = self.client.clone();
-        let atomic_station = station.clone(); 
-        self.station=Some(station);
+        let playbin = Mutex::new(self.playbin.clone());
+        let client = self.client.clone();
+        let station = self.station.unwrap().clone(); 
         thread::spawn( move || {
-            let station_url = atomic_client.get_playable_station_url(&atomic_station);      
-            atomic_playbin.lock().unwrap().set_property("uri", &station_url);  
-            atomic_playbin.lock().unwrap().set_state(gstreamer::State::Playing);
+            let station_url = client.get_playable_station_url(&station);      
+            playbin.lock().unwrap().set_property("uri", &station_url);  
+            playbin.lock().unwrap().set_state(gstreamer::State::Playing);
         }); 
     }
 
