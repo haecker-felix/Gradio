@@ -73,7 +73,7 @@ impl AudioPlayer{
         //request url and set it in a new thread
         let playbin = Mutex::new(self.playbin.clone());
         let client = self.client.clone();
-        let station = self.station.unwrap().clone(); 
+        let station = self.station.clone().unwrap(); 
         thread::spawn( move || {
             let station_url = client.get_playable_station_url(&station);      
             playbin.lock().unwrap().set_property("uri", &station_url);  
