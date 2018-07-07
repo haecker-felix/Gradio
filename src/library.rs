@@ -7,17 +7,28 @@ use std::collections::HashMap;
 use std::fs;
 use std::fs::File;
 use std::io;
+use std::cell::RefCell;
+use std::rc::Rc;
 
 pub struct Library {
-    pub stations: HashMap<i32, (Station, i32)>,
     connection: Connection,
     client: Client,
+
+    update_callbacks: Rc<RefCell<Vec<Rc<RefCell<FnMut(Update)>>>>>,
+}
+
+#[derive(Clone)]
+pub enum Update{
+    // Station / Collection ID
+    StationAdded(Station, i32),
+    StationRemoved(Station, i32),
+
+    CollectionAdded(i32, String),
+    CollectionRemoved(i32),
 }
 
 impl Library {
     pub fn new() -> Self {
-        // < Station ID, (Station , Collection ID) >
-        let stations: HashMap<i32, (Station, i32)> = HashMap::new();
         let path = Self::get_library_path();
         let connection = match path {
             Ok(path) => Connection::open(path).unwrap(),
@@ -28,13 +39,12 @@ impl Library {
             }
         };
         let client = Client::new();
+        let update_callbacks = Rc::new(RefCell::new(Vec::new()));
 
-        let mut library = Library { client, stations, connection };
-        library.read();
-        library
+        Library { client, connection, update_callbacks }
     }
 
-    fn read(&mut self) {
+    pub fn read(&mut self) {
         // Check if database is initialized
         let mut stmt = self.connection.prepare("SELECT * FROM sqlite_master where type='table';").unwrap();
         let mut rows = stmt.query(&[]).unwrap();
@@ -67,7 +77,8 @@ impl Library {
             let station = station.unwrap();
 
             info!("Found Station: {}", station.name);
-            self.stations.insert(station_id, (station, collection_id));
+            Self::update(&self.update_callbacks, Update::CollectionAdded(collection_id, self.get_collection_name(&collection_id)));
+            Self::update(&self.update_callbacks, Update::StationAdded(station, collection_id));
         }
     }
 
@@ -105,5 +116,17 @@ impl Library {
         }
 
         return Ok(path.to_str().unwrap().to_string());
+    }
+
+    pub fn register_update_callback<F: FnMut(Update)+'static>(&mut self, callback: F) {
+        let cell = Rc::new(RefCell::new(callback));
+        self.update_callbacks.borrow_mut().push(cell);
+    }
+
+    fn update(update_callbacks: &Rc<RefCell<Vec<Rc<RefCell<FnMut(Update)>>>>>, val: Update) {
+        for callback in update_callbacks.borrow_mut().iter() {
+            let mut closure = callback.borrow_mut();
+            (&mut *closure)(val.clone());
+        }
     }
 }

@@ -96,9 +96,7 @@ impl GradioApp {
         self.add_page(&self.app_ui.borrow().library_page);
         self.add_page(&self.app_ui.borrow().search_page);
 
-        self.app_ui.borrow_mut().library_page.update_stations(&self.app_state.borrow().library.stations);
-
-        let app_state = self.app_state.clone();
+        self.app_state.borrow_mut().library.read();
 
         self.connect_signals();
         self.gtk_app.run(&[]);

@@ -63,7 +63,9 @@ impl Page for SearchPage {
         gtk::timeout_add(100, move || {
             match search_receiver.try_recv() {
                 Ok(ClientUpdate::NewStations(stations)) => {
-                    result_listbox_clone.add_stations(&stations);
+                    for station in stations {
+                        result_listbox_clone.add_station(&station);
+                    }
                     results_stack.set_visible_child_name("results");
                 }
                 Ok(ClientUpdate::Clear) => {

@@ -18,8 +18,6 @@ impl StationRow {
         let builder = gtk::Builder::new_from_string(include_str!("station_row.ui"));
 
         let container: gtk::ListBoxRow = builder.get_object("station_row").unwrap();
-        let favicon_image: gtk::Image = builder.get_object("station_favicon").unwrap();
-
         let station_label: gtk::Label = builder.get_object("station_label").unwrap();
         let votes_label: gtk::Label = builder.get_object("votes_label").unwrap();
         let location_label: gtk::Label = builder.get_object("location_label").unwrap();
@@ -42,8 +40,6 @@ impl StationRow {
         if station.language != "" {language_label.set_text(&station.language);
         }else{language_label.set_text("—");}
 
-        app_state.borrow().fdl.set_favicon_async(&favicon_image, &station, 32);
-
         let row = Self {
             app_state,
             container,
@@ -55,6 +51,20 @@ impl StationRow {
     }
 
     fn connect_signals(&self) {
+        // It's possible that app_state is still blocked, so let's try it again, till it's available.
+        let favicon_image: gtk::Image = self.builder.get_object("station_favicon").unwrap();
+        let station = self.station.clone();
+        let app_state = self.app_state.clone();
+        gtk::timeout_add(250, move ||{
+            match app_state.try_borrow(){
+                Ok(app_state) => {
+                    app_state.fdl.set_favicon_async(&favicon_image, &station, 32);
+                    Continue(false)
+                },
+                Err(_) => Continue(true),
+            }
+        });
+
         let play_button: gtk::Button = self.builder.get_object("play_button").unwrap();
         let station = self.station.clone();
         let app_state = self.app_state.clone();

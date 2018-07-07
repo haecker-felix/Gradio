@@ -23,8 +23,6 @@ impl StationListBox {
 
         let column: Column = builder.get_object("column").unwrap();
         column.set_maximum_width(600);
-        //let column = Column::new();
-        //container.add(&column);
 
         Self { app_state, container, builder }
     }
@@ -42,17 +40,13 @@ impl StationListBox {
         }
     }
 
-    pub fn add_stations(&self, stations: &Vec<Station>) {
-        let listbox: gtk::ListBox = self.builder.get_object("listbox").unwrap();
-        for station in stations {
-            let row = StationRow::new(self.app_state.clone(), &station);
-            listbox.add(&row.container);
-        }
-    }
-
     pub fn add_station(&self, station: &Station){
         let listbox: gtk::ListBox = self.builder.get_object("listbox").unwrap();
         let row = StationRow::new(self.app_state.clone(), &station);
         listbox.add(&row.container);
+    }
+
+    pub fn remove_station(&self, station: &Station){
+        unimplemented!();
     }
 }

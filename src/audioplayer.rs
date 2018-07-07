@@ -84,7 +84,6 @@ impl AudioPlayer{
         }
     }
 
-
     fn parse_message(message: &Message) -> Option<Update> {
         match message.view(){
             MessageView::Tag(tag) => {
