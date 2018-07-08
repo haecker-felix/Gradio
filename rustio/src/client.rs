@@ -86,11 +86,7 @@ impl Client {
         let url = format!("{}{}{}", BASE_URL, STATION_BY_ID, id);
         let mut result : Vec<Station> = Self::send_get_request(url).unwrap().json().unwrap();
 
-        if result.len() > 0 {
-            Ok(result.remove(0))
-        }else {
-            Err("ID points to an empty station")
-        }
+        result.pop()
     }
 
     pub fn get_playable_station_url(&self, station: &Station) -> String{
