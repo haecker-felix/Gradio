@@ -27,7 +27,6 @@
             "--share=network"
         ],
         "env" : {
-            "DEBUG" : "true",
             "CARGO_HOME" : "./.cargo",
             "RUST_LOG" : "rustio,gradio=debug",
             "RUST_BACKTRACE" : "1",

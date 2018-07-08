@@ -95,6 +95,7 @@ impl Library {
     }
 
     pub fn add_station(&self, station: &Station, collection_id: i32){
+        info!("Add station to library: {} ({})", station.name, station.id);
         let mut stmt = self.connection.prepare(&format!("INSERT INTO library (station_id, collection_id) VALUES ('{}', '{}');", station.id, collection_id)).unwrap();
         stmt.execute(&[]).unwrap();
 
@@ -103,6 +104,7 @@ impl Library {
     }
 
     pub fn remove_station(&self, station: &Station){
+        info!("Remove station from library: {} ({})", station.name, station.id);
         let mut stmt = self.connection.prepare(&format!("DELETE FROM library WHERE station_id = '{}';", station.id)).unwrap();
         stmt.execute(&[]).unwrap();
         Self::update(&self.update_callbacks, Update::StationRemoved(station.clone(), 0));

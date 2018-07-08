@@ -67,7 +67,7 @@ impl FaviconDownloader {
         match Pixbuf::new_from_file_at_size(path.as_path(), size, size) {
             Ok(pixbuf) => Some(pixbuf),
             Err(err) => {
-                warn!("Could not get pixbuf from path \"{:?}\": {}", path, err);
+                debug!("Could not get pixbuf from path \"{:?}\": {}", path, err);
                 None
             }
         }
