@@ -74,8 +74,8 @@ impl Library {
 
             let station = self.client.get_station_by_id(station_id);
             let station = match station {
-                Ok(v) => v,
-                Err(_)=> continue, 
+                Some(v) => v,
+                None    => continue, 
             };
             info!("Found Station: {}", station.name);
             Self::update(&self.update_callbacks, Update::CollectionAdded(collection_id, self.get_collection_name(&collection_id)));
