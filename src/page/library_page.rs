@@ -8,7 +8,6 @@ use rustio::station::Station;
 use std::cell::RefCell;
 use std::collections::HashMap;
 use std::rc::Rc;
-use widgets::station_row::StationRow;
 use widgets::station_listbox::StationListBox;
 use library::Update;
 
@@ -34,7 +33,7 @@ impl LibraryPage {
 
                 // Add new station //
                 Update::StationAdded(station, collection_id) => {
-                    match station_listboxes.borrow().get(&collection_id) {
+                    match station_listboxes.borrow_mut().get_mut(&collection_id) {
                         Some(station_listbox) => station_listbox.add_station(&station),
                         None => warn!("Could not find collection: {}", collection_id),
                     };
@@ -42,7 +41,7 @@ impl LibraryPage {
 
                 // Remove Station //
                 Update::StationRemoved(station, collection_id) => {
-                    match station_listboxes.borrow().get(&collection_id) {
+                    match station_listboxes.borrow_mut().get_mut(&collection_id) {
                         Some(station_listbox) => station_listbox.remove_station(&station),
                         None => warn!("Could not find collection: {}", collection_id),
                     };
@@ -50,7 +49,7 @@ impl LibraryPage {
 
                 // Add Collection //
                 Update::CollectionAdded(collection_id, collection_name) => {
-                    if station_listboxes.borrow().get(&collection_id).is_none() { // don't create new listbox, if already added
+                    if station_listboxes.borrow_mut().get_mut(&collection_id).is_none() {
                         let station_listbox = StationListBox::new(app_state.clone());
                         station_listbox.set_title(collection_name);
                         library_box.add(&station_listbox.container);
@@ -60,7 +59,7 @@ impl LibraryPage {
 
                 // Remove Collection //
                 Update::CollectionRemoved(collection_id) => {
-                    match station_listboxes.borrow().get(&collection_id) {
+                    match station_listboxes.borrow_mut().get_mut(&collection_id) {
                         Some(station_listbox) => {
                             station_listbox.clear();
                             library_box.remove(&station_listbox.container);

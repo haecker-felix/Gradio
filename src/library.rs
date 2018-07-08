@@ -75,12 +75,37 @@ impl Library {
             let station = self.client.get_station_by_id(station_id);
             let station = match station {
                 Ok(v) => v,
-                Err(_)=> continue, 
+                Err(_)=> continue,
             };
+
             info!("Found Station: {}", station.name);
             Self::update(&self.update_callbacks, Update::CollectionAdded(collection_id, self.get_collection_name(&collection_id)));
             Self::update(&self.update_callbacks, Update::StationAdded(station, collection_id));
         }
+    }
+
+    pub fn contains(&self, station: &Station) -> bool {
+        let mut stmt = self.connection.prepare(&format!("SELECT * FROM library WHERE station_id = {}", station.id)).unwrap();
+        let mut rows = stmt.query(&[]).unwrap();
+
+        match rows.next() {
+            Some(_) => true,
+            None => false,
+        }
+    }
+
+    pub fn add_station(&self, station: &Station, collection_id: i32){
+        let mut stmt = self.connection.prepare(&format!("INSERT INTO library (station_id, collection_id) VALUES ('{}', '{}');", station.id, collection_id)).unwrap();
+        stmt.execute(&[]).unwrap();
+
+        Self::update(&self.update_callbacks, Update::CollectionAdded(collection_id, self.get_collection_name(&collection_id)));
+        Self::update(&self.update_callbacks, Update::StationAdded(station.clone(), collection_id));
+    }
+
+    pub fn remove_station(&self, station: &Station){
+        let mut stmt = self.connection.prepare(&format!("DELETE FROM library WHERE station_id = '{}';", station.id)).unwrap();
+        stmt.execute(&[]).unwrap();
+        Self::update(&self.update_callbacks, Update::StationRemoved(station.clone(), 0));
     }
 
     pub fn get_collection_name(&self, collection_id: &i32) -> String {

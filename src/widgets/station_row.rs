@@ -50,6 +50,16 @@ impl StationRow {
         row
     }
 
+    fn update_buttons(app_state: Rc<RefCell<AppState>>, builder: &gtk::Builder, station: &Station){
+        let library_action_stack: gtk::Stack = builder.get_object("library_action_stack").unwrap();
+
+        if app_state.borrow().library.contains(&station) {
+            library_action_stack.set_visible_child_name("library-remove");
+        }else{
+            library_action_stack.set_visible_child_name("library-add");
+        }
+    }
+
     fn connect_signals(&self) {
         // It's possible that app_state is still blocked, so let's try it again, till it's available.
         let favicon_image: gtk::Image = self.builder.get_object("station_favicon").unwrap();
@@ -83,9 +93,31 @@ impl StationRow {
             app_state.borrow_mut().player.set_playback(true);
         });
 
+        let add_button: gtk::Button = self.builder.get_object("add_button").unwrap();
+        let station = self.station.clone();
+        let app_state = self.app_state.clone();
+        let builder = self.builder.clone();
+        add_button.connect_clicked(move |_| {
+            app_state.borrow().library.add_station(&station, 0);
+            Self::update_buttons(app_state.clone(), &builder, &station);
+        });
+
+        let remove_button: gtk::Button = self.builder.get_object("remove_button").unwrap();
+        let station = self.station.clone();
+        let app_state = self.app_state.clone();
+        let builder = self.builder.clone();
+        remove_button.connect_clicked(move |_| {
+            app_state.borrow().library.remove_station(&station);
+            Self::update_buttons(app_state.clone(), &builder, &station);
+        });
+
         let eventbox: gtk::EventBox = self.builder.get_object("eventbox").unwrap();
         let revealer: gtk::Revealer = self.builder.get_object("revealer").unwrap();
+        let app_state = self.app_state.clone();
+        let builder = self.builder.clone();
+        let station = self.station.clone();
         eventbox.connect_button_press_event(move |_,_| {
+            Self::update_buttons(app_state.clone(), &builder, &station);
             revealer.set_reveal_child(!revealer.get_reveal_child());
             gtk::Inhibit(true)
         });

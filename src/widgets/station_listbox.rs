@@ -8,12 +8,17 @@ use std::rc::Rc;
 use widgets::station_row::StationRow;
 use gtk::WidgetExt;
 use libhandy::{Column, ColumnExt};
+use std::collections::HashMap;
 
 pub struct StationListBox {
     app_state: Rc<RefCell<AppState>>,
 
     pub container: gtk::Box,
     builder: gtk::Builder,
+
+    // We need to track which station is which listboxrow, otherwise we cannot remove them
+    // station_id (string), StationRow
+    station_rows: HashMap<String, StationRow>,
 }
 
 impl StationListBox {
@@ -24,7 +29,9 @@ impl StationListBox {
         let column: Column = builder.get_object("column").unwrap();
         column.set_maximum_width(600);
 
-        Self { app_state, container, builder }
+        let mut station_rows = HashMap::new();
+
+        Self { app_state, container, builder, station_rows }
     }
 
     pub fn set_title(&self, title: String) {
@@ -33,20 +40,28 @@ impl StationListBox {
         title_label.set_visible(true);
     }
 
-    pub fn clear(&self) {
+    pub fn clear(&mut self) {
         let listbox: gtk::ListBox = self.builder.get_object("listbox").unwrap();
         for row in listbox.get_children().iter() {
             listbox.remove(row);
         }
+        self.station_rows.clear();
     }
 
-    pub fn add_station(&self, station: &Station){
+    pub fn add_station(&mut self, station: &Station){
         let listbox: gtk::ListBox = self.builder.get_object("listbox").unwrap();
         let row = StationRow::new(self.app_state.clone(), &station);
         listbox.add(&row.container);
+        self.station_rows.insert(station.id.clone(), row);
     }
 
-    pub fn remove_station(&self, station: &Station){
-        unimplemented!();
+    pub fn remove_station(&mut self, station: &Station){
+        let listbox: gtk::ListBox = self.builder.get_object("listbox").unwrap();
+        match self.station_rows.remove(&station.id) {
+            Some(row) => {
+                listbox.remove(&row.container);
+            },
+            None => warn!("Cannot remove not existing row."),
+        };
     }
 }

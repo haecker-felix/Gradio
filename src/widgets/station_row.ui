@@ -313,13 +313,13 @@
                     <child>
                       <object class="GtkBox">
                         <property name="visible">True</property>
-                        <property name="sensitive">False</property>
                         <property name="can_focus">False</property>
                         <property name="border_width">12</property>
                         <property name="spacing">6</property>
                         <child>
                           <object class="GtkButton" id="vote_button">
                             <property name="visible">True</property>
+                            <property name="sensitive">False</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
                             <property name="valign">center</property>
@@ -359,7 +359,7 @@
                                 </style>
                               </object>
                               <packing>
-                                <property name="name">remove</property>
+                                <property name="name">library-remove</property>
                               </packing>
                             </child>
                             <child>
@@ -373,7 +373,7 @@
                                 </style>
                               </object>
                               <packing>
-                                <property name="name">pause</property>
+                                <property name="name">library-add</property>
                                 <property name="position">1</property>
                               </packing>
                             </child>
@@ -388,6 +388,7 @@
                         <child>
                           <object class="GtkButton" id="edit_button">
                             <property name="visible">True</property>
+                            <property name="sensitive">False</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
                             <property name="valign">center</property>
