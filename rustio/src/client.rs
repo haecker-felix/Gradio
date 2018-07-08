@@ -82,7 +82,7 @@ impl Client {
         Self::send_get_request(url).unwrap().json().unwrap()
     }
 
-    pub fn get_station_by_id(&self, id: i32) -> Result<Station,&str> {
+    pub fn get_station_by_id(&self, id: i32) -> Option<Station> {
         let url = format!("{}{}{}", BASE_URL, STATION_BY_ID, id);
         let mut result : Vec<Station> = Self::send_get_request(url).unwrap().json().unwrap();
 
