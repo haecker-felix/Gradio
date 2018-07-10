@@ -51,7 +51,7 @@
                 {
                     "type" : "git",
                     "url" : "https://github.com/haecker-felix/Gradio.git",
-                    "branch" : "rust-port"
+                    "branch" : "rust_port"
                 }
             ]
         }
