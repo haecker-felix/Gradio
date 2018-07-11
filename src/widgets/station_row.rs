@@ -31,7 +31,13 @@ impl StationRow {
         location_label.set_text(&format!("{} {}", station.country, station.state));
         codec_label.set_text(&station.codec);
 
-        if station.homepage != "" {homepage_label.set_markup(&format!("<a href=\"{}\">{}</a>", station.homepage, station.homepage));
+        if station.homepage != "" {
+            //escape & character
+            let station_homepage= match station.homepage.find("&") {
+                None     => station.homepage.clone(),
+                Some(_) => station.homepage.replace("&", "&amp;"),  
+            };
+            homepage_label.set_markup(&format!("<a href=\"{}\">{}</a>", station_homepage, station_homepage));
         }else{homepage_label.set_text("—");}
 
         if station.tags != "" {tags_label.set_text(&station.tags);
