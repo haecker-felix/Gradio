@@ -78,7 +78,7 @@ impl Library {
                 
                 Ok(mut v)     => match v.pop() {
                     Some(station) => station,
-                    None      => continue, 
+                    None          => continue, 
                                 }
                 Err(e)    => {
                     info!("Cannot get station, id={} ,{}",station_id,e.description());
