@@ -76,7 +76,7 @@ impl Library {
             let station = self.client.get_station_by_id(station_id);
             let station = match station {
                 
-                Ok(mut v)     => match v.pop() {
+                Ok(mut v) => match v.pop() {
                     Some(station) => station,
                     None          => continue, 
                                 }
