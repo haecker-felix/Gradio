@@ -27,7 +27,6 @@
             "--share=network"
         ],
         "env" : {
-            "DEBUG" : "true",
             "CARGO_HOME" : "./.cargo",
             "RUST_LOG" : "rustio,gradio=debug",
             "RUST_BACKTRACE" : "1",
@@ -52,7 +51,7 @@
                 {
                     "type" : "git",
                     "url" : "https://github.com/haecker-felix/Gradio.git",
-                    "branch" : "rust-port"
+                    "branch" : "rust_port"
                 }
             ]
         }

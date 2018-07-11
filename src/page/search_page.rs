@@ -18,7 +18,7 @@ pub struct SearchPage {
 
     builder: gtk::Builder,
     container: gtk::Box,
-    result_listbox: Rc<StationListBox>,
+    result_listbox: Rc<RefCell<StationListBox>>,
 
     search_sender: Sender<ClientUpdate>,
 }
@@ -52,10 +52,10 @@ impl Page for SearchPage {
         let builder = gtk::Builder::new_from_string(include_str!("search_page.ui"));
         let container: gtk::Box = builder.get_object("search_page").unwrap();
 
-        let result_listbox: Rc<StationListBox> = Rc::new(StationListBox::new(app_state.clone()));
+        let result_listbox: Rc<RefCell<StationListBox>> = Rc::new(RefCell::new(StationListBox::new(app_state.clone())));
         let results_box: gtk::Box = builder.get_object("results_box").unwrap();
         let results_stack: gtk::Stack = builder.get_object("results_stack").unwrap();
-        results_box.add(&result_listbox.container);
+        results_box.add(&result_listbox.borrow().container);
 
         let (search_sender, search_receiver) = channel();
 
@@ -64,13 +64,13 @@ impl Page for SearchPage {
             match search_receiver.try_recv() {
                 Ok(ClientUpdate::NewStations(stations)) => {
                     for station in stations {
-                        result_listbox_clone.add_station(&station);
+                        result_listbox_clone.borrow_mut().add_station(&station);
                     }
                     results_stack.set_visible_child_name("results");
                 }
                 Ok(ClientUpdate::Clear) => {
                     results_stack.set_visible_child_name("loading");
-                    result_listbox_clone.clear();
+                    result_listbox_clone.borrow_mut().clear();
                 }
                 Err(_) => (),
             }
