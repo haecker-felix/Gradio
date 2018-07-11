@@ -10,7 +10,6 @@ use std::cell::RefCell;
 use std::sync::mpsc::{channel, Sender, Receiver};
 use rustio::client::Client;
 use std::thread;
-use std::sync::Mutex;
 
 pub struct AudioPlayer{
     playbin: Element,
@@ -71,13 +70,13 @@ impl AudioPlayer{
         self.station = Some(station);
         
         //request url and set it in a new thread
-        let playbin = Mutex::new(self.playbin.clone());
-        let client = self.client.clone();
+        let playbin = self.playbin.clone();
+        let client  = self.client.clone();
         let station = self.station.clone().unwrap(); 
         thread::spawn( move || {
             let station_url = client.get_playable_station_url(&station);      
-            playbin.lock().unwrap().set_property("uri", &station_url);  
-            playbin.lock().unwrap().set_state(gstreamer::State::Playing);
+            playbin.set_property("uri", &station_url);  
+            playbin.set_state(gstreamer::State::Playing);
         }); 
     }
 
