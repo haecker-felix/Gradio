@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-01-01 14:42+0100\n"
-"PO-Revision-Date: 2018-07-18 12:36+0000\n"
+"PO-Revision-Date: 2018-07-18 12:43+0000\n"
 "Last-Translator: José Fonte <phastmike@gmail.com>\n"
 "Language-Team: Portuguese (Portugal) <https://hosted.weblate.org/projects/"
 "gradio/translations/pt_PT/>\n"
@@ -333,7 +333,7 @@ msgstr "Mostrar informação técnica"
 
 #: src/page/gradio-settings-page.vala:60
 msgid "Display additional information such as bitrate and codec"
-msgstr ""
+msgstr "Mostrar informação adicional tal como taxa de bits e codec"
 
 #. PLAYBACK
 #. enable background playback
@@ -419,24 +419,20 @@ msgid "Sorting: %s / %s"
 msgstr "Organizar: %s/%s"
 
 #: src/gradio-searchbar.vala:277
-#, fuzzy
 msgid "Select Country …"
-msgstr "Seleccionar País..."
+msgstr "Seleccionar País …"
 
 #: src/gradio-searchbar.vala:308
-#, fuzzy
 msgid "Select State …"
-msgstr "Seleccionar Estado..."
+msgstr "Seleccionar Estado …"
 
 #: src/gradio-searchbar.vala:339
-#, fuzzy
 msgid "Select Language …"
-msgstr "Seleccionar idioma..."
+msgstr "Seleccionar idioma …"
 
 #: src/gradio-searchbar.vala:370
-#, fuzzy
 msgid "Select Tag …"
-msgstr "Seleccionar idioma..."
+msgstr "Seleccionar etiqueta …"
 
 #: src/gradio-station-editor-dialog.vala:54
 msgid "Create radio station"
