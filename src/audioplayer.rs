@@ -5,11 +5,11 @@ use glib::prelude::*;
 use gstreamer::{Element, ElementFactory, ElementExt, Bus, Message, Continue, MessageView};
 use gstreamer::prelude::*;
 use rustio::station::Station;
+use std::thread;
 use std::rc::Rc;
 use std::cell::RefCell;
 use std::sync::mpsc::{channel, Sender, Receiver};
 use rustio::client::Client;
-use std::thread;
 
 pub struct AudioPlayer{
     playbin: Element,
@@ -64,20 +64,19 @@ impl AudioPlayer{
     }
 
     pub fn set_station(&mut self, station: Station){
+        
         Self::update(&self.update_callbacks, Update::Station(station.clone()));
         Self::update(&self.update_callbacks, Update::Title("".to_string()));
+        self.station = Some(station.clone());
+
         self.playbin.set_state(gstreamer::State::Null);
-        self.station = Some(station);
-        
-        //request url and set it in a new thread
         let playbin = self.playbin.clone();
-        let client  = self.client.clone();
-        let station = self.station.clone().unwrap(); 
-        thread::spawn( move || {
-            let station_url = client.get_playable_station_url(&station);      
-            playbin.set_property("uri", &station_url);  
+        thread::spawn(move||{
+            let station_url = Client::get_playable_station_url(&station);
+            playbin.set_property("uri", &station_url);
             playbin.set_state(gstreamer::State::Playing);
-        }); 
+        });
+        
     }
 
     pub fn register_update_callback<F: FnMut(Update)+'static>(&mut self, callback: F) {
@@ -91,7 +90,6 @@ impl AudioPlayer{
             (&mut *closure)(val.clone());
         }
     }
-
 
     fn parse_message(message: &Message) -> Option<Update> {
         match message.view(){
