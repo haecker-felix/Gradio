@@ -93,7 +93,7 @@ impl Client {
         }
     }
 
-    pub fn get_playable_station_url(&self, station: &Station) -> String{
+    pub fn get_playable_station_url(station: &Station) -> String{
         let url = format!("{}{}{}", BASE_URL, PLAYABLE_STATION_URL, station.id);
         let result: StationUrlResult = Self::send_get_request(url).unwrap().json().unwrap();
         result.url

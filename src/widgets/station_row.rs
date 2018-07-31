@@ -90,7 +90,6 @@ impl StationRow {
         play_button.connect_clicked(move |_| {
             let station = station.clone();
             app_state.borrow_mut().player.set_station(station);
-            app_state.borrow_mut().player.set_playback(true);
         });
 
         let add_button: gtk::Button = self.builder.get_object("add_button").unwrap();

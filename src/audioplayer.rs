@@ -5,6 +5,7 @@ use glib::prelude::*;
 use gstreamer::{Element, ElementFactory, ElementExt, Bus, Message, Continue, MessageView};
 use gstreamer::prelude::*;
 use rustio::station::Station;
+use std::thread;
 use std::rc::Rc;
 use std::cell::RefCell;
 use std::sync::mpsc::{channel, Sender, Receiver};
@@ -63,13 +64,19 @@ impl AudioPlayer{
     }
 
     pub fn set_station(&mut self, station: Station){
-        let station_url = self.client.get_playable_station_url(&station);
+        
         Self::update(&self.update_callbacks, Update::Station(station.clone()));
         Self::update(&self.update_callbacks, Update::Title("".to_string()));
-        self.station = Some(station);
+        self.station = Some(station.clone());
 
         self.playbin.set_state(gstreamer::State::Null);
-        self.playbin.set_property("uri", &station_url);
+        let playbin = self.playbin.clone();
+        thread::spawn(move||{
+            let station_url = Client::get_playable_station_url(&station);
+            playbin.set_property("uri", &station_url);
+            playbin.set_state(gstreamer::State::Playing);
+        });
+        
     }
 
     pub fn register_update_callback<F: FnMut(Update)+'static>(&mut self, callback: F) {
