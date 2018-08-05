@@ -10,6 +10,27 @@ use std::io;
 use std::cell::RefCell;
 use std::rc::Rc;
 
+use mdl::model::Model;
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct NewLibrary{
+    pub library: HashMap<u64, u64> // station_id, collection_id
+}
+
+impl Model for NewLibrary {
+    fn key(&self) -> String { "library".to_string() }
+}
+
+impl NewLibrary{
+    pub fn new() -> Self {
+        let library = HashMap::new();
+
+        NewLibrary{ library }
+    }
+}
+
+
+
 pub struct Library {
     connection: Connection,
     client: Client,

@@ -1,4 +1,4 @@
-#[derive(Deserialize, Clone)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Station {
     pub name: String,
     pub language: String,

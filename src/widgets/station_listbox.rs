@@ -1,7 +1,7 @@
 extern crate gtk;
 use gtk::prelude::*;
 
-use app::AppState;
+use app_cache::AppCache;
 use rustio::station::Station;
 use std::cell::RefCell;
 use std::rc::Rc;
@@ -11,7 +11,7 @@ use libhandy::{Column, ColumnExt};
 use std::collections::HashMap;
 
 pub struct StationListBox {
-    app_state: Rc<RefCell<AppState>>,
+    app_cache: AppCache,
 
     pub container: gtk::Box,
     builder: gtk::Builder,
@@ -22,7 +22,7 @@ pub struct StationListBox {
 }
 
 impl StationListBox {
-    pub fn new(app_state: Rc<RefCell<AppState>>) -> Self {
+    pub fn new(app_cache: AppCache) -> Self {
         let builder = gtk::Builder::new_from_string(include_str!("station_listbox.ui"));
         let container: gtk::Box = builder.get_object("station_listbox").unwrap();
 
@@ -31,7 +31,7 @@ impl StationListBox {
 
         let mut station_rows = HashMap::new();
 
-        Self { app_state, container, builder, station_rows }
+        Self { app_cache, container, builder, station_rows }
     }
 
     pub fn set_title(&self, title: String) {
@@ -50,7 +50,7 @@ impl StationListBox {
 
     pub fn add_station(&mut self, station: &Station){
         let listbox: gtk::ListBox = self.builder.get_object("listbox").unwrap();
-        let row = StationRow::new(self.app_state.clone(), &station);
+        let row = StationRow::new(self.app_cache.clone(), &station);
         listbox.add(&row.container);
         self.station_rows.insert(station.id.clone(), row);
     }

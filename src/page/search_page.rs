@@ -1,9 +1,10 @@
 extern crate gtk;
 
-use app::AppState;
+use app_cache::AppCache;
 use gtk::prelude::*;
 use page::Page;
 use rustio::client::ClientUpdate;
+use rustio::client::Client;
 use std::cell::RefCell;
 use std::collections::HashMap;
 use std::rc::Rc;
@@ -11,7 +12,7 @@ use std::sync::mpsc::{channel, Sender};
 use widgets::station_listbox::StationListBox;
 
 pub struct SearchPage {
-    app_state: Rc<RefCell<AppState>>,
+    app_cache: AppCache,
 
     title: String,
     name: String,
@@ -26,7 +27,6 @@ pub struct SearchPage {
 impl SearchPage {
     fn connect_signals(&self) {
         let search_entry: gtk::SearchEntry = self.builder.get_object("search_entry").unwrap();
-        let app_state = self.app_state.clone();
         let search_sender = self.search_sender.clone();
 
         search_entry.connect_search_changed(move |search_entry| {
@@ -39,20 +39,21 @@ impl SearchPage {
             params.insert("limit".to_string(), "150".to_string());
 
             // do the search itself
-            app_state.borrow_mut().client.search(params, search_sender.clone());
+            let mut client = Client::new();
+            client.search(params, search_sender.clone());
         });
     }
 }
 
 impl Page for SearchPage {
-    fn new(app_state: Rc<RefCell<AppState>>) -> Self {
+    fn new(app_cache: AppCache) -> Self {
         let title = "Search".to_string();
         let name = "search_page".to_string();
 
         let builder = gtk::Builder::new_from_string(include_str!("search_page.ui"));
         let container: gtk::Box = builder.get_object("search_page").unwrap();
 
-        let result_listbox: Rc<RefCell<StationListBox>> = Rc::new(RefCell::new(StationListBox::new(app_state.clone())));
+        let result_listbox: Rc<RefCell<StationListBox>> = Rc::new(RefCell::new(StationListBox::new(app_cache.clone())));
         let results_box: gtk::Box = builder.get_object("results_box").unwrap();
         let results_stack: gtk::Stack = builder.get_object("results_stack").unwrap();
         results_box.add(&result_listbox.borrow().container);
@@ -78,7 +79,7 @@ impl Page for SearchPage {
         });
 
         let searchpage = SearchPage {
-            app_state,
+            app_cache,
             title,
             name,
             builder,

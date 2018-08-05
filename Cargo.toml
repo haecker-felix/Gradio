@@ -17,6 +17,10 @@ gstreamer = "0.11.1"
 dbus = "0.6.1"
 dbus-macros = "0.2.3"
 libhandy = { git = "https://gitlab.gnome.org/jsparber/libhandy-rs" }
+mdl = "1.0.2"
+serde_derive = "1.0.70"
+serde = "1.0.70"
+
 
 [dependencies.gtk]
 version = "0.4.0"

@@ -1,20 +1,22 @@
 extern crate gtk;
 use gtk::prelude::*;
 
-use app::AppState;
+use app_cache::AppCache;
+use app_state::AppState;
+use mdl::Model;
 use rustio::station::Station;
 use std::cell::RefCell;
 use std::rc::Rc;
 
 pub struct StationRow {
-    app_state: Rc<RefCell<AppState>>,
+    app_cache: AppCache,
     pub container: gtk::ListBoxRow,
     builder: gtk::Builder,
     station: Station,
 }
 
 impl StationRow {
-    pub fn new(app_state: Rc<RefCell<AppState>>, station: &Station) -> Self {
+    pub fn new(app_cache: AppCache, station: &Station) -> Self {
         let builder = gtk::Builder::new_from_string(include_str!("station_row.ui"));
 
         let container: gtk::ListBoxRow = builder.get_object("station_row").unwrap();
@@ -41,7 +43,7 @@ impl StationRow {
         }else{language_label.set_text("—");}
 
         let row = Self {
-            app_state,
+            app_cache,
             container,
             builder,
             station: station.clone(),
@@ -50,73 +52,56 @@ impl StationRow {
         row
     }
 
-    fn update_buttons(app_state: Rc<RefCell<AppState>>, builder: &gtk::Builder, station: &Station){
-        let library_action_stack: gtk::Stack = builder.get_object("library_action_stack").unwrap();
-
-        if app_state.borrow().library.contains(&station) {
-            library_action_stack.set_visible_child_name("library-remove");
-        }else{
-            library_action_stack.set_visible_child_name("library-add");
-        }
-    }
-
     fn connect_signals(&self) {
         // It's possible that app_state is still blocked, so let's try it again, till it's available.
-        let favicon_image: gtk::Image = self.builder.get_object("station_favicon").unwrap();
-        let station = self.station.clone();
-        let app_state = self.app_state.clone();
-        gtk::timeout_add(250, move ||{
-            match app_state.try_borrow(){
-                Ok(app_state) => {
-                    app_state.fdl.set_favicon_async(&favicon_image, &station, 32);
-                    Continue(false)
-                },
-                Err(_) => Continue(true),
-            }
-        });
+        // let favicon_image: gtk::Image = self.builder.get_object("station_favicon").unwrap();
+        // let station = self.station.clone();
+        // let app_state = self.app_state.clone();
+        // gtk::timeout_add(250, move ||{
+        //     match app_state.try_borrow(){
+        //         Ok(app_state) => {
+        //             app_state.fdl.set_favicon_async(&favicon_image, &station, 32);
+        //             Continue(false)
+        //         },
+        //         Err(_) => Continue(true),
+        //     }
+        // });
 
         let play_button: gtk::Button = self.builder.get_object("play_button").unwrap();
         let station = self.station.clone();
-        let app_state = self.app_state.clone();
+        let app_cache = self.app_cache.clone();
         play_button.connect_clicked(move |_| {
             let station = station.clone();
-            app_state.borrow_mut().player.set_station(station);
-            app_state.borrow_mut().player.set_playback(true);
+
+            let c = &*app_cache.get_cache();
+            AppState::get(c, "app").map(|mut a|{
+                a.ap_station = Some(station);
+                a.store(c);
+            });
+            app_cache.emit_signal("ap".to_string());
         });
 
-        let play_button: gtk::Button = self.builder.get_object("play_button").unwrap();
-        let station = self.station.clone();
-        let app_state = self.app_state.clone();
-        play_button.connect_clicked(move |_| {
-            let station = station.clone();
-            app_state.borrow_mut().player.set_station(station);
-        });
+        // let add_button: gtk::Button = self.builder.get_object("add_button").unwrap();
+        // let station = self.station.clone();
+        // let app_state = self.app_state.clone();
+        // let builder = self.builder.clone();
+        // add_button.connect_clicked(move |_| {
+        //     app_state.borrow().library.add_station(&station, 0);
+        // });
 
-        let add_button: gtk::Button = self.builder.get_object("add_button").unwrap();
-        let station = self.station.clone();
-        let app_state = self.app_state.clone();
-        let builder = self.builder.clone();
-        add_button.connect_clicked(move |_| {
-            app_state.borrow().library.add_station(&station, 0);
-            Self::update_buttons(app_state.clone(), &builder, &station);
-        });
-
-        let remove_button: gtk::Button = self.builder.get_object("remove_button").unwrap();
-        let station = self.station.clone();
-        let app_state = self.app_state.clone();
-        let builder = self.builder.clone();
-        remove_button.connect_clicked(move |_| {
-            app_state.borrow().library.remove_station(&station);
-            Self::update_buttons(app_state.clone(), &builder, &station);
-        });
+        // let remove_button: gtk::Button = self.builder.get_object("remove_button").unwrap();
+        // let station = self.station.clone();
+        // let app_state = self.app_state.clone();
+        // let builder = self.builder.clone();
+        // remove_button.connect_clicked(move |_| {
+        //     app_state.borrow().library.remove_station(&station);
+        // });
 
         let eventbox: gtk::EventBox = self.builder.get_object("eventbox").unwrap();
         let revealer: gtk::Revealer = self.builder.get_object("revealer").unwrap();
-        let app_state = self.app_state.clone();
         let builder = self.builder.clone();
         let station = self.station.clone();
         eventbox.connect_button_press_event(move |_,_| {
-            Self::update_buttons(app_state.clone(), &builder, &station);
             revealer.set_reveal_child(!revealer.get_reveal_child());
             gtk::Inhibit(true)
         });
