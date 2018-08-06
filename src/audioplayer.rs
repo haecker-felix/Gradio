@@ -57,25 +57,32 @@ impl AudioPlayer{
     }
 
     fn connect_signals(&self){
+
+        // Playback //
         let app_cache = self.app_cache.clone();
         let playbin = self.playbin.clone();
-        let stream = self.stream.clone();
-        self.app_cache.signaler.subscribe("ap", Box::new(move |sig| {
-            debug!("subscribed signal for ap");
+        self.app_cache.signaler.subscribe("ap-playback", Box::new(move |sig| {
             let c = &*app_cache.get_cache();
             let app_state = AppState::get(c, "app").unwrap();
 
-            // Playback
             match app_state.ap_state{
                 PlaybackState::SetPlaying => { playbin.set_state(gstreamer::State::Playing); },
                 PlaybackState::SetStopped => { playbin.set_state(gstreamer::State::Ready); },
                 _ => (),
             };
+        }));
 
-            // Station
+        // Station //
+        let app_cache = self.app_cache.clone();
+        let stream = self.stream.clone();
+        let playbin = self.playbin.clone();
+        self.app_cache.signaler.subscribe("ap-station", Box::new(move |sig| {
+            let c = &*app_cache.get_cache();
+            let app_state = AppState::get(c, "app").unwrap();
+
             app_state.ap_station.map(|s| {
                 if(*stream.borrow() != s.url) { // check if station has changed, otherwise don't set it.
-                    warn!("set station for playback: {:?}", s);
+                    debug!("set station for playback: {:?}", s);
                     *stream.borrow_mut() = s.clone().url;
 
                     //let c = &*app_cache.get_cache();
@@ -101,16 +108,17 @@ impl AudioPlayer{
         match message.view(){
             MessageView::Tag(tag) => {
                 tag.get_tags().get::<gstreamer::tags::Title>().map(|title| {
+                    debug!("playback title changed: {:?}", title);
                     let c = &*app_cache.get_cache();
                     AppState::get(c, "app").map(|mut a|{
                         a.ap_title = Some(title.get().unwrap().to_string());
                         a.store(c);
                     });
-                    app_cache.emit_signal("ap".to_string());
+                    app_cache.emit_signal("ap-title".to_string());
                 });
             },
             MessageView::StateChanged(sc) => {
-                info!("PlaybackState: {:?}", sc.get_current());
+                debug!("playback state changed: {:?}", sc.get_current());
                 let c = &*app_cache.get_cache();
                 let mut app_state = AppState::get(c, "app").unwrap();
 
@@ -121,7 +129,7 @@ impl AudioPlayer{
                 };
 
                 app_state.store(c);
-                app_cache.emit_signal("ap".to_string());
+                app_cache.emit_signal("ap-playback".to_string());
             }
             _ => (),
         };

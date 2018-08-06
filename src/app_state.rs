@@ -11,10 +11,10 @@ use mdl::model::Model;
 pub struct AppState{
     pub library: NewLibrary,
 
-    // Audio playback (ap)
-    pub ap_station: Option<Station>,
-    pub ap_title: Option<String>,
-    pub ap_state: PlaybackState,
+    // Audio playback (ap)           Signal:
+    pub ap_station: Option<Station>, // ap-station
+    pub ap_title: Option<String>,    // ap-title
+    pub ap_state: PlaybackState,     // ap-playback
 }
 
 impl Model for AppState {

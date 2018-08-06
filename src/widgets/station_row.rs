@@ -78,7 +78,7 @@ impl StationRow {
                 a.ap_station = Some(station);
                 a.store(c);
             });
-            app_cache.emit_signal("ap".to_string());
+            app_cache.emit_signal("ap-station".to_string());
         });
 
         // let add_button: gtk::Button = self.builder.get_object("add_button").unwrap();

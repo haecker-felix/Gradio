@@ -48,7 +48,7 @@ impl Playerbar {
             AppState::get(c, "app").map(|mut a|{
                 a.ap_state = PlaybackState::SetPlaying; a.store(c);
             });
-            app_cache.emit_signal("ap".to_string());
+            app_cache.emit_signal("ap-playback".to_string());
         });
 
 
@@ -60,34 +60,35 @@ impl Playerbar {
             AppState::get(c, "app").map(|mut a|{
                 a.ap_state = PlaybackState::SetStopped; a.store(c);
             });
-            app_cache.emit_signal("ap".to_string());
+            app_cache.emit_signal("ap-playback".to_string());
         });
 
 
-        // Connect to "ap" to refresh the whole playerbar
+        // Connect to "ap-playback" signal
         let app_cache = self.app_cache.clone();
-        let container = self.container.clone();
-        let fdl = self.fdl.clone();
-        let title_label: gtk::Label = self.builder.get_object("title_label").unwrap();
-        let subtitle_label: gtk::Label = self.builder.get_object("subtitle_label").unwrap();
-        let subtitle_revealer: gtk::Revealer = self.builder.get_object("subtitle_revealer").unwrap();
-        let favicon_image: gtk::Image = self.builder.get_object("favicon_image").unwrap();
         let playback_stack: gtk::Stack = self.builder.get_object("playback_stack").unwrap();
-        self.app_cache.signaler.subscribe("ap", Box::new(move |sig| {
-            debug!("subscribed signal for ap");
-
+        self.app_cache.signaler.subscribe("ap-playback", Box::new(move |sig| {
             let c = &*app_cache.get_cache();
             let app_state = AppState::get(c, "app").unwrap();
 
-            // Playback
             match app_state.ap_state{
                 PlaybackState::Playing => playback_stack.set_visible_child_name("stop_playback"),
                 PlaybackState::Stopped => playback_stack.set_visible_child_name("start_playback"),
                 PlaybackState::Loading => playback_stack.set_visible_child_name("loading"),
                 _ => (),
             }
+        }));
 
-            // Station
+        // Connect to "ap-station" signal
+        let app_cache = self.app_cache.clone();
+        let container = self.container.clone();
+        let fdl = self.fdl.clone();
+        let title_label: gtk::Label = self.builder.get_object("title_label").unwrap();
+        let favicon_image: gtk::Image = self.builder.get_object("favicon_image").unwrap();
+        self.app_cache.signaler.subscribe("ap-station", Box::new(move |sig| {
+            let c = &*app_cache.get_cache();
+            let app_state = AppState::get(c, "app").unwrap();
+
             match app_state.ap_station{
                 Some(s) => {
                     container.set_visible(true);
@@ -97,8 +98,16 @@ impl Playerbar {
                 },
                 None => (),
             }
+        }));
 
-            // Title
+        // Connect to "ap-title" signal
+        let app_cache = self.app_cache.clone();
+        let subtitle_label: gtk::Label = self.builder.get_object("subtitle_label").unwrap();
+        let subtitle_revealer: gtk::Revealer = self.builder.get_object("subtitle_revealer").unwrap();
+        self.app_cache.signaler.subscribe("ap-title", Box::new(move |sig| {
+            let c = &*app_cache.get_cache();
+            let app_state = AppState::get(c, "app").unwrap();
+
             match app_state.ap_title {
                 Some(t) => {
                     subtitle_revealer.set_reveal_child(true);
