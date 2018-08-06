@@ -28,6 +28,10 @@ pub enum PlaybackState{
     Playing,
     Stopped,
     Loading,
+
+    // We need a own state to start / to stop the playback, otherwise we would create a signal/callback loop
+    SetPlaying,
+    SetStopped,
 }
 
 impl AudioPlayer{
@@ -39,7 +43,7 @@ impl AudioPlayer{
         let client = Client::new();
         let stream = Rc::new(RefCell::new("".to_string()));
 
-        //Self::new_bus_messages(update_callbacks.clone(), bus);
+        Self::new_bus_messages(app_cache.clone(), bus);
 
         let player = AudioPlayer{
             app_cache,
@@ -63,30 +67,32 @@ impl AudioPlayer{
 
             // Playback
             match app_state.ap_state{
-                PlaybackState::Playing => { playbin.set_state(gstreamer::State::Playing); },
-                PlaybackState::Stopped => { playbin.set_state(gstreamer::State::Ready); },
-                PlaybackState::Loading => (),
+                PlaybackState::SetPlaying => { playbin.set_state(gstreamer::State::Playing); },
+                PlaybackState::SetStopped => { playbin.set_state(gstreamer::State::Ready); },
+                _ => (),
             };
 
             // Station
             app_state.ap_station.map(|s| {
-                if(*stream.borrow() == s.url) { Continue; } // TODO: Test!
-                *stream.borrow_mut() = s.clone().url;
+                if(*stream.borrow() != s.url) { // check if station has changed, otherwise don't set it.
+                    warn!("set station for playback: {:?}", s);
+                    *stream.borrow_mut() = s.clone().url;
 
-                //let c = &*app_cache.get_cache();
-                //AppState::get(c, "app").map(|mut a|{
-                //    a.ap_title = Some("".to_string());
-                //    a.store(c);
-                //});
-                //app_cache.emit_signal("ap".to_string());
+                    //let c = &*app_cache.get_cache();
+                    //AppState::get(c, "app").map(|mut a|{
+                    //    a.ap_title = Some("".to_string());
+                    //    a.store(c);
+                    //});
+                    //app_cache.emit_signal("ap".to_string());
 
-                playbin.set_state(gstreamer::State::Null);
-                let p = playbin.clone();
-                thread::spawn(move||{
-                    let station_url = Client::get_playable_station_url(&s);
-                    p.set_property("uri", &station_url);
-                    p.set_state(gstreamer::State::Playing);
-                });
+                    playbin.set_state(gstreamer::State::Null);
+                    let p = playbin.clone();
+                    thread::spawn(move||{
+                        let station_url = Client::get_playable_station_url(&s);
+                        p.set_property("uri", &station_url);
+                        p.set_state(gstreamer::State::Playing);
+                    });
+                }
             });
         }));
     }

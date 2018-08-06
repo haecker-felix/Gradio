@@ -46,7 +46,7 @@ impl Playerbar {
         start_playback_button.connect_clicked(move|_|{
             let c = &*app_cache.get_cache();
             AppState::get(c, "app").map(|mut a|{
-                a.ap_state = PlaybackState::Playing; a.store(c);
+                a.ap_state = PlaybackState::SetPlaying; a.store(c);
             });
             app_cache.emit_signal("ap".to_string());
         });
@@ -58,7 +58,7 @@ impl Playerbar {
         stop_playback_button.connect_clicked(move|_|{
             let c = &*app_cache.get_cache();
             AppState::get(c, "app").map(|mut a|{
-                a.ap_state = PlaybackState::Stopped; a.store(c);
+                a.ap_state = PlaybackState::SetStopped; a.store(c);
             });
             app_cache.emit_signal("ap".to_string());
         });
@@ -84,6 +84,7 @@ impl Playerbar {
                 PlaybackState::Playing => playback_stack.set_visible_child_name("stop_playback"),
                 PlaybackState::Stopped => playback_stack.set_visible_child_name("start_playback"),
                 PlaybackState::Loading => playback_stack.set_visible_child_name("loading"),
+                _ => (),
             }
 
             // Station
