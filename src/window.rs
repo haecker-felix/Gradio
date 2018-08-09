@@ -71,25 +71,19 @@ impl Window{
         // add_button
         let app_cache = self.app_cache.clone();
         let add_button: gtk::Button = self.builder.get_object("add_button").unwrap();
-        let header_button_stack: gtk::Stack = self.builder.get_object("header_button_stack").unwrap();
-        let page_stack: gtk::Stack = self.builder.get_object("page_stack").unwrap();
-        let page_label: gtk::Label = self.builder.get_object("page_label").unwrap();
         add_button.connect_clicked(move |_| {
-            header_button_stack.set_visible_child_name("back");
-            page_label.set_text("Add stations");
-            page_stack.set_visible_child_name("search_page");
+            let c = &*app_cache.get_cache();
+            AppState::get(c, "app").map(|mut a|{ a.gui_current_page = "search_page".to_string(); a.store(c); });
+            app_cache.emit_signal("gui-current-page".to_string());
         });
 
         // back_button
         let app_cache = self.app_cache.clone();
         let back_button: gtk::Button = self.builder.get_object("back_button").unwrap();
-        let header_button_stack: gtk::Stack = self.builder.get_object("header_button_stack").unwrap();
-        let page_stack: gtk::Stack = self.builder.get_object("page_stack").unwrap();
-        let page_label: gtk::Label = self.builder.get_object("page_label").unwrap();
         back_button.connect_clicked(move |_| {
-            header_button_stack.set_visible_child_name("add");
-            page_label.set_text("Library");
-            page_stack.set_visible_child_name("library_page");
+            let c = &*app_cache.get_cache();
+            AppState::get(c, "app").map(|mut a|{ a.gui_current_page = "library_page".to_string(); a.store(c); });
+            app_cache.emit_signal("gui-current-page".to_string());
         });
 
         // start_selection_mode_button
@@ -128,6 +122,30 @@ impl Window{
             }else{
                 bottom_stack.set_visible_child_name("default");
                 header_stack.set_visible_child_name("default");
+            }
+        })).unwrap();
+
+        // Connect to "gui-current-page" signal
+        let app_cache = self.app_cache.clone();
+        let page_label: gtk::Label = self.builder.get_object("page_label").unwrap();
+        let page_stack: gtk::Stack = self.builder.get_object("page_stack").unwrap();
+        let header_button_stack: gtk::Stack = self.builder.get_object("header_button_stack").unwrap();
+        self.app_cache.signaler.subscribe("gui-current-page", Box::new(move |sig| {
+            let c = &*app_cache.get_cache();
+            let app_state = AppState::get(c, "app").unwrap();
+            debug!("Set page: {}", app_state.gui_current_page);
+
+            if(app_state.gui_current_page == "library_page"){
+                header_button_stack.set_visible_child_name("add");
+                page_stack.set_visible_child_name("library_page");
+                page_label.set_text("Library");
+            }else{
+                header_button_stack.set_visible_child_name("back");
+            }
+
+            if(app_state.gui_current_page == "search_page"){
+                page_stack.set_visible_child_name("search_page");
+                page_label.set_text("Add stations");
             }
         })).unwrap();
     }

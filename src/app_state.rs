@@ -12,6 +12,7 @@ pub struct AppState{
     pub library: NewLibrary,
 
     // Graphical user interface (gui) Signal:
+    pub gui_current_page: String,     // gui-current-page
     pub gui_selection_mode: bool,     // gui-selection-mode
 
     // Audio playback (ap)            Signal:
@@ -28,6 +29,7 @@ impl AppState{
     pub fn new() -> Self {
         let library = NewLibrary::new();
 
+        let gui_current_page = "library_page".to_string();
         let gui_selection_mode = false;
 
         let ap_station = None;
@@ -36,6 +38,7 @@ impl AppState{
 
         AppState{
             library,
+            gui_current_page,
             gui_selection_mode,
             ap_station,
             ap_title,
