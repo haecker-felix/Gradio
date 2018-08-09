@@ -9,12 +9,15 @@ use widgets::station_row::StationRow;
 use gtk::WidgetExt;
 use libhandy::{Column, ColumnExt};
 use std::collections::HashMap;
+use favicon_downloader::FaviconDownloader;
 
 pub struct StationListBox {
     app_cache: AppCache,
 
     pub container: gtk::Box,
     builder: gtk::Builder,
+
+    fdl: Rc<FaviconDownloader>,
 
     // We need to track which station is which listboxrow, otherwise we cannot remove them
     // station_id (string), StationRow
@@ -29,9 +32,11 @@ impl StationListBox {
         let column: Column = builder.get_object("column").unwrap();
         column.set_maximum_width(600);
 
+        let fdl = Rc::new(FaviconDownloader::new());
+
         let mut station_rows = HashMap::new();
 
-        Self { app_cache, container, builder, station_rows }
+        Self { app_cache, container, builder, fdl, station_rows }
     }
 
     pub fn set_title(&self, title: String) {
@@ -50,7 +55,7 @@ impl StationListBox {
 
     pub fn add_station(&mut self, station: &Station){
         let listbox: gtk::ListBox = self.builder.get_object("listbox").unwrap();
-        let row = StationRow::new(self.app_cache.clone(), &station);
+        let row = StationRow::new(self.app_cache.clone(), &station, self.fdl.clone());
         listbox.add(&row.container);
         self.station_rows.insert(station.id.clone(), row);
     }

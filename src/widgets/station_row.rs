@@ -9,6 +9,7 @@ use rustio::station::Station;
 use std::cell::RefCell;
 use std::rc::Rc;
 use widgets::playbutton::Playbutton;
+use favicon_downloader::FaviconDownloader;
 
 pub struct StationRow {
     app_cache: AppCache,
@@ -18,9 +19,10 @@ pub struct StationRow {
 }
 
 impl StationRow {
-    pub fn new(app_cache: AppCache, station: &Station) -> Self {
+    pub fn new(app_cache: AppCache, station: &Station, fdl: Rc<FaviconDownloader>) -> Self {
         let builder = gtk::Builder::new_from_string(include_str!("station_row.ui"));
 
+        // gtk widgets
         let container: gtk::ListBoxRow = builder.get_object("station_row").unwrap();
         let station_label: gtk::Label = builder.get_object("station_label").unwrap();
         let votes_label: gtk::Label = builder.get_object("votes_label").unwrap();
@@ -30,10 +32,16 @@ impl StationRow {
         let tags_label: gtk::Label = builder.get_object("tags_label").unwrap();
         let language_label: gtk::Label = builder.get_object("language_label").unwrap();
 
+        // playbutton
         let mut playbutton = Playbutton::new(app_cache.clone(), Some(station.clone()));
         let playbutton_box: gtk::Box = builder.get_object("playbutton_box").unwrap();
         playbutton_box.add(&playbutton.container);
 
+        // set station favicon
+        let favicon_image: gtk::Image = builder.get_object("station_favicon").unwrap();
+        fdl.set_favicon_async(&favicon_image, &station, 32);
+
+        // set station information
         station_label.set_text(&station.name);
         votes_label.set_text(&format!("{} Votes", station.votes));
         location_label.set_text(&format!("{} {}", station.country, station.state));
