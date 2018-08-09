@@ -70,36 +70,94 @@
         <property name="can_focus">False</property>
         <property name="transition_type">crossfade</property>
         <child>
-          <object class="GtkHeaderBar">
+          <object class="GtkHeaderBar" id="page_title">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="show_close_button">True</property>
             <child>
-              <object class="GtkButton">
+              <object class="GtkStack" id="header_button_stack">
                 <property name="visible">True</property>
-                <property name="sensitive">False</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
+                <property name="can_focus">False</property>
+                <property name="hhomogeneous">False</property>
+                <property name="vhomogeneous">False</property>
                 <child>
-                  <object class="GtkImage">
+                  <object class="GtkBox" id="add">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="icon_name">list-add-symbolic</property>
+                    <property name="spacing">6</property>
+                    <child>
+                      <object class="GtkButton" id="add_button">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">True</property>
+                        <child>
+                          <object class="GtkImage">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="icon_name">list-add-symbolic</property>
+                          </object>
+                        </child>
+                        <style>
+                          <class name="image-button"/>
+                        </style>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">2</property>
+                      </packing>
+                    </child>
                   </object>
+                  <packing>
+                    <property name="name">add</property>
+                  </packing>
                 </child>
-                <style>
-                  <class name="image-button"/>
-                </style>
+                <child>
+                  <object class="GtkBox" id="back">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="spacing">6</property>
+                    <child>
+                      <object class="GtkButton" id="back_button">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">True</property>
+                        <child>
+                          <object class="GtkImage">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="icon_name">go-previous-symbolic</property>
+                          </object>
+                        </child>
+                        <style>
+                          <class name="image-button"/>
+                        </style>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">2</property>
+                      </packing>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="name">back</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
               </object>
               <packing>
                 <property name="position">1</property>
               </packing>
             </child>
             <child type="title">
-              <object class="GtkStackSwitcher">
+              <object class="GtkLabel" id="page_label">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="stack">page_stack</property>
+                <property name="label" translatable="yes">Library</property>
+                <attributes>
+                  <attribute name="weight" value="bold"/>
+                </attributes>
               </object>
             </child>
             <child>
@@ -151,7 +209,7 @@
           </packing>
         </child>
         <child>
-          <object class="GtkHeaderBar">
+          <object class="GtkHeaderBar" id="selection_mode_header">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <child type="title">
@@ -178,7 +236,7 @@
             </style>
           </object>
           <packing>
-            <property name="name">selection-mode</property>
+            <property name="name">selection_mode</property>
             <property name="position">1</property>
           </packing>
         </child>
@@ -201,24 +259,6 @@
             <property name="expand">True</property>
             <property name="fill">True</property>
             <property name="position">0</property>
-          </packing>
-        </child>
-        <child>
-          <placeholder/>
-        </child>
-        <child>
-          <object class="GtkRevealer" id="selection_mode_revealer">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="transition_type">slide-up</property>
-            <child>
-              <placeholder/>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">2</property>
           </packing>
         </child>
         <child>
@@ -345,7 +385,7 @@
                 </child>
               </object>
               <packing>
-                <property name="name">selection-mode</property>
+                <property name="name">selection_mode</property>
                 <property name="position">1</property>
               </packing>
             </child>
