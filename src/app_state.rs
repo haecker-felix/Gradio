@@ -11,10 +11,13 @@ use mdl::model::Model;
 pub struct AppState{
     pub library: NewLibrary,
 
-    // Audio playback (ap)           Signal:
-    pub ap_station: Option<Station>, // ap-station
-    pub ap_title: Option<String>,    // ap-title
-    pub ap_state: PlaybackState,     // ap-playback
+    // Graphical user interface (gui) Signal:
+    pub gui_selection_mode: bool,     // gui-selection-mode
+
+    // Audio playback (ap)            Signal:
+    pub ap_station: Option<Station>,  // ap-station
+    pub ap_title: Option<String>,     // ap-title
+    pub ap_state: PlaybackState,      // ap-playback
 }
 
 impl Model for AppState {
@@ -25,12 +28,15 @@ impl AppState{
     pub fn new() -> Self {
         let library = NewLibrary::new();
 
+        let gui_selection_mode = false;
+
         let ap_station = None;
         let ap_title = None;
         let ap_state = PlaybackState::Stopped;
 
         AppState{
             library,
+            gui_selection_mode,
             ap_station,
             ap_title,
             ap_state,

@@ -113,7 +113,7 @@ impl Playbutton {
     fn set_state(ap_state: PlaybackState, playback_stack: gtk::Stack, btn_station: Option<Station>, ap_station: Option<Station>){
         let mut set = false;
 
-        if(btn_station.is_some()){
+        if(btn_station.is_some() && ap_station.is_some()){
             if(ap_state != PlaybackState::Playing){
                 playback_stack.set_visible_child_name("start_playback")
             }

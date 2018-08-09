@@ -6,6 +6,10 @@ extern crate gtk;
 use gtk::prelude::*;
 
 use app_cache::AppCache;
+use app_state::AppState;
+
+use mdl::Model;
+
 use page::library_page::LibraryPage;
 use page::search_page::SearchPage;
 use page::Page;
@@ -16,6 +20,7 @@ pub struct Window{
     app_cache: AppCache,
 
     pub widget: gtk::ApplicationWindow,
+    pub builder: gtk::Builder,
 
     pub page_stack: gtk::Stack,
     pub library_page: LibraryPage,
@@ -36,9 +41,10 @@ impl Window{
         let playerbar = Playerbar::new(app_cache.clone());
         playerbar_box.add(&playerbar.container);
 
-        let window = Self{
+        let mut window = Self{
             app_cache,
             widget,
+            builder,
             page_stack,
             library_page,
             search_page,
@@ -46,6 +52,7 @@ impl Window{
 
         window.add_page(&window.library_page);
         window.add_page(&window.search_page);
+        window.connect_signals();
 
         window
     }
@@ -58,6 +65,47 @@ impl Window{
         let provider = gtk::CssProvider::new();
         provider.load_from_data(include_str!("style.css").as_bytes());
         gtk::StyleContext::add_provider_for_screen(&gdk::Screen::get_default().unwrap(), &provider, 600);
+    }
+
+    fn connect_signals(&mut self){
+        // start_selection_mode_button
+        let app_cache = self.app_cache.clone();
+        let start_selection_mode_button: gtk::Button = self.builder.get_object("start_selection_mode_button").unwrap();
+        let header_stack: gtk::Stack = self.builder.get_object("header_stack").unwrap();
+        start_selection_mode_button.connect_clicked(move |_| {
+            let c = &*app_cache.get_cache();
+            AppState::get(c, "app").map(|mut a|{ a.gui_selection_mode = true; a.store(c); });
+            app_cache.emit_signal("gui-selection-mode".to_string());
+        });
+
+        // cancel_selection_mode_button
+        let app_cache = self.app_cache.clone();
+        let cancel_selection_mode_button: gtk::Button = self.builder.get_object("cancel_selection_mode_button").unwrap();
+        let header_stack: gtk::Stack = self.builder.get_object("header_stack").unwrap();
+        cancel_selection_mode_button.connect_clicked(move |_| {
+            let c = &*app_cache.get_cache();
+            AppState::get(c, "app").map(|mut a|{ a.gui_selection_mode = false; a.store(c); });
+            app_cache.emit_signal("gui-selection-mode".to_string());
+
+            header_stack.set_visible_child_name("default");
+        });
+
+        // Connect to "gui-selection-mode" signal
+        let app_cache = self.app_cache.clone();
+        let header_stack: gtk::Stack = self.builder.get_object("header_stack").unwrap();
+        let bottom_stack: gtk::Stack = self.builder.get_object("bottom_stack").unwrap();
+        self.app_cache.signaler.subscribe("gui-selection-mode", Box::new(move |sig| {
+            let c = &*app_cache.get_cache();
+            let app_state = AppState::get(c, "app").unwrap();
+
+            if(app_state.gui_selection_mode){
+                header_stack.set_visible_child_name("selection-mode");
+                bottom_stack.set_visible_child_name("selection-mode");
+            }else{
+                bottom_stack.set_visible_child_name("default");
+                header_stack.set_visible_child_name("default");
+            }
+        })).unwrap();
     }
 
 }
