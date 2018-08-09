@@ -26,6 +26,7 @@ pub struct SearchPage {
 
 impl SearchPage {
     fn connect_signals(&self) {
+        let mut client = Rc::new(RefCell::new(Client::new()));
         let search_entry: gtk::SearchEntry = self.builder.get_object("search_entry").unwrap();
         let search_sender = self.search_sender.clone();
 
@@ -39,8 +40,7 @@ impl SearchPage {
             params.insert("limit".to_string(), "150".to_string());
 
             // do the search itself
-            let mut client = Client::new();
-            client.search(params, search_sender.clone());
+            client.borrow_mut().search(params, search_sender.clone());
         });
     }
 }

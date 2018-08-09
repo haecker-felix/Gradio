@@ -67,20 +67,6 @@ impl StationRow {
     }
 
     fn connect_signals(&self) {
-        // It's possible that app_state is still blocked, so let's try it again, till it's available.
-        // let favicon_image: gtk::Image = self.builder.get_object("station_favicon").unwrap();
-        // let station = self.station.clone();
-        // let app_state = self.app_state.clone();
-        // gtk::timeout_add(250, move ||{
-        //     match app_state.try_borrow(){
-        //         Ok(app_state) => {
-        //             app_state.fdl.set_favicon_async(&favicon_image, &station, 32);
-        //             Continue(false)
-        //         },
-        //         Err(_) => Continue(true),
-        //     }
-        // });
-
         // let add_button: gtk::Button = self.builder.get_object("add_button").unwrap();
         // let station = self.station.clone();
         // let app_state = self.app_state.clone();
