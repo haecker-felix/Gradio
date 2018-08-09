@@ -44,6 +44,8 @@ impl GradioApp{
         let gtk_app = gtk::Application::new("de.haeckerfelix.gradio", gio::ApplicationFlags::empty()).expect("Failed to initialize GtkApplication");
         let window = Window::new(app_cache.clone());
 
+        app_cache.emit_all_signals();
+
         GradioApp {
             app_cache,
             player,

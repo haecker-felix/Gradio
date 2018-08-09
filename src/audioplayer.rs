@@ -90,22 +90,22 @@ impl AudioPlayer{
             let c = &*app_cache.get_cache();
             let mut app_state = AppState::get(c, "app").unwrap();
 
-            let new_station = app_state.ap_station.clone().unwrap();
+            app_state.ap_station.clone().map(|new_station|{
+                debug!("set station for playback: {:?}", new_station);
+                *stream.borrow_mut() = new_station.clone().url;
 
-           debug!("set station for playback: {:?}", new_station);
-           *stream.borrow_mut() = new_station.clone().url;
+                app_state.ap_title = None;
+                app_state.store(c);
+                app_cache.emit_signal("ap-title".to_string());
 
-           app_state.ap_title = None;
-           app_state.store(c);
-           app_cache.emit_signal("ap-title".to_string());
-
-           playbin.set_state(gstreamer::State::Null);
-           let p = playbin.clone();
-           thread::spawn(move||{
-               let station_url = Client::get_playable_station_url(&new_station);
-               p.set_property("uri", &station_url);
-               p.set_state(gstreamer::State::Playing);
-           });
+                playbin.set_state(gstreamer::State::Null);
+                let p = playbin.clone();
+                thread::spawn(move||{
+                    let station_url = Client::get_playable_station_url(&new_station);
+                    p.set_property("uri", &station_url);
+                    p.set_state(gstreamer::State::Playing);
+                });
+            });
         }));
     }
 

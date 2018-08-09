@@ -43,7 +43,16 @@ impl AppCache {
         self.cache.lock().unwrap()
     }
 
+    pub fn emit_all_signals(&self){
+        self.emit_signal("gui-current-page".to_string());
+        self.emit_signal("gui-selection-mode".to_string());
+        self.emit_signal("ap-station".to_string());
+        self.emit_signal("ap-title".to_string());
+        self.emit_signal("ap-playback".to_string());
+    }
+
     pub fn emit_signal(&self, signal: String){
+        debug!("Emit signal: {}", signal);
         self.signaler.emit(SigType::Update, &signal);
     }
 
