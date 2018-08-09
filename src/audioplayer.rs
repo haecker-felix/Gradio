@@ -73,11 +73,16 @@ impl AudioPlayer{
         let playbin = self.playbin.clone();
         self.app_cache.signaler.subscribe("ap-playback", Box::new(move |sig| {
             let c = &*app_cache.get_cache();
-            let app_state = AppState::get(c, "app").unwrap();
+            let mut app_state = AppState::get(c, "app").unwrap();
 
             match app_state.ap_state{
                 PlaybackState::SetPlaying => { playbin.set_state(gstreamer::State::Playing); },
-                PlaybackState::SetStopped => { playbin.set_state(gstreamer::State::Ready); },
+                PlaybackState::SetStopped => {
+                    playbin.set_state(gstreamer::State::Null);
+                    app_state.ap_state = PlaybackState::Stopped;
+                    app_state.store(c);
+                    app_cache.emit_signal("ap-playback".to_string());
+                },
                 _ => (),
             };
         }));
@@ -130,6 +135,7 @@ impl AudioPlayer{
                 match sc.get_current(){
                     gstreamer::State::Playing => app_state.ap_state = PlaybackState::Playing,
                     gstreamer::State::Paused => app_state.ap_state = PlaybackState::Loading,
+                    gstreamer::State::Ready => app_state.ap_state = PlaybackState::Loading,
                     _ => app_state.ap_state = PlaybackState::Stopped,
                 };
 
