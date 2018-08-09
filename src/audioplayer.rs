@@ -23,7 +23,7 @@ pub struct AudioPlayer{
     stream: Rc<RefCell<String>>,
 }
 
-#[derive(Clone, Serialize, Deserialize, Debug)]
+#[derive(Clone, Serialize, Deserialize, Debug, PartialEq)]
 pub enum PlaybackState{
     Playing,
     Stopped,
@@ -57,6 +57,17 @@ impl AudioPlayer{
     }
 
     fn connect_signals(&self){
+        // set initial playback state, we use gtk timeout here, otherwise arc/mutex is locked by sth else
+        let app_cache = self.app_cache.clone();
+        gtk::timeout_add(1, move ||{
+            let c = &*app_cache.get_cache();
+            let mut app_state = AppState::get(c, "app").unwrap();
+            app_state.ap_state = PlaybackState::Stopped;
+            app_state.store(c);
+            app_cache.emit_signal("ap-playback".to_string());
+            gtk::Continue(false)
+        });
+
         // Playback //
         let app_cache = self.app_cache.clone();
         let playbin = self.playbin.clone();
@@ -80,22 +91,21 @@ impl AudioPlayer{
             let mut app_state = AppState::get(c, "app").unwrap();
 
             let new_station = app_state.ap_station.clone().unwrap();
-            if(*stream.borrow() != new_station.url) { // check if station has changed, otherwise don't set it.
-                debug!("set station for playback: {:?}", new_station);
-                *stream.borrow_mut() = new_station.clone().url;
 
-                app_state.ap_title = None;
-                app_state.store(c);
-                app_cache.emit_signal("ap-title".to_string());
+           debug!("set station for playback: {:?}", new_station);
+           *stream.borrow_mut() = new_station.clone().url;
 
-                playbin.set_state(gstreamer::State::Null);
-                let p = playbin.clone();
-                thread::spawn(move||{
-                    let station_url = Client::get_playable_station_url(&new_station);
-                    p.set_property("uri", &station_url);
-                    p.set_state(gstreamer::State::Playing);
-                });
-            }
+           app_state.ap_title = None;
+           app_state.store(c);
+           app_cache.emit_signal("ap-title".to_string());
+
+           playbin.set_state(gstreamer::State::Null);
+           let p = playbin.clone();
+           thread::spawn(move||{
+               let station_url = Client::get_playable_station_url(&new_station);
+               p.set_property("uri", &station_url);
+               p.set_state(gstreamer::State::Playing);
+           });
         }));
     }
 

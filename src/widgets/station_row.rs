@@ -3,10 +3,12 @@ use gtk::prelude::*;
 
 use app_cache::AppCache;
 use app_state::AppState;
+use audioplayer::PlaybackState;
 use mdl::Model;
 use rustio::station::Station;
 use std::cell::RefCell;
 use std::rc::Rc;
+use widgets::playbutton::Playbutton;
 
 pub struct StationRow {
     app_cache: AppCache,
@@ -27,6 +29,10 @@ impl StationRow {
         let homepage_label: gtk::Label = builder.get_object("homepage_label").unwrap();
         let tags_label: gtk::Label = builder.get_object("tags_label").unwrap();
         let language_label: gtk::Label = builder.get_object("language_label").unwrap();
+
+        let mut playbutton = Playbutton::new(app_cache.clone(), Some(station.clone()));
+        let playbutton_box: gtk::Box = builder.get_object("playbutton_box").unwrap();
+        playbutton_box.add(&playbutton.container);
 
         station_label.set_text(&station.name);
         votes_label.set_text(&format!("{} Votes", station.votes));
@@ -66,20 +72,6 @@ impl StationRow {
         //         Err(_) => Continue(true),
         //     }
         // });
-
-        let play_button: gtk::Button = self.builder.get_object("play_button").unwrap();
-        let station = self.station.clone();
-        let app_cache = self.app_cache.clone();
-        play_button.connect_clicked(move |_| {
-            let station = station.clone();
-
-            let c = &*app_cache.get_cache();
-            AppState::get(c, "app").map(|mut a|{
-                a.ap_station = Some(station);
-                a.store(c);
-            });
-            app_cache.emit_signal("ap-station".to_string());
-        });
 
         // let add_button: gtk::Button = self.builder.get_object("add_button").unwrap();
         // let station = self.station.clone();

@@ -31,7 +31,7 @@ impl AppCache {
 
         // signal loop
         let s = signaler.clone();
-        gtk::timeout_add(50, move || {
+        gtk::timeout_add(50, move ||{
             gtk::Continue(s.signal_loop_sync())
         });
 

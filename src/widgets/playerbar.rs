@@ -12,6 +12,8 @@ use rustio::station::Station;
 use audioplayer::PlaybackState;
 use favicon_downloader::FaviconDownloader;
 
+use widgets::playbutton::Playbutton;
+
 pub struct Playerbar {
     app_cache: AppCache,
 
@@ -25,6 +27,11 @@ impl Playerbar {
     pub fn new(app_cache: AppCache) -> Self {
         let builder = gtk::Builder::new_from_string(include_str!("playerbar.ui"));
         let container: gtk::ActionBar = builder.get_object("playerbar").unwrap();
+
+        let playbutton = Playbutton::new(app_cache.clone(), None);
+        playbutton.container.set_property_height_request(40);
+        let playbutton_box: gtk::Box = builder.get_object("playbutton_box").unwrap();
+        playbutton_box.add(&playbutton.container);
 
         let fdl = Rc::new(FaviconDownloader::new());
 
@@ -40,45 +47,6 @@ impl Playerbar {
     }
 
     fn connect_signals(&self){
-        // start_playback_button
-        let start_playback_button: gtk::Button = self.builder.get_object("start_playback_button").unwrap();
-        let app_cache = self.app_cache.clone();
-        start_playback_button.connect_clicked(move|_|{
-            let c = &*app_cache.get_cache();
-            AppState::get(c, "app").map(|mut a|{
-                a.ap_state = PlaybackState::SetPlaying; a.store(c);
-            });
-            app_cache.emit_signal("ap-playback".to_string());
-        });
-
-
-        // stop_playback_button
-        let stop_playback_button: gtk::Button = self.builder.get_object("stop_playback_button").unwrap();
-        let app_cache = self.app_cache.clone();
-        stop_playback_button.connect_clicked(move|_|{
-            let c = &*app_cache.get_cache();
-            AppState::get(c, "app").map(|mut a|{
-                a.ap_state = PlaybackState::SetStopped; a.store(c);
-            });
-            app_cache.emit_signal("ap-playback".to_string());
-        });
-
-
-        // Connect to "ap-playback" signal
-        let app_cache = self.app_cache.clone();
-        let playback_stack: gtk::Stack = self.builder.get_object("playback_stack").unwrap();
-        self.app_cache.signaler.subscribe("ap-playback", Box::new(move |sig| {
-            let c = &*app_cache.get_cache();
-            let app_state = AppState::get(c, "app").unwrap();
-
-            match app_state.ap_state{
-                PlaybackState::Playing => playback_stack.set_visible_child_name("stop_playback"),
-                PlaybackState::Stopped => playback_stack.set_visible_child_name("start_playback"),
-                PlaybackState::Loading => playback_stack.set_visible_child_name("loading"),
-                _ => (),
-            }
-        }));
-
         // Connect to "ap-station" signal
         let app_cache = self.app_cache.clone();
         let container = self.container.clone();

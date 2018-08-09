@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.22.0 -->
+<!-- Generated with glade 3.22.1 -->
 <interface>
   <requires lib="gtk+" version="3.20"/>
   <object class="GtkListBoxRow" id="station_row">
@@ -23,21 +23,13 @@
                 <property name="border_width">12</property>
                 <property name="spacing">6</property>
                 <child>
-                  <object class="GtkButton" id="play_button">
+                  <object class="GtkBox" id="playbutton_box">
                     <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="receives_default">True</property>
-                    <property name="valign">center</property>
+                    <property name="can_focus">False</property>
+                    <property name="orientation">vertical</property>
                     <child>
-                      <object class="GtkImage">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="icon_name">media-playback-start-symbolic</property>
-                      </object>
+                      <placeholder/>
                     </child>
-                    <style>
-                      <class name="image-button"/>
-                    </style>
                   </object>
                   <packing>
                     <property name="expand">False</property>
