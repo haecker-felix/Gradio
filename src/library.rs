@@ -9,6 +9,7 @@ use std::fs::File;
 use std::io;
 use std::cell::RefCell;
 use std::rc::Rc;
+use std::error::Error;
 
 use mdl::model::Model;
 
@@ -95,8 +96,16 @@ impl Library {
 
             let station = self.client.get_station_by_id(station_id);
             let station = match station {
-                Ok(v) => v,
-                Err(_)=> continue,
+                
+                Ok(mut v) => match v.pop() {
+                    Some(station) => station,
+                    None          => continue, 
+                                }
+                Err(e)    => {
+                    info!("Cannot get station, id={} ,{}",station_id,e.description());
+                    continue
+                }
+                
             };
 
             info!("Found Station: {}", station.name);
