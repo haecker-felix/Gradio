@@ -1,7 +1,9 @@
 [package]
 name = "rustio"
-version = "0.1.0"
 authors = ["Felix Häcker <haecker.felix1207@gmail.com>"]
+license = "GPL3"
+version = "0.0.1"
+description = "Rust API wrapper for radio-browser.info"
 
 [dependencies]
 reqwest = "0.8.5"
