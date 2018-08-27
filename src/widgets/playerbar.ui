@@ -45,6 +45,7 @@
             <property name="label" translatable="yes">label</property>
             <property name="wrap">True</property>
             <property name="wrap_mode">char</property>
+            <property name="selectable">True</property>
             <property name="ellipsize">end</property>
             <attributes>
               <attribute name="weight" value="bold"/>
@@ -69,6 +70,7 @@
                 <property name="label" translatable="yes">subtitle</property>
                 <property name="wrap">True</property>
                 <property name="wrap_mode">char</property>
+                <property name="selectable">True</property>
                 <property name="ellipsize">end</property>
               </object>
             </child>

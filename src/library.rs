@@ -13,79 +13,58 @@ use std::rc::Rc;
 use mdl::model::Model;
 
 #[derive(Serialize, Deserialize, Debug)]
-pub struct NewLibrary{
-    pub library: HashMap<u64, u64> // station_id, collection_id
-}
-
-impl Model for NewLibrary {
-    fn key(&self) -> String { "library".to_string() }
-}
-
-impl NewLibrary{
-    pub fn new() -> Self {
-        let library = HashMap::new();
-
-        NewLibrary{ library }
-    }
-}
-
-
-
 pub struct Library {
-    connection: Connection,
-    client: Client,
-
-    update_callbacks: Rc<RefCell<Vec<Rc<RefCell<FnMut(Update)>>>>>,
+    pub stations: HashMap<Station, Option<String>> // station, collection name
 }
 
-#[derive(Clone)]
-pub enum Update{
-    // Station / Collection ID
-    StationAdded(Station, i32),
-    StationRemoved(Station, i32),
-
-    CollectionAdded(i32, String),
-    CollectionRemoved(i32),
+impl Model for Library {
+    fn key(&self) -> String { "library".to_string() }
 }
 
 impl Library {
     pub fn new() -> Self {
-        let path = Self::get_library_path();
-        let connection = match path {
-            Ok(path) => Connection::open(path).unwrap(),
-            Err(err) => {
-                warn!("Cannot open database: {}", err);
-                warn!("Gradio is using a temporary database!");
-                Connection::open_in_memory().unwrap()
-            }
-        };
-        let client = Client::new();
-        let update_callbacks = Rc::new(RefCell::new(Vec::new()));
+        let mut stations = HashMap::new();
+        let mut library = Library { stations };
 
-        Library { client, connection, update_callbacks }
+        Self::get_old_db_path().map(|path| library.import_db(path));
+
+        library
     }
 
-    pub fn read(&mut self) {
-        // Check if database is initialized
-        let mut stmt = self.connection.prepare("SELECT * FROM sqlite_master where type='table';").unwrap();
-        let mut rows = stmt.query(&[]).unwrap();
+    pub fn contains(&self, station: &Station) -> bool {
+        self.stations.contains_key(&station)
+    }
 
-        match rows.next() {
-            Some(_) => (),
-            None => {
-                info!("Initialize database...");
-                let library_table = "CREATE TABLE \"library\" ('station_id' INTEGER, 'collection_id' INTEGER);";
-                self.connection.execute(library_table, &[]).expect("Could not initialize database");
+    pub fn add_station(&mut self, station: Station, collection_name: Option<String>){
+        info!("Add station to library: {} ({})", station.name, station.id);
+        self.stations.insert(station, collection_name);
+    }
 
-                let collection_table = "CREATE TABLE \"collections\" ('collection_id' INTEGER, 'collection_name' TEXT);";
-                self.connection.execute(collection_table, &[]).expect("Could not initialize database");
-            }
+    pub fn remove_station(&mut self, station: &Station){
+        info!("Remove station from library: {} ({})", station.name, station.id);
+        self.stations.remove(&station);
+    }
+
+    fn get_old_db_path() -> Option<String>{
+        let mut path = glib::get_user_data_dir().unwrap();
+        path.push("gradio");
+        path.push("gradio.db");
+
+        info!("Check for old database format at {:?}", path);
+        if(path.exists()){
+            return Some(path.to_str().unwrap().to_string());
         }
+        None
+    }
+
+    fn import_db(&mut self, path: String){
+        let client = Client::new();
+        let connection = Connection::open(path).unwrap();
 
         // Read database itself
-        info!("Read database...");
-        debug!("{:?}", self.connection);
-        let mut stmt = self.connection.prepare("SELECT * FROM library").unwrap();
+        info!("Import database from...");
+        debug!("{:?}", connection);
+        let mut stmt = connection.prepare("SELECT * FROM library").unwrap();
         let mut rows = stmt.query(&[]).unwrap();
 
         while let Some(result_row) = rows.next() {
@@ -93,89 +72,10 @@ impl Library {
             let station_id: i32 = row.get(0);
             let collection_id: i32 = row.get(1);
 
-            let station = self.client.get_station_by_id(station_id);
-            let station = match station {
-                Ok(v) => v,
-                Err(_)=> continue,
-            };
-
-            info!("Found Station: {}", station.name);
-            Self::update(&self.update_callbacks, Update::CollectionAdded(collection_id, self.get_collection_name(&collection_id)));
-            Self::update(&self.update_callbacks, Update::StationAdded(station, collection_id));
-        }
-    }
-
-    pub fn contains(&self, station: &Station) -> bool {
-        let mut stmt = self.connection.prepare(&format!("SELECT * FROM library WHERE station_id = {}", station.id)).unwrap();
-        let mut rows = stmt.query(&[]).unwrap();
-
-        match rows.next() {
-            Some(_) => true,
-            None => false,
-        }
-    }
-
-    pub fn add_station(&self, station: &Station, collection_id: i32){
-        info!("Add station to library: {} ({})", station.name, station.id);
-        let mut stmt = self.connection.prepare(&format!("INSERT INTO library (station_id, collection_id) VALUES ('{}', '{}');", station.id, collection_id)).unwrap();
-        stmt.execute(&[]).unwrap();
-
-        Self::update(&self.update_callbacks, Update::CollectionAdded(collection_id, self.get_collection_name(&collection_id)));
-        Self::update(&self.update_callbacks, Update::StationAdded(station.clone(), collection_id));
-    }
-
-    pub fn remove_station(&self, station: &Station){
-        info!("Remove station from library: {} ({})", station.name, station.id);
-        let mut stmt = self.connection.prepare(&format!("DELETE FROM library WHERE station_id = '{}';", station.id)).unwrap();
-        stmt.execute(&[]).unwrap();
-        Self::update(&self.update_callbacks, Update::StationRemoved(station.clone(), 0));
-    }
-
-    pub fn get_collection_name(&self, collection_id: &i32) -> String {
-        let mut stmt = self.connection.prepare(&format!("SELECT collection_name FROM collections WHERE collection_id = {}", collection_id)).unwrap();
-        let mut rows = stmt.query(&[]).unwrap();
-        let mut name: String = "".to_string();
-
-        while let Some(result_row) = rows.next() {
-            let row = result_row.unwrap();
-            name = row.get(0);
-        }
-        name
-    }
-
-    fn get_library_path() -> io::Result<String> {
-        let mut path = glib::get_user_data_dir().unwrap();
-        debug!("User data dir: {:?}", path);
-
-        if !path.exists() {
-            info!("Create new user data directory...");
-            fs::create_dir(&path.to_str().unwrap())?;
-        }
-
-        path.push("gradio");
-        if !path.exists() {
-            info!("Create new data directory...");
-            fs::create_dir(&path.to_str().unwrap())?;
-        }
-
-        path.push("gradio.db");
-        if !path.exists() {
-            info!("Create new database...");
-            File::create(&path.to_str().unwrap())?;
-        }
-
-        return Ok(path.to_str().unwrap().to_string());
-    }
-
-    pub fn register_update_callback<F: FnMut(Update)+'static>(&mut self, callback: F) {
-        let cell = Rc::new(RefCell::new(callback));
-        self.update_callbacks.borrow_mut().push(cell);
-    }
-
-    fn update(update_callbacks: &Rc<RefCell<Vec<Rc<RefCell<FnMut(Update)>>>>>, val: Update) {
-        for callback in update_callbacks.borrow_mut().iter() {
-            let mut closure = callback.borrow_mut();
-            (&mut *closure)(val.clone());
+            client.get_station_by_id(station_id).map(|station|{
+                info!("Found Station: {}", station.name);
+                self.stations.insert(station, Some(collection_id.to_string()));
+            });
         }
     }
 }

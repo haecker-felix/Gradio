@@ -40,7 +40,10 @@ impl AppCache {
     }
 
     pub fn get_cache(&self) -> MutexGuard<Cache> {
-        self.cache.lock().unwrap()
+        match self.cache.try_lock() {
+            Ok(mg) => mg,
+            Err(_) => panic!("could not lock cache"),
+        }
     }
 
     pub fn emit_all_signals(&self){
@@ -49,6 +52,7 @@ impl AppCache {
         self.emit_signal("ap-station".to_string());
         self.emit_signal("ap-title".to_string());
         self.emit_signal("ap-playback".to_string());
+        self.emit_signal("library".to_string());
     }
 
     pub fn emit_signal(&self, signal: String){

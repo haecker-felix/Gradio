@@ -1,6 +1,8 @@
 extern crate gtk;
 
 use app_cache::AppCache;
+use app_state::AppState;
+use mdl::Model;
 use gtk::prelude::*;
 use gtk::Builder;
 use page::Page;
@@ -9,7 +11,6 @@ use std::cell::RefCell;
 use std::collections::HashMap;
 use std::rc::Rc;
 use widgets::station_listbox::StationListBox;
-use library::Update;
 
 pub struct LibraryPage {
     app_cache: AppCache,
@@ -19,13 +20,35 @@ pub struct LibraryPage {
     builder: Builder,
 
     container: gtk::Box,
-    station_listboxes: Rc<RefCell<HashMap<i32, StationListBox>>>, // Collection ID & StationListBox
+    station_listboxes: Rc<RefCell<HashMap<Option<String>, StationListBox>>>, // Collection Name & StationListBox
 }
 
 impl LibraryPage {
     pub fn connect_signals(&mut self) {
+        // Connect to "library" signal
+        let app_cache = self.app_cache.clone();
         let station_listboxes = self.station_listboxes.clone();
         let library_box: gtk::Box = self.builder.get_object("library_box").unwrap();
+        self.app_cache.signaler.subscribe("library", Box::new(move |sig| {
+            let c = &*app_cache.get_cache();
+            let app_state = AppState::get(c, "app").unwrap();
+
+            for (station, collection_name) in &app_state.library.stations {
+                match station_listboxes.borrow_mut().get_mut(&collection_name) {
+                    Some(station_listbox) => station_listbox.add_station(&station),
+                    None => {
+                        let mut station_listbox = StationListBox::new(app_cache.clone());
+                        station_listbox.set_title("name".to_string());
+                        //station_listbox.add_station(&station);
+                        library_box.add(&station_listbox.container);
+                    },
+                };
+            }
+        })).unwrap();
+
+
+
+
         // let app_state = self.app_state.clone();
 
         // self.app_state.borrow_mut().library.register_update_callback(move|update|{
@@ -80,7 +103,7 @@ impl Page for LibraryPage {
 
         let builder = gtk::Builder::new_from_string(include_str!("library_page.ui"));
         let container: gtk::Box = builder.get_object("library_page").unwrap();
-        let mut station_listboxes: Rc<RefCell<HashMap<i32, StationListBox>>> = Rc::new(RefCell::new(HashMap::new()));
+        let mut station_listboxes: Rc<RefCell<HashMap<Option<String>, StationListBox>>> = Rc::new(RefCell::new(HashMap::new()));
 
         let mut library_page = Self {
             app_cache,

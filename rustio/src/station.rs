@@ -1,4 +1,4 @@
-#[derive(Serialize, Deserialize, Debug, Clone)]
+#[derive(Serialize, Deserialize, Debug, Clone, Eq, Hash)]
 pub struct Station {
     pub name: String,
     pub language: String,
@@ -29,3 +29,9 @@ pub struct Station {
 }
 
 impl Station{}
+
+impl PartialEq for Station {
+    fn eq(&self, other: &Station) -> bool {
+        self.id == other.id
+    }
+}

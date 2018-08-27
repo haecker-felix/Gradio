@@ -1,5 +1,5 @@
 use rustio::station::Station;
-use library::NewLibrary;
+use library::Library;
 use audioplayer::PlaybackState;
 
 use mdl::model::Model;
@@ -9,7 +9,8 @@ use mdl::model::Model;
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct AppState{
-    pub library: NewLibrary,
+    // Library                        Signal:
+    pub library: Library,             // library
 
     // Graphical user interface (gui) Signal:
     pub gui_current_page: String,     // gui-current-page
@@ -27,7 +28,7 @@ impl Model for AppState {
 
 impl AppState{
     pub fn new() -> Self {
-        let library = NewLibrary::new();
+        let library = Library::new();
 
         let gui_current_page = "library_page".to_string();
         let gui_selection_mode = false;
