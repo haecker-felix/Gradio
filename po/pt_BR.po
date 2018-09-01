@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-01-01 14:42+0100\n"
-"PO-Revision-Date: 2018-07-19 13:41+0000\n"
+"PO-Revision-Date: 2018-09-01 16:33+0000\n"
 "Last-Translator: José Fonte <phastmike@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
 "gradio/translations/pt_BR/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 3.1-dev\n"
+"X-Generator: Weblate 3.2-dev\n"
 
 #: data/ui/app-menu.ui:6 data/ui/menubutton.ui:192
 #: src/page/gradio-settings-page.vala:120
@@ -152,7 +152,6 @@ msgid "Global database"
 msgstr "Base de dados global"
 
 #: data/ui/station-editor.ui:54
-#, fuzzy
 msgid ""
 "Gradio is using an internet database. Everything you enter here, is "
 "going to be visible for all users. Please be careful, and double check your "
@@ -227,7 +226,6 @@ msgid "Recently clicked stations"
 msgstr "Estações recentemente ouvidas"
 
 #: data/ui/page/search-page.ui:259
-#, fuzzy
 msgid "Stations with the most clicks"
 msgstr "Estações com mais ouvintes"
 
@@ -321,7 +319,6 @@ msgstr "Cache"
 #. APPEARANCE
 #. Dark design
 #: src/page/gradio-settings-page.vala:54
-#, fuzzy
 msgid "Prefer dark theme"
 msgstr "Optar pelo tema escuro"
 
@@ -354,7 +351,6 @@ msgid "Resume playback on startup"
 msgstr "Continuar a reprodução ao iniciar"
 
 #: src/page/gradio-settings-page.vala:74
-#, fuzzy
 msgid "Play the latest station if you start Gradio"
 msgstr "Tocar a última estação quando você iniciar o Gradio"
 
@@ -423,19 +419,16 @@ msgid "Sorting: %s / %s"
 msgstr "Ordenar: %s / %s"
 
 #: src/gradio-searchbar.vala:277
-#, fuzzy
 msgid "Select Country …"
-msgstr "Selecionar País ..."
+msgstr "Selecionar País …"
 
 #: src/gradio-searchbar.vala:308
-#, fuzzy
 msgid "Select State …"
-msgstr "Selecionar Estado ..."
+msgstr "Selecionar Estado …"
 
 #: src/gradio-searchbar.vala:339
-#, fuzzy
 msgid "Select Language …"
-msgstr "Selecionar Idioma ..."
+msgstr "Selecionar Idioma …"
 
 #: src/gradio-searchbar.vala:370
 msgid "Select Tag …"
@@ -454,12 +447,12 @@ msgid "\"Name\" and \"Stream\" information is required."
 msgstr "As informações \"Nome\" e \"Transmissão\" são requeridas."
 
 #: src/gradio-selection-toolbar.vala:98
-#, c-format, fuzzy
+#, c-format
 msgid "%i radio station(s) not present in library."
 msgstr "%i estação(ões) de rádio não está(ão) presente(s) na biblioteca."
 
 #: src/gradio-selection-toolbar.vala:108
-#, c-format, fuzzy
+#, c-format
 msgid "%i radio station(s) already added to library."
 msgstr "%i estação(ões) de rádio já adicionada(s) à biblioteca."
 
