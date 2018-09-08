@@ -6,5 +6,5 @@ Icon=de.haeckerfelix.gradio
 Terminal=false
 Type=Application
 Categories=AudioVideo;Audio;Player;GNOME;
-Keywords=gradio;internet;radio;
+Keywords=gradio;internet;radio;music;
 StartupNotify=true
