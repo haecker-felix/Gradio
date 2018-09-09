@@ -8,7 +8,7 @@ use mdl::Signaler;
 use std::cell::RefCell;
 use std::rc::Rc;
 
-use rustio::station::Station;
+use rustio::Station;
 use audioplayer::PlaybackState;
 use favicon_downloader::FaviconDownloader;
 

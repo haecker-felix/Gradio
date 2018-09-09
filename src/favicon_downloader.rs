@@ -4,7 +4,7 @@ extern crate reqwest;
 
 use gdk_pixbuf::Pixbuf;
 use gtk::prelude::*;
-use rustio::{client::Client, error::Error, station::Station};
+use rustio::{Client, Station};
 use std::fs;
 use std::fs::File;
 use std::io;
@@ -21,7 +21,7 @@ pub struct FaviconDownloader {
 
 impl FaviconDownloader {
     pub fn new() -> Self {
-        let client = Arc::new(Client::create_reqwest_client());
+        let client = Arc::new(reqwest::Client::new());
 
         FaviconDownloader { client: client }
     }

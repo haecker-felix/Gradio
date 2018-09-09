@@ -6,7 +6,7 @@ use mdl::Model;
 use gtk::prelude::*;
 use gtk::Builder;
 use page::Page;
-use rustio::station::Station;
+use rustio::Station;
 use std::cell::RefCell;
 use std::collections::HashMap;
 use std::rc::Rc;

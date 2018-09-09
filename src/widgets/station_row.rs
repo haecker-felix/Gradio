@@ -5,7 +5,7 @@ use app_cache::AppCache;
 use app_state::AppState;
 use audioplayer::PlaybackState;
 use mdl::Model;
-use rustio::station::Station;
+use rustio::Station;
 use std::cell::RefCell;
 use std::rc::Rc;
 use widgets::playbutton::Playbutton;

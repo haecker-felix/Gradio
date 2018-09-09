@@ -4,12 +4,12 @@ extern crate glib;
 use glib::prelude::*;
 use gstreamer::{Element, ElementFactory, ElementExt, Bus, Message, Continue, MessageView};
 use gstreamer::prelude::*;
-use rustio::station::Station;
+use rustio::Station;
 use std::thread;
 use std::rc::Rc;
 use std::cell::RefCell;
 use std::sync::mpsc::{channel, Sender, Receiver};
-use rustio::client::Client;
+use rustio::Client;
 
 use app_cache::AppCache;
 use app_state::AppState;
@@ -19,7 +19,6 @@ use mdl::Model;
 pub struct AudioPlayer{
     app_cache: AppCache,
     playbin: Element,
-    client: Client,
     stream: Rc<RefCell<String>>,
 }
 
@@ -40,7 +39,7 @@ impl AudioPlayer{
 
         let playbin = ElementFactory::make("playbin", "playbin").unwrap();
         let bus = playbin.get_bus().expect("Unable to get playbin bus");
-        let client = Client::new();
+        
         let stream = Rc::new(RefCell::new("".to_string()));
 
         Self::new_bus_messages(app_cache.clone(), bus);
@@ -48,7 +47,6 @@ impl AudioPlayer{
         let player = AudioPlayer{
             app_cache,
             playbin,
-            client,
             stream,
         };
 
@@ -106,7 +104,8 @@ impl AudioPlayer{
                 playbin.set_state(gstreamer::State::Null);
                 let p = playbin.clone();
                 thread::spawn(move||{
-                    let station_url = Client::get_playable_station_url(&new_station);
+                    let client = Client::new("http://www.radio-browser.info".to_string());
+                    let station_url = client.get_playable_station_url(new_station).unwrap();
                     p.set_property("uri", &station_url);
                     p.set_state(gstreamer::State::Playing);
                 });

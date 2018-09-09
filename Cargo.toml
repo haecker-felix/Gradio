@@ -20,7 +20,7 @@ libhandy = { git = "https://gitlab.gnome.org/jsparber/libhandy-rs" }
 mdl = "1.0.2"
 serde_derive = "1.0.70"
 serde = "1.0.70"
-rustio = "0.0.1"
+rustio = { git = "https://github.com/haecker-felix/Rustio" }
 
 [dependencies.gtk]
 version = "0.4.0"

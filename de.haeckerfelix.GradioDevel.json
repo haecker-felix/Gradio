@@ -1,5 +1,5 @@
 {
-    "app-id" : "de.haeckerfelix.gradio",
+    "app-id" : "de.haeckerfelix.GradioDevel",
     "runtime" : "org.gnome.Sdk",
     "runtime-version" : "3.28",
     "sdk" : "org.gnome.Sdk",
@@ -7,6 +7,10 @@
         "org.freedesktop.Sdk.Extension.rust-stable"
     ],
     "command" : "gradio",
+    "tags" : [
+        "nightly"
+    ],
+    "desktop-file-name-prefix" : "(Nightly) ",
     "finish-args" : [
         "--share=ipc",
         "--share=network",
@@ -27,10 +31,10 @@
             "--share=network"
         ],
         "env" : {
-            "CARGO_HOME" : "./.cargo",
+            "CARGO_HOME" : "/run/build/Gradio/cargo",
             "RUST_LOG" : "rustio,gradio=debug",
             "RUST_BACKTRACE" : "1",
-            "RUSTFLAGS" : "-Awarnings"
+            "RUSTFLAGS" : "--error-format=short --remap-path-prefix =../"
         }
     },
     "modules" : [
@@ -47,6 +51,7 @@
         {
             "name" : "gradio",
             "buildsystem" : "meson",
+            "config-opts" : [ "-Dprofile=development" ],
             "sources" : [
                 {
                     "type" : "git",

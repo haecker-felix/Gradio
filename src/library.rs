@@ -2,7 +2,7 @@ extern crate glib;
 extern crate rusqlite;
 
 use rusqlite::Connection;
-use rustio::{client::Client, station::Station};
+use rustio::{Client, Station};
 use std::collections::HashMap;
 use std::fs;
 use std::fs::File;
@@ -58,7 +58,7 @@ impl Library {
     }
 
     fn import_db(&mut self, path: String){
-        let client = Client::new();
+        let client = Client::new("http://www.radio-browser.info".to_string());
         let connection = Connection::open(path).unwrap();
 
         // Read database itself

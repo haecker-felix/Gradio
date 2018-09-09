@@ -1,4 +1,4 @@
-use rustio::station::Station;
+use rustio::Station;
 use library::Library;
 use audioplayer::PlaybackState;
 
