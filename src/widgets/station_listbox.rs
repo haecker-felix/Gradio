@@ -7,6 +7,7 @@ use widgets::station_row::StationRow;
 use gtk::WidgetExt;
 use libhandy::{Column, ColumnExt};
 use std::collections::HashMap;
+use std::rc::Rc;
 use favicon_downloader::FaviconDownloader;
 
 pub struct StationListBox {

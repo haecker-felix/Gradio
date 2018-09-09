@@ -53,7 +53,7 @@ impl Library {
     }
 
     fn import_db(&mut self, path: String){
-        let client = Client::new("http://www.radio-browser.info".to_string());
+        let client = Client::new("http://www.radio-browser.info");
         let connection = Connection::open(path).unwrap();
 
         // Read database itself
@@ -64,8 +64,8 @@ impl Library {
 
         while let Some(result_row) = rows.next() {
             let row = result_row.unwrap();
-            let station_id: i32 = row.get(0);
-            let collection_id: i32 = row.get(1);
+            let station_id: u32 = row.get(0);
+            let collection_id: u32 = row.get(1);
 
             client.get_station_by_id(station_id).map(|station|{
                 info!("Found Station: {}", station.name);

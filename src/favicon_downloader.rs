@@ -14,6 +14,7 @@ use std::sync::mpsc::channel;
 use std::sync::Arc;
 use std::thread;
 use url::Url;
+use reqwest::Result;
 
 pub struct FaviconDownloader {
     client: Arc<reqwest::Client>,
@@ -43,18 +44,15 @@ impl FaviconDownloader {
         return Ok(path);
     }
 
-    fn get_favicon_path(station: &Station, client: &reqwest::Client) -> Result<PathBuf, Error> {
-        let mut path = Self::get_cache_path()?;
+    fn get_favicon_path(station: &Station, client: &reqwest::Client) -> Result<PathBuf> {
+        let mut path = Self::get_cache_path().unwrap();
         path.push(&station.id);
 
         if !path.exists() {
-            let url = Url::parse(&station.favicon)?;
-            if url.cannot_be_a_base() {
-                return Err(Error::ParseError);
-            }
+            let url = Url::parse(&station.favicon).unwrap();
             let mut response = client.get(url).send()?;
 
-            let mut file = File::create(&path)?;
+            let mut file = File::create(&path).unwrap();
             let mut buffer = Vec::new();
             response.read_to_end(&mut buffer);
 
