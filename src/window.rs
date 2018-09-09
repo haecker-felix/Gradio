@@ -116,7 +116,7 @@ impl Window{
             let c = &*app_cache.get_cache();
             let app_state = AppState::get(c, "app").unwrap();
 
-            if(app_state.gui_selection_mode){
+            if app_state.gui_selection_mode{
                 header_stack.set_visible_child_name("selection_mode");
                 bottom_stack.set_visible_child_name("selection_mode");
             }else{
@@ -135,7 +135,7 @@ impl Window{
             let app_state = AppState::get(c, "app").unwrap();
             debug!("Set page: {}", app_state.gui_current_page);
 
-            if(app_state.gui_current_page == "library_page"){
+            if app_state.gui_current_page == "library_page"{
                 header_button_stack.set_visible_child_name("add");
                 page_stack.set_visible_child_name("library_page");
                 page_label.set_text("Library");
@@ -143,7 +143,7 @@ impl Window{
                 header_button_stack.set_visible_child_name("back");
             }
 
-            if(app_state.gui_current_page == "search_page"){
+            if app_state.gui_current_page == "search_page"{
                 page_stack.set_visible_child_name("search_page");
                 page_label.set_text("Add stations");
             }

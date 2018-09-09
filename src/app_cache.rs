@@ -12,7 +12,6 @@ use std::sync::Arc;
 
 use std::io;
 use std::fs;
-use std::fs::File;
 
 #[derive(Clone)]
 pub struct AppCache {

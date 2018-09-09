@@ -4,7 +4,7 @@ extern crate reqwest;
 
 use gdk_pixbuf::Pixbuf;
 use gtk::prelude::*;
-use rustio::{Client, Station};
+use rustio::Station;
 use std::fs;
 use std::fs::File;
 use std::io;

@@ -4,10 +4,6 @@ use gtk::prelude::*;
 use app_cache::AppCache;
 use app_state::AppState;
 use mdl::Model;
-use mdl::Signaler;
-use std::cell::RefCell;
-use std::rc::Rc;
-
 use rustio::Station;
 use audioplayer::PlaybackState;
 
@@ -62,7 +58,7 @@ impl Playbutton {
             let mut app_state = AppState::get(c, "app").unwrap();
 
             // playbutton in station row
-            if(station.is_some()){
+            if station.is_some(){
                 let s = station.clone();
                 app_state.ap_station = s;
                 app_state.store(c);
@@ -113,14 +109,14 @@ impl Playbutton {
     fn set_state(ap_state: PlaybackState, playback_stack: gtk::Stack, btn_station: Option<Station>, ap_station: Option<Station>){
         let mut set = false;
 
-        if(btn_station.is_some() && ap_station.is_some()){
-            if(ap_state != PlaybackState::Playing){
+        if btn_station.is_some() && ap_station.is_some(){
+            if ap_state != PlaybackState::Playing{
                 playback_stack.set_visible_child_name("start_playback")
             }
-            set = (btn_station.unwrap().url == ap_station.unwrap().url);
+            set = btn_station.unwrap().url == ap_station.unwrap().url;
         }else{ set = true; }
 
-        if(set){
+        if set{
              match ap_state{
                 PlaybackState::Playing => playback_stack.set_visible_child_name("stop_playback"),
                 PlaybackState::Stopped => playback_stack.set_visible_child_name("start_playback"),

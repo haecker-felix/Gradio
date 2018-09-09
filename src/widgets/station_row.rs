@@ -3,10 +3,8 @@ use gtk::prelude::*;
 
 use app_cache::AppCache;
 use app_state::AppState;
-use audioplayer::PlaybackState;
 use mdl::Model;
 use rustio::Station;
-use std::cell::RefCell;
 use std::rc::Rc;
 use widgets::playbutton::Playbutton;
 use favicon_downloader::FaviconDownloader;
@@ -98,13 +96,13 @@ impl StationRow {
             let c = &*app_cache.get_cache();
             let mut app_state = AppState::get(c, "app").unwrap();
 
-            if(button.get_button() == 3){
+            if button.get_button() == 3{
                 app_state.gui_selection_mode = true;
                 app_state.store(c);
                 app_cache.emit_signal("gui-selection-mode".to_string());
                 check_button.set_active(true);
             }else{
-                if(app_state.gui_selection_mode){
+                if app_state.gui_selection_mode{
                     check_button.set_active(!check_button.get_active());
                 }else{
                     revealer.set_reveal_child(!revealer.get_reveal_child());
@@ -121,7 +119,7 @@ impl StationRow {
             let c = &*app_cache.get_cache();
             let app_state = AppState::get(c, "app").unwrap();
 
-            if(app_state.gui_selection_mode){
+            if app_state.gui_selection_mode{
                 selection_mode_revealer.set_reveal_child(true);
                 revealer.set_reveal_child(false);
             }else{

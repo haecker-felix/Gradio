@@ -20,7 +20,7 @@ pub struct SearchPage {
     container: gtk::Box,
     result_listbox: Rc<RefCell<StationListBox>>,
 
-    search_sender: Sender<ClientUpdate>,
+    search_sender: Sender<Message>,
 }
 
 impl SearchPage {

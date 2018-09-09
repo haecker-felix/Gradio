@@ -4,12 +4,7 @@ use gtk::prelude::*;
 use app_cache::AppCache;
 use app_state::AppState;
 use mdl::Model;
-use mdl::Signaler;
-use std::cell::RefCell;
 use std::rc::Rc;
-
-use rustio::Station;
-use audioplayer::PlaybackState;
 use favicon_downloader::FaviconDownloader;
 
 use widgets::playbutton::Playbutton;

@@ -4,11 +4,6 @@ extern crate rusqlite;
 use rusqlite::Connection;
 use rustio::{Client, Station};
 use std::collections::HashMap;
-use std::fs;
-use std::fs::File;
-use std::io;
-use std::cell::RefCell;
-use std::rc::Rc;
 
 use mdl::model::Model;
 
@@ -51,7 +46,7 @@ impl Library {
         path.push("gradio.db");
 
         info!("Check for old database format at {:?}", path);
-        if(path.exists()){
+        if path.exists(){
             return Some(path.to_str().unwrap().to_string());
         }
         None

@@ -3,7 +3,6 @@ extern crate gio;
 extern crate glib;
 extern crate gtk;
 
-use rustio::{Client};
 use app_state::AppState;
 use app_cache::AppCache;
 use window::Window;

@@ -3,8 +3,6 @@ use gtk::prelude::*;
 
 use app_cache::AppCache;
 use rustio::Station;
-use std::cell::RefCell;
-use std::rc::Rc;
 use widgets::station_row::StationRow;
 use gtk::WidgetExt;
 use libhandy::{Column, ColumnExt};

@@ -2,13 +2,11 @@ extern crate gstreamer;
 extern crate gtk;
 extern crate glib;
 use glib::prelude::*;
-use gstreamer::{Element, ElementFactory, ElementExt, Bus, Message, Continue, MessageView};
+use gstreamer::{Element, ElementFactory, ElementExt, Message, Continue, MessageView};
 use gstreamer::prelude::*;
-use rustio::Station;
 use std::thread;
 use std::rc::Rc;
 use std::cell::RefCell;
-use std::sync::mpsc::{channel, Sender, Receiver};
 use rustio::Client;
 
 use app_cache::AppCache;
@@ -147,7 +145,7 @@ impl AudioPlayer{
 
     fn new_bus_messages (app_cache: AppCache, bus: gstreamer::Bus){
         gtk::timeout_add(250, move ||{
-            while(bus.have_pending()){
+            while bus.have_pending(){
                 bus.pop().map(|message| Self::parse_message(&message, app_cache.clone()) );
             }
             Continue(true)
