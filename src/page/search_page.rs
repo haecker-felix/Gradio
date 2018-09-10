@@ -9,6 +9,8 @@ use std::collections::HashMap;
 use std::rc::Rc;
 use std::sync::mpsc::{channel, Sender};
 use widgets::station_listbox::StationListBox;
+use rustio::Station;
+use rustio::Message;
 
 pub struct SearchPage {
     app_cache: AppCache,
@@ -62,13 +64,13 @@ impl Page for SearchPage {
         let result_listbox_clone = result_listbox.clone();
         gtk::timeout_add(100, move || {
             match search_receiver.try_recv() {
-                Ok(ClientUpdate::NewStations(stations)) => {
+                Ok(Message::StationAdd(stations)) => {
                     for station in stations {
                         result_listbox_clone.borrow_mut().add_station(&station);
                     }
                     results_stack.set_visible_child_name("results");
                 }
-                Ok(ClientUpdate::Clear) => {
+                Ok(Message::Clear) => {
                     results_stack.set_visible_child_name("loading");
                     result_listbox_clone.borrow_mut().clear();
                 }
