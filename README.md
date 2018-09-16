@@ -1,8 +1,6 @@
 # Gradio
 A GTK3 app for finding and listening to internet radio stations.
 ___
-If you have any questions, want to discuss design or simply hang out, please join us on #Gradio:matrix.org (You can use [Fractal](https://gitlab.gnome.org/World/fractal) as matrix client!)
-
 => [Rust port / development here](https://github.com/haecker-felix/Gradio/tree/rust_port)
 ___
 
@@ -17,6 +15,9 @@ https://img.shields.io/badge/flatpak-download-brightgreen.svg)](https://flathub.
 
 ## General Informations
 * **Installation**  
+
+<a href='https://flathub.org/apps/details/de.haeckerfelix.Gradio'><img width='240' alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.png'/></a>
+
 [Open install instructions](https://github.com/haecker-felix/gradio/wiki/Install-Instructions) / [Open build instructions](https://github.com/haecker-felix/gradio/wiki/Build-Instructions)
 
 * **License**  
