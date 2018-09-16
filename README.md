@@ -16,7 +16,7 @@ https://img.shields.io/badge/flatpak-download-brightgreen.svg)](https://flathub.
 ## General Informations
 * **Installation**  
 
-<a href='https://flathub.org/apps/details/de.haeckerfelix.Gradio'><img width='240' alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.png'/></a>
+<a href='https://flathub.org/apps/details/de.haeckerfelix.gradio'><img width='240' alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.png'/></a>
 
 [Open install instructions](https://github.com/haecker-felix/gradio/wiki/Install-Instructions) / [Open build instructions](https://github.com/haecker-felix/gradio/wiki/Build-Instructions)
 
