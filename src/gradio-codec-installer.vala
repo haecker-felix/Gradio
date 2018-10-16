@@ -35,8 +35,8 @@ namespace Gradio{
 				var context = new Gst.PbUtils.InstallPluginsContext();
 				Gst.PbUtils.install_plugins_async(installer_detail, context, install_callback);
 			}else{
-				warning("Installation failed. Codec installation is not supported by your distribution. Please install the missin codec by yourself.");
-				App.window.show_notification("Automatic codec installation isn't supported by your distribution.\nPlease install \""+missingcodec+"\" manually.");
+				warning("Installation failed. Codec installation is not supported by your flatpak's distribution. Please install the missin codec by yourself.");
+				App.window.show_notification("Automatic codec installation isn't supported by your flatpak's distribution.\nPlease install \""+missingcodec+"\" manually.");
 			}
 		}
 
