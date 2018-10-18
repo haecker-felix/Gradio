@@ -102,7 +102,7 @@ impl AudioPlayer{
                 playbin.set_state(gstreamer::State::Null);
                 let p = playbin.clone();
                 thread::spawn(move||{
-                    let client = Client::new("http://www.radio-browser.info");
+                    let mut client = Client::new("http://www.radio-browser.info");
                     let station_url = client.get_playable_station_url(new_station).unwrap();
                     p.set_property("uri", &station_url);
                     p.set_state(gstreamer::State::Playing);

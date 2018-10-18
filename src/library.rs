@@ -53,7 +53,7 @@ impl Library {
     }
 
     fn import_db(&mut self, path: String){
-        let client = Client::new("http://www.radio-browser.info");
+        let mut client = Client::new("http://www.radio-browser.info");
         let connection = Connection::open(path).unwrap();
 
         // Read database itself

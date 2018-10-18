@@ -34,12 +34,12 @@ impl LibraryPage {
 
             for (station, collection_name) in &app_state.library.stations {
                 match station_listboxes.borrow_mut().get_mut(&collection_name) {
-                    Some(station_listbox) => station_listbox.add_station(&station),
+                    Some(station_listbox) => /*station_listbox.add_station(&station)*/(),
                     None => {
-                        let mut station_listbox = StationListBox::new(app_cache.clone());
-                        station_listbox.set_title("name".to_string());
+                        //let mut station_listbox = StationListBox::new(app_cache.clone());
+                        //station_listbox.set_title("name".to_string());
                         //station_listbox.add_station(&station);
-                        library_box.add(&station_listbox.container);
+                        //library_box.add(&station_listbox.container);
                     },
                 };
             }

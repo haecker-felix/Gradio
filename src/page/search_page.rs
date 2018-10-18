@@ -3,7 +3,7 @@ extern crate gtk;
 use app_cache::AppCache;
 use gtk::prelude::*;
 use page::Page;
-use rustio::Client;
+use rustio::AsyncClient;
 use std::cell::RefCell;
 use std::collections::HashMap;
 use std::rc::Rc;
@@ -11,6 +11,8 @@ use std::sync::mpsc::{channel, Sender};
 use widgets::station_listbox::StationListBox;
 use rustio::Station;
 use rustio::Message;
+use rustio::StationSearch;
+use rustio::Task;
 
 pub struct SearchPage {
     app_cache: AppCache,
@@ -22,26 +24,28 @@ pub struct SearchPage {
     container: gtk::Box,
     result_listbox: Rc<RefCell<StationListBox>>,
 
-    search_sender: Sender<Message>,
+    client_sender: Sender<Message>,
 }
 
 impl SearchPage {
     fn connect_signals(&self) {
-        let mut client = Rc::new(RefCell::new(Client::new()));
-        let search_entry: gtk::SearchEntry = self.builder.get_object("search_entry").unwrap();
-        let search_sender = self.search_sender.clone();
+        let mut search_entry: gtk::SearchEntry = self.builder.get_object("search_entry").unwrap();
+
+        // create and start async client
+        let mut async_client = RefCell::new(AsyncClient::new("http://www.radio-browser.info".to_string(), self.client_sender.clone()));
+        async_client.borrow_mut().start_loop();
 
         search_entry.connect_search_changed(move |search_entry| {
             // Get search term
             let search_term = search_entry.get_text().unwrap();
+            debug!("Search for {}", search_term);
 
-            // prepare search params
-            let mut params = HashMap::new();
-            params.insert("name".to_string(), search_term);
-            params.insert("limit".to_string(), "150".to_string());
+            // create search task
+            let search_data = StationSearch::search_for_name(search_term, false, 20);
+            let task = Task::Search(search_data);
 
-            // do the search itself
-            client.borrow_mut().search(params, search_sender.clone());
+            // set task for async_client
+            async_client.borrow_mut().set_task(task);
         });
     }
 }
@@ -54,30 +58,12 @@ impl Page for SearchPage {
         let builder = gtk::Builder::new_from_string(include_str!("search_page.ui"));
         let container: gtk::Box = builder.get_object("search_page").unwrap();
 
-        let result_listbox: Rc<RefCell<StationListBox>> = Rc::new(RefCell::new(StationListBox::new(app_cache.clone())));
+        let (client_sender, client_receiver) = channel();
+
+        let result_listbox: Rc<RefCell<StationListBox>> = Rc::new(RefCell::new(StationListBox::new(app_cache.clone(), client_receiver)));
         let results_box: gtk::Box = builder.get_object("results_box").unwrap();
         let results_stack: gtk::Stack = builder.get_object("results_stack").unwrap();
         results_box.add(&result_listbox.borrow().container);
-
-        let (search_sender, search_receiver) = channel();
-
-        let result_listbox_clone = result_listbox.clone();
-        gtk::timeout_add(100, move || {
-            match search_receiver.try_recv() {
-                Ok(Message::StationAdd(stations)) => {
-                    for station in stations {
-                        result_listbox_clone.borrow_mut().add_station(&station);
-                    }
-                    results_stack.set_visible_child_name("results");
-                }
-                Ok(Message::Clear) => {
-                    results_stack.set_visible_child_name("loading");
-                    result_listbox_clone.borrow_mut().clear();
-                }
-                Err(_) => (),
-            }
-            Continue(true)
-        });
 
         let searchpage = SearchPage {
             app_cache,
@@ -86,7 +72,7 @@ impl Page for SearchPage {
             builder,
             container,
             result_listbox,
-            search_sender,
+            client_sender,
         };
         searchpage.connect_signals();
         searchpage
