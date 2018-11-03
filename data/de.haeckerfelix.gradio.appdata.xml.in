@@ -44,6 +44,11 @@
   </kudos>
 
   <releases>
+    <release version="7.2" date="2018-11-03">
+      <description>
+        <p>Updated translations, minor user interface improvements</p>
+      </description>
+    </release>
     <release version="7.1" date="2018-01-20">
       <description>
         <p>Some discover design tweaks, improved tags support, improved filter popover, updated translations, improved m3u export</p>
