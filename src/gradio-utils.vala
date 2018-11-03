@@ -124,44 +124,40 @@ namespace Gradio{
 		}
 
 		public static string export_library_dialog (string current_name){
-			Gtk.FileChooserDialog chooser = new Gtk.FileChooserDialog (
-				_("Export current library"), App.window, Gtk.FileChooserAction.SAVE,
-				_("_Cancel"),
-				Gtk.ResponseType.CANCEL,
-				 _("Export"),
-				Gtk.ResponseType.ACCEPT);
+		    Gtk.FileChooserNative export_dialog = new Gtk.FileChooserNative (
+                                                     _("Export current library"),
+                                                     App.window, Gtk.FileChooserAction.SAVE,
+                                                     _("_Export"),
+                                                     _("_Cancel"));
 
-			chooser.set_current_name(current_name);
-			chooser.set_do_overwrite_confirmation(true);
+			export_dialog.set_current_name(current_name);
+			export_dialog.set_do_overwrite_confirmation(true);
 
 			string path = "";
-			if (chooser.run () == Gtk.ResponseType.ACCEPT) {
-				path = chooser.get_file().get_path();
+			if (export_dialog.run () == Gtk.ResponseType.ACCEPT) {
+				path = export_dialog.get_file().get_path();
 			}
-			chooser.close();
-			chooser.destroy();
+			export_dialog.destroy();
 			return path;
 		}
 
 		public static string import_library_dialog (){
-			Gtk.FileChooserDialog chooser = new Gtk.FileChooserDialog (
-				_("Select database to import"), App.window, Gtk.FileChooserAction.OPEN,
-				_("_Cancel"),
-				Gtk.ResponseType.CANCEL,
-				 _("Import"),
-				Gtk.ResponseType.ACCEPT);
+			Gtk.FileChooserNative import_dialog = new Gtk.FileChooserNative (
+                                                     _("Select database to import"),
+                                                     App.window, Gtk.FileChooserAction.OPEN,
+                                                     _("_Import"),
+                                                     _("_Cancel"));
 
 			Gtk.FileFilter filter = new Gtk.FileFilter ();
-			chooser.set_filter (filter);
+			import_dialog.set_filter (filter);
 			filter.add_mime_type ("application/x-sqlite3");
 
 
 			string path = "";
-			if (chooser.run () == Gtk.ResponseType.ACCEPT) {
-				path = chooser.get_file().get_path();
+			if (import_dialog.run () == Gtk.ResponseType.ACCEPT) {
+				path = import_dialog.get_file().get_path();
 			}
-			chooser.close();
-			chooser.destroy();
+			import_dialog.destroy();
 			return path;
 		}
 

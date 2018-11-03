@@ -1,60 +1,56 @@
 {
-    "app-id" : "de.haeckerfelix.gradio",
-    "runtime" : "org.gnome.Platform",
-    "runtime-version" : "master",
-    "sdk" : "org.gnome.Sdk",
-    "command" : "gradio",
-    "finish-args" : [
-        "--share=ipc",
-        "--share=network",
-        "--socket=x11",
-        "--socket=wayland",
-        "--socket=pulseaudio",
-        "--device=dri",
-        "--env=DCONF_USER_CONFIG_DIR=.config/dconf",
-        "--filesystem=xdg-run/dconf",
-        "--filesystem=~/.config/dconf:ro",
-        "--filesystem=host",
-        "--talk-name=ca.desrt.dconf",
-        "--own-name=org.mpris.MediaPlayer2.gradio"
-    ],
-    "modules" : [
-        {
-            "name" : "gst-libav",
-            "config-opts" : [
-                "--disable-gtk-doc",
-                "--with-system-libav"
-            ],
-            "cleanup" : [
-                "*.la",
-                "/share/gtk-doc"
-            ],
-            "sources" : [
-                {
-                    "type" : "archive",
-                    "url" : "https://gstreamer.freedesktop.org/src/gst-libav/gst-libav-1.10.4.tar.xz",
-                    "sha256" : "6ca0feca75e3d48315e07f20ec37cf6260ed1e9dde58df355febd5016246268b"
-                }
-            ],
-            "modules" : [
-                "org.ffmpeg.FFmpeg.json"
-            ]
-        },
-        {
-            "name" : "gradio",
-            "buildsystem" : "meson",
-            "builddir" : true,
-            "sources" : [
-                {
-                    "type" : "archive",
-                    "url" : "https://github.com/haecker-felix/gradio/archive/v6.0.zip",
-                    "sha256" : "22c576656c8b7c81d45a749a88eeceb059d3e3f3e9814f7c44ae0770df68a638"
-                }
-            ]
-        }
-    ],
-    "build-options" : {
-        "env" : {
-        }
-    }
+   "app-id":"de.haeckerfelix.gradio",
+   "runtime":"org.gnome.Platform",
+   "runtime-version":"3.28",
+   "sdk":"org.gnome.Sdk",
+   "command":"gradio",
+   "finish-args":[
+      "--share=ipc",
+      "--share=network",
+      "--socket=x11",
+      "--socket=wayland",
+      "--socket=pulseaudio",
+      "--device=dri",
+      "--env=DCONF_USER_CONFIG_DIR=.config/dconf",
+      "--filesystem=xdg-run/dconf",
+      "--filesystem=~/.config/dconf:ro",
+      "--talk-name=ca.desrt.dconf",
+      "--own-name=org.mpris.MediaPlayer2.gradio"
+   ],
+   "modules":[
+     {
+         "name": "gst-libav",
+         "buildsystem": "meson",
+         "sources": [
+             {
+               "type": "archive",
+               "url": "https://gstreamer.freedesktop.org/src/gst-libav/gst-libav-1.12.4.tar.xz",
+               "sha256": "2a56aa5d2d8cd912f2bce17f174713d2c417ca298f1f9c28ee66d4aa1e1d9e62"
+             }
+         ]
+     },
+     {
+         "name": "gst-plugins-ugly",
+         "config-opts": [ "--disable-gtk-doc"],
+         "cleanup": [ "*.la", "/share/gtk-doc" ],
+         "sources": [
+             {
+               "type": "archive",
+               "url": "https://gstreamer.freedesktop.org/src/gst-plugins-ugly/gst-plugins-ugly-1.12.4.tar.xz",
+               "sha256": "1c165b8d888ed350acd8e6ac9f6fe06508e6fcc0a3afc6ccc9fbeb30df9be522"
+             }
+         ]
+      },
+      {
+         "name": "gradio",
+         "buildsystem": "meson",
+         "sources":[
+            {
+               "type": "archive",
+               "url": "https://github.com/haecker-felix/gradio/archive/v7.1.tar.gz",
+               "sha256": "7b350583124f00f9030daaf4042cd54c9d340d67124dad298266d2dfa81ba766"
+            }
+         ]
+      }
+   ]
 }
