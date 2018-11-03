@@ -127,13 +127,6 @@ namespace Gradio {
 			action = new GLib.SimpleAction ("select-none", null);
 			action.activate.connect (() => { window.select_none (); });
 			this.add_action (action);
-
-
-			// setup appmenu
-			var builder = new Gtk.Builder.from_resource ("/de/haecker-felix/gradio/ui/app-menu.ui");
-			var app_menu = builder.get_object ("app-menu") as GLib.MenuModel;
-			message("Desktop session is: " + GLib.Environment.get_variable("DESKTOP_SESSION"));
-			if((GLib.Environment.get_variable("DESKTOP_SESSION")).contains("gnome")) set_app_menu (app_menu);
 		}
 
 		public override bool dbus_register (DBusConnection connection, string object_path) {

@@ -1,5 +1,4 @@
 # List of source files containing translatable strings.
-data/ui/app-menu.ui
 data/ui/page/library-page.ui
 data/ui/page/collections-page.ui
 data/ui/details-box.ui

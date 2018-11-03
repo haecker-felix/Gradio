@@ -1,264 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.20.0 -->
+<!-- Generated with glade 3.22.0 -->
 <interface>
   <requires lib="gtk+" version="3.18"/>
   <object class="GtkPopoverMenu" id="MenuPopover">
     <property name="width_request">300</property>
     <property name="can_focus">False</property>
-    <child>
-      <object class="GtkBox" id="MainBox">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="border_width">12</property>
-        <property name="orientation">vertical</property>
-        <child>
-          <object class="GtkBox">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="orientation">vertical</property>
-            <child>
-              <object class="GtkBox" id="ZoomBox">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <child>
-                  <object class="GtkButton" id="ZoomOutButton">
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="receives_default">True</property>
-                    <signal name="clicked" handler="ZoomOutButton_clicked" swapped="no"/>
-                    <child>
-                      <object class="GtkImage">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="icon_name">zoom-out-symbolic</property>
-                      </object>
-                    </child>
-                  </object>
-                  <packing>
-                    <property name="expand">True</property>
-                    <property name="fill">True</property>
-                    <property name="position">0</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkButton" id="ResetZoomButton">
-                    <property name="label">100%</property>
-                    <property name="visible">False</property>
-                    <property name="can_focus">True</property>
-                    <property name="receives_default">True</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">1</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkButton" id="ZoomInButton">
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="receives_default">True</property>
-                    <signal name="clicked" handler="ZoomInButton_clicked" swapped="no"/>
-                    <child>
-                      <object class="GtkImage">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="icon_name">zoom-in-symbolic</property>
-                      </object>
-                    </child>
-                  </object>
-                  <packing>
-                    <property name="expand">True</property>
-                    <property name="fill">True</property>
-                    <property name="position">2</property>
-                  </packing>
-                </child>
-                <style>
-                  <class name="linked"/>
-                </style>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkSeparator">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="margin_top">6</property>
-                <property name="margin_bottom">6</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">1</property>
-              </packing>
-            </child>
-	    <child>
-              <object class="GtkModelButton" id="SortMButton">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="text" translatable="yes">Sorting</property>
-                <property name="menu_name">sort</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">2</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkModelButton" id="HideBrokenMButton">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-		<property name="action_name">menu.hide-broken-stations</property>
-                <property name="text" translatable="yes">Hide broken stations</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">4</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkSeparator">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="margin_top">6</property>
-                <property name="margin_bottom">6</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">5</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkModelButton" id="LibraryMButton">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="text" translatable="yes">Library</property>
-                <property name="menu_name">library</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">6</property>
-              </packing>
-            </child>
-	    <child>
-              <object class="GtkModelButton" id="CreateStationMButton">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-		<property name="action_name">menu.create-station</property>
-                <property name="text" translatable="yes">Create new radio station</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">7</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkBox" id="AppBox">
-                <property name="can_focus">False</property>
-                <property name="no_show_all">True</property>
-                <property name="orientation">vertical</property>
-                <child>
-                  <object class="GtkSeparator">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="margin_top">6</property>
-                    <property name="margin_bottom">6</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">0</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkModelButton" id="SettingsMButton">
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="receives_default">True</property>
-                    <property name="action_name">app.preferences</property>
-                    <property name="text" translatable="yes">Settings</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">1</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkModelButton" id="OpenDatabaseMButton">
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="receives_default">True</property>
-                    <property name="action_name">app.opendatabase</property>
-                    <property name="text" translatable="no">radio-browser.info</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">1</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkModelButton" id="AboutMButton">
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="receives_default">True</property>
-                    <property name="action_name">app.about</property>
-                    <property name="text" translatable="yes">About</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">2</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkModelButton" id="QuitMButton">
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="receives_default">True</property>
-                    <property name="action_name">app.quit</property>
-                    <property name="text" translatable="yes">Quit</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">3</property>
-                  </packing>
-                </child>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">7</property>
-              </packing>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
-      </object>
-      <packing>
-        <property name="submenu">main</property>
-        <property name="position">3</property>
-      </packing>
-    </child>
     <child>
       <object class="GtkBox" id="LibraryBox">
         <property name="visible">True</property>
@@ -365,8 +111,8 @@
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
                     <property name="action_name">menu.sort</property>
+                    <property name="action_target">'votes'</property>
                     <property name="text" translatable="yes">Votes</property>
-	 	    <property name="action-target">'votes'</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -380,8 +126,8 @@
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
                     <property name="action_name">menu.sort</property>
+                    <property name="action_target">'name'</property>
                     <property name="text" translatable="yes">Name</property>
-		    <property name="action-target">'name'</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -395,8 +141,8 @@
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
                     <property name="action_name">menu.sort</property>
+                    <property name="action_target">'language'</property>
                     <property name="text" translatable="yes">Language</property>
-		    <property name="action-target">'language'</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -410,8 +156,8 @@
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
                     <property name="action_name">menu.sort</property>
+                    <property name="action_target">'country'</property>
                     <property name="text" translatable="yes">Country</property>
-		    <property name="action-target">'country'</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -425,8 +171,8 @@
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
                     <property name="action_name">menu.sort</property>
+                    <property name="action_target">'state'</property>
                     <property name="text" translatable="yes">State</property>
-		    <property name="action-target">'state'</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -440,8 +186,8 @@
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
                     <property name="action_name">menu.sort</property>
+                    <property name="action_target">'clicks'</property>
                     <property name="text" translatable="yes">Clicks</property>
-		    <property name="action-target">'clicks'</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -455,8 +201,8 @@
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
                     <property name="action_name">menu.sort</property>
+                    <property name="action_target">'bitrate'</property>
                     <property name="text" translatable="yes">Bitrate</property>
-		    <property name="action-target">'bitrate'</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -470,8 +216,8 @@
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
                     <property name="action_name">menu.sort</property>
+                    <property name="action_target">'clicktimestamp'</property>
                     <property name="text" translatable="yes">Date</property>
-		    <property name="action-target">'clicktimestamp'</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -510,8 +256,8 @@
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
                     <property name="action_name">menu.sortorder</property>
+                    <property name="action_target">'ascending'</property>
                     <property name="text" translatable="yes">Ascending</property>
-		    <property name="action-target">'ascending'</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -525,8 +271,8 @@
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
                     <property name="action_name">menu.sortorder</property>
+                    <property name="action_target">'descending'</property>
                     <property name="text" translatable="yes">Descending</property>
-		    <property name="action-target">'descending'</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -552,6 +298,246 @@
       <packing>
         <property name="submenu">sort</property>
         <property name="position">2</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkBox" id="MainBox">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="border_width">12</property>
+        <property name="orientation">vertical</property>
+        <child>
+          <object class="GtkBox">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="orientation">vertical</property>
+            <child>
+              <object class="GtkBox" id="ZoomBox">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <child>
+                  <object class="GtkButton" id="ZoomOutButton">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <signal name="clicked" handler="ZoomOutButton_clicked" swapped="no"/>
+                    <child>
+                      <object class="GtkImage">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="icon_name">zoom-out-symbolic</property>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">True</property>
+                    <property name="fill">True</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="ResetZoomButton">
+                    <property name="label">100%</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="ZoomInButton">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <signal name="clicked" handler="ZoomInButton_clicked" swapped="no"/>
+                    <child>
+                      <object class="GtkImage">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="icon_name">zoom-in-symbolic</property>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">True</property>
+                    <property name="fill">True</property>
+                    <property name="position">2</property>
+                  </packing>
+                </child>
+                <style>
+                  <class name="linked"/>
+                </style>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkSeparator">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="margin_top">6</property>
+                <property name="margin_bottom">6</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkModelButton" id="SortMButton">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="text" translatable="yes">Sorting</property>
+                <property name="menu_name">sort</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkModelButton" id="HideBrokenMButton">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="action_name">menu.hide-broken-stations</property>
+                <property name="text" translatable="yes">Hide broken stations</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">3</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkSeparator">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="margin_top">6</property>
+                <property name="margin_bottom">6</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">4</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkModelButton" id="LibraryMButton">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="text" translatable="yes">Library</property>
+                <property name="menu_name">library</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">5</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkModelButton" id="CreateStationMButton">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="action_name">menu.create-station</property>
+                <property name="text" translatable="yes">Create new radio station</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">6</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkSeparator">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="margin_top">6</property>
+                <property name="margin_bottom">6</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">7</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkModelButton" id="OpenDatabaseMButton">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="action_name">app.opendatabase</property>
+                <property name="text">radio-browser.info</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">8</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkSeparator">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="margin_top">6</property>
+                <property name="margin_bottom">6</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">9</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkModelButton" id="SettingsMButton">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="action_name">app.preferences</property>
+                <property name="text" translatable="yes">Settings</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">10</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkModelButton" id="AboutMButton">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="action_name">app.about</property>
+                <property name="text" translatable="yes">About</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">11</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+      </object>
+      <packing>
+        <property name="submenu">main</property>
+        <property name="position">3</property>
       </packing>
     </child>
   </object>

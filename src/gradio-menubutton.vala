@@ -24,8 +24,6 @@ namespace Gradio{
 		[GtkChild] public Gtk.Button ZoomInButton;
 		[GtkChild] public Gtk.Button ZoomOutButton;
 
-		[GtkChild] public Gtk.Box AppBox;
-
 		public int actual_zoom = 100;
 		private const int min_zoom = 50;
 		private const int max_zoom = 175;
@@ -41,11 +39,6 @@ namespace Gradio{
 			action_group = new GLib.SimpleActionGroup ();
 			this.insert_action_group ("menu", action_group);
 			setup_actions();
-
-			// Show app actions on non GNOME desktops in menu popover
-			if(!(GLib.Environment.get_variable("DESKTOP_SESSION")).contains("gnome")) {
-				AppBox.set_visible(true);
-			}
 
 			App.settings.notify["station-sorting"].connect(() => {
  				var action = action_group.lookup_action ("sort") as GLib.SimpleAction;
