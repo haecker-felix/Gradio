@@ -47,8 +47,8 @@
          "sources":[
             {
                "type": "archive",
-               "url": "https://github.com/haecker-felix/gradio/archive/v7.1.tar.gz",
-               "sha256": "7b350583124f00f9030daaf4042cd54c9d340d67124dad298266d2dfa81ba766"
+               "url": "https://github.com/haecker-felix/gradio/archive/v7.2.tar.gz",
+               "sha256": "5a85d7d4afb1424e46c935114b268e4a65de2629d60f48eccd75d67ff4b113d2"
             }
          ]
       }
