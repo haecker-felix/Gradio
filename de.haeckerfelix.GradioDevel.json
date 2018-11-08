@@ -1,7 +1,7 @@
 {
     "app-id" : "de.haeckerfelix.GradioDevel",
-    "runtime" : "org.gnome.Sdk",
-    "runtime-version" : "3.28",
+    "runtime" : "org.gnome.Platform",
+    "runtime-version" : "master",
     "sdk" : "org.gnome.Sdk",
     "sdk-extensions" : [
         "org.freedesktop.Sdk.Extension.rust-stable"
@@ -10,20 +10,19 @@
     "tags" : [
         "nightly"
     ],
-    "desktop-file-name-prefix" : "(Nightly) ",
+    "desktop-file-name-prefix" : "(Development) ",
     "finish-args" : [
-        "--share=ipc",
+        "--filesystem=xdg-run/dconf",
+        "--filesystem=~/.config/dconf:ro",
+        "--talk-name=ca.desrt.dconf",
+        "--env=DCONF_USER_CONFIG_DIR=.config/dconf",
         "--share=network",
+        "--share=ipc",
         "--socket=x11",
         "--socket=wayland",
         "--socket=pulseaudio",
         "--device=dri",
-        "--env=DCONF_USER_CONFIG_DIR=.config/dconf",
-        "--filesystem=xdg-run/dconf",
-        "--filesystem=host",
-        "--filesystem=~/.config/dconf:ro",
-        "--talk-name=ca.desrt.dconf",
-        "--own-name=org.mpris.MediaPlayer2.gradio"
+        "--own-name=org.mpris.MediaPlayer2.Gradio"
     ],
     "build-options" : {
         "append-path" : "/usr/lib/sdk/rust-stable/bin",
@@ -32,15 +31,25 @@
         ],
         "env" : {
             "CARGO_HOME" : "/run/build/Gradio/cargo",
-            "RUST_LOG" : "rustio,gradio=debug",
-            "RUST_BACKTRACE" : "1",
-            "RUSTFLAGS" : "--error-format=short --remap-path-prefix =../"
+            "RUST_BACKTRACE" : "1"
         }
     },
     "modules" : [
         {
             "name" : "libhandy",
             "buildsystem" : "meson",
+            "config-opts" : [
+                "-Dintrospection=true",
+                "-Dgtk-doc=false",
+                "-Dtests=false",
+                "-Dexamples=false",
+                "-Dvapi=false",
+                "-Dglade_catalog=false"
+            ],
+            "cleanup" : [
+              "/include",
+              "/lib/pkgconfig"
+            ],
             "sources" : [
                 {
                     "type" : "git",
@@ -55,7 +64,7 @@
             "sources" : [
                 {
                     "type" : "git",
-                    "url" : "https://github.com/haecker-felix/Gradio.git",
+                    "url" : "https://github.com/haecker-felix/gradio.git",
                     "branch" : "rust_port"
                 }
             ]

@@ -4,7 +4,6 @@
          xmlns:foaf="http://xmlns.com/foaf/0.1/"
          xmlns:gnome="http://api.gnome.org/doap-extensions#"
          xmlns="http://usefulinc.com/ns/doap#">
-
   <name xml:lang="en">Gradio</name>
   <shortdesc xml:lang="en">
     Radio app for GNOME
@@ -13,10 +12,8 @@
       Find and listen to internet radio stations
   </description>
   <bug-database rdf:resource="https://github.com/haecker-felix/Gradio/issues" />
-
   <category rdf:resource="http://api.gnome.org/doap-extensions#apps" />
   <programming-language>Rust</programming-language>
-
   <maintainer>
     <foaf:Person>
       <foaf:name>Felix Häcker</foaf:name>

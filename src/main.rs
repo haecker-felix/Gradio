@@ -1,51 +1,38 @@
-#[macro_use]
-extern crate log;
-extern crate pretty_env_logger;
-
-#[macro_use]
-extern crate serde_derive;
-
-
-extern crate gdk;
-extern crate gdk_pixbuf;
+extern crate gtk;
 extern crate gio;
 extern crate glib;
-extern crate gtk;
-extern crate reqwest;
-extern crate gstreamer;
-extern crate rusqlite;
+extern crate gdk;
+#[macro_use] extern crate log;
+extern crate simplelog;
 extern crate rustio;
-extern crate url;
-extern crate mdl;
+extern crate libhandy;
+extern crate gstreamer;
+extern crate mpris_player;
+extern crate rusqlite;
 
-#[macro_use]
-extern crate dbus_macros;
-extern crate dbus;
-
-mod gradio;
-mod app_cache;
-mod app_state;
+mod app;
 mod window;
-mod audioplayer;
-mod favicon_downloader;
+mod player;
 mod library;
-mod page;
+mod search;
 mod widgets;
-mod mpris;
+mod static_resource;
 
-use gradio::GradioApp;
+use app::App;
+use simplelog::*;
 
 fn main() {
-    // Init Logger
-    pretty_env_logger::init();
+    // Initialize logger
+    SimpleLogger::init(LevelFilter::Debug, Config::default()).unwrap();
 
-    // Init GTK
-    if gtk::init().is_err() {
-        error!("Failed to init GTK.");
-        return;
-    }
+    // Initialize GTK
+    gtk::init().unwrap_or_else(|_| panic!("Failed to initialize GTK."));
+    static_resource::init().expect("Failed to initialize the resource file.");
 
-    // Start Gradio itself
-    let app = GradioApp::new();
-    app.run();
+    // Initialize Gstreamer
+    gstreamer::init().expect("Failed to initialize Gstreamer");
+
+    // Run app itself
+    let app = App::new();
+    app.run(app.clone());
 }

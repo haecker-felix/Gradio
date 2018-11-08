@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="15.999999"
+   height="16"
+   viewBox="0 0 15.999999 16"
+   version="1.1"
+   id="svg4043"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   sodipodi:docname="de.haeckerfelix.gradio-symbolic.svg">
+  <defs
+     id="defs4037" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="31.678384"
+     inkscape:cx="9.4173331"
+     inkscape:cy="5.5624682"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:window-width="1920"
+     inkscape:window-height="1016"
+     inkscape:window-x="1600"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     units="px" />
+  <metadata
+     id="metadata4040">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-86.329776,-68.097545)">
+    <g
+       id="g905"
+       transform="translate(-6.520941,0.333757)">
+      <path
+         style="display:inline;opacity:1;vector-effect:none;fill:#241f31;fill-opacity:1;stroke:none;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;enable-background:new"
+         d="M 4 0 A 0.99998474 0.99998474 0 0 0 3 1 A 0.99998474 0.99998474 0 0 0 3.5 1.8632812 L 3.5 3.1347656 A 0.99998474 0.99998474 0 0 0 3 4 L 2 4 C 0.892 4 0 4.892 0 6 L 0 14 C 0 15.108 0.892 16 2 16 L 14 16 C 15.108 16 16 15.108 16 14 L 16 6 C 16 4.892 15.108 4 14 4 L 5 4 A 0.99998474 0.99998474 0 0 0 4.5 3.1367188 L 4.5 1.8652344 A 0.99998474 0.99998474 0 0 0 5 1 A 0.99998474 0.99998474 0 0 0 4 0 z M 5.5 6 C 6.4520125 6 7.3123764 6.3832888 7.9433594 7 L 3.0566406 7 C 3.6876232 6.3832888 4.547989 6 5.5 6 z M 2.3496094 8 L 8.6503906 8 C 8.7987581 8.3109665 8.898186 8.6466219 8.9492188 9 L 2.0507812 9 C 2.1018141 8.6466219 2.2012419 8.3109665 2.3496094 8 z M 12 8 C 13.10457 8 14 8.89543 14 10 C 14 11.104569 13.10457 12 12 12 C 10.89543 12 10 11.104569 10 10 C 10 8.89543 10.89543 8 12 8 z M 12 9 A 1 1 0 0 0 11 10 A 1 1 0 0 0 12 11 A 1 1 0 0 0 13 10 A 1 1 0 0 0 12 9 z M 2.0507812 10 L 8.9492188 10 C 8.898186 10.353378 8.7987581 10.689034 8.6503906 11 L 2.3496094 11 C 2.2012419 10.689034 2.101814 10.353378 2.0507812 10 z M 3.0566406 12 L 7.9433594 12 C 7.3123764 12.616711 6.4520125 13 5.5 13 C 4.547989 13 3.6876232 12.616711 3.0566406 12 z "
+         transform="translate(92.850717,67.763788)"
+         id="rect2562" />
+      <circle
+         style="display:inline;opacity:1;vector-effect:none;fill:#241f31;fill-opacity:1;stroke:none;stroke-width:3.99999976;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;enable-background:new"
+         id="circle2634"
+         cx="96.8507"
+         cy="68.763771"
+         r="0.99998474" />
+    </g>
+  </g>
+</svg>

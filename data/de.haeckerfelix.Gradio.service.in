@@ -1,3 +1,3 @@
 [D-BUS Service]
-Name=de.haeckerfelix.gradio
+Name=@appid@
 Exec=@bindir@/gradio --gapplication-service

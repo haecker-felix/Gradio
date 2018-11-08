@@ -3,14 +3,15 @@
 export CARGO_HOME=$1/target/cargo-home
 export LOCALEDIR="$3"
 export APP_ID="$4"
-export VERSION="$5"
-export PROFILE="$6"
+export NAME_SUFFIX="$5"
+export VERSION="$6"
+export PROFILE="$7"
 
-if [[ "$PROFILE" == "Devel" ]]
-then
+if [ "$PROFILE" = "Devel" ]
+then	
     echo "DEBUG MODE"
-    cargo build -p gradio && cp $1/target/debug/gradio $2
+    cargo build --manifest-path $1/Cargo.toml -p gradio && cp $1/target/debug/gradio $2
 else
     echo "RELEASE MODE"
-    cargo build --release -p gradio && cp $1/target/release/gradio $2
+    cargo build --manifest-path $1/Cargo.toml --release -p gradio && cp $1/target/release/gradio $2
 fi

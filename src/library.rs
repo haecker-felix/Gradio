@@ -1,76 +1,95 @@
-extern crate glib;
+extern crate gtk;
 extern crate rusqlite;
 
-use rusqlite::Connection;
-use rustio::{Client, Station};
+use rusqlite::{Result, Connection};
+use gtk::prelude::*;
+use libhandy::{Column, ColumnExt};
+
+use std::cell::RefCell;
+use std::path::PathBuf;
+use std::sync::mpsc::Sender;
 use std::collections::HashMap;
+use rustio::{Client, Station};
 
-use mdl::model::Model;
+use app::Action;
+use widgets::collection_listbox::CollectionListBox;
 
-#[derive(Serialize, Deserialize, Debug)]
-pub struct Library {
-    pub stations: HashMap<Station, Option<String>> // station, collection name
+pub struct Library{
+    pub widget: gtk::Box,
+    content: RefCell<HashMap<String, Vec<Station>>>,
+    collection_listbox: CollectionListBox,
+    
+    builder: gtk::Builder,
+    sender: Sender<Action>,
 }
 
-impl Model for Library {
-    fn key(&self) -> String { "library".to_string() }
-}
-
-impl Library {
-    pub fn new() -> Self {
-        let mut stations = HashMap::new();
-        let mut library = Library { stations };
-
-        Self::get_old_db_path().map(|path| library.import_db(path));
-
+impl Library{
+    pub fn new(sender: Sender<Action>) -> Self{
+        let builder = gtk::Builder::new_from_resource("/de/haeckerfelix/Gradio/gtk/library.ui");
+        let widget: gtk::Box = builder.get_object("library").unwrap();
+        let content_box: gtk::Box = builder.get_object("content_box").unwrap();
+    
+        let content = RefCell::new(HashMap::new());
+        let collection_listbox = CollectionListBox::new(sender.clone());
+    
+        let library = Self{
+            widget,
+            content,
+            collection_listbox,
+            builder,
+            sender,
+        };
+        
+        // Setup HdyColumn
+        let column = Column::new();
+        column.set_maximum_width(700);
+        content_box.add(&column);
+        let column = column.upcast::<gtk::Widget>(); // See https://gitlab.gnome.org/World/podcasts/blob/master/podcasts-gtk/src/widgets/home_view.rs#L64
+        let column = column.downcast::<gtk::Container>().unwrap();
+        column.show();
+        column.add(&library.collection_listbox.widget);
+        
+        library.setup_signals();
         library
     }
-
-    pub fn contains(&self, station: &Station) -> bool {
-        self.stations.contains_key(&station)
-    }
-
-    pub fn add_station(&mut self, station: Station, collection_name: Option<String>){
-        info!("Add station to library: {} ({})", station.name, station.id);
-        self.stations.insert(station, collection_name);
-    }
-
-    pub fn remove_station(&mut self, station: &Station){
-        info!("Remove station from library: {} ({})", station.name, station.id);
-        self.stations.remove(&station);
-    }
-
-    fn get_old_db_path() -> Option<String>{
-        let mut path = glib::get_user_data_dir().unwrap();
-        path.push("gradio");
-        path.push("gradio.db");
-
-        info!("Check for old database format at {:?}", path);
-        if path.exists(){
-            return Some(path.to_str().unwrap().to_string());
+    
+    pub fn add_stations(&self, collection_name: String, stations: Vec<Station>){          
+        if self.content.borrow().contains_key(&collection_name){ // Collection does already exists
+            let mut s = stations;
+            let collection = self.content.borrow_mut().get_mut(&collection_name).unwrap().append(&mut s);
+        }else{ // Insert as new collection
+            self.content.borrow_mut().insert(collection_name.to_string(), stations.to_vec());
         }
-        None
+        self.refresh();
     }
-
-    fn import_db(&mut self, path: String){
+    
+    pub fn refresh(&self){
+        self.collection_listbox.set_collections(&self.content.borrow());
+    }
+    
+    // TODO: Make this async :)
+    pub fn import_stations(&self, path: &PathBuf) -> Result<()>{
         let mut client = Client::new("http://www.radio-browser.info");
         let connection = Connection::open(path).unwrap();
-
-        // Read database itself
-        info!("Import database from...");
-        debug!("{:?}", connection);
-        let mut stmt = connection.prepare("SELECT * FROM library").unwrap();
+        
+        let mut stmt = connection.prepare("SELECT station_id, collection_name FROM library INNER JOIN collections ON library.collection_id = collections.collection_id;")?;
         let mut rows = stmt.query(&[]).unwrap();
 
         while let Some(result_row) = rows.next() {
             let row = result_row.unwrap();
             let station_id: u32 = row.get(0);
-            let collection_id: u32 = row.get(1);
+            let collection_name: String = row.get(1);
 
             client.get_station_by_id(station_id).map(|station|{
                 info!("Found Station: {}", station.name);
-                self.stations.insert(station, Some(collection_id.to_string()));
+                self.add_stations(collection_name, vec![station].to_vec());
             });
         }
+        
+        Ok(())
+    }
+    
+    fn setup_signals(&self){
+
     }
 }

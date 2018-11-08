@@ -1,153 +1,103 @@
-extern crate gdk;
-extern crate gio;
-extern crate glib;
 extern crate gtk;
-
+extern crate gio;
 use gtk::prelude::*;
 
-use app_cache::AppCache;
-use app_state::AppState;
+use std::sync::mpsc::Sender;
 
-use mdl::Model;
+use app::{AppInfo, Action};
 
-use page::library_page::LibraryPage;
-use page::search_page::SearchPage;
-use page::Page;
-
-use widgets::playerbar::Playerbar;
+#[derive(Debug, Clone, PartialEq)]
+pub enum View{
+    Search,
+    Library,
+    CurrentPlayback,
+}
 
 pub struct Window{
-    app_cache: AppCache,
-
     pub widget: gtk::ApplicationWindow,
-    pub builder: gtk::Builder,
-
-    pub page_stack: gtk::Stack,
-    pub library_page: LibraryPage,
-    pub search_page: SearchPage,
+    pub player_box: gtk::Box,
+    pub library_box: gtk::Box,
+    pub search_box: gtk::Box,
+    
+    builder: gtk::Builder,
+    sender: Sender<Action>,
 }
 
 impl Window{
-    pub fn new(app_cache: AppCache) -> Self{
-        Self::load_css();
-        let builder = gtk::Builder::new_from_string(include_str!("window.ui"));
-
-        let widget: gtk::ApplicationWindow = builder.get_object("main_window").unwrap();
-        let page_stack: gtk::Stack = builder.get_object("page_stack").unwrap();
-        let library_page: LibraryPage = Page::new(app_cache.clone());
-        let search_page: SearchPage = Page::new(app_cache.clone());
-
-        let playerbar_box: gtk::Box = builder.get_object("playerbar_box").unwrap();
-        let playerbar = Playerbar::new(app_cache.clone());
-        playerbar_box.add(&playerbar.container);
-
-        let mut window = Self{
-            app_cache,
-            widget,
+    pub fn new(sender: Sender<Action>, appinfo: &AppInfo) -> Self{
+        let builder = gtk::Builder::new_from_resource("/de/haeckerfelix/Gradio/gtk/window.ui");
+        let window: gtk::ApplicationWindow = builder.get_object("window").unwrap();
+        window.set_title(&appinfo.app_name);
+        let player_box: gtk::Box = builder.get_object("player_box").unwrap();
+        let library_box: gtk::Box = builder.get_object("library_box").unwrap();
+        let search_box: gtk::Box = builder.get_object("search_box").unwrap();
+    
+        let window = Self{
+            widget: window,
+            player_box,
+            library_box,
+            search_box,
             builder,
-            page_stack,
-            library_page,
-            search_page,
+            sender,
         };
+    
+        // Appmenu / hamburger button
+        let menu_builder = gtk::Builder::new_from_resource("/de/haeckerfelix/Gradio/gtk/menu.ui");
+        let appmenu: gio::MenuModel = menu_builder.get_object("menu").unwrap();
+        let appmenu_button: gtk::MenuButton = window.builder.get_object("appmenu_button").unwrap();
+        appmenu_button.set_menu_model(Some(&appmenu));
 
-        window.add_page(&window.library_page);
-        window.add_page(&window.search_page);
-        window.connect_signals();
-
+        // Devel style class
+        if appinfo.app_id.ends_with("Devel") {
+            window.widget.get_style_context().map(|c| c.add_class("devel"));
+        }
+        
+        window.setup_signals();
+        window.set_view(View::Library);
         window
     }
-
-    fn add_page<P: Page>(&self, page: &P) {
-        self.page_stack.add_titled(page.container(), &page.name(), &page.title());
-    }
-
-    fn load_css() {
-        let provider = gtk::CssProvider::new();
-        provider.load_from_data(include_str!("style.css").as_bytes());
-        gtk::StyleContext::add_provider_for_screen(&gdk::Screen::get_default().unwrap(), &provider, 600);
-    }
-
-    fn connect_signals(&mut self){
+    
+    fn setup_signals(&self){
         // add_button
-        let app_cache = self.app_cache.clone();
         let add_button: gtk::Button = self.builder.get_object("add_button").unwrap();
-        add_button.connect_clicked(move |_| {
-            let c = &*app_cache.get_cache();
-            AppState::get(c, "app").map(|mut a|{ a.gui_current_page = "search_page".to_string(); a.store(c); });
-            app_cache.emit_signal("gui-current-page".to_string());
+        let sender = self.sender.clone();
+        add_button.connect_clicked(move|_|{
+            sender.send(Action::ViewShowSearch).unwrap();
         });
-
+        
         // back_button
-        let app_cache = self.app_cache.clone();
         let back_button: gtk::Button = self.builder.get_object("back_button").unwrap();
-        back_button.connect_clicked(move |_| {
-            let c = &*app_cache.get_cache();
-            AppState::get(c, "app").map(|mut a|{ a.gui_current_page = "library_page".to_string(); a.store(c); });
-            app_cache.emit_signal("gui-current-page".to_string());
+        let sender = self.sender.clone();
+        back_button.connect_clicked(move|_|{
+            sender.send(Action::ViewShowLibrary).unwrap();
         });
-
-        // start_selection_mode_button
-        let app_cache = self.app_cache.clone();
-        let start_selection_mode_button: gtk::Button = self.builder.get_object("start_selection_mode_button").unwrap();
-        let header_stack: gtk::Stack = self.builder.get_object("header_stack").unwrap();
-        start_selection_mode_button.connect_clicked(move |_| {
-            let c = &*app_cache.get_cache();
-            AppState::get(c, "app").map(|mut a|{ a.gui_selection_mode = true; a.store(c); });
-            app_cache.emit_signal("gui-selection-mode".to_string());
-        });
-
-        // cancel_selection_mode_button
-        let app_cache = self.app_cache.clone();
-        let cancel_selection_mode_button: gtk::Button = self.builder.get_object("cancel_selection_mode_button").unwrap();
-        let header_stack: gtk::Stack = self.builder.get_object("header_stack").unwrap();
-        cancel_selection_mode_button.connect_clicked(move |_| {
-            let c = &*app_cache.get_cache();
-            AppState::get(c, "app").map(|mut a|{ a.gui_selection_mode = false; a.store(c); });
-            app_cache.emit_signal("gui-selection-mode".to_string());
-
-            header_stack.set_visible_child_name("default");
-        });
-
-        // Connect to "gui-selection-mode" signal
-        let app_cache = self.app_cache.clone();
-        let header_stack: gtk::Stack = self.builder.get_object("header_stack").unwrap();
-        let bottom_stack: gtk::Stack = self.builder.get_object("bottom_stack").unwrap();
-        self.app_cache.signaler.subscribe("gui-selection-mode", Box::new(move |sig| {
-            let c = &*app_cache.get_cache();
-            let app_state = AppState::get(c, "app").unwrap();
-
-            if app_state.gui_selection_mode{
-                header_stack.set_visible_child_name("selection_mode");
-                bottom_stack.set_visible_child_name("selection_mode");
-            }else{
-                bottom_stack.set_visible_child_name("default");
-                header_stack.set_visible_child_name("default");
-            }
-        })).unwrap();
-
-        // Connect to "gui-current-page" signal
-        let app_cache = self.app_cache.clone();
-        let page_label: gtk::Label = self.builder.get_object("page_label").unwrap();
-        let page_stack: gtk::Stack = self.builder.get_object("page_stack").unwrap();
-        let header_button_stack: gtk::Stack = self.builder.get_object("header_button_stack").unwrap();
-        self.app_cache.signaler.subscribe("gui-current-page", Box::new(move |sig| {
-            let c = &*app_cache.get_cache();
-            let app_state = AppState::get(c, "app").unwrap();
-            debug!("Set page: {}", app_state.gui_current_page);
-
-            if app_state.gui_current_page == "library_page"{
-                header_button_stack.set_visible_child_name("add");
-                page_stack.set_visible_child_name("library_page");
-                page_label.set_text("Library");
-            }else{
-                header_button_stack.set_visible_child_name("back");
-            }
-
-            if app_state.gui_current_page == "search_page"{
-                page_stack.set_visible_child_name("search_page");
-                page_label.set_text("Add stations");
-            }
-        })).unwrap();
     }
+    
+    pub fn set_view(&self, view: View){
+        let view_stack: gtk::Stack = self.builder.get_object("view_stack").unwrap();
+        let add_button: gtk::Button = self.builder.get_object("add_button").unwrap();
+        let back_button: gtk::Button = self.builder.get_object("back_button").unwrap();
+        
+        // show "add" or "back" button 
+        let show_add_button = view == View::Library;
+        add_button.set_visible(show_add_button);
+        back_button.set_visible(!show_add_button);
+   
+        // set corrent transition type. for "current_playback" it should slide up/down.
+        if view == View::CurrentPlayback{
+            view_stack.set_transition_type(gtk::StackTransitionType::OverUp);
+        }else{
+            if view_stack.get_visible_child_name().unwrap() == "current_playback"{
+                view_stack.set_transition_type(gtk::StackTransitionType::OverDown);
+            }else{
+                view_stack.set_transition_type(gtk::StackTransitionType::Crossfade);
+            }
+        }
 
+        match view{
+            View::Search => view_stack.set_visible_child_name("search"),
+            View::Library => view_stack.set_visible_child_name("library"),
+            View::CurrentPlayback => view_stack.set_visible_child_name("current_playback"),
+        }
+    }
 }

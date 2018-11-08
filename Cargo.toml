@@ -1,26 +1,21 @@
 [package]
 name = "gradio"
-version = "0.8.0"
+version = "0.1.0"
 authors = ["Felix Häcker <haecker.felix1207@gmail.com>"]
+build = "build.rs"
 
 [dependencies]
+gio = "0.5"
+glib = "0.6"
+gdk = "0.9.0"
 log = "0.4"
-pretty_env_logger = "0.2"
-gio = "0.4.0"
-rusqlite = "0.13.0"
-glib = "0.5.0"
-gdk = "0.8.0"
-reqwest = "0.8.5"
-gdk-pixbuf = "0.4.0"
-url = "1.7.0"
-gstreamer = "0.11.1"
-dbus = "0.6.1"
-dbus-macros = "0.2.3"
-mdl = "1.0.2"
-serde_derive = "1.0.70"
-serde = "1.0.70"
-rustio = { git = "https://github.com/haecker-felix/Rustio" }
+simplelog = "0.5"
+rustio = { git="https://github.com/haecker-felix/Rustio.git" }
+libhandy = { git = "https://gitlab.gnome.org/jsparber/libhandy-rs" }
+gstreamer = "0.12"
+mpris-player = "0.1"
+rusqlite = "0.13"
 
 [dependencies.gtk]
-version = "0.4.0"
+version = "0.5"
 features = ["v3_22"]
