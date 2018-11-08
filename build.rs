@@ -13,4 +13,3 @@ fn main() {
         .expect("failed to generate resources");
     assert!(out.success());
 }
-

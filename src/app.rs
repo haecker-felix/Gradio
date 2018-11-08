@@ -1,20 +1,20 @@
+extern crate gdk;
+extern crate gio;
 extern crate glib;
 extern crate gtk;
-extern crate gio;
-extern crate gdk;
 
-use gtk::prelude::*;
 use gio::prelude::*;
+use gtk::prelude::*;
 
-use std::rc::Rc;
+use rustio::{Client, Station, StationSearch};
 use std::path::PathBuf;
+use std::rc::Rc;
 use std::sync::mpsc::{channel, Receiver, Sender};
-use rustio::{Client, StationSearch, Station};
 
-use window::{Window, View};
-use player::{Player, PlaybackState};
 use library::Library;
+use player::{PlaybackState, Player};
 use search::Search;
+use window::{View, Window};
 
 #[derive(Debug, Clone)]
 pub enum Action {
@@ -31,16 +31,15 @@ pub enum Action {
     LibraryRemoveStations(String, Vec<Station>),
 }
 
-
 #[derive(Clone)]
-pub struct AppInfo{
+pub struct AppInfo {
     pub version: String,
     pub profile: String,
     pub app_name: String,
     pub app_id: String,
 }
 
-pub struct App{
+pub struct App {
     info: AppInfo,
     gtk_app: gtk::Application,
 
@@ -53,9 +52,9 @@ pub struct App{
     search: Search,
 }
 
-impl App{
-    pub fn new() -> Rc<Self>{
-        let info = AppInfo{
+impl App {
+    pub fn new() -> Rc<Self> {
+        let info = AppInfo {
             version: env!("VERSION").to_string(),
             profile: env!("PROFILE").to_string(),
             app_name: "Gradio".to_string(),
@@ -79,7 +78,7 @@ impl App{
         window.library_box.add(&library.widget);
         window.search_box.add(&search.widget);
 
-        let app = Rc::new(Self{
+        let app = Rc::new(Self {
             info,
             gtk_app,
             sender,
@@ -99,7 +98,7 @@ impl App{
         app
     }
 
-    pub fn run(&self, app: Rc<Self>){
+    pub fn run(&self, app: Rc<Self>) {
         info!("{} ({})", self.info.app_name, self.info.app_id);
         info!("Version: {} ({})", self.info.version, self.info.profile);
 
@@ -109,10 +108,10 @@ impl App{
         self.gtk_app.run(&[]);
     }
 
-    fn setup_gaction(&self){
+    fn setup_gaction(&self) {
         // Quit
         let gtk_app = self.gtk_app.clone();
-        self.add_gaction("quit", move |_, _| gtk_app.quit() );
+        self.add_gaction("quit", move |_, _| gtk_app.quit());
         self.gtk_app.set_accels_for_action("app.quit", &["<primary>q"]);
 
         // Shortcuts
@@ -130,15 +129,22 @@ impl App{
 
         // Refresh view
         let sender = self.sender.clone();
-        self.add_gaction("refresh", move |_, _| { sender.send(Action::ViewRefresh).unwrap(); } );
+        self.add_gaction("refresh", move |_, _| {
+            sender.send(Action::ViewRefresh).unwrap();
+        });
         self.gtk_app.set_accels_for_action("app.refresh", &["<primary>r"]);
 
         // Import library
         let sender = self.sender.clone();
-        self.add_gaction("import-library", move |_, _| { sender.send(Action::LibraryImport).unwrap(); } );
+        self.add_gaction("import-library", move |_, _| {
+            sender.send(Action::LibraryImport).unwrap();
+        });
     }
 
-    fn add_gaction<F>(&self, name: &str, action: F) where for<'r, 's> F: Fn(&'r gio::SimpleAction, &'s Option<glib::Variant>) + 'static, {
+    fn add_gaction<F>(&self, name: &str, action: F)
+    where
+        for<'r, 's> F: Fn(&'r gio::SimpleAction, &'s Option<glib::Variant>) + 'static,
+    {
         let simple_action = gio::SimpleAction::new(name, None);
         simple_action.connect_activate(action);
         self.gtk_app.add_action(&simple_action);
@@ -170,7 +176,7 @@ impl App{
         glib::Continue(true)
     }
 
-    fn show_about_dialog(info: AppInfo, window: gtk::ApplicationWindow){
+    fn show_about_dialog(info: AppInfo, window: gtk::ApplicationWindow) {
         let dialog = gtk::AboutDialog::new();
         dialog.set_program_name(info.app_name.as_str());
         dialog.set_logo_icon_name(info.app_id.as_str());
@@ -189,7 +195,7 @@ impl App{
     }
 
     // TODO: This should be done with https://valadoc.org/gtk+-3.0/Gtk.ApplicationWindow.set_help_overlay.html
-    fn show_shortcuts_dialog(window: gtk::ApplicationWindow){
+    fn show_shortcuts_dialog(window: gtk::ApplicationWindow) {
         let builder = gtk::Builder::new_from_resource("/de/haeckerfelix/Gradio/gtk/shortcuts.ui");
         let dialog: gtk::ShortcutsWindow = builder.get_object("shortcuts").unwrap();
 
@@ -198,33 +204,34 @@ impl App{
         dialog.show_all();
     }
 
-    fn import_library(&self){
+    fn import_library(&self) {
         let import_dialog = gtk::FileChooserNative::new("Select database to import", &self.window.widget, gtk::FileChooserAction::Open, "Import", "Cancel");
 
         // TODO: Gets ignored in some cases by using FileChooserNative. We should catch this.
         let filter = gtk::FileFilter::new();
-		import_dialog.set_filter(&filter);
-		filter.add_mime_type("application/x-sqlite3");
+        import_dialog.set_filter(&filter);
+        filter.add_mime_type("application/x-sqlite3");
 
         let mut path = PathBuf::new();
-		if gtk::ResponseType::from(import_dialog.run()) == gtk::ResponseType::Accept {
-			path = import_dialog.get_file().unwrap().get_path().unwrap();
-		}
-		import_dialog.destroy();
+        if gtk::ResponseType::from(import_dialog.run()) == gtk::ResponseType::Accept {
+            path = import_dialog.get_file().unwrap().get_path().unwrap();
+        }
+        import_dialog.destroy();
 
-		debug!("Import path: {:?}", path);
-		match self.library.import_stations(&path){
-		    Ok(_) => info!("Successfully imported library"),
-		    Err(err) => {
-		    	let dialog = gtk::MessageDialog::new(Some(&self.window.widget),
-		                                            gtk::DialogFlags::DESTROY_WITH_PARENT,
-		                                            gtk::MessageType::Info,
-		                                            gtk::ButtonsType::Close,
-		                                            &format!("Could not import library:\n\n{:?}", err));
-		        dialog.run();
-		        dialog.destroy();
-		    },
-		};
-
+        debug!("Import path: {:?}", path);
+        match self.library.import_stations(&path) {
+            Ok(_) => info!("Successfully imported library"),
+            Err(err) => {
+                let dialog = gtk::MessageDialog::new(
+                    Some(&self.window.widget),
+                    gtk::DialogFlags::DESTROY_WITH_PARENT,
+                    gtk::MessageType::Info,
+                    gtk::ButtonsType::Close,
+                    &format!("Could not import library:\n\n{:?}", err),
+                );
+                dialog.run();
+                dialog.destroy();
+            }
+        };
     }
 }

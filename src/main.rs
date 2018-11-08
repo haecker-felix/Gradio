@@ -1,22 +1,23 @@
-extern crate gtk;
+extern crate gdk;
 extern crate gio;
 extern crate glib;
-extern crate gdk;
-#[macro_use] extern crate log;
-extern crate simplelog;
-extern crate rustio;
-extern crate libhandy;
+extern crate gtk;
+#[macro_use]
+extern crate log;
 extern crate gstreamer;
+extern crate libhandy;
 extern crate mpris_player;
 extern crate rusqlite;
+extern crate rustio;
+extern crate simplelog;
 
 mod app;
-mod window;
-mod player;
 mod library;
+mod player;
 mod search;
-mod widgets;
 mod static_resource;
+mod widgets;
+mod window;
 
 use app::App;
 use simplelog::*;
