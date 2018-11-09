@@ -74,13 +74,18 @@ impl Library {
         let mut client = Client::new("http://www.radio-browser.info");
         let connection = Connection::open(path).unwrap();
 
-        let mut stmt = connection.prepare("SELECT station_id, collection_name FROM library INNER JOIN collections ON library.collection_id = collections.collection_id;")?;
+        let mut stmt = connection.prepare("SELECT station_id, collection_name, library.collection_id FROM library LEFT JOIN collections ON library.collection_id = collections.collection_id ORDER BY library.collection_id;")?;
         let mut rows = stmt.query(&[]).unwrap();
 
         while let Some(result_row) = rows.next() {
             let row = result_row.unwrap();
             let station_id: u32 = row.get(0);
-            let collection_name: String = row.get(1);
+            let mut collection_name: String = "".to_string();
+            let collection_id: u32 = row.get(2);
+
+            if collection_id != 0{
+                collection_name = row.get(1);
+            }
 
             client.get_station_by_id(station_id).map(|station| {
                 info!("Found Station: {}", station.name);

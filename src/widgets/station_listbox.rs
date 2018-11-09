@@ -20,8 +20,11 @@ impl StationListBox {
         let builder = gtk::Builder::new_from_resource("/de/haeckerfelix/Gradio/gtk/station_listbox.ui");
         let listbox: gtk::Box = builder.get_object("station_listbox").unwrap();
 
-        let title_label: gtk::Label = builder.get_object("title_label").unwrap();
-        title_label.set_text(title);
+        if(title != ""){
+            let title_label: gtk::Label = builder.get_object("title_label").unwrap();
+            title_label.set_text(title);
+            title_label.set_visible(true);
+        }
 
         let stationlistbox = Self { widget: listbox, builder, sender };
 
