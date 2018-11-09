@@ -49,6 +49,15 @@ impl Library {
         column.show();
         column.add(&library.collection_listbox.widget);
 
+        // check for old Gradio databases and import them automatically
+        let mut path = glib::get_user_data_dir().unwrap();
+        path.push("gradio");
+        path.push("gradio.db");
+        info!("Check for old database format at {:?}", path);
+        if path.exists(){
+            library.import_stations(&path);
+        }
+
         library.setup_signals();
         library
     }
