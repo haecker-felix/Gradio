@@ -168,7 +168,7 @@ impl App {
                 Action::PlaybackStart => self.player.set_playback(PlaybackState::Playing),
                 Action::PlaybackStop => self.player.set_playback(PlaybackState::Stopped),
                 Action::LibraryImport => self.import_library(),
-                Action::LibraryAddStations(name, stations) => self.library.add_stations(name, stations),
+                Action::LibraryAddStations(name, stations) => self.library.add_stations(&name, stations),
                 //Action::LibraryAddStations(name, stations) => self.library.remove_stations(name, stations),
                 _ => (),
             }
@@ -219,7 +219,7 @@ impl App {
         import_dialog.destroy();
 
         debug!("Import path: {:?}", path);
-        match self.library.import_stations(&path) {
+        match self.library.import_from_path(&path) {
             Ok(_) => info!("Successfully imported library"),
             Err(err) => {
                 let dialog = gtk::MessageDialog::new(
