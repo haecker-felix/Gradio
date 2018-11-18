@@ -26,6 +26,9 @@
                 <child>
                   <placeholder/>
                 </child>
+                <style>
+                  <class name="content-background"/>
+                </style>
               </object>
             </child>
           </object>
