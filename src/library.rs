@@ -72,6 +72,11 @@ impl Library {
         self.refresh();
     }
 
+    pub fn remove_stations(&self, stations: Vec<Station>) {
+        Self::remove_from_hashmap(&mut self.content.borrow_mut(), stations);
+        self.refresh();
+    }
+
     pub fn import_from_path(&self, path: &PathBuf) -> Result<()>{
         // test sql connection
         let connection = Connection::open(path.clone()).unwrap();

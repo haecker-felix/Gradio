@@ -28,7 +28,7 @@ pub enum Action {
     PlaybackStop,
     LibraryImport,
     LibraryAddStations(String, Vec<Station>),
-    LibraryRemoveStations(String, Vec<Station>),
+    LibraryRemoveStations(Vec<Station>),
 }
 
 #[derive(Clone)]
@@ -169,7 +169,7 @@ impl App {
                 Action::PlaybackStop => self.player.set_playback(PlaybackState::Stopped),
                 Action::LibraryImport => self.import_library(),
                 Action::LibraryAddStations(name, stations) => self.library.add_stations(&name, stations),
-                //Action::LibraryAddStations(name, stations) => self.library.remove_stations(name, stations),
+                Action::LibraryRemoveStations(stations) => self.library.remove_stations(stations),
                 _ => (),
             }
         }
