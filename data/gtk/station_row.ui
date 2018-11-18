@@ -195,6 +195,89 @@
                       </packing>
                     </child>
                     <child>
+                      <object class="GtkBox">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="border_width">12</property>
+                        <property name="spacing">6</property>
+                        <child>
+                          <object class="GtkButton" id="vote_button">
+                            <property name="visible">True</property>
+                            <property name="sensitive">False</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="valign">center</property>
+                            <child>
+                              <object class="GtkImage">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="icon_name">emblem-favorite-symbolic</property>
+                              </object>
+                            </child>
+                            <style>
+                              <class name="image-button"/>
+                            </style>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkStack" id="library_action_stack">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="hhomogeneous">False</property>
+                            <property name="vhomogeneous">False</property>
+                            <property name="transition_type">crossfade</property>
+                            <property name="interpolate_size">True</property>
+                            <child>
+                              <object class="GtkButton" id="remove_button">
+                                <property name="label">Remove from Library</property>
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">True</property>
+                                <style>
+                                  <class name="destructive-action"/>
+                                </style>
+                              </object>
+                              <packing>
+                                <property name="name">library-remove</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="add_button">
+                                <property name="label">Add to library</property>
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">True</property>
+                                <style>
+                                  <class name="suggested-action"/>
+                                </style>
+                              </object>
+                              <packing>
+                                <property name="name">library-add</property>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="pack_type">end</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="pack_type">end</property>
+                        <property name="position">2</property>
+                      </packing>
+                    </child>
+                    <child>
                       <object class="GtkGrid">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
@@ -332,113 +415,6 @@
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">True</property>
-                        <property name="position">2</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkBox">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="border_width">12</property>
-                        <property name="spacing">6</property>
-                        <child>
-                          <object class="GtkButton" id="vote_button">
-                            <property name="visible">True</property>
-                            <property name="sensitive">False</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
-                            <property name="valign">center</property>
-                            <child>
-                              <object class="GtkImage">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="icon_name">emblem-favorite-symbolic</property>
-                              </object>
-                            </child>
-                            <style>
-                              <class name="image-button"/>
-                            </style>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
-                            <property name="position">0</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkStack" id="library_action_stack">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="hhomogeneous">False</property>
-                            <property name="vhomogeneous">False</property>
-                            <property name="transition_type">crossfade</property>
-                            <property name="interpolate_size">True</property>
-                            <child>
-                              <object class="GtkButton" id="remove_button">
-                                <property name="label">Remove from Library</property>
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="receives_default">True</property>
-                                <style>
-                                  <class name="destructive-action"/>
-                                </style>
-                              </object>
-                              <packing>
-                                <property name="name">library-remove</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkButton" id="add_button">
-                                <property name="label">Add to library</property>
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="receives_default">True</property>
-                                <style>
-                                  <class name="suggested-action"/>
-                                </style>
-                              </object>
-                              <packing>
-                                <property name="name">library-add</property>
-                                <property name="position">1</property>
-                              </packing>
-                            </child>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
-                            <property name="pack_type">end</property>
-                            <property name="position">1</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkButton" id="edit_button">
-                            <property name="visible">True</property>
-                            <property name="sensitive">False</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
-                            <property name="valign">center</property>
-                            <child>
-                              <object class="GtkImage">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="icon_name">document-edit-symbolic</property>
-                              </object>
-                            </child>
-                            <style>
-                              <class name="image-button"/>
-                            </style>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
-                            <property name="position">2</property>
-                          </packing>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="pack_type">end</property>
                         <property name="position">2</property>
                       </packing>
                     </child>

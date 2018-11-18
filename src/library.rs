@@ -14,6 +14,7 @@ use std::sync::mpsc::{channel, Receiver, Sender};
 
 use app::Action;
 use widgets::collection_listbox::CollectionListBox;
+use widgets::station_row::ContentType;
 
 static SQL_READ: &str = "SELECT station_id, collection_name, library.collection_id FROM library LEFT JOIN collections ON library.collection_id = collections.collection_id ORDER BY library.collection_id;";
 
@@ -34,7 +35,7 @@ impl Library {
         let content_box: gtk::Box = builder.get_object("content_box").unwrap();
 
         let content = RefCell::new(HashMap::new());
-        let collection_listbox = CollectionListBox::new(sender.clone());
+        let collection_listbox = CollectionListBox::new(sender.clone(), ContentType::Library);
 
         let library = Self {
             widget,

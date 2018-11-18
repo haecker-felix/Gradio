@@ -7,6 +7,12 @@ use std::sync::mpsc::Sender;
 
 use app::Action;
 
+#[derive(Clone)]
+pub enum ContentType{
+    Library,
+    Other,
+}
+
 pub struct StationRow {
     pub widget: gtk::ListBoxRow,
     station: Station,
@@ -16,7 +22,7 @@ pub struct StationRow {
 }
 
 impl StationRow {
-    pub fn new(sender: Sender<Action>, station: Station) -> Self {
+    pub fn new(sender: Sender<Action>, station: Station, ctype: ContentType) -> Self {
         let builder = gtk::Builder::new_from_resource("/de/haeckerfelix/Gradio/gtk/station_row.ui");
         let row: gtk::ListBoxRow = builder.get_object("station_row").unwrap();
 
@@ -26,6 +32,12 @@ impl StationRow {
             builder,
             sender,
         };
+
+        let library_action_stack: gtk::Stack = stationrow.builder.get_object("library_action_stack").unwrap();
+        match ctype{
+            ContentType::Library => library_action_stack.set_visible_child_name("library-remove"),
+            ContentType::Other => library_action_stack.set_visible_child_name("library-add"),
+        }
 
         stationrow.setup_signals();
         stationrow.setup_widget();
@@ -54,6 +66,24 @@ impl StationRow {
         let station = self.station.clone();
         play_button.connect_clicked(move |_| {
             sender.send(Action::PlaybackSetStation(station.clone()));
+        });
+
+        // remove_button
+        let remove_button: gtk::Button = self.builder.get_object("remove_button").unwrap();
+        let sender = self.sender.clone();
+        let station = self.station.clone();
+        remove_button.connect_clicked(move |btn| {
+            sender.send(Action::LibraryRemoveStations("".to_string(), vec![station.clone()]));
+            btn.set_sensitive(false);
+        });
+
+        // add_button
+        let add_button: gtk::Button = self.builder.get_object("add_button").unwrap();
+        let sender = self.sender.clone();
+        let station = self.station.clone();
+        add_button.connect_clicked(move |btn| {
+            sender.send(Action::LibraryAddStations("".to_string(), vec![station.clone()]));
+            btn.set_sensitive(false);
         });
 
         // eventbox

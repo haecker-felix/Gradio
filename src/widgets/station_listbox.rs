@@ -6,17 +6,18 @@ use rustio::Station;
 use std::sync::mpsc::Sender;
 
 use app::Action;
-use widgets::station_row::StationRow;
+use widgets::station_row::{StationRow, ContentType};
 
 pub struct StationListBox {
     pub widget: gtk::Box,
+    content_type: ContentType,
 
     builder: gtk::Builder,
     sender: Sender<Action>,
 }
 
 impl StationListBox {
-    pub fn new(sender: Sender<Action>, title: &str) -> Self {
+    pub fn new(sender: Sender<Action>, title: &str, content_type: ContentType) -> Self {
         let builder = gtk::Builder::new_from_resource("/de/haeckerfelix/Gradio/gtk/station_listbox.ui");
         let listbox: gtk::Box = builder.get_object("station_listbox").unwrap();
 
@@ -26,7 +27,7 @@ impl StationListBox {
             title_label.set_visible(true);
         }
 
-        let stationlistbox = Self { widget: listbox, builder, sender };
+        let stationlistbox = Self { widget: listbox, content_type, builder, sender };
 
         stationlistbox
     }
@@ -40,7 +41,7 @@ impl StationListBox {
         }
 
         for station in stations {
-            let row = StationRow::new(self.sender.clone(), station);
+            let row = StationRow::new(self.sender.clone(), station, self.content_type.clone());
             listbox.add(&row.widget);
         }
     }
