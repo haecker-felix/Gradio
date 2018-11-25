@@ -25,6 +25,13 @@
                 <property name="title" translatable="yes" context="shortcut window">Refresh view</property>
               </object>
             </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="visible">True</property>
+                <property name="accelerator">&lt;primary&gt;s</property>
+                <property name="title" translatable="yes" context="shortcut window">Save library</property>
+              </object>
+            </child>
           </object>
         </child>
       </object>

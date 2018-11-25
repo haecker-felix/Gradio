@@ -27,6 +27,7 @@ pub enum Action {
     PlaybackSetStation(Station),
     PlaybackStart,
     PlaybackStop,
+    LibraryWrite,
     LibraryImport,
     LibraryAddStations(String, HashMap<u32, Station>),
     LibraryRemoveStations(HashMap<u32, Station>),
@@ -136,6 +137,13 @@ impl App {
         });
         self.gtk_app.set_accels_for_action("app.refresh", &["<primary>r"]);
 
+        // Save library
+        let sender = self.sender.clone();
+        self.add_gaction("save", move |_, _| {
+            sender.send(Action::LibraryWrite).unwrap();
+        });
+        self.gtk_app.set_accels_for_action("app.save", &["<primary>s"]);
+
         // Import library
         let sender = self.sender.clone();
         self.add_gaction("import-library", move |_, _| {
@@ -169,6 +177,7 @@ impl App {
                 Action::PlaybackSetStation(station) => self.player.set_station(station),
                 Action::PlaybackStart => self.player.set_playback(PlaybackState::Playing),
                 Action::PlaybackStop => self.player.set_playback(PlaybackState::Stopped),
+                Action::LibraryWrite => self.library.write_data(),
                 Action::LibraryImport => self.import_library(),
                 Action::LibraryAddStations(name, stations) => self.library.add_stations(&name, stations),
                 Action::LibraryRemoveStations(stations) => self.library.remove_stations(stations),
