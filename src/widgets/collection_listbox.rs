@@ -28,7 +28,7 @@ impl CollectionListBox {
         collection_listbox
     }
 
-    pub fn set_collections(&self, collections: &HashMap<String, Vec<Station>>) {
+    pub fn set_collections(&self, collections: &HashMap<String, HashMap<u32, Station>>) {
         // remove all previous rows
         for widget in self.widget.get_children() {
             widget.destroy();

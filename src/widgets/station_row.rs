@@ -4,6 +4,7 @@ use gtk::prelude::*;
 
 use rustio::Station;
 use std::sync::mpsc::Sender;
+use std::collections::HashMap;
 
 use app::Action;
 
@@ -73,7 +74,9 @@ impl StationRow {
         let sender = self.sender.clone();
         let station = self.station.clone();
         remove_button.connect_clicked(move |btn| {
-            sender.send(Action::LibraryRemoveStations(vec![station.clone()]));
+            let mut hashmap = HashMap::new();
+            hashmap.insert(station.id.parse::<u32>().unwrap(), station.clone());
+            sender.send(Action::LibraryRemoveStations(hashmap));
             btn.set_sensitive(false);
         });
 
@@ -82,7 +85,9 @@ impl StationRow {
         let sender = self.sender.clone();
         let station = self.station.clone();
         add_button.connect_clicked(move |btn| {
-            sender.send(Action::LibraryAddStations("".to_string(), vec![station.clone()]));
+            let mut hashmap = HashMap::new();
+            hashmap.insert(station.id.parse::<u32>().unwrap(), station.clone());
+            sender.send(Action::LibraryAddStations("".to_string(), hashmap));
             btn.set_sensitive(false);
         });
 

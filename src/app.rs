@@ -9,6 +9,7 @@ use gtk::prelude::*;
 use rustio::{Client, Station, StationSearch};
 use std::path::PathBuf;
 use std::rc::Rc;
+use std::collections::HashMap;
 use std::sync::mpsc::{channel, Receiver, Sender};
 
 use library::Library;
@@ -27,8 +28,8 @@ pub enum Action {
     PlaybackStart,
     PlaybackStop,
     LibraryImport,
-    LibraryAddStations(String, Vec<Station>),
-    LibraryRemoveStations(Vec<Station>),
+    LibraryAddStations(String, HashMap<u32, Station>),
+    LibraryRemoveStations(HashMap<u32, Station>),
 }
 
 #[derive(Clone)]
@@ -106,6 +107,7 @@ impl App {
         gtk::timeout_add(25, move || a.process_action());
 
         self.gtk_app.run(&[]);
+        self.library.write_data();
     }
 
     fn setup_gaction(&self) {

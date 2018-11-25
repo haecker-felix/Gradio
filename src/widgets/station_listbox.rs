@@ -4,6 +4,7 @@ use gtk::prelude::*;
 
 use rustio::Station;
 use std::sync::mpsc::Sender;
+use std::collections::HashMap;
 
 use app::Action;
 use widgets::station_row::{StationRow, ContentType};
@@ -32,7 +33,7 @@ impl StationListBox {
         stationlistbox
     }
 
-    pub fn set_stations(&self, stations: Vec<Station>) {
+    pub fn set_stations(&self, stations: HashMap<u32, Station>) {
         let listbox: gtk::ListBox = self.builder.get_object("listbox").unwrap();
 
         // remove all previous rows
@@ -40,7 +41,7 @@ impl StationListBox {
             widget.destroy();
         }
 
-        for station in stations {
+        for (id, station) in stations {
             let row = StationRow::new(self.sender.clone(), station, self.content_type.clone());
             listbox.add(&row.widget);
         }
