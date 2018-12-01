@@ -10,6 +10,7 @@ extern crate mpris_player;
 extern crate rusqlite;
 extern crate rustio;
 extern crate simplelog;
+extern crate indexmap;
 
 mod app;
 mod library;
@@ -18,6 +19,7 @@ mod search;
 mod static_resource;
 mod widgets;
 mod window;
+mod station_model;
 
 use app::App;
 use simplelog::*;

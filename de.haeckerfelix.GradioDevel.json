@@ -31,7 +31,8 @@
         ],
         "env" : {
             "CARGO_HOME" : "/run/build/Gradio/cargo",
-            "RUST_BACKTRACE" : "1"
+            "RUST_BACKTRACE" : "1",
+            "RUSTFLAGS" : "--error-format=short --remap-path-prefix =../"
         }
     },
     "modules" : [
@@ -47,8 +48,8 @@
                 "-Dglade_catalog=false"
             ],
             "cleanup" : [
-              "/include",
-              "/lib/pkgconfig"
+                "/include",
+                "/lib/pkgconfig"
             ],
             "sources" : [
                 {
@@ -60,7 +61,9 @@
         {
             "name" : "gradio",
             "buildsystem" : "meson",
-            "config-opts" : [ "-Dprofile=development" ],
+            "config-opts" : [
+                "-Dprofile=development"
+            ],
             "sources" : [
                 {
                     "type" : "git",

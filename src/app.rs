@@ -29,8 +29,8 @@ pub enum Action {
     PlaybackStop,
     LibraryWrite,
     LibraryImport,
-    LibraryAddStations(String, HashMap<u32, Station>),
-    LibraryRemoveStations(HashMap<u32, Station>),
+    LibraryAddStations(String, Vec<Station>),
+    LibraryRemoveStations(Vec<Station>),
 }
 
 #[derive(Clone)]

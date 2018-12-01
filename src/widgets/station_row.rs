@@ -74,9 +74,7 @@ impl StationRow {
         let sender = self.sender.clone();
         let station = self.station.clone();
         remove_button.connect_clicked(move |btn| {
-            let mut hashmap = HashMap::new();
-            hashmap.insert(station.id.parse::<u32>().unwrap(), station.clone());
-            sender.send(Action::LibraryRemoveStations(hashmap));
+            sender.send(Action::LibraryRemoveStations(vec![station.clone()]));
             btn.set_sensitive(false);
         });
 
@@ -85,9 +83,7 @@ impl StationRow {
         let sender = self.sender.clone();
         let station = self.station.clone();
         add_button.connect_clicked(move |btn| {
-            let mut hashmap = HashMap::new();
-            hashmap.insert(station.id.parse::<u32>().unwrap(), station.clone());
-            sender.send(Action::LibraryAddStations("".to_string(), hashmap));
+            sender.send(Action::LibraryAddStations("".to_string(), vec![station.clone()]));
             btn.set_sensitive(false);
         });
 

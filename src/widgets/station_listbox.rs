@@ -8,6 +8,7 @@ use std::collections::HashMap;
 
 use app::Action;
 use widgets::station_row::{StationRow, ContentType};
+use station_model::StationModel;
 
 pub struct StationListBox {
     pub widget: gtk::Box,
