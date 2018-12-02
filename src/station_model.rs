@@ -1,4 +1,6 @@
 use indexmap::IndexMap;
+use indexmap::map::OccupiedEntry;
+use indexmap::map::Entry;
 use rustio::Station;
 use std::rc::Rc;
 use std::cell::RefCell;
@@ -23,20 +25,33 @@ impl StationModel{
         result
     }
 
-    pub fn add_stations(&mut self, stations: Vec<Station>){
-        for station in stations{
+    pub fn add_station(&mut self, station: Station) -> Option<usize>{
+        let mut index = None;
+        if(!self.contains(&station)){
             let id = station.id.parse::<u32>().unwrap();
-            self.map.insert(id, station);
+            self.map.insert(id.clone(), station);
+            self.sort();
+            index = match self.map.entry(id){
+                Entry::Occupied(e) => Some(e.index()),
+                _ => None,
+            };
         }
-
-        self.sort();
+        index
     }
 
-    pub fn remove_stations(&mut self, stations: Vec<Station>){
-        for station in stations{
+    pub fn remove_station(&mut self, station: Station) -> Option<usize>{
+        let mut index = None;
+        if(self.contains(&station)){
             let id = station.id.parse::<u32>().unwrap();
-            self.map.remove(&id);
+            index = Some(self.map.swap_remove_full(&id).unwrap().0);
+            self.sort();
         }
+        index
+    }
+
+    pub fn contains(&self, station: &Station) -> bool{
+        let id = station.id.parse::<u32>().unwrap();
+        self.map.contains_key(&id)
     }
 
     pub fn clear(&mut self){

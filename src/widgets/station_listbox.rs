@@ -32,13 +32,27 @@ impl StationListBox {
     }
 
     pub fn add_stations(&mut self, stations: Vec<Station>){
-        self.station_model.add_stations(stations.clone());
-        self.refresh();
+        for station in stations{
+            match self.station_model.add_station(station.clone()){
+                Some(index) => {
+                    let row = StationRow::new(self.sender.clone(), station, self.content_type.clone());
+                    self.listbox.insert(&row.widget, index as i32);
+                },
+                None => (),
+            }
+        }
     }
 
     pub fn remove_stations(&mut self, stations: Vec<Station>){
-        self.station_model.remove_stations(stations);
-        self.refresh();
+        for station in stations{
+            match self.station_model.remove_station(station){
+                Some(index) => {
+                    let row = self.listbox.get_row_at_index(index as i32).unwrap();
+                    self.listbox.remove(&row);
+                }
+                None => (),
+            }
+        }
     }
 
     pub fn get_stations(&self) -> Vec<Station>{
