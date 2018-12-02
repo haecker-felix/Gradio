@@ -23,13 +23,12 @@ pub enum Action {
     ViewShowLibrary,
     ViewShowCurrentPlayback,
     ViewRaise,
-    ViewRefresh,
     PlaybackSetStation(Station),
     PlaybackStart,
     PlaybackStop,
     LibraryWrite,
     LibraryImport,
-    LibraryAddStations(String, Vec<Station>),
+    LibraryAddStations(Vec<Station>),
     LibraryRemoveStations(Vec<Station>),
 }
 
@@ -130,13 +129,6 @@ impl App {
             Self::show_about_dialog(info.clone(), window.clone());
         });
 
-        // Refresh view
-        let sender = self.sender.clone();
-        self.add_gaction("refresh", move |_, _| {
-            sender.send(Action::ViewRefresh).unwrap();
-        });
-        self.gtk_app.set_accels_for_action("app.refresh", &["<primary>r"]);
-
         // Save library
         let sender = self.sender.clone();
         self.add_gaction("save", move |_, _| {
@@ -172,14 +164,13 @@ impl App {
                 Action::ViewShowSearch => self.window.set_view(View::Search),
                 Action::ViewShowLibrary => self.window.set_view(View::Library),
                 Action::ViewShowCurrentPlayback => self.window.set_view(View::CurrentPlayback),
-                Action::ViewRaise => self.window.widget.present_with_time((glib::get_monotonic_time() / 1000) as u32), // TODO: Doesn't work. Idk why.
-                Action::ViewRefresh => self.library.refresh(),
+                Action::ViewRaise => self.window.widget.present_with_time((glib::get_monotonic_time() / 1000) as u32),
                 Action::PlaybackSetStation(station) => self.player.set_station(station),
                 Action::PlaybackStart => self.player.set_playback(PlaybackState::Playing),
                 Action::PlaybackStop => self.player.set_playback(PlaybackState::Stopped),
                 Action::LibraryWrite => self.library.write_data(),
                 Action::LibraryImport => self.import_library(),
-                Action::LibraryAddStations(name, stations) => self.library.add_stations(&name, stations),
+                Action::LibraryAddStations(stations) => self.library.add_stations(stations),
                 Action::LibraryRemoveStations(stations) => self.library.remove_stations(stations),
                 _ => (),
             }

@@ -7,7 +7,6 @@
       <file compressed="true" preprocess="xml-stripblanks">gtk/search.ui</file>
       <file compressed="true" preprocess="xml-stripblanks">gtk/station_row.ui</file>
       <file compressed="true" preprocess="xml-stripblanks">gtk/station_listbox.ui</file>
-      <file compressed="true" preprocess="xml-stripblanks">gtk/collection_listbox.ui</file>
       <file compressed="true" preprocess="xml-stripblanks">gtk/menu.ui</file>
       <file compressed="true" preprocess="xml-stripblanks">gtk/shortcuts.ui</file>
       <file compressed="true">gtk/style.css</file>

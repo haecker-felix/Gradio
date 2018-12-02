@@ -17,8 +17,8 @@ use std::io;
 use std::sync::mpsc::{channel, Receiver, Sender};
 
 use app::Action;
-use widgets::collection_listbox::CollectionListBox;
 use widgets::station_row::ContentType;
+use widgets::station_listbox::StationListBox;
 use station_model::StationModel;
 
 static SQL_READ: &str = "SELECT station_id, collection_name, library.collection_id FROM library LEFT JOIN collections ON library.collection_id = collections.collection_id ORDER BY library.collection_id ASC;";
@@ -27,11 +27,9 @@ static SQL_INIT_COLLECTIONS: &str = " CREATE TABLE \"collections\" ('collection_
 
 pub struct Library {
     pub widget: gtk::Box,
-    collection_listbox: CollectionListBox,
+    station_listbox: RefCell<StationListBox>,
 
     db_path: PathBuf,
-    content: RefCell<HashMap<String, StationModel>>,
-
     builder: gtk::Builder,
     sender: Sender<Action>,
 }
@@ -41,16 +39,14 @@ impl Library {
         let builder = gtk::Builder::new_from_resource("/de/haeckerfelix/Gradio/gtk/library.ui");
         let widget: gtk::Box = builder.get_object("library").unwrap();
         let content_box: gtk::Box = builder.get_object("content_box").unwrap();
-        let collection_listbox = CollectionListBox::new(sender.clone(), ContentType::Library);
+        let station_listbox = RefCell::new(StationListBox::new(sender.clone(), ContentType::Library));
 
         let db_path = Self::get_database_path().expect("Could not open database path...");
-        let content = RefCell::new(HashMap::new());
 
         let library = Self {
             widget,
-            collection_listbox,
+            station_listbox,
             db_path,
-            content,
             builder,
             sender,
         };
@@ -62,13 +58,25 @@ impl Library {
         let column = column.upcast::<gtk::Widget>(); // See https://gitlab.gnome.org/World/podcasts/blob/master/podcasts-gtk/src/widgets/home_view.rs#L64
         let column = column.downcast::<gtk::Container>().unwrap();
         column.show();
-        column.add(&library.collection_listbox.widget);
+        column.add(&library.station_listbox.borrow().widget);
 
         // read database and import data
         library.import_from_path(&library.db_path).expect("Could not import stations from database");
 
         library.setup_signals();
         library
+    }
+
+    pub fn add_stations(&self, stations: Vec<Station>) {
+        self.station_listbox.borrow_mut().add_stations(stations);
+    }
+
+    pub fn remove_stations(&self, stations: Vec<Station>) {
+        self.station_listbox.borrow_mut().remove_stations(stations);
+    }
+
+    pub fn write_data(&self){
+        Self::write_stations_to_db(&self.db_path, self.station_listbox.borrow().get_stations()).expect("Could not write stations to database.");
     }
 
     pub fn import_from_path(&self, path: &PathBuf) -> Result<()>{
@@ -79,36 +87,16 @@ impl Library {
         let sender = self.sender.clone();
         let p = path.clone();
         thread::spawn(move|| {
-            let result = Self::read_stations_from_db(&p).unwrap();
-            for (name, stations) in result{
-                sender.send(Action::LibraryAddStations(name, stations.export_vec())).unwrap();
-            }
+            let stations = Self::read_stations_from_db(&p).unwrap();
+            sender.send(Action::LibraryAddStations(stations)).unwrap();
         });
 
         Ok(())
     }
 
-    pub fn add_stations(&self, collection_name: &str, stations: Vec<Station>) {
-        Self::insert_into_hashmap(&mut self.content.borrow_mut(), collection_name, stations);
-        self.refresh();
-    }
-
-    pub fn remove_stations(&self, stations: Vec<Station>) {
-        Self::remove_from_hashmap(&mut self.content.borrow_mut(), stations);
-        self.refresh();
-    }
-
-    pub fn write_data(&self){
-        Self::write_stations_to_db(&self.db_path, &mut self.content.borrow_mut()).expect("Could not write stations to database.");
-    }
-
-    pub fn refresh(&self) {
-        //self.collection_listbox.set_collections(&self.content.borrow());
-    }
-
-    fn read_stations_from_db(path: &PathBuf) -> Result<HashMap<String, StationModel>> {
+    fn read_stations_from_db(path: &PathBuf) -> Result<Vec<Station>> {
         debug!("Read stations from \"{:?}\"", path);
-        let mut result = HashMap::new();
+        let mut result = Vec::new();
         let mut client = Client::new("http://www.radio-browser.info");
         let connection = Connection::open(path.clone()).unwrap();
         let mut stmt = connection.prepare(SQL_READ)?;
@@ -117,65 +105,28 @@ impl Library {
         while let Some(result_row) = rows.next() {
             let row = result_row.unwrap();
             let station_id: u32 = row.get(0);
-            let mut collection_name: String = "".to_string();
-            let collection_id: u32 = row.get(2);
-
-            if collection_id != 0{
-                collection_name = row.get(1);
-            }
 
             client.get_station_by_id(station_id).map(|station| {
                 info!("Found Station: {}", station.name);
-                Self::insert_into_hashmap(&mut result, &collection_name, vec![station]);
+                result.insert(0, station);
             });
         }
         Ok(result)
     }
 
-    fn write_stations_to_db(path: &PathBuf, content: &mut HashMap<String, StationModel>) -> Result<()> {
+    fn write_stations_to_db(path: &PathBuf, stations: Vec<Station>) -> Result<()> {
         info!("Delete previous database data...");
         fs::remove_file(path).unwrap();
         Self::create_database(&path);
 
         info!("Write stations to \"{:?}\"", path);
         let connection = Connection::open(path.clone()).unwrap();
-
-        // Insert data into database
-        let mut collection_id = 1;
-        for (collection_name, stations) in content{
-            let mut coll_id = 0;
-            if collection_name != "" {
-                coll_id = collection_id;
-
-                let mut stmt = connection.prepare(&format!("INSERT INTO collections VALUES ('{}', '{}');", coll_id.to_string(), collection_name))?;
-                stmt.execute(&[]).unwrap();
-
-                collection_id = collection_id +1;
-            }
-
-            for (id, station) in stations{
-                let mut stmt = connection.prepare(&format!("INSERT INTO library VALUES ('{}', '{}');", id.to_string(), coll_id.to_string()))?;
-                stmt.execute(&[]).unwrap();
-            }
+        for station in stations{
+            let mut stmt = connection.prepare(&format!("INSERT INTO library VALUES ('{}', '0');", station.id.to_string(), ))?;
+            stmt.execute(&[]).unwrap();
         }
+
         Ok(())
-    }
-
-    fn insert_into_hashmap(content: &mut HashMap<String, StationModel>, collection_name: &str, stations: Vec<Station>){
-        if content.contains_key(collection_name) { // Collection already exists
-            let station_model = content.get_mut(collection_name).unwrap();
-            station_model.add_stations(stations);
-        } else { // Insert as new collection
-            let mut station_model = StationModel::new();
-            station_model.add_stations(stations);
-            content.insert(collection_name.to_string(), station_model);
-        }
-    }
-
-    fn remove_from_hashmap(content: &mut HashMap<String, StationModel>, stations: Vec<Station>){
-        for (collection_name, station_model) in content{
-            station_model.remove_stations(stations.clone());
-        }
     }
 
     fn get_database_path() -> io::Result<PathBuf> {

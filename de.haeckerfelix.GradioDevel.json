@@ -30,9 +30,9 @@
             "--share=network"
         ],
         "env" : {
+            "RUSTFLAGS" : "--remap-path-prefix =../",
             "CARGO_HOME" : "/run/build/Gradio/cargo",
-            "RUST_BACKTRACE" : "1",
-            "RUSTFLAGS" : "--error-format=short --remap-path-prefix =../"
+            "RUST_BACKTRACE" : "1"
         }
     },
     "modules" : [

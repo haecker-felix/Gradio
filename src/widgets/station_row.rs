@@ -83,7 +83,7 @@ impl StationRow {
         let sender = self.sender.clone();
         let station = self.station.clone();
         add_button.connect_clicked(move |btn| {
-            sender.send(Action::LibraryAddStations("".to_string(), vec![station.clone()]));
+            sender.send(Action::LibraryAddStations(vec![station.clone()]));
             btn.set_sensitive(false);
         });
 

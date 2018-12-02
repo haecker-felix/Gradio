@@ -2,25 +2,17 @@ use indexmap::IndexMap;
 use rustio::Station;
 use std::rc::Rc;
 use std::cell::RefCell;
+use std::cmp::Ordering;
 
+#[derive(Clone, Debug)]
 pub struct StationModel{
     map: IndexMap<u32, Station>,
-
-    add_cb: Vec<Rc<RefCell<FnMut()>>>,
-    remove_cb: Vec<Rc<RefCell<FnMut()>>>,
-    clear_cb: Vec<Rc<RefCell<FnMut()>>>,
 }
 
 impl StationModel{
     pub fn new() -> Self{
-        let mut map = IndexMap::new();
-
-        Self {
-            map,
-            add_cb: Vec::new(),
-            remove_cb: Vec::new(),
-            clear_cb: Vec::new(),
-        }
+        let mut map: IndexMap<u32, Station> = IndexMap::new();
+        Self { map }
     }
 
     pub fn export_vec (&self) -> Vec<Station> {
@@ -37,10 +29,7 @@ impl StationModel{
             self.map.insert(id, station);
         }
 
-        // callback
-        for callback in self.add_cb.iter() {
-            let mut closure = callback.borrow_mut(); (&mut *closure)();
-        }
+        self.sort();
     }
 
     pub fn remove_stations(&mut self, stations: Vec<Station>){
@@ -48,45 +37,24 @@ impl StationModel{
             let id = station.id.parse::<u32>().unwrap();
             self.map.remove(&id);
         }
-
-        // callback
-        for callback in self.remove_cb.iter() {
-            let mut closure = callback.borrow_mut(); (&mut *closure)();
-        }
     }
 
     pub fn clear(&mut self){
         self.map.clear();
-
-        // callback
-        for callback in self.clear_cb.iter() {
-            let mut closure = callback.borrow_mut(); (&mut *closure)();
-        }
     }
 
-    pub fn connect_add<F: FnMut()+'static>(&mut self, callback: F) {
-        let cell = Rc::new(RefCell::new(callback));
-        self.add_cb.push(cell);
-    }
-
-    pub fn connect_remove<F: FnMut()+'static>(&mut self, callback: F) {
-        let cell = Rc::new(RefCell::new(callback));
-        self.remove_cb.push(cell);
-    }
-
-    pub fn connect_clear<F: FnMut()+'static>(&mut self, callback: F) {
-        let cell = Rc::new(RefCell::new(callback));
-        self.clear_cb.push(cell);
+    pub fn sort(&mut self){
+        self.map.sort_by(|a_id, a_station, b_id, b_station|{
+            a_station.name.cmp(&b_station.name)
+        });
     }
 }
 
-impl Iterator for StationModel {
+impl IntoIterator for StationModel {
     type Item = (u32, Station);
+    type IntoIter = ::indexmap::map::IntoIter<u32, Station>;
 
-    fn next(&mut self) -> Option<(u32, Station)> {
-        match self.map.clone().into_iter().next() {
-            Some(r) => Some(r),
-            None => None,
-        }
+    fn into_iter(self) -> Self::IntoIter {
+        self.map.into_iter()
     }
 }
