@@ -56,10 +56,10 @@ pub struct App {
 impl App {
     pub fn new() -> Rc<Self> {
         let info = AppInfo {
-            version: env!("VERSION").to_string(),
-            profile: env!("PROFILE").to_string(),
+            version:  option_env!("VERSION").unwrap_or("0.0.0").to_string(),
+            profile: option_env!("PROFILE").unwrap_or("default").to_string(),
             app_name: "Gradio".to_string(),
-            app_id: env!("APP_ID").to_string(),
+            app_id: option_env!("APP_ID").unwrap_or("de.haeckerfelix.Gradio").to_string(),
         };
 
         // Set custom style
