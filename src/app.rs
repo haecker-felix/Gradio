@@ -6,10 +6,9 @@ extern crate gtk;
 use gio::prelude::*;
 use gtk::prelude::*;
 
-use rustio::{Client, Station, StationSearch};
+use rustio::{Station};
 use std::path::PathBuf;
 use std::rc::Rc;
-use std::collections::HashMap;
 use std::sync::mpsc::{channel, Receiver, Sender};
 
 use library::Library;
@@ -72,7 +71,7 @@ impl App {
 
         let window = Window::new(sender.clone(), &info);
         let player = Player::new(sender.clone(), &info);
-        let mut library = Library::new(sender.clone(), &info);
+        let library = Library::new(sender.clone(), &info);
         let search = Search::new(sender.clone());
 
         window.player_box.add(&player.widget);
@@ -172,7 +171,6 @@ impl App {
                 Action::LibraryImport => self.import_library(),
                 Action::LibraryAddStations(stations) => self.library.add_stations(stations),
                 Action::LibraryRemoveStations(stations) => self.library.remove_stations(stations),
-                _ => (),
             }
         }
         glib::Continue(true)

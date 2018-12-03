@@ -4,7 +4,6 @@ use gtk::prelude::*;
 
 use rustio::Station;
 use std::sync::mpsc::Sender;
-use std::collections::HashMap;
 
 use app::Action;
 
@@ -66,7 +65,7 @@ impl StationRow {
         let sender = self.sender.clone();
         let station = self.station.clone();
         play_button.connect_clicked(move |_| {
-            sender.send(Action::PlaybackSetStation(station.clone()));
+            sender.send(Action::PlaybackSetStation(station.clone())).unwrap();
         });
 
         // remove_button
@@ -74,7 +73,7 @@ impl StationRow {
         let sender = self.sender.clone();
         let station = self.station.clone();
         remove_button.connect_clicked(move |btn| {
-            sender.send(Action::LibraryRemoveStations(vec![station.clone()]));
+            sender.send(Action::LibraryRemoveStations(vec![station.clone()])).unwrap();
             btn.set_sensitive(false);
         });
 
@@ -83,7 +82,7 @@ impl StationRow {
         let sender = self.sender.clone();
         let station = self.station.clone();
         add_button.connect_clicked(move |btn| {
-            sender.send(Action::LibraryAddStations(vec![station.clone()]));
+            sender.send(Action::LibraryAddStations(vec![station.clone()])).unwrap();
             btn.set_sensitive(false);
         });
 

@@ -3,23 +3,21 @@ extern crate rusqlite;
 
 use gtk::prelude::*;
 use libhandy::{Column, ColumnExt};
-use rusqlite::{Connection, Result, Statement};
+use rusqlite::{Connection, Result};
 
 use rustio::{Client, Station};
 use std::cell::RefCell;
-use std::collections::HashMap;
 use std::path::PathBuf;
 use std::thread;
 
 use std::fs;
 use std::fs::File;
 use std::io;
-use std::sync::mpsc::{channel, Receiver, Sender};
+use std::sync::mpsc::Sender;
 
 use app::{Action,AppInfo};
 use widgets::station_row::ContentType;
 use widgets::station_listbox::StationListBox;
-use station_model::StationModel;
 
 static SQL_READ: &str = "SELECT station_id, collection_name, library.collection_id FROM library LEFT JOIN collections ON library.collection_id = collections.collection_id ORDER BY library.collection_id ASC;";
 static SQL_INIT_LIBRARY: &str = "CREATE TABLE \"library\" ('station_id' INTEGER, 'collection_id' INTEGER);";
@@ -89,7 +87,7 @@ impl Library {
     pub fn import_from_path(&self, path: &PathBuf) -> Result<()>{
         // test sql connection
         let connection = Connection::open(path.clone()).unwrap();
-        let mut stmt = connection.prepare(SQL_READ)?;
+        let mut _stmt = connection.prepare(SQL_READ)?;
 
         let sender = self.sender.clone();
         let p = path.clone();
@@ -117,7 +115,7 @@ impl Library {
             client.get_station_by_id(station_id).map(|station| {
                 info!("Found Station: {}", station.name);
                 result.insert(0, station);
-            });
+            }).unwrap();
         }
         Ok(result)
     }
@@ -125,7 +123,7 @@ impl Library {
     fn write_stations_to_db(path: &PathBuf, stations: Vec<Station>) -> Result<()> {
         info!("Delete previous database data...");
         fs::remove_file(path).unwrap();
-        Self::create_database(&path);
+        Self::create_database(&path).unwrap();
 
         info!("Write stations to \"{:?}\"", path);
         let connection = Connection::open(path.clone()).unwrap();
@@ -151,7 +149,7 @@ impl Library {
 
         path.push("gradio.db");
         if !path.exists() {
-            Self::create_database(&path);
+            Self::create_database(&path).unwrap();
         }
 
         Ok(path)
@@ -171,7 +169,7 @@ impl Library {
     }
 
     fn update_visible_page(&self){
-        if(self.station_listbox.borrow().get_stations().len() != 0){
+        if self.station_listbox.borrow().get_stations().len() != 0 {
             self.set_visible_page("content");
         }else{
             self.set_visible_page("empty");

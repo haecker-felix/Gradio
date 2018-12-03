@@ -4,7 +4,6 @@ use gtk::prelude::*;
 
 use rustio::Station;
 use std::sync::mpsc::Sender;
-use std::collections::HashMap;
 
 use app::Action;
 use widgets::station_row::{StationRow, ContentType};
@@ -16,7 +15,6 @@ pub struct StationListBox {
     station_model: StationModel,
     content_type: ContentType,
 
-    builder: gtk::Builder,
     sender: Sender<Action>,
 }
 
@@ -28,7 +26,7 @@ impl StationListBox {
         let listbox: gtk::ListBox = builder.get_object("listbox").unwrap();
         let station_model = StationModel::new();
 
-        Self { widget, listbox, station_model, content_type, builder, sender }
+        Self { widget, listbox, station_model, content_type, sender }
     }
 
     pub fn add_stations(&mut self, stations: Vec<Station>){
@@ -57,19 +55,5 @@ impl StationListBox {
 
     pub fn get_stations(&self) -> Vec<Station>{
         self.station_model.export_vec()
-    }
-
-    fn refresh(&self){
-        self.clear();
-        for (id, station) in self.station_model.clone() {
-            let row = StationRow::new(self.sender.clone(), station, self.content_type.clone());
-            self.listbox.add(&row.widget);
-        }
-    }
-
-    fn clear(&self) {
-        for widget in self.listbox.get_children() {
-            widget.destroy();
-        }
     }
 }

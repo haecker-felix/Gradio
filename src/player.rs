@@ -110,17 +110,17 @@ impl Player {
             let mut client = Client::new("http://www.radio-browser.info");
             let station_url = client.get_playable_station_url(station).unwrap();
             p.set_property("uri", &station_url).unwrap();
-            p.set_state(gstreamer::State::Playing);
+            let _ = p.set_state(gstreamer::State::Playing);
         });
     }
 
     pub fn set_playback(&self, playback: PlaybackState) {
         match playback {
             PlaybackState::Playing => {
-                self.playbin.set_state(gstreamer::State::Playing);
+                let _ = self.playbin.set_state(gstreamer::State::Playing);
             }
             PlaybackState::Stopped => {
-                self.playbin.set_state(gstreamer::State::Null);
+                let _ = self.playbin.set_state(gstreamer::State::Null);
 
                 // We need to set it manually, because we don't receive a gst message when the playback stops
                 self.player_widgets.playback_button_stack.set_visible_child_name("start_playback");
