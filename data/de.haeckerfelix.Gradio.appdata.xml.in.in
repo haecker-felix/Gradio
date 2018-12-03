@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop">
   <id>@appid@.desktop</id>
-  <name>Gradio</name>
+  <name>Radio</name>
   <summary>Find and listen to internet radio stations</summary>
   <translation type="gettext">gradio</translation>
   <developer_name>Felix Häcker</developer_name>
@@ -11,7 +11,7 @@
 
   <description>
     <p>
-      With Gradio you can browse, search and of course play radio stations. All
+      With Radio you can browse, search and of course play radio stations. All
       this is simple and uncomplicated.
     </p>
   </description>
@@ -90,4 +90,5 @@
     </release>
   </releases>
 </component>
+
 

@@ -57,7 +57,7 @@ impl App {
         let info = AppInfo {
             version:  option_env!("VERSION").unwrap_or("0.0.0").to_string(),
             profile: option_env!("PROFILE").unwrap_or("default").to_string(),
-            app_name: "Gradio".to_string(),
+            app_name: "Radio".to_string(),
             app_id: option_env!("APP_ID").unwrap_or("de.haeckerfelix.Gradio").to_string(),
         };
 

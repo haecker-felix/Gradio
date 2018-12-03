@@ -69,7 +69,7 @@ impl Player {
         let playbin = gstreamer::ElementFactory::make("playbin", "playbin").unwrap();
         let station = Cell::new(None);
 
-        let mpris = MprisPlayer::new(info.app_name.to_string(), info.app_name.to_string(), info.app_id.to_string());
+        let mpris = MprisPlayer::new("Gradio".to_string(), "Gradio".to_string(), "de.haeckerfelix.Gradio".to_string());
         mpris.set_can_raise(true);
         mpris.set_can_play(false);
         mpris.set_can_seek(false);
