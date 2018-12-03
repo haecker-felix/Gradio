@@ -12,7 +12,7 @@ use std::sync::mpsc::Sender;
 use std::sync::Arc;
 use std::thread;
 
-use app::Action;
+use app::{Action, AppInfo};
 
 pub enum PlaybackState {
     Playing,
@@ -62,14 +62,14 @@ pub struct Player {
 }
 
 impl Player {
-    pub fn new(sender: Sender<Action>) -> Self {
+    pub fn new(sender: Sender<Action>, info: &AppInfo) -> Self {
         let builder = gtk::Builder::new_from_resource("/de/haeckerfelix/Gradio/gtk/player.ui");
         let widget: gtk::ActionBar = builder.get_object("player").unwrap();
         let player_widgets = Rc::new(PlayerWidgets::new(builder.clone()));
         let playbin = gstreamer::ElementFactory::make("playbin", "playbin").unwrap();
         let station = Cell::new(None);
 
-        let mpris = MprisPlayer::new("Gradio".to_string(), "Gradio".to_string(), "de.haeckerfelix.Gradio".to_string());
+        let mpris = MprisPlayer::new(info.app_name.to_string(), info.app_name.to_string(), info.app_id.to_string());
         mpris.set_can_raise(true);
         mpris.set_can_play(false);
         mpris.set_can_seek(false);

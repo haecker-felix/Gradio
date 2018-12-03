@@ -71,8 +71,8 @@ impl App {
         let (sender, receiver) = channel();
 
         let window = Window::new(sender.clone(), &info);
-        let player = Player::new(sender.clone());
-        let mut library = Library::new(sender.clone());
+        let player = Player::new(sender.clone(), &info);
+        let mut library = Library::new(sender.clone(), &info);
         let search = Search::new(sender.clone());
 
         window.player_box.add(&player.widget);

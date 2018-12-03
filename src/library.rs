@@ -16,7 +16,7 @@ use std::fs::File;
 use std::io;
 use std::sync::mpsc::{channel, Receiver, Sender};
 
-use app::Action;
+use app::{Action,AppInfo};
 use widgets::station_row::ContentType;
 use widgets::station_listbox::StationListBox;
 use station_model::StationModel;
@@ -35,13 +35,18 @@ pub struct Library {
 }
 
 impl Library {
-    pub fn new(sender: Sender<Action>) -> Self {
+    pub fn new(sender: Sender<Action>, info: &AppInfo) -> Self {
         let builder = gtk::Builder::new_from_resource("/de/haeckerfelix/Gradio/gtk/library.ui");
         let widget: gtk::Box = builder.get_object("library").unwrap();
         let content_box: gtk::Box = builder.get_object("content_box").unwrap();
         let station_listbox = RefCell::new(StationListBox::new(sender.clone(), ContentType::Library));
 
         let db_path = Self::get_database_path().expect("Could not open database path...");
+
+        let logo_image: gtk::Image = builder.get_object("logo_image").unwrap();
+        logo_image.set_from_icon_name(Some(format!("{}-symbolic", info.app_id).as_str()), 128);
+        let welcome_text: gtk::Label = builder.get_object("welcome_text").unwrap();
+        welcome_text.set_text(format!("Welcome to {}", info.app_name).as_str());
 
         let library = Self {
             widget,
