@@ -69,10 +69,12 @@ impl Library {
 
     pub fn add_stations(&self, stations: Vec<Station>) {
         self.station_listbox.borrow_mut().add_stations(stations);
+        self.update_visible_page();
     }
 
     pub fn remove_stations(&self, stations: Vec<Station>) {
         self.station_listbox.borrow_mut().remove_stations(stations);
+        self.update_visible_page();
     }
 
     pub fn write_data(&self){
@@ -86,6 +88,7 @@ impl Library {
 
         let sender = self.sender.clone();
         let p = path.clone();
+        self.set_visible_page("loading");
         thread::spawn(move|| {
             let stations = Self::read_stations_from_db(&p).unwrap();
             sender.send(Action::LibraryAddStations(stations)).unwrap();
@@ -160,6 +163,19 @@ impl Library {
         let mut stmt = connection.prepare(SQL_INIT_COLLECTIONS).expect("Could not initialize sqlite database");
         stmt.execute(&[]).unwrap();
         Ok(())
+    }
+
+    fn update_visible_page(&self){
+        if(self.station_listbox.borrow().get_stations().len() != 0){
+            self.set_visible_page("content");
+        }else{
+            self.set_visible_page("empty");
+        }
+    }
+
+    fn set_visible_page(&self, name: &str){
+        let stack: gtk::Stack = self.builder.get_object("library_stack").unwrap();
+        stack.set_visible_child_name(name);
     }
 
     fn setup_signals(&self) {}
