@@ -43,9 +43,9 @@ impl Window {
 
         // Appmenu / hamburger button
         let menu_builder = gtk::Builder::new_from_resource("/de/haeckerfelix/Gradio/gtk/menu.ui");
-        let appmenu: gio::MenuModel = menu_builder.get_object("menu").unwrap();
+        let popover_menu: gtk::PopoverMenu = menu_builder.get_object("popover_menu").unwrap();
         let appmenu_button: gtk::MenuButton = window.builder.get_object("appmenu_button").unwrap();
-        appmenu_button.set_menu_model(Some(&appmenu));
+        appmenu_button.set_popover(Some(&popover_menu));
 
         // Devel style class
         if appinfo.app_id.ends_with("Devel") {
