@@ -3,14 +3,38 @@ use indexmap::map::Entry;
 use rustio::Station;
 
 #[derive(Clone, Debug)]
+pub enum Sorting{
+    Name,
+    Language,
+    Country,
+    State,
+    Codec,
+    Votes,
+    Bitrate,
+}
+
+#[derive(Clone, Debug)]
+pub enum Order{
+    Ascending,
+    Descending,
+}
+
+
+#[derive(Clone, Debug)]
 pub struct StationModel{
     map: IndexMap<u32, Station>,
+    sorting: Sorting,
+    order: Order,
 }
 
 impl StationModel{
     pub fn new() -> Self{
         let map: IndexMap<u32, Station> = IndexMap::new();
-        Self { map }
+
+        let sorting = Sorting::Votes;
+        let order = Order::Descending;
+
+        Self { map, sorting, order }
     }
 
     pub fn export_vec (&self) -> Vec<Station> {
@@ -50,9 +74,39 @@ impl StationModel{
         self.map.contains_key(&id)
     }
 
+    pub fn set_sorting(&mut self, sorting: Sorting, order: Order){
+        self.sorting = sorting;
+        self.order = order;
+    }
+
     pub fn sort(&mut self){
-        self.map.sort_by(|_a_id, a_station, _b_id, b_station|{
-            a_station.name.cmp(&b_station.name)
+        let order = self.order.clone();
+        let sorting = self.sorting.clone();
+
+        self.map.sort_by(move|_, b, _, d|{
+            let station_a: Station;
+            let station_b: Station;
+
+            match order{
+                Order::Ascending => {
+                    station_a = b.clone();
+                    station_b = d.clone();
+                },
+                Order::Descending => {
+                    station_b = b.clone();
+                    station_a = d.clone();
+                },
+            }
+
+            match sorting{
+                Sorting::Name => station_a.name.cmp(&station_b.name),
+                Sorting::Language => station_a.language.cmp(&station_b.language),
+                Sorting::Country => station_a.country.cmp(&station_b.country),
+                Sorting::State => station_a.state.cmp(&station_b.state),
+                Sorting::Codec => station_a.codec.cmp(&station_b.codec),
+                Sorting::Votes => station_a.votes.parse::<i32>().unwrap().cmp(&station_b.votes.parse::<i32>().unwrap()),
+                Sorting::Bitrate => station_a.bitrate.parse::<i32>().unwrap().cmp(&station_b.bitrate.parse::<i32>().unwrap()),
+            }
         });
     }
 }
