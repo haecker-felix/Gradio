@@ -39,7 +39,7 @@ impl Library {
         let content_box: gtk::Box = builder.get_object("content_box").unwrap();
         let station_listbox = RefCell::new(StationListBox::new(sender.clone(), ContentType::Library));
 
-        let db_path = Self::get_database_path().expect("Could not open database path...");
+        let db_path = Self::get_database_path("gradio.db").expect("Could not open database path...");
 
         let logo_image: gtk::Image = builder.get_object("logo_image").unwrap();
         logo_image.set_from_icon_name(Some(format!("{}-symbolic", info.app_id).as_str()), 128);
@@ -100,6 +100,11 @@ impl Library {
         Ok(())
     }
 
+    pub fn export_to_path(&self, path: &PathBuf) -> Result<()>{
+        Self::write_stations_to_db(&path, self.station_listbox.borrow().get_stations()).expect("Could not export database.");
+        Ok(())
+    }
+
     fn read_stations_from_db(path: &PathBuf) -> Result<Vec<Station>> {
         debug!("Read stations from \"{:?}\"", path);
         let mut result = Vec::new();
@@ -121,21 +126,27 @@ impl Library {
     }
 
     fn write_stations_to_db(path: &PathBuf, stations: Vec<Station>) -> Result<()> {
-        info!("Delete previous database data...");
-        fs::remove_file(path).unwrap();
-        Self::create_database(&path).unwrap();
+        let tmpdb = Self::get_database_path("tmp.db").unwrap();
 
-        info!("Write stations to \"{:?}\"", path);
-        let connection = Connection::open(path.clone()).unwrap();
+        info!("Delete previous database data...");
+        let _ = fs::remove_file(path);
+        let _ = fs::remove_file(&tmpdb);
+        let _ = Self::create_database(&tmpdb);
+
+        info!("Write stations to \"{:?}\"", tmpdb);
+        let connection = Connection::open(tmpdb.clone()).unwrap();
         for station in stations{
             let mut stmt = connection.prepare(&format!("INSERT INTO library VALUES ('{}', '0');", station.id.to_string(), ))?;
             stmt.execute(&[]).unwrap();
         }
 
+        debug!("Move tmp.db to real path...");
+        let _ = fs::copy(&tmpdb, &path);
+
         Ok(())
     }
 
-    fn get_database_path() -> io::Result<PathBuf> {
+    fn get_database_path(name: &str) -> io::Result<PathBuf> {
         let mut path = glib::get_user_data_dir().unwrap();
 
         if !path.exists() {
@@ -147,7 +158,7 @@ impl Library {
             fs::create_dir(&path.to_str().unwrap())?;
         }
 
-        path.push("gradio.db");
+        path.push(name);
         if !path.exists() {
             Self::create_database(&path).unwrap();
         }

@@ -6,6 +6,10 @@
         <attribute name="label" translatable="yes">_Import library</attribute>
         <attribute name="action">app.import-library</attribute>
       </item>
+      <item>
+        <attribute name="label" translatable="yes">_Export library</attribute>
+        <attribute name="action">app.export-library</attribute>
+      </item>
     </section>
     <section>
       <item>
@@ -17,10 +21,11 @@
         <attribute name="action">app.shortcuts</attribute>
       </item>
       <item>
-        <attribute name="label" translatable="yes">_About</attribute>
+        <attribute name="label" translatable="yes">_About Radio</attribute>
         <attribute name="action">app.about</attribute>
       </item>
     </section>
   </menu>
 </interface>
+
 

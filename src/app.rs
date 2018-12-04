@@ -7,7 +7,6 @@ use gio::prelude::*;
 use gtk::prelude::*;
 
 use rustio::{Station};
-use std::path::PathBuf;
 use std::rc::Rc;
 use std::sync::mpsc::{channel, Receiver, Sender};
 
@@ -27,6 +26,7 @@ pub enum Action {
     PlaybackStop,
     LibraryWrite,
     LibraryImport,
+    LibraryExport,
     LibraryAddStations(Vec<Station>),
     LibraryRemoveStations(Vec<Station>),
 }
@@ -140,6 +140,12 @@ impl App {
         self.add_gaction("import-library", move |_, _| {
             sender.send(Action::LibraryImport).unwrap();
         });
+
+        // Export library
+        let sender = self.sender.clone();
+        self.add_gaction("export-library", move |_, _| {
+            sender.send(Action::LibraryExport).unwrap();
+        });
     }
 
     fn add_gaction<F>(&self, name: &str, action: F)
@@ -169,6 +175,7 @@ impl App {
                 Action::PlaybackStop => self.player.set_playback(PlaybackState::Stopped),
                 Action::LibraryWrite => self.library.write_data(),
                 Action::LibraryImport => self.import_library(),
+                Action::LibraryExport => self.export_library(),
                 Action::LibraryAddStations(stations) => self.library.add_stations(stations),
                 Action::LibraryRemoveStations(stations) => self.library.remove_stations(stations),
             }
@@ -206,32 +213,51 @@ impl App {
 
     fn import_library(&self) {
         let import_dialog = gtk::FileChooserNative::new("Select database to import", &self.window.widget, gtk::FileChooserAction::Open, "Import", "Cancel");
-
-        // TODO: Gets ignored in some cases by using FileChooserNative. We should catch this.
         let filter = gtk::FileFilter::new();
         import_dialog.set_filter(&filter);
         filter.add_mime_type("application/x-sqlite3");
 
-        let mut path = PathBuf::new();
         if gtk::ResponseType::from(import_dialog.run()) == gtk::ResponseType::Accept {
-            path = import_dialog.get_file().unwrap().get_path().unwrap();
+            let path = import_dialog.get_file().unwrap().get_path().unwrap();
+            debug!("Import path: {:?}", path);
+            match self.library.import_from_path(&path) {
+                Ok(_) => info!("Successfully imported library"),
+                Err(err) => {
+                    let dialog = gtk::MessageDialog::new(
+                        Some(&self.window.widget),
+                        gtk::DialogFlags::DESTROY_WITH_PARENT,
+                        gtk::MessageType::Info,
+                        gtk::ButtonsType::Close,
+                        &format!("Could not import library:\n\n{:?}", err),
+                    );
+                    dialog.run();
+                    dialog.destroy();
+                }
+            };
         }
         import_dialog.destroy();
+    }
 
-        debug!("Import path: {:?}", path);
-        match self.library.import_from_path(&path) {
-            Ok(_) => info!("Successfully imported library"),
-            Err(err) => {
-                let dialog = gtk::MessageDialog::new(
-                    Some(&self.window.widget),
-                    gtk::DialogFlags::DESTROY_WITH_PARENT,
-                    gtk::MessageType::Info,
-                    gtk::ButtonsType::Close,
-                    &format!("Could not import library:\n\n{:?}", err),
-                );
-                dialog.run();
-                dialog.destroy();
-            }
-        };
+    fn export_library(&self) {
+        let export_dialog = gtk::FileChooserNative::new("Export database", &self.window.widget, gtk::FileChooserAction::Save, "Export", "Cancel");
+        if gtk::ResponseType::from(export_dialog.run()) == gtk::ResponseType::Accept {
+            let path = export_dialog.get_file().unwrap().get_path().unwrap();
+            debug!("Export path: {:?}", path);
+            match self.library.export_to_path(&path) {
+                Ok(_) => info!("Successfully exported library"),
+                Err(err) => {
+                    let dialog = gtk::MessageDialog::new(
+                        Some(&self.window.widget),
+                        gtk::DialogFlags::DESTROY_WITH_PARENT,
+                        gtk::MessageType::Info,
+                        gtk::ButtonsType::Close,
+                        &format!("Could not export library:\n\n{:?}", err),
+                    );
+                    dialog.run();
+                    dialog.destroy();
+                }
+            };
+        }
+        export_dialog.destroy();
     }
 }
