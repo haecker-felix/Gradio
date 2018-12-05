@@ -16,6 +16,7 @@ use std::io;
 use std::sync::mpsc::Sender;
 
 use app::{Action,AppInfo};
+use station_model::{Sorting, Order};
 use widgets::station_row::ContentType;
 use widgets::station_listbox::StationListBox;
 
@@ -103,6 +104,10 @@ impl Library {
     pub fn export_to_path(&self, path: &PathBuf) -> Result<()>{
         Self::write_stations_to_db(&path, self.station_listbox.borrow().get_stations()).expect("Could not export database.");
         Ok(())
+    }
+
+    pub fn set_sorting(&self, sorting: Sorting, order: Order){
+        self.station_listbox.borrow_mut().set_sorting(sorting, order);
     }
 
     fn read_stations_from_db(path: &PathBuf) -> Result<Vec<Station>> {

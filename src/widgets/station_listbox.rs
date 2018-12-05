@@ -7,7 +7,7 @@ use std::sync::mpsc::Sender;
 
 use app::Action;
 use widgets::station_row::{StationRow, ContentType};
-use station_model::StationModel;
+use station_model::{Sorting, Order, StationModel};
 
 pub struct StationListBox {
     pub widget: gtk::Box,
@@ -56,4 +56,26 @@ impl StationListBox {
     pub fn get_stations(&self) -> Vec<Station>{
         self.station_model.export_vec()
     }
+
+    pub fn set_sorting(&mut self, sorting: Sorting, order: Order){
+        self.station_model.set_sorting(sorting, order);
+        self.station_model.sort();
+        self.refresh();
+    }
+
+    fn refresh(&self){
+        self.clear();
+        for (_, station) in self.station_model.clone() {
+            let row = StationRow::new(self.sender.clone(), station, self.content_type.clone());
+            self.listbox.add(&row.widget);
+        }
+    }
+
+    fn clear(&self) {
+        for widget in self.listbox.get_children() {
+            widget.destroy();
+        }
+    }
 }
+
+

@@ -31,8 +31,8 @@ impl StationModel{
     pub fn new() -> Self{
         let map: IndexMap<u32, Station> = IndexMap::new();
 
-        let sorting = Sorting::Votes;
-        let order = Order::Descending;
+        let sorting = Sorting::Name;
+        let order = Order::Ascending;
 
         Self { map, sorting, order }
     }

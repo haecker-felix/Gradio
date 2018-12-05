@@ -3,7 +3,6 @@ extern crate gtk;
 use gtk::prelude::*;
 
 use std::sync::mpsc::Sender;
-
 use app::{Action, AppInfo};
 
 #[derive(Debug, Clone, PartialEq)]
