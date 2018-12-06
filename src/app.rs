@@ -80,6 +80,11 @@ impl App {
         window.library_box.add(&library.widget);
         window.search_box.add(&search.widget);
 
+        // Help overlay
+        let builder = gtk::Builder::new_from_resource("/de/haeckerfelix/Gradio/gtk/shortcuts.ui");
+        let dialog: gtk::ShortcutsWindow = builder.get_object("shortcuts").unwrap();
+        window.widget.set_help_overlay(Some(&dialog));
+
         let app = Rc::new(Self {
             info,
             gtk_app,
@@ -116,12 +121,6 @@ impl App {
         let gtk_app = self.gtk_app.clone();
         self.add_gaction("quit", move |_, _| gtk_app.quit());
         self.gtk_app.set_accels_for_action("app.quit", &["<primary>q"]);
-
-        // Shortcuts
-        let window = self.window.widget.clone();
-        self.add_gaction("shortcuts", move |_, _| {
-            Self::show_shortcuts_dialog(window.clone());
-        });
 
         // About
         let window = self.window.widget.clone();
@@ -249,16 +248,6 @@ impl App {
 
         dialog.connect_response(|dialog, _| dialog.destroy());
         dialog.show();
-    }
-
-    // TODO: This should be done with https://valadoc.org/gtk+-3.0/Gtk.ApplicationWindow.set_help_overlay.html
-    fn show_shortcuts_dialog(window: gtk::ApplicationWindow) {
-        let builder = gtk::Builder::new_from_resource("/de/haeckerfelix/Gradio/gtk/shortcuts.ui");
-        let dialog: gtk::ShortcutsWindow = builder.get_object("shortcuts").unwrap();
-
-        dialog.set_transient_for(&window);
-        dialog.set_modal(true);
-        dialog.show_all();
     }
 
     fn import_library(&self) {
