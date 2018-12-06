@@ -97,7 +97,10 @@ impl Library {
         thread::spawn(move|| {
             match Self::read_stations_from_db(&p){
                 Ok(stations) => sender.send(Action::LibraryAddStations(stations)).unwrap(),
-                Err(err) => () // TODO: Handle error
+                Err(err) => {
+                    sender.send(Action::LibraryAddStations(Vec::new())).unwrap();
+                    sender.send(Action::ViewShowNotification(format!("Could not load stations - {}", err.to_string()).to_string())).unwrap();
+                }
             };
         });
 
@@ -220,13 +223,13 @@ quick_error! {
         Sqlite(err: rusqlite::Error) {
             from()
             description("sqlite error")
-            display("Sqlite error: {}", err)
+            display("Database error: {}", err)
             cause(err)
         }
         Restson(err: restson::Error) {
             from()
             description("restson error")
-            display("Restson error: {}", err)
+            display("Network error: {}", err)
             cause(err)
         }
     }

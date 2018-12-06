@@ -4,6 +4,7 @@ use gtk::prelude::*;
 
 use std::sync::mpsc::Sender;
 use app::{Action, AppInfo};
+use widgets::notification::Notification;
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum View {
@@ -74,6 +75,13 @@ impl Window {
         back_button.connect_clicked(move |_| {
             sender.send(Action::ViewShowLibrary).unwrap();
         });
+    }
+
+    pub fn show_notification(&self, text: String){
+        let notification = Notification::new(text.as_str());
+
+        let overlay: gtk::Overlay = self.builder.get_object("overlay").unwrap();
+        notification.show(&overlay);
     }
 
     pub fn set_view(&self, view: View) {
