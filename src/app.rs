@@ -262,18 +262,8 @@ impl App {
             let path = import_dialog.get_file().unwrap().get_path().unwrap();
             debug!("Import path: {:?}", path);
             match self.library.import_from_path(&path) {
-                Ok(_) => info!("Successfully imported library"),
-                Err(err) => {
-                    let dialog = gtk::MessageDialog::new(
-                        Some(&self.window.widget),
-                        gtk::DialogFlags::DESTROY_WITH_PARENT,
-                        gtk::MessageType::Info,
-                        gtk::ButtonsType::Close,
-                        &format!("Could not import library:\n\n{:?}", err),
-                    );
-                    dialog.run();
-                    dialog.destroy();
-                }
+                Ok(_) => self.sender.send(Action::ViewShowNotification("Successfully imported library".to_string())).unwrap(),
+                Err(err) => self.sender.send(Action::ViewShowNotification(format!("Could not import library - {}", err.to_string()))).unwrap(),
             };
         }
         import_dialog.destroy();
@@ -285,18 +275,8 @@ impl App {
             let path = export_dialog.get_file().unwrap().get_path().unwrap();
             debug!("Export path: {:?}", path);
             match self.library.export_to_path(&path) {
-                Ok(_) => info!("Successfully exported library"),
-                Err(err) => {
-                    let dialog = gtk::MessageDialog::new(
-                        Some(&self.window.widget),
-                        gtk::DialogFlags::DESTROY_WITH_PARENT,
-                        gtk::MessageType::Info,
-                        gtk::ButtonsType::Close,
-                        &format!("Could not export library:\n\n{:?}", err),
-                    );
-                    dialog.run();
-                    dialog.destroy();
-                }
+                Ok(_) => self.sender.send(Action::ViewShowNotification("Successfully exported library".to_string())).unwrap(),
+                Err(err) => self.sender.send(Action::ViewShowNotification(format!("Could not export library - {}", err.to_string()))).unwrap(),
             };
         }
         export_dialog.destroy();
