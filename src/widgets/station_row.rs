@@ -16,28 +16,24 @@ pub enum ContentType{
 pub struct StationRow {
     pub widget: gtk::ListBoxRow,
     station: Station,
+    content_type: ContentType,
 
     builder: gtk::Builder,
     sender: Sender<Action>,
 }
 
 impl StationRow {
-    pub fn new(sender: Sender<Action>, station: Station, ctype: ContentType) -> Self {
+    pub fn new(sender: Sender<Action>, station: Station, content_type: ContentType) -> Self {
         let builder = gtk::Builder::new_from_resource("/de/haeckerfelix/Gradio/gtk/station_row.ui");
         let row: gtk::ListBoxRow = builder.get_object("station_row").unwrap();
 
         let stationrow = Self {
             widget: row,
             station,
+            content_type,
             builder,
             sender,
         };
-
-        let library_action_stack: gtk::Stack = stationrow.builder.get_object("library_action_stack").unwrap();
-        match ctype{
-            ContentType::Library => library_action_stack.set_visible_child_name("library-remove"),
-            ContentType::Other => library_action_stack.set_visible_child_name("library-add"),
-        }
 
         stationrow.setup_signals();
         stationrow.setup_widget();
@@ -52,11 +48,20 @@ impl StationRow {
         let homepage_label: gtk::Label = self.builder.get_object("homepage_label").unwrap();
         let tags_label: gtk::Label = self.builder.get_object("tags_label").unwrap();
         let language_label: gtk::Label = self.builder.get_object("language_label").unwrap();
+        let library_action_stack: gtk::Stack = self.builder.get_object("library_action_stack").unwrap();
 
         station_label.set_text(&self.station.name);
         votes_label.set_text(&format!("{} Votes", self.station.votes));
         location_label.set_text(&format!("{} {}", self.station.country, self.station.state));
         codec_label.set_text(&self.station.codec);
+        homepage_label.set_markup(&format!("<a href=\"{}\">{}</a>", self.station.homepage, self.station.homepage));
+        tags_label.set_text(&self.station.tags);
+        language_label.set_text(&self.station.language);
+
+        match self.content_type {
+            ContentType::Library => library_action_stack.set_visible_child_name("library-remove"),
+            ContentType::Other => library_action_stack.set_visible_child_name("library-add"),
+        }
     }
 
     fn setup_signals(&self) {
