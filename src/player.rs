@@ -1,8 +1,8 @@
 use gstreamer::prelude::*;
 use gtk::prelude::*;
-
 use mpris_player::{Metadata, MprisPlayer, OrgMprisMediaPlayer2Player, PlaybackStatus};
 use rustio::{Client, Station};
+
 use std::cell::Cell;
 use std::rc::Rc;
 use std::sync::mpsc::Sender;

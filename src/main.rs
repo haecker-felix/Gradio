@@ -8,9 +8,9 @@ mod library;
 mod player;
 mod search;
 mod static_resource;
+mod station_model;
 mod widgets;
 mod window;
-mod station_model;
 
 use crate::app::App;
 use simplelog::*;

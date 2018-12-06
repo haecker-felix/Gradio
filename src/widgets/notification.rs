@@ -15,11 +15,7 @@ impl Notification {
         let text_label: gtk::Label = builder.get_object("text_label").unwrap();
         text_label.set_label(text);
 
-        let notification = Notification {
-            revealer,
-            text_label,
-            close_button,
-        };
+        let notification = Notification { revealer, text_label, close_button };
 
         let revealer = notification.revealer.clone();
         notification.close_button.connect_clicked(move |_| {

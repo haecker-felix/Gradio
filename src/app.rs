@@ -1,15 +1,15 @@
 use gio::prelude::*;
 use gtk::prelude::*;
+use rustio::Station;
 
-use rustio::{Station};
 use std::rc::Rc;
 use std::sync::mpsc::{channel, Receiver, Sender};
 
 use crate::library::Library;
 use crate::player::{PlaybackState, Player};
 use crate::search::Search;
+use crate::station_model::{Order, Sorting};
 use crate::window::{View, Window};
-use crate::station_model::{Sorting, Order};
 
 #[derive(Debug, Clone)]
 pub enum Action {
@@ -53,7 +53,7 @@ pub struct App {
 impl App {
     pub fn new() -> Rc<Self> {
         let info = AppInfo {
-            version:  option_env!("VERSION").unwrap_or("0.0.0").to_string(),
+            version: option_env!("VERSION").unwrap_or("0.0.0").to_string(),
             profile: option_env!("PROFILE").unwrap_or("default").to_string(),
             app_name: "Radio".to_string(),
             app_id: option_env!("APP_ID").unwrap_or("de.haeckerfelix.Gradio").to_string(),
@@ -156,7 +156,7 @@ impl App {
         let sa = sorting_action.clone();
         let oa = order_action.clone();
         let sender = self.sender.clone();
-        sorting_action.connect_activate(move |a,b| {
+        sorting_action.connect_activate(move |a, b| {
             a.set_state(&b.clone().unwrap());
             Self::sort_action(&sa, &oa, &sender);
         });
@@ -164,21 +164,21 @@ impl App {
         let sa = sorting_action.clone();
         let oa = order_action.clone();
         let sender = self.sender.clone();
-        order_action.connect_activate(move |a,b| {
+        order_action.connect_activate(move |a, b| {
             a.set_state(&b.clone().unwrap());
             Self::sort_action(&sa, &oa, &sender);
         });
     }
 
-    fn sort_action(sorting_action: &gio::SimpleAction, order_action: &gio::SimpleAction, sender: &Sender<Action>){
+    fn sort_action(sorting_action: &gio::SimpleAction, order_action: &gio::SimpleAction, sender: &Sender<Action>) {
         let order_str: String = order_action.get_state().unwrap().get_str().unwrap().to_string();
-        let order = match order_str.as_ref(){
+        let order = match order_str.as_ref() {
             "ascending" => Order::Ascending,
             _ => Order::Descending,
         };
 
         let sorting_str: String = sorting_action.get_state().unwrap().get_str().unwrap().to_string();
-        let sorting = match sorting_str.as_ref(){
+        let sorting = match sorting_str.as_ref() {
             "language" => Sorting::Language,
             "country" => Sorting::Country,
             "state" => Sorting::State,

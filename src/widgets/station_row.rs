@@ -1,12 +1,12 @@
 use gtk::prelude::*;
-
 use rustio::Station;
+
 use std::sync::mpsc::Sender;
 
 use crate::app::Action;
 
 #[derive(Clone)]
-pub enum ContentType{
+pub enum ContentType {
     Library,
     Other,
 }

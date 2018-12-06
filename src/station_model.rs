@@ -1,9 +1,9 @@
-use indexmap::IndexMap;
 use indexmap::map::Entry;
+use indexmap::IndexMap;
 use rustio::Station;
 
 #[derive(Clone, Debug)]
-pub enum Sorting{
+pub enum Sorting {
     Name,
     Language,
     Country,
@@ -14,21 +14,20 @@ pub enum Sorting{
 }
 
 #[derive(Clone, Debug)]
-pub enum Order{
+pub enum Order {
     Ascending,
     Descending,
 }
 
-
 #[derive(Clone, Debug)]
-pub struct StationModel{
+pub struct StationModel {
     map: IndexMap<u32, Station>,
     sorting: Sorting,
     order: Order,
 }
 
-impl StationModel{
-    pub fn new() -> Self{
+impl StationModel {
+    pub fn new() -> Self {
         let map: IndexMap<u32, Station> = IndexMap::new();
 
         let sorting = Sorting::Name;
@@ -37,7 +36,7 @@ impl StationModel{
         Self { map, sorting, order }
     }
 
-    pub fn export_vec (&self) -> Vec<Station> {
+    pub fn export_vec(&self) -> Vec<Station> {
         let mut result = Vec::new();
         for (_id, station) in self.map.clone() {
             result.insert(0, station);
@@ -45,13 +44,13 @@ impl StationModel{
         result
     }
 
-    pub fn add_station(&mut self, station: Station) -> Option<usize>{
+    pub fn add_station(&mut self, station: Station) -> Option<usize> {
         let mut index = None;
         if !self.contains(&station) {
             let id = station.id.parse::<u32>().unwrap();
             self.map.insert(id.clone(), station);
             self.sort();
-            index = match self.map.entry(id){
+            index = match self.map.entry(id) {
                 Entry::Occupied(e) => Some(e.index()),
                 _ => None,
             };
@@ -59,7 +58,7 @@ impl StationModel{
         index
     }
 
-    pub fn remove_station(&mut self, station: Station) -> Option<usize>{
+    pub fn remove_station(&mut self, station: Station) -> Option<usize> {
         let mut index = None;
         if self.contains(&station) {
             let id = station.id.parse::<u32>().unwrap();
@@ -69,36 +68,36 @@ impl StationModel{
         index
     }
 
-    pub fn contains(&self, station: &Station) -> bool{
+    pub fn contains(&self, station: &Station) -> bool {
         let id = station.id.parse::<u32>().unwrap();
         self.map.contains_key(&id)
     }
 
-    pub fn set_sorting(&mut self, sorting: Sorting, order: Order){
+    pub fn set_sorting(&mut self, sorting: Sorting, order: Order) {
         self.sorting = sorting;
         self.order = order;
     }
 
-    pub fn sort(&mut self){
+    pub fn sort(&mut self) {
         let order = self.order.clone();
         let sorting = self.sorting.clone();
 
-        self.map.sort_by(move|_, b, _, d|{
+        self.map.sort_by(move |_, b, _, d| {
             let station_a: Station;
             let station_b: Station;
 
-            match order{
+            match order {
                 Order::Ascending => {
                     station_a = b.clone();
                     station_b = d.clone();
-                },
+                }
                 Order::Descending => {
                     station_b = b.clone();
                     station_a = d.clone();
-                },
+                }
             }
 
-            match sorting{
+            match sorting {
                 Sorting::Name => station_a.name.cmp(&station_b.name),
                 Sorting::Language => station_a.language.cmp(&station_b.language),
                 Sorting::Country => station_a.country.cmp(&station_b.country),

@@ -1,6 +1,7 @@
 use gtk::prelude::*;
 
 use std::sync::mpsc::Sender;
+
 use crate::app::{Action, AppInfo};
 use crate::widgets::notification::Notification;
 
@@ -75,7 +76,7 @@ impl Window {
         });
     }
 
-    pub fn show_notification(&self, text: String){
+    pub fn show_notification(&self, text: String) {
         let notification = Notification::new(text.as_str());
 
         let overlay: gtk::Overlay = self.builder.get_object("overlay").unwrap();

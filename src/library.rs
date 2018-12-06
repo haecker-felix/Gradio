@@ -1,24 +1,24 @@
 use gtk::prelude::*;
 use libhandy::{Column, ColumnExt};
-use rusqlite::{Connection};
-
+use rusqlite::Connection;
 use rustio::{Client, Station};
-use std::cell::RefCell;
-use std::path::PathBuf;
-use std::thread;
 
+use std::cell::RefCell;
 use std::fs;
-use std::result::Result;
 use std::fs::File;
 use std::io;
+use std::path::PathBuf;
+use std::result::Result;
 use std::sync::mpsc::Sender;
+use std::thread;
 
-use crate::app::{Action,AppInfo};
-use crate::station_model::{Sorting, Order};
-use crate::widgets::station_row::ContentType;
+use crate::app::{Action, AppInfo};
+use crate::station_model::{Order, Sorting};
 use crate::widgets::station_listbox::StationListBox;
+use crate::widgets::station_row::ContentType;
 
-static SQL_READ: &str = "SELECT station_id, collection_name, library.collection_id FROM library LEFT JOIN collections ON library.collection_id = collections.collection_id ORDER BY library.collection_id ASC;";
+static SQL_READ: &str = "SELECT station_id, collection_name, library.collection_id
+                        FROM library LEFT JOIN collections ON library.collection_id = collections.collection_id ORDER BY library.collection_id ASC;";
 static SQL_INIT_LIBRARY: &str = "CREATE TABLE \"library\" ('station_id' INTEGER, 'collection_id' INTEGER);";
 static SQL_INIT_COLLECTIONS: &str = " CREATE TABLE \"collections\" ('collection_id' INTEGER, 'collection_name' TEXT)";
 
@@ -79,11 +79,11 @@ impl Library {
         self.update_visible_page();
     }
 
-    pub fn write_data(&self){
+    pub fn write_data(&self) {
         Self::write_stations_to_db(&self.db_path, self.station_listbox.borrow().get_stations()).expect("Could not write stations to database.");
     }
 
-    pub fn import_from_path(&self, path: &PathBuf) -> Result<(), LibraryError>{
+    pub fn import_from_path(&self, path: &PathBuf) -> Result<(), LibraryError> {
         // test sql connection
         let connection = Connection::open(path.clone())?;
         let mut _stmt = connection.prepare(SQL_READ)?;
@@ -91,8 +91,8 @@ impl Library {
         let sender = self.sender.clone();
         let p = path.clone();
         self.set_visible_page("loading");
-        thread::spawn(move|| {
-            match Self::read_stations_from_db(&p){
+        thread::spawn(move || {
+            match Self::read_stations_from_db(&p) {
                 Ok(stations) => sender.send(Action::LibraryAddStations(stations)).unwrap(),
                 Err(err) => {
                     sender.send(Action::LibraryAddStations(Vec::new())).unwrap();
@@ -104,12 +104,12 @@ impl Library {
         Ok(())
     }
 
-    pub fn export_to_path(&self, path: &PathBuf) -> Result<(),LibraryError>{
+    pub fn export_to_path(&self, path: &PathBuf) -> Result<(), LibraryError> {
         Self::write_stations_to_db(&path, self.station_listbox.borrow().get_stations()).expect("Could not export database.");
         Ok(())
     }
 
-    pub fn set_sorting(&self, sorting: Sorting, order: Order){
+    pub fn set_sorting(&self, sorting: Sorting, order: Order) {
         self.station_listbox.borrow_mut().set_sorting(sorting, order);
     }
 
@@ -134,9 +134,9 @@ impl Library {
     }
 
     fn write_stations_to_db(path: &PathBuf, stations: Vec<Station>) -> Result<(), LibraryError> {
-        if stations.len() == 0{
+        if stations.len() == 0 {
             debug!("No stations - Do nothing.");
-            return Ok(())
+            return Ok(());
         }
 
         let tmpdb = Self::get_database_path("tmp.db")?;
@@ -148,8 +148,8 @@ impl Library {
 
         info!("Write stations to \"{:?}\"", tmpdb);
         let connection = Connection::open(tmpdb.clone())?;
-        for station in stations{
-            let mut stmt = connection.prepare(&format!("INSERT INTO library VALUES ('{}', '0');", station.id.to_string(), ))?;
+        for station in stations {
+            let mut stmt = connection.prepare(&format!("INSERT INTO library VALUES ('{}', '0');", station.id.to_string(),))?;
             stmt.execute(&[])?;
         }
 
@@ -179,7 +179,7 @@ impl Library {
         Ok(path)
     }
 
-    fn create_database(path: &PathBuf) -> Result<(), LibraryError>{
+    fn create_database(path: &PathBuf) -> Result<(), LibraryError> {
         info!("Create new database...");
         File::create(&path.to_str().unwrap())?;
 
@@ -192,15 +192,15 @@ impl Library {
         Ok(())
     }
 
-    fn update_visible_page(&self){
+    fn update_visible_page(&self) {
         if self.station_listbox.borrow().get_stations().len() != 0 {
             self.set_visible_page("content");
-        }else{
+        } else {
             self.set_visible_page("empty");
         }
     }
 
-    fn set_visible_page(&self, name: &str){
+    fn set_visible_page(&self, name: &str) {
         let stack: gtk::Stack = self.builder.get_object("library_stack").unwrap();
         stack.set_visible_child_name(name);
     }
