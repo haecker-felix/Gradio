@@ -95,8 +95,10 @@ impl Library {
         let p = path.clone();
         self.set_visible_page("loading");
         thread::spawn(move|| {
-            let stations = Self::read_stations_from_db(&p).unwrap();
-            sender.send(Action::LibraryAddStations(stations)).unwrap();
+            match Self::read_stations_from_db(&p){
+                Ok(stations) => sender.send(Action::LibraryAddStations(stations)).unwrap(),
+                Err(err) => () // TODO: Handle error
+            };
         });
 
         Ok(())
@@ -132,6 +134,11 @@ impl Library {
     }
 
     fn write_stations_to_db(path: &PathBuf, stations: Vec<Station>) -> Result<(), LibraryError> {
+        if stations.len() == 0{
+            debug!("No stations - Do nothing.");
+            return Ok(())
+        }
+
         let tmpdb = Self::get_database_path("tmp.db")?;
 
         info!("Delete previous database data...");
