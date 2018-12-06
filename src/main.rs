@@ -1,19 +1,7 @@
-extern crate gdk;
-extern crate gio;
-extern crate glib;
-extern crate gtk;
 #[macro_use]
 extern crate log;
-extern crate gstreamer;
-extern crate libhandy;
-extern crate mpris_player;
-extern crate rusqlite;
-extern crate rustio;
-extern crate simplelog;
-extern crate indexmap;
 #[macro_use]
 extern crate quick_error;
-extern crate restson;
 
 mod app;
 mod library;
@@ -24,7 +12,7 @@ mod widgets;
 mod window;
 mod station_model;
 
-use app::App;
+use crate::app::App;
 use simplelog::*;
 
 fn main() {

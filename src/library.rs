@@ -1,6 +1,3 @@
-extern crate gtk;
-extern crate rusqlite;
-
 use gtk::prelude::*;
 use libhandy::{Column, ColumnExt};
 use rusqlite::{Connection};
@@ -16,10 +13,10 @@ use std::fs::File;
 use std::io;
 use std::sync::mpsc::Sender;
 
-use app::{Action,AppInfo};
-use station_model::{Sorting, Order};
-use widgets::station_row::ContentType;
-use widgets::station_listbox::StationListBox;
+use crate::app::{Action,AppInfo};
+use crate::station_model::{Sorting, Order};
+use crate::widgets::station_row::ContentType;
+use crate::widgets::station_listbox::StationListBox;
 
 static SQL_READ: &str = "SELECT station_id, collection_name, library.collection_id FROM library LEFT JOIN collections ON library.collection_id = collections.collection_id ORDER BY library.collection_id ASC;";
 static SQL_INIT_LIBRARY: &str = "CREATE TABLE \"library\" ('station_id' INTEGER, 'collection_id' INTEGER);";

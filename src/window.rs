@@ -1,10 +1,8 @@
-extern crate gio;
-extern crate gtk;
 use gtk::prelude::*;
 
 use std::sync::mpsc::Sender;
-use app::{Action, AppInfo};
-use widgets::notification::Notification;
+use crate::app::{Action, AppInfo};
+use crate::widgets::notification::Notification;
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum View {

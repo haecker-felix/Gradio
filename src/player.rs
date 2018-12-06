@@ -1,6 +1,3 @@
-extern crate gstreamer;
-extern crate gtk;
-
 use gstreamer::prelude::*;
 use gtk::prelude::*;
 
@@ -12,7 +9,7 @@ use std::sync::mpsc::Sender;
 use std::sync::Arc;
 use std::thread;
 
-use app::{Action, AppInfo};
+use crate::app::{Action, AppInfo};
 
 pub enum PlaybackState {
     Playing,

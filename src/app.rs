@@ -1,8 +1,3 @@
-extern crate gdk;
-extern crate gio;
-extern crate glib;
-extern crate gtk;
-
 use gio::prelude::*;
 use gtk::prelude::*;
 
@@ -10,11 +5,11 @@ use rustio::{Station};
 use std::rc::Rc;
 use std::sync::mpsc::{channel, Receiver, Sender};
 
-use library::Library;
-use player::{PlaybackState, Player};
-use search::Search;
-use window::{View, Window};
-use station_model::{Sorting, Order};
+use crate::library::Library;
+use crate::player::{PlaybackState, Player};
+use crate::search::Search;
+use crate::window::{View, Window};
+use crate::station_model::{Sorting, Order};
 
 #[derive(Debug, Clone)]
 pub enum Action {

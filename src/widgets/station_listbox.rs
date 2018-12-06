@@ -1,13 +1,11 @@
-extern crate gio;
-extern crate gtk;
 use gtk::prelude::*;
 
 use rustio::Station;
 use std::sync::mpsc::Sender;
 
-use app::Action;
-use widgets::station_row::{StationRow, ContentType};
-use station_model::{Sorting, Order, StationModel};
+use crate::app::Action;
+use crate::widgets::station_row::{StationRow, ContentType};
+use crate::station_model::{Sorting, Order, StationModel};
 
 pub struct StationListBox {
     pub widget: gtk::Box,

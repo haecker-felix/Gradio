@@ -1,10 +1,9 @@
-extern crate gtk;
 use gtk::prelude::*;
 use libhandy::{Leaflet, LeafletChildTransitionType, LeafletExt, LeafletModeTransitionType};
 
 use std::sync::mpsc::Sender;
 
-use app::Action;
+use crate::app::Action;
 
 pub struct Search {
     pub widget: gtk::Box,

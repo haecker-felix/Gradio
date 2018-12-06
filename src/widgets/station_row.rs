@@ -1,11 +1,9 @@
-extern crate gio;
-extern crate gtk;
 use gtk::prelude::*;
 
 use rustio::Station;
 use std::sync::mpsc::Sender;
 
-use app::Action;
+use crate::app::Action;
 
 #[derive(Clone)]
 pub enum ContentType{
