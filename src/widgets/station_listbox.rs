@@ -19,7 +19,6 @@ pub struct StationListBox {
 }
 
 impl StationListBox {
-    // TODO: remove title stuff from ui file
     pub fn new(sender: Sender<Action>, content_type: ContentType) -> Self {
         let builder = gtk::Builder::new_from_resource("/de/haeckerfelix/Gradio/gtk/station_listbox.ui");
         let widget: gtk::Box = builder.get_object("station_listbox").unwrap();

@@ -104,7 +104,6 @@ impl Player {
         self.mpris.set_metadata(metadata);
         self.mpris.set_can_play(true);
 
-        // TODO: Refactor this
         let p = self.playbin.clone();
         thread::spawn(move || {
             let mut client = Client::new("http://www.radio-browser.info");
