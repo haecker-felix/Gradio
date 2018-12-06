@@ -3,7 +3,7 @@ extern crate rusqlite;
 
 use gtk::prelude::*;
 use libhandy::{Column, ColumnExt};
-use rusqlite::{Connection, Result};
+use rusqlite::{Connection};
 
 use rustio::{Client, Station};
 use std::cell::RefCell;
@@ -11,6 +11,7 @@ use std::path::PathBuf;
 use std::thread;
 
 use std::fs;
+use std::result::Result;
 use std::fs::File;
 use std::io;
 use std::sync::mpsc::Sender;
@@ -85,9 +86,9 @@ impl Library {
         Self::write_stations_to_db(&self.db_path, self.station_listbox.borrow().get_stations()).expect("Could not write stations to database.");
     }
 
-    pub fn import_from_path(&self, path: &PathBuf) -> Result<()>{
+    pub fn import_from_path(&self, path: &PathBuf) -> Result<(), LibraryError>{
         // test sql connection
-        let connection = Connection::open(path.clone()).unwrap();
+        let connection = Connection::open(path.clone())?;
         let mut _stmt = connection.prepare(SQL_READ)?;
 
         let sender = self.sender.clone();
@@ -101,7 +102,7 @@ impl Library {
         Ok(())
     }
 
-    pub fn export_to_path(&self, path: &PathBuf) -> Result<()>{
+    pub fn export_to_path(&self, path: &PathBuf) -> Result<(),LibraryError>{
         Self::write_stations_to_db(&path, self.station_listbox.borrow().get_stations()).expect("Could not export database.");
         Ok(())
     }
@@ -110,13 +111,13 @@ impl Library {
         self.station_listbox.borrow_mut().set_sorting(sorting, order);
     }
 
-    fn read_stations_from_db(path: &PathBuf) -> Result<Vec<Station>> {
+    fn read_stations_from_db(path: &PathBuf) -> Result<Vec<Station>, LibraryError> {
         debug!("Read stations from \"{:?}\"", path);
         let mut result = Vec::new();
         let mut client = Client::new("http://www.radio-browser.info");
-        let connection = Connection::open(path.clone()).unwrap();
+        let connection = Connection::open(path.clone())?;
         let mut stmt = connection.prepare(SQL_READ)?;
-        let mut rows = stmt.query(&[]).unwrap();
+        let mut rows = stmt.query(&[])?;
 
         while let Some(result_row) = rows.next() {
             let row = result_row.unwrap();
@@ -125,13 +126,13 @@ impl Library {
             client.get_station_by_id(station_id).map(|station| {
                 info!("Found Station: {}", station.name);
                 result.insert(0, station);
-            }).unwrap();
+            })?;
         }
         Ok(result)
     }
 
-    fn write_stations_to_db(path: &PathBuf, stations: Vec<Station>) -> Result<()> {
-        let tmpdb = Self::get_database_path("tmp.db").unwrap();
+    fn write_stations_to_db(path: &PathBuf, stations: Vec<Station>) -> Result<(), LibraryError> {
+        let tmpdb = Self::get_database_path("tmp.db")?;
 
         info!("Delete previous database data...");
         let _ = fs::remove_file(path);
@@ -139,10 +140,10 @@ impl Library {
         let _ = Self::create_database(&tmpdb);
 
         info!("Write stations to \"{:?}\"", tmpdb);
-        let connection = Connection::open(tmpdb.clone()).unwrap();
+        let connection = Connection::open(tmpdb.clone())?;
         for station in stations{
             let mut stmt = connection.prepare(&format!("INSERT INTO library VALUES ('{}', '0');", station.id.to_string(), ))?;
-            stmt.execute(&[]).unwrap();
+            stmt.execute(&[])?;
         }
 
         debug!("Move tmp.db to real path...");
@@ -151,7 +152,7 @@ impl Library {
         Ok(())
     }
 
-    fn get_database_path(name: &str) -> io::Result<PathBuf> {
+    fn get_database_path(name: &str) -> Result<PathBuf, LibraryError> {
         let mut path = glib::get_user_data_dir().unwrap();
 
         if !path.exists() {
@@ -165,22 +166,22 @@ impl Library {
 
         path.push(name);
         if !path.exists() {
-            Self::create_database(&path).unwrap();
+            Self::create_database(&path)?;
         }
 
         Ok(path)
     }
 
-    fn create_database(path: &PathBuf) -> io::Result<()>{
+    fn create_database(path: &PathBuf) -> Result<(), LibraryError>{
         info!("Create new database...");
         File::create(&path.to_str().unwrap())?;
 
         info!("Initialize database...");
-        let connection = Connection::open(path.clone()).unwrap();
+        let connection = Connection::open(path.clone())?;
         let mut stmt = connection.prepare(SQL_INIT_LIBRARY).expect("Could not initialize sqlite database");
-        stmt.execute(&[]).unwrap();
+        stmt.execute(&[])?;
         let mut stmt = connection.prepare(SQL_INIT_COLLECTIONS).expect("Could not initialize sqlite database");
-        stmt.execute(&[]).unwrap();
+        stmt.execute(&[])?;
         Ok(())
     }
 
@@ -198,4 +199,28 @@ impl Library {
     }
 
     fn setup_signals(&self) {}
+}
+
+quick_error! {
+    #[derive(Debug)]
+    pub enum LibraryError {
+        Io(err: io::Error) {
+            from()
+            description("io error")
+            display("I/O error: {}", err)
+            cause(err)
+        }
+        Sqlite(err: rusqlite::Error) {
+            from()
+            description("sqlite error")
+            display("Sqlite error: {}", err)
+            cause(err)
+        }
+        Restson(err: restson::Error) {
+            from()
+            description("restson error")
+            display("Restson error: {}", err)
+            cause(err)
+        }
+    }
 }

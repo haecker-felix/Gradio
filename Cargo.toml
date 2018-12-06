@@ -16,6 +16,8 @@ gstreamer = "0.12"
 mpris-player = "0.1"
 rusqlite = "0.13"
 indexmap = "1.0"
+quick-error = "1.2.2"
+restson = "0.4"
 
 [dependencies.gtk]
 version = "0.5"

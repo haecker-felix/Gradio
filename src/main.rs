@@ -11,6 +11,9 @@ extern crate rusqlite;
 extern crate rustio;
 extern crate simplelog;
 extern crate indexmap;
+#[macro_use]
+extern crate quick_error;
+extern crate restson;
 
 mod app;
 mod library;
