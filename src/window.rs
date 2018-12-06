@@ -87,8 +87,8 @@ impl Window {
         let library_mode = view == View::Library;
         add_button.set_visible(library_mode);
         back_button.set_visible(!library_mode);
-        sorting_mbutton.set_visible(library_mode);
-        library_mbutton.set_visible(library_mode);
+        sorting_mbutton.set_sensitive(library_mode);
+        library_mbutton.set_sensitive(library_mode);
 
         // set corrent transition type. for "current_playback" it should slide up/down.
         if view == View::CurrentPlayback {
