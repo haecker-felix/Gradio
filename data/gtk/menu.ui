@@ -10,7 +10,7 @@
         <property name="orientation">vertical</property>
         <property name="margin">12</property>
         <child>
-          <object class="GtkModelButton">
+          <object class="GtkModelButton" id="sorting_mbutton">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="receives_default">False</property>
@@ -24,7 +24,7 @@
           </packing>
         </child>
         <child>
-          <object class="GtkModelButton">
+          <object class="GtkModelButton" id="library_mbutton">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="receives_default">False</property>
@@ -298,4 +298,3 @@
     </child>
   </object>
 </interface>
-

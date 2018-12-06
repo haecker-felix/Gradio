@@ -19,14 +19,18 @@ pub struct Window {
     pub search_box: gtk::Box,
 
     builder: gtk::Builder,
+    menu_builder: gtk::Builder,
     sender: Sender<Action>,
 }
 
 impl Window {
     pub fn new(sender: Sender<Action>, appinfo: &AppInfo) -> Self {
         let builder = gtk::Builder::new_from_resource("/de/haeckerfelix/Gradio/gtk/window.ui");
+        let menu_builder = gtk::Builder::new_from_resource("/de/haeckerfelix/Gradio/gtk/menu.ui");
+
         let window: gtk::ApplicationWindow = builder.get_object("window").unwrap();
         window.set_title(&appinfo.app_name);
+
         let player_box: gtk::Box = builder.get_object("player_box").unwrap();
         let library_box: gtk::Box = builder.get_object("library_box").unwrap();
         let search_box: gtk::Box = builder.get_object("search_box").unwrap();
@@ -37,12 +41,12 @@ impl Window {
             library_box,
             search_box,
             builder,
+            menu_builder,
             sender,
         };
 
         // Appmenu / hamburger button
-        let menu_builder = gtk::Builder::new_from_resource("/de/haeckerfelix/Gradio/gtk/menu.ui");
-        let popover_menu: gtk::PopoverMenu = menu_builder.get_object("popover_menu").unwrap();
+        let popover_menu: gtk::PopoverMenu = window.menu_builder.get_object("popover_menu").unwrap();
         let appmenu_button: gtk::MenuButton = window.builder.get_object("appmenu_button").unwrap();
         appmenu_button.set_popover(Some(&popover_menu));
 
@@ -73,14 +77,18 @@ impl Window {
     }
 
     pub fn set_view(&self, view: View) {
+        let sorting_mbutton: gtk::ModelButton = self.menu_builder.get_object("sorting_mbutton").unwrap();
+        let library_mbutton: gtk::ModelButton = self.menu_builder.get_object("library_mbutton").unwrap();
         let view_stack: gtk::Stack = self.builder.get_object("view_stack").unwrap();
         let add_button: gtk::Button = self.builder.get_object("add_button").unwrap();
         let back_button: gtk::Button = self.builder.get_object("back_button").unwrap();
 
-        // show "add" or "back" button
-        let show_add_button = view == View::Library;
-        add_button.set_visible(show_add_button);
-        back_button.set_visible(!show_add_button);
+        // show or hide view specific buttons
+        let library_mode = view == View::Library;
+        add_button.set_visible(library_mode);
+        back_button.set_visible(!library_mode);
+        sorting_mbutton.set_visible(library_mode);
+        library_mbutton.set_visible(library_mode);
 
         // set corrent transition type. for "current_playback" it should slide up/down.
         if view == View::CurrentPlayback {
