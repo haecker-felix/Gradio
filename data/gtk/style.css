@@ -17,3 +17,35 @@
 .station-row:hover {
 	background: @theme_bg_color;
 }
+
+.bottombar{
+  background: @bottombar_bg;
+  border-top: solid gray 1px;
+}
+
+.bottombar button image {
+  -gtk-icon-shadow: none;
+  color: gray;
+}
+
+.bottombar button {
+  border: none;
+  box-shadow: none;
+  background-image: none;
+  border-radius: 0px;
+  background-color: @bottombar_bg;
+  outline-color: #999;
+  padding: 10px;
+}
+
+.bottombar button:hover {
+  background-color: shade(@theme_bg_color, 1.3);
+}
+
+.bottombar button:checked image {
+  color: @theme_fg_color;
+}
+
+.bottombar button:checked {
+  background-color: @theme_base_color;
+}
