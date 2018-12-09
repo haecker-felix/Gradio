@@ -67,16 +67,25 @@ impl StationListBox {
     }
 
     fn refresh(&self) {
-        self.clear();
+        // remove all rows
+        for widget in self.listbox.get_children() {
+            widget.destroy();
+        }
+
+        // sort
         for (_, station) in self.station_model.clone() {
             let row = StationRow::new(self.sender.clone(), station, self.content_type.clone());
             self.listbox.add(&row.widget);
         }
     }
 
-    fn clear(&self) {
+    pub fn clear(&mut self) {
+        // remove all rows
         for widget in self.listbox.get_children() {
             widget.destroy();
         }
+
+        // clear station_model
+        self.station_model.clear();
     }
 }

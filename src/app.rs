@@ -1,6 +1,6 @@
 use gio::prelude::*;
 use gtk::prelude::*;
-use rustio::Station;
+use rustio::{Station, StationSearch};
 
 use std::rc::Rc;
 use std::sync::mpsc::{channel, Receiver, Sender};
@@ -27,6 +27,7 @@ pub enum Action {
     LibraryExport,
     LibraryAddStations(Vec<Station>),
     LibraryRemoveStations(Vec<Station>),
+    SearchFor(StationSearch),
 }
 
 #[derive(Clone)]
@@ -224,6 +225,7 @@ impl App {
                 Action::LibraryExport => self.export_library(),
                 Action::LibraryAddStations(stations) => self.library.add_stations(stations),
                 Action::LibraryRemoveStations(stations) => self.library.remove_stations(stations),
+                Action::SearchFor(data) => self.search.search_for(data),
             }
         }
         glib::Continue(true)
