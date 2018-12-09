@@ -1,5 +1,6 @@
 use gtk::prelude::*;
 use rustio::Station;
+use libhandy::{Column, ColumnExt};
 
 use std::sync::mpsc::Sender;
 
@@ -22,6 +23,15 @@ impl StationListBox {
         let widget: gtk::Box = builder.get_object("station_listbox").unwrap();
         let listbox: gtk::ListBox = builder.get_object("listbox").unwrap();
         let station_model = StationModel::new();
+
+        // Setup HdyColumn
+        let column = Column::new();
+        column.set_maximum_width(700);
+        widget.add(&column);
+        let column = column.upcast::<gtk::Widget>(); // See https://gitlab.gnome.org/World/podcasts/blob/master/podcasts-gtk/src/widgets/home_view.rs#L64
+        let column = column.downcast::<gtk::Container>().unwrap();
+        column.show();
+        column.add(&listbox);
 
         Self {
             widget,

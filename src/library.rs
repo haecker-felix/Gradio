@@ -1,5 +1,4 @@
 use gtk::prelude::*;
-use libhandy::{Column, ColumnExt};
 use rusqlite::Connection;
 use rustio::{Client, Station};
 
@@ -37,6 +36,7 @@ impl Library {
         let widget: gtk::Box = builder.get_object("library").unwrap();
         let content_box: gtk::Box = builder.get_object("content_box").unwrap();
         let station_listbox = RefCell::new(StationListBox::new(sender.clone(), ContentType::Library));
+        content_box.add(&station_listbox.borrow().widget);
 
         let db_path = Self::get_database_path("gradio.db").expect("Could not open database path...");
 
@@ -52,15 +52,6 @@ impl Library {
             builder,
             sender,
         };
-
-        // Setup HdyColumn
-        let column = Column::new();
-        column.set_maximum_width(700);
-        content_box.add(&column);
-        let column = column.upcast::<gtk::Widget>(); // See https://gitlab.gnome.org/World/podcasts/blob/master/podcasts-gtk/src/widgets/home_view.rs#L64
-        let column = column.downcast::<gtk::Container>().unwrap();
-        column.show();
-        column.add(&library.station_listbox.borrow().widget);
 
         // read database and import data
         library.import_from_path(&library.db_path).expect("Could not import stations from database");
