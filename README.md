@@ -10,7 +10,7 @@ https://img.shields.io/badge/flatpak-download-brightgreen.svg)](https://flathub.
 [![Packaging status](https://repology.org/badge/tiny-repos/gradio.svg)](https://repology.org/metapackage/gradio)
 [![Translation status](https://hosted.weblate.org/widgets/gradio/-/svg-badge.svg)](https://hosted.weblate.org/engage/gradio/?utm_source=widget)
 
-## General Informations
+## General
 
 * **License**  
 GNU General Public License, Version 3
