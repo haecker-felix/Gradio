@@ -1,5 +1,4 @@
 use gtk::prelude::*;
-use libhandy::{Leaflet, LeafletChildTransitionType, LeafletExt, LeafletModeTransitionType};
 use rustio::{Client, StationSearch};
 
 use std::sync::mpsc::Sender;
