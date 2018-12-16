@@ -7,6 +7,7 @@ use std::sync::mpsc::{channel, Receiver, Sender};
 
 use crate::library::Library;
 use crate::player::{PlaybackState, Player};
+use crate::recorder::Recorder;
 use crate::search::Search;
 use crate::station_model::{Order, Sorting};
 use crate::window::{View, Window};
@@ -47,6 +48,7 @@ pub struct App {
 
     window: Window,
     player: Player,
+    recorder: Recorder,
     library: Library,
     search: Search,
 }
@@ -69,11 +71,13 @@ impl App {
         let (sender, receiver) = channel();
 
         let window = Window::new(sender.clone(), &info);
-        let player = Player::new(sender.clone(), &info);
+        let player = Player::new(sender.clone());
+        let recorder = Recorder::new(sender.clone());
         let library = Library::new(sender.clone(), &info);
         let search = Search::new(sender.clone());
 
         window.player_box.add(&player.widget);
+        window.recorder_box.add(&recorder.widget);
         window.library_box.add(&library.widget);
         window.search_box.add(&search.widget);
 
@@ -89,6 +93,7 @@ impl App {
             receiver,
             window,
             player,
+            recorder,
             library,
             search,
         });

@@ -3,6 +3,7 @@
   <gresource prefix="/de/haeckerfelix/Gradio/">
       <file compressed="true" preprocess="xml-stripblanks">gtk/window.ui</file>
       <file compressed="true" preprocess="xml-stripblanks">gtk/player.ui</file>
+      <file compressed="true" preprocess="xml-stripblanks">gtk/recorder.ui</file>
       <file compressed="true" preprocess="xml-stripblanks">gtk/library.ui</file>
       <file compressed="true" preprocess="xml-stripblanks">gtk/search.ui</file>
       <file compressed="true" preprocess="xml-stripblanks">gtk/station_row.ui</file>

@@ -6,6 +6,7 @@ extern crate quick_error;
 mod app;
 mod library;
 mod player;
+mod recorder;
 mod search;
 mod static_resource;
 mod station_model;

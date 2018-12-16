@@ -50,7 +50,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkBox" id="current_playback_box">
+                  <object class="GtkBox" id="recorder_box">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="orientation">vertical</property>
@@ -58,7 +58,7 @@
                       <object class="GtkLabel">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="label" translatable="yes">Todo - current playback</property>
+                        <property name="label" translatable="yes">Recorder</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>

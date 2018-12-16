@@ -59,7 +59,7 @@ pub struct Player {
 }
 
 impl Player {
-    pub fn new(sender: Sender<Action>, _info: &AppInfo) -> Self {
+    pub fn new(sender: Sender<Action>) -> Self {
         let builder = gtk::Builder::new_from_resource("/de/haeckerfelix/Gradio/gtk/player.ui");
         let widget: gtk::ActionBar = builder.get_object("player").unwrap();
         let player_widgets = Rc::new(PlayerWidgets::new(builder.clone()));

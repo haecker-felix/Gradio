@@ -15,6 +15,7 @@ pub enum View {
 pub struct Window {
     pub widget: gtk::ApplicationWindow,
     pub player_box: gtk::Box,
+    pub recorder_box: gtk::Box,
     pub library_box: gtk::Box,
     pub search_box: gtk::Box,
 
@@ -32,12 +33,14 @@ impl Window {
         window.set_title(&appinfo.app_name);
 
         let player_box: gtk::Box = builder.get_object("player_box").unwrap();
+        let recorder_box: gtk::Box = builder.get_object("recorder_box").unwrap();
         let library_box: gtk::Box = builder.get_object("library_box").unwrap();
         let search_box: gtk::Box = builder.get_object("search_box").unwrap();
 
         let window = Self {
             widget: window,
             player_box,
+            recorder_box,
             library_box,
             search_box,
             builder,
