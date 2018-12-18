@@ -222,7 +222,10 @@ impl App {
                 Action::ViewRaise => self.window.widget.present_with_time((glib::get_monotonic_time() / 1000) as u32),
                 Action::ViewShowNotification(text) => self.window.show_notification(text),
                 Action::ViewSetSorting(sorting, order) => self.library.set_sorting(sorting, order),
-                Action::PlaybackSetStation(station) => self.player.set_station(station),
+                Action::PlaybackSetStation(station) => {
+                    self.player.set_station(station.clone());
+                    self.recorder.set_station(station);
+                },
                 Action::PlaybackStart => self.player.set_playback(PlaybackState::Playing),
                 Action::PlaybackStop => self.player.set_playback(PlaybackState::Stopped),
                 Action::LibraryWrite => self.library.write_data(),

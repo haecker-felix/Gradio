@@ -14,6 +14,7 @@ simplelog = "0.5"
 rustio = { git="https://github.com/haecker-felix/Rustio.git" }
 libhandy = { git = "https://gitlab.gnome.org/jsparber/libhandy-rs" }
 gstreamer = "0.12"
+gstreamer-pbutils = "0.12"
 mpris-player = "0.1"
 rusqlite = "0.13"
 indexmap = "1.0"
