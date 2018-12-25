@@ -1,5 +1,5 @@
 use gstreamer::prelude::*;
-use gstreamer_pbutils::prelude::*;
+use gstreamer::{Element, Bin, Pipeline, Pad, PadProbeId, State, ElementFactory};
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                         //
@@ -8,7 +8,7 @@ use gstreamer_pbutils::prelude::*;
 //   | uridecodebin | -> | audioconvert | -> | vorbisenc | -> | queue | -> | muxsinkbin |  //
 //    --------------      --------------      -----------      -------      ------------   //
 //                                                                                         //
-//  # muxsinkbin:  (gstreamer::Bin) #                                                      //
+//  # muxsinkbin:  (gstreamer Bin) #                                                       //
 //    --------------------------------------------                                         //
 //   |                  --------      ----------  |                                        //
 //   | ( ghostpad ) -> | oggmux | -> | filesink | |                                        //
@@ -18,36 +18,36 @@ use gstreamer_pbutils::prelude::*;
 /////////////////////////////////////////////////////////////////////////////////////////////
 
 pub struct RecorderBackend{
-    pub pipeline: gstreamer::Pipeline,
+    pub pipeline: Pipeline,
 
-    pub uridecodebin: gstreamer::Element,
-    pub audioconvert: gstreamer::Element,
-    pub vorbisenc: gstreamer::Element,
-    pub queue: gstreamer::Element,
-    pub muxsinkbin: Option<gstreamer::Bin>,
+    pub uridecodebin: Element,
+    pub audioconvert: Element,
+    pub vorbisenc: Element,
+    pub queue: Element,
+    pub muxsinkbin: Option<Bin>,
 
-    pub queue_srcpad: gstreamer::Pad,
-    pub queue_blockprobe_id: Option<gstreamer::PadProbeId>,
+    pub queue_srcpad: Pad,
+    pub queue_blockprobe_id: Option<PadProbeId>,
 }
 
 impl RecorderBackend{
     pub fn new() -> Self{
         // create gstreamer pipeline
-        let pipeline = gstreamer::Pipeline::new("recorder_pipeline");
+        let pipeline = Pipeline::new("recorder_pipeline");
 
         // create pipeline elements
-        let uridecodebin = gstreamer::ElementFactory::make("uridecodebin", "uridecodebin").unwrap();
-        let audioconvert = gstreamer::ElementFactory::make("audioconvert", "audioconvert").unwrap();
-        let vorbisenc = gstreamer::ElementFactory::make("vorbisenc", "vorbisenc").unwrap();
-        let queue = gstreamer::ElementFactory::make("queue", "queue").unwrap();
+        let uridecodebin = ElementFactory::make("uridecodebin", "uridecodebin").unwrap();
+        let audioconvert = ElementFactory::make("audioconvert", "audioconvert").unwrap();
+        let vorbisenc = ElementFactory::make("vorbisenc", "vorbisenc").unwrap();
+        let queue = ElementFactory::make("queue", "queue").unwrap();
 
         // link pipeline elements
         pipeline.add_many(&[&uridecodebin, &audioconvert, &vorbisenc, &queue]).unwrap();
-        gstreamer::Element::link_many(&[&audioconvert, &vorbisenc, &queue]).unwrap();
+        Element::link_many(&[&audioconvert, &vorbisenc, &queue]).unwrap();
 
         // dynamically link uridecodebin element with audioconvert element
         let convert = audioconvert.clone();
-        uridecodebin.connect_pad_added(move |uridecodebin, src_pad|{
+        uridecodebin.connect_pad_added(move |_, src_pad|{
             let sink_pad = convert.get_static_pad("sink").expect("Failed to get static sink pad from convert");
             if sink_pad.is_linked() {
                 return; // We are already linked. Ignoring.
@@ -82,13 +82,13 @@ impl RecorderBackend{
 
     pub fn new_source_uri(&mut self, source: &str){
         debug!("Stop pipeline...");
-        let _ = self.pipeline.set_state(gstreamer::State::Null);
+        let _ = self.pipeline.set_state(State::Null);
 
         debug!("Set new source uri...");
         self.uridecodebin.set_property("uri", &source).unwrap();
 
         debug!("Start pipeline...");
-        let _ = self.pipeline.set_state(gstreamer::State::Playing);
+        let _ = self.pipeline.set_state(State::Playing);
     }
 
     pub fn new_filesink_location(&mut self, location: &str){
@@ -96,8 +96,8 @@ impl RecorderBackend{
 
         debug!("Destroy old muxsinkbin");
         let muxsinkbin = self.muxsinkbin.take().unwrap();
-        muxsinkbin.set_state(gstreamer::State::Null);
-        self.pipeline.remove(&muxsinkbin);
+        let _ = muxsinkbin.set_state(State::Null);
+        self.pipeline.remove(&muxsinkbin).unwrap();
 
         debug!("Create new muxsinkbin");
         self.create_muxsinkbin(location);
@@ -108,20 +108,20 @@ impl RecorderBackend{
 
     fn create_muxsinkbin(&mut self, location: &str){
         // Create oggmux
-        let oggmux = gstreamer::ElementFactory::make("oggmux", "oggmux").unwrap();
+        let oggmux = ElementFactory::make("oggmux", "oggmux").unwrap();
 
         // Create filesink
-        let filesink = gstreamer::ElementFactory::make("filesink", "filesink").unwrap();
+        let filesink = ElementFactory::make("filesink", "filesink").unwrap();
         filesink.set_property("location", &location).unwrap();
 
         // Create bin
-        let bin = gstreamer::Bin::new("bin");
+        let bin = Bin::new("bin");
         bin.set_property("message-forward", &true).unwrap();
 
         // Add elements to bin and link them
         bin.add(&oggmux).unwrap();
         bin.add(&filesink).unwrap();
-        gstreamer::Element::link_many(&[&oggmux, &filesink]).unwrap();
+        Element::link_many(&[&oggmux, &filesink]).unwrap();
 
         // Add bin to pipeline
         self.pipeline.add(&bin).unwrap();
@@ -132,7 +132,7 @@ impl RecorderBackend{
 
         let ghostpad = gstreamer::GhostPad::new("sink", &oggmux_sinkpad).unwrap();
         bin.add_pad(&ghostpad).unwrap();
-        bin.sync_state_with_parent();
+        bin.sync_state_with_parent().unwrap();
 
         if self.queue_srcpad.link(&ghostpad) != gstreamer::PadLinkReturn::Ok {
             warn!("Queue src pad cannot linked to oggmux sinkpad");

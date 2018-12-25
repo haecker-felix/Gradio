@@ -1,20 +1,15 @@
-use gstreamer::prelude::*;
-use gstreamer_pbutils::prelude::*;
 use gtk::prelude::*;
-use mpris_player::{Metadata, MprisPlayer, OrgMprisMediaPlayer2Player, PlaybackStatus};
 use rustio::{Client, Station};
 use gstreamer::ElementExt;
-use gstreamer::BinExt;
+use gstreamer::prelude::*;
 
-use std::cell::Cell;
-use std::cell::RefCell;
+use std::cell::{Cell, RefCell};
 use std::rc::Rc;
-use std::sync::Arc;
-use std::sync::Mutex;
+use std::sync::{Arc, Mutex};
 use std::sync::mpsc::Sender;
 use std::thread;
 
-use crate::app::{Action, AppInfo};
+use crate::app::Action;
 use crate::recorder_backend::RecorderBackend;
 
 pub struct Recorder {
@@ -34,7 +29,7 @@ impl Recorder {
         let current_station = Cell::new(None);
         let current_song = Rc::new(RefCell::new("".to_string()));
 
-        // create gstreamer pipeline
+        // create gstreamer backend
         let backend = Arc::new(Mutex::new(RecorderBackend::new()));
 
         let recorder = Self {
@@ -52,7 +47,6 @@ impl Recorder {
 
     pub fn set_station(&self, station: Station) {
         self.current_station.set(Some(station.clone()));
-        let _ = self.backend.lock().unwrap().pipeline.set_state(gstreamer::State::Paused);
 
         let backend = self.backend.clone();
         thread::spawn(move || {
@@ -63,7 +57,7 @@ impl Recorder {
         });
     }
 
-    fn parse_bus_message(message: &gstreamer::Message, gstpipe: Arc<Mutex<RecorderBackend>>, current_song: Rc<RefCell<String>>) {
+    fn parse_bus_message(message: &gstreamer::Message, backend: Arc<Mutex<RecorderBackend>>, current_song: Rc<RefCell<String>>) {
         match message.view() {
             gstreamer::MessageView::Tag(tag) => {
                 tag.get_tags().get::<gstreamer::tags::Title>().map(|title| {
@@ -73,8 +67,9 @@ impl Recorder {
                         debug!("New song detected: {}", current_song.borrow());
 
                         debug!("Block the dataflow ...");
-                        let gstp = gstpipe.clone();
-                        let id = gstpipe.lock().unwrap().queue_srcpad.add_probe (gstreamer::PadProbeType::BLOCK_DOWNSTREAM, move|pad, info|{
+                        let gstp = backend.clone();
+                        let id = backend.lock().unwrap().queue_srcpad.add_probe (gstreamer::PadProbeType::BLOCK_DOWNSTREAM, move|_, _|{
+                            // Dataflow is blocked
                             debug!("Pad is blocked now.");
 
                             debug!("Push EOS into muxsinkbin sinkpad...");
@@ -85,7 +80,7 @@ impl Recorder {
                         }).unwrap();
 
                         // We need the padprobe id later to remove the block probe
-                        gstpipe.lock().unwrap().queue_blockprobe_id = Some(id);
+                        backend.lock().unwrap().queue_blockprobe_id = Some(id);
                     }
                 });
             },
@@ -93,10 +88,10 @@ impl Recorder {
                 let structure = element.get_structure().unwrap();
                 if structure.get_name() == "GstBinForwarded" {
                     let message: gstreamer::message::Message = structure.get("message").unwrap();
-                    if let gstreamer::MessageView::Eos(eos) = &message.view(){
+                    if let gstreamer::MessageView::Eos(_) = &message.view(){
                         debug!("muxsinkbin got EOS...");
                         let path = &format!("{}/{}.ogg", glib::get_user_special_dir(glib::UserDirectory::Music).unwrap().to_str().unwrap(), &*current_song.borrow());
-                        gstpipe.lock().unwrap().new_filesink_location(&path);
+                        backend.lock().unwrap().new_filesink_location(&path);
                     }
                 }
             },

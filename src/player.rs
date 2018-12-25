@@ -9,7 +9,7 @@ use std::sync::mpsc::Sender;
 use std::sync::Arc;
 use std::thread;
 
-use crate::app::{Action, AppInfo};
+use crate::app::Action;
 
 pub enum PlaybackState {
     Playing,
