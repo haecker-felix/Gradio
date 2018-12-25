@@ -35,7 +35,7 @@ impl Recorder {
         let current_song = Rc::new(RefCell::new("".to_string()));
 
         // create gstreamer pipeline
-        let backend = Arc::new(Mutex::new(GstBackend::new()));
+        let backend = Arc::new(Mutex::new(RecorderBackend::new()));
 
         let recorder = Self {
             widget,
@@ -63,7 +63,7 @@ impl Recorder {
         });
     }
 
-    fn parse_bus_message(message: &gstreamer::Message, gstpipe: Arc<Mutex<GstBackend>>, current_song: Rc<RefCell<String>>) {
+    fn parse_bus_message(message: &gstreamer::Message, gstpipe: Arc<Mutex<RecorderBackend>>, current_song: Rc<RefCell<String>>) {
         match message.view() {
             gstreamer::MessageView::Tag(tag) => {
                 tag.get_tags().get::<gstreamer::tags::Title>().map(|title| {
