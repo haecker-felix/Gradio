@@ -7,12 +7,12 @@ edition = "2018"
 
 [dependencies]
 gio = "0.5"
-glib = "0.6"
+glib = "0.6.1"
 gdk = "0.9.0"
 log = "0.4"
 simplelog = "0.5"
 rustio = { git="https://github.com/haecker-felix/Rustio.git" }
-libhandy = { git = "https://gitlab.gnome.org/jsparber/libhandy-rs" }
+libhandy = { git = "https://gitlab.gnome.org/World/Rust/libhandy-rs" }
 gstreamer = "0.12"
 gstreamer-pbutils = "0.12"
 mpris-player = "0.1"

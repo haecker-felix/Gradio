@@ -18,12 +18,12 @@ use crate::app::{Action, AppInfo};
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                         //
-//  -> Gstreamer Pipeline                                                                  //
+//  # Gstreamer Pipeline #                                                                 //
 //    --------------      --------------      -----------      -------      ------------   //
 //   | uridecodebin | -> | audioconvert | -> | vorbisenc | -> | queue | -> | muxsinkbin |  //
 //    --------------      --------------      -----------      -------      ------------   //
 //                                                                                         //
-//  -> muxsinkbin:  (gstreamer::Bin)                                                       //
+//  # muxsinkbin:  (gstreamer::Bin) #                                                      //
 //    --------------------------------------------                                         //
 //   |                  --------      ----------  |                                        //
 //   | ( ghostpad ) -> | oggmux | -> | filesink | |                                        //
