@@ -7,6 +7,7 @@ mod app;
 mod library;
 mod player;
 mod recorder;
+mod recorder_backend;
 mod search;
 mod static_resource;
 mod station_model;
