@@ -10,7 +10,7 @@ use crate::player::{PlaybackState, Player};
 use crate::recorder::Recorder;
 use crate::search::Search;
 use crate::station_model::{Order, Sorting};
-use crate::window::{View, Window};
+use crate::window::{View, SidebarView, Window};
 
 #[derive(Debug, Clone)]
 pub enum Action {
@@ -225,6 +225,7 @@ impl App {
                 Action::PlaybackSetStation(station) => {
                     self.player.set_station(station.clone());
                     self.recorder.set_station(station);
+                    self.window.set_sidebar_view(SidebarView::Playback);
                 },
                 Action::PlaybackStart => self.player.set_playback(PlaybackState::Playing),
                 Action::PlaybackStop => self.player.set_playback(PlaybackState::Stopped),

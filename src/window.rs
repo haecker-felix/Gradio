@@ -12,6 +12,12 @@ pub enum View {
     CurrentPlayback,
 }
 
+#[derive(Debug, Clone, PartialEq)]
+pub enum SidebarView {
+    Playback,
+    NoPlayback,
+}
+
 pub struct Window {
     pub widget: gtk::ApplicationWindow,
     pub player_box: gtk::Box,
@@ -84,6 +90,15 @@ impl Window {
 
         let overlay: gtk::Overlay = self.builder.get_object("overlay").unwrap();
         notification.show(&overlay);
+    }
+
+    pub fn set_sidebar_view(&self, view: SidebarView){
+        let sidebar_stack: gtk::Stack = self.builder.get_object("sidebar_stack").unwrap();
+
+        match view{
+            SidebarView::Playback => sidebar_stack.set_visible_child_name("playback"),
+            SidebarView::NoPlayback => sidebar_stack.set_visible_child_name("no-playback")
+        }
     }
 
     pub fn set_view(&self, view: View) {

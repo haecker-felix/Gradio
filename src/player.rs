@@ -47,7 +47,7 @@ impl PlayerWidgets {
 }
 
 pub struct Player {
-    pub widget: gtk::ActionBar,
+    pub widget: gtk::Box,
     player_widgets: Rc<PlayerWidgets>,
 
     playbin: gstreamer::Element,
@@ -61,7 +61,7 @@ pub struct Player {
 impl Player {
     pub fn new(sender: Sender<Action>) -> Self {
         let builder = gtk::Builder::new_from_resource("/de/haeckerfelix/Gradio/gtk/player.ui");
-        let widget: gtk::ActionBar = builder.get_object("player").unwrap();
+        let widget: gtk::Box = builder.get_object("player").unwrap();
         let player_widgets = Rc::new(PlayerWidgets::new(builder.clone()));
         let playbin = gstreamer::ElementFactory::make("playbin", "playbin").unwrap();
         let station = Cell::new(None);
@@ -88,7 +88,6 @@ impl Player {
     }
 
     pub fn set_station(&self, station: Station) {
-        self.widget.set_visible(true);
         self.player_widgets.reset();
         self.player_widgets.title_label.set_text(&station.name);
         self.station.set(Some(station.clone()));
@@ -175,14 +174,6 @@ impl Player {
     }
 
     fn setup_signals(&self) {
-        // eventbox
-        let eventbox: gtk::EventBox = self.builder.get_object("eventbox").unwrap();
-        let sender = self.sender.clone();
-        eventbox.connect_button_press_event(move |_, _| {
-            sender.send(Action::ViewShowCurrentPlayback).unwrap();
-            gtk::Inhibit(false)
-        });
-
         // start_playback_button
         let start_playback_button: gtk::Button = self.builder.get_object("start_playback_button").unwrap();
         let sender = self.sender.clone();
