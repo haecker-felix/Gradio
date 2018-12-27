@@ -35,6 +35,8 @@ impl Window {
         let menu_builder = gtk::Builder::new_from_resource("/de/haeckerfelix/Gradio/gtk/menu.ui");
 
         let window: gtk::ApplicationWindow = builder.get_object("window").unwrap();
+        let view_headerbar: gtk::HeaderBar = builder.get_object("view_headerbar").unwrap();
+        view_headerbar.set_title(Some(appinfo.app_name.as_str()));
         window.set_title(&appinfo.app_name);
 
         let player_box: gtk::Box = builder.get_object("player_box").unwrap();
