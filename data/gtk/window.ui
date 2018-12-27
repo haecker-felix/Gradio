@@ -22,6 +22,7 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="hexpand">True</property>
+                <property name="show_close_button">True</property>
                 <child>
                   <object class="GtkButton" id="add_button">
                     <property name="visible">True</property>
@@ -291,6 +292,12 @@
       <widget name="sidebar_headerbar"/>
       <widget name="sidebar_stack"/>
     </widgets>
+  </object>
+  <object class="HdyHeaderGroup">
+    <headerbars>
+      <headerbar name="view_headerbar"/>
+      <headerbar name="sidebar_headerbar"/>
+    </headerbars>
   </object>
   <object class="GtkSizeGroup">
     <widgets>
