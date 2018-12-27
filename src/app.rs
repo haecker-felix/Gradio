@@ -16,7 +16,6 @@ use crate::window::{View, SidebarView, Window};
 pub enum Action {
     ViewShowSearch,
     ViewShowLibrary,
-    ViewShowCurrentPlayback,
     ViewShowNotification(String),
     ViewRaise,
     ViewSetSorting(Sorting, Order),
@@ -218,7 +217,6 @@ impl App {
             match action {
                 Action::ViewShowSearch => self.window.set_view(View::Search),
                 Action::ViewShowLibrary => self.window.set_view(View::Library),
-                Action::ViewShowCurrentPlayback => self.window.set_view(View::CurrentPlayback),
                 Action::ViewRaise => self.window.widget.present_with_time((glib::get_monotonic_time() / 1000) as u32),
                 Action::ViewShowNotification(text) => self.window.show_notification(text),
                 Action::ViewSetSorting(sorting, order) => self.library.set_sorting(sorting, order),

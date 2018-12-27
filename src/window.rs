@@ -9,7 +9,6 @@ use crate::widgets::notification::Notification;
 pub enum View {
     Search,
     Library,
-    CurrentPlayback,
 }
 
 #[derive(Debug, Clone, PartialEq)]
@@ -115,21 +114,9 @@ impl Window {
         sorting_mbutton.set_sensitive(library_mode);
         library_mbutton.set_sensitive(library_mode);
 
-        // set corrent transition type. for "current_playback" it should slide up/down.
-        if view == View::CurrentPlayback {
-            view_stack.set_transition_type(gtk::StackTransitionType::OverUp);
-        } else {
-            if view_stack.get_visible_child_name().unwrap() == "current_playback" {
-                view_stack.set_transition_type(gtk::StackTransitionType::OverDown);
-            } else {
-                view_stack.set_transition_type(gtk::StackTransitionType::Crossfade);
-            }
-        }
-
         match view {
             View::Search => view_stack.set_visible_child_name("search"),
             View::Library => view_stack.set_visible_child_name("library"),
-            View::CurrentPlayback => view_stack.set_visible_child_name("current_playback"),
         }
     }
 }
