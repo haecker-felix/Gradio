@@ -1,6 +1,8 @@
 use gtk::prelude::*;
+use libhandy::LeafletExt;
 
 use std::sync::mpsc::Sender;
+use std::sync::Arc;
 
 use crate::app::{Action, AppInfo};
 use crate::widgets::notification::Notification;
@@ -36,7 +38,6 @@ impl Window {
 
         let window: gtk::ApplicationWindow = builder.get_object("window").unwrap();
         let view_headerbar: gtk::HeaderBar = builder.get_object("view_headerbar").unwrap();
-        view_headerbar.set_title(Some(appinfo.app_name.as_str()));
         window.set_title(&appinfo.app_name);
 
         let player_box: gtk::Box = builder.get_object("player_box").unwrap();
@@ -83,6 +84,12 @@ impl Window {
         let sender = self.sender.clone();
         back_button.connect_clicked(move |_| {
             sender.send(Action::ViewShowLibrary).unwrap();
+        });
+
+        let leaflet: libhandy::Leaflet = self.builder.get_object("content").unwrap();
+        let bottombar: gtk::Box = self.builder.get_object("bottombar").unwrap();
+        leaflet.connect_property_fold_notify(move |leaflet|{
+            bottombar.set_visible(leaflet.get_property_folded());
         });
     }
 

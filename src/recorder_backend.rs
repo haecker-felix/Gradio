@@ -104,6 +104,8 @@ impl RecorderBackend{
 
         debug!("Remove block probe...");
         self.queue_srcpad.remove_probe(self.queue_blockprobe_id.take().unwrap());
+
+        debug!("Everything ok.")
     }
 
     fn create_muxsinkbin(&mut self, location: &str){

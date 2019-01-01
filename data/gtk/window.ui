@@ -17,6 +17,8 @@
           <object class="HdyLeaflet">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="mode_transition_type">slide</property>
+            <property name="child_transition_type">slide</property>
             <child>
               <object class="GtkHeaderBar" id="view_headerbar">
                 <property name="visible">True</property>
