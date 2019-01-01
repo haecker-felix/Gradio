@@ -14,7 +14,7 @@
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <child>
-          <object class="HdyLeaflet">
+          <object class="HdyLeaflet" id="header_leaflet">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="mode_transition_type">slide</property>
@@ -78,6 +78,9 @@
                   </packing>
                 </child>
               </object>
+              <packing>
+                <property name="name">content</property>
+              </packing>
             </child>
             <child>
               <object class="GtkSeparator">
@@ -99,6 +102,9 @@
                   <placeholder/>
                 </child>
               </object>
+              <packing>
+                <property name="name">playback</property>
+              </packing>
             </child>
           </object>
         </child>

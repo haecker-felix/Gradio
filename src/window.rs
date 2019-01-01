@@ -11,6 +11,7 @@ use crate::widgets::notification::Notification;
 pub enum View {
     Search,
     Library,
+    Playback,
 }
 
 #[derive(Debug, Clone, PartialEq)]
@@ -89,36 +90,45 @@ impl Window {
         // leaflet
         let leaflet: libhandy::Leaflet = self.builder.get_object("content").unwrap();
         let bottom_switcher: gtk::ActionBar = self.builder.get_object("bottom_switcher").unwrap();
+        let view_stack: gtk::Stack = self.builder.get_object("view_stack").unwrap();
         let add_button: gtk::Button = self.builder.get_object("add_button").unwrap();
+        let back_button: gtk::Button = self.builder.get_object("back_button").unwrap();
         leaflet.connect_property_fold_notify(move |leaflet|{
             bottom_switcher.set_visible(leaflet.get_property_folded());
-            add_button.set_visible(!leaflet.get_property_folded());
+
+            if !leaflet.get_property_folded(){
+                match view_stack.get_visible_child_name().unwrap().as_ref(){
+                    "library" => add_button.set_visible(true),
+                    _ => back_button.set_visible(true),
+                }
+            }else{
+                back_button.set_visible(false);
+                add_button.set_visible(false);
+            }
         });
 
         // library_switcher
-        let leaflet: libhandy::Leaflet = self.builder.get_object("content").unwrap();
         let library_switcher: gtk::RadioButton = self.builder.get_object("library_switcher").unwrap();
-        let view_stack: gtk::Stack = self.builder.get_object("view_stack").unwrap();
+        let builder = self.builder.clone();
+        let menu_builder = self.menu_builder.clone();
         library_switcher.connect_clicked(move |_|{
-            leaflet.set_visible_child_name("content");
-            view_stack.set_visible_child_name("library")
+            Self::update_view(View::Library, builder.clone(), menu_builder.clone());
         });
 
         // playback_switcher
-        let leaflet: libhandy::Leaflet = self.builder.get_object("content").unwrap();
         let playback_switcher: gtk::RadioButton = self.builder.get_object("playback_switcher").unwrap();
-        let view_stack: gtk::Stack = self.builder.get_object("view_stack").unwrap();
+        let builder = self.builder.clone();
+        let menu_builder = self.menu_builder.clone();
         playback_switcher.connect_clicked(move |_|{
-            leaflet.set_visible_child_name("playback");
+            Self::update_view(View::Playback, builder.clone(), menu_builder.clone());
         });
 
         // add_switcher
-        let leaflet: libhandy::Leaflet = self.builder.get_object("content").unwrap();
         let add_switcher: gtk::RadioButton = self.builder.get_object("add_switcher").unwrap();
-        let view_stack: gtk::Stack = self.builder.get_object("view_stack").unwrap();
+        let builder = self.builder.clone();
+        let menu_builder = self.menu_builder.clone();
         add_switcher.connect_clicked(move |_|{
-            leaflet.set_visible_child_name("content");
-            view_stack.set_visible_child_name("search")
+            Self::update_view(View::Search, builder.clone(), menu_builder.clone());
         });
     }
 
@@ -138,23 +148,43 @@ impl Window {
         }
     }
 
-    pub fn set_view(&self, view: View) {
-        let sorting_mbutton: gtk::ModelButton = self.menu_builder.get_object("sorting_mbutton").unwrap();
-        let library_mbutton: gtk::ModelButton = self.menu_builder.get_object("library_mbutton").unwrap();
-        let view_stack: gtk::Stack = self.builder.get_object("view_stack").unwrap();
-        let add_button: gtk::Button = self.builder.get_object("add_button").unwrap();
-        let back_button: gtk::Button = self.builder.get_object("back_button").unwrap();
+    fn update_view(view: View, builder: gtk::Builder, menu_builder: gtk::Builder){
+        let leaflet: libhandy::Leaflet = builder.get_object("content").unwrap();
+        let header_leaflet: libhandy::Leaflet = builder.get_object("header_leaflet").unwrap();
+        let sorting_mbutton: gtk::ModelButton = menu_builder.get_object("sorting_mbutton").unwrap();
+        let library_mbutton: gtk::ModelButton = menu_builder.get_object("library_mbutton").unwrap();
+        let view_stack: gtk::Stack = builder.get_object("view_stack").unwrap();
+        let add_button: gtk::Button = builder.get_object("add_button").unwrap();
+        let back_button: gtk::Button = builder.get_object("back_button").unwrap();
 
         // show or hide view specific buttons
         let library_mode = view == View::Library;
-        add_button.set_visible(library_mode);
-        back_button.set_visible(!library_mode);
+        if !leaflet.get_property_folded(){
+            add_button.set_visible(library_mode);
+            back_button.set_visible(!library_mode);
+        }
         sorting_mbutton.set_sensitive(library_mode);
         library_mbutton.set_sensitive(library_mode);
 
         match view {
-            View::Search => view_stack.set_visible_child_name("search"),
-            View::Library => view_stack.set_visible_child_name("library"),
+            View::Search => {
+                leaflet.set_visible_child_name("content");
+                header_leaflet.set_visible_child_name("content");
+                view_stack.set_visible_child_name("search");
+            },
+            View::Library => {
+                leaflet.set_visible_child_name("content");
+                header_leaflet.set_visible_child_name("content");
+                view_stack.set_visible_child_name("library");
+            },
+            View::Playback => {
+                header_leaflet.set_visible_child_name("playback");
+                leaflet.set_visible_child_name("playback");
+            },
         }
+    }
+
+    pub fn set_view(&self, view: View) {
+        Self::update_view(view, self.builder.clone(), self.menu_builder.clone());
     }
 }
