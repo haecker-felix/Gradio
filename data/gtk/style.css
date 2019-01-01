@@ -27,7 +27,7 @@ actionbar.bottombar > revealer > box {
 
 .bottombar {
   min-height: 48px;
-  font-size: small;
+  font-size: smaller;
 }
 
 :checked.bottom-switcher > box > label {
