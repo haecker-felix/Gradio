@@ -1,4 +1,5 @@
 use gtk::prelude::*;
+use libhandy::{ActionRow, ActionRowExt};
 use rustio::{Client, Station};
 use gstreamer::ElementExt;
 use gstreamer::prelude::*;
@@ -14,6 +15,7 @@ use crate::recorder_backend::RecorderBackend;
 
 pub struct Recorder {
     pub widget: gtk::Box,
+    last_played_listbox: gtk::ListBox,
     current_station: Cell<Option<Station>>,
     current_song: Rc<RefCell<String>>,
     backend: Arc<Mutex<RecorderBackend>>,
@@ -26,6 +28,7 @@ impl Recorder {
     pub fn new(sender: Sender<Action>) -> Self {
         let builder = gtk::Builder::new_from_resource("/de/haeckerfelix/Gradio/gtk/recorder.ui");
         let widget: gtk::Box = builder.get_object("recorder").unwrap();
+        let last_played_listbox: gtk::ListBox = builder.get_object("last_played_listbox").unwrap();
         let current_station = Cell::new(None);
         let current_song = Rc::new(RefCell::new("".to_string()));
 
@@ -34,6 +37,7 @@ impl Recorder {
 
         let recorder = Self {
             widget,
+            last_played_listbox,
             current_station,
             current_song,
             backend,
@@ -57,12 +61,20 @@ impl Recorder {
         });
     }
 
-    fn parse_bus_message(message: &gstreamer::Message, backend: Arc<Mutex<RecorderBackend>>, current_song: Rc<RefCell<String>>) {
+    fn parse_bus_message(message: &gstreamer::Message, backend: Arc<Mutex<RecorderBackend>>, current_song: Rc<RefCell<String>>, last_played_listbox: gtk::ListBox) {
         match message.view() {
             gstreamer::MessageView::Tag(tag) => {
                 tag.get_tags().get::<gstreamer::tags::Title>().map(|title| {
                     // Check if song have changed
                     if *current_song.borrow() != title.get().unwrap() {
+                        // Create row for old song
+                        if *current_song.borrow() != "" {
+                            let row = libhandy::ActionRow::new();
+                            row.set_title(&*current_song.borrow());
+                            row.set_visible(true);
+                            last_played_listbox.add(&row);
+                        }
+
                         *current_song.borrow_mut() = title.get().unwrap().to_string();
                         debug!("New song detected: {}", current_song.borrow());
 
@@ -91,6 +103,8 @@ impl Recorder {
                     if let gstreamer::MessageView::Eos(_) = &message.view(){
                         debug!("muxsinkbin got EOS...");
                         let path = &format!("{}/{}.ogg", glib::get_user_special_dir(glib::UserDirectory::Music).unwrap().to_str().unwrap(), &*current_song.borrow());
+
+                        // Old song is closed correctly, so we can start with the new song now
                         backend.lock().unwrap().new_filesink_location(&path);
                     }
                 }
@@ -103,11 +117,12 @@ impl Recorder {
         let bus = self.backend.lock().unwrap().pipeline.get_bus().expect("Unable to get pipeline bus");
         let backend = self.backend.clone();
         let current_song = self.current_song.clone();
+        let last_played_listbox = self.last_played_listbox.clone();
         gtk::timeout_add(250, move || {
             while bus.have_pending() {
                 bus.pop().map(|message| {
                     //debug!("new message {:?}", message);
-                    Self::parse_bus_message(&message, backend.clone(), current_song.clone());
+                    Self::parse_bus_message(&message, backend.clone(), current_song.clone(), last_played_listbox.clone());
                 });
             }
             Continue(true)
