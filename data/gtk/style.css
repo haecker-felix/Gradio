@@ -18,34 +18,36 @@
 	background: @theme_bg_color;
 }
 
-.bottombar{
-  background: @bottombar_bg;
-  border-top: solid gray 1px;
+
+/* Original Author: Christopher Davis (https://gitlab.gnome.org/BrainBlasted/Trumpet/blob/a4c78543c970c7c998c4b3ef67d5df252048ce4c/res/stylesheet.css) */
+actionbar.bottombar > revealer > box {
+  padding-top: 0px;
+  padding-bottom: 0px;
 }
 
-.bottombar button image {
-  -gtk-icon-shadow: none;
-  color: gray;
+.bottombar {
+  min-height: 48px;
+  font-size: small;
 }
 
-.bottombar button {
-  border: none;
-  box-shadow: none;
-  background-image: none;
+:checked.bottom-switcher > box > label {
+  font-weight: bold;
+}
+
+.bottom-switcher {
+  border-top-width: 0px;
   border-radius: 0px;
-  background-color: @bottombar_bg;
-  outline-color: #999;
-  padding: 10px;
+  border-bottom-width: 0px;
 }
 
-.bottombar button:hover {
-  background-color: shade(@theme_bg_color, 1.3);
+.top-switcher > button {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-left: 12px;
+  padding-right: 12px;
+  border-radius: 0;
+  border-top-style: none;
+  border-bottom-style: none;
+  min-height: 38px;
 }
 
-.bottombar button:checked image {
-  color: @theme_fg_color;
-}
-
-.bottombar button:checked {
-  background-color: @theme_base_color;
-}

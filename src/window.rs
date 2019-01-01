@@ -86,10 +86,39 @@ impl Window {
             sender.send(Action::ViewShowLibrary).unwrap();
         });
 
+        // leaflet
         let leaflet: libhandy::Leaflet = self.builder.get_object("content").unwrap();
-        let bottombar: gtk::Box = self.builder.get_object("bottombar").unwrap();
+        let bottom_switcher: gtk::ActionBar = self.builder.get_object("bottom_switcher").unwrap();
+        let add_button: gtk::Button = self.builder.get_object("add_button").unwrap();
         leaflet.connect_property_fold_notify(move |leaflet|{
-            bottombar.set_visible(leaflet.get_property_folded());
+            bottom_switcher.set_visible(leaflet.get_property_folded());
+            add_button.set_visible(!leaflet.get_property_folded());
+        });
+
+        // library_switcher
+        let leaflet: libhandy::Leaflet = self.builder.get_object("content").unwrap();
+        let library_switcher: gtk::RadioButton = self.builder.get_object("library_switcher").unwrap();
+        let view_stack: gtk::Stack = self.builder.get_object("view_stack").unwrap();
+        library_switcher.connect_clicked(move |_|{
+            leaflet.set_visible_child_name("content");
+            view_stack.set_visible_child_name("library")
+        });
+
+        // playback_switcher
+        let leaflet: libhandy::Leaflet = self.builder.get_object("content").unwrap();
+        let playback_switcher: gtk::RadioButton = self.builder.get_object("playback_switcher").unwrap();
+        let view_stack: gtk::Stack = self.builder.get_object("view_stack").unwrap();
+        playback_switcher.connect_clicked(move |_|{
+            leaflet.set_visible_child_name("playback");
+        });
+
+        // add_switcher
+        let leaflet: libhandy::Leaflet = self.builder.get_object("content").unwrap();
+        let add_switcher: gtk::RadioButton = self.builder.get_object("add_switcher").unwrap();
+        let view_stack: gtk::Stack = self.builder.get_object("view_stack").unwrap();
+        add_switcher.connect_clicked(move |_|{
+            leaflet.set_visible_child_name("content");
+            view_stack.set_visible_child_name("search")
         });
     }
 
