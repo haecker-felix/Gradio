@@ -39,6 +39,7 @@ impl Window {
 
         let window: gtk::ApplicationWindow = builder.get_object("window").unwrap();
         let view_headerbar: gtk::HeaderBar = builder.get_object("view_headerbar").unwrap();
+        view_headerbar.set_title(Some(appinfo.app_name.as_ref()));
         window.set_title(&appinfo.app_name);
 
         let player_box: gtk::Box = builder.get_object("player_box").unwrap();
