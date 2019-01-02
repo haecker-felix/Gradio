@@ -16,3 +16,4 @@ Rustio
 ./Rustio
 resources.gresource
 *.gresource
+tags.*
