@@ -2,14 +2,16 @@ use gstreamer::prelude::*;
 use gtk::prelude::*;
 use mpris_player::{Metadata, MprisPlayer, OrgMprisMediaPlayer2Player, PlaybackStatus};
 use rustio::{Client, Station};
+use libhandy::{ActionRow, ActionRowExt};
 
-use std::cell::Cell;
+use std::cell::{Cell, RefCell};
 use std::rc::Rc;
 use std::sync::mpsc::Sender;
-use std::sync::Arc;
+use std::sync::{Arc, Mutex};
 use std::thread;
 
 use crate::app::Action;
+use crate::gstreamer_backend::GstreamerBackend;
 
 pub enum PlaybackState {
     Playing,
@@ -22,6 +24,7 @@ struct PlayerWidgets {
     pub subtitle_label: gtk::Label,
     pub subtitle_revealer: gtk::Revealer,
     pub playback_button_stack: gtk::Stack,
+    pub last_played_listbox: gtk::ListBox,
 }
 
 impl PlayerWidgets {
@@ -30,12 +33,14 @@ impl PlayerWidgets {
         let subtitle_label: gtk::Label = builder.get_object("subtitle_label").unwrap();
         let subtitle_revealer: gtk::Revealer = builder.get_object("subtitle_revealer").unwrap();
         let playback_button_stack: gtk::Stack = builder.get_object("playback_button_stack").unwrap();
+        let last_played_listbox: gtk::ListBox = builder.get_object("last_played_listbox").unwrap();
 
         PlayerWidgets {
             title_label,
             subtitle_label,
             subtitle_revealer,
             playback_button_stack,
+            last_played_listbox,
         }
     }
 
@@ -44,15 +49,27 @@ impl PlayerWidgets {
         self.subtitle_label.set_text("");
         self.subtitle_revealer.set_reveal_child(false);
     }
+
+    pub fn set_title(&self, title: &str){
+        if title != "" {
+            self.subtitle_label.set_text(title);
+            self.subtitle_revealer.set_reveal_child(true);
+        } else {
+            self.subtitle_label.set_text("");
+            self.subtitle_revealer.set_reveal_child(false);
+        }
+    }
 }
+
 
 pub struct Player {
     pub widget: gtk::Box,
     player_widgets: Rc<PlayerWidgets>,
 
-    playbin: gstreamer::Element,
+    backend: Arc<Mutex<GstreamerBackend>>,
     mpris: Arc<MprisPlayer>,
-    station: Cell<Option<Station>>,
+    current_station: Cell<Option<Station>>,
+    current_song: Rc<RefCell<String>>,
 
     builder: gtk::Builder,
     sender: Sender<Action>,
@@ -63,8 +80,9 @@ impl Player {
         let builder = gtk::Builder::new_from_resource("/de/haeckerfelix/Gradio/gtk/player.ui");
         let widget: gtk::Box = builder.get_object("player").unwrap();
         let player_widgets = Rc::new(PlayerWidgets::new(builder.clone()));
-        let playbin = gstreamer::ElementFactory::make("playbin", "playbin").unwrap();
-        let station = Cell::new(None);
+        let backend = Arc::new(Mutex::new(GstreamerBackend::new()));
+        let current_station = Cell::new(None);
+        let current_song = Rc::new(RefCell::new("".to_string()));
 
         let mpris = MprisPlayer::new("Gradio".to_string(), "Gradio".to_string(), "de.haeckerfelix.Gradio".to_string());
         mpris.set_can_raise(true);
@@ -76,9 +94,10 @@ impl Player {
         let player = Self {
             widget,
             player_widgets,
-            playbin,
+            backend,
             mpris,
-            station,
+            current_station,
+            current_song,
             builder,
             sender,
         };
@@ -90,7 +109,7 @@ impl Player {
     pub fn set_station(&self, station: Station) {
         self.player_widgets.reset();
         self.player_widgets.title_label.set_text(&station.name);
-        self.station.set(Some(station.clone()));
+        self.current_station.set(Some(station.clone()));
         self.set_playback(PlaybackState::Stopped);
 
         // set mpris metadata
@@ -100,22 +119,22 @@ impl Player {
         self.mpris.set_metadata(metadata);
         self.mpris.set_can_play(true);
 
-        let p = self.playbin.clone();
+        let backend = self.backend.clone();
         thread::spawn(move || {
             let mut client = Client::new("http://www.radio-browser.info");
             let station_url = client.get_playable_station_url(station).unwrap();
-            p.set_property("uri", &station_url).unwrap();
-            let _ = p.set_state(gstreamer::State::Playing);
+            debug!("new source uri to record: {}", station_url);
+            backend.lock().unwrap().new_source_uri(&station_url);
         });
     }
 
     pub fn set_playback(&self, playback: PlaybackState) {
         match playback {
             PlaybackState::Playing => {
-                let _ = self.playbin.set_state(gstreamer::State::Playing);
+                let _ = self.backend.lock().unwrap().set_state(gstreamer::State::Playing);
             }
             PlaybackState::Stopped => {
-                let _ = self.playbin.set_state(gstreamer::State::Null);
+                let _ = self.backend.lock().unwrap().set_state(gstreamer::State::Null);
 
                 // We need to set it manually, because we don't receive a gst message when the playback stops
                 self.player_widgets.playback_button_stack.set_visible_child_name("start_playback");
@@ -125,26 +144,48 @@ impl Player {
         };
     }
 
-    fn parse_bus_message(message: &gstreamer::Message, player_widgets: Rc<PlayerWidgets>, mpris: Arc<MprisPlayer>) {
+    fn parse_bus_message(message: &gstreamer::Message, player_widgets: Rc<PlayerWidgets>, mpris: Arc<MprisPlayer>, backend: Arc<Mutex<GstreamerBackend>>, current_song: Rc<RefCell<String>>) {
         match message.view() {
             gstreamer::MessageView::Tag(tag) => {
                 tag.get_tags().get::<gstreamer::tags::Title>().map(|title| {
-                    debug!("playback title changed: {:?}", title);
+                    // Check if song have changed
+                    if *current_song.borrow() != title.get().unwrap() {
+                        // save/close old song, and add to song history
+                        if *current_song.borrow() != "" {
+                            let row = libhandy::ActionRow::new();
+                            row.set_title(&*current_song.borrow());
+                            row.set_visible(true);
+                            player_widgets.last_played_listbox.add(&row);
+                        }
 
-                    // TODO: this would override the artist/art_url field. Needs to be fixed at mpris_player
-                    // let mut metadata = Metadata::new();
-                    // metadata.title = Some(title.get().unwrap().to_string());
-                    // mpris.set_metadata(metadata);
+                        *current_song.borrow_mut() = title.get().unwrap().to_string();
+                        debug!("New song: {:?}", title);
+                        player_widgets.set_title(title.get().unwrap());
 
-                    if title.get().unwrap() != "" {
-                        player_widgets.subtitle_label.set_text(title.get().unwrap());
-                        player_widgets.subtitle_revealer.set_reveal_child(true);
-                    } else {
-                        player_widgets.subtitle_label.set_text("");
-                        player_widgets.subtitle_revealer.set_reveal_child(false);
+                        // TODO: this would override the artist/art_url field. Needs to be fixed at mpris_player
+                        // let mut metadata = Metadata::new();
+                        // metadata.title = Some(title.get().unwrap().to_string());
+                        // mpris.set_metadata(metadata);
+
+                        debug!("Block the dataflow ...");
+                        let gstp = backend.clone();
+                        let id = backend.lock().unwrap().queue_srcpad.add_probe (gstreamer::PadProbeType::BLOCK_DOWNSTREAM, move|_, _|{
+                            // Dataflow is blocked
+                            debug!("Pad is blocked now.");
+
+                            debug!("Push EOS into muxsinkbin sinkpad...");
+                            let sinkpad = gstp.lock().unwrap().muxsinkbin.clone().unwrap().get_static_pad("sink").unwrap();
+                            sinkpad.send_event(gstreamer::Event::new_eos().build());
+
+                            gstreamer::PadProbeReturn::Ok
+                        }).unwrap();
+
+                        // We need the padprobe id later to remove the block probe
+                        backend.lock().unwrap().queue_blockprobe_id = Some(id);
                     }
+
                 });
-            }
+            },
             gstreamer::MessageView::StateChanged(sc) => {
                 debug!("playback state changed: {:?}", sc.get_current());
                 let playback_state = match sc.get_current() {
@@ -168,7 +209,20 @@ impl Player {
                         mpris.set_playback_status(PlaybackStatus::Stopped);
                     }
                 };
-            }
+            },
+            gstreamer::MessageView::Element(element) => {
+                let structure = element.get_structure().unwrap();
+                if structure.get_name() == "GstBinForwarded" {
+                    let message: gstreamer::message::Message = structure.get("message").unwrap();
+                    if let gstreamer::MessageView::Eos(_) = &message.view(){
+                        debug!("muxsinkbin got EOS...");
+                        let path = &format!("{}/{}.ogg", glib::get_user_special_dir(glib::UserDirectory::Music).unwrap().to_str().unwrap(), &*current_song.borrow());
+
+                        // Old song is closed correctly, so we can start with the new song now
+                        backend.lock().unwrap().new_filesink_location(&path);
+                    }
+                }
+            },
             _ => (),
         };
     }
@@ -205,13 +259,15 @@ impl Player {
             };
         });
 
-        // new playbin bus messages
-        let bus = self.playbin.get_bus().expect("Unable to get playbin bus");
+        // new backend (pipeline) bus messages
+        let bus = self.backend.lock().unwrap().pipeline.get_bus().expect("Unable to get pipeline bus");
         let player_widgets = self.player_widgets.clone();
+        let backend = self.backend.clone();
+        let current_song = self.current_song.clone();
         let mpris = self.mpris.clone();
         gtk::timeout_add(250, move || {
             while bus.have_pending() {
-                bus.pop().map(|message| Self::parse_bus_message(&message, player_widgets.clone(), mpris.clone()));
+                bus.pop().map(|message| Self::parse_bus_message(&message, player_widgets.clone(), mpris.clone(), backend.clone(), current_song.clone()));
             }
             Continue(true)
         });

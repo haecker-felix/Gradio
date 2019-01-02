@@ -17,7 +17,7 @@ use gstreamer::{Element, Bin, Pipeline, Pad, PadProbeId, State, ElementFactory};
 //                                                                                         //
 /////////////////////////////////////////////////////////////////////////////////////////////
 
-pub struct RecorderBackend{
+pub struct GstreamerBackend{
     pub pipeline: Pipeline,
 
     pub uridecodebin: Element,
@@ -30,7 +30,7 @@ pub struct RecorderBackend{
     pub queue_blockprobe_id: Option<PadProbeId>,
 }
 
-impl RecorderBackend{
+impl GstreamerBackend{
     pub fn new() -> Self{
         // create gstreamer pipeline
         let pipeline = Pipeline::new("recorder_pipeline");
@@ -78,6 +78,10 @@ impl RecorderBackend{
 
         pipeline.create_muxsinkbin("/dev/null");
         pipeline
+    }
+
+    pub fn set_state(&self, state: gstreamer::State){
+        self.pipeline.set_state(state);
     }
 
     pub fn new_source_uri(&mut self, source: &str){
