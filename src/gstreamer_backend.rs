@@ -1,33 +1,53 @@
 use gstreamer::prelude::*;
 use gstreamer::{Element, Bin, Pipeline, Pad, PadProbeId, State, ElementFactory};
 
-/////////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                         //
-//  # Gstreamer Pipeline #                                                                 //
-//    --------------      --------------      -----------      -------      ------------   //
-//   | uridecodebin | -> | audioconvert | -> | vorbisenc | -> | queue | -> | muxsinkbin |  //
-//    --------------      --------------      -----------      -------      ------------   //
-//                                                                                         //
-//  # muxsinkbin:  (gstreamer Bin) #                                                       //
-//    --------------------------------------------                                         //
-//   |                  --------      ----------  |                                        //
-//   | ( ghostpad ) -> | oggmux | -> | filesink | |                                        //
-//   |                  --------      ----------  |                                        //
-//    --------------------------------------------                                         //
-//                                                                                         //
-/////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                      //
+//  # Gstreamer Pipeline                                                                                //
+//                                            -----      -----------      --------       ------------   //
+//                                           |     | -> | vorbisenc | -> | queue [1] -> | muxsinkbin |  //
+//    --------------      --------------     |     |     -----------      --------       ------------   //
+//   | uridecodebin | -> | audioconvert | -> | tee |                                                    //
+//    --------------      --------------     |     |     --------       ---------------                 //
+//                                           |     | -> | queue [2] -> | autoaudiosink |                //
+//                                            -----      --------       ---------------                 //
+//                                                                                                      //
+//                                                                                                      //
+//                                                                                                      //
+//  We use the two source pads to block the dataflow, so we can change the muxsinkbin.                  //
+//   - 1 -> file_srcpad                                                                                 //
+//   - 2 -> audio_srcpad                                                                                //
+//                                                                                                      //
+//  The dataflow gets blocked when the song changes.                                                    //
+//                                                                                                      //
+//                                                                                                      //
+//  # muxsinkbin:  (gstreamer Bin)                                                                      //
+//    --------------------------------------------                                                      //
+//   |                  --------      ----------  |                                                     //
+//   | ( ghostpad ) -> | oggmux | -> | filesink | |                                                     //
+//   |                  --------      ----------  |                                                     //
+//    --------------------------------------------                                                      //
+//                                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 pub struct GstreamerBackend{
     pub pipeline: Pipeline,
 
     pub uridecodebin: Element,
     pub audioconvert: Element,
+    pub tee: Element,
     pub vorbisenc: Element,
-    pub queue: Element,
-    pub muxsinkbin: Option<Bin>,
 
-    pub queue_srcpad: Pad,
-    pub queue_blockprobe_id: Option<PadProbeId>,
+    pub audio_queue: Element,
+    pub autoaudiosink: Element,
+    pub audio_srcpad: Pad,
+    pub audio_blockprobe_id: Option<PadProbeId>,
+
+
+    pub file_queue: Element,
+    pub muxsinkbin: Option<Bin>,
+    pub file_srcpad: Pad,
+    pub file_blockprobe_id: Option<PadProbeId>,
 }
 
 impl GstreamerBackend{
@@ -38,12 +58,26 @@ impl GstreamerBackend{
         // create pipeline elements
         let uridecodebin = ElementFactory::make("uridecodebin", "uridecodebin").unwrap();
         let audioconvert = ElementFactory::make("audioconvert", "audioconvert").unwrap();
+        let tee = ElementFactory::make("tee", "tee").unwrap();
+        let audio_queue = ElementFactory::make("queue", "audio_queue").unwrap();
+        let autoaudiosink = ElementFactory::make("autoaudiosink", "autoaudiosink").unwrap();
         let vorbisenc = ElementFactory::make("vorbisenc", "vorbisenc").unwrap();
-        let queue = ElementFactory::make("queue", "queue").unwrap();
+        let file_queue = ElementFactory::make("queue", "file_queue").unwrap();
 
         // link pipeline elements
-        pipeline.add_many(&[&uridecodebin, &audioconvert, &vorbisenc, &queue]).unwrap();
-        Element::link_many(&[&audioconvert, &vorbisenc, &queue]).unwrap();
+        pipeline.add_many(&[&uridecodebin, &audioconvert, &tee, &audio_queue, &autoaudiosink, &vorbisenc, &file_queue]).unwrap();
+        Element::link_many(&[&audioconvert, &tee]).unwrap();
+        let tee_tempmlate = tee.get_pad_template ("src_%u").unwrap();
+
+        // link tee -> vorbisenc -> queue
+        let tee_file_srcpad = tee.request_pad(&tee_tempmlate, None, None).unwrap();
+        let _ = tee_file_srcpad.link(&vorbisenc.get_static_pad("sink").unwrap());
+        let _ = vorbisenc.link(&file_queue);
+
+        // link tee -> queue -> autoaudiosink
+        let tee_audio_srcpad = tee.request_pad(&tee_tempmlate, None, None).unwrap();
+        let _ = tee_audio_srcpad.link(&audio_queue.get_static_pad("sink").unwrap());
+        let _ = audio_queue.link(&autoaudiosink);
 
         // dynamically link uridecodebin element with audioconvert element
         let convert = audioconvert.clone();
@@ -63,17 +97,23 @@ impl GstreamerBackend{
             }
         });
 
-        let queue_srcpad = queue.get_static_pad("src").unwrap();
+        let file_srcpad = file_queue.get_static_pad("src").unwrap();
+        let audio_srcpad = audio_queue.get_static_pad("src").unwrap();
 
         let mut pipeline = Self{
             pipeline,
             uridecodebin,
             audioconvert,
+            tee,
+            audio_queue,
+            autoaudiosink,
+            audio_srcpad,
+            audio_blockprobe_id: None,
             vorbisenc,
-            queue,
+            file_queue,
             muxsinkbin: None,
-            queue_srcpad,
-            queue_blockprobe_id: None,
+            file_srcpad,
+            file_blockprobe_id: None,
         };
 
         pipeline.create_muxsinkbin("/dev/null");
@@ -81,7 +121,31 @@ impl GstreamerBackend{
     }
 
     pub fn set_state(&self, state: gstreamer::State){
-        self.pipeline.set_state(state);
+        let _ = self.pipeline.set_state(state);
+    }
+
+    pub fn block_dataflow(&mut self){
+        // Audio branch
+        let audio_id = self.audio_srcpad.add_probe (gstreamer::PadProbeType::BLOCK_DOWNSTREAM, move|_, _|{
+            gstreamer::PadProbeReturn::Ok
+        }).unwrap();
+
+        // File branch
+        let muxsinkbin = self.muxsinkbin.clone();
+        let file_id = self.file_srcpad.add_probe (gstreamer::PadProbeType::BLOCK_DOWNSTREAM, move|_, _|{
+            // Dataflow is blocked
+            debug!("Pad is blocked now.");
+
+            debug!("Push EOS into muxsinkbin sinkpad...");
+            let sinkpad = muxsinkbin.clone().unwrap().get_static_pad("sink").unwrap();
+            sinkpad.send_event(gstreamer::Event::new_eos().build());
+
+            gstreamer::PadProbeReturn::Ok
+        }).unwrap();
+
+        // We need the padprobe id later to remove the block probe
+        self.file_blockprobe_id = Some(file_id);
+        self.audio_blockprobe_id = Some(audio_id);
     }
 
     pub fn new_source_uri(&mut self, source: &str){
@@ -107,9 +171,10 @@ impl GstreamerBackend{
         self.create_muxsinkbin(location);
 
         debug!("Remove block probe...");
-        self.queue_srcpad.remove_probe(self.queue_blockprobe_id.take().unwrap());
+        self.file_srcpad.remove_probe(self.file_blockprobe_id.take().unwrap());
+        self.audio_srcpad.remove_probe(self.audio_blockprobe_id.take().unwrap());
 
-        debug!("Everything ok.")
+        debug!("Everything ok.");
     }
 
     fn create_muxsinkbin(&mut self, location: &str){
@@ -140,7 +205,7 @@ impl GstreamerBackend{
         bin.add_pad(&ghostpad).unwrap();
         bin.sync_state_with_parent().unwrap();
 
-        if self.queue_srcpad.link(&ghostpad) != gstreamer::PadLinkReturn::Ok {
+        if self.file_srcpad.link(&ghostpad) != gstreamer::PadLinkReturn::Ok {
             warn!("Queue src pad cannot linked to oggmux sinkpad");
         }
 

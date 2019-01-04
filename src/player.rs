@@ -2,7 +2,7 @@ use gstreamer::prelude::*;
 use gtk::prelude::*;
 use mpris_player::{Metadata, MprisPlayer, OrgMprisMediaPlayer2Player, PlaybackStatus};
 use rustio::{Client, Station};
-use libhandy::{ActionRow, ActionRowExt};
+use libhandy::ActionRowExt;
 
 use std::cell::{Cell, RefCell};
 use std::rc::Rc;
@@ -168,20 +168,7 @@ impl Player {
                         // mpris.set_metadata(metadata);
 
                         debug!("Block the dataflow ...");
-                        let gstp = backend.clone();
-                        let id = backend.lock().unwrap().queue_srcpad.add_probe (gstreamer::PadProbeType::BLOCK_DOWNSTREAM, move|_, _|{
-                            // Dataflow is blocked
-                            debug!("Pad is blocked now.");
-
-                            debug!("Push EOS into muxsinkbin sinkpad...");
-                            let sinkpad = gstp.lock().unwrap().muxsinkbin.clone().unwrap().get_static_pad("sink").unwrap();
-                            sinkpad.send_event(gstreamer::Event::new_eos().build());
-
-                            gstreamer::PadProbeReturn::Ok
-                        }).unwrap();
-
-                        // We need the padprobe id later to remove the block probe
-                        backend.lock().unwrap().queue_blockprobe_id = Some(id);
+                        backend.lock().unwrap().block_dataflow();
                     }
 
                 });
@@ -267,7 +254,10 @@ impl Player {
         let mpris = self.mpris.clone();
         gtk::timeout_add(250, move || {
             while bus.have_pending() {
-                bus.pop().map(|message| Self::parse_bus_message(&message, player_widgets.clone(), mpris.clone(), backend.clone(), current_song.clone()));
+                bus.pop().map(|message|{
+                    debug!("new message {:?}", message);
+                    Self::parse_bus_message(&message, player_widgets.clone(), mpris.clone(), backend.clone(), current_song.clone());
+                });
             }
             Continue(true)
         });

@@ -2,7 +2,6 @@ use gtk::prelude::*;
 use libhandy::LeafletExt;
 
 use std::sync::mpsc::Sender;
-use std::sync::Arc;
 
 use crate::app::{Action, AppInfo};
 use crate::widgets::notification::Notification;
