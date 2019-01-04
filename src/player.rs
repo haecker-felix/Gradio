@@ -153,9 +153,11 @@ impl Player {
                     if &*current_song.borrow().title != title.get().unwrap() {
                         // save/close old song, and add to song history
                         if &*current_song.borrow().title != "" { // TODO: Use option here
-                            player_widgets.last_played_listbox.add(&current_song.borrow().widget);
+                            current_song.borrow().stop();
+                            player_widgets.last_played_listbox.insert(&current_song.borrow().widget, 0);
                         }
 
+                        // set new song
                         let new_song = Song::new(title.get().unwrap());
                         *current_song.borrow_mut() = new_song;
                         debug!("New song: {:?}", title);
