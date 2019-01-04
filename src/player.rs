@@ -12,6 +12,7 @@ use std::thread;
 
 use crate::app::Action;
 use crate::gstreamer_backend::GstreamerBackend;
+use crate::song::Song;
 
 pub enum PlaybackState {
     Playing,
@@ -69,7 +70,7 @@ pub struct Player {
     backend: Arc<Mutex<GstreamerBackend>>,
     mpris: Arc<MprisPlayer>,
     current_station: Cell<Option<Station>>,
-    current_song: Rc<RefCell<String>>,
+    current_song: Rc<RefCell<Song>>,
 
     builder: gtk::Builder,
     sender: Sender<Action>,
@@ -82,7 +83,7 @@ impl Player {
         let player_widgets = Rc::new(PlayerWidgets::new(builder.clone()));
         let backend = Arc::new(Mutex::new(GstreamerBackend::new()));
         let current_station = Cell::new(None);
-        let current_song = Rc::new(RefCell::new("".to_string()));
+        let current_song = Rc::new(RefCell::new(Song::new("")));
 
         let mpris = MprisPlayer::new("Gradio".to_string(), "Gradio".to_string(), "de.haeckerfelix.Gradio".to_string());
         mpris.set_can_raise(true);
@@ -144,21 +145,19 @@ impl Player {
         };
     }
 
-    fn parse_bus_message(message: &gstreamer::Message, player_widgets: Rc<PlayerWidgets>, mpris: Arc<MprisPlayer>, backend: Arc<Mutex<GstreamerBackend>>, current_song: Rc<RefCell<String>>) {
+    fn parse_bus_message(message: &gstreamer::Message, player_widgets: Rc<PlayerWidgets>, mpris: Arc<MprisPlayer>, backend: Arc<Mutex<GstreamerBackend>>, current_song: Rc<RefCell<Song>>) {
         match message.view() {
             gstreamer::MessageView::Tag(tag) => {
                 tag.get_tags().get::<gstreamer::tags::Title>().map(|title| {
                     // Check if song have changed
-                    if *current_song.borrow() != title.get().unwrap() {
+                    if &*current_song.borrow().title != title.get().unwrap() {
                         // save/close old song, and add to song history
-                        if *current_song.borrow() != "" {
-                            let row = libhandy::ActionRow::new();
-                            row.set_title(&*current_song.borrow());
-                            row.set_visible(true);
-                            player_widgets.last_played_listbox.add(&row);
+                        if &*current_song.borrow().title != "" { // TODO: Use option here
+                            player_widgets.last_played_listbox.add(&current_song.borrow().widget);
                         }
 
-                        *current_song.borrow_mut() = title.get().unwrap().to_string();
+                        let new_song = Song::new(title.get().unwrap());
+                        *current_song.borrow_mut() = new_song;
                         debug!("New song: {:?}", title);
                         player_widgets.set_title(title.get().unwrap());
 
@@ -203,7 +202,7 @@ impl Player {
                     let message: gstreamer::message::Message = structure.get("message").unwrap();
                     if let gstreamer::MessageView::Eos(_) = &message.view(){
                         debug!("muxsinkbin got EOS...");
-                        let path = &format!("{}/{}.ogg", glib::get_user_special_dir(glib::UserDirectory::Music).unwrap().to_str().unwrap(), &*current_song.borrow());
+                        let path = &format!("{}/{}.ogg", glib::get_user_special_dir(glib::UserDirectory::Music).unwrap().to_str().unwrap(), &*current_song.borrow().title);
 
                         // Old song is closed correctly, so we can start with the new song now
                         backend.lock().unwrap().new_filesink_location(&path);

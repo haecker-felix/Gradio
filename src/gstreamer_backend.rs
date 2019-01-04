@@ -43,7 +43,6 @@ pub struct GstreamerBackend{
     pub audio_srcpad: Pad,
     pub audio_blockprobe_id: Option<PadProbeId>,
 
-
     pub file_queue: Element,
     pub muxsinkbin: Option<Bin>,
     pub file_srcpad: Pad,

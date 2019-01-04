@@ -12,6 +12,7 @@ mod static_resource;
 mod station_model;
 mod widgets;
 mod window;
+mod song;
 
 use crate::app::App;
 use simplelog::*;
