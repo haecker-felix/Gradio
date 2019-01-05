@@ -211,12 +211,12 @@ impl Player {
                         debug!("muxsinkbin got EOS...");
 
                         if current_song.borrow().is_some() {
-                            // Old song is saved correctly, so we can start with the new song now
-                            let path = glib::get_user_special_dir(glib::UserDirectory::Music).unwrap();
-                            let filename = current_song.borrow().clone().unwrap().title;
-                            let path = &format!("{}/{}.ogg", path.to_str().unwrap(), filename);
+                            let song = current_song.borrow().clone().unwrap();
 
-                            backend.lock().unwrap().new_filesink_location(&path);
+                            // Old song is saved correctly (cause we got the EOS message),
+                            // so we can start with the new song now
+                            debug!("Cache song \"{}\" under \"{}\"", song.title, song.path);
+                            backend.lock().unwrap().new_filesink_location(&song.path);
                         }else{
                             // Or just redirect the stream to /dev/null
                             backend.lock().unwrap().new_filesink_location("/dev/null");
@@ -269,7 +269,7 @@ impl Player {
         gtk::timeout_add(250, move || {
             while bus.have_pending() {
                 bus.pop().map(|message|{
-                    debug!("new message {:?}", message);
+                    //debug!("new message {:?}", message);
                     Self::parse_bus_message(&message, player_widgets.clone(), mpris.clone(), backend.clone(), current_song.clone());
                 });
             }
