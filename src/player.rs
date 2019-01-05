@@ -70,7 +70,7 @@ pub struct Player {
     backend: Arc<Mutex<GstreamerBackend>>,
     mpris: Arc<MprisPlayer>,
     current_station: Cell<Option<Station>>,
-    current_song: Rc<RefCell<Song>>,
+    current_song: Rc<RefCell<Option<Song>>>,
 
     builder: gtk::Builder,
     sender: Sender<Action>,
@@ -83,7 +83,7 @@ impl Player {
         let player_widgets = Rc::new(PlayerWidgets::new(builder.clone()));
         let backend = Arc::new(Mutex::new(GstreamerBackend::new()));
         let current_station = Cell::new(None);
-        let current_song = Rc::new(RefCell::new(Song::new("")));
+        let current_song = Rc::new(RefCell::new(None));
 
         let mpris = MprisPlayer::new("Gradio".to_string(), "Gradio".to_string(), "de.haeckerfelix.Gradio".to_string());
         mpris.set_can_raise(true);
@@ -108,6 +108,9 @@ impl Player {
     }
 
     pub fn set_station(&self, station: Station) {
+        // delete old song, because it's not completely recorded
+        self.current_song.borrow_mut().take().map(|song| song.delete());
+
         self.player_widgets.reset();
         self.player_widgets.title_label.set_text(&station.name);
         self.current_station.set(Some(station.clone()));
@@ -145,23 +148,25 @@ impl Player {
         };
     }
 
-    fn parse_bus_message(message: &gstreamer::Message, player_widgets: Rc<PlayerWidgets>, mpris: Arc<MprisPlayer>, backend: Arc<Mutex<GstreamerBackend>>, current_song: Rc<RefCell<Song>>) {
+    fn parse_bus_message(message: &gstreamer::Message, player_widgets: Rc<PlayerWidgets>, mpris: Arc<MprisPlayer>, backend: Arc<Mutex<GstreamerBackend>>, current_song: Rc<RefCell<Option<Song>>>) {
         match message.view() {
             gstreamer::MessageView::Tag(tag) => {
-                tag.get_tags().get::<gstreamer::tags::Title>().map(|title| {
+                tag.get_tags().get::<gstreamer::tags::Title>().map(|t| {
+                    let new_song = Some(Song::new(t.get().unwrap()));
+                    let old_song = current_song.borrow().clone();
+
                     // Check if song have changed
-                    if &*current_song.borrow().title != title.get().unwrap() {
+                    if new_song != old_song {
                         // save/close old song, and add to song history
-                        if &*current_song.borrow().title != "" { // TODO: Use option here
-                            current_song.borrow().stop();
-                            player_widgets.last_played_listbox.insert(&current_song.borrow().widget, 0);
-                        }
+                        current_song.borrow().clone().map(|song|{
+                            song.stop();
+                            player_widgets.last_played_listbox.insert(&song.widget, 0);
+                        });
 
                         // set new song
-                        let new_song = Song::new(title.get().unwrap());
+                        debug!("New song: {:?}", new_song.clone().unwrap().title);
+                        player_widgets.set_title(&new_song.clone().unwrap().title);
                         *current_song.borrow_mut() = new_song;
-                        debug!("New song: {:?}", title);
-                        player_widgets.set_title(title.get().unwrap());
 
                         // TODO: this would override the artist/art_url field. Needs to be fixed at mpris_player
                         // let mut metadata = Metadata::new();
@@ -204,10 +209,18 @@ impl Player {
                     let message: gstreamer::message::Message = structure.get("message").unwrap();
                     if let gstreamer::MessageView::Eos(_) = &message.view(){
                         debug!("muxsinkbin got EOS...");
-                        let path = &format!("{}/{}.ogg", glib::get_user_special_dir(glib::UserDirectory::Music).unwrap().to_str().unwrap(), &*current_song.borrow().title);
 
-                        // Old song is closed correctly, so we can start with the new song now
-                        backend.lock().unwrap().new_filesink_location(&path);
+                        if current_song.borrow().is_some() {
+                            // Old song is saved correctly, so we can start with the new song now
+                            let path = glib::get_user_special_dir(glib::UserDirectory::Music).unwrap();
+                            let filename = current_song.borrow().clone().unwrap().title;
+                            let path = &format!("{}/{}.ogg", path.to_str().unwrap(), filename);
+
+                            backend.lock().unwrap().new_filesink_location(&path);
+                        }else{
+                            // Or just redirect the stream to /dev/null
+                            backend.lock().unwrap().new_filesink_location("/dev/null");
+                        }
                     }
                 }
             },

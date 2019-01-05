@@ -5,6 +5,7 @@ use libhandy::{ActionRow, ActionRowExt};
 use std::rc::Rc;
 use std::cell::RefCell;
 
+#[derive(Debug, Clone)]
 pub struct Song {
     pub widget: ActionRow,
     pub title: String,
@@ -56,5 +57,11 @@ impl Song {
 
     pub fn delete(&self){
         // TODO: implement
+    }
+}
+
+impl PartialEq for Song {
+    fn eq(&self, other: &Song) -> bool {
+        self.title == other.title
     }
 }
