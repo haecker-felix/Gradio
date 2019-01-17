@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-01-01 14:42+0100\n"
-"PO-Revision-Date: 2018-03-19 21:48+0000\n"
-"Last-Translator: Sergey N <yardox@gmail.com>\n"
+"PO-Revision-Date: 2019-01-18 08:20+0000\n"
+"Last-Translator: アンドレイ・クズネツォフ <honyakushyo@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/gradio/"
 "translations/ru/>\n"
 "Language: ru\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<="
 "4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 2.20-dev\n"
+"X-Generator: Weblate 3.4-dev\n"
 
 #: data/ui/app-menu.ui:6 data/ui/menubutton.ui:192
 #: src/page/gradio-settings-page.vala:120
@@ -47,7 +47,7 @@ msgstr "Добавить станции в библиотеку"
 
 #: data/ui/page/collections-page.ui:43
 msgid "You don't have any collection"
-msgstr "У вас нет коллекции"
+msgstr "Вы еще не создали ни одной коллекции"
 
 #: data/ui/page/collections-page.ui:61
 msgid "You can group stations into collections."
@@ -93,7 +93,7 @@ msgstr "Воспроизвести"
 
 #: data/ui/details-box.ui:478
 msgid "Open homepage"
-msgstr "Открыть домашнюю страницу"
+msgstr "Открыть сайт"
 
 #: data/ui/details-box.ui:523 data/ui/selection-toolbar.ui:195
 msgid "Edit"
@@ -101,7 +101,7 @@ msgstr "Редактировать"
 
 #: data/ui/organize-collection-popover.ui:25
 msgid "Enter name for new collection..."
-msgstr "Введите название для новой коллекции..."
+msgstr "Введите имя новой коллекции..."
 
 #: data/ui/organize-collection-popover.ui:35
 msgid "Create"
@@ -117,7 +117,7 @@ msgstr "Выбрать все"
 
 #: data/ui/selection-menu.ui:11
 msgid "Select None"
-msgstr "Не выбирать ничего"
+msgstr "Отменить выбор"
 
 #: data/ui/selection-toolbar.ui:28
 msgid "Save"
@@ -125,7 +125,7 @@ msgstr "Сохранить"
 
 #: data/ui/selection-toolbar.ui:70
 msgid "Click an item to view options"
-msgstr "Нажмите на пункт чтобы выбрать опции"
+msgstr "Для просмотра опций выберите станцию"
 
 #: data/ui/selection-toolbar.ui:104
 msgid "Collection"
@@ -157,9 +157,9 @@ msgid ""
 "going to be visible for all users. Please be careful, and double check your "
 "input!"
 msgstr ""
-"Gradio использует базу данных в интернете. Все, что вы вводите здесь, будет "
-"доступно для всех пользователей. Пожалуйста, будьте осторожны и дважды "
-"проверьте свой ввод!"
+"Gradio использует общедоступную базу данных. Все, что вы вводите здесь, "
+"будет доступно для всех пользователей. Пожалуйста, будьте внимательны и "
+"дважды проверьте вводимые данные!"
 
 #: data/ui/station-editor.ui:68
 msgid "Continue"
@@ -177,7 +177,7 @@ msgstr "Страна"
 #: data/ui/station-editor.ui:181 data/ui/menubutton.ui:414
 #: src/gradio-searchbar.vala:191
 msgid "State"
-msgstr "Область"
+msgstr "Область/Штат/Регион"
 
 #: data/ui/station-editor.ui:196 data/ui/menubutton.ui:384
 #: src/gradio-searchbar.vala:189
@@ -186,7 +186,7 @@ msgstr "Язык"
 
 #: data/ui/station-editor.ui:266
 msgid "Favicon Address"
-msgstr "Адрес иконки"
+msgstr "Адрес логотипа"
 
 #: data/ui/station-editor.ui:304
 msgid "Enter tags separated by commas"
@@ -194,11 +194,11 @@ msgstr "Введите теги через запятую"
 
 #: data/ui/station-editor.ui:337
 msgid "Homepage"
-msgstr "Домашняя страница"
+msgstr "Сайт"
 
 #: data/ui/station-editor.ui:480
 msgid "Server Response"
-msgstr "Отклик сервера"
+msgstr "Ответ сервера"
 
 #: data/ui/station-editor.ui:516
 msgid "Close"
@@ -219,7 +219,7 @@ msgstr "Ещё..."
 
 #: data/ui/page/search-page.ui:101
 msgid "Stations with the most votes"
-msgstr "Станции с наибольшим количеством голосов"
+msgstr "Популярные станции"
 
 #: data/ui/page/search-page.ui:180
 msgid "Recently clicked stations"
@@ -239,7 +239,7 @@ msgstr "Результаты:"
 
 #: data/ui/page/search-page.ui:477
 msgid "No results found"
-msgstr "Результаты не найдены"
+msgstr "Ничего не найдено"
 
 #: data/ui/page/search-page.ui:495
 msgid ""
@@ -286,7 +286,7 @@ msgstr "Дата"
 
 #: data/ui/menubutton.ui:499 src/gradio-searchbar.vala:197
 msgid "Ascending"
-msgstr "По возростанию"
+msgstr "По возрастанию"
 
 #: data/ui/menubutton.ui:514 src/gradio-searchbar.vala:198
 msgid "Descending"
@@ -344,7 +344,7 @@ msgstr "Фоновое воспроизведение"
 
 #: src/page/gradio-settings-page.vala:68
 msgid "Continue the playback if you close the Gradio window"
-msgstr "Продолжайте воспроизведение, если закрыть окно Gradio"
+msgstr "Продолжать воспроизведение, если окно Gradio закрыто"
 
 #. resume playback on startup
 #: src/page/gradio-settings-page.vala:74
@@ -377,7 +377,7 @@ msgstr "Показывать уведомления на рабочем стол
 #. enable tray icon
 #: src/page/gradio-settings-page.vala:95
 msgid "Tray icon"
-msgstr "Значок в системном трее"
+msgstr "Значок в системном лотке"
 
 #: src/page/gradio-settings-page.vala:95
 msgid "Show a tray icon, to restore the main window"
@@ -387,7 +387,7 @@ msgstr "Показывать значок в трее чтобы открыть 
 #. cache station images
 #: src/page/gradio-settings-page.vala:104
 msgid "Cache station icons"
-msgstr "Временные файлы значков радиостанций"
+msgstr "Временные файлы изображений радиостанций"
 
 #: src/page/gradio-settings-page.vala:104
 msgid "Saves the images locally."
@@ -399,7 +399,7 @@ msgstr "Очистить временные файлы"
 
 #: src/page/gradio-settings-page.vala:109
 msgid "Clear all cached station icons"
-msgstr "Стереть все временные файлы значков радиостанций"
+msgstr "Очистить сохраненные изображения радиостанций"
 
 #: src/gradio-headerbar.vala:53 src/gradio-headerbar.vala:59
 msgid "Click on items to select them"
@@ -441,11 +441,11 @@ msgstr "Создать радиостанцию"
 
 #: src/gradio-station-editor-dialog.vala:60
 msgid "Edit radio station"
-msgstr "Редактировать радиостанцию"
+msgstr "Редактировать данные радиостанции"
 
 #: src/gradio-station-editor-dialog.vala:131
 msgid "\"Name\" and \"Stream\" information is required."
-msgstr "Пункты \"Название\" и \"Поток\" обязательны."
+msgstr "Заполните поля \"Название\" и \"Поток\"."
 
 #: src/gradio-selection-toolbar.vala:98
 #, c-format
@@ -455,4 +455,4 @@ msgstr "%i радиостанция(-и) отсутствует в библио�
 #: src/gradio-selection-toolbar.vala:108
 #, c-format
 msgid "%i radio station(s) already added to library."
-msgstr "%i радиостанция(-и), добавленна в библиотеку."
+msgstr "%i радиостанция(-и), уже была добавлена в библиотеку."
