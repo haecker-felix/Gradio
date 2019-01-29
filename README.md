@@ -1,5 +1,3 @@
-Moved to [GNOME GitLab](https://gitlab.gnome.org/haecker-felix/Gradio)!
-
 # Gradio
 A GTK3 app for finding and listening to internet radio stations.
 ___
