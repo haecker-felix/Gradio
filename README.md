@@ -1,8 +1,18 @@
+___
+**Note**: Gradio is dead! But don't worry! 
+
+A successor is already being developed. It's called Shortwave, which will include all important Gradio features.
+
+- Your data can be transferred easily from Gradio to Shortwave.
+- It's written completely from scratch using Rust
+- The interface will be adaptive using libhandy (Will be compatible with Librem 5)
+
+You can track the development of Shortwave here:
+https://gitlab.gnome.org/World/Shortwave
+___
+
 # Gradio
 A GTK3 app for finding and listening to internet radio stations.
-___
-=> [Rust port / development here](https://github.com/haecker-felix/Gradio/tree/rust_port)
-___
 
 ![alt text](https://raw.githubusercontent.com/haecker-felix/gradio/master/data/icons/hicolor/256x256/apps/de.haeckerfelix.gradio.png "Logo")
 
