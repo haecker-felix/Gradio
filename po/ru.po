@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-01-01 14:42+0100\n"
-"PO-Revision-Date: 2019-01-18 08:20+0000\n"
+"PO-Revision-Date: 2019-02-28 08:18+0000\n"
 "Last-Translator: アンドレイ・クズネツォフ <honyakushyo@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/gradio/"
 "translations/ru/>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<="
 "4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 3.4-dev\n"
+"X-Generator: Weblate 3.5-dev\n"
 
 #: data/ui/app-menu.ui:6 data/ui/menubutton.ui:192
 #: src/page/gradio-settings-page.vala:120
@@ -244,8 +244,7 @@ msgstr "Ничего не найдено"
 #: data/ui/page/search-page.ui:495
 msgid ""
 "Either the station does not exist, or you have to search with other keywords."
-msgstr ""
-"Либо станция не существует, либо вам нужно искать по другим ключевым словам."
+msgstr "Станция не существует, или попробуйте другие ключевые слова."
 
 #: data/ui/menubutton.ui:104 data/ui/menubutton.ui:332
 msgid "Sorting"
