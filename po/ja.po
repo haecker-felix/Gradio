@@ -8,18 +8,21 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-01-01 14:42+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2019-04-14 02:04+0000\n"
+"Last-Translator: Luke <lgardener1337@gmail.com>\n"
+"Language-Team: Japanese <https://hosted.weblate.org/projects/gradio/"
+"translations/ja/>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 3.6-dev\n"
 
 #: data/ui/app-menu.ui:6 data/ui/menubutton.ui:192
 #: src/page/gradio-settings-page.vala:120
 msgid "Settings"
-msgstr ""
+msgstr "設定"
 
 #: data/ui/app-menu.ui:12 data/ui/menubutton.ui:206
 msgid "About"
@@ -27,7 +30,7 @@ msgstr ""
 
 #: data/ui/app-menu.ui:18 data/ui/menubutton.ui:220
 msgid "Quit"
-msgstr ""
+msgstr "終了"
 
 #: data/ui/page/library-page.ui:44
 msgid "Your library is empty"
@@ -429,11 +432,11 @@ msgstr ""
 
 #: src/gradio-station-editor-dialog.vala:54
 msgid "Create radio station"
-msgstr ""
+msgstr "ラジオ局を作る"
 
 #: src/gradio-station-editor-dialog.vala:60
 msgid "Edit radio station"
-msgstr ""
+msgstr "ラジオ局を編集する"
 
 #: src/gradio-station-editor-dialog.vala:131
 msgid "\"Name\" and \"Stream\" information is required."
