@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-01-01 14:42+0100\n"
-"PO-Revision-Date: 2019-02-28 08:18+0000\n"
+"PO-Revision-Date: 2019-05-13 18:39+0000\n"
 "Last-Translator: アンドレイ・クズネツォフ <honyakushyo@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/gradio/"
 "translations/ru/>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<="
 "4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 3.5-dev\n"
+"X-Generator: Weblate 3.7-dev\n"
 
 #: data/ui/app-menu.ui:6 data/ui/menubutton.ui:192
 #: src/page/gradio-settings-page.vala:120
@@ -261,7 +261,7 @@ msgstr "Библиотека"
 
 #: data/ui/menubutton.ui:160
 msgid "Create new radio station"
-msgstr "Создать новую радиостанцию"
+msgstr "Добавить новую радиостанцию"
 
 #: data/ui/menubutton.ui:281
 msgid "Import"
@@ -294,7 +294,7 @@ msgstr "По убыванию"
 #: src/page/gradio-collection-items-page.vala:75
 #: src/page/gradio-library-page.vala:88
 msgid "Items: "
-msgstr "Пункты: "
+msgstr "Станции: "
 
 #: src/page/gradio-library-page.vala:86
 msgid "Fetching station data…"
@@ -324,7 +324,7 @@ msgstr "Использовать тёмную тему"
 
 #: src/page/gradio-settings-page.vala:54
 msgid "Use a dark theme, if possible"
-msgstr "Использовать тёмную тему, если это возможно"
+msgstr "Использовать тёмную тему, если возможно"
 
 #. Show technical station information.
 #: src/page/gradio-settings-page.vala:60
@@ -380,7 +380,7 @@ msgstr "Значок в системном лотке"
 
 #: src/page/gradio-settings-page.vala:95
 msgid "Show a tray icon, to restore the main window"
-msgstr "Показывать значок в трее чтобы открыть главное окно"
+msgstr "Показывать значок в системном лотке"
 
 #. CACHE
 #. cache station images
