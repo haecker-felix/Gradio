@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-01-01 14:42+0100\n"
 "PO-Revision-Date: 2019-05-13 18:54+0000\n"
-"Last-Translator: Anton Mikhailov <proffmade@yandex.ru>\n"
+"Last-Translator: アンドレイ・クズネツォフ <honyakushyo@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/gradio/"
 "translations/ru/>\n"
 "Language: ru\n"
@@ -252,7 +252,7 @@ msgstr "Сортировка"
 
 #: data/ui/menubutton.ui:119
 msgid "Hide broken stations"
-msgstr "Скрыть повреждённые станции"
+msgstr "Скрыть неработающие станции"
 
 #: data/ui/menubutton.ui:145 data/ui/menubutton.ui:264
 #: src/page/gradio-library-page.vala:81
@@ -386,7 +386,7 @@ msgstr "Показывать значок на системной панели"
 #. cache station images
 #: src/page/gradio-settings-page.vala:104
 msgid "Cache station icons"
-msgstr "Временные файлы изображений радиостанций"
+msgstr "Кэшировать изображения станций"
 
 #: src/page/gradio-settings-page.vala:104
 msgid "Saves the images locally."
