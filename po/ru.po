@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-01-01 14:42+0100\n"
-"PO-Revision-Date: 2019-05-13 18:39+0000\n"
-"Last-Translator: アンドレイ・クズネツォフ <honyakushyo@gmail.com>\n"
+"PO-Revision-Date: 2019-05-13 18:54+0000\n"
+"Last-Translator: Anton Mikhailov <proffmade@yandex.ru>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/gradio/"
 "translations/ru/>\n"
 "Language: ru\n"
@@ -81,7 +81,7 @@ msgstr "Местоположение"
 
 #: data/ui/details-box.ui:314 data/ui/station-editor.ui:322
 msgid "Tags"
-msgstr "Тэги"
+msgstr "Теги"
 
 #: data/ui/details-box.ui:346
 msgid "Codec"
@@ -177,7 +177,7 @@ msgstr "Страна"
 #: data/ui/station-editor.ui:181 data/ui/menubutton.ui:414
 #: src/gradio-searchbar.vala:191
 msgid "State"
-msgstr "Область/Штат/Регион"
+msgstr "Страна/Область/Штат/Регион"
 
 #: data/ui/station-editor.ui:196 data/ui/menubutton.ui:384
 #: src/gradio-searchbar.vala:189
@@ -194,7 +194,7 @@ msgstr "Введите теги через запятую"
 
 #: data/ui/station-editor.ui:337
 msgid "Homepage"
-msgstr "Сайт"
+msgstr "Официальный сайт"
 
 #: data/ui/station-editor.ui:480
 msgid "Server Response"
@@ -380,7 +380,7 @@ msgstr "Значок в системном лотке"
 
 #: src/page/gradio-settings-page.vala:95
 msgid "Show a tray icon, to restore the main window"
-msgstr "Показывать значок в системном лотке"
+msgstr "Показывать значок на системной панели"
 
 #. CACHE
 #. cache station images
