@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: gradio\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-01-01 14:42+0100\n"
-"PO-Revision-Date: 2019-05-13 18:54+0000\n"
-"Last-Translator: アンドレイ・クズネツォフ <honyakushyo@gmail.com>\n"
+"PO-Revision-Date: 2019-05-13 21:13+0000\n"
+"Last-Translator: Anton Mikhailov <proffmade@yandex.ru>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/gradio/"
 "translations/ru/>\n"
 "Language: ru\n"
@@ -47,7 +47,7 @@ msgstr "Добавить станции в библиотеку"
 
 #: data/ui/page/collections-page.ui:43
 msgid "You don't have any collection"
-msgstr "Вы еще не создали ни одной коллекции"
+msgstr "Добавить радиостанцию в коллекцию"
 
 #: data/ui/page/collections-page.ui:61
 msgid "You can group stations into collections."
@@ -93,7 +93,7 @@ msgstr "Воспроизвести"
 
 #: data/ui/details-box.ui:478
 msgid "Open homepage"
-msgstr "Открыть сайт"
+msgstr "Официальный сайт"
 
 #: data/ui/details-box.ui:523 data/ui/selection-toolbar.ui:195
 msgid "Edit"
@@ -358,7 +358,7 @@ msgstr "Воспроизвести последнюю радиостанцию �
 #. mpris
 #: src/page/gradio-settings-page.vala:83
 msgid "MPRIS"
-msgstr "MPRIS(стандарт. интерфейс упр. медиаплеерами)"
+msgstr "MPRIS (стандарт. интерфейс упр. медиаплеерами через D-Bus)"
 
 #: src/page/gradio-settings-page.vala:83
 msgid "Integrate Gradio as media player in your desktop environment"
@@ -376,7 +376,7 @@ msgstr "Показывать уведомления на рабочем стол
 #. enable tray icon
 #: src/page/gradio-settings-page.vala:95
 msgid "Tray icon"
-msgstr "Значок в системном лотке"
+msgstr "Значок на системном панели"
 
 #: src/page/gradio-settings-page.vala:95
 msgid "Show a tray icon, to restore the main window"
@@ -394,7 +394,7 @@ msgstr "Хранить изображения на компьютере."
 
 #: src/page/gradio-settings-page.vala:109
 msgid "Clear Cache"
-msgstr "Очистить временные файлы"
+msgstr "Очистить временные файлы кэша"
 
 #: src/page/gradio-settings-page.vala:109
 msgid "Clear all cached station icons"
@@ -432,11 +432,11 @@ msgstr "Выбрать язык…"
 
 #: src/gradio-searchbar.vala:370
 msgid "Select Tag …"
-msgstr "Выбрать тэг…"
+msgstr "Выбрать тег…"
 
 #: src/gradio-station-editor-dialog.vala:54
 msgid "Create radio station"
-msgstr "Создать радиостанцию"
+msgstr "Добавить радиостанцию"
 
 #: src/gradio-station-editor-dialog.vala:60
 msgid "Edit radio station"
