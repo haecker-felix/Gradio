@@ -44,6 +44,13 @@
   </kudos>
 
   <releases>
+    <release version="7.3" date="2019-09-11">
+      <description>
+        <p>This will probably be the last version of Gradio. It includes updated translations and small improvements.</p>
+        <p>The successor of Gradio will be Shortwave. More information can be found here:</p>
+        <p>https://gitlab.gnome.org/World/Shortwave</p>
+      </description>
+    </release>
     <release version="7.2" date="2018-11-03">
       <description>
         <p>Updated translations, minor user interface improvements</p>

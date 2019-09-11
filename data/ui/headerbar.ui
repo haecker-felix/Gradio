@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.20.0 -->
+<!-- Generated with glade 3.22.1 -->
 <interface>
   <requires lib="gtk+" version="3.18"/>
   <template class="GradioHeaderbar" parent="GtkStack">
@@ -31,6 +31,21 @@
           </object>
           <packing>
             <property name="position">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkBox" id="MenuBox">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="valign">center</property>
+            <property name="orientation">vertical</property>
+            <child>
+              <placeholder/>
+            </child>
+          </object>
+          <packing>
+            <property name="pack_type">end</property>
+            <property name="position">1</property>
           </packing>
         </child>
         <child>
@@ -72,21 +87,6 @@
             <style>
               <class name="image-button"/>
             </style>
-          </object>
-          <packing>
-            <property name="pack_type">end</property>
-            <property name="position">4</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkBox" id="MenuBox">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="valign">center</property>
-            <property name="orientation">vertical</property>
-            <child>
-              <placeholder/>
-            </child>
           </object>
           <packing>
             <property name="pack_type">end</property>
