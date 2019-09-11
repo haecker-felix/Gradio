@@ -23,7 +23,6 @@ namespace Gradio{
 
 		[GtkChild] Viewport ScrollViewport;
 		[GtkChild] Stack LibraryStack;
-		[GtkChild] Button SearchButton;
 
 		private MainBox mainbox;
 

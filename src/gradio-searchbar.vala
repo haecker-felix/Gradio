@@ -282,7 +282,7 @@ namespace Gradio{
 			reset_timeout();
 		}
 
-                private void set_state(){
+        private new void set_state(){
 		        unowned string name;
                         name = StateEntry.get_text();
 
