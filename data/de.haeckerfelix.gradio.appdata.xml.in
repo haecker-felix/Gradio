@@ -47,18 +47,16 @@
     <release version="7.3" date="2019-09-11">
       <description>
         <p>This will probably be the last version of Gradio. It includes updated translations and small improvements.</p>
-        <p>The successor of Gradio will be Shortwave. More information can be found here:</p>
-        <p>https://gitlab.gnome.org/World/Shortwave</p>
       </description>
     </release>
     <release version="7.2" date="2018-11-03">
       <description>
-        <p>Updated translations, minor user interface improvements</p>
+        <p>Updated translations, minor user interface improvements.</p>
       </description>
     </release>
     <release version="7.1" date="2018-01-20">
       <description>
-        <p>Some discover design tweaks, improved tags support, improved filter popover, updated translations, improved m3u export</p>
+        <p>Some discover design tweaks, improved tags support, improved filter popover, updated translations, improved m3u export.</p>
       </description>
     </release>
     <release version="7.0" date="2017-12-15">
@@ -68,32 +66,26 @@
     </release>
     <release version="6.0" date="2017-09-10">
       <description>
-        <p>Group your stations into collections, Everything is now sortable, Extended search page, Stations can be created and edited, New details sidebar, New selection system</p>
+        <p>Group your stations into collections, Everything is now sortable, Extended search page, Stations can be created and edited, New details sidebar, New selection system.</p>
       </description>
     </release>
     <release version="5.0.0" date="2016-12-24">
       <description>
-        <p>New grid/list view, new right click menu, background playback, redesigned discover page</p>
+        <p>New grid/list view, new right click menu, background playback, redesigned discover page.</p>
       </description>
     </release>
     <release version="4.0.1" date="2016-07-29">
-      <description>
-        <p>New optional dark mode</p>
-      </description>
     </release>
     <release version="4.0.0" date="2016-07-28">
       <description>
-        <p>New volume control, show connection information, new sort options</p>
+        <p>New volume control, show connection information, new sort options.</p>
       </description>
     </release>
     <release version="3.0.1" date="2016-06-30">
-      <description>
-        <p>Fixed crash on Ubuntu based systems</p>
-      </description>
     </release>
     <release version="3.0.0" date="2016-06-28">
       <description>
-        <p>MPRIS Support, vote for stations, search for stations</p>
+        <p>MPRIS Support, vote for stations, search for stations.</p>
       </description>
     </release>
   </releases>
