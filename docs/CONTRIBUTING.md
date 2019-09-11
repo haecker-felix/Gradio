@@ -10,7 +10,7 @@ bug tracker.
 To translate Gradio, please use [Weblate](https://hosted.weblate.org/engage/gradio/).
 
 ## Asking for Help
-Currently there isn't much documentation available for Gradio. If you have a question, please contact me: haecker.felix1207@gmail.com
+Currently there isn't much documentation available for Gradio. If you have a question, please contact me: haeckerfelix@gnome.org
 
 ## Licensing
 Contributions should be licensed under the LGPL-2.1+ or GPL-3.

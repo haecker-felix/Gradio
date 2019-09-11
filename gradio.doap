@@ -16,7 +16,7 @@
   <maintainer>
     <foaf:Person>
       <foaf:name>Felix Häcker</foaf:name>
-      <foaf:mbox rdf:resource="mailto:haecker.felix1207@gmail.com" />
+      <foaf:mbox rdf:resource="mailto:haeckerfelix@gnome.org" />
     </foaf:Person>
   </maintainer>
 </Project>

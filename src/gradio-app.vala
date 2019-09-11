@@ -148,7 +148,7 @@ namespace Gradio {
 		}
 
 		private void show_about_dialog(){
-			string[] authors = { "Felix Häcker <haecker.felix1207@gmail.com>" };
+			string[] authors = { "Felix Häcker <haeckerfelix@gnome.org>" };
 			string[] artists = { "Juan Pablo Lozano <lozanotux@gmail.com>" };
 
 			Gtk.show_about_dialog (window,
