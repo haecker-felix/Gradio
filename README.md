@@ -32,9 +32,3 @@ https://img.shields.io/badge/flatpak-download-brightgreen.svg)](https://flathub.
 
 * **License**  
 GNU General Public License, Version 3
-
-* **Bugs**  
-To report bugs, please use the GitHub [bugtracker](https://github.com/haecker-felix/gradio/issues)
-
-* **Translations**  
-To translate Gradio, please use [Weblate](https://hosted.weblate.org/engage/gradio/).
