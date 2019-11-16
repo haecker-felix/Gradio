@@ -1,5 +1,5 @@
 ___
-The development of Gradio is stopped, the successor is Shortwave.
+### The successor of Gradio is Shortwave.
 
 Get more information here:
 
